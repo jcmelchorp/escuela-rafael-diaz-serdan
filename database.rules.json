@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": "true",
+    ".write": "true",
+    "courses": {
+      ".indexOn": ["id", "roomId", "mainTeacherId"]
+    },
+    "users": {
+      ".indexOn": ["id", "grade", "uid"]
+    }
+  }
+}
