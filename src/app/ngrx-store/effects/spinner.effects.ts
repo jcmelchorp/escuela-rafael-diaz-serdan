@@ -46,10 +46,10 @@ export class SpinnerEffects {
             ea.payload.entityOp.endsWith(OP_SUCCESS)
         ),  */
         ofType(
-          //fromAuthActions.notAuthenticated,
-          //fromAuthActions.signInSuccess,
-          //fromAuthActions.signInFail,
-          //fromAuthActions.signOutCompleted,
+          fromAuthActions.notAuthenticated,
+          fromAuthActions.signInSuccess,
+          fromAuthActions.signInFail,
+          fromAuthActions.signOutCompleted,
           ROUTER_NAVIGATED,
           ROUTER_ERROR
         ),

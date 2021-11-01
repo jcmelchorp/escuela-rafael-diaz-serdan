@@ -1,0 +1,23 @@
+<div class="p-4">
+  <p class="view-title">Ajustes</p>
+  <p class="view-subtitle">Configura la aplicación.</p>
+  <div class="mx-3" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around" fxLayoutGap="10px">
+    <mat-card class="my-4 {{(isDarkTheme|async) ?'':'border'}}" fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-sm="100%">
+      <mat-card-header style="margin-top: -25px">
+        <mat-card-title>
+          <span [ngClass]="{'bg-white': !(isDarkTheme|async)}" class="card-title">Apariencia</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="start top" fxLayoutGap="10px">
+          <mat-slide-toggle [checked]="(isDarkTheme | async)" labelPosition="before"
+            (change)="toggleDarkTheme($event.checked)">
+          </mat-slide-toggle>
+          <fa-icon [icon]="(isDarkTheme | async)?faMoon:faSun" size="lg"></fa-icon>
+          <div>Modo {{(isDarkTheme | async)?'nocturno':'diurno'}}</div>
+        </div>
+        <p>Disminuye la intensidad de luz emitida por la pantalla al utilizar una interfaz de color negro.</p>
+      </mat-card-content>
+    </mat-card>
+
+  </div>

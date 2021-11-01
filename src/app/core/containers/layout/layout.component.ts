@@ -15,6 +15,7 @@ import { LayoutService, ThemeService } from '@rds-core/services';
 import { User } from '@rds-auth/models/user.model';
 import { AppState } from '@rds-store/index';
 import * as fromAuthSelectors from '@rds-auth/state/auth.selectors';
+import { signInSuccess } from '@rds-auth/state/auth.actions';
 
 @Component({
   selector: 'app-layout',
@@ -39,6 +40,10 @@ export class LayoutComponent {
     this.router.events.subscribe((event_2) =>
       this.navigationInterceptor(event_2 as RouterEvent)
     );
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      this.store.dispatch(signInSuccess({ user }));
+    }
     this.isHandset$ = this.layoutService.isHandset$;
     this.isOnline$ = this.store.select(fromAuthSelectors.isOnline);
     this.user$ = this.store.select(fromAuthSelectors.selectUser);
