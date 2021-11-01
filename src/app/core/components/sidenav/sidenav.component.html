@@ -1,0 +1,29 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav *ngIf="isOnline" #leftSidenav class="sidenav d-print-none" [fixedInViewport]="isHandset"
+    [attr.role]="isHandset ? 'dialog' : 'navigation'" [@onSideNavChange]="sideNavState ? 'open' : 'close'"
+    [mode]="isHandset ? 'over' : 'side'" [opened]="false">
+    <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
+      <mat-nav-list>
+        <mat-expansion-panel mat-list-item *ngIf="isAdmin && isOnline && user" [class.mat-elevation-z0]="true" dense>
+          <mat-expansion-panel-header>
+            <mat-icon matListIcon>admin_panel_settings</mat-icon>
+            <div matLine>Administración</div>
+          </mat-expansion-panel-header>
+          <mat-nav-list dense>
+            <mat-list-item [routerLink]="['users']" routerLinkActive="active" (click)="leftSidenav.close()">
+              <div matLine>Usuarios</div>
+              <mat-icon matListIcon>people_alt</mat-icon>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['admin']" routerLinkActive="active" (click)="leftSidenav.close()">
+              <div matLine>Dominio</div>
+              <mat-icon matListIcon>domain</mat-icon>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-main [isOnline]="isOnline!"></app-main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

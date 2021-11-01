@@ -1,0 +1,73 @@
+<mat-toolbar class="bg-transparent">
+  <mat-toolbar-row fxLayout="row warp" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <button *ngIf="isOnline" type="button" aria-label="mostrar menu" mat-icon-button
+        (click)="toggleSidenavLeft($event)">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <button appMaterialElevation mat-icon-button [routerLink]="['/']">
+        <img class="img-fluid" src="assets/images/rds-newlogo-transparent.png" />
+      </button>
+      <button mat-button [matMenuTriggerFor]="escuela">
+        Escuela
+      </button>
+      <button mat-button [matMenuTriggerFor]="webapp">
+        Aplicación
+      </button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
+      <!-- <span>{{myDate|date:'full':'es-MX'}}</span> -->
+      <button *ngIf="isOnline" mat-icon-button [matMenuTriggerFor]="userMenu">
+        <img class="img-fluid rounded-circle" src="{{user.photoUrl}}" />
+      </button>
+      <div *ngIf="!isOnline" mat-raised-button fxLayout="column" fxLayoutAlign="space-around center">
+        <fa-icon class="rds-icon" mat-icon-button (click)="onLogin()" size="lg"
+          [icon]="isDoorOpen?faDoorOpen:faDoorClosed"></fa-icon>
+        <!-- <h5>Ingresar</h5> -->
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-menu #userMenu="matMenu" fxLayoutAlign="right">
+  <ng-template matMenuContent>
+    <div mat-list-item *ngIf="isOnline && user" [routerLink]="['user']">
+      <app-user-card [isOnline]="isOnline" [isAdmin]="isAdmin" [user]="user"> </app-user-card>
+    </div>
+    <div mat-menu-item *ngIf="isOnline" [routerLink]="['settings']">
+      <fa-icon matListIcon [icon]="faSlidersH" size="lg"></fa-icon>
+      <span>&nbsp;Configuración</span>
+    </div>
+    <div mat-menu-item *ngIf="isOnline" (click)="onLogout(user.id)">
+      <fa-icon matListIcon [icon]="faSignOutAlt" size="lg"></fa-icon>
+      <span>&nbsp;Cerrar Sesión</span>
+    </div>
+  </ng-template>
+</mat-menu>
+<mat-menu #escuela="matMenu">
+  <ng-template matMenuContent>
+    <div mat-menu-item [routerLink]="['about']" routerLinkActive="active">Quiénes somos</div>
+    <div mat-menu-item [matMenuTriggerFor]="oferta">Oferta educativa</div>
+    <div mat-menu-item [routerLink]="['location']" routerLinkActive="active">Galería de fotos</div>
+    <div mat-menu-item [routerLink]="['location']" routerLinkActive="active">Ubicación y contacto</div>
+  </ng-template>
+</mat-menu>
+<mat-menu #webapp="matMenu">
+  <ng-template matMenuContent>
+    <div mat-menu-item [matMenuTriggerFor]="conduct">Código de conducta</div>
+    <div mat-menu-item [routerLink]="['privacy-policy']" routerLinkActive="active">Políticas de privacidad</div>
+    <div mat-menu-item [routerLink]="['license']" routerLinkActive="active">Licencia</div>
+  </ng-template>
+</mat-menu>
+<mat-menu #conduct="matMenu">
+  <ng-template matMenuContent>
+    <div mat-menu-item [routerLink]="['code-conduct-school']" routerLinkActive="active">Para espacios académicos</div>
+    <div mat-menu-item [routerLink]="['code-conduct']" routerLinkActive="active">Para este sitio</div>
+  </ng-template>
+</mat-menu>
+<mat-menu #oferta="matMenu">
+  <ng-template matMenuContent>
+    <div mat-menu-item [routerLink]="['remote-learning']" routerLinkActive="active">Educación a distancia</div>
+    <div mat-menu-item [routerLink]="['reopenning']" routerLinkActive="active">Reapertura</div>
+
+  </ng-template>
+</mat-menu>

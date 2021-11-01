@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "escuela-rafael-diaz-serdan": {
+      "hosting": {
+        "escuela-rafael-diaz-serdan": [
+          "escuela-rafael-diaz-serdan"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "escuela-rafael-diaz-serdan"
+  }
+}

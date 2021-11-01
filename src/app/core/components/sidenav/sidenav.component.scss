@@ -1,0 +1,14 @@
+.sidenav-container {
+  height: calc(100vh - 65px);
+}
+.sidenav /* .mat-toolbar */ {
+  background: inherit;
+  border: none;
+  width: auto;
+  max-width: 250px;
+}
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}

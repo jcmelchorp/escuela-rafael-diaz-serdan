@@ -1,0 +1,208 @@
+@use "./../../../../assets/themes/colors" as colors;
+
+#parallax {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background-image: url("/assets/images/parallax_house.png"),
+    url("/assets/images/parallax_text.png"),
+    url("/assets/images/parallax_people.png"),
+    url("/assets/images/parallax_house_shadow.png"),
+    url("/assets/images/parallax_text_shadow.png"),
+    url("/assets/images/parallax_people_shadow.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position: 50% 50%;
+  animation: createBox 1s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+h1 span {
+  font-family: "Fredoka One";
+  font-size: 2.5rem;
+  height: 200px;
+  position: fixed;
+  width: 30px;
+  transform-origin: bottom;
+  color: colors.$rds-logo-color;
+  text-shadow: 3px 3px 1px colors.$gray-chateau-color;
+}
+.emblem {
+  position: relative;
+  /* top: 100; */
+  left: calc(50% - 200px);
+  margin: 0 auto;
+  width: 300px;
+  height: 480px;
+  font-weight: bold;
+  color: colors.$rds-logo-color;
+  animation: spinZ 1s cubic-bezier(0.98, 0, 0.65, 1.65) alternate;
+  text-align: center;
+  display: inline-block;
+}
+
+.char01 {
+  transform: rotate(301deg);
+}
+.char02 {
+  transform: rotate(309deg);
+}
+.char03 {
+  transform: rotate(316deg);
+}
+.char04 {
+  transform: rotate(323deg);
+}
+.char05 {
+  transform: rotate(331deg);
+}
+.char06 {
+  transform: rotate(337deg);
+}
+.char07 {
+  transform: rotate(343deg);
+}
+.char08 {
+  transform: rotate(350deg);
+}
+.char09 {
+  transform: rotate(356deg);
+}
+.char10 {
+  transform: rotate(4deg);
+}
+.char11 {
+  transform: rotate(11deg);
+}
+.char12 {
+  transform: rotate(18deg);
+}
+.char13 {
+  transform: rotate(26deg);
+}
+.char14 {
+  transform: rotate(32deg);
+}
+.char15 {
+  transform: rotate(36deg);
+}
+.char16 {
+  transform: rotate(42deg);
+}
+.char17 {
+  transform: rotate(48deg);
+}
+.char18 {
+  transform: rotate(54deg);
+}
+.char19 {
+  transform: rotate(62deg);
+}
+.char20 {
+  transform: rotate(67deg);
+}
+.char21 {
+  transform: rotate(73deg);
+}
+.char22 {
+  transform: rotate(81deg);
+}
+.char23 {
+  transform: rotate(88deg);
+}
+.char24 {
+  transform: rotate(95deg);
+}
+.char25 {
+  transform: rotate(103deg);
+}
+.char26 {
+  transform: rotate(111deg);
+}
+@keyframes createBox {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes move {
+  0% {
+    transform: translate(-30%, 0);
+  }
+  50% {
+    text-shadow: 0 25px 50px rgba(0, 0, 0, 0.75);
+  }
+  100% {
+    transform: translate(30%, 0);
+  }
+}
+.words span:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.words span:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.words span:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+.words span:nth-child(5) {
+  animation-delay: 2s;
+}
+
+.words span:nth-child(6) {
+  animation-delay: 2.5s;
+}
+
+.words span:nth-child(7) {
+  animation-delay: 3s;
+}
+.words span:nth-child(8) {
+  animation-delay: 0.5s;
+}
+
+.words span:nth-child(9) {
+  animation-delay: 1s;
+}
+
+.words span:nth-child(10) {
+  animation-delay: 1.5s;
+}
+
+.words span:nth-child(11) {
+  animation-delay: 2s;
+}
+
+.words span:nth-child(12) {
+  animation-delay: 2.5s;
+}
+
+.words span:nth-child(13) {
+  animation-delay: 3s;
+}
+.words span:nth-child(14) {
+  animation-delay: 0.5s;
+}
+
+.words span:nth-child(15) {
+  animation-delay: 1s;
+}
+
+.words span:nth-child(16) {
+  animation-delay: 1.5s;
+}
+
+.words span:nth-child(17) {
+  animation-delay: 2s;
+}
+
+.words span:nth-child(18) {
+  animation-delay: 2.5s;
+}
+
+.words span:nth-child(19) {
+  animation-delay: 3s;
+}

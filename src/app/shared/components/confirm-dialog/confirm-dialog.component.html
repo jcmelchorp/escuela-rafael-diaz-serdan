@@ -1,0 +1,13 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>{{data.action|titlecase}} {{data.subject}}</h2>
+  <mat-icon matDialogClose mat-icon-button>cancel</mat-icon>
+</div>
+<mat-dialog-content fxLayout="column" fxLayoutAlign="center center">
+  <h3>{{data.title}}</h3>
+  <p>{{data.message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="data.confirm=false" matDialogClose>Cancelar</button>
+  <button mat-stroked-button color="warn" (click)="data.confirm=true"
+    [matDialogClose]="data">{{data.action|titlecase}}</button>
+</mat-dialog-actions>

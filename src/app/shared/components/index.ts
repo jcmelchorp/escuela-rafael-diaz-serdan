@@ -1,0 +1,23 @@
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
+import { InfoCardsComponent } from './info-cards/info-cards.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ParallaxSpaceComponent } from './parallax-space/parallax-space.component';
+export const sharedComponents: any[] = [
+  BreadcrumbComponent,
+  ConfirmDialogComponent,
+  DashboardComponent,
+  HomeComponent,
+  InfoCardsComponent,
+  NotFoundComponent,
+  ParallaxSpaceComponent,
+];
+export * from './breadcrumb/breadcrumb.component';
+export * from './confirm-dialog/confirm-dialog.component';
+export * from './dashboard/dashboard.component';
+export * from './home/home.component';
+export * from './info-cards/info-cards.component';
+export * from './not-found/not-found.component';
+export * from './parallax-space/parallax-space.component';

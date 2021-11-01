@@ -1,0 +1,18 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>Inicio de sesión </h2>
+  <mat-icon matDialogClose mat-icon-button>cancel</mat-icon>
+</div>
+<mat-dialog-content>
+  <div class="text-center">
+    <img class="img-logo" src="assets/images/rds-newlogo-transparent.png">
+  </div>
+  <h4 class="text-justify">Para ingresar a los servicios académicos institucionales,
+    haz click en el botón para identificarte con tu cuenta escolar.
+  </h4>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button (click)="onLogin()">
+    <img class="img-google" src="assets/images/google-logo.svg" />
+    <span>@rafaeldiazserdan.net</span>
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,3 @@
+<app-parallax-space *ngIf="!(isOnline$|async)"></app-parallax-space>
+<app-dashboard *ngIf="(isOnline$|async)" [isTeacher$]="isTeacher$" [isAdmin$]="isAdmin$" [isOnline$]="(isOnline$)">
+</app-dashboard>
