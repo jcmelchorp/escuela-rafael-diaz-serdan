@@ -10,12 +10,11 @@ const routes: Routes = [
     data: { breadcrumb: 'Home' },
     children: [
       { path: '', component: HomeComponent, data: { breadcrumb: null } },
-
+      {
+        path: '**',
+        component: NotFoundComponent,
+      },
     ],
-  },
-  {
-    path: '**',
-    component: NotFoundComponent,
   },
 ];
 
