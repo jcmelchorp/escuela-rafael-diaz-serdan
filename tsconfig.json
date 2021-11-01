@@ -3,11 +3,43 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@rds-modules/*": [
+        "src/app/modules/*"
+      ],
+      "@rds-shared/*": [
+        "src/app/shared/*"
+      ],
+      "@rds-core/*": [
+        "src/app/core/*"
+      ],
+      "@rds-auth/*": [
+        "src/app/auth/*"
+      ],
+      "@rds-store/*": [
+        "src/app/ngrx-store/*"
+      ],
+      "@rds-admin/*": [
+        "src/app/admin/*"
+      ],
+      "@rds-env/*": [
+        "src/environments/*"
+      ],
+      "@rds-root/*": [
+        "src/*"
+      ],
+    },
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": false,
+    "strict": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2017",
@@ -18,6 +50,9 @@
     ]
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": false,
+    "strictInputAccessModifiers": false,
+    "strictTemplates": false
   }
 }
