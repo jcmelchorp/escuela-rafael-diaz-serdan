@@ -1,0 +1,29 @@
+<div *ngIf="isLoading$|async">
+  <mat-progress-bar mode="query" color="primary"> </mat-progress-bar>
+</div>
+<div *ngIf="(courseWorks$|async).length==0 && !(isLoading$|async)">
+  <mat-card class="text-center">
+    <fa-icon [icon]="faBlind" size="lg"></fa-icon>No se encontraron elementos.
+  </mat-card>
+</div>
+<mat-accordion multi [togglePosition]="'before'">
+  <mat-expansion-panel class="mat-elevation-z0" *ngFor="let topic of topics$|async" #topicsPanel="matExpansionPanel">
+    <mat-expansion-panel-header class="border-bottom border-primary">
+      <mat-panel-title>
+        <span>{{topic.name}}</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="mx-n4">
+      <mat-accordion displayMode="flat">
+        <mat-expansion-panel class="mat-elevation-z0" *ngFor="let courseWork of courseWorks$|async">
+          <mat-expansion-panel-header>
+            <div class="d-inline-block text-truncate w-80">{{courseWork.title}}</div>
+          </mat-expansion-panel-header>
+          <div>
+            {{courseWork.description}}
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

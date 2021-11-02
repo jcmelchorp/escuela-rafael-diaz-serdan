@@ -1,0 +1,60 @@
+<div class="py-2" *ngIf="course$|async as course">
+  <div class="py-2" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="space-around stretch">
+    <mat-card class="mat-elevation-z0" fxFlex="0 1 calc(49% - 5px)" fxFlex.lt-md="100%">
+      <mat-card-header>
+        <mat-card-title>
+          {{ course.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{course.room}}° {{ course.section }}
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card class="mat-elevation-z0" *ngIf="(owner$|async) as owner" fxFlex="0 1 calc(49% - 5px)" fxFlex.lt-md="100%">
+      <mat-card-header>
+        <img mat-card-avatar [src]="[owner.profile.photoUrl]" />
+        <mat-card-title>{{owner.profile.name.fullName}}</mat-card-title>
+        <mat-card-subtitle>{{owner.profile.emailAddress}}</mat-card-subtitle>
+        <fa-icon mat-icon-button class="float-right" [icon]="owner.profile.verifiedTeacher ? faUserCheck : faUserTimes"
+          size="2x">
+        </fa-icon>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <div class="py-2" fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <fa-icon class="px-1" [ngClass]="[course.guardiansEnabled ? 'text-success' : 'text-danger']" [icon]="faHouseUser"
+        size="2x"></fa-icon>
+      <!-- <mat-icon class="px-1" [ngClass]="[course.guardiansEnabled ? 'text-success' : 'text-danger']">
+        supervised_user_circle</mat-icon> -->
+      Tutores
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <fa-icon mat-icon-button (click)="openCourseDialog(course)" class="px-1" [icon]="faEdit" size="2x"></fa-icon>
+      Modificar
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <fa-icon mat-icon-button (click)="openAddUserDialog(course)" class="px-1" [icon]="faUserPlus" size="2x"></fa-icon>
+      Invitar
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <fa-icon mat-icon-button class="px-1" [icon]="faAt" size="2x"></fa-icon>
+      Correo Grupal
+    </div>
+    <a class="text-reset text-decoration-none" fxLayout="column" fxLayoutAlign="center center"
+      [href]="course.teacherFolder.alternateLink" target="_blank" rel="noopener">
+      <fa-icon class="px-1" [icon]="faGoogleDrive" size="2x"></fa-icon>
+      Carpeta
+    </a>
+  </div>
+  <div class="py-2" style="height: 100vh">
+    <nav class="sticky-top" mat-tab-nav-bar mat-align-tabs="center">
+      <a mat-tab-link *ngFor="let link of courseLinks" [routerLink]="link.route" routerLinkActive
+        #rla="routerLinkActive" [active]="rla.isActive">
+        {{link.name}}
+      </a>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>

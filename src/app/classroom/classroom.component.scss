@@ -1,0 +1,29 @@
+@import "./../../assets/themes/colors.scss";
+
+.additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+mat-card-header {
+  .img-google-logo {
+    margin-top: -5px;
+    height: 35px;
+    width: auto;
+  }
+}
+
+.img-fluid {
+  max-height: 120px;
+}
+
+.dashboard-card {
+  position: absolute;
+  height: fit-content;
+  width: auto;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px solid gray;
+  box-shadow: none;
+}

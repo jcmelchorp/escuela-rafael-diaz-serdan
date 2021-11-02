@@ -48,6 +48,13 @@ export class DashboardComponent {
         access: this.isTeacher$ || this.isAdmin$,
 
       },
+      {
+        title: 'Funciones de G Suite',
+        description: 'Administra Google Classroom y Google Admin Directory.',
+        route: 'gsuite',
+        imgUrl: 'assets/images/dashboard-google.png',
+        access: (this.isTeacher$ || this.isAdmin$)
+      }
       /*  {
          title: 'Cuentas de usuario de Google',
          description: 'Manejo de usuarios de Google Workspace',

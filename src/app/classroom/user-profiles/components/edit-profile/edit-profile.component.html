@@ -1,0 +1,21 @@
+<mat-card class="w-100 mat-elevation-z5">
+  <mat-card-content class="card border-success m-n2">
+    <h2 class="card-header">Datos Generales</h2>
+    <div class="card-body">
+      <form [formGroup]="updateProfileForm" (onSubmit)="onProfileUpdate()">
+        <mat-form-field class="d-block" appearance="outline">
+          <mat-label>Nombre completo</mat-label>
+          <input matInput type="text" formControlName="fullName" />
+        </mat-form-field>
+        <mat-form-field class="d-block" appearance="outline">
+          <mat-label>Photo</mat-label>
+          <input matInput type="text" formControlName="photoUrl" />
+        </mat-form-field>
+        <div class="text-right">
+          <button class="btn btn-info" mat-raised-button type="submit" (click)="onProfileUpdate()"
+            [disabled]="(!updateProfileForm.get('fullName').valid || !updateProfileForm.get('photoUrl').valid  || !updateProfileForm.get('fullName').touched || !updateProfileForm.get('photoUrl').touched)">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

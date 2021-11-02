@@ -1,0 +1,48 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+  <h2 mat-dialog-title>{{(data.isNew) ? 'Crea' : 'Modifica'}} un anuncio</h2>
+  <fa-icon mat-icon-button [icon]="faTimes" size="lg" (click)="close()" [matDialogClose]=""></fa-icon>
+</div>
+<mat-dialog-content>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Texto</mat-label>
+    <textarea matInput placeholder="Crea un mensaje para compartir con una clase" type="text"
+      #cfcAutosize="cdkTextareaAutosize" cdkTextareaAutosize cdkAutosizeMinRows="4" cdkAutosizeMaxRows="10"
+      [(ngModel)]="data.newAnnouncement.text"></textarea>
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <mat-label>Agrega enlaces:</mat-label>
+    <mat-chip-list #chipList>
+      <mat-chip class="text-truncate" *ngFor="let material of data.newAnnouncement.materials" [removable]="removable"
+        (removed)="remove(material)" [selectable]="selectable">
+        <img matChipAvatar [src]="material.link.thumbnailUrl" /> {{material.link.url}} - {{material.link.title}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+    <input placeholder="Nuevo enlace..." [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)" />
+  </mat-form-field>
+  <div class="d-block">
+    <mat-form-field appearance="outline">
+      <mat-label>Estado de publicación</mat-label>
+      <mat-select [(ngModel)]="data.newAnnouncement.state" (change)="onStateSelection($event.key)">
+        <mat-option *ngFor="let key of keys" [value]="states[key]">
+          {{states[key]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nivel</mat-label>
+      <mat-select [(ngModel)]="data.section" (change)="onSectionSelection($event.key)" multiple>
+        <mat-option *ngFor="let key of levelKeys" [value]="levels[key]">
+          {{levels[key]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [matDialogClose]="data">
+    {{(data.isNew) ? 'Crear' : 'Modificar'}}
+  </button>
+</mat-dialog-actions>

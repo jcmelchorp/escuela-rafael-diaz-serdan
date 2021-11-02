@@ -324,12 +324,12 @@ export class AuthEffects {
                  };
                  return fromAuthActions.updateProfileSuccess({ user: updatedUser });
                }),
-               catchError((err) => of(fromAuthActions.authError({ error: err })))
+               catchError((err) => of(fromAuthActions.notAuthenticated({ error: err })))
              )
          )
        ),
-   );
-  */
+   ); */
+
   updateOnlineStatus$ = createEffect(
     () =>
       this.actions$.pipe(

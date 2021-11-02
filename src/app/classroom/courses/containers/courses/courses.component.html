@@ -1,0 +1,26 @@
+<div class="p-2">
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar src="https://i.pinimg.com/originals/98/d3/a2/98d3a283f98cded8e639957e935bd373.png" />
+      <mat-card-title>
+        <img class="img-google-logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png" />
+        <span class="text-google-logo"> Classroom</span>
+      </mat-card-title>
+      <mat-card-subtitle>Administrador de recursos</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-button (click)="openCreateAnnouncementDialog()">
+          <fa-icon class="text-success" [icon]="faBullhorn"></fa-icon> Anuncio
+        </button>
+        <button mat-button (click)="openCreateCourseDialog()">
+          <fa-icon class="text-success" [icon]="faPlus"></fa-icon> Nueva clase
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div class="p-2 pt-4">
+  <router-outlet></router-outlet>
+</div>

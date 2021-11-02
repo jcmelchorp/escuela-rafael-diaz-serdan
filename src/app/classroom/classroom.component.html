@@ -1,0 +1,42 @@
+<div class="m-4">
+  <mat-card class="mat-elevation-z4" style="width: fit-content;">
+    <mat-card-header style="margin-top: -20px">
+      <mat-card-title>
+        <img class="img-google-logo"
+          src="https://lh3.googleusercontent.com/sYGCKFdty43En6yLGeV94mfNGHXfVj-bQYitHRndarB7tHmQq_kyVxhlPejeCBVEEYUbnKG2_jUzgNXoPoer6XJm71V3uz2Z6q0CmNw=w0" />
+      </mat-card-title>
+      <mat-card-subtitle style="margin-top: 10px">
+        <span class="view-subtitle">Administra Google Classroom y Google Admin Directory.</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <div class="p-2">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+      <mat-card class="mb-2 dashboard-cards" fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"
+        fxFlex.lt-sm="100%" [routerLink]="['clases']" appMaterialElevation [raisedElevation]="raisedElev">
+        <mat-card-header>
+          <img mat-card-avatar src="https://i.pinimg.com/originals/98/d3/a2/98d3a283f98cded8e639957e935bd373.png" />
+          <mat-card-title>
+            <span class="google-card-name">Google Classroom</span>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <span>Administrador de recursos.</span>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="mb-2 dashboard-cards" fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"
+        fxFlex.lt-sm="100%" [routerLink]="['/admin']" appMaterialElevation [raisedElevation]="raisedElev">
+        <mat-card-header>
+          <img mat-card-avatar src="https://mytcpip.com/wp-content/uploads/2019/06/nexusae0_icon2.png" />
+          <mat-card-title>
+            <span class="google-card-name">Google Admin</span>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <span>Administración de dominio.</span>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</div>

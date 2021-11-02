@@ -1,0 +1,56 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+  <h2 mat-dialog-title>{{(data.isNew) ? 'Crea' : 'Modifica'}} una clase</h2>
+  <fa-icon mat-icon-button [icon]="faTimes" size="lg" (click)="close()" [matDialogClose]=""></fa-icon>
+</div>
+
+<mat-dialog-content>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput type="text" placeholder="¿Cuál es el nombre de tu clase?" [(ngModel)]="data.name">
+  </mat-form-field>
+  <div class="d-block">
+    <mat-slide-toggle matInput palceholder="Informes a tutores" color="primary" [(ngModel)]="data.guardiansEnabled">
+    </mat-slide-toggle>&nbsp;
+    <mat-label>Informes a tutores</mat-label>
+  </div>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <mat-form-field appearance="outline">
+      <mat-label>Nivel</mat-label>
+      <mat-select [(ngModel)]="data.section" placeholder="Selecciona el nivel escolar"
+        (change)="onSectionSelection($event.key)">
+        <mat-option *ngFor="let key of levelKeys" [value]="levels[key]">
+          {{levels[key]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Grado</mat-label>
+      <input matInput type="text" [(ngModel)]="data.room" />
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="5px">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select [(ngModel)]="data.courseState" placeholder="Selecciona el estado"
+        (change)="onStateSelection($event.key)">
+        <mat-option *ngFor="let key of keys" [value]="states[key]">
+          {{states[key]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Descripción del encabezado</mat-label>
+    <textarea matInput type="text" [(ngModel)]="data.descriptionHeading"></textarea>
+  </mat-form-field>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput type="text" [(ngModel)]="data.description"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [matDialogClose]="data">
+    {{(data.isNew) ? 'Crear' : 'Modificar'}}
+  </button>
+</mat-dialog-actions>

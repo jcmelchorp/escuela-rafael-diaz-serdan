@@ -1,0 +1,21 @@
+<div class="p-2">
+  <mat-card class="mat-elevation-z8">
+    <mat-card-header>
+      <img mat-card-avatar src="assets/images/rds-newlogo-transparent.png" />
+      <mat-card-title class="view-title">Información de cuenta
+      </mat-card-title>
+      <mat-card-subtitle class="view-subtitle">Datos asociados a usuarios de cuentas institucionales
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+  <div class="pt-2">
+    <div fxLayout="row flex" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutAlign="space-around stretch">
+      <div fxFlex="0 1 calc(35% - 5px)" fxFlex.lt-md="100%">
+        <app-profile-user [user]="user$ | async" (logout)="logoutUser($event)"></app-profile-user>
+      </div>
+      <div fxFlex="0 1 calc(65% - 5px)" fxFlex.lt-md="100%">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div *ngIf="(students$|async).length==0 && !(isLoading$|async)">
+  <mat-card class="text-center">
+    <fa-icon [icon]="faBlind" size="lg"></fa-icon>No se encontraron elementos.
+  </mat-card>
+</div>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let student of students$|async">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{student.profile.name.fullName}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{student.profile.emailAddress}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-action-row>
+      <button mat-button (click)="showGuardians(student.userId)">Tutores registrados</button>
+      <!-- <app-delete-button (delete)="handleDelete()"></app-delete-button> -->
+      <button mat-button class="text-danger" (click)="removeConfirm(student)">Expulsar</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -19,6 +19,15 @@ const routes: Routes = [
         canActivate: [AdminGuard],
       },
       {
+        path: 'gsuite',
+        loadChildren: () =>
+          import('@rds-classroom/classroom.module').then(
+            (m) => m.ClassroomModule
+          ),
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Google GSuite' },
+      },
+      {
         path: 'config',
         component: SettingsComponent,
         canActivate: [AuthGuard],

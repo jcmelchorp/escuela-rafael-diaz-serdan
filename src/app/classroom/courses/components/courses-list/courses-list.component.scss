@@ -1,0 +1,29 @@
+
+@import "./../../../../../assets/themes/colors.scss";
+.hide { display: none; }
+.table-container {
+
+  //margin-top: 8px;
+  mat-table {
+    color: $deep-blue-color;
+    line-height: 14px !important;
+    width: 100%;
+
+    mat-header-row {
+      height: 50px;
+    }
+
+
+
+    .course-row.mat-footer-row,
+    .course-row.mat-row {
+      height: 30px;
+      cursor: pointer;
+    }
+    mat-header-cell {
+      letter-spacing: 0.3px;
+    }
+
+
+  }
+}

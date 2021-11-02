@@ -1,0 +1,104 @@
+<div *ngIf="!(isLoading$ | async)">
+  <mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Búsqueda...</mat-panel-title>
+        <mat-panel-description>(por nombre, status y fecha de creación)</mat-panel-description>
+      </mat-expansion-panel-header>
+      <form [formGroup]="searchForm">
+        <div fxLayout="row flex" fxLayoutAlign="space-between stretch" fxLayoutAlign.lt-md="end"
+          fxLayout.lt-md="column">
+          <mat-form-field class="my-n2" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-md="100%" appearance="outline">
+            <mat-label>Busca una clase por nombre</mat-label>
+            <input matInput type="search" class="dc-search" placeholder="Search Course" (keyup)="applyFilter()"
+              formControlName="name" (click)="searching = true" />
+            <button mat-icon-button matSuffix (click)="name = ''; applyFilter(''); searching = !searching"
+              color="accent">
+              <mat-icon *ngIf="!searching">search</mat-icon>
+              <mat-icon *ngIf="searching">clear</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field class="my-n2" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-md="100%" appearance="outline">
+            <mat-label>Estado del curso</mat-label>
+            <mat-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedStates"
+              (selectionChange)="applyFilter($event.value)" type="text" placeholder="Todos" multiple>
+              <mat-option *ngFor="let key of keys" [value]="states[key]">
+                {{ states[key] }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="my-n2" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-md="100%" appearance="outline">
+            <mat-label>Fecha de creación</mat-label>
+            <input matInput formControlName="creationTime" [matDatepicker]="picker" (dateInput)="applyFilter()" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="table-container">
+    <mat-table class="full-width-table table-hover" matSort aria-label="Course work table">
+      <ng-container matColumnDef="courseState">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div [ngSwitch]="row.courseState">
+            <div *ngSwitchCase="'COURSE_STATE_UNSPECIFIED'">
+              <fa-icon [icon]="faExclamation" size="lg"></fa-icon>
+            </div>
+            <div *ngSwitchCase="'ACTIVE'">
+              <fa-icon class="text-success" [icon]="faCheck" size="lg"></fa-icon>
+            </div>
+            <div *ngSwitchCase="'ARCHIVED'">
+              <fa-icon class="text-warning" [icon]="faFileArchive" size="lg"></fa-icon>
+            </div>
+            <div *ngSwitchCase="'PROVISIONED'">
+              <fa-icon class="text-info" [icon]="faScrewdriver" size="lg"></fa-icon>
+            </div>
+            <div *ngSwitchCase="'DECLINED'">
+              <fa-icon class="text-danger" [icon]="faTimes" size="lg"></fa-icon>
+            </div>
+            <div *ngSwitchCase="'SUSPENDED'">
+              <fa-icon class="text-dark" [icon]="faBan" size="lg"></fa-icon>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+        <mat-cell class="dc-content" *matCellDef="let element">{{ element.name }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="section">
+        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Nivel</mat-header-cell>
+        <mat-cell class="dc-content" *matCellDef="let element">{{ element.section }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="room">
+        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Grado</mat-header-cell>
+        <mat-cell class="dc-content" *matCellDef="let element">
+          {{ element.room }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="noRecord">
+        <mat-footer-cell *matFooterCellDef class="text-danger">
+          No hay resultados que coincidan con la búsqueda.
+        </mat-footer-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns" class="course-row" [routerLink]="[row.id]">
+      </mat-row>
+      <!-- Row shown when there is no matching data.-->
+      <mat-footer-row *matFooterRowDef="!dataSource.data.length ? ['noRecord'] : []" colSpan="3"
+        style="text-align: center;">
+      </mat-footer-row>
+    </mat-table>
+    <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageSize]="10" [pageIndex]="0"
+      [pageSizeOptions]="[5, 10, 20, 50, 100]">
+    </mat-paginator>
+  </div>
+</div>

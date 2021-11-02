@@ -1,0 +1,29 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+  <h2 mat-dialog-title>Resultados de la publicación</h2>
+  <fa-icon mat-icon-button [icon]="faTimes" size="lg" (click)="close()" [matDialogClose]=""></fa-icon>
+</div>
+<mat-dialog-content>
+  <mat-list dense>
+    <h3 matSubheader>Publicados:</h3>
+    <div *ngFor="let announcement of data">
+      <div *ngIf="announcement.status===200">
+        <mat-list-item>
+          <fa-icon class="text-success" matListIcon [icon]="faCheckCircle"></fa-icon>
+          <h4 matLine matTooltip="{{announcement.result.creationTime}}">{{announcement.courseName}}</h4>
+        </mat-list-item>
+      </div>
+    </div>
+  </mat-list>
+  <mat-divider></mat-divider>
+  <mat-list dense>
+    <div *ngFor="let announcement of data">
+      <div *ngIf="announcement.status===400">
+        <h3 matSubheader>Error:</h3>
+        <mat-list-item>
+          <fa-icon matListIcon class="text-danger" [icon]="faTimesCircle"></fa-icon>
+          <h4 matLine matTooltip="{{announcement.result.error.message}}">{{announcement.courseName}}</h4>
+        </mat-list-item>
+      </div>
+    </div>
+  </mat-list>
+</mat-dialog-content>

@@ -43,6 +43,8 @@ export const updateOnlineStatus = createAction(
   '[Auth Online] Update online status',
   props<{ id: string; isOnline: boolean }>()
 );
+export const updateProfile = createAction('[Auth Component] Update profile', props<{ userData: User }>());
+export const updateProfileSuccess = createAction('[Auth Component] Update profile success', props<{ user: User }>());
 export const updateTeachersRole = createAction(
   '[Auth Role] Update teacher role',
   props<{ isTeacher: boolean }>()

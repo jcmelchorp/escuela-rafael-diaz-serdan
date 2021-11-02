@@ -1,0 +1,19 @@
+<div fxLayout="row" fxLayoutAlign="space-between top">
+  <h2 mat-dialog-title>Agrega un {{(data.isTeacher) ? 'profesor' : 'alumno'}}</h2>
+  <fa-icon mat-icon-button [icon]="faTimes" size="lg" (click)="close()" matDialogClose></fa-icon>
+</div>
+<h3>{{data.name}}</h3>
+<mat-dialog-content>
+  <p>Escribe el correo electrónico del {{(data.isTeacher) ? 'profesor' : 'alumno'}} que deseas agregar:
+    <span>(puedes escribir "me" si se trata de tí.)</span>
+  </p>
+
+  <mat-slide-toggle [(ngModel)]="data.isTeacher">Como {{(data.isTeacher) ? 'profesor' : 'alumno'}}</mat-slide-toggle>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Correo del {{(data.isTeacher) ? 'profesor' : 'alumno'}}</mat-label>
+    <input matInput type="email" [(ngModel)]="data.mail" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [matDialogClose]="data">Agregar</button>
+</mat-dialog-actions>
