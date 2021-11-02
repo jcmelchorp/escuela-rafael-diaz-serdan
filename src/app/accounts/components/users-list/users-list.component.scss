@@ -1,0 +1,24 @@
+@use "./../../../../assets/themes/colors" as colors;
+
+.mat-table {
+  width: 100%;
+}
+.mat-form-field {
+  font-size: 12px;
+}
+td.mat-column-badges {
+  width: 120px;
+}
+td.mat-column-givenName {
+  width: max-content;
+}
+td.mat-column-actions {
+  width: 80px;
+}
+.mat-row:hover .mat-cell {
+  background-color: colors.$text-hover-color;
+}
+.users-row-is-clicked {
+  font-weight: 500;
+  background-color: colors.$text-hover-color;
+}

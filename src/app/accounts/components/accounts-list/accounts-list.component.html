@@ -1,0 +1,30 @@
+<mat-list role="list" dense>
+  <mat-list-item role="listitem" *ngFor="let user of data" routerLinkActive="active">
+    <img matListAvatar src="{{user.photoUrl}}">
+    <div matLine>
+      <fa-icon matTooltip="Última conexión: {{user.lastLoginTime}}" [icon]="faCircle"
+        class="{{user.isOnline?'text-success':'text-danger'}}">
+      </fa-icon>&nbsp;
+      <span>
+        {{user.name?.fullName}}
+      </span>&nbsp;
+      <span class="text-secondary">{{user.id}}</span>
+    </div>
+    <div matLine>{{user.primaryEmail}}</div>
+    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-evenly">
+      <fa-icon *ngIf="user.isHuman" [icon]="user.role=='alumnos'?faIdCard:faIdCardAlt" size="2x" mat-icon-button
+        [routerLink]="[user.id]" matTooltip="Información Personal"></fa-icon>
+      <!-- <fa-icon [icon]="" size="2x" mat-icon-button *ngIf="user.role=='Profesores'"
+          [routerLink]="[user.id]" matTooltip="Edita información personal del docente"></fa-icon> -->
+      <fa-icon color="primary" [icon]="faUserCircle" size="2x" (click)="openEditUser(user)"
+        matTooltip="Cuenta de usuario">
+      </fa-icon>
+      <fa-icon [icon]="faUserSlash" size="2x" class="text-danger" (click)="openSuspendUser(user)"
+        matTooltip="{{user.suspended ? 'Reestablecer o habilitar' : 'Suspender o inhabilitar'}} usuario">
+      </fa-icon>
+      <fa-icon [icon]="faTrashAlt" size="2x" class="text-danger" (click)="openDeleteUser(user)"
+        matTooltip="Borrar usuario"></fa-icon>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>

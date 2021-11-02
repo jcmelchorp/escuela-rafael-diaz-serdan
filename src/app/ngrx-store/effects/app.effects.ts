@@ -16,7 +16,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 export class AppEffects {
   loadApp$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadApp/* ROOT_EFFECTS_INIT */),
+      ofType(ROOT_EFFECTS_INIT),
       switchMap(() =>
         of(this.gapiService.handleClientLoad()).pipe(
           switchMap(() => of(loadAppSuccess()))

@@ -16,6 +16,9 @@
       "@rds-auth/*": [
         "src/app/auth/*"
       ],
+      "@rds-accounts/*": [
+        "src/app/accounts/*"
+      ],
       "@rds-store/*": [
         "src/app/ngrx-store/*"
       ],

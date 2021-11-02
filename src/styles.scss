@@ -1,4 +1,4 @@
-@use "assets/themes/_colors" as color;
+@use "assets/themes/colors" as colors;
 @import "assets/themes/custom-theme.scss";
 /* You can add global styles to this file, and also import other style files */
 html,
@@ -10,10 +10,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .view-title {
-  color: color.$rds-logo-color;
+  color: colors.$rds-logo-color;
   font-size: calc(1rem + 1.8vw);
   font-family: "fredoka one", cursive;
-  text-shadow: -2px -1px 1px color.$text-shadow-color;
+  text-shadow: -2px -1px 1px colors.$text-shadow-color;
 }
 .view-subtitle {
   font-family: "comfortaa";
@@ -21,7 +21,7 @@ body {
   font-weight: 400;
 }
 .display-4-responsive {
-  color: color.$rds-logo-color;
+  color: colors.$rds-logo-color;
   font-size: calc(1rem + 3vw);
   font-weight: 100;
 }
@@ -55,14 +55,14 @@ body {
   top: 0;
 }
 .rds-icon {
-  color: color.$rds-logo-color;
+  color: colors.$rds-logo-color;
 }
 .card-title {
   font-family: "poppins";
-  color: color.$rds-logo-color;
+  color: colors.$rds-logo-color;
 }
 .color-rds {
-  color: color.$primary-color;
+  color: colors.$primary-color;
 }
 .google-card-name {
   font-family: "comfortaa";
@@ -71,27 +71,27 @@ body {
   font-family: "comfortaa";
   padding-left: 10px;
   margin-top: -10px;
-  color: color.$text-shadow-color;
+  color: colors.$text-shadow-color;
 }
 .img-select {
   width: 30px;
   height: auto;
 }
 .mcard-title {
-  color: color.$william-color;
+  color: colors.$william-color;
   font-size: calc(1rem + 1vw);
   font-weight: 700;
   font-family: "comfortaa", cursive;
 }
 .app-name {
-  color: color.$rds-logo-color;
+  color: colors.$rds-logo-color;
   font-weight: 800;
 }
 .hidden {
   display: none;
 }
 .active {
-  color: color.$rds-logo-color;
+  color: colors.$rds-logo-color;
 }
 
 .text-wrap-right {

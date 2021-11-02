@@ -1,0 +1,45 @@
+<div class="p-0 card">
+  <form [formGroup]="saveForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="card-header" mat-dialog-title fxLayout="row wrap" fxLayoutAlign="space-between">
+      <h2>
+        <fa-icon [icon]="faUserPlus"></fa-icon>&nbsp;<span class="ml-2">{{data.action|titlecase}}</span>
+      </h2>
+      <fa-icon mat-icon-button [icon]="faTimes" size="lg" (click)="onClose()" [matDialogClose]=""></fa-icon>
+    </div>
+    <mat-dialog-content>
+      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="2px">
+        <mat-form-field fxFlex="0 1 calc(50% - 2px)" appearance="outline">
+          <mat-label>Grupo</mat-label>
+          <mat-select formControlName="grade">
+            <mat-option value="">Sin seleccionar</mat-option>
+            <mat-option *ngFor="let key of slevelKeys" [value]="slevels[key]">
+              {{slevels[key]|titlecase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="0 1 calc(50% - 2px)" appearance="outline">
+          <mat-label>Nivel</mat-label>
+          <mat-select formControlName="level">
+            <mat-option value="">Sin seleccionar</mat-option>
+            <mat-option *ngFor="let key of clevelKeys" [value]="clevels[key]">
+              {{clevels[key]|titlecase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <mat-checkbox color="primary" formControlName="isInGoogle">
+          <span>Omitir {{data.action}}ción de usuario en Google.</span>
+          <mat-icon *ngIf="data.action=='Crea'" class="text-secondary"
+            [matTooltip]="'Utiliza esta opción si el usuario ya tiene una cuenta @rafaeldiazserdan, pero no se encuentra en la base de datos.'">
+            help_outline</mat-icon>
+        </mat-checkbox>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-stroked-button color="warn" matDialogClose>Cancelar</button>
+      <button mat-stroked-button color="primary" type="submit" [disabled]="!saveForm.dirty">{{data.action}}</button>
+    </mat-dialog-actions>
+  </form>
+</div>

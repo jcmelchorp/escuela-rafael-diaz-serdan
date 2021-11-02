@@ -1,0 +1,220 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>Usuario de Google</h2>
+  <mat-icon matDialogClose mat-icon-button>cancel</mat-icon>
+</div>
+<mat-dialog-content>
+  <mat-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Revisa de nuevo los datos ingresados" [editable]="true">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Usuario de Google</ng-template>
+        <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+          <mat-form-field fxFlex="0 1 calc(50% - 5px)" appearance="outline">
+            <mat-label>Nombre(s)</mat-label>
+            <input matInput type="text" formControlName="givenName" required>
+            <mat-error *ngIf="firstFormGroup.controls['givenName'].hasError('required')">
+              Este dato es requerido.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="0 1 calc(50% - 5px)" appearance="outline">
+            <mat-label>Apellido(s)</mat-label>
+            <input matInput type="text" formControlName="familyName" required>
+            <mat-error *ngIf="firstFormGroup.controls['familyName'].hasError('required')">
+              Este dato es requerido.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+          <mat-form-field fxFlex="0 1 calc(50% - 5px)" appearance="outline">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput type="text" placeholder="...@rafaeldiazserdan.net" autocomplete="email"
+              formControlName="primaryEmail" required>
+            <mat-error *ngIf="firstFormGroup.controls['primaryEmail'].hasError('required')">
+              Este dato es requerido.
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['primaryEmail'].hasError('pattern')">
+              No es un formato de correo válido.
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['primaryEmail'].hasError('emailDomain')">
+              Sólo se permiten direcciones bajo el dominio @rafaeldiazserdan.net.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex="0 1 calc(50% - 5px)" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+              autocomplete="current-password" required>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="firstFormGroup.controls['password'].hasError('required')">
+              Este dato es requerido.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+          <button mat-stroked-button color="primary" (click)="onGoogleCreate()"
+            [disabled]="!firstFormGroup.valid || (created$|async)">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around center">
+              <span>Crear en Google</span>
+              <mat-spinner *ngIf="creating$|async" strokeWidth="3" [diameter]="25" [color]="'primary'"></mat-spinner>
+            </div>
+          </button>
+          <button *ngIf="(created$|async) && !googleError && data.googleUser" mat-stroked-button color="accent"
+            matStepperNext (click)="created.next(false)">Siguiente</button>
+          <!--  <div *ngIf="googleError$|async" class="text-warning">
+            {{(googleError$|async).error}} {{(googleError$|async).message}}</div> -->
+          <div *ngIf="googleError" class="text-danger">
+            {{googleError.code}} {{googleError.message}}</div>
+          <div *ngIf="(created$|async) && data.googleUser" class="text-success">
+            <mat-icon>done</mat-icon>{{data.googleUser.id}}
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required." [editable]="!!data.googleUser">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Usuario de la institución</ng-template>
+        <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+          <mat-form-field fxFlex="0 1 calc(33.3% - 5px)" appearance="outline">
+            <mat-label>Nombre(s)</mat-label>
+            <input matInput type="text" formControlName="givenName">
+          </mat-form-field>
+          <mat-form-field fxFlex="0 1 calc(33.3% - 5px)" appearance="outline">
+            <mat-label>Apellido(s)</mat-label>
+            <input matInput type="text" formControlName="familyName">
+          </mat-form-field>
+          <mat-form-field *ngIf="secondFormGroup.controls['isHuman'].value" fxFlex="0 1 calc(33.3% - 5px)"
+            appearance="outline">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" (focus)="picker.open()" placeholder="Fecha de nacimiento"
+              color="primary" name="dob" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
+          <mat-form-field *ngIf="secondFormGroup.controls['isHuman'].value" fxFlex="0 1 calc(33% - 5px)"
+            fxFlex.lt-lg="100%" appearance="outline">
+            <mat-label>CURP</mat-label>
+            <input matInput placeholder="CURP" formControlName="curp">
+          </mat-form-field>
+          <mat-form-field
+            *ngIf="secondFormGroup.controls['role'].value=='alumnos' && secondFormGroup.controls['isHuman'].value"
+            fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+            <mat-label>NIEV</mat-label>
+            <input matInput placeholder="NIEV" formControlName="niev">
+          </mat-form-field>
+          <mat-form-field
+            *ngIf="secondFormGroup.controls['role'].value=='profesores'||'administrativos' && secondFormGroup.controls['isHuman'].value"
+            fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+            <mat-label>RFC</mat-label>
+            <input matInput placeholder="RFC" formControlName="rfc">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+          <mat-form-field fxFlex="0 1 calc(50% - 5px)" appearance="outline">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput type="text" formControlName="primaryEmail" autocomplete="email">
+          </mat-form-field>
+          <mat-form-field fxFlex="0 1 calc(50% - 5px)" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+              autocomplete="current-password">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+          <div *ngIf="secondFormGroup.controls['role'].value=='alumnos'" fxLayout="column" fxFlex="0 1 calc(25% - 5px)">
+            <mat-form-field appearance="outline">
+              <mat-label>Grupo</mat-label>
+              <mat-select formControlName="grade">
+                <mat-option value="">Sin seleccionar</mat-option>
+                <mat-option *ngFor="let key of slevelKeys" [value]="slevels[key]">
+                  {{slevels[key]|titlecase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Nivel</mat-label>
+              <mat-select formControlName="level">
+                <mat-option value="">Sin seleccionar</mat-option>
+                <mat-option *ngFor="let key of clevelKeys" [value]="clevels[key]">
+                  {{clevels[key]|titlecase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="0 1 calc(25% - 5px)">
+            <mat-label for="role">Rol de usuario:</mat-label>
+            <mat-radio-group fxLayout="column" name="role" color="primary" formControlName="role" required>
+              <mat-radio-button class="mx-2" value="alumnos">
+                Alumno<mat-icon class="text-secondary"
+                  matTooltip="Participa en Google Classroom como alumno y su expediente personal se ajustara a este rol.">
+                  help_outline</mat-icon>
+              </mat-radio-button>
+              <mat-radio-button class="mx-2" value="profesores">
+                Docente <mat-icon class="text-secondary"
+                  matTooltip="Participa en Google Classroom como alumno o profesor y su expediente personal contiene datos laborales.">
+                  help_outline</mat-icon>
+              </mat-radio-button>
+              <mat-radio-button class="mx-2" value="administrativos">
+                Administrativo <mat-icon class="text-secondary"
+                  matTooltip="Participa a Google Classroom como alumno o profesor, pero no podrá iniciar clases virtuales a través de Google Meet. Su expediente personal contiene datos laborales.">
+                  help_outline</mat-icon>
+              </mat-radio-button>
+              <mat-radio-button class="mx-2" value="otros">
+                Otros<mat-icon class="text-secondary" matTooltip="Rol general sin distinción.">help_outline</mat-icon>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div *ngIf="secondFormGroup.controls['isHuman'].value" fxLayout="column" fxFlex="0 1 calc(25% - 5px)">
+            <mat-label for="gender">Género: </mat-label>
+            <mat-radio-group fxLayout="column" name="gender" color="primary" formControlName="gender">
+              <mat-radio-button class="mx-2" value="hombre">
+                Hombre
+              </mat-radio-button>
+              <mat-radio-button class="mx-2" value="mujer">
+                Mujer
+              </mat-radio-button>
+              <mat-radio-button class="mx-2" value="inespecífico">
+                Prefiero no decir
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div fxLayout="column" fxFlex="0 1 calc(25% - 5px)">
+            <mat-checkbox color="primary" formControlName="isAdmin">
+              <span>Administrador</span>
+            </mat-checkbox>
+            <!--  <mat-checkbox color="primary" formControlName="suspended">
+              <span>Suspendido</span>
+            </mat-checkbox> -->
+            <mat-checkbox color="primary" formControlName="isHuman">
+              <span>Usuario humano</span>
+              <mat-icon class="text-secondary"
+                matTooltip="Selecciona esta opción si el usuario es una persona. Si es una cuenta asociada a un puesto o función dentro de la institución, asegúrate que esta opción esté desactivada">
+                help_outline</mat-icon>
+            </mat-checkbox>
+            <mat-checkbox color="primary" formControlName="isInGoogle">
+              <span class="text-wrap">Usuario en Google</span>
+              <mat-icon class="text-secondary"
+                matTooltip="Utiliza esta opción si el usuario ya tiene una cuenta @rafaeldiazserdan, pero no se encuentra en la base de datos.">
+                help_outline</mat-icon>
+            </mat-checkbox>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+          <button mat-stroked-button color="primary" (click)="onFirebaseCreate()" [disabled]="!secondFormGroup.valid ">
+            <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-around center">
+              <span>Crear</span>
+              <mat-spinner *ngIf="creating$|async" strokeWidth="3" [diameter]="25" [color]="'primary'"></mat-spinner>
+            </div>
+          </button>
+          <button *ngIf="(created$|async) && data.firebaseUser" mat-stroked-button matStepperNext
+            (click)="created.next(false)">Siguiente</button>
+          <div *ngIf="(created$|async) && data.firebaseUser" class="text-success">
+            <mat-icon>done</mat-icon>{{data.firebaseUser}}
+          </div>
+        </div>
+      </form>
+
+    </mat-step>
+
+  </mat-stepper>
+</mat-dialog-content>

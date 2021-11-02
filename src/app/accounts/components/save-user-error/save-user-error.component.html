@@ -1,0 +1,11 @@
+<div class="m-n3 card">
+  <div class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <h2>
+      <fa-icon class="text-danger" [icon]="faUserTimes"></fa-icon> <span class="ml-2">{{data.action}} </span>
+    </h2>
+    <fa-icon mat-icon-button [icon]="faTimes" size="lg" (click)="onClose()"></fa-icon>
+  </div>
+  <div class="card-body">
+    <p>{{data.message}}</p>
+  </div>
+</div>

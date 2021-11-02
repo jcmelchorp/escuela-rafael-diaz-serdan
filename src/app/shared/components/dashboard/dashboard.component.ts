@@ -41,19 +41,20 @@ export class DashboardComponent {
         access: this.isOnline$,
       },
       {
-        title: 'Usuarios',
+        title: 'Cuentas de usuario',
         description: 'Manejo de usuarios de la institución',
-        route: 'users',
+        route: 'accounts',
         imgUrl: 'assets/images/assignment-grades2.png',
         access: this.isTeacher$ || this.isAdmin$,
+
       },
-      {
-        title: 'Usuarios de Google',
-        description: 'Manejo de usuarios de Google Workspace',
-        route: 'admin',
-        imgUrl: 'assets/images/google-admin-img.png',
-        access: this.isTeacher$ || this.isAdmin$,
-      },
+      /*  {
+         title: 'Cuentas de usuario de Google',
+         description: 'Manejo de usuarios de Google Workspace',
+         route: 'admin',
+         imgUrl: 'assets/images/google-admin-img.png',
+         access: this.isTeacher$ || this.isAdmin$,
+       }, */
     ];
   }
 }

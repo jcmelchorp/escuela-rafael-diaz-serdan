@@ -1,0 +1,59 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>Usuario {{data.action}}do</h2>
+  <mat-icon matDialogClose mat-icon-button>cancel</mat-icon>
+</div>
+<mat-dialog-content>
+  <div class="text-center">
+    <img class="img-small" src="assets/images/rds-newlogo-transparent.png">
+    <p>Se ha {{data.action}}do el usuario con los siguientes datos:</p>
+  </div>
+
+  <div *ngIf="data">
+    <div class="mb-n2" fxLayout="row">
+      <p class="col-6">ID:&nbsp;</p>
+      <p class="col-6">{{data.id}}</p>
+    </div>
+    <div class="mb-n2" fxLayout="row">
+      <p class="col-6">Nombre(s):&nbsp;</p>
+      <p class="col-6">{{data.name.givenName}}</p>
+    </div>
+    <div class="mb-n2" fxLayout="row">
+      <p class="col-6">Apellido(s):&nbsp;</p>
+      <p class="col-6">{{data.name.familyName}}</p>
+    </div>
+    <div class="mb-n2" fxLayout="row">
+      <p class="col-6">Correo electrónico:&nbsp;</p>
+      <p class="col-6">{{data.primaryEmail}}</p>
+    </div>
+    <div class="mb-n2" fxLayout="row">
+      <p class="col-6">Fecha de nacimiento:&nbsp;</p>
+      <p class="col-6">{{data.dob|date}}</p>
+    </div>
+    <div class="mb-n2" fxLayout="row">
+      <p class="col-6">Contraseña:&nbsp;</p>
+      <p class="col-6">{{data.password}}</p>
+    </div>
+    <div class="mb-n2" *ngIf="data.role=='Alumnos'" fxLayout="row">
+      <p class="col-6">Nivel:&nbsp;</p>
+      <p class="col-6">{{data.level}}</p>
+    </div>
+    <div class="mb-n2" *ngIf="data.role=='Alumnos'" fxLayout="row">
+      <p class="col-6">Grado:&nbsp;</p>
+      <p class="col-6">{{data.grade}}</p>
+    </div>
+    <div class="mb-n2" fxLayout="row">
+      <p class="col-6">Ruta de la organización:&nbsp;</p>
+      <p class="col-6">{{data.orgUnitPath}}</p>
+    </div>
+    <div fxLayout="row">
+      <p class="col-6">Rol de usuario:&nbsp;</p>
+      <p class="col-6">{{data.role}}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="accent" (click)="onClose()" matDialogClose>Terminar</button>
+  <button mat-stroked-button (click)="printPage()">
+    <mat-icon>print</mat-icon>&nbsp;Imprimir
+  </button>
+</mat-dialog-actions>

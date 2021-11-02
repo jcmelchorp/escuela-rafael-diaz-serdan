@@ -20,3 +20,6 @@ export enum CourseLevel {
   Primaria,
   Secundaria,
 }
+export enum UserRole {
+  otros, alumnos, profesores, administrativos
+}
