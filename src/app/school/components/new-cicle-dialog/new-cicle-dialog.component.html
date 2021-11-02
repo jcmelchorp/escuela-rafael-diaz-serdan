@@ -1,0 +1,31 @@
+<form [formGroup]="formData">
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>Nuevo Ciclo Escolar</h2>
+  <mat-icon matDialogClose mat-icon-button>cancel</mat-icon>
+</div>
+<mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+    <mat-form-field appearance="outline">
+      <mat-label>Año de inicio</mat-label>
+      <input matInput placeholder="YYYY" formControlName="yi" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Año de término</mat-label>
+      <input matInput placeholder="YYYY" formControlName="yf" />
+    </mat-form-field>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="accent" type="reset" (click)="resetData()">
+    Limpiar
+  </button>
+  <button mat-stroked-button color="primary" type="submit" (click)="saveData()" [disabled]="
+      !formData.dirty ||
+      formData.untouched ||
+      formData.invalid ||
+      formData.pristine
+    ">
+    Crear
+  </button>
+</mat-dialog-actions>
+</form>

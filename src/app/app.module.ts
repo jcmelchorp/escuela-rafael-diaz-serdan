@@ -17,10 +17,10 @@ import { SharedModule } from '@rds-shared/shared.module';
 import { environment } from '@rds-env/environment';
 import { NgrxStoreModule } from './ngrx-store/ngrx-store.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from '@rds-auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireAuthModule, PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
@@ -54,15 +54,19 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
-    /* provideFirebaseApp(() => initializeApp(environment.firebase)),
+    /*     const firebaseApp = initializeApp({ });
+    const auth = getAuth();
+    onAuthStateChanged(auth, user => { console.log(user); });
     provideAnalytics(() => getAnalytics()),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore()),
-    providePerformance(() => getPerformance()), */
-  ],
-  providers: [
-    /* ScreenTrackingService, UserTrackingService */
+      provideAuth(() => getAuth()),
+      provideDatabase(() => getDatabase()),
+      provideFirestore(() => getFirestore()),
+      providePerformance(() => getPerformance()), * /
+      ],
+    providers: [
+      { provide: PERSISTENCE, useValue: 'session' },
+      { provide: USE_DEVICE_LANGUAGE, useValue: true },
+      /* ScreenTrackingService, UserTrackingService */
   ],
   bootstrap: [AppComponent]
 })

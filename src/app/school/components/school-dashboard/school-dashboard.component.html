@@ -1,0 +1,67 @@
+<div class="py-2" [@fadeIn]="'fadeIn'">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="start">
+    <mat-card *ngFor="let link of assigmentLinks" class="mb-2" fxFlex="0 1 calc(33.3% - 10px)"
+      fxFlex.lt-lg="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%" [routerLink]="link.route" appMaterialElevation
+      [raisedElevation]="raisedElev">
+      <mat-card-header>
+        <fa-icon mat-card-avatar class="rds-icon" [icon]="link.icon" size="2x"></fa-icon>
+        <mat-card-title>{{link.title}}</mat-card-title>
+        <mat-card-subtitle>
+          <p><small>{{link.description}}</small></p>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
+<!--  <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+    <mat-card class="mb-2" fxFlex="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%" [routerLink]="['usuarios']"
+      appMaterialElevation [raisedElevation]="raisedElev">
+      <fa-icon class="rds-icon float-left" [icon]="faUsers" size="2x"></fa-icon>
+      <mat-card-header>
+        <mat-card-title>Usuarios</mat-card-title>
+        <mat-card-subtitle>
+          <p>Datos sobre las personas en la institución</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card> -->
+<!--  <mat-card class="mb-2" fxFlex="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%" [routerLink]="['alumnos']"
+      appMaterialElevation [raisedElevation]="raisedElev">
+      <fa-icon class="rds-icon float-left" [icon]="faIdCard" size="2x"></fa-icon>
+      <mat-card-header>
+        <mat-card-title>Expedientes Escolares</mat-card-title>
+        <mat-card-subtitle>
+          <p>Accede a la información de los estudiantes.</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card> -->
+<!--  <mat-card class="mb-2" fxFlex="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%" [routerLink]="['profesores']"
+      appMaterialElevation [raisedElevation]="raisedElev">
+      <fa-icon class="rds-icon float-left" [icon]="faUserTie" size="2x"></fa-icon>
+      <mat-card-header>
+        <mat-card-title>Personal Docente</mat-card-title>
+        <mat-card-subtitle>
+          <p>Accede a la información del personal docente.</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card> -->
+<!--  <mat-card class="mb-2" fxFlex="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%" [routerLink]="['asignaciones']"
+      appMaterialElevation [raisedElevation]="raisedElev">
+      <fa-icon class="rds-icon float-left" [icon]="faIdCardAlt" size="2x"></fa-icon>
+      <mat-card-header>
+        <mat-card-title>Asignaciones</mat-card-title>
+        <mat-card-subtitle>
+          <p>Administra materias y grupos.</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card> -->
+<!--  <mat-card class="mb-2" fxFlex="0 1 calc(25% - 10px)" fxFlex.lt-lg="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
+      (click)="openCreateUser()" appMaterialElevation [raisedElevation]="raisedElev">
+      <fa-icon class="rds-icon float-left" [icon]="faUserPlus" size="2x"></fa-icon>
+      <mat-card-header>
+        <mat-card-title>Nuevo Usuario</mat-card-title>
+        <mat-card-subtitle>
+          <p><small>Crea una cuenta de alumno, docente o personal administrativo.</small></p>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card> -->
+<!-- </div> -->

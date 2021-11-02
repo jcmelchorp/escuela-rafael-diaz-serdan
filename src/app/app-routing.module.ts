@@ -15,8 +15,17 @@ const routes: Routes = [
       { path: '', component: HomeComponent, data: { breadcrumb: null } },
       {
         path: 'accounts',
-        loadChildren: () => import('./accounts/accounts.module').then(m => m.AccountsModule),
+        loadChildren: () => import('./accounts/accounts.module').then(
+          m => m.AccountsModule),
         canActivate: [AdminGuard],
+        data: { breadcrumb: null }
+      },
+      {
+        path: 'escuela',
+        loadChildren: () => import('./school/school.module').then(
+          m => m.SchoolModule),
+        canActivate: [AdminGuard],
+        data: { breadcrumb: null }
       },
       {
         path: 'gsuite',
@@ -39,6 +48,7 @@ const routes: Routes = [
       },
     ],
   },
+
 
 ];
 

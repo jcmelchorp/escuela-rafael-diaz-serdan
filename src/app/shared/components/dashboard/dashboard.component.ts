@@ -40,6 +40,20 @@ export class DashboardComponent {
         imgUrl: 'assets/images/assignment-grades2.png',
         access: this.isOnline$,
       },
+      /* {
+        title: 'Profesores',
+        description: 'Acceso a las funciones docentes.',
+        route: 'profesores',
+        imgUrl: 'assets/images/dashboard-image2.png',
+        access: this.isTeacher$ || this.isAdmin$,
+      }, */
+      {
+        title: 'Dirección',
+        description: 'Gestiona usuarios, grupos, clases y horarios en la institución.',
+        route: 'escuela',
+        imgUrl: 'assets/images/dashboard-image.png',
+        access: this.isAdmin$,
+      },
       {
         title: 'Cuentas de usuario',
         description: 'Manejo de usuarios de la institución',
