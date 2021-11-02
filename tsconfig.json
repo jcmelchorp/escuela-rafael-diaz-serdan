@@ -19,6 +19,9 @@
       "@rds-accounts/*": [
         "src/app/accounts/*"
       ],
+      "@rds-classroom/*": [
+        "src/app/classroom/*"
+      ],
       "@rds-store/*": [
         "src/app/ngrx-store/*"
       ],

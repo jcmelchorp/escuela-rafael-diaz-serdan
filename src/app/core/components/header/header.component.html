@@ -33,7 +33,7 @@
     <div mat-list-item *ngIf="isOnline && user" [routerLink]="['user']">
       <app-user-card [isOnline]="isOnline" [isAdmin]="isAdmin" [user]="user"> </app-user-card>
     </div>
-    <div mat-menu-item *ngIf="isOnline" [routerLink]="['settings']">
+    <div mat-menu-item *ngIf="isOnline" [routerLink]="['config']">
       <fa-icon matListIcon [icon]="faSlidersH" size="lg"></fa-icon>
       <span>&nbsp;Configuración</span>
     </div>
