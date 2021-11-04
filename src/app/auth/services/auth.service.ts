@@ -82,22 +82,25 @@ export class AuthService {
     private afDatabase: AngularFireDatabase,
     private afStore: AngularFirestore
   ) {
-    this.user$ = this.getAuthState().pipe(
+  }
+  getUserById(id: string): Observable<User> {
+    return this.afDatabase
+      .object<User>(`${this.userCollection}/${id}`)
+      .valueChanges();
+  }
+  getAuthUser(): Observable<any> {
+    return this.afAuth.authState.pipe(
+      take(1),
       switchMap((user) => {
         if (user) {
           return this.afDatabase
-            .object<User>(`${this.userCollection}/${user.providerData[0].uid}`)
+            .object(`${this.userCollection}/${user.providerData[0]?.uid}`)
             .valueChanges();
         } else {
           return of(null);
         }
       })
     );
-  }
-  getUserById(id: string): Observable<User> {
-    return this.afDatabase
-      .object<User>(`${this.userCollection}/${id}`)
-      .valueChanges();
   }
   getAuthState(): Observable<firebase.User> {
     return this.afAuth.authState;
@@ -108,13 +111,13 @@ export class AuthService {
     return this.afAuth.signInWithCredential(credentials);
   }
   signInWithPopup(): Observable<firebase.auth.UserCredential> {
-    return from(
-      this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    );
+    return from(this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(_ => {
+      return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    }));
   }
   signOut(id: string) {
     //this.updateOnlineStatus(id, false);
-    return this.afAuth.signOut();
+    return from(this.afAuth.signOut());
   }
   updateOnlineStatus(id: string, status: boolean): Observable<void> {
     if (status) {

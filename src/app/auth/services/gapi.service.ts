@@ -165,11 +165,12 @@ export class GapiService {
     this._googleAuth.disconnect();
   }
 
-  async signOut(id: string) {
-    const auth2 = gapi.auth2.getAuthInstance();
-    return await auth2.signOut();
+  signOut(id: string) {
+    gapi.auth2.getAuthInstance().signOut();
+    return this.authService
+      .updateOnlineStatus(id, false)
+      .pipe(switchMap(() => this.authService.signOut(id)));
   }
-
   setSigninStatus(googleUser: gapi.auth2.GoogleUser) {
     const isAuthorized = this.updateSigninStatus(googleUser);
     if (isAuthorized) {

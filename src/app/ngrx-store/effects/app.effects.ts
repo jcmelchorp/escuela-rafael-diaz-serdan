@@ -7,16 +7,17 @@ import {
   ROOT_EFFECTS_INIT,
 } from '@ngrx/effects';
 import { GapiService } from '@rds-auth/services';
-import { loadApp, loadAppFail, loadAppSuccess } from '@rds-store/actions/app.actions';
+import { getUser, signOutCompleted } from '@rds-auth/state/auth.actions';
+import { loadApp, loadAppFail, loadAppSuccess, localStoreUser } from '@rds-store/actions/app.actions';
 
-import { from, of } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { defer, from, Observable, of } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AppEffects {
   loadApp$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ROOT_EFFECTS_INIT),
+      ofType(loadApp, ROOT_EFFECTS_INIT),
       switchMap(() =>
         of(this.gapiService.handleClientLoad()).pipe(
           switchMap(() => of(loadAppSuccess()))
@@ -25,5 +26,30 @@ export class AppEffects {
       catchError((err) => of(loadAppFail(err)))
     )
   );
+  /*  localStoreUser$ = createEffect(
+     () =>
+       this.actions$.pipe(
+         ofType(localStoreUser),
+         tap((action) =>
+           localStorage.setItem('user', JSON.stringify(action.user))
+         )
+       ),
+     { dispatch: false }
+   );
+   removeUser$ = createEffect(
+     () =>
+       this.actions$.pipe(
+         ofType(signOutCompleted),
+         tap(() =>
+           localStorage.removeItem('user')
+         )
+       ),
+     { dispatch: false }
+   ); */
+  /* init$: Observable<any> = createEffect(() =>
+    defer(() => {
+      return of(getUser());
+    })
+  ); */
   constructor(private actions$: Actions, private gapiService: GapiService) { }
 }

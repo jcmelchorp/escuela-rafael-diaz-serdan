@@ -6,12 +6,12 @@ import { environment } from '@rds-env/environment';
 import { routerKey } from './router';
 import { CustomSerializer } from './router/custom-serializer';
 import { storeConfig } from './config/store-config';
-import { registeredEffects } from './effects';
 import * as fromEntity from './config/entity-metadata';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '.';
-import { NgrxToastService } from './services/ngrx-toast.service';
+import { NgrxToastService } from './ngrx-toast.service';
+import { registeredEffects } from './config/registered-effects';
 
 @NgModule({
   declarations: [],
@@ -20,8 +20,11 @@ import { NgrxToastService } from './services/ngrx-toast.service';
     !environment.production
       ? StoreDevtoolsModule.instrument()
       : StoreDevtoolsModule.instrument({
-        maxAge: 25,
+        maxAge: 30,
         logOnly: environment.production,
+        features: {
+          persist: true,
+        }
       }),
     EffectsModule.forRoot([...registeredEffects]),
     EntityDataModule.forRoot(fromEntity.entityConfig),
@@ -30,7 +33,7 @@ import { NgrxToastService } from './services/ngrx-toast.service';
       serializer: CustomSerializer,
     }),
   ],
-  providers: [NgrxToastService],
+  providers: [],
   exports: [
     StoreModule,
     StoreRouterConnectingModule,

@@ -9,7 +9,7 @@ import { Subscription, Observable, Subject } from 'rxjs';
 import { SchoolCourse } from '../../models/school-course.model';
 import { SchoolCoursesDialogComponent } from '../../components/school-courses-dialog/school-courses-dialog.component';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -34,8 +34,7 @@ export class SchoolCoursesComponent implements OnInit {
   courses$: Observable<SchoolCourse[]>;
   coursesByGrade$: Observable<SchoolCourse[]>[];
   resCount$: Observable<number>;
-
-
+  willDownload = false;
   constructor(
     private fb: FormBuilder,
     private schoolCourseEntityService: SchoolCoursesEntityService,
@@ -99,6 +98,33 @@ export class SchoolCoursesComponent implements OnInit {
 
   handleCourseDelete(course: SchoolCourse) {
     this.schoolCourseEntityService.delete(course);
+  }
+  onFileChange(ev) {
+    let workBook = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+    reader.onload = (event) => {
+      const data = reader.result;
+      workBook = XLSX.read(data, { type: 'binary' });
+      jsonData = workBook.SheetNames.reduce((initial, name) => {
+        const sheet = workBook.Sheets[name];
+        initial[name] = XLSX.utils.sheet_to_json(sheet);
+        return initial;
+      }, {});
+      const dataString = JSON.stringify(jsonData);
+      document.getElementById('output').innerHTML = dataString.slice(0, 300).concat("...");
+      this.setDownload(dataString);
+    }
+    reader.readAsBinaryString(file);
+  }
+  setDownload(data) {
+    this.willDownload = true;
+    setTimeout(() => {
+      const el = document.querySelector("#download");
+      el.setAttribute("href", `data:text/json;charset=utf-8,${encodeURIComponent(data)}`);
+      el.setAttribute("download", 'xlsxtojson.json');
+    }, 1000)
   }
 
 }

@@ -33,7 +33,7 @@ export class SnackEffects {
         tap(() =>
           setTimeout(() => {
             this.snackService.justMessage('La aplicación está lista');
-          }, 2000)
+          }, 3000)
         )
       ),
     { dispatch: false }
@@ -43,14 +43,24 @@ export class SnackEffects {
     () =>
       this.actions$.pipe(
         ofType(fromAuthActions.notAuthenticated),
-        tap((error) => {
-          this.toastrService.warning(error.error.message, error.error.code);
-        })
-      ),
+        tap((error) =>
+          setTimeout(() => {
+            this.snackService.messageWithComponent('Error', {
+              vPos: 'bottom',
+              hPos: 'left',
+              setAutoHide: false,
+              hide: 5000,
+              message: error.error.message,
+              action: true,
+              actionString: error.error.code,
+              extra: false
+            });
+          }, 3000)
+        )),
     { dispatch: false }
   );
 
-  youAreLoggedOut$ = createEffect(
+  /* youAreLoggedOut$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(fromAuthActions.signOut),
@@ -62,7 +72,7 @@ export class SnackEffects {
         )
       ),
     { dispatch: false }
-  );
+  ); */
 
   comeBackSoon$ = createEffect(
     () =>
@@ -70,11 +80,8 @@ export class SnackEffects {
         ofType(fromAuthActions.signOutCompleted),
         tap(() =>
           setTimeout(() => {
-            this.toastrService.success(
-              'Tu sesión ha terminado. Vuelve pronto!',
-              'Registro de acceso'
-            );
-          }, 2000)
+            this.snackService.justMessage('Tu sesión ha terminado. Vuelve pronto!');
+          }, 3000)
         )
       ),
     { dispatch: false }

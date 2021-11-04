@@ -40,10 +40,6 @@ export class LayoutComponent {
     this.router.events.subscribe((event_2) =>
       this.navigationInterceptor(event_2 as RouterEvent)
     );
-    const user: User = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      this.store.dispatch(signInSuccess({ user }));
-    }
     this.isHandset$ = this.layoutService.isHandset$;
     this.isOnline$ = this.store.select(fromAuthSelectors.isOnline);
     this.user$ = this.store.select(fromAuthSelectors.selectUser);

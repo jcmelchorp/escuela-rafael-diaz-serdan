@@ -21,7 +21,6 @@ export class SpinnerEffects {
         ofType(
           fromAuthActions.signIn,
           fromAuthActions.signOut,
-          ROUTER_NAVIGATION
         ),
         tap(() => {
           this.spinner.show('entitySpinner', {
@@ -50,8 +49,6 @@ export class SpinnerEffects {
           fromAuthActions.signInSuccess,
           fromAuthActions.signInFail,
           fromAuthActions.signOutCompleted,
-          ROUTER_NAVIGATED,
-          ROUTER_ERROR
         ),
 
         tap(() => {
