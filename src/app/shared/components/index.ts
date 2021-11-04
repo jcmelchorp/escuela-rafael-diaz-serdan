@@ -5,10 +5,12 @@ import { HomeComponent } from './home/home.component';
 import { InfoCardsComponent } from './info-cards/info-cards.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ParallaxSpaceComponent } from './parallax-space/parallax-space.component';
+import { DeleteButtonComponent } from './delete-button/delete-button.component';
 export const sharedComponents: any[] = [
   BreadcrumbComponent,
   ConfirmDialogComponent,
   DashboardComponent,
+  DeleteButtonComponent,
   HomeComponent,
   InfoCardsComponent,
   NotFoundComponent,
@@ -17,6 +19,7 @@ export const sharedComponents: any[] = [
 export * from './breadcrumb/breadcrumb.component';
 export * from './confirm-dialog/confirm-dialog.component';
 export * from './dashboard/dashboard.component';
+export * from './delete-button/delete-button.component';
 export * from './home/home.component';
 export * from './info-cards/info-cards.component';
 export * from './not-found/not-found.component';

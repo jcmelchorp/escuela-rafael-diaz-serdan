@@ -9,6 +9,7 @@ import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import * as fromAccounts from '@rds-store/accounts';
 import * as fromAccountsDomain from '@rds-store/accounts-domain';
+import * as fromSchoolCourses from '@rds-store/school/school-courses';
 import * as fromEntity from '@rds-store/config/entity-metadata';
 import { schoolComponents } from './components';
 import { schoolContainers } from './containers';
@@ -16,6 +17,10 @@ import { SchoolRoutingModule } from './school-routing.module';
 import { SchoolService } from './services/school.service';
 import { AccountsDomainService } from '../accounts/services/accounts-domain.service';
 import { AccountsService } from '../accounts/services/accounts.service';
+import { SchoolCoursesService } from './services/school-courses.service';
+import { SchoolCoursesEntityService } from '../ngrx-store/school/school-courses/school-courses-entity.service';
+import { SchoolCoursesDataService } from '@rds-store/school/school-courses/school-courses-data.service';
+
 
 
 @NgModule({
@@ -23,11 +28,11 @@ import { AccountsService } from '../accounts/services/accounts.service';
   imports: [SharedModule, SchoolRoutingModule],
   providers: [
     SchoolService,
+    SchoolCoursesService,
     AccountsDomainService,
     AccountsService,
-    /* CourseRoomService,
-    CourseRoomEntityService,
-    CourseRoomDataService, */
+    SchoolCoursesEntityService,
+    SchoolCoursesDataService,
     AccountsDataService,
     AccountsEntityService,
     AccountsDomainDataService,
@@ -39,8 +44,8 @@ export class SchoolModule {
     eds: EntityDefinitionService,
     entityServices: EntityServices,
     entityDataService: EntityDataService,
-    /* courseRoomEntityService: CourseRoomEntityService,
-    courseRoomDataService: CourseRoomDataService, */
+    schoolCoursesEntityService: SchoolCoursesEntityService,
+    schoolCoursesDataService: SchoolCoursesDataService,
     accountsDomainEntityService: AccountsDomainEntityService,
     accountsDomainDataService: AccountsDomainDataService,
     accountsEntityService: AccountsEntityService,
@@ -48,12 +53,12 @@ export class SchoolModule {
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
     entityServices.registerEntityCollectionServices([
-      /* courseRoomEntityService */, accountsDomainEntityService, accountsEntityService
+      schoolCoursesEntityService, accountsDomainEntityService, accountsEntityService
     ]);
-    /*  entityDataService.registerService(
-       fromCourseRoom.entityCollectionName,
-       courseRoomDataService
-     ); */
+    entityDataService.registerService(
+      fromSchoolCourses.entityCollectionName,
+      schoolCoursesDataService
+    );
     entityDataService.registerService(
       fromAccounts.entityCollectionName,
       accountsDataService

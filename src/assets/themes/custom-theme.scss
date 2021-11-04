@@ -12,7 +12,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 // Fonts
-@import "https://fonts.googleapis.com/css?family=Material+Icons+Outlined";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Fredoka+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 
 $fontConfig: (
@@ -266,7 +266,7 @@ $altTheme: (
 
 .material-icons {
   font-size: 24px;
-  font-family: "Material Icons Outlined", "Material Icons";
+  font-family: "Material Icons";
   .mat-badge-content {
     font-family: "Comfortaa";
   }

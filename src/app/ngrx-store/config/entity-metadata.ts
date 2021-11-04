@@ -6,6 +6,7 @@ import {
 import { User } from '@rds-auth/models/user.model';
 import * as fromAccount from '@rds-store/accounts';
 import * as fromAccountDomain from '@rds-store/accounts-domain';
+import * as fromSchoolCourses from '@rds-store/school/school-courses';
 import * as fromAnnouncement from '@rds-store/classroom/announcement';
 import * as fromCourse from '@rds-store/classroom/course';
 import * as fromCourseWork from '@rds-store/classroom/course-work';
@@ -16,6 +17,7 @@ import * as fromTopic from '@rds-store/classroom/topic';
 import * as fromUserProfile from '@rds-store/classroom/user-profile';
 //import * as fromGroup from '@rds-admin/state/group';
 import * as fromStudentSubmission from '@rds-store/classroom/student-submission';
+import { SchoolCourse } from '../../school/models/school-course.model';
 
 export const entityMetadata: EntityMetadataMap = {
   [fromAccountDomain.entityCollectionName]: {
@@ -55,6 +57,19 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticSaveEntities: false,
     },
   },
+  [fromSchoolCourses.entityCollectionName]: {
+    filterFn: (entities: SchoolCourse[], { name, grade, description }: Partial<SchoolCourse>) =>
+      entities
+        .filter((e) => (name ? e.name === name : true))
+        .filter((e) => (grade ? e.grade === grade : true))
+        .filter((e) => (description ? e.description === description : true)),
+    selectId: (schoolCourse: SchoolCourse) => schoolCourse.id,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+    },
+  },
   [fromCourse.entityCollectionName]: {
     entityDispatcherOptions: {
       optimisticAdd: true,
@@ -84,14 +99,6 @@ export const entityMetadata: EntityMetadataMap = {
     },
     selectId: (courseWork: gapi.client.classroom.CourseWork) => courseWork.id,
   },
-  /*
-    [fromGroup.entityCollectionName]: {
-      entityDispatcherOptions: {
-        optimisticAdd: true,
-        optimisticUpdate: true,
-        optimisticSaveEntities: true,
-      },
-    }, */
   [fromUserProfile.entityCollectionName]: {
     entityDispatcherOptions: {
       optimisticAdd: true,
@@ -139,6 +146,16 @@ export const entityMetadata: EntityMetadataMap = {
 const pluralNames = {
   [fromAccountDomain.entityCollectionName]: fromAccountDomain.pluralizedEntityName,
   [fromAccount.entityCollectionName]: fromAccount.pluralizedEntityName,
+  [fromSchoolCourses.entityCollectionName]: fromSchoolCourses.pluralizedEntityName,
+  [fromCourse.entityCollectionName]: fromCourse.pluralizedEntityName,
+  [fromStudent.entityCollectionName]: fromStudent.pluralizedEntityName,
+  [fromTeacher.entityCollectionName]: fromTeacher.pluralizedEntityName,
+  [fromCourseWork.entityCollectionName]: fromCourseWork.pluralizedEntityName,
+  [fromUserProfile.entityCollectionName]: fromUserProfile.pluralizedEntityName,
+  [fromGuardian.entityCollectionName]: fromGuardian.pluralizedEntityName,
+  [fromAnnouncement.entityCollectionName]: fromAnnouncement.pluralizedEntityName,
+  [fromStudentSubmission.entityCollectionName]: fromStudentSubmission.pluralizedEntityName,
+  [fromTopic.entityCollectionName]: fromTopic.pluralizedEntityName,
 };
 
 export const entityConfig: EntityDataModuleConfig = {

@@ -1,0 +1,8 @@
+<button mat-icon-button class="text-danger" (click)="canDelete ? deleteElement() : prepareForDelete()">
+  <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
+  <!-- <span *ngIf="canDelete">¿Confirma eliminar?</span> -->
+</button>
+
+<button *ngIf="canDelete" mat-icon-button (click)="cancel()">
+  <fa-icon [icon]="faTimes" size="lg"></fa-icon>
+</button>
