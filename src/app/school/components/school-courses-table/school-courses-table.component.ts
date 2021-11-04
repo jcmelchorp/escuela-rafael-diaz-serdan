@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -15,6 +15,7 @@ export class Group {
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
   styleUrls: ['./school-courses-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SchoolCoursesTableComponent implements OnInit {
   @Input() data: any[];
@@ -27,11 +28,10 @@ export class SchoolCoursesTableComponent implements OnInit {
 
   constructor() {
     this.columns = [
-      /* { field: 'id' }, */
-      { field: 'name' },
-      { field: 'grade' },
-      { field: 'courseType' },
-      { field: 'description' },
+      { field: 'grade', label: 'Grado' },
+      { field: 'name', label: 'Nombre' },
+      { field: 'courseType', label: 'Tipo' },
+
     ];
     this.displayedColumns = this.columns.map((column) => column.field);
     this.groupByColumns = ['grade'];

@@ -2,19 +2,10 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
+import { Entity, firebaseSerialize } from '@rds-shared/models/firebase.model';
 
 import { Observable } from 'rxjs';
-import { take, map } from 'rxjs/operators';
-
-// We need a function that will turn our JS Objects into an Object
-// that Firestore can work with
-function firebaseSerialize<T>(object: T) {
-  return JSON.parse(JSON.stringify(object));
-}
-// We need a base Entity interface that our models will extend
-export interface Entity {
-  id?: string; // Optional for new Entities
-}
+import { map } from 'rxjs/operators';
 export class FirestoreGenericService<T extends Entity> {
   // Reference to the Collection in Firestore
   private collection: AngularFirestoreCollection<T>;
@@ -24,7 +15,7 @@ export class FirestoreGenericService<T extends Entity> {
    */
   constructor(private afs: AngularFirestore, collectionName: string) {
     // We then create the reference to this Collection
-    this.collection = this.afs.collection(collectionName);
+    this.collection = this.afs.collection<T>(collectionName);
   }
 
   /**

@@ -6,12 +6,9 @@ import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
 import { moveIn } from '@rds-shared/animations/router.animations';
 import { Subscription, Observable, Subject } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
-import { CourseType, SchoolCourse } from '../../models/school-course.model';
-import { AccountsEntityService } from '../../../ngrx-store/accounts/accounts-entity.service';
+import { SchoolCourse } from '../../models/school-course.model';
 import { SchoolCoursesDialogComponent } from '../../components/school-courses-dialog/school-courses-dialog.component';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-school-courses',
@@ -45,20 +42,10 @@ export class SchoolCoursesComponent implements OnInit {
     //private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog
   ) {
-    this.initSearchForm();
     this.resCount$ = this.schoolCourseEntityService.count$
     this.loaded_courses$ = this.schoolCourseEntityService.loaded$;
-    //this.loaded_users$ = this.accountsEntityService.loaded$;
+    this.loading_courses$ = this.schoolCourseEntityService.loading$;
     this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
-    //this.teachers$ = this.accountsEntityService.entities$.pipe(
-    //  map((users) => users.filter((u) => u.isTeacher == true))
-    //);
-  }
-
-  ngOnInit() {
-  }
-
-  initSearchForm() {
     this.filterValues = this.fb.group({
       name: new FormControl(),
       grade: new FormControl(),
@@ -71,6 +58,11 @@ export class SchoolCoursesComponent implements OnInit {
     });
     this.filteredEntities$ = this.schoolCourseEntityService.filteredEntities$;
   }
+
+  ngOnInit() {
+  }
+
+
 
   applyFilterString() {
     const nameForm: string = (this.filterValues.get('name').value as string);

@@ -1,24 +1,10 @@
-import { Inject, Injectable } from '@angular/core';
-import { IFirebase } from './firebase.interface';
-import { SchoolCourse } from '../../school/models/school-course.model';
+import { Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { map, take } from 'rxjs/operators';
 import { QueryParams } from '@ngrx/data';
-/**
- * Base Entity interface that our models will extend
- * */
-export interface Entity {
-  id?: string; // Optional for new Entities
-}
-/**
- * function that will turn our JS Objects into an Object that Firestore can work with
- * */
-function firebaseSerialize<T>(object: T) {
-  return JSON.parse(JSON.stringify(object));
-}
-@Injectable()
+import { Entity, firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
 export class FirebaseService<T extends Entity> implements IFirebase<T> {
   private collection: string;
   private fsCollection: AngularFirestoreCollection<T>;
@@ -32,20 +18,20 @@ export class FirebaseService<T extends Entity> implements IFirebase<T> {
       throw new Error('Firestore called with no collection name');
     }
     this.collection = collectionName;
-    this.rtdbList = this.afdb.list<T>(collectionName);
-    this.fsCollection = this.afs.collection<T>(collectionName);
+    this.rtdbList = this.afdb.list<T>(this.collection);
+    this.fsCollection = this.afs.collection<T>(this.collection);
   }
-  add(entity: T): Observable<T> {
-    if (entity['id']) {
-      this.fsCollection.doc(entity['id']).update(firebaseSerialize(entity)).then(_ =>
-        this.rtdbList.update(entity['id'], firebaseSerialize(entity))
+  add(entity: T, id?: string): Observable<T> {
+    if (id) {
+      this.fsCollection.doc(id).update(firebaseSerialize(entity)).then(_ =>
+        this.rtdbList.update(id, firebaseSerialize(entity))
       );
     } else {
       this.fsCollection.add(firebaseSerialize(entity)).then(_ =>
         this.rtdbList.push(firebaseSerialize(entity))
       );
     }
-    return this.getById(entity['id']);
+    return this.getById(id);
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     this.fsCollection.doc<T>(id).update(firebaseSerialize(entity));
@@ -72,11 +58,11 @@ export class FirebaseService<T extends Entity> implements IFirebase<T> {
     return of(id)
   }
   list(): Observable<T[]> {
-    return this.fsCollection.valueChanges({ idField: 'id' }).pipe(take(1));
+    return this.fsCollection.valueChanges({ idField: 'id' });
   }
 
   getWithQuery(query: QueryParams): Observable<T[]> {
-    return this.afs.collection<T>(this.collectionName, ref => ref.where(
+    return this.afs.collection<T>(this.collection, ref => ref.where(
       query['field'].toString(),
       query['operation'] as any,
       query['value'].toString()
