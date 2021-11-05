@@ -27,26 +27,26 @@
         </mat-list-item>
       </mat-nav-list>
       <mat-nav-list dense>
-        <mat-accordion mat-list-item [displayMode]="flat" [multi]="true" dense>
-          <mat-expansion-panel [disabled]="!isAdmin" [class.mat-elevation-z0]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-icon matListIcon>admin_panel_settings</mat-icon>
-              <span matLine [@animateText]="linkText ? 'show' : 'hide'">Usuarios</span>
-            </mat-expansion-panel-header>
-            <ng-template matExpansionPanelContent>
-              <mat-nav-list dense>
-                <mat-list-item [routerLink]="['users']" routerLinkActive="active" (click)="leftSidenav.close()">
-                  <mat-icon matListIcon>people_alt</mat-icon>
-                  <span matLine [@animateText]="linkText ? 'show' : 'hide'">Escuela</span>
-                </mat-list-item>
-                <mat-list-item [routerLink]="['admin']" routerLinkActive="active" (click)="leftSidenav.close()">
-                  <mat-icon matListIcon>domain</mat-icon>
-                  <span matLine [@animateText]="linkText ? 'show' : 'hide'">Google</span>
-                </mat-list-item>
-              </mat-nav-list>
-            </ng-template>
-          </mat-expansion-panel>
-        </mat-accordion>
+        <!--         <mat-accordion  [displayMode]="flat" [multi]="true" dense>-->
+        <mat-expansion-panel [disabled]="!isAdmin" [class.mat-elevation-z0]="true" dense hideToggle>
+          <mat-expansion-panel-header>
+            <mat-icon matListIcon>admin_panel_settings</mat-icon>
+            <span matLine [@animateText]="linkText ? 'show' : 'hide'">Usuarios</span>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            <mat-nav-list dense>
+              <mat-list-item [routerLink]="['users']" routerLinkActive="active" (click)="leftSidenav.close()">
+                <mat-icon matListIcon>people_alt</mat-icon>
+                <span matLine [@animateText]="linkText ? 'show' : 'hide'">Escuela</span>
+              </mat-list-item>
+              <mat-list-item [routerLink]="['admin']" routerLinkActive="active" (click)="leftSidenav.close()">
+                <mat-icon matListIcon>domain</mat-icon>
+                <span matLine [@animateText]="linkText ? 'show' : 'hide'">Google</span>
+              </mat-list-item>
+            </mat-nav-list>
+          </ng-template>
+        </mat-expansion-panel>
+        <!--         </mat-accordion>-->
         <mat-list-item (click)="onSidenavToggle()">
           <fa-icon matListIcon [icon]="sideNavState ? faCompressAlt : faExpandAlt"></fa-icon>
         </mat-list-item>
@@ -54,7 +54,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content [@onMainContentChange]="(onSideNavChange) ? 'open': 'close'">
-    <ng-content #progressBar></ng-content>
+
     <app-main [isOnline]="isOnline"></app-main>
   </mat-sidenav-content>
 </mat-sidenav-container>

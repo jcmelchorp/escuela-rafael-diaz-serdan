@@ -25,6 +25,7 @@
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
+<ng-content #progressBar></ng-content>
 <mat-menu #userMenu="matMenu" fxLayoutAlign="right">
   <ng-template matMenuContent>
     <div mat-list-item *ngIf="isOnline && user" [routerLink]="['user']">
