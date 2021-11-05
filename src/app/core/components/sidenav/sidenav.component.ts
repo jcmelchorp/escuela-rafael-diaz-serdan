@@ -13,6 +13,8 @@ import { User } from '@rds-auth/models/user.model';
 import { AppState } from '@rds-store/index';
 
 import { LayoutService } from '../../services';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faUserTie, faBuilding, faUserGraduate, faCompressAlt, faExpandAlt } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -20,22 +22,22 @@ import { LayoutService } from '../../services';
   animations: [onMainContentChange, onSideNavChange, animateText],
 })
 export class SidenavComponent {
-  @ViewChild('leftSidenav')
-  sidenavLeft!: MatSidenav;
-  @Input()
-  isHandset!: boolean;
-  @Input()
-  isOnline!: boolean;
-  @Input()
-  isAdmin!: boolean;
-  @Input()
-  isTeacher!: boolean;
-  @Input()
-  user!: User;
-  onSideNavChange!: boolean;
+  @ViewChild('leftSidenav') sidenavLeft!: MatSidenav;
+  @Input() isHandset: boolean;
+  @Input() isOnline: boolean;
+  @Input() isAdmin: boolean;
+  @Input() isTeacher: boolean;
+  @Input() user: User;
+  onSideNavChange: boolean;
   mobileQuery!: MediaQueryList;
   linkText: boolean = false;
   sideNavState: boolean = false;
+  faUserTie = faUserTie;
+  faGoogle = faGoogle;
+  faBuilding = faBuilding;
+  faUserGraduate = faUserGraduate;
+  faCompressAlt = faCompressAlt;
+  faExpandAlt = faExpandAlt;
   constructor(
     private layoutService: LayoutService,
     private store: Store<AppState>

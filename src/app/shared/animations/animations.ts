@@ -4,23 +4,23 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export const onSideNavChange = trigger('onSideNavChange', [
   state('close',
     style({
-      'min-width': '80px',
+      'min-width': '0px',
     })
   ),
   state('open',
     style({
-      'min-width': '160px',
+      'min-width': '200px',
     })
   ),
-  transition('close => open', animate('250ms ease-in')),
-  transition('open => close', animate('250ms ease-out')),
+  transition('close => open', animate('400ms ease-in')),
+  transition('open => close', animate('400ms ease-out')),
 ]);
 
 
 export const onMainContentChange = trigger('onMainContentChange', [
   state('close',
     style({
-      'margin-left': '80px'
+      'margin-left': '0px'
     })
   ),
   state('open',
@@ -28,8 +28,8 @@ export const onMainContentChange = trigger('onMainContentChange', [
       'margin-left': '200px'
     })
   ),
-  transition('close => open', animate('250ms ease-in')),
-  transition('open => close', animate('250ms ease-out')),
+  transition('close => open', animate('400ms ease-in')),
+  transition('open => close', animate('400ms ease-out')),
 ]);
 
 
@@ -46,6 +46,6 @@ export const animateText = trigger('animateText', [
       opacity: 1,
     })
   ),
-  transition('close => open', animate('250ms ease-in')),
-  transition('open => close', animate('250ms ease-out')),
+  transition('close => open', animate('300ms ease-in')),
+  transition('open => close', animate('300ms ease-out')),
 ]);

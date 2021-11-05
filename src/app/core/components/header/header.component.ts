@@ -49,6 +49,7 @@ export class HeaderComponent {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       height: 'fit-content',
       width: '600px',
+      maxWidth: '512px',
       data: {},
     });
     dialogRef.afterClosed().subscribe((result) => {
