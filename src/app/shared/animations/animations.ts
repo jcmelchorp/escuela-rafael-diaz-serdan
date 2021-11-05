@@ -46,6 +46,6 @@ export const animateText = trigger('animateText', [
       opacity: 1,
     })
   ),
-  transition('close => open', animate('300ms ease-in')),
-  transition('open => close', animate('300ms ease-out')),
+  transition('hide => show', animate('300ms ease-in')),
+  transition('show => hide', animate('100ms ease-out')),
 ]);
