@@ -1,0 +1,1964 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sistema RDS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Sistema RDS</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Escribe para buscar"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Componentes</li>
+  <li
+  >
+  UserDetailsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>Fichero</h3>
+</p>
+<p class="comment">
+    <code>src/app/accounts/components/user-details/user-details.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implementa</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Meta datos</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-user-details</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./user-details.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./user-details.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Índice</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Propiedades</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#faChevronLeft" >faChevronLeft</a>
+                            </li>
+                            <li>
+                                <a href="#faPlus" >faPlus</a>
+                            </li>
+                            <li>
+                                <a href="#faTrashAlt" >faTrashAlt</a>
+                            </li>
+                            <li>
+                                <a href="#loaded$" >loaded$</a>
+                            </li>
+                            <li>
+                                <a href="#loading$" >loading$</a>
+                            </li>
+                            <li>
+                                <a href="#municipiosNames" >municipiosNames</a>
+                            </li>
+                            <li>
+                                <a href="#parentForm" >parentForm</a>
+                            </li>
+                            <li>
+                                <a href="#phoneEnum" >phoneEnum</a>
+                            </li>
+                            <li>
+                                <a href="#phoneKeys" >phoneKeys</a>
+                            </li>
+                            <li>
+                                <a href="#raisedElev" >raisedElev</a>
+                            </li>
+                            <li>
+                                <a href="#showParentForm" >showParentForm</a>
+                            </li>
+                            <li>
+                                <a href="#statesNames" >statesNames</a>
+                            </li>
+                            <li>
+                                <a href="#user$" >user$</a>
+                            </li>
+                            <li>
+                                <a href="#userForm" >userForm</a>
+                            </li>
+                            <li>
+                                <a href="#userId" >userId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Métodos</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addParent" >addParent</a>
+                            </li>
+                            <li>
+                                <a href="#addPhone" >addPhone</a>
+                            </li>
+                            <li>
+                                <a href="#fillStudentForm" >fillStudentForm</a>
+                            </li>
+                            <li>
+                                <a href="#fillUserForm" >fillUserForm</a>
+                            </li>
+                            <li>
+                                <a href="#newParent" >newParent</a>
+                            </li>
+                            <li>
+                                <a href="#newPhone" >newPhone</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onEstadoChange" >onEstadoChange</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#removeParent" >removeParent</a>
+                            </li>
+                            <li>
+                                <a href="#removePhone" >removePhone</a>
+                            </li>
+                            <li>
+                                <a href="#setParent" >setParent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accesorios</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#parents" >parents</a>
+                                </li>
+                                <li>
+                                    <a href="#phones" >phones</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(store: <a href="../interfaces/AppState.html" target="_self">Store&lt;AppState&gt;</a>, accountsEntityService: <a href="../injectables/AccountsEntityService.html" target="_self">AccountsEntityService</a>, fb: <a href="../interfaces/Form.html" target="_self">FormBuilder</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="44" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:44</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parámetros :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                    <td>Tipo</td>
+                                                <td>Opcional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/AppState.html" target="_self" >Store&lt;AppState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>accountsEntityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AccountsEntityService.html" target="_self" >AccountsEntityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/Form.html" target="_self" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Métodos
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addParent"></a>
+                    <span class="name">
+                        <span ><b>addParent</b></span>
+                        <a href="#addParent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addParent()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="158"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:158</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addPhone"></a>
+                    <span class="name">
+                        <span ><b>addPhone</b></span>
+                        <a href="#addPhone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addPhone()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="175"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:175</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fillStudentForm"></a>
+                    <span class="name">
+                        <span ><b>fillStudentForm</b></span>
+                        <a href="#fillStudentForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fillStudentForm(user?: <a href="../interfaces/User.html" target="_self">Partial&lt;User&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="73"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:73</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../interfaces/User.html" target="_self" >Partial&lt;User&gt;</a></code>
+                                    </td>
+
+                                    <td>
+                                        Si
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fillUserForm"></a>
+                    <span class="name">
+                        <span ><b>fillUserForm</b></span>
+                        <a href="#fillUserForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fillUserForm(user?: <a href="../interfaces/User.html" target="_self">Partial&lt;User&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="86"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:86</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../interfaces/User.html" target="_self" >Partial&lt;User&gt;</a></code>
+                                    </td>
+
+                                    <td>
+                                        Si
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newParent"></a>
+                    <span class="name">
+                        <span ><b>newParent</b></span>
+                        <a href="#newParent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>newParent()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="120"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:120</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newPhone"></a>
+                    <span class="name">
+                        <span ><b>newPhone</b></span>
+                        <a href="#newPhone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>newPhone()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="167"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:167</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="54"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:54</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEstadoChange"></a>
+                    <span class="name">
+                        <span ><b>onEstadoChange</b></span>
+                        <a href="#onEstadoChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEstadoChange(estado: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="111"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>estado</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="95"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:95</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeParent"></a>
+                    <span class="name">
+                        <span ><b>removeParent</b></span>
+                        <a href="#removeParent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeParent(j: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="161"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:161</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>j</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removePhone"></a>
+                    <span class="name">
+                        <span ><b>removePhone</b></span>
+                        <a href="#removePhone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removePhone(i: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="178"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:178</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>i</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setParent"></a>
+                    <span class="name">
+                        <span ><b>setParent</b></span>
+                        <a href="#setParent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setParent(parent: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="139"
+                            class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:139</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>parent</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Propiedades
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faChevronLeft"></a>
+                    <span class="name">
+                        <span ><b>faChevronLeft</b></span>
+                        <a href="#faChevronLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faChevronLeft</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="43" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPlus"></a>
+                    <span class="name">
+                        <span ><b>faPlus</b></span>
+                        <a href="#faPlus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faPlus</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="42" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTrashAlt"></a>
+                    <span class="name">
+                        <span ><b>faTrashAlt</b></span>
+                        <a href="#faTrashAlt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faTrashAlt</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="41" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaded$"></a>
+                    <span class="name">
+                        <span ><b>loaded$</b></span>
+                        <a href="#loaded$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="31" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading$"></a>
+                    <span class="name">
+                        <span ><b>loading$</b></span>
+                        <a href="#loading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="32" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="municipiosNames"></a>
+                    <span class="name">
+                        <span ><b>municipiosNames</b></span>
+                        <a href="#municipiosNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[] | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="36" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="parentForm"></a>
+                    <span class="name">
+                        <span ><b>parentForm</b></span>
+                        <a href="#parentForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="38" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="phoneEnum"></a>
+                    <span class="name">
+                        <span ><b>phoneEnum</b></span>
+                        <a href="#phoneEnum"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>PhoneType</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="34" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="phoneKeys"></a>
+                    <span class="name">
+                        <span ><b>phoneKeys</b></span>
+                        <a href="#phoneKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="33" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="raisedElev"></a>
+                    <span class="name">
+                        <span ><b>raisedElev</b></span>
+                        <a href="#raisedElev"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>12</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="40" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showParentForm"></a>
+                    <span class="name">
+                        <span ><b>showParentForm</b></span>
+                        <a href="#showParentForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="39" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="statesNames"></a>
+                    <span class="name">
+                        <span ><b>statesNames</b></span>
+                        <a href="#statesNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="35" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user$"></a>
+                    <span class="name">
+                        <span ><b>user$</b></span>
+                        <a href="#user$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User | undefined&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="30" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userForm"></a>
+                    <span class="name">
+                        <span ><b>userForm</b></span>
+                        <a href="#userForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="37" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userId"></a>
+                    <span class="name">
+                        <span ><b>userId</b></span>
+                        <a href="#userId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="44" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accesorios
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="parents"></a>
+                        <span class="name"><b>parents</b><a href="#parents"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>parents()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Definido en <a href="" data-line="117" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:117</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="phones"></a>
+                        <span class="name"><b>phones</b><a href="#phones"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>phones()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Definido en <a href="" data-line="164" class="link-to-prism">src/app/accounts/components/user-details/user-details.component.ts:164</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormGroup, FormBuilder, FormArray, FormControl } from &#x27;@angular/forms&#x27;;
+
+import {
+  faTrashAlt,
+  faPlus,
+  faChevronLeft,
+} from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { User } from &#x27;@rds-auth/models/user.model&#x27;;
+import { AppState } from &#x27;@rds-store/index&#x27;;
+import { AccountsEntityService } from &#x27;@rds-store/accounts/accounts-entity.service&#x27;;
+
+
+import { Observable } from &#x27;rxjs&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+
+
+import states from &#x27;./states.json&#x27;;
+import { selectedAccountById } from &#x27;../../state/accounts.selectors&#x27;;
+import { PhoneType } from &#x27;@rds-auth/models/user-parent.model&#x27;;
+
+@Component({
+  selector: &#x27;app-user-details&#x27;,
+  templateUrl: &#x27;./user-details.component.html&#x27;,
+  styleUrls: [&#x27;./user-details.component.scss&#x27;],
+})
+export class UserDetailsComponent implements OnInit {
+  user$!: Observable&lt;User | undefined&gt;;
+  loaded$!: Observable&lt;boolean&gt;;
+  loading$!: Observable&lt;boolean&gt;;
+  phoneKeys: string[];
+  phoneEnum &#x3D; PhoneType;
+  statesNames: string[];
+  municipiosNames!: string[] | undefined;
+  userForm!: FormGroup;
+  parentForm!: FormGroup;
+  showParentForm &#x3D; false;
+  raisedElev: number &#x3D; 12;
+  faTrashAlt &#x3D; faTrashAlt;
+  faPlus &#x3D; faPlus;
+  faChevronLeft &#x3D; faChevronLeft;
+  userId!: string;
+  constructor(
+    private store: Store&lt;AppState&gt;,
+    private accountsEntityService: AccountsEntityService,
+    private fb: FormBuilder
+  ) {
+    this.statesNames &#x3D; Object.keys(states);
+    this.phoneKeys &#x3D; Object.keys(this.phoneEnum).filter(Number);
+  }
+
+  ngOnInit() {
+    this.user$ &#x3D; this.store.select(selectedAccountById).pipe(
+      map((user) &#x3D;&gt; {
+        if (user) {
+          user.role &#x3D;&#x3D; &#x27;alumnos&#x27;
+            ? this.fillStudentForm(user)
+            : this.fillUserForm(user);
+        }
+        return user;
+      })
+    );
+    /* this.user$ &#x3D; this.accountsEntityService.entities$.pipe(
+      map(users &#x3D;&gt; {
+        const user &#x3D; users.find(u &#x3D;&gt; u.id &#x3D;&#x3D; this.userId);
+        user.role &#x3D;&#x3D; &#x27;alumnos&#x27; ? this.fillStudentForm(user) : this.fillUserForm(user);
+        return user
+      })
+    ); */
+  }
+  fillStudentForm(user?: Partial&lt;User&gt;) {
+    this.userForm &#x3D; this.fb.group({
+      curp: new FormControl(user?.curp),
+      niev: new FormControl(user?.niev),
+      dob: new FormControl(new Date(user?.dob!)),
+      gender: new FormControl(user?.gender),
+      parents: this.fb.array(
+        user?.parents
+          ? user?.parents.map((parent) &#x3D;&gt; this.setParent(parent))
+          : []
+      ),
+    });
+  }
+  fillUserForm(user?: Partial&lt;User&gt;) {
+    this.userForm &#x3D; this.fb.group({
+      curp: new FormControl(user?.curp),
+      rfc: new FormControl(user?.rfc),
+      dob: new FormControl(new Date(user?.dob!)),
+      gender: new FormControl(user?.gender),
+    });
+  }
+
+  onSubmit() {
+    // get only updated values
+    let postUser: any &#x3D; {
+      id: this.userId,
+    };
+    Object.keys(this.userForm.controls).forEach((name: string) &#x3D;&gt; {
+      if (this.userForm.controls[name].dirty) {
+        postUser[name] &#x3D; this.userForm.controls[name].value;
+      }
+      if (name &#x3D;&#x3D; &#x27;role&#x27;)
+        postUser[name] &#x3D; this.userForm.controls[name].value.toLowerCase();
+    });
+
+    console.log(postUser);
+    this.accountsEntityService.update(postUser);
+  }
+  onEstadoChange(estado: string) {
+    this.municipiosNames &#x3D; Object.values(states).find((state) &#x3D;&gt;
+      state.includes(estado)
+    );
+  }
+
+  get parents(): FormArray {
+    return this.userForm.get(&#x27;parents&#x27;) as FormArray;
+  }
+  newParent(): FormGroup {
+    return this.fb.group({
+      userId: &#x27;&#x27;,
+      givenName: &#x27;&#x27;,
+      familyName: &#x27;&#x27;,
+      curp: &#x27;&#x27;,
+      gender: &#x27;&#x27;,
+      relationType: &#x27;&#x27;,
+      relationCustom: &#x27;&#x27;,
+      phones: [],
+      email: &#x27;&#x27;,
+      streetAddress: &#x27;&#x27;,
+      neighborhood: &#x27;&#x27;,
+      city: &#x27;&#x27;,
+      postalCode: &#x27;&#x27;,
+      municipio: &#x27;&#x27;,
+      state: &#x27;&#x27;,
+    });
+  }
+  setParent(parent: any): FormGroup {
+    return this.fb.group({
+      userId: &#x27;&#x27;,
+      givenName: [parent.givenName],
+      familyName: [parent.familyName],
+      curp: [parent.curp],
+      gender: [parent.gender],
+      relationType: [parent.relationType],
+      relationCustom: [parent.relationCustom],
+      phones: [],
+      email: [parent.email],
+      streetAddress: [parent.streetAddress],
+      neighborhood: [parent.neighborhood],
+      city: [parent.city],
+      postalCode: [parent.postalCode],
+      municipio: [parent.municipio],
+      state: [parent.state],
+    });
+  }
+  addParent() {
+    this.parents.push(this.newParent());
+  }
+  removeParent(j: number) {
+    this.parents.removeAt(j);
+  }
+  get phones(): FormArray {
+    return this.parents.get(&#x27;phones&#x27;) as FormArray;
+  }
+  newPhone(): FormGroup {
+    return this.fb.group({
+      value: &#x27;&#x27;,
+      type: &#x27;&#x27;,
+      primary: &#x27;&#x27;,
+      customType: &#x27;&#x27;,
+    });
+  }
+  addPhone() {
+    this.phones.push(this.newPhone());
+  }
+  removePhone(i: number) {
+    this.phones.removeAt(i);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;ng-template #spinner&gt;
+  &lt;div style&#x3D;&quot;min-height: 300px;&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;center center&quot;&gt;
+    &lt;mat-spinner strokeWidth&#x3D;&quot;10&quot; [diameter]&#x3D;&quot;100&quot;&gt;
+    &lt;/mat-spinner&gt;
+    &lt;span&gt;Buscando clases ...&lt;/span&gt;&lt;br&gt;
+  &lt;/div&gt;
+&lt;/ng-template&gt; --&gt;
+&lt;fa-icon mat-icon-button [routerLink]&#x3D;&quot;[&#x27;..&#x27;]&quot; [icon]&#x3D;&quot;faChevronLeft&quot;&gt;&lt;/fa-icon&gt;
+&lt;div *ngIf&#x3D;&quot;(user$|async) as user&quot;&gt;
+  &lt;form [formGroup]&#x3D;&quot;userForm&quot; novalidate (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+    &lt;mat-card class&#x3D;&quot;mat-elevation-z0 bg-transparent&quot;&gt;
+      &lt;mat-card-header&gt;
+        &lt;img mat-card-avatar [src]&#x3D;&quot;user.photoUrl&quot; alt&#x3D;&quot;imagen de {{user.name?.fullName}}&quot;&gt;
+        &lt;mat-card-title&gt;{{user.name?.fullName}}&lt;/mat-card-title&gt;
+        &lt;h5 class&#x3D;&quot;text-muted&quot;&gt;Google ID: {{user.id}}&lt;/h5&gt;
+        &lt;mat-card-subtitle&gt;{{user.primaryEmail}}&lt;/mat-card-subtitle&gt;
+      &lt;/mat-card-header&gt;
+      &lt;mat-card-content&gt;
+        &lt;ng-template #notHuman&gt;
+          &lt;div class&#x3D;&quot;alert alert-danger&quot; role&#x3D;&quot;alert&quot;&gt;
+            &lt;div&gt;Esta cuenta no es una persona.&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/ng-template&gt;
+        &lt;div *ngIf&#x3D;&quot;user.isHuman;else notHuman&quot;&gt;
+          &lt;h2&gt;Datos personales&lt;/h2&gt;
+          &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-lg&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+            &lt;mat-form-field *ngIf&#x3D;&quot;user.isHuman&quot; fxFlex&#x3D;&quot;0 1 calc(33% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+              &lt;mat-label&gt;CURP&lt;/mat-label&gt;
+              &lt;input matInput placeholder&#x3D;&quot;CURP&quot; formControlName&#x3D;&quot;curp&quot;&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-form-field *ngIf&#x3D;&quot;user.role&#x3D;&#x3D;&#x27;alumnos&#x27; &amp;&amp; user.isHuman&quot; fxFlex&#x3D;&quot;0 1 calc(33% - 5px)&quot;
+              fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+              &lt;mat-label&gt;NIEV&lt;/mat-label&gt;
+              &lt;input matInput placeholder&#x3D;&quot;NIEV&quot; formControlName&#x3D;&quot;niev&quot;&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-form-field *ngIf&#x3D;&quot;(user.role&#x3D;&#x3D;&#x27;profesores&#x27;|| user.role&#x3D;&#x3D;&#x27;administrativos&#x27;) &amp;&amp; user.isHuman&quot;
+              fxFlex&#x3D;&quot;0 1 calc(33% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+              &lt;mat-label&gt;RFC&lt;/mat-label&gt;
+              &lt;input matInput placeholder&#x3D;&quot;RFC&quot; formControlName&#x3D;&quot;rfc&quot;&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-form-field *ngIf&#x3D;&quot;user.isHuman&quot; fxFlex&#x3D;&quot;0 1 calc(33% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+              &lt;mat-label&gt;Fecha de nacimiento&lt;/mat-label&gt;
+              &lt;input matInput [matDatepicker]&#x3D;&quot;picker&quot; (focus)&#x3D;&quot;picker.open()&quot; placeholder&#x3D;&quot;Fecha de nacimiento&quot;
+                color&#x3D;&quot;primary&quot; name&#x3D;&quot;dob&quot; formControlName&#x3D;&quot;dob&quot;&gt;
+              &lt;mat-datepicker-toggle matSuffix [for]&#x3D;&quot;picker&quot;&gt;&lt;/mat-datepicker-toggle&gt;
+              &lt;mat-datepicker #picker&gt;&lt;/mat-datepicker&gt;
+            &lt;/mat-form-field&gt;
+          &lt;/div&gt;
+          &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-lg&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+            &lt;div *ngIf&#x3D;&quot;user.isHuman&quot; fxLayout&#x3D;&quot;row wrap&quot; fxLayoutAlign&#x3D;&quot;cener center&quot;&gt;
+              &lt;mat-label for&#x3D;&quot;gender&quot;&gt;Genero: &lt;/mat-label&gt;
+              &lt;mat-radio-group name&#x3D;&quot;gender&quot; color&#x3D;&quot;primary&quot; formControlName&#x3D;&quot;gender&quot;&gt;
+                &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;hombre&quot;&gt;
+                  Hombre
+                &lt;/mat-radio-button&gt;
+                &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;mujer&quot;&gt;
+                  Mujer
+                &lt;/mat-radio-button&gt;
+                &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;inespecífico&quot;&gt;
+                  Prefiero no decir
+                &lt;/mat-radio-button&gt;
+              &lt;/mat-radio-group&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;text-center&quot;&gt;
+            &lt;button class&#x3D;&quot;btn btn-info-outline&quot; mat-button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!userForm.dirty&quot;&gt;
+              &lt;mat-icon class&#x3D;&quot;{{userForm.dirty?&#x27;text-success&#x27;:&#x27;text-muted&#x27;}}&quot;&gt;save&lt;/mat-icon&gt;Guardar
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!--  &lt;/mat-expansion-panel&gt; --&gt;
+        &lt;!--   parent form    --&gt;
+        &lt;div *ngIf&#x3D;&quot;user.role&#x3D;&#x3D;&#x27;alumnos&#x27; &amp;&amp; user.isHuman&quot;&gt;
+          &lt;h2&gt;Datos de los representantes&lt;/h2&gt;
+          &lt;mat-accordion togglePosition&#x3D;&quot;before&quot;&gt;
+            &lt;div class&#x3D;&quot;card bg-transparent&quot; formArrayName&#x3D;&quot;parents&quot;&gt;
+              &lt;span class&#x3D;&quot;card-name bg-transparent&quot;&gt;&lt;/span&gt;
+              &lt;div class&#x3D;&quot;my-2&quot; *ngFor&#x3D;&quot;let parent of parents.controls; let j&#x3D;index&quot;&gt;
+                &lt;div [formGroupName]&#x3D;&quot;j&quot;&gt;
+                  &lt;mat-expansion-panel appMaterialElevation [raisedElevation]&#x3D;&quot;raisedElev&quot;&gt;
+                    &lt;mat-expansion-panel-header&gt;
+
+                      &lt;mat-panel-description&gt;
+                        &lt;div *ngIf&#x3D;&quot;parent.get(&#x27;relationType&#x27;)?.value&#x3D;&#x3D;&#x27;Otro&#x27;;else relationType&quot;&gt;
+                          {{parent.get(&#x27;relationType&#x27;)?.value}}
+                        &lt;/div&gt;
+                        &lt;ng-template #relationType&gt;
+                          {{parent.get(&#x27;relationType&#x27;)?.value}}
+                        &lt;/ng-template&gt;
+                      &lt;/mat-panel-description&gt;
+                      &lt;mat-panel-title&gt;
+                        {{parent.get(&#x27;givenName&#x27;)?.value}}&amp;nbsp;{{parent.get(&#x27;familyName&#x27;)?.value}}
+                      &lt;/mat-panel-title&gt;
+                      &lt;fa-icon class&#x3D;&quot;text-danger&quot; [icon]&#x3D;&quot;faTrashAlt&quot; size&#x3D;&quot;lg&quot; mat-icon-button
+                        (click)&#x3D;&quot;removeParent(j)&quot;&gt;&lt;/fa-icon&gt;
+                    &lt;/mat-expansion-panel-header&gt;
+                    &lt;!-- &lt;form [formGroup]&#x3D;&quot;parentForm&quot; novalidate (ngSubmit)&#x3D;&quot;onSubmitParent()&quot;&gt; --&gt;
+                    &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-lg&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Nombre(s)&lt;/mat-label&gt;
+                        &lt;input matInput placeholder&#x3D;&quot;Nombre(s)&quot; formControlName&#x3D;&quot;givenName&quot;&gt;
+                      &lt;/mat-form-field&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Apellido(s)&lt;/mat-label&gt;
+                        &lt;input matInput placeholder&#x3D;&quot;Apellido(s)&quot; formControlName&#x3D;&quot;familyName&quot;&gt;
+                      &lt;/mat-form-field&gt;
+                    &lt;/div&gt;
+                    &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-lg&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+                      &lt;div fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot;&gt;
+                        &lt;mat-label for&#x3D;&quot;relation&quot;&gt;Parentezco: &lt;/mat-label&gt;
+                        &lt;mat-radio-group fxLayout&#x3D;&quot;row wrap&quot; fxLayoutAlign&#x3D;&quot;cener center&quot; name&#x3D;&quot;relation&quot;
+                          color&#x3D;&quot;primary&quot; formControlName&#x3D;&quot;relationType&quot;&gt;
+                          &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;Madre&quot;&gt;
+                            Madre
+                          &lt;/mat-radio-button&gt;
+                          &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;Padre&quot;&gt;
+                            Padre
+                          &lt;/mat-radio-button&gt;
+                          &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;Otro&quot;&gt;
+                            Otro
+                          &lt;/mat-radio-button&gt;
+                          &lt;div *ngIf&#x3D;&quot;parent.get(&#x27;relationType&#x27;)?.value&#x3D;&#x3D;&#x27;Otro&#x27;&quot;&gt;
+                            &lt;mat-form-field class&#x3D;&quot;d-flex&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                              &lt;mat-label&gt;Parentesco&lt;/mat-label&gt;
+                              &lt;input matInput placeholder&#x3D;&quot;Parentesco&quot; formControlName&#x3D;&quot;relationCustom&quot;&gt;
+                            &lt;/mat-form-field&gt;
+                          &lt;/div&gt;
+                        &lt;/mat-radio-group&gt;
+                      &lt;/div&gt;
+                      &lt;div fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot;&gt;
+                        &lt;mat-label for&#x3D;&quot;gender&quot;&gt;Genero: &lt;/mat-label&gt;
+                        &lt;mat-radio-group fxLayout&#x3D;&quot;row wrap&quot; fxLayoutAlign&#x3D;&quot;cener center&quot; name&#x3D;&quot;gender&quot; color&#x3D;&quot;primary&quot;
+                          formControlName&#x3D;&quot;gender&quot;&gt;
+                          &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;Hombre&quot;&gt;
+                            Hombre
+                          &lt;/mat-radio-button&gt;
+                          &lt;mat-radio-button class&#x3D;&quot;mx-2&quot; value&#x3D;&quot;Mujer&quot;&gt;
+                            Mujer
+                          &lt;/mat-radio-button&gt;
+                        &lt;/mat-radio-group&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-lg&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;CURP&lt;/mat-label&gt;
+                        &lt;input matInput placeholder&#x3D;&quot;CURP&quot; formControlName&#x3D;&quot;curp&quot;&gt;
+                      &lt;/mat-form-field&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Correo electrónico&lt;/mat-label&gt;
+                        &lt;input matInput placeholder&#x3D;&quot;Correo electrónico&quot; formControlName&#x3D;&quot;email&quot;&gt;
+                      &lt;/mat-form-field&gt;
+                    &lt;/div&gt;
+                    &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-lg&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Dirección&lt;/mat-label&gt;
+                        &lt;input matInput placeholder&#x3D;&quot;Calle/Av., Num.Int./Ext.&quot; formControlName&#x3D;&quot;streetAddress&quot;&gt;
+                      &lt;/mat-form-field&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(50% - 5px)&quot; fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Colonia&lt;/mat-label&gt;
+                        &lt;input matInput placeholder&#x3D;&quot;Colonia, barrio o fraccionamiento&quot; formControlName&#x3D;&quot;neighborhood&quot;&gt;
+                      &lt;/mat-form-field&gt;
+                    &lt;/div&gt;
+                    &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-md&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(25% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;0 1 calc(50% - 10px)&quot;
+                        fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Código Postal&lt;/mat-label&gt;
+                        &lt;input matInput #postalCode maxlength&#x3D;&quot;5&quot; placeholder&#x3D;&quot;Código Postal&quot; type&#x3D;&quot;number&quot;
+                          formControlName&#x3D;&quot;postalCode&quot;&gt;
+                        &lt;mat-hint align&#x3D;&quot;end&quot;&gt;{{postalCode.value.length}} / 5&lt;/mat-hint&gt;
+                      &lt;/mat-form-field&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(25% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;0 1 calc(50% - 10px)&quot;
+                        fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Estado&lt;/mat-label&gt;
+                        &lt;mat-select placeholder&#x3D;&quot;Estado&quot; formControlName&#x3D;&quot;state&quot;
+                          (selectionChange)&#x3D;&quot;onEstadoChange($event.value)&quot;&gt;
+                          &lt;mat-option *ngFor&#x3D;&quot;let state of statesNames&quot; [value]&#x3D;&quot;state&quot;&gt;
+                            {{ state }}
+                          &lt;/mat-option&gt;
+                        &lt;/mat-select&gt;
+                      &lt;/mat-form-field&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(25% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;0 1 calc(50% - 10px)&quot;
+                        fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Municipio&lt;/mat-label&gt;
+                        &lt;mat-select placeholder&#x3D;&quot;Municipio&quot; formControlName&#x3D;&quot;municipio&quot;&gt;
+                          &lt;mat-option *ngFor&#x3D;&quot;let municipio of municipiosNames&quot; [value]&#x3D;&quot;municipio&quot;&gt;
+                            {{ municipio }}
+                          &lt;/mat-option&gt;
+                        &lt;/mat-select&gt;
+                      &lt;/mat-form-field&gt;
+                      &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(25% - 5px)&quot; fxFlex.lt-lg&#x3D;&quot;0 1 calc(50% - 10px)&quot;
+                        fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                        &lt;mat-label&gt;Ciudad&lt;/mat-label&gt;
+                        &lt;input matInput placeholder&#x3D;&quot;Ciudad&quot; formControlName&#x3D;&quot;city&quot;&gt;
+                      &lt;/mat-form-field&gt;
+                    &lt;/div&gt;
+                    &lt;!-- &lt;div formArrayName&#x3D;&quot;phones&quot;&gt;
+                      &lt;div *ngFor&#x3D;&quot;let phone of phones.controls; let i&#x3D;index&quot;&gt;
+                        &lt;div [formGroupName]&#x3D;&quot;i&quot; fxLayout&#x3D;&quot;row wrap&quot; fxLayoutGap&#x3D;&quot;5px&quot;
+                          fxLayoutAlign&#x3D;&quot;space-around center&quot;&gt;
+                          &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(40% - 5px)&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                            &lt;mat-label&gt;Telefono&lt;/mat-label&gt;
+                            &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;value&quot;&gt;
+                          &lt;/mat-form-field&gt;
+                          &lt;mat-form-field fxFlex&#x3D;&quot;0 1 calc(40% - 5px)&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                            &lt;mat-label&gt;Tipo de teléfono&lt;/mat-label&gt;
+                            &lt;mat-select placeholder&#x3D;&quot;Tipo de teléfono&quot; formControlName&#x3D;&quot;type&quot;&gt;
+                              &lt;mat-option *ngFor&#x3D;&quot;let phoneKey of phoneKeys&quot; [value]&#x3D;&quot;phoneEnum[phoneKey]&quot;&gt;
+                                {{ phoneEnum[phoneKey] }}
+                              &lt;/mat-option&gt;
+                            &lt;/mat-select&gt;
+                          &lt;/mat-form-field&gt;
+                          &lt;button mat-icon-button (click)&#x3D;&quot;removeSkill(i)&quot;&gt;
+                            &lt;fa-icon class&#x3D;&quot;text-danger&quot; [icon]&#x3D;&quot;faTrashAlt&quot; size&#x3D;&quot;lg&quot;&gt;&lt;/fa-icon&gt;
+                          &lt;/button&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                      &lt;p&gt;
+                        &lt;button mat-icon-button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addPhone()&quot;&gt;Añadir teléfono&lt;/button&gt;
+                      &lt;/p&gt;
+                    &lt;/div&gt; --&gt;
+                    &lt;div class&#x3D;&quot;text-center&quot;&gt;
+                      &lt;button class&#x3D;&quot;btn btn-info-outline&quot; mat-button type&#x3D;&quot;submit&quot; [disabled]&#x3D;&quot;!parent.dirty&quot;&gt;
+                        &lt;mat-icon class&#x3D;&quot;{{parent.dirty?&#x27;text-success&#x27;:&#x27;text-muted&#x27;}}&quot;&gt;save&lt;/mat-icon&gt;Guardar
+                      &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;!-- &lt;/form&gt; --&gt;
+                  &lt;/mat-expansion-panel&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-center&quot;&gt;
+                &lt;button mat-button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;addParent()&quot;&gt;
+                  &lt;mat-icon class&#x3D;&quot;text-success&quot;&gt;add&lt;/mat-icon&gt;&amp;nbsp;Agrega padre o tutor
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/mat-accordion&gt;
+          &lt;h2&gt;Datos biométricos&lt;/h2&gt;
+        &lt;/div&gt;
+      &lt;/mat-card-content&gt;
+    &lt;/mat-card&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./user-details.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.school-user-form-card {
+  min-width: 120px;
+  margin: 20px auto;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Leyenda</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Elemento Html</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Componente</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Elemento Html con directiva</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- <ng-template #spinner>  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">    <mat-spinner strokeWidth="10" [diameter]="100">    </mat-spinner>    <span>Buscando clases ...</span><br>  </div></ng-template> --><fa-icon mat-icon-button [routerLink]="[\'..\']" [icon]="faChevronLeft"></fa-icon><div *ngIf="(user$|async) as user">  <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">    <mat-card class="mat-elevation-z0 bg-transparent">      <mat-card-header>        <img mat-card-avatar [src]="user.photoUrl" alt="imagen de {{user.name?.fullName}}">        <mat-card-title>{{user.name?.fullName}}</mat-card-title>        <h5 class="text-muted">Google ID: {{user.id}}</h5>        <mat-card-subtitle>{{user.primaryEmail}}</mat-card-subtitle>      </mat-card-header>      <mat-card-content>        <ng-template #notHuman>          <div class="alert alert-danger" role="alert">            <div>Esta cuenta no es una persona.</div>          </div>        </ng-template>        <div *ngIf="user.isHuman;else notHuman">          <h2>Datos personales</h2>          <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">            <mat-form-field *ngIf="user.isHuman" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">              <mat-label>CURP</mat-label>              <input matInput placeholder="CURP" formControlName="curp">            </mat-form-field>            <mat-form-field *ngIf="user.role==\'alumnos\' && user.isHuman" fxFlex="0 1 calc(33% - 5px)"              fxFlex.lt-lg="100%" appearance="outline">              <mat-label>NIEV</mat-label>              <input matInput placeholder="NIEV" formControlName="niev">            </mat-form-field>            <mat-form-field *ngIf="(user.role==\'profesores\'|| user.role==\'administrativos\') && user.isHuman"              fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">              <mat-label>RFC</mat-label>              <input matInput placeholder="RFC" formControlName="rfc">            </mat-form-field>            <mat-form-field *ngIf="user.isHuman" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">              <mat-label>Fecha de nacimiento</mat-label>              <input matInput [matDatepicker]="picker" (focus)="picker.open()" placeholder="Fecha de nacimiento"                color="primary" name="dob" formControlName="dob">              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>              <mat-datepicker #picker></mat-datepicker>            </mat-form-field>          </div>          <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">            <div *ngIf="user.isHuman" fxLayout="row wrap" fxLayoutAlign="cener center">              <mat-label for="gender">Genero: </mat-label>              <mat-radio-group name="gender" color="primary" formControlName="gender">                <mat-radio-button class="mx-2" value="hombre">                  Hombre                </mat-radio-button>                <mat-radio-button class="mx-2" value="mujer">                  Mujer                </mat-radio-button>                <mat-radio-button class="mx-2" value="inespecífico">                  Prefiero no decir                </mat-radio-button>              </mat-radio-group>            </div>          </div>          <div class="text-center">            <button class="btn btn-info-outline" mat-button type="submit" [disabled]="!userForm.dirty">              <mat-icon class="{{userForm.dirty?\'text-success\':\'text-muted\'}}">save</mat-icon>Guardar            </button>          </div>        </div>        <!--  </mat-expansion-panel> -->        <!--   parent form    -->        <div *ngIf="user.role==\'alumnos\' && user.isHuman">          <h2>Datos de los representantes</h2>          <mat-accordion togglePosition="before">            <div class="card bg-transparent" formArrayName="parents">              <span class="card-name bg-transparent"></span>              <div class="my-2" *ngFor="let parent of parents.controls; let j=index">                <div [formGroupName]="j">                  <mat-expansion-panel appMaterialElevation [raisedElevation]="raisedElev">                    <mat-expansion-panel-header>                      <mat-panel-description>                        <div *ngIf="parent.get(\'relationType\')?.value==\'Otro\';else relationType">                          {{parent.get(\'relationType\')?.value}}                        </div>                        <ng-template #relationType>                          {{parent.get(\'relationType\')?.value}}                        </ng-template>                      </mat-panel-description>                      <mat-panel-title>                        {{parent.get(\'givenName\')?.value}}&nbsp;{{parent.get(\'familyName\')?.value}}                      </mat-panel-title>                      <fa-icon class="text-danger" [icon]="faTrashAlt" size="lg" mat-icon-button                        (click)="removeParent(j)"></fa-icon>                    </mat-expansion-panel-header>                    <!-- <form [formGroup]="parentForm" novalidate (ngSubmit)="onSubmitParent()"> -->                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">                        <mat-label>Nombre(s)</mat-label>                        <input matInput placeholder="Nombre(s)" formControlName="givenName">                      </mat-form-field>                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">                        <mat-label>Apellido(s)</mat-label>                        <input matInput placeholder="Apellido(s)" formControlName="familyName">                      </mat-form-field>                    </div>                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">                      <div fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%">                        <mat-label for="relation">Parentezco: </mat-label>                        <mat-radio-group fxLayout="row wrap" fxLayoutAlign="cener center" name="relation"                          color="primary" formControlName="relationType">                          <mat-radio-button class="mx-2" value="Madre">                            Madre                          </mat-radio-button>                          <mat-radio-button class="mx-2" value="Padre">                            Padre                          </mat-radio-button>                          <mat-radio-button class="mx-2" value="Otro">                            Otro                          </mat-radio-button>                          <div *ngIf="parent.get(\'relationType\')?.value==\'Otro\'">                            <mat-form-field class="d-flex" appearance="outline">                              <mat-label>Parentesco</mat-label>                              <input matInput placeholder="Parentesco" formControlName="relationCustom">                            </mat-form-field>                          </div>                        </mat-radio-group>                      </div>                      <div fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%">                        <mat-label for="gender">Genero: </mat-label>                        <mat-radio-group fxLayout="row wrap" fxLayoutAlign="cener center" name="gender" color="primary"                          formControlName="gender">                          <mat-radio-button class="mx-2" value="Hombre">                            Hombre                          </mat-radio-button>                          <mat-radio-button class="mx-2" value="Mujer">                            Mujer                          </mat-radio-button>                        </mat-radio-group>                      </div>                    </div>                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">                        <mat-label>CURP</mat-label>                        <input matInput placeholder="CURP" formControlName="curp">                      </mat-form-field>                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">                        <mat-label>Correo electrónico</mat-label>                        <input matInput placeholder="Correo electrónico" formControlName="email">                      </mat-form-field>                    </div>                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-md="100%" appearance="outline">                        <mat-label>Dirección</mat-label>                        <input matInput placeholder="Calle/Av., Num.Int./Ext." formControlName="streetAddress">                      </mat-form-field>                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-md="100%" appearance="outline">                        <mat-label>Colonia</mat-label>                        <input matInput placeholder="Colonia, barrio o fraccionamiento" formControlName="neighborhood">                      </mat-form-field>                    </div>                    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"                        fxFlex.lt-md="100%" appearance="outline">                        <mat-label>Código Postal</mat-label>                        <input matInput #postalCode maxlength="5" placeholder="Código Postal" type="number"                          formControlName="postalCode">                        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>                      </mat-form-field>                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"                        fxFlex.lt-md="100%" appearance="outline">                        <mat-label>Estado</mat-label>                        <mat-select placeholder="Estado" formControlName="state"                          (selectionChange)="onEstadoChange($event.value)">                          <mat-option *ngFor="let state of statesNames" [value]="state">                            {{ state }}                          </mat-option>                        </mat-select>                      </mat-form-field>                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"                        fxFlex.lt-md="100%" appearance="outline">                        <mat-label>Municipio</mat-label>                        <mat-select placeholder="Municipio" formControlName="municipio">                          <mat-option *ngFor="let municipio of municipiosNames" [value]="municipio">                            {{ municipio }}                          </mat-option>                        </mat-select>                      </mat-form-field>                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"                        fxFlex.lt-md="100%" appearance="outline">                        <mat-label>Ciudad</mat-label>                        <input matInput placeholder="Ciudad" formControlName="city">                      </mat-form-field>                    </div>                    <!-- <div formArrayName="phones">                      <div *ngFor="let phone of phones.controls; let i=index">                        <div [formGroupName]="i" fxLayout="row wrap" fxLayoutGap="5px"                          fxLayoutAlign="space-around center">                          <mat-form-field fxFlex="0 1 calc(40% - 5px)" appearance="outline">                            <mat-label>Telefono</mat-label>                            <input matInput type="text" formControlName="value">                          </mat-form-field>                          <mat-form-field fxFlex="0 1 calc(40% - 5px)" appearance="outline">                            <mat-label>Tipo de teléfono</mat-label>                            <mat-select placeholder="Tipo de teléfono" formControlName="type">                              <mat-option *ngFor="let phoneKey of phoneKeys" [value]="phoneEnum[phoneKey]">                                {{ phoneEnum[phoneKey] }}                              </mat-option>                            </mat-select>                          </mat-form-field>                          <button mat-icon-button (click)="removeSkill(i)">                            <fa-icon class="text-danger" [icon]="faTrashAlt" size="lg"></fa-icon>                          </button>                        </div>                      </div>                      <p>                        <button mat-icon-button type="button" (click)="addPhone()">Añadir teléfono</button>                      </p>                    </div> -->                    <div class="text-center">                      <button class="btn btn-info-outline" mat-button type="submit" [disabled]="!parent.dirty">                        <mat-icon class="{{parent.dirty?\'text-success\':\'text-muted\'}}">save</mat-icon>Guardar                      </button>                    </div>                    <!-- </form> -->                  </mat-expansion-panel>                </div>              </div>              <div class="text-center">                <button mat-button type="button" (click)="addParent()">                  <mat-icon class="text-success">add</mat-icon>&nbsp;Agrega padre o tutor                </button>              </div>            </div>          </mat-accordion>          <h2>Datos biométricos</h2>        </div>      </mat-card-content>    </mat-card>  </form></div></div>'
+    var COMPONENTS = [{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NewCicleDialogComponent', 'selector': ''},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesDialogComponent', 'selector': ''},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+    var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
+    var ACTUAL_COMPONENT = {'name': 'UserDetailsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> comparación de resultados "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No hay resultados que coincidan "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserDetailsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

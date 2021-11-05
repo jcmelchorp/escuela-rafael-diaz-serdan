@@ -1,0 +1,1898 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sistema RDS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Sistema RDS</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Escribe para buscar"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Componentes</li>
+  <li
+  >
+  CoursesListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>Fichero</h3>
+</p>
+<p class="comment">
+    <code>src/app/classroom/courses/components/courses-list/courses-list.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implementa</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Meta datos</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-courses-list</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./courses-list.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./courses-list.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Índice</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Propiedades</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#courseNameFilter" >courseNameFilter</a>
+                            </li>
+                            <li>
+                                <a href="#courses" >courses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#courseStateFilter" >courseStateFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#courseTotal$" >courseTotal$</a>
+                            </li>
+                            <li>
+                                <a href="#creationTime" >creationTime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#creationTimeFilter" >creationTimeFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dataSource" >dataSource</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#defaultSort" >defaultSort</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#displayedColumns" >displayedColumns</a>
+                            </li>
+                            <li>
+                                <a href="#faBan" >faBan</a>
+                            </li>
+                            <li>
+                                <a href="#faBullhorn" >faBullhorn</a>
+                            </li>
+                            <li>
+                                <a href="#faCheck" >faCheck</a>
+                            </li>
+                            <li>
+                                <a href="#faEdit" >faEdit</a>
+                            </li>
+                            <li>
+                                <a href="#faExclamation" >faExclamation</a>
+                            </li>
+                            <li>
+                                <a href="#faFileArchive" >faFileArchive</a>
+                            </li>
+                            <li>
+                                <a href="#faPlus" >faPlus</a>
+                            </li>
+                            <li>
+                                <a href="#faScrewdriver" >faScrewdriver</a>
+                            </li>
+                            <li>
+                                <a href="#faStudents" >faStudents</a>
+                            </li>
+                            <li>
+                                <a href="#faTeachers" >faTeachers</a>
+                            </li>
+                            <li>
+                                <a href="#faTimes" >faTimes</a>
+                            </li>
+                            <li>
+                                <a href="#faUserPlus" >faUserPlus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#filterSubject" >filterSubject</a>
+                            </li>
+                            <li>
+                                <a href="#isLoading$" >isLoading$</a>
+                            </li>
+                            <li>
+                                <a href="#keys" >keys</a>
+                            </li>
+                            <li>
+                                <a href="#name" >name</a>
+                            </li>
+                            <li>
+                                <a href="#paginator" >paginator</a>
+                            </li>
+                            <li>
+                                <a href="#searchForm" >searchForm</a>
+                            </li>
+                            <li>
+                                <a href="#searching" >searching</a>
+                            </li>
+                            <li>
+                                <a href="#selectedStates" >selectedStates</a>
+                            </li>
+                            <li>
+                                <a href="#sort" >sort</a>
+                            </li>
+                            <li>
+                                <a href="#states" >states</a>
+                            </li>
+                            <li>
+                                <a href="#table" >table</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Métodos</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#applyFilter" >applyFilter</a>
+                            </li>
+                            <li>
+                                <a href="#getFilterPredicate" >getFilterPredicate</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#searchFormInit" >searchFormInit</a>
+                            </li>
+                            <li>
+                                <a href="#tableFilter" >tableFilter</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(courseEntityService: <a href="../injectables/CourseEntityService.html" target="_self">CourseEntityService</a>, fb: <a href="../interfaces/Form.html" target="_self">FormBuilder</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="55" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:55</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parámetros :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                    <td>Tipo</td>
+                                                <td>Opcional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>courseEntityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CourseEntityService.html" target="_self" >CourseEntityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/Form.html" target="_self" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Métodos
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyFilter"></a>
+                    <span class="name">
+                        <span ><b>applyFilter</b></span>
+                        <a href="#applyFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyFilter()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="111"
+                            class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFilterPredicate"></a>
+                    <span class="name">
+                        <span ><b>getFilterPredicate</b></span>
+                        <a href="#getFilterPredicate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFilterPredicate()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="85"
+                            class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:85</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>    <code>(row: any, filters: string) &#x3D;&gt; any</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="71"
+                            class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:71</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="65"
+                            class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:65</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchFormInit"></a>
+                    <span class="name">
+                        <span ><b>searchFormInit</b></span>
+                        <a href="#searchFormInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>searchFormInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="76"
+                            class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:76</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tableFilter"></a>
+                    <span class="name">
+                        <span ><b>tableFilter</b></span>
+                        <a href="#tableFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>tableFilter()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="126"
+                            class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:126</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>    <code>(data: any, filter: any) &#x3D;&gt; boolean</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Propiedades
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="courseNameFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>courseNameFilter</b></span>
+                        <a href="#courseNameFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="51" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="courses"></a>
+                    <span class="name">
+                        <span ><b>courses</b></span>
+                        <a href="#courses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>gapi.client.classroom.Course[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="24" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="courseStateFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>courseStateFilter</b></span>
+                        <a href="#courseStateFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[&#x27;&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="52" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="courseTotal$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>courseTotal$</b></span>
+                        <a href="#courseTotal$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;number&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="31" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="creationTime"></a>
+                    <span class="name">
+                        <span ><b>creationTime</b></span>
+                        <a href="#creationTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/Form.html" target="_self" >FormControl</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="49" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="creationTimeFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>creationTimeFilter</b></span>
+                        <a href="#creationTimeFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="50" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataSource"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>dataSource</b></span>
+                        <a href="#dataSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>MatTableDataSource&lt;gapi.client.classroom.Course&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="30" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="defaultSort"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>defaultSort</b></span>
+                        <a href="#defaultSort"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Sort</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{ active: &#x27;name&#x27;, direction: &#x27;asc&#x27; }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="33" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayedColumns"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>displayedColumns</b></span>
+                        <a href="#displayedColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[&#x27;courseState&#x27;, &#x27;name&#x27;, &#x27;section&#x27;, &#x27;room&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="29" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faBan"></a>
+                    <span class="name">
+                        <span ><b>faBan</b></span>
+                        <a href="#faBan"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faBan</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="43" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faBullhorn"></a>
+                    <span class="name">
+                        <span ><b>faBullhorn</b></span>
+                        <a href="#faBullhorn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faBullhorn</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="45" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCheck"></a>
+                    <span class="name">
+                        <span ><b>faCheck</b></span>
+                        <a href="#faCheck"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faCheck</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="38" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faEdit"></a>
+                    <span class="name">
+                        <span ><b>faEdit</b></span>
+                        <a href="#faEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faEdit</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="34" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faExclamation"></a>
+                    <span class="name">
+                        <span ><b>faExclamation</b></span>
+                        <a href="#faExclamation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faExclamation</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="37" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faFileArchive"></a>
+                    <span class="name">
+                        <span ><b>faFileArchive</b></span>
+                        <a href="#faFileArchive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faArchive</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="39" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faPlus"></a>
+                    <span class="name">
+                        <span ><b>faPlus</b></span>
+                        <a href="#faPlus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faPlus</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="44" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faScrewdriver"></a>
+                    <span class="name">
+                        <span ><b>faScrewdriver</b></span>
+                        <a href="#faScrewdriver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faScrewdriver</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="40" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faStudents"></a>
+                    <span class="name">
+                        <span ><b>faStudents</b></span>
+                        <a href="#faStudents"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faUserGraduate</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="35" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTeachers"></a>
+                    <span class="name">
+                        <span ><b>faTeachers</b></span>
+                        <a href="#faTeachers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faUserTie</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="36" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faTimes"></a>
+                    <span class="name">
+                        <span ><b>faTimes</b></span>
+                        <a href="#faTimes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faTimes</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="41" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faUserPlus"></a>
+                    <span class="name">
+                        <span ><b>faUserPlus</b></span>
+                        <a href="#faUserPlus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faUserPlus</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="42" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>filterSubject</b></span>
+                        <a href="#filterSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>new Subject&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="32" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading$"></a>
+                    <span class="name">
+                        <span ><b>isLoading$</b></span>
+                        <a href="#isLoading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="25" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="keys"></a>
+                    <span class="name">
+                        <span ><b>keys</b></span>
+                        <a href="#keys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="53" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="name"></a>
+                    <span class="name">
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/Form.html" target="_self" >FormControl</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="48" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginator"></a>
+                    <span class="name">
+                        <span ><b>paginator</b></span>
+                        <a href="#paginator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>MatPaginator</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decoradores : </b>
+                        <br />
+                        <code>
+                            @ViewChild(MatPaginator)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="27" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchForm"></a>
+                    <span class="name">
+                        <span ><b>searchForm</b></span>
+                        <a href="#searchForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="47" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searching"></a>
+                    <span class="name">
+                        <span ><b>searching</b></span>
+                        <a href="#searching"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="46" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedStates"></a>
+                    <span class="name">
+                        <span ><b>selectedStates</b></span>
+                        <a href="#selectedStates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="55" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sort"></a>
+                    <span class="name">
+                        <span ><b>sort</b></span>
+                        <a href="#sort"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>MatSort</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decoradores : </b>
+                        <br />
+                        <code>
+                            @ViewChild(MatSort)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="26" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="states"></a>
+                    <span class="name">
+                        <span ><b>states</b></span>
+                        <a href="#states"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>CourseState</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="54" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="table"></a>
+                    <span class="name">
+                        <span ><b>table</b></span>
+                        <a href="#table"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>MatTable&lt;gapi.client.classroom.Course&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decoradores : </b>
+                        <br />
+                        <code>
+                            @ViewChild(MatTable)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="28" class="link-to-prism">src/app/classroom/courses/components/courses-list/courses-list.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { MatSort, Sort } from &#x27;@angular/material/sort&#x27;;
+import { MatPaginator } from &#x27;@angular/material/paginator&#x27;;
+import { MatTable, MatTableDataSource } from &#x27;@angular/material/table&#x27;;
+import { FormControl, FormGroup, Validators, FormBuilder } from &#x27;@angular/forms&#x27;;
+
+import { faEdit, faUserGraduate, faUserTie, faExclamation, faCheck, faArchive, faScrewdriver, faTimes, faUserPlus, faBan, faPlus, faBullhorn } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+
+import { CourseEntityService } from &#x27;@rds-store/classroom/course/course-entity.service&#x27;;
+
+import { CourseState } from &#x27;@rds-classroom/models/classroom.enum&#x27;;
+
+import { filter } from &#x27;rxjs/operators&#x27;;
+import { concat, Observable, Subject } from &#x27;rxjs&#x27;;
+
+@Component({
+  selector: &#x27;app-courses-list&#x27;,
+  templateUrl: &#x27;./courses-list.component.html&#x27;,
+  styleUrls: [&#x27;./courses-list.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
+})
+export class CoursesListComponent implements OnInit, AfterViewInit {
+  courses: gapi.client.classroom.Course[];
+  isLoading$: Observable&lt;boolean&gt;;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatTable) table: MatTable&lt;gapi.client.classroom.Course&gt;;
+  public displayedColumns: string[] &#x3D; [&#x27;courseState&#x27;, &#x27;name&#x27;, &#x27;section&#x27;, &#x27;room&#x27;];
+  public dataSource: MatTableDataSource&lt;gapi.client.classroom.Course&gt;;
+  public courseTotal$: Observable&lt;number&gt;;
+  public filterSubject &#x3D; new Subject&lt;string&gt;();
+  public defaultSort: Sort &#x3D; { active: &#x27;name&#x27;, direction: &#x27;asc&#x27; };
+  faEdit &#x3D; faEdit;
+  faStudents &#x3D; faUserGraduate;
+  faTeachers &#x3D; faUserTie;
+  faExclamation &#x3D; faExclamation;
+  faCheck &#x3D; faCheck;
+  faFileArchive &#x3D; faArchive;
+  faScrewdriver &#x3D; faScrewdriver;
+  faTimes &#x3D; faTimes;
+  faUserPlus &#x3D; faUserPlus;
+  faBan &#x3D; faBan;
+  faPlus &#x3D; faPlus;
+  faBullhorn &#x3D; faBullhorn;
+  searching: boolean &#x3D; false;
+  searchForm: FormGroup;
+  name: FormControl;
+  creationTime: FormControl;
+  public creationTimeFilter &#x3D; &#x27;&#x27;;
+  public courseNameFilter &#x3D; &#x27;&#x27;;
+  public courseStateFilter &#x3D; [&#x27;&#x27;];
+  keys;
+  states &#x3D; CourseState;
+  selectedStates: string[];
+
+  constructor(
+    private courseEntityService: CourseEntityService,
+    private fb: FormBuilder
+  ) {
+    this.keys &#x3D; Object.keys(this.states).filter(Number);
+    this.courseTotal$ &#x3D; this.courseEntityService.count$
+    this.courseEntityService.entities$.subscribe(courses &#x3D;&gt; this.courses &#x3D; courses);
+  }
+  ngOnInit(): void {
+    this.searchFormInit();
+    this.selectedStates &#x3D; [&#x27;ACTIVE&#x27;, &#x27;ARCHIVED&#x27;, &#x27;PROVISIONED&#x27;, &#x27;DECLINED&#x27;, &#x27;SUSPENDED&#x27;]
+    this.dataSource &#x3D; new MatTableDataSource(this.courses);
+    this.dataSource.filterPredicate &#x3D; this.getFilterPredicate();
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.sort &#x3D; this.sort;
+    this.dataSource.paginator &#x3D; this.paginator;
+    this.table.dataSource &#x3D; this.dataSource;
+  }
+  searchFormInit(): void {
+    this.searchForm &#x3D; this.fb.group({
+      name: new FormControl(&#x27;&#x27;, Validators.pattern(&#x27;^[a-zA-Z ]+$&#x27;)),
+      creationTime: new FormControl(&#x27;&#x27;),
+      //selectedStates: new FormControl()
+    });
+  }
+
+  /* this method well be called for each row in table  */
+  getFilterPredicate() {
+    return (row: gapi.client.classroom.Course, filters: string) &#x3D;&gt; {
+      // split string per &#x27;$&#x27; to array
+      const filterArray &#x3D; filters.split(&#x27;$&#x27;);
+      const creationDate &#x3D; filterArray[0];
+      const coursesName &#x3D; filterArray[1];
+      //const courseStates &#x3D; filterArray[2];
+      const matchFilter &#x3D; [];
+      // Fetch data from row
+      const columnCreationDate &#x3D; new Date(row.creationTime).toLocaleDateString();
+      const columnCourseTitle &#x3D; row.name;
+      //const columnCourseState &#x3D; row.courseState;
+      // verify fetching data by our searching values
+      const customFilterDD &#x3D; columnCreationDate.toLowerCase().includes(creationDate);
+      const customFilterCW &#x3D; columnCourseTitle.toLowerCase().includes(coursesName);
+      //const customFilterCS &#x3D; columnCourseState.toLowerCase().includes(courseStates);
+
+      // push boolean values into array
+      matchFilter.push(customFilterDD);
+      matchFilter.push(customFilterCW);
+      //matchFilter.push(customFilterCS);
+      // return true if all values in array is true
+      // else return false
+      return matchFilter.every(Boolean);
+    };
+  }
+  applyFilter() {
+    const date &#x3D; this.searchForm.get(&#x27;creationTime&#x27;).value;
+    const as &#x3D; this.searchForm.get(&#x27;name&#x27;).value;
+    // const st: string[] &#x3D; this.searchForm.get(&#x27;selectedStates&#x27;).value;
+    const fixedDate &#x3D; new Date(date);
+    this.creationTimeFilter &#x3D; (date &#x3D;&#x3D;&#x3D; null || date &#x3D;&#x3D;&#x3D; &#x27;&#x27;) ? &#x27;&#x27; : fixedDate.toLocaleDateString();
+    this.courseNameFilter &#x3D; as &#x3D;&#x3D;&#x3D; null ? &#x27;&#x27; : as;
+    // create string of our searching values and split if by &#x27;$&#x27;
+    const filterValue &#x3D; this.creationTimeFilter + &#x27;$&#x27; + this.courseNameFilter;
+    const value &#x3D; filterValue.trim().toLowerCase();
+    this.dataSource.filter &#x3D; value;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  tableFilter() {
+    const filterFunction &#x3D; (data, filter): boolean &#x3D;&gt; {
+      const searchTerms &#x3D; JSON.parse(filter);
+
+      // return all data if there are no filter values
+      if (!searchTerms.SubValue.length &amp;&amp; !searchTerms.Horizontal.length &amp;&amp; !searchTerms.ID.length) {
+        return true;
+      }
+
+      return (
+        searchTerms.SubValue.indexOf(data.SubValue) !&#x3D;&#x3D; -1 ||
+        searchTerms.Horizontal.indexOf(data.Horizontal) !&#x3D;&#x3D; -1 ||
+        searchTerms.ID.indexOf(data.ID) !&#x3D;&#x3D; -1
+      );
+    };
+    return filterFunction;
+  }
+  //this.loadCourses();
+  /* let filter$ &#x3D; this.filterSubject.pipe(
+    debounceTime(150),
+    distinctUntilChanged(),
+    tap((value: string) &#x3D;&gt; {
+      this.paginator.pageIndex &#x3D; 0;
+      this.filter &#x3D; value;
+    })
+  ); */
+
+  //let sort$ &#x3D; this.sort.sortChange.pipe(tap(() &#x3D;&gt; this.paginator.pageIndex &#x3D; 0));
+
+  /*  this.subscription.add(merge(filter$, sort$, this.paginator.page).pipe(
+     tap(() &#x3D;&gt; this.loadCourses())
+   ).subscribe()); */
+
+
+  /*  private loadCourses(): void {
+     this.store.dispatch(loadCourses({
+       params: {
+
+        pageSize: this.paginator.pageSize,
+
+        coursesState
+       filter: this.filter.toLocaleLowerCase(),
+       pageIndex: this.paginator.pageIndex,
+       ,
+
+       }
+     }));
+
+
+   }
+  */
+
+
+  /* public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  } */
+
+  /*  public retry(): void {
+     this.loadCourses();
+   } */
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;!(isLoading$ | async)&quot;&gt;
+  &lt;mat-accordion&gt;
+    &lt;mat-expansion-panel class&#x3D;&quot;mat-elevation-z0&quot;&gt;
+      &lt;mat-expansion-panel-header&gt;
+        &lt;mat-panel-title&gt;Búsqueda...&lt;/mat-panel-title&gt;
+        &lt;mat-panel-description&gt;(por nombre, status y fecha de creación)&lt;/mat-panel-description&gt;
+      &lt;/mat-expansion-panel-header&gt;
+      &lt;form [formGroup]&#x3D;&quot;searchForm&quot;&gt;
+        &lt;div fxLayout&#x3D;&quot;row flex&quot; fxLayoutAlign&#x3D;&quot;space-between stretch&quot; fxLayoutAlign.lt-md&#x3D;&quot;end&quot;
+          fxLayout.lt-md&#x3D;&quot;column&quot;&gt;
+          &lt;mat-form-field class&#x3D;&quot;my-n2&quot; fxFlex&#x3D;&quot;0 1 calc(33% - 5px)&quot; fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Busca una clase por nombre&lt;/mat-label&gt;
+            &lt;input matInput type&#x3D;&quot;search&quot; class&#x3D;&quot;dc-search&quot; placeholder&#x3D;&quot;Search Course&quot; (keyup)&#x3D;&quot;applyFilter()&quot;
+              formControlName&#x3D;&quot;name&quot; (click)&#x3D;&quot;searching &#x3D; true&quot; /&gt;
+            &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;name &#x3D; &#x27;&#x27;; applyFilter(&#x27;&#x27;); searching &#x3D; !searching&quot;
+              color&#x3D;&quot;accent&quot;&gt;
+              &lt;mat-icon *ngIf&#x3D;&quot;!searching&quot;&gt;search&lt;/mat-icon&gt;
+              &lt;mat-icon *ngIf&#x3D;&quot;searching&quot;&gt;clear&lt;/mat-icon&gt;
+            &lt;/button&gt;
+          &lt;/mat-form-field&gt;
+          &lt;mat-form-field class&#x3D;&quot;my-n2&quot; fxFlex&#x3D;&quot;0 1 calc(33% - 5px)&quot; fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Estado del curso&lt;/mat-label&gt;
+            &lt;mat-select [ngModelOptions]&#x3D;&quot;{ standalone: true }&quot; [(ngModel)]&#x3D;&quot;selectedStates&quot;
+              (selectionChange)&#x3D;&quot;applyFilter($event.value)&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Todos&quot; multiple&gt;
+              &lt;mat-option *ngFor&#x3D;&quot;let key of keys&quot; [value]&#x3D;&quot;states[key]&quot;&gt;
+                {{ states[key] }}
+              &lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+          &lt;/mat-form-field&gt;
+          &lt;mat-form-field class&#x3D;&quot;my-n2&quot; fxFlex&#x3D;&quot;0 1 calc(33% - 5px)&quot; fxFlex.lt-md&#x3D;&quot;100%&quot; appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Fecha de creación&lt;/mat-label&gt;
+            &lt;input matInput formControlName&#x3D;&quot;creationTime&quot; [matDatepicker]&#x3D;&quot;picker&quot; (dateInput)&#x3D;&quot;applyFilter()&quot; /&gt;
+            &lt;mat-datepicker-toggle matSuffix [for]&#x3D;&quot;picker&quot;&gt;&lt;/mat-datepicker-toggle&gt;
+            &lt;mat-datepicker #picker&gt;&lt;/mat-datepicker&gt;
+          &lt;/mat-form-field&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/mat-expansion-panel&gt;
+  &lt;/mat-accordion&gt;
+  &lt;div class&#x3D;&quot;table-container&quot;&gt;
+    &lt;mat-table class&#x3D;&quot;full-width-table table-hover&quot; matSort aria-label&#x3D;&quot;Course work table&quot;&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;courseState&quot;&gt;
+        &lt;mat-header-cell *matHeaderCellDef mat-sort-header&gt;Estado&lt;/mat-header-cell&gt;
+        &lt;mat-cell *matCellDef&#x3D;&quot;let row&quot;&gt;
+          &lt;div [ngSwitch]&#x3D;&quot;row.courseState&quot;&gt;
+            &lt;div *ngSwitchCase&#x3D;&quot;&#x27;COURSE_STATE_UNSPECIFIED&#x27;&quot;&gt;
+              &lt;fa-icon [icon]&#x3D;&quot;faExclamation&quot; size&#x3D;&quot;lg&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+            &lt;div *ngSwitchCase&#x3D;&quot;&#x27;ACTIVE&#x27;&quot;&gt;
+              &lt;fa-icon class&#x3D;&quot;text-success&quot; [icon]&#x3D;&quot;faCheck&quot; size&#x3D;&quot;lg&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+            &lt;div *ngSwitchCase&#x3D;&quot;&#x27;ARCHIVED&#x27;&quot;&gt;
+              &lt;fa-icon class&#x3D;&quot;text-warning&quot; [icon]&#x3D;&quot;faFileArchive&quot; size&#x3D;&quot;lg&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+            &lt;div *ngSwitchCase&#x3D;&quot;&#x27;PROVISIONED&#x27;&quot;&gt;
+              &lt;fa-icon class&#x3D;&quot;text-info&quot; [icon]&#x3D;&quot;faScrewdriver&quot; size&#x3D;&quot;lg&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+            &lt;div *ngSwitchCase&#x3D;&quot;&#x27;DECLINED&#x27;&quot;&gt;
+              &lt;fa-icon class&#x3D;&quot;text-danger&quot; [icon]&#x3D;&quot;faTimes&quot; size&#x3D;&quot;lg&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+            &lt;div *ngSwitchCase&#x3D;&quot;&#x27;SUSPENDED&#x27;&quot;&gt;
+              &lt;fa-icon class&#x3D;&quot;text-dark&quot; [icon]&#x3D;&quot;faBan&quot; size&#x3D;&quot;lg&quot;&gt;&lt;/fa-icon&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/mat-cell&gt;
+      &lt;/ng-container&gt;
+      &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
+        &lt;mat-header-cell class&#x3D;&quot;dc-label&quot; *matHeaderCellDef mat-sort-header&gt;Nombre&lt;/mat-header-cell&gt;
+        &lt;mat-cell class&#x3D;&quot;dc-content&quot; *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.name }}
+        &lt;/mat-cell&gt;
+      &lt;/ng-container&gt;
+
+      &lt;ng-container matColumnDef&#x3D;&quot;section&quot;&gt;
+        &lt;mat-header-cell class&#x3D;&quot;dc-label&quot; *matHeaderCellDef mat-sort-header&gt;Nivel&lt;/mat-header-cell&gt;
+        &lt;mat-cell class&#x3D;&quot;dc-content&quot; *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.section }}
+        &lt;/mat-cell&gt;
+      &lt;/ng-container&gt;
+
+      &lt;ng-container matColumnDef&#x3D;&quot;room&quot;&gt;
+        &lt;mat-header-cell class&#x3D;&quot;dc-label&quot; *matHeaderCellDef mat-sort-header&gt;Grado&lt;/mat-header-cell&gt;
+        &lt;mat-cell class&#x3D;&quot;dc-content&quot; *matCellDef&#x3D;&quot;let element&quot;&gt;
+          {{ element.room }}
+        &lt;/mat-cell&gt;
+      &lt;/ng-container&gt;
+
+      &lt;ng-container matColumnDef&#x3D;&quot;noRecord&quot;&gt;
+        &lt;mat-footer-cell *matFooterCellDef class&#x3D;&quot;text-danger&quot;&gt;
+          No hay resultados que coincidan con la búsqueda.
+        &lt;/mat-footer-cell&gt;
+      &lt;/ng-container&gt;
+
+      &lt;mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns; sticky: true;&quot;&gt;&lt;/mat-header-row&gt;
+      &lt;mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns&quot; class&#x3D;&quot;course-row&quot; [routerLink]&#x3D;&quot;[row.id]&quot;&gt;
+      &lt;/mat-row&gt;
+      &lt;!-- Row shown when there is no matching data.--&gt;
+      &lt;mat-footer-row *matFooterRowDef&#x3D;&quot;!dataSource.data.length ? [&#x27;noRecord&#x27;] : []&quot; colSpan&#x3D;&quot;3&quot;
+        style&#x3D;&quot;text-align: center;&quot;&gt;
+      &lt;/mat-footer-row&gt;
+    &lt;/mat-table&gt;
+    &lt;mat-paginator #paginator [length]&#x3D;&quot;dataSource.filteredData.length&quot; [pageSize]&#x3D;&quot;10&quot; [pageIndex]&#x3D;&quot;0&quot;
+      [pageSizeOptions]&#x3D;&quot;[5, 10, 20, 50, 100]&quot;&gt;
+    &lt;/mat-paginator&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./courses-list.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">
+@import &quot;./../../../../../assets/themes/colors.scss&quot;;
+.hide { display: none; }
+.table-container {
+
+  //margin-top: 8px;
+  mat-table {
+    color: $deep-blue-color;
+    line-height: 14px !important;
+    width: 100%;
+
+    mat-header-row {
+      height: 50px;
+    }
+
+
+
+    .course-row.mat-footer-row,
+    .course-row.mat-row {
+      height: 30px;
+      cursor: pointer;
+    }
+    mat-header-cell {
+      letter-spacing: 0.3px;
+    }
+
+
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Leyenda</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Elemento Html</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Componente</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Elemento Html con directiva</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="!(isLoading$ | async)">  <mat-accordion>    <mat-expansion-panel class="mat-elevation-z0">      <mat-expansion-panel-header>        <mat-panel-title>Búsqueda...</mat-panel-title>        <mat-panel-description>(por nombre, status y fecha de creación)</mat-panel-description>      </mat-expansion-panel-header>      <form [formGroup]="searchForm">        <div fxLayout="row flex" fxLayoutAlign="space-between stretch" fxLayoutAlign.lt-md="end"          fxLayout.lt-md="column">          <mat-form-field class="my-n2" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-md="100%" appearance="outline">            <mat-label>Busca una clase por nombre</mat-label>            <input matInput type="search" class="dc-search" placeholder="Search Course" (keyup)="applyFilter()"              formControlName="name" (click)="searching = true" />            <button mat-icon-button matSuffix (click)="name = \'\'; applyFilter(\'\'); searching = !searching"              color="accent">              <mat-icon *ngIf="!searching">search</mat-icon>              <mat-icon *ngIf="searching">clear</mat-icon>            </button>          </mat-form-field>          <mat-form-field class="my-n2" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-md="100%" appearance="outline">            <mat-label>Estado del curso</mat-label>            <mat-select [ngModelOptions]="{ standalone: true }" [(ngModel)]="selectedStates"              (selectionChange)="applyFilter($event.value)" type="text" placeholder="Todos" multiple>              <mat-option *ngFor="let key of keys" [value]="states[key]">                {{ states[key] }}              </mat-option>            </mat-select>          </mat-form-field>          <mat-form-field class="my-n2" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-md="100%" appearance="outline">            <mat-label>Fecha de creación</mat-label>            <input matInput formControlName="creationTime" [matDatepicker]="picker" (dateInput)="applyFilter()" />            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>            <mat-datepicker #picker></mat-datepicker>          </mat-form-field>        </div>      </form>    </mat-expansion-panel>  </mat-accordion>  <div class="table-container">    <mat-table class="full-width-table table-hover" matSort aria-label="Course work table">      <ng-container matColumnDef="courseState">        <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>        <mat-cell *matCellDef="let row">          <div [ngSwitch]="row.courseState">            <div *ngSwitchCase="\'COURSE_STATE_UNSPECIFIED\'">              <fa-icon [icon]="faExclamation" size="lg"></fa-icon>            </div>            <div *ngSwitchCase="\'ACTIVE\'">              <fa-icon class="text-success" [icon]="faCheck" size="lg"></fa-icon>            </div>            <div *ngSwitchCase="\'ARCHIVED\'">              <fa-icon class="text-warning" [icon]="faFileArchive" size="lg"></fa-icon>            </div>            <div *ngSwitchCase="\'PROVISIONED\'">              <fa-icon class="text-info" [icon]="faScrewdriver" size="lg"></fa-icon>            </div>            <div *ngSwitchCase="\'DECLINED\'">              <fa-icon class="text-danger" [icon]="faTimes" size="lg"></fa-icon>            </div>            <div *ngSwitchCase="\'SUSPENDED\'">              <fa-icon class="text-dark" [icon]="faBan" size="lg"></fa-icon>            </div>          </div>        </mat-cell>      </ng-container>      <ng-container matColumnDef="name">        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>        <mat-cell class="dc-content" *matCellDef="let element">{{ element.name }}        </mat-cell>      </ng-container>      <ng-container matColumnDef="section">        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Nivel</mat-header-cell>        <mat-cell class="dc-content" *matCellDef="let element">{{ element.section }}        </mat-cell>      </ng-container>      <ng-container matColumnDef="room">        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Grado</mat-header-cell>        <mat-cell class="dc-content" *matCellDef="let element">          {{ element.room }}        </mat-cell>      </ng-container>      <ng-container matColumnDef="noRecord">        <mat-footer-cell *matFooterCellDef class="text-danger">          No hay resultados que coincidan con la búsqueda.        </mat-footer-cell>      </ng-container>      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>      <mat-row *matRowDef="let row; columns: displayedColumns" class="course-row" [routerLink]="[row.id]">      </mat-row>      <!-- Row shown when there is no matching data.-->      <mat-footer-row *matFooterRowDef="!dataSource.data.length ? [\'noRecord\'] : []" colSpan="3"        style="text-align: center;">      </mat-footer-row>    </mat-table>    <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageSize]="10" [pageIndex]="0"      [pageSizeOptions]="[5, 10, 20, 50, 100]">    </mat-paginator>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NewCicleDialogComponent', 'selector': ''},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesDialogComponent', 'selector': ''},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+    var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
+    var ACTUAL_COMPONENT = {'name': 'CoursesListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> comparación de resultados "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No hay resultados que coincidan "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CoursesListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

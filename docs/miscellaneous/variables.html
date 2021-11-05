@@ -1,0 +1,4010 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sistema RDS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Sistema RDS</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Escribe para buscar"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Miscelánea</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Índice</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#accountsComponents" title="src/app/accounts/components/index.ts" ><b>accountsComponents</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#accountsContainers" title="src/app/accounts/containers/index.ts" ><b>accountsContainers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#accountSelectors" title="src/app/accounts/state/accounts.selectors.ts" ><b>accountSelectors</b>&nbsp;&nbsp;&nbsp;(src/.../accounts.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#animateText" title="src/app/shared/animations/animations.ts" ><b>animateText</b>&nbsp;&nbsp;&nbsp;(src/.../animations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#authComponents" title="src/app/auth/components/index.ts" ><b>authComponents</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#authFeatureKey" title="src/app/auth/state/auth.reducer.ts" ><b>authFeatureKey</b>&nbsp;&nbsp;&nbsp;(src/.../auth.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#authReducer" title="src/app/auth/state/auth.reducer.ts" ><b>authReducer</b>&nbsp;&nbsp;&nbsp;(src/.../auth.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#authServices" title="src/app/auth/services/index.ts" ><b>authServices</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#checkAdminRole" title="src/app/auth/state/auth.actions.ts" ><b>checkAdminRole</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#checkTeacherRole" title="src/app/auth/state/auth.actions.ts" ><b>checkTeacherRole</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#commonModules" title="src/app/modules/index.ts" ><b>commonModules</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#context" title="src/test.ts" ><b>context</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#coreComponents" title="src/app/core/components/index.ts" ><b>coreComponents</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#coreContainers" title="src/app/core/containers/index.ts" ><b>coreContainers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#coreServices" title="src/app/core/services/index.ts" ><b>coreServices</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/accounts/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/accounts-domain/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/announcement/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/course/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/course-work/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/guardian/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/student/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/student-submission/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/teacher/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/topic/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/classroom/user-profile/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionEndPoint" title="src/app/ngrx-store/school/school-courses/state.ts" ><b>entityCollectionEndPoint</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/accounts/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/accounts-domain/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/announcement/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/course/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/course-work/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/guardian/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/student/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/student-submission/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/teacher/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/topic/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/classroom/user-profile/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityCollectionName" title="src/app/ngrx-store/school/school-courses/state.ts" ><b>entityCollectionName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityConfig" title="src/app/ngrx-store/config/entity-metadata.ts" ><b>entityConfig</b>&nbsp;&nbsp;&nbsp;(src/.../entity-metadata.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entityMetadata" title="src/app/ngrx-store/config/entity-metadata.ts" ><b>entityMetadata</b>&nbsp;&nbsp;&nbsp;(src/.../entity-metadata.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/accounts/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/accounts-domain/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/announcement/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/course/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/course-work/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/guardian/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/student/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/student-submission/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/teacher/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/topic/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/classroom/user-profile/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#entitySelectId" title="src/app/ngrx-store/school/school-courses/state.ts" ><b>entitySelectId</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.prod.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#expandFadeInAnimation" title="src/app/shared/animations/fade-in.animation.ts" ><b>expandFadeInAnimation</b>&nbsp;&nbsp;&nbsp;(src/.../fade-in.animation.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fadeInAnimation" title="src/app/shared/animations/fade-in.animation.ts" ><b>fadeInAnimation</b>&nbsp;&nbsp;&nbsp;(src/.../fade-in.animation.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fillUser" title="src/app/auth/state/auth.actions.ts" ><b>fillUser</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#flyInOut" title="src/app/shared/animations/fade-in.animation.ts" ><b>flyInOut</b>&nbsp;&nbsp;&nbsp;(src/.../fade-in.animation.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#flyOut" title="src/app/shared/animations/fade-in.animation.ts" ><b>flyOut</b>&nbsp;&nbsp;&nbsp;(src/.../fade-in.animation.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#formsModules" title="src/app/modules/index.ts" ><b>formsModules</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#gapi" title="src/app/accounts/services/accounts-domain.service.ts" ><b>gapi</b>&nbsp;&nbsp;&nbsp;(src/.../accounts-domain.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#gapi" title="src/app/classroom/user-profiles/services/user-profiles.service.ts" ><b>gapi</b>&nbsp;&nbsp;&nbsp;(src/.../user-profiles.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getCurrentParams" title="src/app/ngrx-store/router/router.selectors.ts" ><b>getCurrentParams</b>&nbsp;&nbsp;&nbsp;(src/.../router.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getCurrentQueryParams" title="src/app/ngrx-store/router/router.selectors.ts" ><b>getCurrentQueryParams</b>&nbsp;&nbsp;&nbsp;(src/.../router.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getCurrentRoute" title="src/app/ngrx-store/router/router.selectors.ts" ><b>getCurrentRoute</b>&nbsp;&nbsp;&nbsp;(src/.../router.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getError" title="src/app/auth/state/auth.selectors.ts" ><b>getError</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getRouterState" title="src/app/ngrx-store/router/router.selectors.ts" ><b>getRouterState</b>&nbsp;&nbsp;&nbsp;(src/.../router.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getUser" title="src/app/auth/state/auth.actions.ts" ><b>getUser</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#heightReveal" title="src/app/shared/animations/fade-in.animation.ts" ><b>heightReveal</b>&nbsp;&nbsp;&nbsp;(src/.../fade-in.animation.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#initialState" title="src/app/auth/state/auth.reducer.ts" ><b>initialState</b>&nbsp;&nbsp;&nbsp;(src/.../auth.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isAdmin" title="src/app/auth/state/auth.selectors.ts" ><b>isAdmin</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isOnline" title="src/app/auth/state/auth.selectors.ts" ><b>isOnline</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isTeacher" title="src/app/auth/state/auth.selectors.ts" ><b>isTeacher</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#loadApp" title="src/app/ngrx-store/actions/app.actions.ts" ><b>loadApp</b>&nbsp;&nbsp;&nbsp;(src/.../app.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#loadAppFail" title="src/app/ngrx-store/actions/app.actions.ts" ><b>loadAppFail</b>&nbsp;&nbsp;&nbsp;(src/.../app.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#loadAppSuccess" title="src/app/ngrx-store/actions/app.actions.ts" ><b>loadAppSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../app.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#localStoreUser" title="src/app/ngrx-store/actions/app.actions.ts" ><b>localStoreUser</b>&nbsp;&nbsp;&nbsp;(src/.../app.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#metaReducers" title="src/app/ngrx-store/index.ts" ><b>metaReducers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#notAuthenticated" title="src/app/auth/state/auth.actions.ts" ><b>notAuthenticated</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#onMainContentChange" title="src/app/shared/animations/animations.ts" ><b>onMainContentChange</b>&nbsp;&nbsp;&nbsp;(src/.../animations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#onSideNavChange" title="src/app/shared/animations/animations.ts" ><b>onSideNavChange</b>&nbsp;&nbsp;&nbsp;(src/.../animations.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/accounts/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/accounts-domain/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/announcement/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/course/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/course-work/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/guardian/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/student/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/student-submission/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/teacher/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/topic/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/classroom/user-profile/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralizedEntityName" title="src/app/ngrx-store/school/school-courses/state.ts" ><b>pluralizedEntityName</b>&nbsp;&nbsp;&nbsp;(src/.../state.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pluralNames" title="src/app/ngrx-store/config/entity-metadata.ts" ><b>pluralNames</b>&nbsp;&nbsp;&nbsp;(src/.../entity-metadata.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#reducers" title="src/app/ngrx-store/index.ts" ><b>reducers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#registeredEffects" title="src/app/ngrx-store/config/registered-effects.ts" ><b>registeredEffects</b>&nbsp;&nbsp;&nbsp;(src/.../registered-effects.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#require" title="src/test.ts" ><b>require</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#routerKey" title="src/app/ngrx-store/router/index.ts" ><b>routerKey</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#saveUser" title="src/app/auth/state/auth.actions.ts" ><b>saveUser</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#schoolComponents" title="src/app/school/components/index.ts" ><b>schoolComponents</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#schoolContainers" title="src/app/school/containers/index.ts" ><b>schoolContainers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#selectAccounts" title="src/app/accounts/state/accounts.selectors.ts" ><b>selectAccounts</b>&nbsp;&nbsp;&nbsp;(src/.../accounts.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#selectAuthState" title="src/app/auth/state/auth.selectors.ts" ><b>selectAuthState</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#selectedAccountById" title="src/app/accounts/state/accounts.selectors.ts" ><b>selectedAccountById</b>&nbsp;&nbsp;&nbsp;(src/.../accounts.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#selectUser" title="src/app/auth/state/auth.selectors.ts" ><b>selectUser</b>&nbsp;&nbsp;&nbsp;(src/.../auth.selectors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#sharedComponents" title="src/app/shared/components/index.ts" ><b>sharedComponents</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#sharedServices" title="src/app/shared/services/index.ts" ><b>sharedServices</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#signIn" title="src/app/auth/state/auth.actions.ts" ><b>signIn</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#signInFail" title="src/app/auth/state/auth.actions.ts" ><b>signInFail</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#signInSuccess" title="src/app/auth/state/auth.actions.ts" ><b>signInSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#signOut" title="src/app/auth/state/auth.actions.ts" ><b>signOut</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#signOutCompleted" title="src/app/auth/state/auth.actions.ts" ><b>signOutCompleted</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#storeConfig" title="src/app/ngrx-store/config/store-config.ts" ><b>storeConfig</b>&nbsp;&nbsp;&nbsp;(src/.../store-config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#uiModules" title="src/app/modules/index.ts" ><b>uiModules</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateAdminRole" title="src/app/auth/state/auth.actions.ts" ><b>updateAdminRole</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateOnlineStatus" title="src/app/auth/state/auth.actions.ts" ><b>updateOnlineStatus</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateProfile" title="src/app/auth/state/auth.actions.ts" ><b>updateProfile</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateProfileSuccess" title="src/app/auth/state/auth.actions.ts" ><b>updateProfileSuccess</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateTeachersRole" title="src/app/auth/state/auth.actions.ts" ><b>updateTeachersRole</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/accounts/components/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accountsComponents"></a>
+                    <span class="name">
+                        <span ><b>accountsComponents</b></span>
+                        <a href="#accountsComponents"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  UserEditDialogComponent,
+  SaveUserErrorComponent,
+  UsersListComponent,
+  UserDetailsComponent,
+  ChangeGradeComponent,
+  AccountsTableComponent,
+  AccountsListComponent,
+  NewAccountComponent,
+  NewAccountConfirmComponent
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/accounts/containers/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accountsContainers"></a>
+                    <span class="name">
+                        <span ><b>accountsContainers</b></span>
+                        <a href="#accountsContainers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[AccountsComponent]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/accounts/state/accounts.selectors.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accountSelectors"></a>
+                    <span class="name">
+                        <span ><b>accountSelectors</b></span>
+                        <a href="#accountSelectors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>new EntitySelectorsFactory().create&lt;User&gt;(
+  fromAccounts.entityCollectionName
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectAccounts"></a>
+                    <span class="name">
+                        <span ><b>selectAccounts</b></span>
+                        <a href="#selectAccounts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  accountSelectors.selectEntities,
+  (accountEntities) &#x3D;&gt; accountEntities
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedAccountById"></a>
+                    <span class="name">
+                        <span ><b>selectedAccountById</b></span>
+                        <a href="#selectedAccountById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  getCurrentQueryParams,
+  accountSelectors.selectEntities,
+  (queryParams, accountEntities) &#x3D;&gt;
+    accountEntities.find((u) &#x3D;&gt; u.id &#x3D;&#x3D; queryParams.id)
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/animations/animations.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animateText"></a>
+                    <span class="name">
+                        <span ><b>animateText</b></span>
+                        <a href="#animateText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;animateText&#x27;, [
+  state(&#x27;hide&#x27;,
+    style({
+      &#x27;display&#x27;: &#x27;none&#x27;,
+      opacity: 0,
+    })
+  ),
+  state(&#x27;show&#x27;,
+    style({
+      &#x27;display&#x27;: &#x27;block&#x27;,
+      opacity: 1,
+    })
+  ),
+  transition(&#x27;hide &#x3D;&gt; show&#x27;, animate(&#x27;300ms ease-in&#x27;)),
+  transition(&#x27;show &#x3D;&gt; hide&#x27;, animate(&#x27;100ms ease-out&#x27;)),
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMainContentChange"></a>
+                    <span class="name">
+                        <span ><b>onMainContentChange</b></span>
+                        <a href="#onMainContentChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;onMainContentChange&#x27;, [
+  state(&#x27;close&#x27;,
+    style({
+      &#x27;margin-left&#x27;: &#x27;0px&#x27;
+    })
+  ),
+  state(&#x27;open&#x27;,
+    style({
+      &#x27;margin-left&#x27;: &#x27;200px&#x27;
+    })
+  ),
+  transition(&#x27;close &#x3D;&gt; open&#x27;, animate(&#x27;400ms ease-in&#x27;)),
+  transition(&#x27;open &#x3D;&gt; close&#x27;, animate(&#x27;400ms ease-out&#x27;)),
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSideNavChange"></a>
+                    <span class="name">
+                        <span ><b>onSideNavChange</b></span>
+                        <a href="#onSideNavChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;onSideNavChange&#x27;, [
+  state(&#x27;close&#x27;,
+    style({
+      &#x27;min-width&#x27;: &#x27;0px&#x27;,
+    })
+  ),
+  state(&#x27;open&#x27;,
+    style({
+      &#x27;min-width&#x27;: &#x27;200px&#x27;,
+    })
+  ),
+  transition(&#x27;close &#x3D;&gt; open&#x27;, animate(&#x27;400ms ease-in&#x27;)),
+  transition(&#x27;open &#x3D;&gt; close&#x27;, animate(&#x27;400ms ease-out&#x27;)),
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/auth/components/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authComponents"></a>
+                    <span class="name">
+                        <span ><b>authComponents</b></span>
+                        <a href="#authComponents"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  LoginDialogComponent,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/auth/state/auth.reducer.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authFeatureKey"></a>
+                    <span class="name">
+                        <span ><b>authFeatureKey</b></span>
+                        <a href="#authFeatureKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;auth&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authReducer"></a>
+                    <span class="name">
+                        <span ><b>authReducer</b></span>
+                        <a href="#authReducer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createReducer&lt;AuthenticationState&gt;(
+  initialState,
+  on(authActions.signInSuccess, (state, action) &#x3D;&gt; {
+    return {
+      ...state,
+      user: action.user,
+      isOnline: true,
+    };
+  }),
+  on(authActions.signInFail, (state) &#x3D;&gt; {
+    return {
+      ...state,
+      user: null,
+      isOnline: false,
+    };
+  }),
+  on(authActions.notAuthenticated, (state, action) &#x3D;&gt; {
+    return {
+      ...state,
+      error: action.error,
+    };
+  }),
+  on(authActions.signOutCompleted, (state) &#x3D;&gt; {
+    return {
+      ...state,
+      user: null,
+      isAdmin: false,
+      isTeacher: false,
+      isOnline: false,
+    };
+  }),
+  on(authActions.updateAdminRole, (state, action) &#x3D;&gt; {
+    return {
+      ...state,
+      isAdmin: action.isAdmin,
+    };
+  }),
+  on(authActions.updateTeachersRole, (state, action) &#x3D;&gt; {
+    return {
+      ...state,
+      isTeacher: action.isTeacher,
+    };
+  }),
+  on(authActions.updateOnlineStatus, (state, action) &#x3D;&gt; {
+    return {
+      ...state,
+      isOnline: action.isOnline,
+    };
+  })
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialState"></a>
+                    <span class="name">
+                        <span ><b>initialState</b></span>
+                        <a href="#initialState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/AuthenticationState.html" target="_self" >AuthenticationState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  user: null,
+  isAdmin: false,
+  isOnline: false,
+  isTeacher: false,
+  error: null,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/auth/services/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authServices"></a>
+                    <span class="name">
+                        <span ><b>authServices</b></span>
+                        <a href="#authServices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[AuthService, GapiService]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/auth/state/auth.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkAdminRole"></a>
+                    <span class="name">
+                        <span ><b>checkAdminRole</b></span>
+                        <a href="#checkAdminRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth Role] Check admin role&#x27;,
+  props&lt;{ id: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkTeacherRole"></a>
+                    <span class="name">
+                        <span ><b>checkTeacherRole</b></span>
+                        <a href="#checkTeacherRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth Role] Check teacher role&#x27;,
+  props&lt;{ id: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fillUser"></a>
+                    <span class="name">
+                        <span ><b>fillUser</b></span>
+                        <a href="#fillUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth Effect] Merge user&#x27;,
+  props&lt;{ id: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUser"></a>
+                    <span class="name">
+                        <span ><b>getUser</b></span>
+                        <a href="#getUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(&#x27;[Auth User] Get user&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="notAuthenticated"></a>
+                    <span class="name">
+                        <span ><b>notAuthenticated</b></span>
+                        <a href="#notAuthenticated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth] Authentication Fail&#x27;,
+  props&lt;{ error: any }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveUser"></a>
+                    <span class="name">
+                        <span ><b>saveUser</b></span>
+                        <a href="#saveUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth Firebase] Save user to firebase&#x27;,
+  props&lt;{ user: User }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signIn"></a>
+                    <span class="name">
+                        <span ><b>signIn</b></span>
+                        <a href="#signIn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(&#x27;[AccountUser] Google&#x60;s sign-in request&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signInFail"></a>
+                    <span class="name">
+                        <span ><b>signInFail</b></span>
+                        <a href="#signInFail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(&#x27;[Auth SignIn] Google&#x60;s sign-in Fail&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signInSuccess"></a>
+                    <span class="name">
+                        <span ><b>signInSuccess</b></span>
+                        <a href="#signInSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth SignIn] Google&#x60;s sign-in Success&#x27;,
+  props&lt;{ user: User }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signOut"></a>
+                    <span class="name">
+                        <span ><b>signOut</b></span>
+                        <a href="#signOut"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth SignOut] Google&#x60;s sign-out request&#x27;,
+  props&lt;{ id: string }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signOutCompleted"></a>
+                    <span class="name">
+                        <span ><b>signOutCompleted</b></span>
+                        <a href="#signOutCompleted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth SignOut] Google&#x60;s sign-out completed&#x27;
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateAdminRole"></a>
+                    <span class="name">
+                        <span ><b>updateAdminRole</b></span>
+                        <a href="#updateAdminRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth Role] Update admin role&#x27;,
+  props&lt;{ isAdmin: boolean }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateOnlineStatus"></a>
+                    <span class="name">
+                        <span ><b>updateOnlineStatus</b></span>
+                        <a href="#updateOnlineStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth Online] Update online status&#x27;,
+  props&lt;{ id: string; isOnline: boolean }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProfile"></a>
+                    <span class="name">
+                        <span ><b>updateProfile</b></span>
+                        <a href="#updateProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(&#x27;[Auth Component] Update profile&#x27;, props&lt;{ userData: User }&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateProfileSuccess"></a>
+                    <span class="name">
+                        <span ><b>updateProfileSuccess</b></span>
+                        <a href="#updateProfileSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(&#x27;[Auth Component] Update profile success&#x27;, props&lt;{ user: User }&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateTeachersRole"></a>
+                    <span class="name">
+                        <span ><b>updateTeachersRole</b></span>
+                        <a href="#updateTeachersRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[Auth Role] Update teacher role&#x27;,
+  props&lt;{ isTeacher: boolean }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/modules/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commonModules"></a>
+                    <span class="name">
+                        <span ><b>commonModules</b></span>
+                        <a href="#commonModules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  CommonModule,
+  RouterModule,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formsModules"></a>
+                    <span class="name">
+                        <span ><b>formsModules</b></span>
+                        <a href="#formsModules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  FormsModule,
+  ReactiveFormsModule
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uiModules"></a>
+                    <span class="name">
+                        <span ><b>uiModules</b></span>
+                        <a href="#uiModules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  MaterialModule,
+  FlexLayoutModule,
+  FontAwesomeModule,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/test.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="context"></a>
+                    <span class="name">
+                        <span ><b>context</b></span>
+                        <a href="#context"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>require.context(&#x27;./&#x27;, true, /\.spec\.ts$/)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="require"></a>
+                    <span class="name">
+                        <span ><b>require</b></span>
+                        <a href="#require"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/components/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="coreComponents"></a>
+                    <span class="name">
+                        <span ><b>coreComponents</b></span>
+                        <a href="#coreComponents"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  HeaderComponent,
+  MainComponent,
+  SettingsComponent,
+  SidenavComponent,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/containers/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="coreContainers"></a>
+                    <span class="name">
+                        <span ><b>coreContainers</b></span>
+                        <a href="#coreContainers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  LayoutComponent,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/services/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="coreServices"></a>
+                    <span class="name">
+                        <span ><b>coreServices</b></span>
+                        <a href="#coreServices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  LayoutService,
+  ThemeService
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/accounts/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;Account&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;accounts&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/accounts-domain/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;AccountDomain&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;accountsDomain&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/announcement/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;Announcement&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;announcements&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/course/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;Course&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;courses&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/course-work/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;CourseWork&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;courseWorks&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/guardian/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;Guardian&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;guardians&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/student/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;Student&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;students&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/student-submission/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;StudentSubmission&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;studentSubmissions&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/teacher/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;Teacher&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;teachers&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/topic/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;Topic&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;topics&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/classroom/user-profile/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;UserProfile&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;userProfiles&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/school/school-courses/state.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionEndPoint"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionEndPoint</b></span>
+                        <a href="#entityCollectionEndPoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>pluralizedEntityName</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityCollectionName"></a>
+                    <span class="name">
+                        <span ><b>entityCollectionName</b></span>
+                        <a href="#entityCollectionName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;SchoolCourse&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entitySelectId"></a>
+                    <span class="name">
+                        <span ><b>entitySelectId</b></span>
+                        <a href="#entitySelectId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;url&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralizedEntityName"></a>
+                    <span class="name">
+                        <span ><b>pluralizedEntityName</b></span>
+                        <a href="#pluralizedEntityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;schoolCourses&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/config/entity-metadata.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityConfig"></a>
+                    <span class="name">
+                        <span ><b>entityConfig</b></span>
+                        <a href="#entityConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/Entity.html" target="_self" >EntityDataModuleConfig</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  entityMetadata,
+  pluralNames,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityMetadata"></a>
+                    <span class="name">
+                        <span ><b>entityMetadata</b></span>
+                        <a href="#entityMetadata"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/Entity.html" target="_self" >EntityMetadataMap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  [fromAccountDomain.entityCollectionName]: {
+    filterFn: (entities: User[], { name, grade, role }: Partial&lt;User&gt;) &#x3D;&gt;
+      entities
+        .filter((e) &#x3D;&gt;
+          name &amp;&amp; e.name &amp;&amp; e.name.fullName
+            ? e.name.fullName
+              .toLocaleLowerCase()
+              .includes(&#x60;${name.fullName!.toLocaleLowerCase()}&#x60;)
+            : true
+        )
+        .filter((e) &#x3D;&gt; (grade ? e.grade &#x3D;&#x3D;&#x3D; grade : true))
+        .filter((e) &#x3D;&gt; (role ? e.role &#x3D;&#x3D;&#x3D; role : true)),
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+    },
+  },
+  [fromAccount.entityCollectionName]: {
+    filterFn: (entities: User[], { name, grade, role }: Partial&lt;User&gt;) &#x3D;&gt;
+      entities
+        .filter((e) &#x3D;&gt;
+          name &amp;&amp; e.name &amp;&amp; e.name.fullName
+            ? e.name.fullName
+              .toLocaleLowerCase()
+              .includes(name.fullName!.toLocaleLowerCase())
+            : true
+        )
+        .filter((e) &#x3D;&gt; (grade ? e.grade &#x3D;&#x3D;&#x3D; grade : true))
+        .filter((e) &#x3D;&gt; (role ? e.role &#x3D;&#x3D;&#x3D; role : true)),
+    selectId: (user: User) &#x3D;&gt; user.id,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+    },
+  },
+  [fromSchoolCourses.entityCollectionName]: {
+    filterFn: (entities: SchoolCourse[], { name, grade, description }: Partial&lt;SchoolCourse&gt;) &#x3D;&gt;
+      entities
+        .filter((e) &#x3D;&gt; (name ? e.name &#x3D;&#x3D;&#x3D; name : true))
+        .filter((e) &#x3D;&gt; (grade ? e.grade &#x3D;&#x3D;&#x3D; grade : true))
+        .filter((e) &#x3D;&gt; (description ? e.description &#x3D;&#x3D;&#x3D; description : true)),
+    selectId: (schoolCourse: SchoolCourse) &#x3D;&gt; schoolCourse.id,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+    },
+  },
+  [fromCourse.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+      optimisticSaveEntities: true,
+    },
+    selectId: (course: gapi.client.classroom.Course) &#x3D;&gt; course.id,
+  },
+  [fromStudent.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+    },
+    selectId: (student: gapi.client.classroom.Student) &#x3D;&gt; student.userId,
+  },
+  [fromTeacher.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+    },
+    selectId: (teacher: gapi.client.classroom.Teacher) &#x3D;&gt; teacher.userId,
+  },
+  [fromCourseWork.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+    },
+    selectId: (courseWork: gapi.client.classroom.CourseWork) &#x3D;&gt; courseWork.id,
+  },
+  [fromUserProfile.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+      optimisticSaveEntities: true,
+    },
+    selectId: (profile: gapi.client.classroom.UserProfile) &#x3D;&gt; profile.id,
+  },
+  [fromGuardian.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+      optimisticSaveEntities: true,
+    },
+    selectId: (guardian: gapi.client.classroom.UserProfile) &#x3D;&gt; guardian.id,
+  },
+  [fromAnnouncement.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+      optimisticSaveEntities: true,
+    },
+    selectId: (announcement: gapi.client.classroom.Announcement) &#x3D;&gt;
+      announcement.id,
+  },
+  [fromStudentSubmission.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+      optimisticSaveEntities: true,
+    },
+    selectId: (studentSubmission: gapi.client.classroom.StudentSubmission) &#x3D;&gt;
+      studentSubmission.id,
+  },
+  [fromTopic.entityCollectionName]: {
+    entityDispatcherOptions: {
+      optimisticAdd: true,
+      optimisticUpdate: true,
+      optimisticSaveEntities: true,
+    },
+    selectId: (topics: gapi.client.classroom.Topic) &#x3D;&gt; topics.topicId,
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pluralNames"></a>
+                    <span class="name">
+                        <span ><b>pluralNames</b></span>
+                        <a href="#pluralNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  [fromAccountDomain.entityCollectionName]: fromAccountDomain.pluralizedEntityName,
+  [fromAccount.entityCollectionName]: fromAccount.pluralizedEntityName,
+  [fromSchoolCourses.entityCollectionName]: fromSchoolCourses.pluralizedEntityName,
+  [fromCourse.entityCollectionName]: fromCourse.pluralizedEntityName,
+  [fromStudent.entityCollectionName]: fromStudent.pluralizedEntityName,
+  [fromTeacher.entityCollectionName]: fromTeacher.pluralizedEntityName,
+  [fromCourseWork.entityCollectionName]: fromCourseWork.pluralizedEntityName,
+  [fromUserProfile.entityCollectionName]: fromUserProfile.pluralizedEntityName,
+  [fromGuardian.entityCollectionName]: fromGuardian.pluralizedEntityName,
+  [fromAnnouncement.entityCollectionName]: fromAnnouncement.pluralizedEntityName,
+  [fromStudentSubmission.entityCollectionName]: fromStudentSubmission.pluralizedEntityName,
+  [fromTopic.entityCollectionName]: fromTopic.pluralizedEntityName,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.prod.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  firebase: {
+    projectId: &#x27;escuela-rafael-diaz-serdan&#x27;,
+    appId: &#x27;1:142236230734:web:f4563999a96a4b28bb8f1f&#x27;,
+    databaseURL: &#x27;https://escuela-rafael-diaz-serdan-default-rtdb.firebaseio.com&#x27;,
+    storageBucket: &#x27;escuela-rafael-diaz-serdan.appspot.com&#x27;,
+    locationId: &#x27;us-central&#x27;,
+    apiKey: &#x27;AIzaSyDTOrn4jDAeMqTFZ-yKZ4F4cMKYvrDxw70&#x27;,
+    authDomain: &#x27;escuela-rafael-diaz-serdan.firebaseapp.com&#x27;,
+    messagingSenderId: &#x27;142236230734&#x27;,
+    measurementId: &#x27;G-NHKG8FTNR8&#x27;,
+  },
+  useEmulators: false,
+  production: true,
+  gapi: {
+    clientId:
+      &#x27;142236230734-r3g8p9odrmu41ic3dffdub5j4tv09dls.apps.googleusercontent.com&#x27;,
+    discoveryDocs: [
+      &#x27;https://classroom.googleapis.com/$discovery/rest?version&#x3D;v1&#x27;,
+      &#x27;https://admin.googleapis.com/$discovery/rest?version&#x3D;directory_v1&#x27;
+    ],
+    authScopes: [&#x27;openid&#x27;, &#x27;email&#x27;, &#x27;profile&#x27;].join(&#x27; &#x27;),
+    adminScopes: [
+      &#x27;https://www.googleapis.com/auth/cloud-platform&#x27;,
+      // View and manage the provisioning of users on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.user&#x27;,
+      // Manage delegated admin roles for your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.rolemanagement&#x27;,
+      // View and manage organization units on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.orgunit&#x27;,
+      // View and manage the provisioning of groups on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.group&#x27;,
+      // View and manage group subscriptions on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.group.member&#x27;,
+    ].join(&#x27; &#x27;),
+    classroomScopes: [
+      // See and update its own attachments to posts in Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.addons.student&#x27;,
+      // See, create, and update its own attachments to posts in classes you teach in Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.addons.teacher&#x27;,
+      // Administrar tus clases de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.courses&#x27;,
+      // Ver tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.courses.readonly&#x27;,
+      // Ver los tutores de estudiantes de tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly&#x27;,
+      // Ver y administrar los tutores de estudiantes de tus clases de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.guardianlinks.students&#x27;,
+      // Administrar las listas de tus clases de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.rosters&#x27;,
+      // Ver las listas de tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.rosters.readonly&#x27;,
+      // Ver las direcciones de correo electrónico de las personas de tus clases
+      &#x27;https://www.googleapis.com/auth/classroom.profile.emails&#x27;,
+      // Ver las fotos de perfil de las personas de tus clases
+      &#x27;https://www.googleapis.com/auth/classroom.profile.photos&#x27;,
+      // Ver tus tutores de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly&#x27;,
+      // Administrar el trabajo del curso y las calificaciones de los estudiantes
+      // en las clases de Google Classroom que impartes; ver el trabajo del curso
+      // y las calificaciones en las clases que administras.
+      &#x27;https://www.googleapis.com/auth/classroom.coursework.students&#x27;,
+      // Ver y gestionar notificaciones de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.announcements&#x27;,
+      // Ver instrucciones del trabajo asignado por los profesores en tus
+      // clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.course-work.readonly&#x27;,
+      // Ver los trabajos y las calificaciones de los alumnos de las clases que impartes
+      // o administras en Google Classroom.
+      // &#x27;https://www.googleapis.com/auth/classroom.student-submissions.students.readonly&#x27;,
+      // Ver los trabajos y las calificaciones de los cursos de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.student-submissions.me.readonly&#x27;,
+      // Ver los trabajos y las calificaciones de los cursos de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.coursework.me&#x27;,
+      // Ver notificaciones de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.announcements.readonly&#x27;,
+      // Ver, editar y crear material de trabajo de clase en Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.courseworkmaterials&#x27;,
+      // Ver todo el material de trabajo de tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly&#x27;,
+      // Ver, crear y editar temas en Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.topics&#x27;,
+      // Ver temas en Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.topics.readonly&#x27;,
+      // Recibir notificaciones sobre tus datos de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.push-notifications&#x27;,
+    ].join(&#x27; &#x27;),
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  firebase: {
+    projectId: &#x27;escuela-rafael-diaz-serdan&#x27;,
+    appId: &#x27;1:142236230734:web:f4563999a96a4b28bb8f1f&#x27;,
+    databaseURL: &#x27;https://escuela-rafael-diaz-serdan-default-rtdb.firebaseio.com&#x27;,
+    storageBucket: &#x27;escuela-rafael-diaz-serdan.appspot.com&#x27;,
+    locationId: &#x27;us-central&#x27;,
+    apiKey: &#x27;AIzaSyDTOrn4jDAeMqTFZ-yKZ4F4cMKYvrDxw70&#x27;,
+    authDomain: &#x27;escuela-rafael-diaz-serdan.firebaseapp.com&#x27;,
+    messagingSenderId: &#x27;142236230734&#x27;,
+    measurementId: &#x27;G-NHKG8FTNR8&#x27;,
+  },
+  useEmulators: true,
+  production: false,
+  gapi: {
+    clientId:
+      &#x27;142236230734-r3g8p9odrmu41ic3dffdub5j4tv09dls.apps.googleusercontent.com&#x27;,
+    discoveryDocs: [
+      &#x27;https://classroom.googleapis.com/$discovery/rest?version&#x3D;v1&#x27;,
+      &#x27;https://admin.googleapis.com/$discovery/rest?version&#x3D;directory_v1&#x27;,
+    ],
+    authScopes: [&#x27;openid&#x27;, &#x27;email&#x27;, &#x27;profile&#x27;].join(&#x27; &#x27;),
+    adminScopes: [
+      &#x27;https://www.googleapis.com/auth/cloud-platform&#x27;,
+      // View and manage the provisioning of users on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.user&#x27;,
+      // Manage delegated admin roles for your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.rolemanagement&#x27;,
+      // View and manage organization units on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.orgunit&#x27;,
+      // View and manage the provisioning of groups on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.group&#x27;,
+      // View and manage group subscriptions on your domain
+      &#x27;https://www.googleapis.com/auth/admin.directory.group.member&#x27;,
+    ].join(&#x27; &#x27;),
+    classroomScopes: [
+      // See and update its own attachments to posts in Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.addons.student&#x27;,
+      // See, create, and update its own attachments to posts in classes you teach in Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.addons.teacher&#x27;,
+      // Administrar tus clases de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.courses&#x27;,
+      // Ver tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.courses.readonly&#x27;,
+      // Ver los tutores de estudiantes de tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly&#x27;,
+      // Ver y administrar los tutores de estudiantes de tus clases de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.guardianlinks.students&#x27;,
+      // Administrar las listas de tus clases de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.rosters&#x27;,
+      // Ver las listas de tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.rosters.readonly&#x27;,
+      // Ver las direcciones de correo electrónico de las personas de tus clases
+      &#x27;https://www.googleapis.com/auth/classroom.profile.emails&#x27;,
+      // Ver las fotos de perfil de las personas de tus clases
+      &#x27;https://www.googleapis.com/auth/classroom.profile.photos&#x27;,
+      // Ver tus tutores de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly&#x27;,
+      // Administrar el trabajo del curso y las calificaciones de los estudiantes
+      // en las clases de Google Classroom que impartes; ver el trabajo del curso
+      // y las calificaciones en las clases que administras.
+      &#x27;https://www.googleapis.com/auth/classroom.coursework.students&#x27;,
+      // Ver y gestionar notificaciones de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.announcements&#x27;,
+      // Ver instrucciones del trabajo asignado por los profesores en tus
+      // clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.course-work.readonly&#x27;,
+      // Ver los trabajos y las calificaciones de los alumnos de las clases que impartes
+      // o administras en Google Classroom.
+      // &#x27;https://www.googleapis.com/auth/classroom.student-submissions.students.readonly&#x27;,
+      // Ver los trabajos y las calificaciones de los cursos de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.student-submissions.me.readonly&#x27;,
+      // Ver los trabajos y las calificaciones de los cursos de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.coursework.me&#x27;,
+      // Ver notificaciones de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.announcements.readonly&#x27;,
+      // Ver, editar y crear material de trabajo de clase en Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.courseworkmaterials&#x27;,
+      // Ver todo el material de trabajo de tus clases de Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly&#x27;,
+      // Ver, crear y editar temas en Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.topics&#x27;,
+      // Ver temas en Google Classroom
+      // &#x27;https://www.googleapis.com/auth/classroom.topics.readonly&#x27;,
+      // Recibir notificaciones sobre tus datos de Google Classroom
+      &#x27;https://www.googleapis.com/auth/classroom.push-notifications&#x27;,
+    ].join(&#x27; &#x27;),
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/animations/fade-in.animation.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="expandFadeInAnimation"></a>
+                    <span class="name">
+                        <span ><b>expandFadeInAnimation</b></span>
+                        <a href="#expandFadeInAnimation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;expandFadeIn&#x27;, [
+  // state(&#x27;void&#x27;, style({ top: &#x27;-35rem&#x27; })),
+  state(
+    &#x27;show&#x27;,
+    style({
+      opacity: 1,
+      transform: &#x27;scale(1)&#x27;
+    })
+  ),
+  state(
+    &#x27;hide&#x27;,
+    style({
+      opacity: 0,
+      transform: &#x27;scale(0.4)&#x27;
+    })
+  ),
+  transition(&#x27;show &#x3D;&gt; hide&#x27;, animate(&#x27;300ms ease-in&#x27;)),
+  transition(&#x27;hide &#x3D;&gt; show&#x27;, animate(&#x27;300ms ease-in&#x27;))
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fadeInAnimation"></a>
+                    <span class="name">
+                        <span ><b>fadeInAnimation</b></span>
+                        <a href="#fadeInAnimation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;fadeIn&#x27;, [
+  state(&#x27;void&#x27;, style({ opacity: 0, transform: &#x27;translateY(-2rem)&#x27; })),
+  transition(&#x27;void &#x3D;&gt; *&#x27;, [
+    animate(
+      &#x27;300ms ease-in&#x27;,
+      style({
+        opacity: 1,
+        transform: &#x27;translateY(0rem)&#x27;
+      })
+    )
+  ]),
+  transition(&#x27;* &#x3D;&gt; void&#x27;, [
+    animate(
+      &#x27;300ms ease-out&#x27;,
+      style({
+        opacity: 0,
+        transform: &#x27;translateY(-2rem)&#x27;
+      })
+    )
+  ])
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="flyInOut"></a>
+                    <span class="name">
+                        <span ><b>flyInOut</b></span>
+                        <a href="#flyInOut"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;flyInOut&#x27;, [
+  state(&#x27;in&#x27;, style({ transform: &#x27;translateX(0)&#x27; })),
+  transition(&#x27;void &#x3D;&gt; *&#x27;, [
+    style({ transform: &#x27;translateX(-100%)&#x27; }),
+    animate(300)
+  ]),
+  transition(&#x27;* &#x3D;&gt; void&#x27;, [
+    animate(300, style({ transform: &#x27;translateX(100%)&#x27; }))
+  ])
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="flyOut"></a>
+                    <span class="name">
+                        <span ><b>flyOut</b></span>
+                        <a href="#flyOut"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;flyOut&#x27;, [
+  state(&#x27;void&#x27;, style({ opacity: 0, transform: &#x27;translateY(-30%)&#x27; })),
+  transition(&#x27;void &#x3D;&gt; *&#x27;, [
+    animate(
+      &#x27;300ms ease-out&#x27;,
+      style({
+        opacity: 1,
+        transform: &#x27;translateY(0%)&#x27;
+      })
+    )
+  ]),
+  transition(&#x27;* &#x3D;&gt; void&#x27;, [
+    animate(
+      &#x27;300ms ease-out&#x27;,
+      style({
+        opacity: 0,
+        transform: &#x27;translateX(-80%)&#x27;
+      })
+    )
+  ])
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="heightReveal"></a>
+                    <span class="name">
+                        <span ><b>heightReveal</b></span>
+                        <a href="#heightReveal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>trigger(&#x27;flyInOut&#x27;, [
+  state(&#x27;in&#x27;, style({ height: 0, overflow: &#x27;hidden&#x27; })),
+  transition(&#x27;void &#x3D;&gt; *&#x27;, [style({ height: 0 }), animate(300)]),
+  transition(&#x27;* &#x3D;&gt; void&#x27;, [animate(300, style({ height: 100 }))])
+])</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/accounts/services/accounts-domain.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gapi"></a>
+                    <span class="name">
+                        <span ><b>gapi</b></span>
+                        <a href="#gapi"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/classroom/user-profiles/services/user-profiles.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gapi"></a>
+                    <span class="name">
+                        <span ><b>gapi</b></span>
+                        <a href="#gapi"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/router/router.selectors.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentParams"></a>
+                    <span class="name">
+                        <span ><b>getCurrentParams</b></span>
+                        <a href="#getCurrentParams"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  getRouterState,
+  (router) &#x3D;&gt; router.state.params
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentQueryParams"></a>
+                    <span class="name">
+                        <span ><b>getCurrentQueryParams</b></span>
+                        <a href="#getCurrentQueryParams"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  getRouterState,
+  (router) &#x3D;&gt; router.state.queryParams
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentRoute"></a>
+                    <span class="name">
+                        <span ><b>getCurrentRoute</b></span>
+                        <a href="#getCurrentRoute"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  getRouterState,
+  (router) &#x3D;&gt; router.state
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRouterState"></a>
+                    <span class="name">
+                        <span ><b>getRouterState</b></span>
+                        <a href="#getRouterState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createFeatureSelector&lt;RouterReducerState&lt;RouterStateUrl&gt;&gt;(routerKey)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/auth/state/auth.selectors.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getError"></a>
+                    <span class="name">
+                        <span ><b>getError</b></span>
+                        <a href="#getError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  selectAuthState,
+  (state: AuthenticationState): any &#x3D;&gt; state.error
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAdmin"></a>
+                    <span class="name">
+                        <span ><b>isAdmin</b></span>
+                        <a href="#isAdmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  selectAuthState,
+  (state: AuthenticationState): boolean &#x3D;&gt; state.isAdmin
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isOnline"></a>
+                    <span class="name">
+                        <span ><b>isOnline</b></span>
+                        <a href="#isOnline"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  selectAuthState,
+  (state: AuthenticationState): boolean &#x3D;&gt; !!state.user
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isTeacher"></a>
+                    <span class="name">
+                        <span ><b>isTeacher</b></span>
+                        <a href="#isTeacher"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  selectAuthState,
+  (state: AuthenticationState): boolean &#x3D;&gt; state.isTeacher
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectAuthState"></a>
+                    <span class="name">
+                        <span ><b>selectAuthState</b></span>
+                        <a href="#selectAuthState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createFeatureSelector&lt;AuthenticationState&gt;(authFeatureKey)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectUser"></a>
+                    <span class="name">
+                        <span ><b>selectUser</b></span>
+                        <a href="#selectUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createSelector(
+  selectAuthState,
+  (state: AuthenticationState): User &#x3D;&gt; state.user!
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/actions/app.actions.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadApp"></a>
+                    <span class="name">
+                        <span ><b>loadApp</b></span>
+                        <a href="#loadApp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(&#x27;[App] Load App&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAppFail"></a>
+                    <span class="name">
+                        <span ><b>loadAppFail</b></span>
+                        <a href="#loadAppFail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[App] Load App Fail&#x27;,
+  props&lt;{ error: any }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAppSuccess"></a>
+                    <span class="name">
+                        <span ><b>loadAppSuccess</b></span>
+                        <a href="#loadAppSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(&#x27;[App] Load App Success&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="localStoreUser"></a>
+                    <span class="name">
+                        <span ><b>localStoreUser</b></span>
+                        <a href="#localStoreUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>createAction(
+  &#x27;[App] Store in local User&#x27;,
+  props&lt;{ user: User }&gt;()
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="metaReducers"></a>
+                    <span class="name">
+                        <span ><b>metaReducers</b></span>
+                        <a href="#metaReducers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>MetaReducer[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>!environment.production
+  ? [debug, logout]
+  : []</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reducers"></a>
+                    <span class="name">
+                        <span ><b>reducers</b></span>
+                        <a href="#reducers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/AppState.html" target="_self" >ActionReducerMap&lt;AppState&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  [authFeatureKey]: authReducer,
+  [routerKey]: routerReducer,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/config/registered-effects.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registeredEffects"></a>
+                    <span class="name">
+                        <span ><b>registeredEffects</b></span>
+                        <a href="#registeredEffects"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  AppEffects,
+  DialogEffects,
+  RouteEffects,
+  SnackEffects,
+  SpinnerEffects,
+  NgrxToastService,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/router/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routerKey"></a>
+                    <span class="name">
+                        <span ><b>routerKey</b></span>
+                        <a href="#routerKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;router&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/school/components/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="schoolComponents"></a>
+                    <span class="name">
+                        <span ><b>schoolComponents</b></span>
+                        <a href="#schoolComponents"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  NewCicleDialogComponent,
+  SchoolCoursesDialogComponent,
+  SchoolCoursesTableComponent,
+  SchoolDashboardComponent,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/school/containers/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="schoolContainers"></a>
+                    <span class="name">
+                        <span ><b>schoolContainers</b></span>
+                        <a href="#schoolContainers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  SchoolComponent,
+  SchoolCoursesComponent]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/components/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sharedComponents"></a>
+                    <span class="name">
+                        <span ><b>sharedComponents</b></span>
+                        <a href="#sharedComponents"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  BreadcrumbComponent,
+  ConfirmDialogComponent,
+  DashboardComponent,
+  DeleteButtonComponent,
+  HomeComponent,
+  InfoCardsComponent,
+  NotFoundComponent,
+  ParallaxSpaceComponent,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/services/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sharedServices"></a>
+                    <span class="name">
+                        <span ><b>sharedServices</b></span>
+                        <a href="#sharedServices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  SeoService,
+  SnackService,
+  SubscriptionService,
+  SnackbarService,
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/ngrx-store/config/store-config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="storeConfig"></a>
+                    <span class="name">
+                        <span ><b>storeConfig</b></span>
+                        <a href="#storeConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>{
+  metaReducers,
+  runtimeChecks: {
+    strictStateImmutability: true,
+    strictActionImmutability: true,
+    strictStateSerializability: true,
+    strictActionSerializability: true,
+    strictActionWithinNgZone: true,
+    strictActionTypeUniqueness: true,
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> comparación de resultados "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No hay resultados que coincidan "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

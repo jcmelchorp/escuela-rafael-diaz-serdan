@@ -1,0 +1,1066 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sistema RDS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Sistema RDS</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Escribe para buscar"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Componentes</li>
+  <li
+  >
+  AccountsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>Fichero</h3>
+</p>
+<p class="comment">
+    <code>src/app/accounts/containers/accounts/accounts.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implementa</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Meta datos</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-accounts</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./accounts.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./accounts.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Índice</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Propiedades</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activeLink" >activeLink</a>
+                            </li>
+                            <li>
+                                <a href="#background" >background</a>
+                            </li>
+                            <li>
+                                <a href="#filteredEntities$" >filteredEntities$</a>
+                            </li>
+                            <li>
+                                <a href="#filterValues" >filterValues</a>
+                            </li>
+                            <li>
+                                <a href="#gradeKeys" >gradeKeys</a>
+                            </li>
+                            <li>
+                                <a href="#grades" >grades</a>
+                            </li>
+                            <li>
+                                <a href="#links" >links</a>
+                            </li>
+                            <li>
+                                <a href="#loaded$" >loaded$</a>
+                            </li>
+                            <li>
+                                <a href="#loading$" >loading$</a>
+                            </li>
+                            <li>
+                                <a href="#roleKeys" >roleKeys</a>
+                            </li>
+                            <li>
+                                <a href="#roles" >roles</a>
+                            </li>
+                            <li>
+                                <a href="#users$" >users$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Métodos</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#applyFilterString" >applyFilterString</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCreateUser" >onCreateUser</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(accountsEntityService: <a href="../injectables/AccountsEntityService.html" target="_self">AccountsEntityService</a>, store: <a href="../interfaces/AppState.html" target="_self">Store&lt;AppState&gt;</a>, dialog: MatDialog, fb: <a href="../interfaces/Form.html" target="_self">FormBuilder</a>, accountsDomainService: <a href="../injectables/AccountsDomainService.html" target="_self">AccountsDomainService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="36" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parámetros :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                    <td>Tipo</td>
+                                                <td>Opcional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>accountsEntityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AccountsEntityService.html" target="_self" >AccountsEntityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/AppState.html" target="_self" >Store&lt;AppState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/Form.html" target="_self" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>accountsDomainService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AccountsDomainService.html" target="_self" >AccountsDomainService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Métodos
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyFilterString"></a>
+                    <span class="name">
+                        <span ><b>applyFilterString</b></span>
+                        <a href="#applyFilterString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyFilterString()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="68"
+                            class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:68</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="67"
+                            class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:67</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCreateUser"></a>
+                    <span class="name">
+                        <span ><b>onCreateUser</b></span>
+                        <a href="#onCreateUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCreateUser()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="96"
+                            class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:96</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Propiedades
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeLink"></a>
+                    <span class="name">
+                        <span ><b>activeLink</b></span>
+                        <a href="#activeLink"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="35" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="background"></a>
+                    <span class="name">
+                        <span ><b>background</b></span>
+                        <a href="#background"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>ThemePalette</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>undefined</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="36" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredEntities$"></a>
+                    <span class="name">
+                        <span ><b>filteredEntities$</b></span>
+                        <a href="#filteredEntities$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="33" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterValues"></a>
+                    <span class="name">
+                        <span ><b>filterValues</b></span>
+                        <a href="#filterValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="32" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gradeKeys"></a>
+                    <span class="name">
+                        <span ><b>gradeKeys</b></span>
+                        <a href="#gradeKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="30" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="grades"></a>
+                    <span class="name">
+                        <span ><b>grades</b></span>
+                        <a href="#grades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>SchoolLevel</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="31" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="links"></a>
+                    <span class="name">
+                        <span ><b>links</b></span>
+                        <a href="#links"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[&#x27;tabla&#x27;, &#x27;lista&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="34" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaded$"></a>
+                    <span class="name">
+                        <span ><b>loaded$</b></span>
+                        <a href="#loaded$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="25" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading$"></a>
+                    <span class="name">
+                        <span ><b>loading$</b></span>
+                        <a href="#loading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="26" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="roleKeys"></a>
+                    <span class="name">
+                        <span ><b>roleKeys</b></span>
+                        <a href="#roleKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="28" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="roles"></a>
+                    <span class="name">
+                        <span ><b>roles</b></span>
+                        <a href="#roles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>UserRole</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="29" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="users$"></a>
+                    <span class="name">
+                        <span ><b>users$</b></span>
+                        <a href="#users$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="27" class="link-to-prism">src/app/accounts/containers/accounts/accounts.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormControl, FormGroup } from &#x27;@angular/forms&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { ThemePalette } from &#x27;@angular/material/core&#x27;;
+
+import { Store } from &#x27;@ngrx/store&#x27;;
+
+import { Observable } from &#x27;rxjs&#x27;;
+import { NewAccountConfirmComponent } from &#x27;./../../components/new-account-confirm/new-account-confirm.component&#x27;;
+import { NewAccountComponent } from &#x27;./../../components/new-account/new-account.component&#x27;;
+import { selectAccounts } from &#x27;../../state/accounts.selectors&#x27;;
+import { User } from &#x27;@rds-auth/models/user.model&#x27;;
+import { SchoolLevel, UserRole } from &#x27;@rds-auth/models/user.enum&#x27;;
+import { AppState } from &#x27;@rds-store/index&#x27;;
+import { AccountsEntityService } from &#x27;@rds-store/accounts/accounts-entity.service&#x27;;
+import { AccountsDomainService } from &#x27;../../services/accounts-domain.service&#x27;;
+
+
+@Component({
+  selector: &#x27;app-accounts&#x27;,
+  templateUrl: &#x27;./accounts.component.html&#x27;,
+  styleUrls: [&#x27;./accounts.component.scss&#x27;],
+})
+export class AccountsComponent implements OnInit {
+  loaded$: Observable&lt;boolean&gt;;
+  loading$: Observable&lt;boolean&gt;;
+  users$: Observable&lt;User[]&gt;;
+  roleKeys: string[];
+  roles &#x3D; UserRole;
+  gradeKeys: string[];
+  grades &#x3D; SchoolLevel;
+  filterValues: FormGroup;
+  filteredEntities$: Observable&lt;User[]&gt;;
+  links &#x3D; [&#x27;tabla&#x27;, &#x27;lista&#x27;];
+  activeLink: any;
+  background: ThemePalette &#x3D; undefined;
+  constructor(
+    private accountsEntityService: AccountsEntityService,
+    private store: Store&lt;AppState&gt;,
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private accountsDomainService: AccountsDomainService
+  ) {
+    this.accountsDomainService.handleAdminLoad();
+    this.users$ &#x3D; this.store.select(selectAccounts);
+    this.gradeKeys &#x3D; Object.keys(this.grades).filter(Number);
+    this.roleKeys &#x3D; Object.keys(this.roles).filter(Number);
+    this.filterValues &#x3D; this.fb.group({
+      grade: new FormControl(),
+      role: new FormControl(),
+      name: new FormControl(),
+      suspended: new FormControl(),
+    });
+    this.filterValues.valueChanges.subscribe((changes) &#x3D;&gt; {
+      Object.keys(changes).forEach(
+        (key) &#x3D;&gt; changes[key] &#x3D;&#x3D; null &amp;&amp; delete changes[key]
+      );
+      Object.keys(changes).includes(&#x27;name&#x27;) &amp;&amp; changes.name !&#x3D;&#x3D; &#x27;&#x27;
+        ? (changes.name &#x3D; { fullName: changes[&#x27;name&#x27;] })
+        : delete changes.name;
+      return this.accountsEntityService.setFilter(changes);
+    });
+    this.loaded$ &#x3D; this.accountsEntityService.loaded$;
+    this.loading$ &#x3D; this.accountsEntityService.loading$;
+    this.filteredEntities$ &#x3D; this.accountsEntityService.filteredEntities$;
+  }
+  ngOnInit(): void { }
+  applyFilterString() {
+    const nameForm &#x3D; this.filterValues.get(&#x27;name&#x27;)?.value;
+    const gradeForm &#x3D; this.filterValues.get(&#x27;grade&#x27;)?.value;
+    const roleForm &#x3D; this.filterValues.get(&#x27;role&#x27;)?.value;
+    const suspendedForm &#x3D; this.filterValues.get(&#x27;suspended&#x27;)?.value;
+
+    const name &#x3D;
+      nameForm &#x3D;&#x3D;&#x3D; undefined || nameForm &#x3D;&#x3D; null || nameForm &#x3D;&#x3D; &#x27;&#x27;
+        ? &#x27;&#x27;
+        : nameForm;
+    const grade &#x3D;
+      gradeForm &#x3D;&#x3D;&#x3D; undefined || gradeForm &#x3D;&#x3D; null || gradeForm &#x3D;&#x3D; &#x27;&#x27;
+        ? &#x27;&#x27;
+        : gradeForm;
+    const role &#x3D;
+      roleForm &#x3D;&#x3D;&#x3D; undefined || roleForm &#x3D;&#x3D; null || roleForm &#x3D;&#x3D; &#x27;&#x27;
+        ? &#x27;&#x27;
+        : roleForm;
+    const suspended &#x3D;
+      suspendedForm &#x3D;&#x3D;&#x3D; undefined ||
+        suspendedForm &#x3D;&#x3D; null ||
+        suspendedForm &#x3D;&#x3D; &#x27;&#x27;
+        ? &#x27;&#x27;
+        : suspendedForm.toString();
+    const filter &#x3D; JSON.parse(
+      JSON.stringify({ name: { fullName: name }, grade: grade, role: role })
+    );
+  }
+  onCreateUser() {
+    let firebaseUser: User;
+    const dialogRef &#x3D; this.dialog.open(NewAccountComponent, {
+      width: &#x27;600px&#x27;,
+      minWidth: &#x27;fit-content&#x27;,
+      height: &#x27;fit-content&#x27;,
+      minHeight: &#x27;400px&#x27;,
+      data: { googleUser: {}, firebaseUser: {} },
+    });
+    dialogRef.afterClosed().subscribe((resp) &#x3D;&gt; {
+      if (resp) {
+        firebaseUser &#x3D; resp.firebaseUser;
+        console.log(resp.firebaseUser);
+        this.dialog.open(NewAccountConfirmComponent, {
+          width: &#x27;600px&#x27;,
+          minWidth: &#x27;fit-content&#x27;,
+          height: &#x27;fit-content&#x27;,
+          minHeight: &#x27;400px&#x27;,
+          data: { ...firebaseUser, action: &#x27;crea&#x27; },
+        });
+      }
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;p-4&quot;&gt;
+  &lt;p class&#x3D;&quot;view-title&quot;&gt;Usuarios&lt;/p&gt;
+  &lt;p class&#x3D;&quot;view-subtitle&quot;&gt;Cuentas de usuarios.&lt;/p&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    &lt;div class&#x3D;&quot;card-body&quot;&gt;
+      &lt;form [formGroup]&#x3D;&quot;filterValues&quot;&gt;
+        &lt;div class&#x3D;&quot;position-sticky&quot; fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-md&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+          &lt;mat-form-field appearance&#x3D;&quot;outline&quot; fxFlex&#x3D;&quot;1 0 calc(33.3% - 5px)&quot;&gt;
+            &lt;mat-label&gt;Nombre&lt;/mat-label&gt;
+            &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Buscar por nombre&quot;&gt;
+            &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;filterValues.controls.name.reset();$event.stopPropagation()&quot;&gt;
+              &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+            &lt;/button&gt;
+          &lt;/mat-form-field&gt;
+          &lt;mat-form-field appearance&#x3D;&quot;outline&quot; fxFlex&#x3D;&quot;1 0 calc(33.3% - 5px)&quot;&gt;
+            &lt;mat-label&gt;Grado escolar&lt;/mat-label&gt;
+            &lt;mat-select formControlName&#x3D;&quot;grade&quot; placeholder&#x3D;&quot;Selecciona un grado&quot;&gt;
+              &lt;mat-option *ngFor&#x3D;&quot;let key of gradeKeys&quot; [value]&#x3D;&quot;key&quot;&gt;
+                {{key}}
+              &lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+            &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;filterValues.controls.grade.reset();$event.stopPropagation()&quot;&gt;
+              &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+            &lt;/button&gt;
+          &lt;/mat-form-field&gt;
+          &lt;mat-form-field appearance&#x3D;&quot;outline&quot; fxFlex&#x3D;&quot;1 0 calc(33.3% - 5px)&quot;&gt;
+            &lt;mat-label&gt;Rol de usuario&lt;/mat-label&gt;
+            &lt;mat-select formControlName&#x3D;&quot;role&quot; placeholder&#x3D;&quot;Selecciona un rol&quot;&gt;
+              &lt;mat-option *ngFor&#x3D;&quot;let key of roleKeys&quot; [value]&#x3D;&quot;key&quot;&gt;
+                {{key|titlecase}}
+              &lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+            &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;filterValues.controls.role.reset();$event.stopPropagation()&quot;&gt;
+              &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+            &lt;/button&gt;
+          &lt;/mat-form-field&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;ng-template #spinner&gt;
+      &lt;div style&#x3D;&quot;min-height: 300px;&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;center center&quot;&gt;
+        &lt;mat-spinner strokeWidth&#x3D;&quot;10&quot; [diameter]&#x3D;&quot;100&quot;&gt;
+        &lt;/mat-spinner&gt;
+        &lt;span&gt;Buscando clases ...&lt;/span&gt;&lt;br&gt;
+      &lt;/div&gt;
+    &lt;/ng-template&gt;
+    &lt;mat-tab-group *ngIf&#x3D;&quot;(filteredEntities$|async) as filteredEntities;else spinner&quot; mat-stretch-tabs
+      class&#x3D;&quot;example-stretched-tabs&quot;&gt;
+      &lt;mat-tab&gt;
+        &lt;ng-template mat-tab-label&gt;
+          &lt;mat-icon&gt;table_rows&lt;/mat-icon&gt;
+          Tabla
+        &lt;/ng-template&gt;
+        &lt;!-- &lt;app-accounts-table [data]&#x3D;&quot;filteredEntities&quot;&gt;&lt;/app-accounts-table&gt; --&gt;
+      &lt;/mat-tab&gt;
+      &lt;mat-tab&gt;
+        &lt;ng-template mat-tab-label&gt;
+          &lt;mat-icon&gt;list&lt;/mat-icon&gt;
+          Lista
+        &lt;/ng-template&gt;
+        &lt;!-- &lt;app-accounts-list [data]&#x3D;&quot;filteredEntities&quot;&gt;&lt;/app-accounts-list&gt; --&gt;
+      &lt;/mat-tab&gt;
+    &lt;/mat-tab-group&gt;
+    &lt;!--   &lt;nav mat-tab-nav-bar [backgroundColor]&#x3D;&quot;background&quot; mat-align-tabs&#x3D;&quot;center&quot;&gt;
+      &lt;a mat-tab-link [routerLink]&#x3D;&quot;[link]&quot; *ngFor&#x3D;&quot;let link of links&quot; (click)&#x3D;&quot;activeLink &#x3D; link&quot;
+        [active]&#x3D;&quot;activeLink &#x3D;&#x3D; link&quot;&gt; {{link|titlecase}}
+      &lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;router-outlet&gt;&lt;/router-outlet&gt; --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;button class&#x3D;&quot;mat-fab-bottom-right mat-elevation-z8&quot; mat-fab color&#x3D;&quot;primary&quot; matTooltip&#x3D;&quot;Nuevo usuario&quot;
+  (click)&#x3D;&quot;onCreateUser()&quot;&gt;
+  &lt;mat-icon class&#x3D;&quot;icon&quot;&gt;person_add&lt;/mat-icon&gt;
+&lt;/button&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./accounts.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.mat-fab-bottom-right {
+  z-index: 200;
+  position: fixed;
+  bottom: 75px;
+  top: auto;
+  right: 75px;
+  left: auto;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Leyenda</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Elemento Html</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Componente</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Elemento Html con directiva</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="p-4">  <p class="view-title">Usuarios</p>  <p class="view-subtitle">Cuentas de usuarios.</p>  <div class="card">    <div class="card-body">      <form [formGroup]="filterValues">        <div class="position-sticky" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">          <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">            <mat-label>Nombre</mat-label>            <input matInput type="text" formControlName="name" placeholder="Buscar por nombre">            <button mat-icon-button matSuffix (click)="filterValues.controls.name.reset();$event.stopPropagation()">              <mat-icon>close</mat-icon>            </button>          </mat-form-field>          <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">            <mat-label>Grado escolar</mat-label>            <mat-select formControlName="grade" placeholder="Selecciona un grado">              <mat-option *ngFor="let key of gradeKeys" [value]="key">                {{key}}              </mat-option>            </mat-select>            <button mat-icon-button matSuffix (click)="filterValues.controls.grade.reset();$event.stopPropagation()">              <mat-icon>close</mat-icon>            </button>          </mat-form-field>          <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">            <mat-label>Rol de usuario</mat-label>            <mat-select formControlName="role" placeholder="Selecciona un rol">              <mat-option *ngFor="let key of roleKeys" [value]="key">                {{key|titlecase}}              </mat-option>            </mat-select>            <button mat-icon-button matSuffix (click)="filterValues.controls.role.reset();$event.stopPropagation()">              <mat-icon>close</mat-icon>            </button>          </mat-form-field>        </div>      </form>    </div>    <ng-template #spinner>      <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">        <mat-spinner strokeWidth="10" [diameter]="100">        </mat-spinner>        <span>Buscando clases ...</span><br>      </div>    </ng-template>    <mat-tab-group *ngIf="(filteredEntities$|async) as filteredEntities;else spinner" mat-stretch-tabs      class="example-stretched-tabs">      <mat-tab>        <ng-template mat-tab-label>          <mat-icon>table_rows</mat-icon>          Tabla        </ng-template>        <!-- <app-accounts-table [data]="filteredEntities"></app-accounts-table> -->      </mat-tab>      <mat-tab>        <ng-template mat-tab-label>          <mat-icon>list</mat-icon>          Lista        </ng-template>        <!-- <app-accounts-list [data]="filteredEntities"></app-accounts-list> -->      </mat-tab>    </mat-tab-group>    <!--   <nav mat-tab-nav-bar [backgroundColor]="background" mat-align-tabs="center">      <a mat-tab-link [routerLink]="[link]" *ngFor="let link of links" (click)="activeLink = link"        [active]="activeLink == link"> {{link|titlecase}}      </a>    </nav>    <router-outlet></router-outlet> -->  </div></div><button class="mat-fab-bottom-right mat-elevation-z8" mat-fab color="primary" matTooltip="Nuevo usuario"  (click)="onCreateUser()">  <mat-icon class="icon">person_add</mat-icon></button></div>'
+    var COMPONENTS = [{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NewCicleDialogComponent', 'selector': ''},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesDialogComponent', 'selector': ''},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+    var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
+    var ACTUAL_COMPONENT = {'name': 'AccountsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> comparación de resultados "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No hay resultados que coincidan "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AccountsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
