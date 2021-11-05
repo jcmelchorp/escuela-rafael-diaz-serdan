@@ -18,9 +18,10 @@ export class SnackEffects {
       this.actions$.pipe(
         ofType(fromAuthActions.signInSuccess),
         tap((user) =>
-          this.toastrService.success(
-            `Has ingresado como: ${user.user?.displayName}`
-          )
+          setTimeout(() => {
+            this.snackService.justMessage(
+              `Has ingresado como:${user.user?.displayName}`);
+          }, 3000)
         )
       ),
     { dispatch: false }

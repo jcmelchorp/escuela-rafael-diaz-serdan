@@ -2,9 +2,9 @@
   <div class="card-body">
     <h2 style="margin-top: -30px">
       <span class="mcard-title bg-white">Materias</span>
-      <input matInput type="file" (change)="onFileChange($event)" />
+      <!-- <input matInput type="file" (change)="onFileChange($event)" />
 
-      <div id="output"></div>
+      <div id="output"></div> -->
 
     </h2>
     <form [formGroup]="filterValues" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="2px">
@@ -22,10 +22,9 @@
         </mat-select>
       </mat-form-field>
     </form>
-    <div>Se encontraron {{resCount$|async}} resultados en la búsqueda.</div>
-    <div *ngIf="(loaded_courses$|async) && !(loading_courses$|async) && filteredEntities$|async as courses">
-
-      <app-school-courses-table [data]="courses"></app-school-courses-table>
+    <!--     <div>Se encontraron {{resCount$|async}} resultados en la búsqueda.</div -->
+    <div *ngIf="(loaded_courses$|async) && !(loading_courses$|async)">
+      <app-school-courses-table [data]="filteredEntities$|async"></app-school-courses-table>
       <!-- <mat-list role="list" dense *ngIf="courses.length==0">
         <mat-list-item class="text-center"> No hay materias para mostrar.
         </mat-list-item>

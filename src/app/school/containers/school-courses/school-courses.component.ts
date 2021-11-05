@@ -61,8 +61,6 @@ export class SchoolCoursesComponent implements OnInit {
   ngOnInit() {
   }
 
-
-
   applyFilterString() {
     const nameForm: string = (this.filterValues.get('name').value as string);
     const gradeForm: string = this.filterValues.get('grade').value as string;

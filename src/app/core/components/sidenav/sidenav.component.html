@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav *ngIf="isOnline" #leftSidenav class="sidenav d-print-none bg-transparent" [fixedInViewport]="isHandset"
+  <mat-sidenav *ngIf="isOnline" #leftSidenav class="sidenav d-print-none bg-transparent" [fixedInViewport]="false"
     [attr.role]="isHandset ? 'dialog' : 'navigation'" [@onSideNavChange]="sideNavState ? 'open' : 'close'"
-    [mode]="isHandset ? 'push' : 'side'" [opened]="isHandset === false">
+    [mode]="'side'" [opened]="isHandset === false">
     <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
       <mat-nav-list dense>
         <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="['gsuite']" routerLinkActive="active">
@@ -9,36 +9,38 @@
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">GSuite</span>
         </mat-list-item>
         <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="['escuela']" routerLinkActive="active">
-          <fa-icon matListIcon [icon]="faBuilding"></fa-icon>
+          <mat-icon matListIcon>apartment</mat-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">Administración</span>
         </mat-list-item>
         <mat-list-item *ngIf="isTeacher" [routerLink]="['profesores']" routerLinkActive="active">
-          <fa-icon matListIcon [icon]="faUserTie"></fa-icon>
-          <span matLine [@animateText]="linkText ? 'show' : 'hide'">Docentes</span>
+          <mat-icon matListIcon>co_present</mat-icon>
+          <span matLine [@animateText]="linkText ? 'show' : 'hide'">Profesores</span>
         </mat-list-item>
         <!-- <h3 matSubheader [@animateText]="linkText ? 'show' : 'hide'">Alumnos</h3> -->
         <mat-list-item [routerLink]="['user']" routerLinkActive="active">
-          <fa-icon matListIcon [icon]="faUserGraduate"></fa-icon>
-          <span matLine [@animateText]="linkText ? 'show' : 'hide'">Usuario</span>
+          <mat-icon matListIcon>school</mat-icon>
+          <span matLine [@animateText]="linkText ? 'show' : 'hide'">Alumnos</span>
         </mat-list-item>
       </mat-nav-list>
       <mat-nav-list dense>
-        <mat-accordion mat-list-item [displayMode]="flat" [multi]="true">
+        <mat-accordion mat-list-item [displayMode]="flat" [multi]="true" dense>
           <mat-expansion-panel [disabled]="!isAdmin" [class.mat-elevation-z0]="true" hideToggle>
             <mat-expansion-panel-header>
               <mat-icon matListIcon>admin_panel_settings</mat-icon>
-              <span matLine [@animateText]="linkText ? 'show' : 'hide'">Administración</span>
+              <span matLine [@animateText]="linkText ? 'show' : 'hide'">Usuarios</span>
             </mat-expansion-panel-header>
-            <mat-nav-list dense>
-              <mat-list-item [routerLink]="['users']" routerLinkActive="active" (click)="leftSidenav.close()">
-                <mat-icon matListIcon>people_alt</mat-icon>
-                <span matLine [@animateText]="linkText ? 'show' : 'hide'">Usuarios</span>
-              </mat-list-item>
-              <mat-list-item [routerLink]="['admin']" routerLinkActive="active" (click)="leftSidenav.close()">
-                <mat-icon matListIcon>domain</mat-icon>
-                <span matLine [@animateText]="linkText ? 'show' : 'hide'">Cuentas de Google</span>
-              </mat-list-item>
-            </mat-nav-list>
+            <ng-template matExpansionPanelContent>
+              <mat-nav-list dense>
+                <mat-list-item [routerLink]="['users']" routerLinkActive="active" (click)="leftSidenav.close()">
+                  <mat-icon matListIcon>people_alt</mat-icon>
+                  <span matLine [@animateText]="linkText ? 'show' : 'hide'">Escuela</span>
+                </mat-list-item>
+                <mat-list-item [routerLink]="['admin']" routerLinkActive="active" (click)="leftSidenav.close()">
+                  <mat-icon matListIcon>domain</mat-icon>
+                  <span matLine [@animateText]="linkText ? 'show' : 'hide'">Google</span>
+                </mat-list-item>
+              </mat-nav-list>
+            </ng-template>
           </mat-expansion-panel>
         </mat-accordion>
         <mat-list-item (click)="onSidenavToggle()">

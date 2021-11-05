@@ -31,14 +31,12 @@ export class SchoolCoursesTableComponent implements OnInit {
       { field: 'grade', label: 'Grado' },
       { field: 'name', label: 'Nombre' },
       { field: 'courseType', label: 'Tipo' },
-
     ];
-    this.displayedColumns = this.columns.map((column) => column.field);
+    this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
     this.groupByColumns = ['grade'];
   }
 
   ngOnInit() {
-
     this.dataSource.data = this.addGroups(this.data, this.groupByColumns);
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
     this.dataSource.filter = performance.now().toString();
