@@ -10,7 +10,9 @@
     {
       "target": "escuela-rafael-diaz-serdan",
       "public": "dist/escuela-rafael-diaz-serdan",
-      "ignore": ["**/.*"],
+      "ignore": [
+        "**/.*"
+      ],
       "headers": [
         {
           "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
