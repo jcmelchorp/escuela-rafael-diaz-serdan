@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 
 import { faEdit, faUserGraduate, faUserTie, faExclamation, faCheck, faArchive, faScrewdriver, faTimes, faUserPlus, faBan, faPlus, faBullhorn } from '@fortawesome/free-solid-svg-icons';
 
-import { CourseEntityService } from '@rds-store/classroom/course/course-entity.service';
+import { CourseEntityService } from '@rds-root/app/store/classroom/course/course-entity.service';
 
 import { CourseState } from '@rds-classroom/models/classroom.enum';
 

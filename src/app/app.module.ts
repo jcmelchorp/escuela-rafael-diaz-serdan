@@ -15,7 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '@rds-core/core.module';
 import { SharedModule } from '@rds-shared/shared.module';
 import { environment } from '@rds-env/environment';
-import { NgrxStoreModule } from './ngrx-store/ngrx-store.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthModule } from '@rds-auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
@@ -23,6 +22,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule, PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AppStoreModule } from '@rds-root/app/store/app-store.module';
 
 
 @NgModule({
@@ -34,12 +34,12 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgrxStoreModule,
+    AppStoreModule,
     CoreModule,
     SharedModule.forRoot(),
     AuthModule.forRoot(),
     NgxSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register('gnaw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
@@ -50,7 +50,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
       easing: 'ease-in',
       closeButton: true,
     }),
-    AngularFireModule.initializeApp(environment.firebase, 'sitio-rds'),
+    AngularFireModule.initializeApp(environment.firebase, 'sigio-rds'),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),

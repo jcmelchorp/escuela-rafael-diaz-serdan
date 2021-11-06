@@ -18,8 +18,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faGoogleDrive } from '@fortawesome/free-brands-svg-icons';
 
-import { CourseEntityService } from '@rds-store/classroom/course/course-entity.service';
-import { TeacherEntityService } from '@rds-store/classroom/teacher/teacher-entity.service';
+import { CourseEntityService } from '@rds-root/app/store/classroom/course/course-entity.service';
+import { TeacherEntityService } from '@rds-root/app/store/classroom/teacher/teacher-entity.service';
 
 import { UserProfilesService } from '@rds-classroom/user-profiles/services/user-profiles.service';
 

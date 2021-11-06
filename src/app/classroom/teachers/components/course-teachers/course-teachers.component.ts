@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { faBlind } from '@fortawesome/free-solid-svg-icons';
 
-import { TeacherEntityService } from '@rds-store/classroom/teacher/teacher-entity.service';
+import { TeacherEntityService } from '@rds-root/app/store/classroom/teacher/teacher-entity.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

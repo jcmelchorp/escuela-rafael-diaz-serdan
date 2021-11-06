@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Actions, createEffect, ofType, OnInitEffects, ROOT_EFFECTS_INIT } from '@ngrx/effects';
+import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { User } from '@rds-auth/models/user.model';
 import { of, Observable, defer, from } from 'rxjs';
 import { switchMap, map, catchError, take, tap } from 'rxjs/operators';
@@ -20,9 +20,7 @@ export class AuthEffects implements OnInitEffects {
   ngrxOnInitEffects(): Action {
     return { type: authAction.getUser().type };
   }
-  /* init$: Observable<any> = defer(() => {
-    return of(authAction.getUser());
-  }); */
+  /* init$: Observable<any> = defer(() => [authAction.getUser()]); */
   getUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authAction.getUser),

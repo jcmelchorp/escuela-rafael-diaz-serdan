@@ -11,10 +11,10 @@ import {
   EntityServices,
 } from '@ngrx/data';
 
-import * as fromEntity from '@rds-store/config/entity-metadata';
-import * as fromAnnouncement from '@rds-store/classroom/announcement';
-import { AnnouncementDataService } from '@rds-store/classroom/announcement/announcement-data.service';
-import { AnnouncementEntityService } from '@rds-store/classroom/announcement/announcement-entity.service';
+import * as fromEntity from '@rds-root/app/store/config/entity-metadata';
+import * as fromAnnouncement from '@rds-root/app/store/classroom/announcement';
+import { AnnouncementDataService } from '@rds-root/app/store/classroom/announcement/announcement-data.service';
+import { AnnouncementEntityService } from '@rds-root/app/store/classroom/announcement/announcement-entity.service';
 import { AnnouncementsRoutingModule } from './announcements-routing.module';
 import { AnnouncementResolver } from './services/announcement.resolver';
 import { AnnouncementsService } from './services/announcements.service';

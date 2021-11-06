@@ -7,15 +7,15 @@ import {
   EntityDefinitionService,
   EntityServices,
 } from '@ngrx/data';
-import * as fromCourseWork from '@rds-store/classroom/course-work';
-import * as fromStudentSubmission from '@rds-store/classroom/student-submission';
-import * as fromTopic from '@rds-store/classroom/topic';
-import { StudentSubmissionDataService } from '@rds-store/classroom/student-submission/student-submission-data.service';
-import { StudentSubmissionEntityService } from '@rds-store/classroom/student-submission/student-submission-entity.service';
-import { CourseWorkDataService } from '@rds-store/classroom/course-work/course-work-data-service.service';
-import { CourseWorkEntityService } from '@rds-store/classroom/course-work/course-work-entity-service.service';
-import { TopicDataService } from '@rds-store/classroom/topic/topic-data.service';
-import { TopicEntityService } from '@rds-store/classroom/topic/topic-entity.service';
+import * as fromCourseWork from '@rds-root/app/store/classroom/course-work';
+import * as fromStudentSubmission from '@rds-root/app/store/classroom/student-submission';
+import * as fromTopic from '@rds-root/app/store/classroom/topic';
+import { StudentSubmissionDataService } from '@rds-root/app/store/classroom/student-submission/student-submission-data.service';
+import { StudentSubmissionEntityService } from '@rds-root/app/store/classroom/student-submission/student-submission-entity.service';
+import { CourseWorkDataService } from '@rds-root/app/store/classroom/course-work/course-work-data-service.service';
+import { CourseWorkEntityService } from '@rds-root/app/store/classroom/course-work/course-work-entity-service.service';
+import { TopicDataService } from '@rds-root/app/store/classroom/topic/topic-data.service';
+import { TopicEntityService } from '@rds-root/app/store/classroom/topic/topic-entity.service';
 
 import { CourseWorksRoutingModule } from './course-works-routing.module';
 
@@ -24,7 +24,7 @@ import { CourseWorksService } from './services/course-works.service';
 import { StudentSubmissionsResolver } from './services/student-submissions.resolver';
 import { TopicsResolver } from './services/topics.resolver';
 import { CourseWorkComponent } from './components/course-work/course-work.component';
-import * as fromEntity from '@rds-store/config/entity-metadata';
+import * as fromEntity from '@rds-root/app/store/config/entity-metadata';
 import { MaterialModule } from '@rds-root/app/modules';
 
 @NgModule({

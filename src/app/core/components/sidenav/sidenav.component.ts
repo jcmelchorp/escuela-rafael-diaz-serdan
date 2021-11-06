@@ -10,7 +10,7 @@ import {
 } from '@rds-shared/animations/animations';
 import { User } from '@rds-auth/models/user.model';
 
-import { AppState } from '@rds-store/index';
+import { AppState } from '@rds-root/app/store/app.state';
 
 import { LayoutService } from '../../services';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';

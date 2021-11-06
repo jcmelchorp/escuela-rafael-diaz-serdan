@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 
 import { select, Store } from '@ngrx/store';
 import { isOnline } from '@rds-auth/state/auth.selectors';
-import { AppState } from '@rds-store/index';
+import { AppState } from '@rds-root/app/store/app.state';
 
 
 import { Observable } from 'rxjs';

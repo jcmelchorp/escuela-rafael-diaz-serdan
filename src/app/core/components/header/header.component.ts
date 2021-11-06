@@ -8,7 +8,7 @@ import {
   faSignOutAlt,
   faSlidersH,
 } from '@fortawesome/free-solid-svg-icons';
-import { AppState } from '@rds-store/index';
+import { AppState } from '@rds-root/app/store/app.state';
 import { LoginDialogComponent } from '@rds-auth/components';
 import { User } from '@rds-auth/models/user.model';
 import { signOut } from '@rds-auth/state/auth.actions';

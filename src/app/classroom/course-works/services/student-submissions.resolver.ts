@@ -5,8 +5,8 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { TopicEntityService } from '@rds-store/classroom/topic/topic-entity.service';
-import { StudentSubmissionEntityService } from '@rds-store/classroom/student-submission/student-submission-entity.service';
+import { TopicEntityService } from '@rds-root/app/store/classroom/topic/topic-entity.service';
+import { StudentSubmissionEntityService } from '@rds-root/app/store/classroom/student-submission/student-submission-entity.service';
 
 import { Observable, of } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';

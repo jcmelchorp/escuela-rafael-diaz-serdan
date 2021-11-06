@@ -23,8 +23,8 @@ import { ChangeGradeComponent } from './../change-grade/change-grade.component';
 import { UserEditDialogComponent } from './../user-edit-dialog/user-edit-dialog.component';
 import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
-import { AppState } from '@rds-store/index';
-import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { AppState } from '@rds-root/app/store/app.state';
+import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
 import { selectAccounts } from '../../state/accounts.selectors';
 
 

@@ -8,7 +8,7 @@ import { moveIn } from '@rds-shared/animations/router.animations';
 import { Subscription, Observable, Subject } from 'rxjs';
 import { SchoolCourse } from '../../models/school-course.model';
 import { SchoolCoursesDialogComponent } from '../../components/school-courses-dialog/school-courses-dialog.component';
-import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { SchoolCoursesEntityService } from '@rds-root/app/store/school/school-courses/school-courses-entity.service';
 import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-school-courses',

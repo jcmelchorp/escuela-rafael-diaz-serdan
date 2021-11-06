@@ -13,7 +13,7 @@ import { select, Store } from '@ngrx/store';
 
 import { User } from '@rds-auth/models/user.model';
 
-import { AppState } from '@rds-store/index';
+import { AppState } from '@rds-root/app/store/app.state';
 
 import * as fromAuthActions from '@rds-auth/state/auth.actions';
 

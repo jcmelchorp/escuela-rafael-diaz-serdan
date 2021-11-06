@@ -4,7 +4,7 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot,
 } from '@angular/router';
-import { UserProfileEntityService } from '@rds-store/classroom/user-profile/user-profile-entity.service';
+import { UserProfileEntityService } from '@rds-root/app/store/classroom/user-profile/user-profile-entity.service';
 import { Observable, of } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';
 

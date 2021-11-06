@@ -32,7 +32,7 @@
 
   <!-- Group header -->
   <ng-container matColumnDef="groupHeader">
-    <mat-cell colspan="999" *matCellDef="let group">
+    <mat-cell [attr.colspan]="displayedStudentsColumnsList.length" *matCellDef="let group">
       <mat-icon fontSet="material-icons-outlined">{{
         group.expanded ? "remove" : "add"
         }}</mat-icon>

@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Store } from '@ngrx/store';
 import { User } from '@rds-auth/models/user.model';
 import { selectUser } from '@rds-auth/state/auth.selectors';
-import { AppState } from '@rds-store/index';
+import { AppState } from '@rds-root/app/store/app.state';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';

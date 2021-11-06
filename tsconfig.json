@@ -23,7 +23,7 @@
         "src/app/classroom/*"
       ],
       "@rds-store/*": [
-        "src/app/ngrx-store/*"
+        "src/app/store/*"
       ],
       "@rds-admin/*": [
         "src/app/admin/*"

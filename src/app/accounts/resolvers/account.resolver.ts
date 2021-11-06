@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
 import { Store } from '@ngrx/store';
-import { AppState } from '@rds-store/index';
-import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { AppState } from '@rds-root/app/store/app.state';
+import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
 
 
 

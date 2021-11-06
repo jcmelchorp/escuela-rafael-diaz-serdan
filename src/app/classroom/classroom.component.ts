@@ -6,12 +6,12 @@ import { faIdCardAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { Store, select } from '@ngrx/store';
 
-import { AppState } from '@rds-store/index';
+import { AppState } from '@rds-root/app/store/app.state';
 
 import { User } from '@rds-auth/models/user.model';
 import * as fromAuthSelectors from '@rds-auth/state/auth.selectors';
 
-import { UserProfileEntityService } from '@rds-store/classroom/user-profile/user-profile-entity.service';
+import { UserProfileEntityService } from '@rds-root/app/store/classroom/user-profile/user-profile-entity.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

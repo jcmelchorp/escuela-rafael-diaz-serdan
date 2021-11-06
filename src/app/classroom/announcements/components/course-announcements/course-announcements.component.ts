@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { faBlind } from '@fortawesome/free-solid-svg-icons';
 
-import { AnnouncementEntityService } from '@rds-store/classroom/announcement/announcement-entity.service';
+import { AnnouncementEntityService } from '@rds-root/app/store/classroom/announcement/announcement-entity.service';
 
 import { UserProfilesService } from '@rds-classroom/user-profiles/services/user-profiles.service';
 

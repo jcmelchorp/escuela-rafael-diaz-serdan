@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { TopicEntityService } from '@rds-store/classroom/topic/topic-entity.service';
+import { TopicEntityService } from '@rds-root/app/store/classroom/topic/topic-entity.service';
 
 import { Observable, of } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';

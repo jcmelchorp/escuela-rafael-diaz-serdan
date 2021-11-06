@@ -9,8 +9,8 @@ import {
 
 import { Store } from '@ngrx/store';
 import { User } from '@rds-auth/models/user.model';
-import { AppState } from '@rds-store/index';
-import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { AppState } from '@rds-root/app/store/app.state';
+import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
 
 
 import { Observable } from 'rxjs';

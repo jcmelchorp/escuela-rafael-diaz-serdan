@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { faBullhorn, faListAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { CourseEntityService } from '@rds-store/classroom/course/course-entity.service';
+import { CourseEntityService } from '@rds-root/app/store/classroom/course/course-entity.service';
 
 import { Observable } from 'rxjs';
 

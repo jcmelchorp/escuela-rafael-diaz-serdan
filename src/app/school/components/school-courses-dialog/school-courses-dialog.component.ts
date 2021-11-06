@@ -6,7 +6,7 @@ import { User } from '@rds-auth/models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CourseType, SchoolCourse } from '../../models/school-course.model';
-import { AccountsEntityService } from '../../../ngrx-store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 
 @Component({

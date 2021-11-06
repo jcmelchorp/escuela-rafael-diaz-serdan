@@ -8,7 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { isAdmin, isOnline, isTeacher } from '@rds-auth/state/auth.selectors';
 import { RouterCard } from '@rds-shared/models/router-card.model';
-import { AppState } from '@rds-store/index';
+import { AppState } from '@rds-root/app/store/app.state';
 import { Observable } from 'rxjs';
 import { flyInOut } from '../../animations/fade-in.animation';
 import { User } from '../../../auth/models/user.model';

@@ -9,15 +9,15 @@ import { EntityDefinitionService, EntityServices, EntityDataService } from '@ngr
 
 import { SharedModule } from '@rds-shared/shared.module';
 
-import * as fromCourse from '@rds-store/classroom/course';
-import * as fromUserProfile from '@rds-store/classroom/user-profile';
-import * as fromEntity from '@rds-store/config/entity-metadata';
-import { CourseDataService } from '@rds-store/classroom/course/course-data.service';
-import { CourseEntityService } from '@rds-store/classroom/course/course-entity.service';
-import { UserProfileDataService } from '@rds-store/classroom/user-profile/user-profile-data.service';
-import { UserProfileEntityService } from '@rds-store/classroom/user-profile/user-profile-entity.service';
-import { GuardianDataService } from '@rds-store/classroom/guardian/guardian-data.service';
-import { GuardianEntityService } from '@rds-store/classroom/guardian/guardian-entity.service';
+import * as fromCourse from '@rds-root/app/store/classroom/course';
+import * as fromUserProfile from '@rds-root/app/store/classroom/user-profile';
+import * as fromEntity from '@rds-root/app/store/config/entity-metadata';
+import { CourseDataService } from '@rds-root/app/store/classroom/course/course-data.service';
+import { CourseEntityService } from '@rds-root/app/store/classroom/course/course-entity.service';
+import { UserProfileDataService } from '@rds-root/app/store/classroom/user-profile/user-profile-data.service';
+import { UserProfileEntityService } from '@rds-root/app/store/classroom/user-profile/user-profile-entity.service';
+import { GuardianDataService } from '@rds-root/app/store/classroom/guardian/guardian-data.service';
+import { GuardianEntityService } from '@rds-root/app/store/classroom/guardian/guardian-entity.service';
 
 import { UserProfilesService } from '@rds-classroom/user-profiles/services/user-profiles.service';
 import { AnnouncementsModule } from '@rds-classroom/announcements/announcements.module';

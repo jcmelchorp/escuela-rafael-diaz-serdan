@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ROUTER_NAVIGATION, RouterNavigatedAction } from '@ngrx/router-store';
 import { User } from '@rds-auth/models/user.model';
-import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
 import { filter, map, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()

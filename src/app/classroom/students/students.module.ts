@@ -6,10 +6,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { EntityDataService, EntityDefinitionService, EntityServices } from '@ngrx/data';
 
-import * as fromStudent from '@rds-store/classroom/student';
-import { StudentEntityService } from '@rds-store/classroom/student/student-entity.service';
-import { StudentDataService } from '@rds-store/classroom/student/student-data.service';
-import * as fromEntity from '@rds-store/config/entity-metadata';
+import * as fromStudent from '@rds-root/app/store/classroom/student';
+import { StudentEntityService } from '@rds-root/app/store/classroom/student/student-entity.service';
+import { StudentDataService } from '@rds-root/app/store/classroom/student/student-data.service';
+import * as fromEntity from '@rds-root/app/store/config/entity-metadata';
 
 import { SharedModule } from '@rds-shared/shared.module';
 

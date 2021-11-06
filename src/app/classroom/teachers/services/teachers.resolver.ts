@@ -6,7 +6,7 @@ import {
   ActivatedRoute
 } from '@angular/router';
 
-import { TeacherEntityService } from '@rds-store/classroom/teacher/teacher-entity.service';
+import { TeacherEntityService } from '@rds-root/app/store/classroom/teacher/teacher-entity.service';
 
 import { Observable, of } from 'rxjs';
 import { filter, first, tap } from 'rxjs/operators';

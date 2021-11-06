@@ -1,9 +1,9 @@
 import { EntitySelectorsFactory } from '@ngrx/data';
 import { createSelector } from '@ngrx/store';
 import { User } from '@rds-auth/models/user.model';
-import { getCurrentQueryParams } from '@rds-store/router/router.selectors';
+import { getCurrentQueryParams } from '@rds-root/app/store/router/router.selectors';
 
-import * as fromAccounts from '@rds-store/accounts';
+import * as fromAccounts from '@rds-root/app/store/accounts';
 export const accountSelectors = new EntitySelectorsFactory().create<User>(
   fromAccounts.entityCollectionName
 );
