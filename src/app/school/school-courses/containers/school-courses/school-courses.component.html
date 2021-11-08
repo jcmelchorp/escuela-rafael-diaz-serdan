@@ -1,0 +1,29 @@
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>
+<div *ngIf="(loaded$|async) && !(loading$|async) && (schoolCourses$|async) as schoolCourses;else spinner"
+  class="card bg-transparent">
+  <div class="card-body">
+    <h2 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
+      <div class="mcard-title bg-white">Materias</div>
+      <div fxLayoutGap="10px">
+        <button color="default" mat-mini-fab matTooltip="Nuevo curso" (click)="openSchoolCourseDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button color="default" mat-mini-fab matTooltip="Cargar archivo de materias" (click)="loadFile()">
+          <mat-icon>upload</mat-icon>
+        </button>
+        <button color="default" mat-mini-fab matTooltip="Guardar lista en archivo" (click)="saveFile()">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </h2>
+    <app-school-courses-table [data]="schoolCourses" (onClickDelete)="handleCourseDelete($event)"
+      (onClickEdit)="openSchoolCourseDialog($event)">
+    </app-school-courses-table>
+  </div>
+</div>

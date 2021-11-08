@@ -24,20 +24,20 @@ export class FirestoreService<T> implements IFirebase<T> {
   add(entity: T): Observable<T> {
     const key = this.afs.createId();
     return from(this.fsCollection.doc(key).set(firebaseSerialize({ id: key, ...entity })))
-      .pipe(take(1), map(_ => { return { id: key, ...entity } as T }));
+      .pipe(map(_ => { return { id: key, ...entity } as T }));
 
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     return from(this.fsCollection.doc<T>(id).update(firebaseSerialize(entity)))
-      .pipe(take(1), map(_ => { return { id, ...entity as T } }));
+      .pipe(map(_ => { return { id, ...entity as T } }));
   }
   getById(id: string): Observable<T> {
     return this.fsCollection
-      .doc<T>(id).valueChanges();
+      .doc<T>(id).valueChanges({ idField: 'id' });
   }
   delete(id: string): Observable<string> {
     return from(this.fsCollection.doc<T>(id).delete())
-      .pipe(take(1), map(_ => id));
+      .pipe(map(_ => id));
   }
   list(): Observable<T[]> {
     return this.fsCollection.valueChanges({ idField: 'id' });
@@ -47,8 +47,7 @@ export class FirestoreService<T> implements IFirebase<T> {
       query['field'].toString(),
       query['operation'] as any,
       query['value'].toString()
-    )).valueChanges()
-      .pipe(take(1));
+    )).valueChanges({ idField: 'id' })
   }
 
   upsert(entity: T): Observable<any> {

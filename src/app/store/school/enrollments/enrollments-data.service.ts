@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
-import { Enrollment } from '@rds-school/models/enrollment.model';
-import { EnrollmentsService } from '@rds-school/services/enrollments.service';
+import { Enrollment } from '@rds-school/enrollments/models/enrollment.model';
+import { EnrollmentsService } from '@rds-school/enrollments/services/enrollments.service';
+
 
 import { from, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';

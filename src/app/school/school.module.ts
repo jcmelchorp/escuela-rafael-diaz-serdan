@@ -1,42 +1,38 @@
 import { NgModule } from '@angular/core';
-import { EntityDefinitionService, EntityServices, EntityDataService } from '@ngrx/data';
-
-
-import { SharedModule } from '@rds-shared/shared.module';
-import { AccountsDomainDataService } from '@rds-store/accounts-domain/accounts-domain-data.service';
-import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts-domain-entity.service';
-import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
-import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-
 import * as fromEnrollments from '@rds-store/school/enrollments';
 import * as fromAccounts from '@rds-store/accounts';
 import * as fromAccountsDomain from '@rds-store/accounts-domain';
 import * as fromSchoolCourses from '@rds-store/school/school-courses';
 import * as fromAssignedCourses from '@rds-store/school/assigned-courses';
 import * as fromEntity from '@rds-store/config/entity-metadata';
-
-import { schoolComponents } from './components';
-import { schoolContainers } from './containers';
 import { SchoolRoutingModule } from './school-routing.module';
-import { EnrollmentsService } from './services/enrollments.service';
-import { AccountsDomainService } from '../accounts/services/accounts-domain.service';
-import { AccountsService } from '../accounts/services/accounts.service';
-import { SchoolCoursesService } from './services/school-courses.service';
+import { SchoolComponent } from './school.component';
+import { SchoolCoursesModule } from './school-courses/school-courses.module';
+import { SharedModule } from '@rds-shared/shared.module';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { SchoolCoursesDataService } from '@rds-store/school/school-courses/school-courses-data.service';
-import { EnrollmentsEntityService } from '@rds-store/school/enrollments/enrollments-entity.service';
-import { EnrollmentsDataService } from '@rds-store/school/enrollments/enrollments-data.service';
-import { AssignedCoursesService } from './services/assigned-courses.service';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { AccountsDomainService } from '@rds-accounts/services/accounts-domain.service';
+import { AccountsService } from '@rds-accounts/services/accounts.service';
+import { EntityDefinitionService, EntityServices, EntityDataService } from '@ngrx/data';
+import { AccountsDomainDataService } from '@rds-store/accounts-domain/accounts-domain-data.service';
+import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts-domain-entity.service';
 import { AssignedCoursesDataService } from '@rds-store/school/assigned-courses/assigned-courses-data.service';
+import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { EnrollmentsDataService } from '@rds-store/school/enrollments/enrollments-data.service';
+import { EnrollmentsEntityService } from '@rds-store/school/enrollments/enrollments-entity.service';
+
+import { SchoolDashboardComponent } from './school-dashboard/school-dashboard.component';
+import { EnrollmentsService } from './enrollments/services/enrollments.service';
+import { EnrollmentsModule } from './enrollments/enrollments.module';
+
+
 @NgModule({
-  declarations: [...schoolComponents, ...schoolContainers,
-  ],
-  imports: [SharedModule, SchoolRoutingModule],
+  declarations: [SchoolComponent, SchoolDashboardComponent],
+  imports: [SharedModule, SchoolRoutingModule, SchoolCoursesModule, EnrollmentsModule],
+  exports: [SharedModule],
   providers: [
-    EnrollmentsService,
-    SchoolCoursesService,
-    AssignedCoursesService,
     AccountsDomainService,
     AccountsService,
     SchoolCoursesEntityService,

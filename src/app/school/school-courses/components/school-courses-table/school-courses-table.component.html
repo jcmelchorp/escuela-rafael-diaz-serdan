@@ -1,0 +1,59 @@
+<mat-table>
+  <ng-container *ngFor="let column of columns; let i = index" matColumnDef="{{ column.field }}">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-stroked-button [disabled]="column.field=='priority'||column.field=='name'"
+        color="{{groupByColumns.includes(column.field)?'primary':'default'}}" (click)="groupByColumns.includes(column.field)
+            ? unGroupBy($event, column)
+            : groupBy($event, column)">
+        {{ column.label }}
+      </button>
+    </mat-header-cell>
+    <div *ngIf="column.field!=='actions'">
+      <mat-cell *matCellDef="let row">
+        {{row[column.field] }}
+        <!--  {{groupByColumns.includes(column.field)?'':row[column.field] }} -->
+      </mat-cell>
+    </div>
+  </ng-container>
+  <!--  Actions-->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-icon mat-icon-button (click)="editSchoolCourse(row)">edit</mat-icon>
+      <mat-icon color="warn" mat-icon-button (click)="deleteSchoolCourse(row)">delete</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="noData">
+    <mat-footer-cell class="bg-warning" *matFooterCellDef [attr.colspan]="displayedColumns.length">
+      No se encontraron elementos
+    </mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="loading">
+    <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+      <div style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+    </mat-footer-cell>
+  </ng-container>
+  <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource && dataSource.data.length > 0"></mat-footer-row>
+  <mat-footer-row *matFooterRowDef="['loading']" [hidden]="dataSource !== undefined"></mat-footer-row>
+  <!-- Group header -->
+  <ng-container matColumnDef="groupHeader">
+    <mat-cell class="bg-gray border-bottom-0 rounded-3 " [attr.colspan]="displayedColumns.length"
+      *matCellDef="let group">
+      {{ group[groupByColumns[group.level - 1]] }} ({{group.totalCounts}})
+      <mat-icon>{{
+        group.expanded ? "expand_more" : "chevron_right"
+        }}</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)">
+  </mat-row>
+
+</mat-table>

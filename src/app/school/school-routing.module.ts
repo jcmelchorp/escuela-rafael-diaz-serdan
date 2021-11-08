@@ -1,30 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  SchoolDashboardComponent,
-} from './components';
-import { EnrollmentComponent, SchoolComponent, SchoolCoursesComponent } from './containers';
-import { EnrollmentResolver } from './resolvers/enrollment.resolver';
-import { SchoolCoursesResolver } from './resolvers/school-courses.resolver';
-import { SchoolUsersResolver } from './resolvers/school-users.resolver';
-import { SchoolInstructionsComponent } from './components/school-instructions/school-instructions.component';
-
-
+import { SchoolCoursesResolver } from './school-courses/resolvers/school-courses.resolver';
+import { SchoolComponent } from './school.component';
+import { SchoolDashboardComponent } from './school-dashboard/school-dashboard.component';
+import { SchoolUsersResolver } from './school-courses/resolvers/school-users.resolver';
+import { EnrollmentComponent } from './enrollments/containers/enrollment/enrollment.component';
+import { SchoolCoursesComponent } from './school-courses/containers/school-courses/school-courses.component';
+import { EnrollmentResolver } from './enrollments/resolvers/enrollment.resolver';
+import { NotFoundComponent } from '@rds-shared/components';
 const routes: Routes = [
   {
     path: '',
     component: SchoolComponent,
-    resolve: { courses: SchoolCoursesResolver },
     children: [
-      /* {
+      {
         path: '',
         component: SchoolDashboardComponent,
         data: { breadcrumb: 'Dirección' }
-      }, */
+      },
       {
-        path: '',
+        path: 'materias',
         component: SchoolCoursesComponent,
+        resolve: { courses: SchoolCoursesResolver },
         data: { breadcrumb: 'Materias' }
+      },
+      {
+        path: 'inscripciones',
+        component: EnrollmentComponent,
+        resolve: { courses: EnrollmentResolver },
+        data: { breadcrumb: 'Materias' }
+      },
+      {
+        path: '**',
+        component: NotFoundComponent,
       },
     ],
   },

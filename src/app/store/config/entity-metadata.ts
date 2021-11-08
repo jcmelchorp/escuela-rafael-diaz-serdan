@@ -19,9 +19,11 @@ import * as fromTopic from '@rds-store/classroom/topic';
 import * as fromUserProfile from '@rds-store/classroom/user-profile';
 //import * as fromGroup from '@rds-admin/state/group';
 import * as fromStudentSubmission from '@rds-store/classroom/student-submission';
-import { SchoolCourse } from '../../school/models/school-course.model';
-import { Enrollment } from '../../school/models/enrollment.model';
-import { AssignedCourse } from '@rds-school/models/assigned-course.model';
+import { Enrollment } from '@rds-school/enrollments/models/enrollment.model';
+import { SchoolCourse } from '@rds-school/school-courses/models/school-course.model';
+import { AssignedCourse } from '@rds-school/school-courses/models/school-course.model';
+import { AccountDomain } from '@rds-accounts/models/account-domain.model';
+
 
 export const entityMetadata: EntityMetadataMap = {
   [fromEnrollments.entityCollectionName]: {
@@ -37,7 +39,7 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromAccountDomain.entityCollectionName]: {
-    filterFn: (entities: User[], { name, grade, role }: Partial<User>) =>
+    filterFn: (entities: AccountDomain[], { name/* , grade, role */ }: Partial<AccountDomain>) =>
       entities
         .filter((e) =>
           name && e.name && e.name.fullName
@@ -46,8 +48,8 @@ export const entityMetadata: EntityMetadataMap = {
               .includes(`${name.fullName!.toLocaleLowerCase()}`)
             : true
         )
-        .filter((e) => (grade ? e.grade === grade : true))
-        .filter((e) => (role ? e.role === role : true)),
+       /*  .filter((e) => (grade ? e.grade === grade : true))
+        .filter((e) => (role ? e.role === role : true)), */,
     entityDispatcherOptions: {
       optimisticAdd: false,
       optimisticUpdate: false,

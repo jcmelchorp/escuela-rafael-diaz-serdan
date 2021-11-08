@@ -4,6 +4,10 @@
     [mode]="'side'" [opened]="isHandset === false">
     <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
       <mat-nav-list dense>
+        <mat-list-item [routerLink]="['/']" routerLinkActive="active">
+          <mat-icon matListIcon>home</mat-icon>
+          <span matLine [@animateText]="linkText ? 'show' : 'hide'">Inicio</span>
+        </mat-list-item>
         <mat-list-item [routerLink]="['user']" routerLinkActive="active">
           <mat-icon matListIcon>school</mat-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">Alumnos</span>
@@ -11,10 +15,6 @@
         <mat-list-item *ngIf="isTeacher" [routerLink]="['profesores']" routerLinkActive="active">
           <mat-icon matListIcon>co_present</mat-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">Profesores</span>
-        </mat-list-item>
-        <mat-list-item [routerLink]="['/']" routerLinkActive="active">
-          <mat-icon matListIcon>home</mat-icon>
-          <span matLine [@animateText]="linkText ? 'show' : 'hide'">Inicio</span>
         </mat-list-item>
         <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="['gsuite']" routerLinkActive="active">
           <fa-icon matListIcon [icon]="faGoogle"></fa-icon>
