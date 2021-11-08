@@ -19,13 +19,13 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <mat-icon mat-icon-button (click)="editSchoolCourse(row)">edit</mat-icon>
-      <mat-icon color="warn" mat-icon-button (click)="deleteSchoolCourse(row)">delete</mat-icon>
+      <mat-icon mat-icon-button (click)="editAssignedCourse(row)">edit</mat-icon>
+      <mat-icon color="warn" mat-icon-button (click)="deleteAssignedCourse(row)">delete</mat-icon>
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="noData">
-    <mat-footer-cell class="bg-warning" *matFooterCellDef [attr.colspan]="displayedColumns.length">
+    <mat-footer-cell class="bg-gray" *matFooterCellDef [attr.colspan]="displayedColumns.length">
       No se encontraron elementos
     </mat-footer-cell>
   </ng-container>

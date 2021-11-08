@@ -8,13 +8,15 @@ export interface SchoolCourse {
   priority: number;
   courseType: CourseType;
 }
+export interface AssignedCourse extends SchoolCourse {
+  teacherId: string;
+  cycle: string;
+  studentIds?: string[];
+
+}
 
 export enum CourseType {
   formativo,
   optativo,
 }
 
-export interface AssignedCourse extends SchoolCourse {
-  teacherId: string;
-  studentIds: string[];
-}

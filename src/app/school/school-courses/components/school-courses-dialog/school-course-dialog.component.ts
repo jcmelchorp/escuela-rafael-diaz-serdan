@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { CourseType, SchoolCourse, AssignedCourse } from '../../models/school-course.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
+import { Cycle } from '../../models/cycle.enum';
 
 @Component({
   templateUrl: './school-course-dialog.component.html',
@@ -24,6 +25,8 @@ export class SchoolCourseDialogComponent {
   types = CourseType;
   slevelKeys;
   slevels = SchoolLevel;
+  cycleKeys;
+  cycles = Cycle
   constructor(
     private dialogRef: MatDialogRef<SchoolCourseDialogComponent>,
     private accountEntityService: AccountsEntityService,
@@ -31,19 +34,19 @@ export class SchoolCourseDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.keys = Object.keys(this.types).filter((x) => x.length > 5);
+    this.cycleKeys = Object.keys(this.cycles).filter((x) => x.length > 5);
     this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
+    this.teachers$ = this.accountEntityService.entities$.pipe(
+      map((users) => users.filter((u) => u.isTeacher == true))
+    );
     this.formData = this.fb.group({
       name: new FormControl(this.data.course.name, Validators.required),
       grade: new FormControl(this.data.course.grade),
       courseType: new FormControl(this.data.course.courseType),
+      cycle: new FormControl(this.data.course.cycle),
       description: new FormControl(this.data.course.description),
+      teacherId: new FormControl(this.data.course.teacherId),
     });
-    /* this.periods$ = this.roomService.getPeriods();
-    this.rooms$ = this.roomService
-      .getRoomsOnCicle(this.data.course.cicle)
-      .pipe(
-        map((rooms) => rooms.filter((r) => r.status.toString() == 'activo'))
-      ); */
     this.teachers$ = this.accountEntityService.entities$.pipe(
       map((users) => {
         return users.filter((x) => x.isTeacher == true && x.suspended == false);
@@ -55,12 +58,20 @@ export class SchoolCourseDialogComponent {
     this.formData.reset();
   }
   saveData() {
-    if (this.formData.valid) {
-      this.dialogRef.close({
-        course: { ...this.data.course, ...this.formData.value },
-        isNew: this.data.isNew,
-      });
-    }
+    const course: AssignedCourse = {
+      id: this.data.course.id,
+      name: this.formData.controls.name.value,
+      priority: this.data.course.priority,
+      cycle: this.formData.controls.cycle.value,
+      description: this.formData.controls.description.value,
+      courseType: this.formData.controls.courseType.value,
+      teacherId: this.formData.controls.teacherId.value,
+      grade: this.formData.controls.grade.value,
+    };
+    this.dialogRef.close({
+      course: course,
+      isNew: this.data.isNew,
+    });
   }
   close() {
     this.dialogRef.close();

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { SchoolCourse } from '../../models/school-course.model';
-import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { AssignedCourse } from '../../models/school-course.model';
+
 
 export class Group {
   level = 0;
@@ -19,9 +19,9 @@ export class Group {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
-  @Input() data: SchoolCourse[];
+  @Input() data: AssignedCourse[];
   @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | Group>>;
-  @Output() onClickEdit = new EventEmitter<SchoolCourse>();
+  @Output() onClickEdit = new EventEmitter<AssignedCourse>();
   @Output() onClickDelete = new EventEmitter<string>();
   dataSource = new MatTableDataSource<any | Group>([]);
   //_alldata: any[];
@@ -179,11 +179,11 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
     return item.level;
   }
 
-  editSchoolCourse(course?: SchoolCourse) {
-    let completeCourse: SchoolCourse = this.data.find(c => c.id === course.id);
+  editAssignedCourse(course?: AssignedCourse) {
+    let completeCourse: AssignedCourse = this.data.find(c => c.id === course.id);
     this.onClickEdit.emit(completeCourse);
   }
-  deleteSchoolCourse(course?: SchoolCourse) {
+  deleteAssignedCourse(course?: AssignedCourse) {
     this.onClickDelete.emit(course.id);
   }
 }

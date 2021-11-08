@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
@@ -9,6 +9,7 @@ import { AssignedCourse, SchoolCourse } from '../../models/school-course.model';
 import { SchoolCourseDialogComponent } from '../../components/school-courses-dialog/school-course-dialog.component';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { UploadFileDialogComponent } from '@rds-shared/components/upload-file-dialog/upload-file-dialog.component';
+import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -19,39 +20,48 @@ import { UploadFileDialogComponent } from '@rds-shared/components/upload-file-di
 export class SchoolCoursesComponent implements OnInit {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
-  newClass$: Observable<SchoolCourse>;
-  courseRoomsSub: Subject<SchoolCourse> = new Subject<SchoolCourse>();
-  slevelKeys;
-  slevels = SchoolLevel;
-  faChalkboardTeacher = faChalkboardTeacher;
   filterValues: FormGroup;
-  schoolCourses$: Observable<SchoolCourse[]>;
-  courses$: Observable<SchoolCourse[]>;
-  coursesByGrade$: Observable<SchoolCourse[]>[];
+  schoolCourses$: Observable<AssignedCourse[]>;
+  filteredEntities$: Observable<AssignedCourse[]>;
   resCount$: Observable<number>;
   willDownload = false;
+  gradeKeys;
+  grades = SchoolLevel;
   constructor(
     private fb: FormBuilder,
-    private schoolCourseEntityService: SchoolCoursesEntityService,
+    private assignedCourseEntityService: AssignedCoursesEntityService,
     private dialog: MatDialog
   ) {
-    this.resCount$ = this.schoolCourseEntityService.count$
-    this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
-    this.loaded$ = this.schoolCourseEntityService.loaded$;
-    this.loading$ = this.schoolCourseEntityService.loading$;
+    this.resCount$ = this.assignedCourseEntityService.count$
+    this.gradeKeys = Object.keys(this.grades).filter((x) => x.length > 2);
+    this.filterValues = this.fb.group({
+      grade: new FormControl(),
+      name: new FormControl(),
+    });
+    this.filterValues.valueChanges.subscribe((changes) => {
+      Object.keys(changes).forEach(
+        (key) => changes[key] == null && delete changes[key]
+      );
+      Object.keys(changes).includes('name') && changes.name !== ''
+        ? (changes.name = { fullName: changes['name'] })
+        : delete changes.name;
+      return this.assignedCourseEntityService.setFilter(changes);
+    });
+    this.loaded$ = this.assignedCourseEntityService.loaded$;
+    this.loading$ = this.assignedCourseEntityService.loading$;
+    this.filteredEntities$ = this.assignedCourseEntityService.filteredEntities$;
   }
 
   ngOnInit() {
-    this.schoolCourses$ = this.schoolCourseEntityService.entities$;
+    this.schoolCourses$ = this.assignedCourseEntityService.entities$;
   }
 
 
-  openSchoolCourseDialog(course?: SchoolCourse) {
+  openSchoolCourseDialog(course?: AssignedCourse) {
     const newCourse: Partial<AssignedCourse> = {};
     console.log(course)
     const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
       width: 'fit-content',
-      minWidth: '400px',
       height: 'fit-content',
       data: course
         ? { course, isNew: false }
@@ -61,9 +71,9 @@ export class SchoolCoursesComponent implements OnInit {
       if (result.isNew) {
         if (result) {
           console.log(result.course)
-          this.schoolCourseEntityService.add(result.course);
+          this.assignedCourseEntityService.add(result.course);
         } else {
-          this.schoolCourseEntityService.update(result.course);
+          this.assignedCourseEntityService.update(result.course);
         }
       } else {
         console.log('Dialog closed without changes')
@@ -82,7 +92,7 @@ export class SchoolCoursesComponent implements OnInit {
       if (result) {
         console.log(result)
         result.output.forEach((x) => {
-          this.schoolCourseEntityService.add(x);
+          this.assignedCourseEntityService.add(x);
         });
       } else {
         console.log('Dialog closed without changes')
@@ -91,7 +101,7 @@ export class SchoolCoursesComponent implements OnInit {
   }
 
   handleCourseDelete(id: string) {
-    this.schoolCourseEntityService.delete(id);
+    this.assignedCourseEntityService.delete(id);
   }
 
 }

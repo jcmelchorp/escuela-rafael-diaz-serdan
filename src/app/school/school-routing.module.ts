@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SchoolCoursesResolver } from './school-courses/resolvers/school-courses.resolver';
+import { AssignedCoursesResolver } from './school-courses/resolvers/assigned-courses.resolver';
 import { SchoolComponent } from './school.component';
 import { SchoolDashboardComponent } from './school-dashboard/school-dashboard.component';
 import { SchoolUsersResolver } from './school-courses/resolvers/school-users.resolver';
@@ -21,7 +21,7 @@ const routes: Routes = [
       {
         path: 'materias',
         component: SchoolCoursesComponent,
-        resolve: { courses: SchoolCoursesResolver },
+        resolve: { courses: AssignedCoursesResolver },
         data: { breadcrumb: 'Materias' }
       },
       {
@@ -40,6 +40,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SchoolUsersResolver, SchoolCoursesResolver, EnrollmentResolver],
+  providers: [AssignedCoursesResolver, SchoolUsersResolver, EnrollmentResolver],
 })
 export class SchoolRoutingModule { }

@@ -8,6 +8,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { EnrollmentDialogComponent } from './enrollments/components/enrollment-dialog/enrollment-dialog.component';
 import { Enrollment, EnrollmentLabel } from './enrollments/models/enrollment.model';
 import { EnrollmentsService } from './enrollments/services/enrollments.service';
+import { Cycle } from './school-courses/models/cycle.enum';
 
 @Component({
   selector: 'app-school',
@@ -18,26 +19,22 @@ export class SchoolComponent implements OnInit {
   enrollments$: Observable<EnrollmentLabel[]>
   enrollment$: Observable<Enrollment>
   selectedId: string;
+  cycleKeys;
+  cycles = Cycle;
   constructor(
     private dialog: MatDialog,
     private enrollmentsService: EnrollmentsService,
     private enrollmentsEntityService: EnrollmentsEntityService,
   ) {
-    /* this.enrollments$ = this.enrollmentsService.getEnrollments(); */
+    this.cycleKeys = Object.keys(this.cycles).filter((x) => x.length > 5);
   }
 
   ngOnInit(): void {
-    /* this.enrollment$ = this.enrollmentsService.getDefaultEnrollmentId()
-      .pipe(
-        tap(sel => this.selectedId = sel),
-        switchMap(id => this.enrollmentsEntityService.getByKey(id))
-      ); */
   }
   openEnrollmentDialog(enrollment?: Enrollment) {
     const newEnrollment: Partial<Enrollment> = {};
     const dialogRef = this.dialog.open(EnrollmentDialogComponent, {
       width: 'fit-content',
-      minWidth: '300px',
       height: 'fit-content',
       minHeight: '200px',
       data: enrollment ?

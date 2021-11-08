@@ -9,8 +9,8 @@
         <mat-label>Ciclo escolar</mat-label>
         <mat-select [(ngModel)]="selectedId" placeholder="Selecciona un ciclo escolar">
           <mat-option [value]="">Selecciona un ciclo escolar</mat-option>
-          <mat-option *ngFor="let key of (enrollments$|async)" [value]="key.id">
-            {{key.label}}
+          <mat-option *ngFor="let key of cycleKeys" [value]="cycles[key]">
+            {{cycles[key]}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -22,8 +22,7 @@
     </div>
     <router-outlet></router-outlet>
   </div>
-
-
-  <button mat-fab id="new-user" matTooltip="Nuevo usuario" (click)="openSaveUser()">
-    <mat-icon>person_add</mat-icon>
-  </button>
+</div>
+<button mat-fab id="new-user" matTooltip="Nuevo usuario" (click)="openSaveUser()">
+  <mat-icon>person_add</mat-icon>
+</button>
