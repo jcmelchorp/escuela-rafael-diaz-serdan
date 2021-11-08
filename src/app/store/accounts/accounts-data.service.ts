@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { User } from '@rds-auth/models/user.model';
-import { AccountsService } from '@rds-root/app/accounts/services/accounts.service';
+import { AccountsService } from '@rds-accounts/services/accounts.service';
 import { from, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 

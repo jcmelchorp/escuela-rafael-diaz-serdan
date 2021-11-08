@@ -1,0 +1,21 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>Cargar archivo</h2>
+  <mat-icon matDialogClose mat-icon-button>cancel</mat-icon>
+</div>
+
+<mat-dialog-content>
+  <input type="file" (change)="onFileChange($event)" multiple="false" />
+  <button mat-button (click)="selectAll()">Seleccionar todos</button>
+  <mat-selection-list #selectedCourses>
+    <mat-list-option *ngFor="let dato of data.output;">
+      <div mat-line>{{dato.priority}}. {{dato.name}} - {{dato.grade}}</div>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button *ngIf="data" mat-stroked-button color="accent" type="reset" (click)="resetData()">Limpiar</button>
+  <button *ngIf="!data" mat-stroked-button color="warn" matDialogClose>Cancelar</button>
+  <button *ngIf="selectedCourses.selectedOptions.selected.length>0" mat-raised-button color="primary" type="submit"
+    (click)="saveData()">Importar
+    ({{selectedCourses.selectedOptions.selected.length}})</button>
+</mat-dialog-actions>

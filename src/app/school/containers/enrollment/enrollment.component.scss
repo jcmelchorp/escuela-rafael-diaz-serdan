@@ -1,0 +1,10 @@
+@import "./../../../../assets/themes/colors";
+#new-enrollment {
+  color: white;
+  background-color: $rds-logo-color;
+  position: fixed;
+  bottom: 120px;
+  top: auto;
+  right: 50px;
+  left: auto;
+}

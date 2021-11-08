@@ -4,22 +4,38 @@ import {
   PropsFilterFnFactory,
 } from '@ngrx/data';
 import { User } from '@rds-auth/models/user.model';
-import * as fromAccount from '@rds-root/app/store/accounts';
-import * as fromAccountDomain from '@rds-root/app/store/accounts-domain';
-import * as fromSchoolCourses from '@rds-root/app/store/school/school-courses';
-import * as fromAnnouncement from '@rds-root/app/store/classroom/announcement';
-import * as fromCourse from '@rds-root/app/store/classroom/course';
-import * as fromCourseWork from '@rds-root/app/store/classroom/course-work';
-import * as fromGuardian from '@rds-root/app/store/classroom/guardian';
-import * as fromStudent from '@rds-root/app/store/classroom/student';
-import * as fromTeacher from '@rds-root/app/store/classroom/teacher';
-import * as fromTopic from '@rds-root/app/store/classroom/topic';
-import * as fromUserProfile from '@rds-root/app/store/classroom/user-profile';
+import * as fromAccount from '@rds-store/accounts';
+import * as fromAccountDomain from '@rds-store/accounts-domain';
+import * as fromSchoolCourses from '@rds-store/school/school-courses';
+import * as fromAnnouncement from '@rds-store/classroom/announcement';
+import * as fromCourse from '@rds-store/classroom/course';
+import * as fromCourseWork from '@rds-store/classroom/course-work';
+import * as fromEnrollments from '@rds-store/school/enrollments/';
+import * as fromAssignedCourses from '@rds-store/school/assigned-courses';
+import * as fromGuardian from '@rds-store/classroom/guardian';
+import * as fromStudent from '@rds-store/classroom/student';
+import * as fromTeacher from '@rds-store/classroom/teacher';
+import * as fromTopic from '@rds-store/classroom/topic';
+import * as fromUserProfile from '@rds-store/classroom/user-profile';
 //import * as fromGroup from '@rds-admin/state/group';
-import * as fromStudentSubmission from '@rds-root/app/store/classroom/student-submission';
+import * as fromStudentSubmission from '@rds-store/classroom/student-submission';
 import { SchoolCourse } from '../../school/models/school-course.model';
+import { Enrollment } from '../../school/models/enrollment.model';
+import { AssignedCourse } from '@rds-school/models/assigned-course.model';
 
 export const entityMetadata: EntityMetadataMap = {
+  [fromEnrollments.entityCollectionName]: {
+    filterFn: (entities: Enrollment[], { label }: Partial<Enrollment>) =>
+      entities
+        .filter((e) => (label ? e.label === label : true)),
+    selectId: (enrollment: Enrollment) => enrollment.id,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: true,
+      optimisticSaveEntities: false,
+      optimisticDelete: true,
+    },
+  },
   [fromAccountDomain.entityCollectionName]: {
     filterFn: (entities: User[], { name, grade, role }: Partial<User>) =>
       entities
@@ -68,6 +84,18 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticAdd: false,
       optimisticUpdate: false,
       optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
+    },
+  },
+  [fromAssignedCourses.entityCollectionName]: {
+    selectId: (assignedCourse: AssignedCourse) => assignedCourse.id,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
   },
   [fromCourse.entityCollectionName]: {

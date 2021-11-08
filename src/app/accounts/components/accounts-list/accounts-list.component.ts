@@ -20,7 +20,7 @@ import { NewAccountConfirmComponent } from './../new-account-confirm/new-account
 
 import { SaveUserErrorComponent, UserEditDialogComponent } from '..';
 import { User } from '@rds-auth/models/user.model';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Component({
   selector: 'app-accounts-list',

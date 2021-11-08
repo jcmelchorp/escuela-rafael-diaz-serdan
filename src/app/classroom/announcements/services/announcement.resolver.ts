@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { AnnouncementEntityService } from '@rds-root/app/store/classroom/announcement/announcement-entity.service';
+import { AnnouncementEntityService } from '@rds-store/classroom/announcement/announcement-entity.service';
 
 import { Observable } from 'rxjs';
 import { filter, first, tap } from 'rxjs/operators';

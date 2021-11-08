@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LayoutService, ThemeService } from '@rds-core/services';
 import { User } from '@rds-auth/models/user.model';
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 import * as fromAuthSelectors from '@rds-auth/state/auth.selectors';
 import { signInSuccess } from '@rds-auth/state/auth.actions';
 

@@ -1,18 +1,12 @@
-<mat-table [dataSource]="dataSource" class="bg-transparent">
+<mat-table class="bg-transparent">
   <ng-container *ngFor="let column of columns; let i = index" matColumnDef="{{ column.field }}">
     <mat-header-cell *matHeaderCellDef>
-      <button [disabled]="column.field==='actions'||column.field==='grade'" mat-button
-        color="{{groupByColumns.includes(column.field)?'primary':'default'}}" (click)="groupByColumns.includes(column.field)
+      <button mat-button color="{{groupByColumns.includes(column.field)?'primary':'default'}}" (click)="groupByColumns.includes(column.field)
             ? unGroupBy($event, column)
             : groupBy($event, column)">
         {{ column.label }}
       </button>
     </mat-header-cell>
-    <div *ngIf="column.field=='actions'">
-      <mat-cell *matCellDef="let row">
-        <app-delete-button></app-delete-button>
-      </mat-cell>
-    </div>
     <div *ngIf="column.field!=='actions'">
       <mat-cell *matCellDef="let row">
         {{groupByColumns.includes(column.field)?'':row[column.field] }}
@@ -23,8 +17,8 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <mat-icon button mat-icon-button (click)="onEditUser(row)">edit </mat-icon>
-      <mat-icon button mat-icon-button (click)="onDeleteUser(row)">delete_forever </mat-icon>
+      <mat-icon button mat-icon-button (click)="editSchoolCourse(row)">edit </mat-icon>
+      <app-delete-button (delete)="handleCourseDelete(row.id)"></app-delete-button>
     </mat-cell>
   </ng-container>
   <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -32,7 +26,7 @@
 
   <!-- Group header -->
   <ng-container matColumnDef="groupHeader">
-    <mat-cell [attr.colspan]="displayedStudentsColumnsList.length" *matCellDef="let group">
+    <mat-cell [attr.colspan]="displayedColumns.length" *matCellDef="let group">
       <mat-icon fontSet="material-icons-outlined">{{
         group.expanded ? "remove" : "add"
         }}</mat-icon>

@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 
 import { SnackService } from '@rds-shared/services';
-import { loadAppSuccess } from '@rds-root/app/store/actions/app.actions';
+import { loadAppSuccess } from '@rds-store/actions/app.actions';
 
 @Injectable()
 export class SnackEffects {

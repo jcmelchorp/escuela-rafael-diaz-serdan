@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { SchoolCourse } from '../../models/school-course.model';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 
 export class Group {
   level = 0;
@@ -15,34 +16,40 @@ export class Group {
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
   styleUrls: ['./school-courses-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SchoolCoursesTableComponent implements OnInit {
-  @Input() data: any[];
-  /*   @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | Group>>;*/
+export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit */ {
+  @Input() data: SchoolCourse[];
+  @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | Group>>;
+  @Output() onClickEdit = new EventEmitter<SchoolCourse>();
   public dataSource = new MatTableDataSource<any | Group>([]);
   //_alldata: any[];
   columns: any[];
   displayedColumns: string[];
   groupByColumns: string[] = [];
 
-  constructor() {
+  constructor(
+    private schoolCourseEntityService: SchoolCoursesEntityService,
+  ) {
     this.columns = [
+      { field: 'priority', label: '#' },
       { field: 'grade', label: 'Grado' },
       { field: 'name', label: 'Nombre' },
-      { field: 'courseType', label: 'Tipo' },
+
     ];
     this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
     this.groupByColumns = ['grade'];
+
   }
 
   ngOnInit() {
     this.dataSource.data = this.addGroups(this.data, this.groupByColumns);
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
     this.dataSource.filter = performance.now().toString();
-
   }
 
+  ngAfterViewInit() {
+    this.table.dataSource = this.dataSource;
+  }
   groupBy(event, column) {
     event.stopPropagation();
     this.checkGroupByColumn(column.field, true);
@@ -150,5 +157,11 @@ export class SchoolCoursesTableComponent implements OnInit {
   isGroup(index, item): boolean {
     return item.level;
   }
-
+  handleCourseDelete(id: string) {
+    this.schoolCourseEntityService.delete(id);
+  }
+  editSchoolCourse(course?: SchoolCourse) {
+    let completeCourse: SchoolCourse = this.data.find(c => c.id === course.id);
+    this.onClickEdit.emit(completeCourse);
+  }
 }

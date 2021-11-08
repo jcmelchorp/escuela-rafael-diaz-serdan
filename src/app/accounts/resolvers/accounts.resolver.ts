@@ -4,7 +4,7 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { Observable } from 'rxjs';
 import { filter, first, map, takeUntil, tap } from 'rxjs/operators';
 

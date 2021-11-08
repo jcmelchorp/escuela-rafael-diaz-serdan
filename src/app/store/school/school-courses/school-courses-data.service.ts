@@ -11,8 +11,8 @@ import { concat, from, merge, Observable, of } from 'rxjs';
 import { tap, concatMap, switchMap, mergeMap, map, mergeAll, concatAll, toArray } from 'rxjs/operators';
 
 import * as fromClass from '.';
-import { SchoolCoursesService } from '@rds-root/app/school/services/school-courses.service';
-import { SchoolCourse } from '@rds-root/app/school/models/school-course.model';
+import { SchoolCoursesService } from '@rds-school/services/school-courses.service';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
 
 @Injectable()
 export class SchoolCoursesDataService extends DefaultDataService<SchoolCourse> {

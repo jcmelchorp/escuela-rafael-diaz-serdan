@@ -4,7 +4,7 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { SchoolCoursesEntityService } from '@rds-root/app/store/school/school-courses/school-courses-entity.service';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 
 
 import { Observable } from 'rxjs';

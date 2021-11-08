@@ -3,32 +3,40 @@ import { EntityDefinitionService, EntityServices, EntityDataService } from '@ngr
 
 
 import { SharedModule } from '@rds-shared/shared.module';
-import { AccountsDomainDataService } from '@rds-root/app/store/accounts-domain/accounts-domain-data.service';
-import { AccountsDomainEntityService } from '@rds-root/app/store/accounts-domain/accounts-domain-entity.service';
-import { AccountsDataService } from '@rds-root/app/store/accounts/accounts-data.service';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
-import * as fromAccounts from '@rds-root/app/store/accounts';
-import * as fromAccountsDomain from '@rds-root/app/store/accounts-domain';
-import * as fromSchoolCourses from '@rds-root/app/store/school/school-courses';
-import * as fromEntity from '@rds-root/app/store/config/entity-metadata';
+import { AccountsDomainDataService } from '@rds-store/accounts-domain/accounts-domain-data.service';
+import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts-domain-entity.service';
+import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+
+import * as fromEnrollments from '@rds-store/school/enrollments';
+import * as fromAccounts from '@rds-store/accounts';
+import * as fromAccountsDomain from '@rds-store/accounts-domain';
+import * as fromSchoolCourses from '@rds-store/school/school-courses';
+import * as fromAssignedCourses from '@rds-store/school/assigned-courses';
+import * as fromEntity from '@rds-store/config/entity-metadata';
+
 import { schoolComponents } from './components';
 import { schoolContainers } from './containers';
 import { SchoolRoutingModule } from './school-routing.module';
-import { SchoolService } from './services/school.service';
+import { EnrollmentsService } from './services/enrollments.service';
 import { AccountsDomainService } from '../accounts/services/accounts-domain.service';
 import { AccountsService } from '../accounts/services/accounts.service';
 import { SchoolCoursesService } from './services/school-courses.service';
-import { SchoolCoursesEntityService } from '../store/school/school-courses/school-courses-entity.service';
-import { SchoolCoursesDataService } from '@rds-root/app/store/school/school-courses/school-courses-data.service';
-
-
-
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { SchoolCoursesDataService } from '@rds-store/school/school-courses/school-courses-data.service';
+import { EnrollmentsEntityService } from '@rds-store/school/enrollments/enrollments-entity.service';
+import { EnrollmentsDataService } from '@rds-store/school/enrollments/enrollments-data.service';
+import { AssignedCoursesService } from './services/assigned-courses.service';
+import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { AssignedCoursesDataService } from '@rds-store/school/assigned-courses/assigned-courses-data.service';
 @NgModule({
-  declarations: [...schoolComponents, ...schoolContainers],
+  declarations: [...schoolComponents, ...schoolContainers,
+  ],
   imports: [SharedModule, SchoolRoutingModule],
   providers: [
-    SchoolService,
+    EnrollmentsService,
     SchoolCoursesService,
+    AssignedCoursesService,
     AccountsDomainService,
     AccountsService,
     SchoolCoursesEntityService,
@@ -36,7 +44,11 @@ import { SchoolCoursesDataService } from '@rds-root/app/store/school/school-cour
     AccountsDataService,
     AccountsEntityService,
     AccountsDomainDataService,
-    AccountsDomainEntityService
+    AccountsDomainEntityService,
+    EnrollmentsEntityService,
+    EnrollmentsDataService,
+    AssignedCoursesEntityService,
+    AssignedCoursesDataService,
   ],
 })
 export class SchoolModule {
@@ -49,15 +61,23 @@ export class SchoolModule {
     accountsDomainEntityService: AccountsDomainEntityService,
     accountsDomainDataService: AccountsDomainDataService,
     accountsEntityService: AccountsEntityService,
-    accountsDataService: AccountsDataService
+    accountsDataService: AccountsDataService,
+    enrollmentsEntityService: EnrollmentsEntityService,
+    enrollmentsDataService: EnrollmentsDataService,
+    assignedCoursesEntityService: AssignedCoursesEntityService,
+    assignedCoursesDataService: AssignedCoursesDataService,
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
     entityServices.registerEntityCollectionServices([
-      schoolCoursesEntityService, accountsDomainEntityService, accountsEntityService
+      schoolCoursesEntityService, accountsDomainEntityService, accountsEntityService, enrollmentsEntityService, assignedCoursesEntityService
     ]);
     entityDataService.registerService(
       fromSchoolCourses.entityCollectionName,
       schoolCoursesDataService
+    );
+    entityDataService.registerService(
+      fromAssignedCourses.entityCollectionName,
+      assignedCoursesDataService
     );
     entityDataService.registerService(
       fromAccounts.entityCollectionName,
@@ -66,6 +86,10 @@ export class SchoolModule {
     entityDataService.registerService(
       fromAccountsDomain.entityCollectionName,
       accountsDomainDataService
+    );
+    entityDataService.registerService(
+      fromEnrollments.entityCollectionName,
+      enrollmentsDataService
     );
   }
 }

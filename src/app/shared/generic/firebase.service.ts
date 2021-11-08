@@ -22,16 +22,13 @@ export class FirebaseService<T extends Entity> implements IFirebase<T> {
     this.fsCollection = this.afs.collection<T>(this.collection);
   }
   add(entity: T, id?: string): Observable<T> {
-    if (id) {
-      this.fsCollection.doc(id).update(firebaseSerialize(entity)).then(_ =>
-        this.rtdbList.update(id, firebaseSerialize(entity))
-      );
-    } else {
-      this.fsCollection.add(firebaseSerialize(entity)).then(_ =>
-        this.rtdbList.push(firebaseSerialize(entity))
-      );
-    }
-    return this.getById(id);
+    let key;
+    id ? key = id : key = this.afs.createId();
+    this.fsCollection.add({ id: key, ...entity }).then(_ =>
+      this.rtdbList.update(key, { id: key, ...entity })
+    );
+    console.log({ id: key, ...entity })
+    return of({ id: key, ...entity });
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     this.fsCollection.doc<T>(id).update(firebaseSerialize(entity));

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +8,9 @@ import { moveIn } from '@rds-shared/animations/router.animations';
 import { Subscription, Observable, Subject } from 'rxjs';
 import { SchoolCourse } from '../../models/school-course.model';
 import { SchoolCoursesDialogComponent } from '../../components/school-courses-dialog/school-courses-dialog.component';
-import { SchoolCoursesEntityService } from '@rds-root/app/store/school/school-courses/school-courses-entity.service';
-import * as XLSX from 'xlsx';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { UploadFileDialogComponent } from '../../components/upload-file/upload-file-dialog.component';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -17,20 +18,15 @@ import * as XLSX from 'xlsx';
   animations: [moveIn()],
 })
 export class SchoolCoursesComponent implements OnInit {
-  courseRooms: SchoolCourse[];
-  coursesSubscription: Subscription;
-  teachers$: Observable<User[]>;
-  loading_users$: Observable<boolean>;
-  loaded_users$: Observable<boolean>;
-  loading_courses$: Observable<boolean>;
-  loaded_courses$: Observable<boolean>;
+  loading$: Observable<boolean>;
+  loaded$: Observable<boolean>;
   newClass$: Observable<SchoolCourse>;
   courseRoomsSub: Subject<SchoolCourse> = new Subject<SchoolCourse>();
   slevelKeys;
   slevels = SchoolLevel;
   faChalkboardTeacher = faChalkboardTeacher;
   filterValues: FormGroup;
-  filteredEntities$: Observable<SchoolCourse[]>;
+  schoolCourses$: Observable<SchoolCourse[]>;
   courses$: Observable<SchoolCourse[]>;
   coursesByGrade$: Observable<SchoolCourse[]>[];
   resCount$: Observable<number>;
@@ -38,41 +34,22 @@ export class SchoolCoursesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private schoolCourseEntityService: SchoolCoursesEntityService,
-    //private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog
   ) {
     this.resCount$ = this.schoolCourseEntityService.count$
-    this.loaded_courses$ = this.schoolCourseEntityService.loaded$;
-    this.loading_courses$ = this.schoolCourseEntityService.loading$;
     this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
-    this.filterValues = this.fb.group({
-      name: new FormControl(),
-      grade: new FormControl(),
-    });
-    this.filterValues.valueChanges.subscribe((changes) => {
-      Object.keys(changes).forEach(
-        (key) => changes[key] == null && delete changes[key]
-      );
-      return this.schoolCourseEntityService.setFilter(changes);
-    });
-    this.filteredEntities$ = this.schoolCourseEntityService.filteredEntities$;
+    this.loaded$ = this.schoolCourseEntityService.loaded$;
+    this.loading$ = this.schoolCourseEntityService.loading$;
   }
 
   ngOnInit() {
+    this.schoolCourses$ = this.schoolCourseEntityService.entities$;
   }
 
-  applyFilterString() {
-    const nameForm: string = (this.filterValues.get('name').value as string);
-    const gradeForm: string = this.filterValues.get('grade').value as string;
-    const name = nameForm === undefined || nameForm == null || nameForm == '' ? '' : nameForm.toLocaleLowerCase();
-    const grade = gradeForm === undefined || gradeForm == null || gradeForm == '' ? '' : gradeForm;
-    const filter = JSON.parse(
-      JSON.stringify({ name: name, grade: grade })
-    );
-  }
 
   openSchoolCourseDialog(course?: SchoolCourse) {
     const newCourse: Partial<SchoolCourse> = {};
+    console.log(course)
     const dialogRef = this.dialog.open(SchoolCoursesDialogComponent, {
       width: 'fit-content',
       minWidth: '400px',
@@ -82,8 +59,9 @@ export class SchoolCoursesComponent implements OnInit {
         : { course: newCourse, isNew: true },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        if (result.isNew) {
+      if (result.isNew) {
+        if (result) {
+          console.log(result.course)
           this.schoolCourseEntityService.add(result.course);
         } else {
           this.schoolCourseEntityService.update(result.course);
@@ -94,35 +72,24 @@ export class SchoolCoursesComponent implements OnInit {
     });
   }
 
-  handleCourseDelete(course: SchoolCourse) {
-    this.schoolCourseEntityService.delete(course);
+  loadFile() {
+    const dialogRef = this.dialog.open(UploadFileDialogComponent, {
+      width: 'fit-content',
+      minWidth: '700px',
+      height: 'fit-content',
+      data: { output: [] },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result)
+        result.output.forEach((x) => {
+          this.schoolCourseEntityService.add(x);
+        });
+      } else {
+        console.log('Dialog closed without changes')
+      }
+    });
   }
-  onFileChange(ev) {
-    let workBook = null;
-    let jsonData = null;
-    const reader = new FileReader();
-    const file = ev.target.files[0];
-    reader.onload = (event) => {
-      const data = reader.result;
-      workBook = XLSX.read(data, { type: 'binary' });
-      jsonData = workBook.SheetNames.reduce((initial, name) => {
-        const sheet = workBook.Sheets[name];
-        initial[name] = XLSX.utils.sheet_to_json(sheet);
-        return initial;
-      }, {});
-      const dataString = JSON.stringify(jsonData);
-      document.getElementById('output').innerHTML = dataString.slice(0, 300).concat("...");
-      this.setDownload(dataString);
-    }
-    reader.readAsBinaryString(file);
-  }
-  setDownload(data) {
-    this.willDownload = true;
-    setTimeout(() => {
-      const el = document.querySelector("#download");
-      el.setAttribute("href", `data:text/json;charset=utf-8,${encodeURIComponent(data)}`);
-      el.setAttribute("download", 'xlsxtojson.json');
-    }, 1000)
-  }
+
 
 }

@@ -4,6 +4,12 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "exceljs": [
+        "node_modules/exceljs/dist/exceljs.min"
+      ],
+      "@rds-school/*": [
+        "src/app/school/*"
+      ],
       "@rds-modules/*": [
         "src/app/modules/*"
       ],
@@ -30,9 +36,6 @@
       ],
       "@rds-env/*": [
         "src/environments/*"
-      ],
-      "@rds-root/*": [
-        "src/*"
       ],
     },
     "outDir": "./dist/out-tsc",

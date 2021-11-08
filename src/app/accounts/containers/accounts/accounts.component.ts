@@ -11,8 +11,8 @@ import { NewAccountComponent } from './../../components/new-account/new-account.
 import { selectAccounts } from '../../state/accounts.selectors';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
-import { AppState } from '@rds-root/app/store/app.state';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AppState } from '@rds-store/app.state';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { AccountsDomainService } from '../../services/accounts-domain.service';
 
 

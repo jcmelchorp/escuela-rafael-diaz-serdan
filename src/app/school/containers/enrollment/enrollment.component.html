@@ -1,0 +1,24 @@
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>
+<div *ngIf="enrollment;else spinner" class="card bg-transparent">
+  <div class="card-body">
+    <h2 style="margin-top: -30px">
+      <div class="mcard-title bg-white">Inscripciones</div>
+    </h2>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button mat-button [disabled]="enrollment.assignedCourses.length!==0" (click)="enrollCourses(enrollment)">
+        Importar cursos</button>
+    </div>
+
+    <div *ngIf="!enrollment.assignedCourses">No courses</div>
+    <ul *ngIf="enrollment.assignedCourses">
+      <li *ngFor="let course of enrollment.assignedCourses">
+        {{course.name}} </li>
+    </ul>
+  </div>
+</div>

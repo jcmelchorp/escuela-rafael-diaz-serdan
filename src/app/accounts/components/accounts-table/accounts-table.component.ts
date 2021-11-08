@@ -11,7 +11,7 @@ import { ConfirmDialogComponent } from '@rds-shared/components';
 import { ChangeGradeComponent, UserEditDialogComponent } from '..';
 import { AccountsTableDataSource } from './accounts-table-data-source';
 import { User } from '@rds-auth/models/user.model';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Component({
   selector: 'app-accounts-table',

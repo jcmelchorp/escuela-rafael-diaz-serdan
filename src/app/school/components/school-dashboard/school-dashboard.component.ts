@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { faIdCard, faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import {
-  faUsers,
-  faUserTie,
-  faUserPlus,
-  faIdCardAlt,
   faSchool,
   faBook,
   faTools,
+  faClipboard,
 } from '@fortawesome/free-solid-svg-icons';
 import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
 
@@ -19,41 +16,22 @@ import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
   animations: [fadeInAnimation], //[@fadeIn]="'fadeIn'"
 })
 export class SchoolDashboardComponent implements OnInit {
-  faIdCard = faIdCard;
-  faIdCardAlt = faIdCardAlt;
-  faUserTie = faUserTie;
-  faUserPlus = faUserPlus;
-  faTools = faTools;
-  faUserCircle = faUserCircle
   raisedElev: number = 12;
   assigmentLinks: any[];
   constructor() { }
-
   ngOnInit(): void {
     this.assigmentLinks = [
-      /*  {
-         title: 'Usuarios',
-         description: 'Información sobre alumnos, maestros y personal.',
-         route: 'usuarios',
-         icon: faUsers,
-       },
-       {
-         title: 'Cuentas de usuarios',
-         description: 'Información sobre alumnos, maestros y personal.',
-         route: 'cuentas',
-         icon: faUserCircle,
-       }, */
-      {
-        title: 'Grupos',
-        description: 'Administra materias y grupos.',
-        route: 'grupos',
-        icon: faSchool,
-      },
       {
         title: 'Materias',
         description: 'Materias y clases dentro de la institución',
         route: 'materias',
         icon: faBook,
+      },
+      {
+        title: 'Inscripciones',
+        description: 'Materias y clases dentro de la institución',
+        route: 'inscripciones',
+        icon: faClipboard,
       },
       {
         title: 'Configuración',

@@ -1,14 +1,23 @@
 import { SchoolDashboardComponent } from './school-dashboard/school-dashboard.component';
-import { NewCicleDialogComponent } from './new-cicle-dialog/new-cicle-dialog.component';
+import { EnrollmentDialogComponent } from './enrollment-dialog/enrollment-dialog.component';
 import { SchoolCoursesDialogComponent } from './school-courses-dialog/school-courses-dialog.component';
 import { SchoolCoursesTableComponent } from './school-courses-table/school-courses-table.component';
+import { EnrollmentCourseDialogComponent } from './enrollment-course-dialog/enrollment-course-dialog.component';
+import { SchoolInstructionsComponent } from './school-instructions/school-instructions.component';
+import { UploadFileDialogComponent } from './upload-file/upload-file-dialog.component';
 export const schoolComponents: any[] = [
-  NewCicleDialogComponent,
+  EnrollmentDialogComponent,
+  EnrollmentCourseDialogComponent,
   SchoolCoursesDialogComponent,
   SchoolCoursesTableComponent,
   SchoolDashboardComponent,
+  SchoolInstructionsComponent,
+  UploadFileDialogComponent,
 ];
-export * from './new-cicle-dialog/new-cicle-dialog.component';
+export * from './enrollment-dialog/enrollment-dialog.component';
+export * from './enrollment-course-dialog/enrollment-course-dialog.component';
 export * from './school-courses-dialog/school-courses-dialog.component';
 export * from './school-courses-table/school-courses-table.component';
 export * from './school-dashboard/school-dashboard.component';
+export * from './school-instructions/school-instructions.component';
+export * from './upload-file/upload-file-dialog.component';

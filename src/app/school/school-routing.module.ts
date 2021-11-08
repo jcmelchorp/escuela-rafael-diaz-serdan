@@ -3,35 +3,35 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   SchoolDashboardComponent,
 } from './components';
-import { SchoolComponent, SchoolCoursesComponent } from './containers';
+import { EnrollmentComponent, SchoolComponent, SchoolCoursesComponent } from './containers';
+import { EnrollmentResolver } from './resolvers/enrollment.resolver';
 import { SchoolCoursesResolver } from './resolvers/school-courses.resolver';
 import { SchoolUsersResolver } from './resolvers/school-users.resolver';
+import { SchoolInstructionsComponent } from './components/school-instructions/school-instructions.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: SchoolComponent,
-    data: { breadcrumb: null },
+    resolve: { courses: SchoolCoursesResolver },
     children: [
-      {
+      /* {
         path: '',
         component: SchoolDashboardComponent,
-        data: { breadcrumb: 'Dirección' },
-      },
+        data: { breadcrumb: 'Dirección' }
+      }, */
       {
-        path: 'materias',
+        path: '',
         component: SchoolCoursesComponent,
-        resolve: { schoolUsers: SchoolCoursesResolver },
-        data: { breadcrumb: 'Materias' },
+        data: { breadcrumb: 'Materias' }
       },
     ],
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SchoolUsersResolver, SchoolCoursesResolver],
+  providers: [SchoolUsersResolver, SchoolCoursesResolver, EnrollmentResolver],
 })
 export class SchoolRoutingModule { }

@@ -1,42 +1,71 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { faBook, faSchool, faTools } from '@fortawesome/free-solid-svg-icons';
+import { NewAccountComponent, NewAccountConfirmComponent } from '@rds-accounts/components';
+import { AccountDomain } from '@rds-accounts/models/account-domain.model';
 import { User } from '@rds-auth/models/user.model';
+import { EnrollmentDialogComponent } from '@rds-school/components';
+import { EnrollmentsService } from '@rds-school/services/enrollments.service';
+import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
+import { NavLink } from '@rds-shared/models/nav-link';
+import { EnrollmentsEntityService } from '@rds-store/school/enrollments/enrollments-entity.service';
+import { Observable } from 'rxjs';
+import { tap, switchMap, map } from 'rxjs/operators';
+import { Enrollment, EnrollmentLabel } from '../../models/enrollment.model';
 
-
-import { NewCicleDialogComponent } from '../../components/new-cicle-dialog/new-cicle-dialog.component';
-import { SchoolService } from '../../services/school.service';
-import { NewAccountComponent } from '../../../accounts/components/new-account/new-account.component';
-import { NewAccountConfirmComponent } from '../../../accounts/components/new-account-confirm/new-account-confirm.component';
-import { AccountDomain } from '../../../accounts/models/account-domain.model';
 
 @Component({
   selector: 'app-school',
   templateUrl: './school.component.html',
   styleUrls: ['./school.component.scss'],
+  animations: [fadeInAnimation], //[@fadeIn]="'fadeIn'"
+
 })
 export class SchoolComponent implements OnInit {
   newUser: AccountDomain;
-  constructor(
-    private dialog: MatDialog,
-    private schoolService: SchoolService
-  ) { }
+  enrollments$: Observable<EnrollmentLabel[]>
+  enrollment$: Observable<Enrollment>
+  selectedEnrollmentId$: Observable<string>;
+  selectedId: string;
+  assigmentLinks: NavLink[];
 
-  ngOnInit(): void { }
-  newCicle() {
-    const dialogRef = this.dialog.open(NewCicleDialogComponent, {
+  constructor(
+
+    private dialog: MatDialog,
+    private enrollmentsService: EnrollmentsService,
+    private enrollmentsEntityService: EnrollmentsEntityService,
+  ) {
+    this.enrollments$ = this.enrollmentsService.getEnrollments();
+  }
+
+  ngOnInit(): void {
+    this.enrollment$ = this.enrollmentsService.getDefaultEnrollmentId()
+      .pipe(
+        tap(sel => this.selectedId = sel),
+        switchMap(id => this.enrollmentsEntityService.getByKey(id))
+      );
+  }
+  openEnrollmentDialog(enrollment?: Enrollment) {
+    const newEnrollment: Partial<Enrollment> = {};
+    const dialogRef = this.dialog.open(EnrollmentDialogComponent, {
       width: 'fit-content',
       minWidth: '300px',
       height: 'fit-content',
       minHeight: '200px',
-      data: { yearInit: '', yearFinal: '' },
+      data: enrollment ?
+        { enrollment, isNew: false } :
+        { enrollment: newEnrollment, isNew: true },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) {
         console.log('Creating New User Canceled');
       } else {
-        this.schoolService.createPeriod(result.yearInit, result.yearFinal);
+        if (result.isNew) {
+          this.enrollmentsEntityService.add(result.enrollment);
+        } else {
+          this.enrollmentsEntityService.update(result.enrollment.id, result.enrollment);
+        }
       }
     });
   }

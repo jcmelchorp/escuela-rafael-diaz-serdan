@@ -21,14 +21,11 @@ export class FirestoreService<T> implements IFirebase<T> {
     this.collection = collectionName;
     this.fsCollection = this.afs.collection<T>(this.collection);
   }
-  add(entity: T, id?: string): Observable<T> {
-    if (id) {
-      return from(this.fsCollection.doc(id).update(firebaseSerialize(entity)))
-        .pipe(take(1), map(_ => { return { id, ...entity } as T }));
-    } else {
-      return from(this.fsCollection.add(firebaseSerialize(entity)))
-        .pipe(take(1), map(_ => { return { id, ...entity } as T }));
-    }
+  add(entity: T): Observable<T> {
+    const key = this.afs.createId();
+    return from(this.fsCollection.doc(key).set(firebaseSerialize({ id: key, ...entity })))
+      .pipe(take(1), map(_ => { return { id: key, ...entity } as T }));
+
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     return from(this.fsCollection.doc<T>(id).update(firebaseSerialize(entity)))
@@ -36,15 +33,14 @@ export class FirestoreService<T> implements IFirebase<T> {
   }
   getById(id: string): Observable<T> {
     return this.fsCollection
-      .doc<T>(id).valueChanges({ idField: 'id' })
-      .pipe(take(1));
+      .doc<T>(id).valueChanges();
   }
   delete(id: string): Observable<string> {
     return from(this.fsCollection.doc<T>(id).delete())
       .pipe(take(1), map(_ => id));
   }
   list(): Observable<T[]> {
-    return this.fsCollection.valueChanges({ idField: 'id' }).pipe(take(1));
+    return this.fsCollection.valueChanges({ idField: 'id' });
   }
   getWithQuery(query: QueryParams): Observable<T[]> {
     return this.afs.collection<T>(this.collection, ref => ref.where(
