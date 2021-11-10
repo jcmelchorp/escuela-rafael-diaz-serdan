@@ -1,1 +1,23 @@
-<p>students-courses works!</p>
+<form [formGroup]="filterValues">
+  <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+    <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="name" placeholder="Buscar por nombre">
+      <button mat-icon-button matSuffix (click)="filterValues.controls.name.reset();$event.stopPropagation()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
+      <mat-label>Grado escolar</mat-label>
+      <mat-select formControlName="grade" placeholder="Selecciona un grado">
+        <mat-option [value]="">Todos los grados</mat-option>
+        <mat-option *ngFor="let key of gradeKeys" [value]="key">
+          {{key}}
+        </mat-option>
+      </mat-select>
+      <button mat-icon-button matSuffix (click)="filterValues.controls.grade.reset();$event.stopPropagation()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</form>

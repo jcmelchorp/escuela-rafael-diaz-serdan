@@ -11,8 +11,8 @@ import { StudentsCoursesComponent } from './containers/students-courses/students
 
 
 @NgModule({
-  declarations: [...schoolCoursesComponents, ...schoolCoursesContainers, StudentsCoursesComponent],
-  providers: [SchoolCoursesService, AssignedCoursesService,],
+  declarations: [...schoolCoursesComponents, ...schoolCoursesContainers],
+  providers: [SchoolCoursesService, AssignedCoursesService],
   imports: [
     SharedModule,
     SchoolCoursesRoutingModule

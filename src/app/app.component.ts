@@ -1,4 +1,5 @@
-import { ApplicationRef, Component, isDevMode } from '@angular/core';
+import { ApplicationRef, Component, isDevMode, OnInit } from '@angular/core';
+import { SeoService } from '@rds-shared/services';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
@@ -15,9 +16,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   </ngx-spinner>
   <router-outlet></router-outlet>`,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'escuela-rafael-diaz-serdan';
-  constructor(appRef: ApplicationRef) {
+  constructor(appRef: ApplicationRef, private seoService: SeoService) {
     if (isDevMode()) {
       appRef.isStable
         .pipe(debounceTime(200), distinctUntilChanged())
@@ -26,4 +27,13 @@ export class AppComponent {
         });
     }
   }
+  ngOnInit(): void {
+    this.seoService.titleInit();
+    this.seoService.generateTags({
+      title: this.title,
+      description: 'Aplicación de servicios escolares de la Escuela Rafael Díaz Serdán - Educación para la vida. Ubicada en la ciudad y puerto de Veracruz, México',
+      image: 'assets/screenshots/screenshot02.png'
+    });
+  }
+
 }

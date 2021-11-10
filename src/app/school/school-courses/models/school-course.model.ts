@@ -16,7 +16,7 @@ export interface AssignedCourse extends SchoolCourse {
 }
 
 export enum CourseType {
-  formativo,
-  optativo,
+  FORMATIVO = 'Formativo',
+  OPATTIVO = 'Optativo',
 }
 

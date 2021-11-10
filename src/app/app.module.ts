@@ -11,18 +11,21 @@ import { environment } from '@rds-env/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthModule } from '@rds-auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
-import { AngularFireModule } from '@angular/fire/compat';
+/* import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule, PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; */
 import { AppStoreModule } from '@rds-store/app-store.module';
-/* import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAnalytics, getAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth, getAuth, initializeAuth, indexedDBLocalPersistence, browserPopupRedirectResolver } from '@angular/fire/auth';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { providePerformance, getPerformance } from '@angular/fire/performance';
-import { connectAuthEmulatorInDevMode } from '@rds-env/emulators'; */
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth, initializeAuth, indexedDBLocalPersistence, browserPopupRedirectResolver, connectAuthEmulator } from '@angular/fire/auth';
+import { provideDatabase, getDatabase, connectDatabaseEmulator } from '@angular/fire/database';
+import { provideFirestore, getFirestore, connectFirestoreEmulator, enableMultiTabIndexedDbPersistence } from '@angular/fire/firestore';
+import { connectAuthEmulatorInDevMode } from '@rds-env/emulators';
+let resolvePersistenceEnabled: (enabled: boolean) => void;
+
+export const persistenceEnabled = new Promise<boolean>(resolve => {
+  resolvePersistenceEnabled = resolve;
+});
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,22 +51,40 @@ import { connectAuthEmulatorInDevMode } from '@rds-env/emulators'; */
       easing: 'ease-in',
       closeButton: true,
     }),
-    AngularFireModule.initializeApp(environment.firebase, 'sigio-rds'),
+    /* AngularFireModule.initializeApp(environment.firebase, 'sigio-rds'),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule.enablePersistence(),
-    /*     const firebaseApp = initializeApp({ });
-    const auth = getAuth();
-    onAuthStateChanged(auth, user => { console.log(user); });
-    provideAnalytics(() => getAnalytics()),
-      provideAuth(() => getAuth()),
-      provideDatabase(() => getDatabase()),
-      provideFirestore(() => getFirestore()),
-      providePerformance(() => getPerformance()), */
+    AngularFirestoreModule.enablePersistence(), */
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => {
+      const auth = getAuth();
+      if (environment.useEmulators) {
+        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+      }
+      return auth;
+    }),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      if (environment.useEmulators) {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+      enableMultiTabIndexedDbPersistence(firestore).then(
+        () => resolvePersistenceEnabled(true),
+        () => resolvePersistenceEnabled(false)
+      );
+      return firestore;
+    }),
+    provideDatabase(() => {
+      const database = getDatabase();
+      if (environment.useEmulators) {
+        connectDatabaseEmulator(database, 'localhost', 9000);
+      }
+      return database;
+    })
   ],
   providers: [
-    { provide: PERSISTENCE, useValue: 'local' },
-    { provide: USE_DEVICE_LANGUAGE, useValue: true },
+    /*   { provide: PERSISTENCE, useValue: 'local' },
+      { provide: USE_DEVICE_LANGUAGE, useValue: true }, */
     /* ScreenTrackingService, UserTrackingService */
   ],
   bootstrap: [AppComponent]

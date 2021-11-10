@@ -91,6 +91,11 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromAssignedCourses.entityCollectionName]: {
+    filterFn: (entities: AssignedCourse[], { name, grade, description }: Partial<AssignedCourse>) =>
+      entities
+        .filter((e) => (name ? e.name === name : true))
+        .filter((e) => (grade ? e.grade === grade : true))
+        .filter((e) => (description ? e.description === description : true)),
     selectId: (assignedCourse: AssignedCourse) => assignedCourse.id,
     entityDispatcherOptions: {
       optimisticAdd: false,
@@ -100,77 +105,77 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticUpsert: false,
     },
   },
-  [fromCourse.entityCollectionName]: {
+  /* [fromCourse.entityCollectionName]: {
     entityDispatcherOptions: {
       optimisticAdd: true,
       optimisticUpdate: true,
       optimisticSaveEntities: true,
     },
     selectId: (course: gapi.client.classroom.Course) => course.id,
-  },
-  [fromStudent.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-    },
-    selectId: (student: gapi.client.classroom.Student) => student.userId,
-  },
-  [fromTeacher.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-    },
-    selectId: (teacher: gapi.client.classroom.Teacher) => teacher.userId,
-  },
-  [fromCourseWork.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-    },
-    selectId: (courseWork: gapi.client.classroom.CourseWork) => courseWork.id,
-  },
-  [fromUserProfile.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
-    },
-    selectId: (profile: gapi.client.classroom.UserProfile) => profile.id,
-  },
-  [fromGuardian.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
-    },
-    selectId: (guardian: gapi.client.classroom.UserProfile) => guardian.id,
-  },
-  [fromAnnouncement.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
-    },
-    selectId: (announcement: gapi.client.classroom.Announcement) =>
-      announcement.id,
-  },
-  [fromStudentSubmission.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
-    },
-    selectId: (studentSubmission: gapi.client.classroom.StudentSubmission) =>
-      studentSubmission.id,
-  },
-  [fromTopic.entityCollectionName]: {
-    entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
-    },
-    selectId: (topics: gapi.client.classroom.Topic) => topics.topicId,
-  },
+  }, */
+  /*  [fromStudent.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+     },
+     selectId: (student: gapi.client.classroom.Student) => student.userId,
+   },
+   [fromTeacher.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+     },
+     selectId: (teacher: gapi.client.classroom.Teacher) => teacher.userId,
+   },
+   [fromCourseWork.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+     },
+     selectId: (courseWork: gapi.client.classroom.CourseWork) => courseWork.id,
+   },
+   [fromUserProfile.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+       optimisticSaveEntities: true,
+     },
+     selectId: (profile: gapi.client.classroom.UserProfile) => profile.id,
+   },
+   [fromGuardian.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+       optimisticSaveEntities: true,
+     },
+     selectId: (guardian: gapi.client.classroom.UserProfile) => guardian.id,
+   },
+   [fromAnnouncement.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+       optimisticSaveEntities: true,
+     },
+     selectId: (announcement: gapi.client.classroom.Announcement) =>
+       announcement.id,
+   },
+   [fromStudentSubmission.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+       optimisticSaveEntities: true,
+     },
+     selectId: (studentSubmission: gapi.client.classroom.StudentSubmission) =>
+       studentSubmission.id,
+   },
+   [fromTopic.entityCollectionName]: {
+     entityDispatcherOptions: {
+       optimisticAdd: true,
+       optimisticUpdate: true,
+       optimisticSaveEntities: true,
+     },
+     selectId: (topics: gapi.client.classroom.Topic) => topics.topicId,
+   }, */
 };
 
 const pluralNames = {

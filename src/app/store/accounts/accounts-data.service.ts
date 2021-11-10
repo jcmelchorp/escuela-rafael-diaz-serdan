@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DefaultDataService, HttpUrlGenerator } from '@ngrx/data';
+import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsService } from '@rds-accounts/services/accounts.service';
@@ -21,11 +21,11 @@ export class AccountsDataService extends DefaultDataService<User> {
   }
 
   getAll(): Observable<User[]> {
-    return this.accountsService.getList().pipe(take(1), map(users => users));
+    return this.accountsService.list().pipe(take(1), map(users => users));
   }
 
-  getWithQuery(grade: string) {
-    return this.accountsService.getList().pipe(map(users => users.filter(u => u.grade == grade)));
+  getWithQuery(value: any): Observable<User[]> {
+    return this.accountsService.getWithQuery('role', value);
   }
   getByKey(userId: string): Observable<User> {
     return this.getById(userId)
@@ -37,7 +37,7 @@ export class AccountsDataService extends DefaultDataService<User> {
     return this.accountsService.getById(userId);
   }
   add(user: Partial<User>): Observable<User> {
-    return this.accountsService.create(user);
+    return this.accountsService.add(user as User);
   }
   update(update: Update<User>): Observable<User> {
     return this.accountsService.update(update.id.toString(), update.changes);

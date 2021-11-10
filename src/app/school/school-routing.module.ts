@@ -8,6 +8,9 @@ import { EnrollmentComponent } from './enrollments/containers/enrollment/enrollm
 import { SchoolCoursesComponent } from './school-courses/containers/school-courses/school-courses.component';
 import { EnrollmentResolver } from './enrollments/resolvers/enrollment.resolver';
 import { NotFoundComponent } from '@rds-shared/components';
+import { StudentsCoursesComponent } from './school-courses/containers/students-courses/students-courses.component';
+import { TeachersResolver } from './school-courses/resolvers/teachers.resolver';
+import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
 const routes: Routes = [
   {
     path: '',
@@ -16,6 +19,7 @@ const routes: Routes = [
       {
         path: '',
         component: SchoolDashboardComponent,
+        resolve: { teachers: AccountsResolver },
         data: { breadcrumb: 'Dirección' }
       },
       {
@@ -23,6 +27,12 @@ const routes: Routes = [
         component: SchoolCoursesComponent,
         resolve: { courses: AssignedCoursesResolver },
         data: { breadcrumb: 'Materias' }
+      },
+      {
+        path: ':courseId',
+        component: StudentsCoursesComponent,
+        resolve: { students: SchoolUsersResolver },
+        data: { breadcrumb: 'Alumnos' }
       },
       {
         path: 'inscripciones',
@@ -40,6 +50,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [AssignedCoursesResolver, SchoolUsersResolver, EnrollmentResolver],
+  providers: [AssignedCoursesResolver, SchoolUsersResolver, EnrollmentResolver, TeachersResolver, AccountsResolver],
 })
 export class SchoolRoutingModule { }

@@ -33,9 +33,9 @@ export class SchoolCourseDialogComponent {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.keys = Object.keys(this.types).filter((x) => x.length > 5);
-    this.cycleKeys = Object.keys(this.cycles).filter((x) => x.length > 5);
-    this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
+    this.keys = Object.keys(this.types);
+    this.cycleKeys = Object.keys(this.cycles);
+    this.slevelKeys = Object.keys(this.slevels);
     this.teachers$ = this.accountEntityService.entities$.pipe(
       map((users) => users.filter((u) => u.isTeacher == true))
     );
@@ -46,6 +46,7 @@ export class SchoolCourseDialogComponent {
       cycle: new FormControl(this.data.course.cycle),
       description: new FormControl(this.data.course.description),
       teacherId: new FormControl(this.data.course.teacherId),
+      priority: new FormControl(this.data.course.priority),
     });
     this.teachers$ = this.accountEntityService.entities$.pipe(
       map((users) => {
@@ -58,7 +59,7 @@ export class SchoolCourseDialogComponent {
     this.formData.reset();
   }
   saveData() {
-    const course: AssignedCourse = {
+    const course: Partial<AssignedCourse> = {
       id: this.data.course.id,
       name: this.formData.controls.name.value,
       priority: this.data.course.priority,
@@ -68,6 +69,7 @@ export class SchoolCourseDialogComponent {
       teacherId: this.formData.controls.teacherId.value,
       grade: this.formData.controls.grade.value,
     };
+    //!this.data.isNew ? course.id = this.data.course.id : null;
     this.dialogRef.close({
       course: course,
       isNew: this.data.isNew,

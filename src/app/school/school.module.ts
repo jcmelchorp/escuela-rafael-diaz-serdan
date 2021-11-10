@@ -22,9 +22,7 @@ import { AssignedCoursesDataService } from '@rds-store/school/assigned-courses/a
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { EnrollmentsDataService } from '@rds-store/school/enrollments/enrollments-data.service';
 import { EnrollmentsEntityService } from '@rds-store/school/enrollments/enrollments-entity.service';
-
 import { SchoolDashboardComponent } from './school-dashboard/school-dashboard.component';
-import { EnrollmentsService } from './enrollments/services/enrollments.service';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
 
 

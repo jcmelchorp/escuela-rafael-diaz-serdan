@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,7 @@ import { SchoolCourseDialogComponent } from '../../components/school-courses-dia
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { UploadFileDialogComponent } from '@rds-shared/components/upload-file-dialog/upload-file-dialog.component';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -23,7 +24,7 @@ export class SchoolCoursesComponent implements OnInit {
   filterValues: FormGroup;
   schoolCourses$: Observable<AssignedCourse[]>;
   filteredEntities$: Observable<AssignedCourse[]>;
-  resCount$: Observable<number>;
+  coursesCount$: Observable<number>;
   willDownload = false;
   gradeKeys;
   grades = SchoolLevel;
@@ -32,8 +33,8 @@ export class SchoolCoursesComponent implements OnInit {
     private assignedCourseEntityService: AssignedCoursesEntityService,
     private dialog: MatDialog
   ) {
-    this.resCount$ = this.assignedCourseEntityService.count$
-    this.gradeKeys = Object.keys(this.grades).filter((x) => x.length > 2);
+    this.coursesCount$ = this.assignedCourseEntityService.count$
+    this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
       grade: new FormControl(),
       name: new FormControl(),
@@ -52,25 +53,28 @@ export class SchoolCoursesComponent implements OnInit {
     this.filteredEntities$ = this.assignedCourseEntityService.filteredEntities$;
   }
 
+
   ngOnInit() {
     this.schoolCourses$ = this.assignedCourseEntityService.entities$;
   }
 
 
   openSchoolCourseDialog(course?: AssignedCourse) {
+    let coursesInGrade: number;
+    /* this.schoolCourses$.subscribe((courses) => coursesInGrade = courses.filter((x) => x.grade === course.grade).length); */
     const newCourse: Partial<AssignedCourse> = {};
-    console.log(course)
+    /* priority: coursesInGrade
+  }; */
     const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
       width: 'fit-content',
       height: 'fit-content',
       data: course
-        ? { course, isNew: false }
+        ? { course: course, isNew: false }
         : { course: newCourse, isNew: true },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.isNew) {
-        if (result) {
-          console.log(result.course)
+      if (result) {
+        if (result.isNew) {
           this.assignedCourseEntityService.add(result.course);
         } else {
           this.assignedCourseEntityService.update(result.course);

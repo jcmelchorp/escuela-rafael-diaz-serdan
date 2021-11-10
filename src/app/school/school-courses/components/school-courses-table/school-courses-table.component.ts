@@ -1,6 +1,16 @@
 import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { AssignedCourse } from '../../models/school-course.model';
+import { AccountsEntityService } from '../../../../store/accounts/accounts-entity.service';
+import { User } from '@rds-auth/models/user.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ConfirmDialogComponent } from '@rds-shared/components';
+import { MatDialog } from '@angular/material/dialog';
+import { AssignedCoursesEntityService } from '../../../../store/school/assigned-courses/assigned-courses-entity.service';
 
 
 export class Group {
@@ -16,35 +26,39 @@ export class Group {
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
   styleUrls: ['./school-courses-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
   @Input() data: AssignedCourse[];
   @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | Group>>;
+  @ViewChild(MatSort) sort!: MatSort;
   @Output() onClickEdit = new EventEmitter<AssignedCourse>();
   @Output() onClickDelete = new EventEmitter<string>();
+  teachers$: Observable<User[]>;
+  slevels = SchoolLevel;
   dataSource = new MatTableDataSource<any | Group>([]);
   //_alldata: any[];
   columns: any[];
   displayedColumns: string[];
   groupByColumns: string[] = [];
   isLoading: boolean;
-  constructor(
-  ) {
+  constructor(private accountsEntityService: AccountsEntityService, private dialog: MatDialog) {
     this.columns = [
-      { field: 'priority', label: '#' },
       { field: 'grade', label: 'Grado' },
+      { field: 'priority', label: '#' },
       { field: 'name', label: 'Nombre' },
-
+      { field: 'teacherId', label: 'Profesor' }
     ];
     this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
     this.groupByColumns = ['grade'];
-
+    this.teachers$ = this.accountsEntityService.entities$.pipe(
+      map(teachers => teachers.filter(teacher => teacher.role === 'profesores'))
+    );
   }
 
   ngOnInit() {
-    this.isLoading = true;
-    this.dataSource.data = this.addGroups(this.data, this.groupByColumns).sort((a, b) => {
+
+    this.dataSource.data = this.addGroups(this.data.sort((a, b) => {
       if (a.priority < b.priority) {
         return -1;
       }
@@ -52,13 +66,15 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
         return 1;
       }
       return 0;
-    });
+    }), this.groupByColumns);
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
     this.dataSource.filter = performance.now().toString();
+
     this.isLoading = false;
   }
 
   ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
     this.table.dataSource = this.dataSource;
   }
   groupBy(event, column) {
@@ -90,15 +106,7 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
     ;
     event.stopPropagation();
     this.checkGroupByColumn(column.field, false);
-    this.dataSource.data = this.addGroups(this.data, this.groupByColumns).sort((a, b) => {
-      if (a[this.groupByColumns[this.groupByColumns.length - 2]] < b[this.groupByColumns[this.groupByColumns.length - 2]]) {
-        return -1;
-      }
-      if (a[this.groupByColumns[this.groupByColumns.length - 2]] > b[this.groupByColumns[this.groupByColumns.length - 2]]) {
-        return 1;
-      }
-      return 0;
-    });
+    this.dataSource.data = this.addGroups(this.data, this.groupByColumns);
     this.dataSource.filter = performance.now().toString();
   }
   // below is for grid row grouping
@@ -183,7 +191,29 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
     let completeCourse: AssignedCourse = this.data.find(c => c.id === course.id);
     this.onClickEdit.emit(completeCourse);
   }
-  deleteAssignedCourse(course?: AssignedCourse) {
-    this.onClickDelete.emit(course.id);
+  deleteAssignedCourse(course: AssignedCourse) {
+    console.log(course)
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: 'fit-content',
+      height: 'fit-content',
+      data: {
+        id: course.id,
+        action: 'elimina',
+        subject: 'Clase',
+        confirm: false,
+        title: `¿Está seguro de que desea eliminar la clase ${course.name} de ${course.grade}?`,
+        message:
+          'La clase se eliminará de la base de datos.',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.confirm) {
+        console.log(result.id)
+        this.onClickDelete.emit(result.id);
+      } else {
+        console.log('Dialog closed without changes')
+      }
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { UserCredential } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
@@ -44,14 +45,13 @@ export class AuthEffects implements OnInitEffects {
       ofType(authAction.signIn),
       switchMap(() =>
         this.authService.signInWithPopup().pipe(
-          map((res) => {
+          map((res: UserCredential) => {
             return {
               id: res.user?.providerData[0]?.uid,
               primaryEmail: res.user?.email,
               photoUrl: res.user?.providerData[0]?.photoURL,
               authPhotoUrl: res.user?.photoURL,
               displayName: res.user?.displayName,
-              isNew: res.additionalUserInfo?.isNewUser,
               isVerified: res.user?.emailVerified,
               creationTime: res.user?.metadata.creationTime,
               lastLoginTime: res.user?.metadata.lastSignInTime,
@@ -59,14 +59,14 @@ export class AuthEffects implements OnInitEffects {
             };
           }),
           switchMap((user) => {
-            if (user.isNew) {
-              return [
-                authAction.signInSuccess({ user }),
-                authAction.saveUser({ user }),
-              ];
-            } else {
-              return [authAction.signInSuccess({ user })];
-            }
+           /*  if (user.isNew) {
+              return */ [
+              authAction.signInSuccess({ user }),
+              authAction.saveUser({ user }),
+            ];
+            /* } else { */
+            return [authAction.signInSuccess({ user })];
+            /*  } */
           }),
           catchError((error) => of(authAction.notAuthenticated({ error })))
         )

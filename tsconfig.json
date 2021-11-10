@@ -4,8 +4,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "exceljs": [
-        "node_modules/exceljs/dist/exceljs.min"
+      "@emulator/*": [
+        "src/emulator/*"
       ],
       "@rds-school/*": [
         "src/app/school/*"
