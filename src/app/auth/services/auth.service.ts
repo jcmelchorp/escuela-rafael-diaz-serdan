@@ -1,14 +1,6 @@
-import { collection, Firestore, orderBy, query } from '@angular/fire/firestore';
 import { Injectable, Optional } from '@angular/core';
 import { User as AuthUser } from '@rds-auth/models/user.model';
 import firebase from 'firebase/compat/app';
-/* import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; */
-/* import { Database } from '@angular/fire/compat/database';
-import { Firestore } from '@angular/fire/compat/firestore';
-import { traceUntilFirst } from '@angular/fire/performance';
-import { Auth, authState, getAdditionalUserInfo, GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup, User, UserCredential } from '@angular/fire/auth';*/
 import { Observable, of, from, Subscription, EMPTY } from 'rxjs';
 import { switchMap, map, take, pluck, shareReplay } from 'rxjs/operators';
 import { Database, objectVal, push, ref, update } from '@angular/fire/database';
@@ -36,24 +28,26 @@ export class AuthService {
 
   }
 
-  getUser(id: string): Observable<User> {
+  getUser(id: string): Observable<AuthUser> {
     /* return this.afDatabase
       .object<User>(`${this.collection}/${id}`)
       .valueChanges(); */
     const doc = ref(this.database, `${this.collection}/${id}`);
-    return objectVal<User>(doc, { keyField: 'id' })
+    return objectVal<AuthUser>(doc, { keyField: 'id' })
   }
-  getAuthUser(): Observable<any> {
+  getAuthUser(): Observable<AuthUser | null> {
     return authState(this.auth).pipe(
       switchMap((user: User) => {
         if (user) {
           const doc = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
           return objectVal<AuthUser>(doc, { keyField: 'id' });
-        };
+        } else {
+          return of(null)
+        }
       }
       ));
   }
-  getAuthState(): Observable<firebase.User> {
+  getAuthState(): Observable<AuthUser> {
     return this.getAuthUser()
   }
   signInWithCredential(

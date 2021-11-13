@@ -1,7 +1,7 @@
 <mat-table matSort>
   <ng-container *ngFor="let column of columns; let i = index" matColumnDef="{{ column.field }}">
-    <mat-header-cell mat-sort-header *matHeaderCellDef>
-      <button mat-stroked-button [disabled]="column.field=='priority'||column.field=='name'"
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-button [disabled]="column.field=='priority'||column.field=='name'||column.field=='teacherId'"
         color="{{groupByColumns.includes(column.field)?'primary':'default'}}" (click)="groupByColumns.includes(column.field)
             ? unGroupBy($event, column)
             : groupBy($event, column)">
@@ -15,7 +15,7 @@
       <div *ngSwitchCase="column.field==='grade'">
         <mat-cell *matCellDef="let row">{{slevels[row[column.field]]}} </mat-cell>
       </div>
-      <div *ngSwitchCase="column.field==='teacherId'">
+      <!--  <div *ngSwitchCase="column.field==='teacherId'">
         <mat-cell *matCellDef="let row">
           <mat-form-field class="d-block" appearance="outline">
             <mat-label>Profesor</mat-label>
@@ -27,7 +27,7 @@
             </mat-select>
           </mat-form-field>
         </mat-cell>
-      </div>
+      </div> -->
       <div *ngSwitchDefault>
         <mat-cell *matCellDef="let row">{{row[column.field]}}</mat-cell>
       </div>
@@ -43,12 +43,13 @@
       <mat-icon color="warn" mat-icon-button matTooltip="Elimina esta clase" (click)="deleteAssignedCourse(row)">
         delete
       </mat-icon>
-      <mat-icon *ngIf="!row.teacherId" mat-icon-button matTooltip="Asigna un profesor a esta clase"
-        (click)="addTeacherToCourse(row)">
+      <!-- <mat-icon *ngIf="!row.teacherId" mat-icon-button matTooltip="Asigna un profesor a esta clase"
+        (click)="openTeacherToCourse(row)">
         co_present
-      </mat-icon>
-      <mat-icon mat-icon-button matTooltip="Asigna alumnos a esta clase">groups
-      </mat-icon>
+      </mat-icon> -->
+      <button mat-icon-button matBadge=" {{row.students?.lenght}}" (click)="openStudentsToCourse(row)">
+        <mat-icon matTooltip=" Asigna alumnos a esta clase">groups </mat-icon>
+      </button>
     </mat-cell>
   </ng-container>
 
@@ -57,7 +58,12 @@
       No se encontraron elementos
     </mat-footer-cell>
   </ng-container>
-
+  <!-- Expanded Content Column - The detail row is made up of this one column -->
+  <!--  <ng-container matColumnDef="expandedDetail">
+    <mat-cell *matCellDef="let detail">
+      The symbol for {{detail.element.name}} is {{detail.element.symbol}}
+    </mat-cell>
+  </ng-container> -->
   <ng-container matColumnDef="loading">
     <mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
       <div style="display: flex; justify-content: center; align-items: center; background: white;">
@@ -66,8 +72,15 @@
       </div>
     </mat-footer-cell>
   </ng-container>
+
+  <!--
+  <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
+    [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
+  <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+    [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden">
+  </mat-row> -->
   <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   <mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource && dataSource.data.length > 0"></mat-footer-row>
   <mat-footer-row *matFooterRowDef="['loading']" [hidden]="dataSource !== undefined"></mat-footer-row>
   <!-- Group header -->
@@ -83,5 +96,6 @@
 
   <mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup" (click)="groupHeaderClick(row)">
   </mat-row>
+
 
 </mat-table>

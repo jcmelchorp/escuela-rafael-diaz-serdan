@@ -5,10 +5,9 @@ import { faTimes, faBook } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@rds-auth/models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CourseType, SchoolCourse, AssignedCourse } from '../../models/school-course.model';
+import { CourseType, SchoolCourse, AssignedCourse, Cycle } from '../../models/school-course.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
-import { Cycle } from '../../models/cycle.enum';
 
 @Component({
   templateUrl: './school-course-dialog.component.html',
@@ -48,11 +47,7 @@ export class SchoolCourseDialogComponent {
       teacherId: new FormControl(this.data.course.teacherId),
       priority: new FormControl(this.data.course.priority),
     });
-    this.teachers$ = this.accountEntityService.entities$.pipe(
-      map((users) => {
-        return users.filter((x) => x.isTeacher == true && x.suspended == false);
-      })
-    );
+
   }
 
   resetData() {

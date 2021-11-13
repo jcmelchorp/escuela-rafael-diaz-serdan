@@ -7,6 +7,12 @@
       "@emulator/*": [
         "src/emulator/*"
       ],
+      "@rds-admin/*": [
+        "src/app/admin/*"
+      ],
+      "@rds-env/*": [
+        "src/environments/*"
+      ],
       "@rds-school/*": [
         "src/app/school/*"
       ],
@@ -31,11 +37,8 @@
       "@rds-store/*": [
         "src/app/store/*"
       ],
-      "@rds-admin/*": [
-        "src/app/admin/*"
-      ],
-      "@rds-env/*": [
-        "src/environments/*"
+      "@rds-profile/*": [
+        "src/app/profile/*"
       ],
     },
     "outDir": "./dist/out-tsc",

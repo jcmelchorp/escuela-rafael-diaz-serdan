@@ -45,8 +45,6 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
   getById(id: string): Observable<T> {
     const refCollection = doc(this.afs, this.tCollection, id);
     return from(getDoc(refCollection)).pipe(map(x => x.data() as T));
-    /* return this.fsCollection
-      .doc<T>(id).valueChanges({ idField: 'id' }); */
   }
   delete(id: string): Observable<string> {
     const refCollection = doc(this.afs, `${this.tCollection}/${id}`);

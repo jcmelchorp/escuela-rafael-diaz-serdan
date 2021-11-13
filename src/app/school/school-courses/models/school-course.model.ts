@@ -5,18 +5,27 @@ export interface SchoolCourse {
   name: string;
   description: string;
   grade: SchoolLevel;
-  priority: number;
   courseType: CourseType;
 }
-export interface AssignedCourse extends SchoolCourse {
+export class AssignedCourse implements SchoolCourse {
+  id: string;
+  name: string;
+  description: string;
+  grade: SchoolLevel;
+  courseType: CourseType;
   teacherId: string;
   cycle: string;
-  studentIds?: string[];
-
+  priority: number;
+  students: string[];
 }
 
 export enum CourseType {
   FORMATIVO = 'Formativo',
-  OPATTIVO = 'Optativo',
+  OPTATIVO = 'Optativo',
 }
 
+export enum Cycle {
+  CE20202021 = '2020-2021',
+  CE20212022 = '2021-2022',
+  CE20222023 = '2022-2023',
+}

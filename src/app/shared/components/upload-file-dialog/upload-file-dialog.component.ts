@@ -1,8 +1,8 @@
 import { Component, Directive, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSelectionList } from "@angular/material/list";
-import { SchoolCourse } from "@rds-school/school-courses/models/school-course.model";
 import * as XLSX from 'xlsx';
+import { AssignedCourse } from '../../../school/school-courses/models/school-course.model';
 @Component({
   styleUrls: ['upload-file-dialog.component.scss'],
   templateUrl: 'upload-file-dialog.component.html',
@@ -12,7 +12,7 @@ export class UploadFileDialogComponent {
   @ViewChild('selectedCourses') selectedCourses: MatSelectionList;
   constructor(
     private dialogRef: MatDialogRef<UploadFileDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { output: SchoolCourse[] }
+    @Inject(MAT_DIALOG_DATA) public data: { output: AssignedCourse[] }
   ) {
 
   }
@@ -35,14 +35,17 @@ export class UploadFileDialogComponent {
       const outputArray = XLSX.utils.sheet_to_json(ws, { header: 1 });
       outputArray.forEach((row, i) => {
         if (i > 0) {
-          const course: Partial<SchoolCourse> = {
+          const course: Partial<AssignedCourse> = {
             priority: row[0],
             grade: row[1],
             name: row[2],
             courseType: row[3],
             description: row[4],
+            cycle: row[5],
+            teacherId: row[6],
+            students: []
           };
-          this.data.output.push(course as SchoolCourse);
+          this.data.output.push(course as AssignedCourse);
         }
       });
     };

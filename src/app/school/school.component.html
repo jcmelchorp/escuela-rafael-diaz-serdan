@@ -1,11 +1,15 @@
 <div class="p-4">
   <p class="view-title">Dirección</p>
   <p class="view-subtitle">Gestiona usuarios, grupos, clases y horarios en la institución.</p>
-  <!-- <div *ngIf="(enrollment$|async) as enrollment" class="py-2"> -->
-  <div class="py-2">
-    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="start start" fxLayoutGap="10px"
-      fxLayoutGap.lt-sm="2px">
-      <mat-form-field fxFlex="1 0 calc(60% - 10px)" appearance="outline">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- <div *ngIf="(enrollment$|async) as enrollment" class="py-2"> -->
+<!--  <div class="pt-2">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="start start">
+      <mat-form-field fxFlex="1 0 calc(60% - 5px)" appearance="outline">
         <mat-label>Ciclo escolar</mat-label>
         <mat-select [(ngModel)]="selectedId" placeholder="Selecciona un ciclo escolar">
           <mat-option [value]="">Selecciona un ciclo escolar</mat-option>
@@ -14,15 +18,14 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div fxFlex="1 0 calc(20% - 10px)">
+      <div fxFlex="1 0 calc(20% - 5px)">
         <button mat-raised-button matTooltip="Nuevo ciclo escolar" (click)="openEnrollmentDialog()">
           Nuevo ciclo escolar
         </button>
       </div>
-    </div>
-    <router-outlet></router-outlet>
-  </div>
-</div>
+    </div> -->
+
+<!--  </div> -->
 <button mat-fab id="new-user" matTooltip="Nuevo usuario" (click)="openSaveUser()">
   <mat-icon>person_add</mat-icon>
 </button>

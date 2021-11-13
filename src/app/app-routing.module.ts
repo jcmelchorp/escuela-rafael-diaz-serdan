@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, data: { breadcrumb: null } },
       {
-        path: 'accounts',
+        path: 'usuarios',
         loadChildren: () => import('./accounts/accounts.module').then(
           m => m.AccountsModule),
         canActivate: [AdminGuard],
@@ -28,11 +28,16 @@ const routes: Routes = [
         data: { breadcrumb: null }
       },
       {
+        path: 'perfil',
+        loadChildren: () => import('./profile/profile.module').then(
+          m => m.ProfileModule),
+        canActivate: [AuthGuard],
+        data: { breadcrumb: null }
+      },
+      {
         path: 'gsuite',
-        loadChildren: () =>
-          import('@rds-classroom/classroom.module').then(
-            (m) => m.ClassroomModule
-          ),
+        loadChildren: () => import('@rds-classroom/classroom.module').then(
+          (m) => m.ClassroomModule),
         canActivate: [AuthGuard],
         data: { breadcrumb: 'Google GSuite' },
       },
@@ -45,15 +50,13 @@ const routes: Routes = [
       {
         path: '**',
         component: NotFoundComponent,
-      },
-    ],
-  },
-
-
+      }
+    ]
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

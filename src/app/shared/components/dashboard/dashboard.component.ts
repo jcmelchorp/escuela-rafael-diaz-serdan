@@ -36,7 +36,7 @@ export class DashboardComponent {
       {
         title: 'Alumnos',
         description: 'Accede a toda tu información como alumno.',
-        route: 'user',
+        route: 'perfil',
         imgUrl: 'assets/images/assignment-grades2.png',
         access: this.isOnline$,
       },
@@ -55,10 +55,18 @@ export class DashboardComponent {
         access: this.isAdmin$,
       },
       {
-        title: 'Cuentas de usuario',
+        title: 'Cuenta institucional',
         description: 'Manejo de usuarios de la institución',
-        route: 'accounts',
-        imgUrl: 'assets/images/assignment-grades2.png',
+        route: 'usuarios',
+        imgUrl: 'assets/images/assignment-image2.png',
+        access: this.isTeacher$ || this.isAdmin$,
+
+      },
+      {
+        title: 'Usuarios de Google',
+        description: 'Manejo de usuarios de Google Workspace',
+        route: 'usuarios',
+        imgUrl: 'assets/images/dashboard-google.png',
         access: this.isTeacher$ || this.isAdmin$,
 
       },
@@ -66,16 +74,16 @@ export class DashboardComponent {
         title: 'Funciones de G Suite',
         description: 'Administra Google Classroom y Google Admin Directory.',
         route: 'gsuite',
-        imgUrl: 'assets/images/dashboard-google.png',
+        imgUrl: 'assets/images/google-admin-img.png',
         access: (this.isTeacher$ || this.isAdmin$)
-      }
-      /*  {
-         title: 'Cuentas de usuario de Google',
-         description: 'Manejo de usuarios de Google Workspace',
-         route: 'admin',
-         imgUrl: 'assets/images/google-admin-img.png',
-         access: this.isTeacher$ || this.isAdmin$,
-       }, */
+      },
+      {
+        title: 'Profesores',
+        description: 'Espacio de profesores.',
+        route: 'profesores',
+        imgUrl: 'assets/images/google-admin-img.png',
+        access: this.isTeacher$ || this.isAdmin$,
+      },
     ];
   }
 }

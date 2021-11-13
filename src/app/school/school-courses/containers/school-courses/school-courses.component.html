@@ -37,9 +37,10 @@
         </button>
       </div>
     </h2>
+    <div>Agrupar elementos por:</div>
   </div>
   <app-school-courses-table [data]="filteredEntities" (onClickDelete)="handleCourseDelete($event)"
-    (onClickEdit)="openSchoolCourseDialog($event)">
+    (onClickEdit)="openSchoolCourseDialog($event)" (onClickStudents)="editCourse($event)">
   </app-school-courses-table>
 </div>
 <ng-template #spinner>

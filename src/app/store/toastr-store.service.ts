@@ -12,22 +12,22 @@ export class ToastrStoreService {
 
   constructor(actions$: Actions, toast: ToastrService) {
     actions$.pipe(
-      ofType(),
+      ofEntityOp(),
       filter(
         (ea: EntityAction) =>
-          ea.payload.entityOp.endsWith(OP_SUCCESS)
-      )
+          (ea.payload.entityOp.endsWith(OP_SUCCESS) && !ea.payload.entityOp.includes('query'))
+      ),
     )
       // this service never dies so no need to unsubscribe
       .subscribe(action =>
         toast.success(
-          `${action.payload.entityName} action`,
-          action.payload.entityOp
+          `${action.payload.entityOp} action`,
+          action.payload.entityName
         )
       );
 
     actions$.pipe(
-      ofType(),
+      ofEntityOp(),
       filter(
         (ea: EntityAction) =>
           ea.payload.entityOp.endsWith(OP_ERROR)

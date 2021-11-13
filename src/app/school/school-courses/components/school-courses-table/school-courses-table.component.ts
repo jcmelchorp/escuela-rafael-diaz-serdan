@@ -11,6 +11,8 @@ import { map } from 'rxjs/operators';
 import { ConfirmDialogComponent } from '@rds-shared/components';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignedCoursesEntityService } from '../../../../store/school/assigned-courses/assigned-courses-entity.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AddStudentsCoursesComponent } from '../add-students-courses/add-students-courses.component';
 
 
 export class Group {
@@ -26,14 +28,24 @@ export class Group {
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
   styleUrls: ['./school-courses-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
+
 export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
   @Input() data: AssignedCourse[];
   @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | Group>>;
   @ViewChild(MatSort) sort!: MatSort;
   @Output() onClickEdit = new EventEmitter<AssignedCourse>();
   @Output() onClickDelete = new EventEmitter<string>();
+  @Output() onClickStudents = new EventEmitter<AssignedCourse>();
+
   teachers$: Observable<User[]>;
   slevels = SchoolLevel;
   dataSource = new MatTableDataSource<any | Group>([]);
@@ -42,15 +54,18 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[];
   groupByColumns: string[] = [];
   isLoading: boolean;
+  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
+  expandedElement: any;
   constructor(private accountsEntityService: AccountsEntityService, private dialog: MatDialog) {
     this.columns = [
+      { field: 'cycle', label: 'Ciclo escolar' },
       { field: 'grade', label: 'Grado' },
       { field: 'priority', label: '#' },
       { field: 'name', label: 'Nombre' },
       { field: 'teacherId', label: 'Profesor' }
     ];
     this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
-    this.groupByColumns = ['grade'];
+    this.groupByColumns = ['cycle', 'grade'];
     this.teachers$ = this.accountsEntityService.entities$.pipe(
       map(teachers => teachers.filter(teacher => teacher.role === 'profesores'))
     );
@@ -187,16 +202,29 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
     return item.level;
   }
 
+  openStudentsToCourse(row) {
+    const dialogRef = this.dialog.open(AddStudentsCoursesComponent, {
+      width: '500px',
+      height: 'fit-content',
+      data: { course: row as AssignedCourse }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onClickStudents.emit(result.course);
+      }
+      else {
+        console.log('The dialog was closed');
+      }
+    });
+  }
   editAssignedCourse(course?: AssignedCourse) {
-    let completeCourse: AssignedCourse = this.data.find(c => c.id === course.id);
-    this.onClickEdit.emit(completeCourse);
+    this.onClickEdit.emit(course);
   }
   deleteAssignedCourse(course: AssignedCourse) {
-    console.log(course)
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: 'fit-content',
-      height: 'fit-content',
+      width: '500px',
+      height: '400px',
       data: {
         id: course.id,
         action: 'elimina',

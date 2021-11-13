@@ -1,0 +1,34 @@
+<h1>Campos y áreas de formación</h1>
+<h3>Tercer momento</h3>
+<div fxLayout="row wrap" fxLayoutAlign="end center">
+  <button mat-button matTooltip="Mostrar todas las observaciones" (click)="accordion.openAll()">
+    <fa-icon size="lg" [icon]="faExpandArrowsAlt">
+    </fa-icon>
+    Expandir todo
+  </button>
+  <button mat-button matTooltip="Contraer todas las observaciones" (click)="accordion.closeAll()">
+    <fa-icon size="lg" [icon]="faCompressArrowsAlt">
+    </fa-icon>
+    Contraer todo
+  </button>
+</div>
+
+<mat-accordion multi>
+  <mat-expansion-panel *ngFor="let course of scores; let i = index" appMaterialElevation [raisedElevation]="raisedElev"
+    hideToggle>
+    <mat-expansion-panel-header>
+      <fa-icon size="lg" class="text-warning" [icon]="faStar"> </fa-icon>
+      <mat-panel-title>
+        <fa-icon class="course-icon" size="lg" [icon]="icons[i]"></fa-icon>&nbsp;&nbsp;
+        <strong>{{course.courseName}}</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+
+    <p class="mx-5" *ngFor="let remark of course.remarks">
+      <fa-icon class="text-success" [icon]="faCheck"></fa-icon>&nbsp;{{remark}}
+    </p>
+
+
+  </mat-expansion-panel>
+</mat-accordion>

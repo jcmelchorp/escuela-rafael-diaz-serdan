@@ -51,6 +51,8 @@ export class SchoolCoursesComponent implements OnInit {
     this.loaded$ = this.assignedCourseEntityService.loaded$;
     this.loading$ = this.assignedCourseEntityService.loading$;
     this.filteredEntities$ = this.assignedCourseEntityService.filteredEntities$;
+    this.coursesCount$ = this.assignedCourseEntityService.count$
+
   }
 
 
@@ -58,13 +60,15 @@ export class SchoolCoursesComponent implements OnInit {
     this.schoolCourses$ = this.assignedCourseEntityService.entities$;
   }
 
+  editCourse(course: AssignedCourse) {
+    console.log(course)
+    this.assignedCourseEntityService.update(course);
+  }
+
 
   openSchoolCourseDialog(course?: AssignedCourse) {
     let coursesInGrade: number;
-    /* this.schoolCourses$.subscribe((courses) => coursesInGrade = courses.filter((x) => x.grade === course.grade).length); */
     const newCourse: Partial<AssignedCourse> = {};
-    /* priority: coursesInGrade
-  }; */
     const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
       width: 'fit-content',
       height: 'fit-content',
@@ -77,7 +81,7 @@ export class SchoolCoursesComponent implements OnInit {
         if (result.isNew) {
           this.assignedCourseEntityService.add(result.course);
         } else {
-          this.assignedCourseEntityService.update(result.course);
+          this.editCourse(result.course);
         }
       } else {
         console.log('Dialog closed without changes')

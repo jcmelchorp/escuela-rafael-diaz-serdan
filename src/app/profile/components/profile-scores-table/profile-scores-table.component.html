@@ -1,0 +1,104 @@
+<h1>Campos y áreas de formación</h1>
+<div *ngIf="data" #htmlData>
+  <mat-table #table [dataSource]="formative">
+    <!-- Id Column -->
+    <ng-container matColumnDef="courseName">
+      <mat-header-cell *matHeaderCellDef>Materia</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span matBadge="{{element.notes3?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
+          [matBadgeHidden]="hidden" matBadgeColor="warn">{{element.courseName}}&nbsp;&nbsp;</span>
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> Promedio: </mat-footer-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="unit1">
+      <mat-header-cell *matHeaderCellDef>Unidad 1</mat-header-cell>
+      <mat-cell class="text-{{element.unit1<6?'danger':'dark'}}" *matCellDef="let element">
+        {{element.unit1==0?'-':element.unit1}} </mat-cell>
+      <mat-footer-cell *matFooterCellDef>
+        {{getAverage()[0]==0?'-':getAverage()[0]|number}}
+      </mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit2">
+      <mat-header-cell *matHeaderCellDef>Unidad 2</mat-header-cell>
+      <mat-cell class="text-{{element.unit2<6?'danger':'dark'}}" *matCellDef="let element">
+        {{element.unit2==0?'-':element.unit2}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{getAverage()[1]==0?'-':getAverage()[1]|number}} </mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit3">
+      <mat-header-cell *matHeaderCellDef>Unidad 3</mat-header-cell>
+      <mat-cell class="text-{{element.unit3<6?'danger':'dark'}}" *matCellDef="let element">
+        {{element.unit3==0?'-':element.unit3}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{getAverage()[2]==0?'-':getAverage()[2]|number}}</mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="prom_materia">
+      <mat-header-cell *matHeaderCellDef>Final</mat-header-cell>
+      <mat-cell class="text-{{element.prom_materia<6?'danger':'dark'}}" *matCellDef="let element">
+        {{element.isCourseClosed?element.prom_materia:'-'}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{getAverage()[3]==0?'-':getAverage()[3]|number}}</mat-footer-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let element">
+        <em class=".d-print-block">{{element.element.notes3}}</em>
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
+      [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+      [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden"> </mat-row>
+    <mat-footer-row class="strong-footer" *matFooterRowDef="displayedColumns"></mat-footer-row>
+  </mat-table>
+
+  <h1 class="pt-5">Materias Optativas:</h1>
+
+  <mat-table [dataSource]="optative">
+    <!-- Id Column -->
+    <ng-container matColumnDef="courseName">
+      <mat-header-cell *matHeaderCellDef>Materia</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.courseName}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="unit1">
+      <mat-header-cell *matHeaderCellDef>Unidad 1</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.unit1==0?'-':element.unit1}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit2">
+      <mat-header-cell *matHeaderCellDef>Unidad 2</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.unit2==0?'-':element.unit2}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit3">
+      <mat-header-cell *matHeaderCellDef>Unidad 3</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.unit3==0?'-':element.unit3}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="final">
+      <mat-header-cell *matHeaderCellDef>Final</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.isCourseClosed?element.final:'-'}}</mat-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let element">
+        <p>{{element.element.notes2}}</p>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
+      [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+      [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden"> </mat-row>
+  </mat-table>
+
+</div>

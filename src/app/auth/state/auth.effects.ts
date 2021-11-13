@@ -34,9 +34,8 @@ export class AuthEffects implements OnInitEffects {
               return authAction.signInFail();
             }
           }),
-          catchError((error) => of(authAction.notAuthenticated({ error })))
         )
-      )
+      ), catchError((error) => of(authAction.notAuthenticated({ error })))
     )
   );
 

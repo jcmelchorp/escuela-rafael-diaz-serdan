@@ -9,7 +9,7 @@ import { storeConfig } from './config/store-config';
 import * as fromEntity from './config/entity-metadata';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
-import { registeredEffects } from './config/registered-effects';
+import { registeredEffects, ToastrStoreService } from './config/registered-effects';
 import * as fromRoot from './reducers';
 import { reducers } from './reducers';
 @NgModule({
@@ -32,6 +32,7 @@ import { reducers } from './reducers';
       serializer: CustomSerializer,
     }),
   ],
+  providers: [ToastrStoreService],
   exports: [
     StoreModule,
     StoreRouterConnectingModule,

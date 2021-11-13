@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import * as fromEnrollments from '@rds-store/school/enrollments';
 import * as fromAccounts from '@rds-store/accounts';
 import * as fromAccountsDomain from '@rds-store/accounts-domain';
 import * as fromSchoolCourses from '@rds-store/school/school-courses';
@@ -20,15 +19,10 @@ import { AccountsDomainDataService } from '@rds-store/accounts-domain/accounts-d
 import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts-domain-entity.service';
 import { AssignedCoursesDataService } from '@rds-store/school/assigned-courses/assigned-courses-data.service';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
-import { EnrollmentsDataService } from '@rds-store/school/enrollments/enrollments-data.service';
-import { EnrollmentsEntityService } from '@rds-store/school/enrollments/enrollments-entity.service';
 import { SchoolDashboardComponent } from './school-dashboard/school-dashboard.component';
-import { EnrollmentsModule } from './enrollments/enrollments.module';
-
-
 @NgModule({
   declarations: [SchoolComponent, SchoolDashboardComponent],
-  imports: [SharedModule, SchoolRoutingModule, SchoolCoursesModule, EnrollmentsModule],
+  imports: [SharedModule, SchoolRoutingModule, SchoolCoursesModule],
   exports: [SharedModule],
   providers: [
     AccountsDomainService,
@@ -39,8 +33,6 @@ import { EnrollmentsModule } from './enrollments/enrollments.module';
     AccountsEntityService,
     AccountsDomainDataService,
     AccountsDomainEntityService,
-    EnrollmentsEntityService,
-    EnrollmentsDataService,
     AssignedCoursesEntityService,
     AssignedCoursesDataService,
   ],
@@ -56,14 +48,12 @@ export class SchoolModule {
     accountsDomainDataService: AccountsDomainDataService,
     accountsEntityService: AccountsEntityService,
     accountsDataService: AccountsDataService,
-    enrollmentsEntityService: EnrollmentsEntityService,
-    enrollmentsDataService: EnrollmentsDataService,
     assignedCoursesEntityService: AssignedCoursesEntityService,
     assignedCoursesDataService: AssignedCoursesDataService,
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
     entityServices.registerEntityCollectionServices([
-      schoolCoursesEntityService, accountsDomainEntityService, accountsEntityService, enrollmentsEntityService, assignedCoursesEntityService
+      schoolCoursesEntityService, accountsDomainEntityService, accountsEntityService, assignedCoursesEntityService
     ]);
     entityDataService.registerService(
       fromSchoolCourses.entityCollectionName,
@@ -80,10 +70,6 @@ export class SchoolModule {
     entityDataService.registerService(
       fromAccountsDomain.entityCollectionName,
       accountsDomainDataService
-    );
-    entityDataService.registerService(
-      fromEnrollments.entityCollectionName,
-      enrollmentsDataService
     );
   }
 }

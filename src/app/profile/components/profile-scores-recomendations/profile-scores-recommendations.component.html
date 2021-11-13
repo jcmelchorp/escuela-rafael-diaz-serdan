@@ -1,0 +1,12 @@
+<div *ngIf="recomendation; else noRecomend">
+  <div *ngFor="let unit of recomendation">
+    <blockquote class="blockquote">
+      <p>{{unit}}</p>
+    </blockquote>
+  </div>
+</div>
+<ng-template #noRecomend>
+  <blockquote class="blockquote">
+    <p class="text-center">No se ha emitido recomendación</p>
+  </blockquote>
+</ng-template>
