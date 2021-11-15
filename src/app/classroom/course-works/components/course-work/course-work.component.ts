@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { faBlind } from '@fortawesome/free-solid-svg-icons';
 
-import { StudentSubmissionEntityService } from '@rds-root/app/store/classroom/student-submission/student-submission-entity.service';
-import { TopicEntityService } from '@rds-root/app/store/classroom/topic/topic-entity.service';
-import { CourseWorkEntityService } from '@rds-root/app/store/classroom/course-work/course-work-entity-service.service';
+import { StudentSubmissionEntityService } from '@rds-store/classroom/student-submission/student-submission-entity.service';
+import { TopicEntityService } from '@rds-store/classroom/topic/topic-entity.service';
+import { CourseWorkEntityService } from '@rds-store/classroom/course-work/course-work-entity-service.service';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

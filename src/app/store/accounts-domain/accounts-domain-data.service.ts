@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { Observable, from } from 'rxjs';
-import * as fromAccountDomain from '@rds-root/app/store/accounts-domain';
+import * as fromAccountDomain from '@rds-store/accounts-domain';
 import { AccountDomain } from '../../accounts/models/account-domain.model';
 import { AccountsDomainService } from '../../accounts/services/accounts-domain.service';
 

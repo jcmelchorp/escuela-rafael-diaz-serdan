@@ -5,7 +5,7 @@ import * as authActions from '@rds-auth/state/auth.actions';
 
 import { environment } from '@rds-env/environment';
 import { routerKey } from '../router';
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 
 export const reducers: ActionReducerMap<AppState> = {
   [authFeatureKey]: authReducer,

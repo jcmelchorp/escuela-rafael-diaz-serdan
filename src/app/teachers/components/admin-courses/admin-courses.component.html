@@ -1,0 +1,54 @@
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>
+  <div class="card bg-transparent">
+    <div class="card-body">
+      <h2 class="card-title">
+        <span>Mis materias</span>
+      </h2>
+      <form *ngIf="teachers$|async as teachers; else teachersSpinner" [formGroup]="searchForm">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="2px">
+          <mat-form-field fxFlex="1 0 calc(50% - 2px)" fxFlex.lt-md="100%" appearance="outline">
+            <mat-label>Grupo</mat-label>
+            <mat-select formControlName="grade" placeholder="Selecciona un grado escolar"
+              (selectionChange)="onSearch()">
+              <mat-option value="">Ningún grupo seleccionado</mat-option>
+              <mat-option *ngFor="let skey of slevelKeys" value="{{skey}}">
+                {{skey}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field fxFlex="1 0 calc(50% - 2px)" fxFlex.lt-md="100%" appearance="outline">
+            <mat-label>Profesor</mat-label>
+            <mat-select formControlName="mainTeacherId" placeholder="Selecciona el profesor"
+              (selectionChange)="onSearch()">
+
+              <mat-option value="">Ningún maestro seleccionado</mat-option>
+              <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
+                <img class="img-select rounded-circle" src="{{teacher.photoUrl}}">&nbsp;
+                {{teacher.name.fullName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </form>
+
+      <div *ngIf="courses$|async as courses;else spinner" [@moveIn]="'moveIn'">
+        <mat-list class="list-group" *ngIf="courses.length==0" dense>
+          <mat-list-item class="list-group-item bg-transparent"> No hay materias para mostrar. </mat-list-item>
+        </mat-list>
+        <mat-list class="list-group" dense>
+          <mat-list-item class="list-group-item bg-transparent" *ngFor="let course of courses"
+            [routerLink]="['..',course.id]" [queryParams]="{grade:course.grade}">
+
+            <div matLine>{{course.name}} </div>
+            <div matLine>{{course.grade}}</div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>

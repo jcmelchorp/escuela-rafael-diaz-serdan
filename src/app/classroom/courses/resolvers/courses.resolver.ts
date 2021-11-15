@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
-import { CourseEntityService } from '@rds-root/app/store/classroom/course/course-entity.service';
+import { CourseEntityService } from '@rds-store/classroom/course/course-entity.service';
 
 import { Observable } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';

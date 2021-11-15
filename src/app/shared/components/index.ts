@@ -6,6 +6,7 @@ import { InfoCardsComponent } from './info-cards/info-cards.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ParallaxSpaceComponent } from './parallax-space/parallax-space.component';
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
+import { UploadFileDialogComponent } from './upload-file-dialog/upload-file-dialog.component';
 export const sharedComponents: any[] = [
   BreadcrumbComponent,
   ConfirmDialogComponent,
@@ -15,6 +16,7 @@ export const sharedComponents: any[] = [
   InfoCardsComponent,
   NotFoundComponent,
   ParallaxSpaceComponent,
+  UploadFileDialogComponent
 ];
 export * from './breadcrumb/breadcrumb.component';
 export * from './confirm-dialog/confirm-dialog.component';

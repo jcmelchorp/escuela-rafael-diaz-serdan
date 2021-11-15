@@ -7,15 +7,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { EntityDefinitionService, EntityServices, EntityDataService } from '@ngrx/data';
 
-import * as fromGuardian from '@rds-root/app/store/classroom/guardian';
-import * as fromUserProfile from '@rds-root/app/store/classroom/user-profile';
-import * as fromEntity from '@rds-root/app/store/config/entity-metadata';
-import { CourseDataService } from '@rds-root/app/store/classroom/course/course-data.service';
-import { CourseEntityService } from '@rds-root/app/store/classroom/course/course-entity.service';
-import { GuardianDataService } from '@rds-root/app/store/classroom/guardian/guardian-data.service';
-import { GuardianEntityService } from '@rds-root/app/store/classroom/guardian/guardian-entity.service';
-import { UserProfileDataService } from '@rds-root/app/store/classroom/user-profile/user-profile-data.service';
-import { UserProfileEntityService } from '@rds-root/app/store/classroom/user-profile/user-profile-entity.service';
+import * as fromGuardian from '@rds-store/classroom/guardian';
+import * as fromUserProfile from '@rds-store/classroom/user-profile';
+import * as fromEntity from '@rds-store/config/entity-metadata';
+import { CourseDataService } from '@rds-store/classroom/course/course-data.service';
+import { CourseEntityService } from '@rds-store/classroom/course/course-entity.service';
+import { GuardianDataService } from '@rds-store/classroom/guardian/guardian-data.service';
+import { GuardianEntityService } from '@rds-store/classroom/guardian/guardian-entity.service';
+import { UserProfileDataService } from '@rds-store/classroom/user-profile/user-profile-data.service';
+import { UserProfileEntityService } from '@rds-store/classroom/user-profile/user-profile-entity.service';
 
 import { MaterialModule } from '../../modules/material.module';
 import { CoursesService } from '../courses/services/courses.service';

@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 
-import { CourseWorkEntityService } from '@rds-root/app/store/classroom/course-work/course-work-entity-service.service';
+import { CourseWorkEntityService } from '@rds-store/classroom/course-work/course-work-entity-service.service';
 
 import { Observable, of } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';

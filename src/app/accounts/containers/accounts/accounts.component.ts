@@ -8,11 +8,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { NewAccountConfirmComponent } from './../../components/new-account-confirm/new-account-confirm.component';
 import { NewAccountComponent } from './../../components/new-account/new-account.component';
-import { selectAccounts } from '../../state/accounts.selectors';
+import { selectAccounts } from './../../state/accounts.selectors';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
-import { AppState } from '@rds-root/app/store/app.state';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AppState } from '@rds-store/app.state';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { AccountsDomainService } from '../../services/accounts-domain.service';
 
 
@@ -43,8 +43,8 @@ export class AccountsComponent implements OnInit {
   ) {
     this.accountsDomainService.handleAdminLoad();
     this.users$ = this.store.select(selectAccounts);
-    this.gradeKeys = Object.keys(this.grades).filter(Number);
-    this.roleKeys = Object.keys(this.roles).filter(Number);
+    this.gradeKeys = Object.keys(this.grades);
+    this.roleKeys = Object.keys(this.roles);
     this.filterValues = this.fb.group({
       grade: new FormControl(),
       role: new FormControl(),

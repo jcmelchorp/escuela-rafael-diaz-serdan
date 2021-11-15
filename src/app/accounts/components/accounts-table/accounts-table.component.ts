@@ -4,14 +4,11 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-
 import { ConfirmDialogComponent } from '@rds-shared/components';
-
-
 import { ChangeGradeComponent, UserEditDialogComponent } from '..';
 import { AccountsTableDataSource } from './accounts-table-data-source';
 import { User } from '@rds-auth/models/user.model';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Component({
   selector: 'app-accounts-table',
@@ -19,8 +16,7 @@ import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-ent
   styleUrls: ['./accounts-table.component.scss'],
 })
 export class AccountsTableComponent implements AfterViewInit {
-  @Input()
-  data!: User[];
+  @Input() data!: User[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<User>;
@@ -29,11 +25,11 @@ export class AccountsTableComponent implements AfterViewInit {
   columnsToDisplay = [
     {
       propertyName: 'givenName',
-      headerText: 'Nombre',
+      headerText: 'Nombre(s)',
     },
     {
       propertyName: 'familyName',
-      headerText: 'Apellido',
+      headerText: 'Apellido(s)',
     },
     {
       propertyName: 'grade',
@@ -157,7 +153,7 @@ export class AccountsTableComponent implements AfterViewInit {
     if (
       selection.selected
         .map((user) => user.role)
-        .every((role) => role == 'alumnos')
+        .every((role) => role == 'Alumnos')
     ) {
       const gradesArray = selection.selected.map((user) => user.grade);
       const levelArray = selection.selected.map((user) => user.level);

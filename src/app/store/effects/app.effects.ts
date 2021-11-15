@@ -8,7 +8,7 @@ import {
 } from '@ngrx/effects';
 import { GapiService } from '@rds-auth/services';
 import { getUser, signOutCompleted } from '@rds-auth/state/auth.actions';
-import { loadApp, loadAppFail, loadAppSuccess, localStoreUser } from '@rds-root/app/store/actions/app.actions';
+import { loadApp, loadAppFail, loadAppSuccess, localStoreUser } from '@rds-store/actions/app.actions';
 
 import { defer, from, Observable, of } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';

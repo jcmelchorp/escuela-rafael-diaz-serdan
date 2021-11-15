@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromAuthActions from '@rds-auth/state/auth.actions';
 
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 
 @Component({
   templateUrl: './login-dialog.component.html',

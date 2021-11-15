@@ -1,0 +1,110 @@
+<ng-template #spinner>
+  <div style="min-height: 300px" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [diameter]="100" strokeWidth="12">
+    </mat-spinner>
+    <span>
+      Obteniendo alumnos del curso ...
+    </span>
+    <br>
+  </div>
+</ng-template>
+
+<div class="card bg-transparent">
+  <div *ngIf="(loaded$ | async) && !(loading$ | async) && (students$ | async) as students;else spinner"
+    class="card-body">
+    <h2 class="card-title" fxLayout="row wrap" fxLayoutAlign="space-between start">
+      <button mat-icon-button [routerLink]="['./../calificaciones']">
+        <mat-icon>chevron_left</mat-icon> Regresar
+      </button>
+      <div class="text-right">{{ course.name }}<br>Ciclo escolar: {{selectedCicle.cicle}}</div>
+    </h2>
+    <form [formGroup]="currentGrades" autocomplete="off" fxLayout="row wrap" fxLayoutAlign="space-between center"
+      fxLayoutGap="2px">
+      <mat-accordion [multi]="true" [hideToggle]="false" displayMode="flat">
+        <div formArrayName="scores">
+          <div *ngFor="
+              let score of currentGrades.get('scores').controls;
+              let j = index
+            ">
+            <div [formGroupName]="j">
+              <mat-expansion-panel [hideToggle]="false" class="mat-elevation-z0 bg-transpartent">
+                <mat-expansion-panel-header>
+                  <mat-panel-title style="font-size: 18px">
+                    {{ j + 1 }}.&nbsp;{{ score.get("studentName").value }}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{ score.get("studentId").value }}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                  <mat-form-field *ngIf="!isKinder" appearance="outline">
+                    <mat-label>Unidad 1</mat-label>
+                    <input matInput type="number" formControlName="unit1">
+                  </mat-form-field>
+                  <mat-checkbox *ngIf="!isKinder" formControlName="recover1" color="primary">
+                    <span matTooltip="Marca la casilla para indicar nivelación concluida">Nivelación</span>
+                  </mat-checkbox>
+                  <mat-form-field fxFlex appearance="outline">
+                    <mat-label>
+                      Comentarios Unidad 1
+                    </mat-label>
+                    <input matInput placeholder="Comentarios unidad 1..." formControlName="notes1">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                  <mat-form-field *ngIf="!isKinder" appearance="outline">
+                    <mat-label>Unidad 2</mat-label>
+                    <input matInput type="number" formControlName="unit2">
+                  </mat-form-field>
+                  <mat-checkbox *ngIf="!isKinder" formControlName="recover2" color="primary">
+                    <span matTooltip="Marca la casilla para indicar nivelación concluida">Nivelación</span>
+                  </mat-checkbox>
+                  <mat-form-field fxFlex appearance="outline">
+                    <mat-label>
+                      Comentarios Unidad 2
+                    </mat-label>
+                    <input matInput placeholder="Comentarios unidad 2..." formControlName="notes2">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                  <mat-form-field *ngIf="!isKinder" appearance="outline">
+                    <mat-label>Unidad 3</mat-label>
+                    <input matInput type="number" formControlName="unit3">
+                  </mat-form-field>
+                  <mat-checkbox *ngIf="!isKinder" formControlName="recover3" color="primary">
+                    <span matTooltip="Marca la casilla para indicar nivelación concluida">Nivelación</span>
+                  </mat-checkbox>
+                  <mat-form-field fxFlex appearance="outline">
+                    <mat-label>
+                      Comentarios Unidad 3
+                    </mat-label>
+                    <input matInput placeholder="Comentarios unidad 3..." formControlName="notes3">
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+                  <mat-form-field *ngIf="!isKinder" appearance="outline">
+                    <mat-label>Promedio final</mat-label>
+                    <input matInput type="number" formControlName="final">
+                  </mat-form-field>
+                  <mat-checkbox formControlName="isCourseClosed" color="primary">
+                    <span matTooltip="Marca la casilla para indicar el final de la evaluación del curso">
+                      Se ha terminado de evaluar el curso
+                    </span>
+                  </mat-checkbox>
+                </div>
+                <mat-action-row>
+                  <button [disabled]="!score.dirty" (click)="finalGrades(score)" mat-raised-button>
+                    Publicar
+                    <mat-icon *ngIf="publishing$ | async">
+                      <mat-spinner color="primary" diameter="20">
+                      </mat-spinner>
+                    </mat-icon>
+                  </button>
+                </mat-action-row>
+              </mat-expansion-panel>
+            </div>
+          </div>
+        </div>
+      </mat-accordion>
+    </form>
+  </div>

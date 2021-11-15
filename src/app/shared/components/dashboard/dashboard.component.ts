@@ -8,7 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { isAdmin, isOnline, isTeacher } from '@rds-auth/state/auth.selectors';
 import { RouterCard } from '@rds-shared/models/router-card.model';
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 import { Observable } from 'rxjs';
 import { flyInOut } from '../../animations/fade-in.animation';
 import { User } from '../../../auth/models/user.model';
@@ -36,17 +36,17 @@ export class DashboardComponent {
       {
         title: 'Alumnos',
         description: 'Accede a toda tu información como alumno.',
-        route: 'user',
+        route: 'perfil',
         imgUrl: 'assets/images/assignment-grades2.png',
         access: this.isOnline$,
       },
-      /* {
+      {
         title: 'Profesores',
-        description: 'Acceso a las funciones docentes.',
+        description: 'Espacio de profesores.',
         route: 'profesores',
-        imgUrl: 'assets/images/dashboard-image2.png',
+        imgUrl: 'assets/images/dashboard-google.png',
         access: this.isTeacher$ || this.isAdmin$,
-      }, */
+      },
       {
         title: 'Dirección',
         description: 'Gestiona usuarios, grupos, clases y horarios en la institución.',
@@ -55,10 +55,10 @@ export class DashboardComponent {
         access: this.isAdmin$,
       },
       {
-        title: 'Cuentas de usuario',
-        description: 'Manejo de usuarios de la institución',
-        route: 'accounts',
-        imgUrl: 'assets/images/assignment-grades2.png',
+        title: 'Usuarios de la institución',
+        description: 'Manejo de usuarios de Google Workspace',
+        route: 'usuarios',
+        imgUrl: 'assets/images/dashboard-image2.png',
         access: this.isTeacher$ || this.isAdmin$,
 
       },
@@ -66,16 +66,10 @@ export class DashboardComponent {
         title: 'Funciones de G Suite',
         description: 'Administra Google Classroom y Google Admin Directory.',
         route: 'gsuite',
-        imgUrl: 'assets/images/dashboard-google.png',
+        imgUrl: 'assets/images/google-admin-img.png',
         access: (this.isTeacher$ || this.isAdmin$)
-      }
-      /*  {
-         title: 'Cuentas de usuario de Google',
-         description: 'Manejo de usuarios de Google Workspace',
-         route: 'admin',
-         imgUrl: 'assets/images/google-admin-img.png',
-         access: this.isTeacher$ || this.isAdmin$,
-       }, */
+      },
+
     ];
   }
 }

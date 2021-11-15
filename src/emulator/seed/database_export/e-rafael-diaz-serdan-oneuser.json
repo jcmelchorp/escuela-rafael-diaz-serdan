@@ -1,0 +1,88 @@
+{
+  "109366701296393968292": {
+    "addresses": [{
+      "formatted": "2 de Abril 222. Fracc. Virginia. C.P. 94294",
+      "type": "home"
+    }],
+    "agreedToTerms": true,
+    "aliases": [
+      "juliocmelchor@rafaeldiazserdan.net",
+      "julio.melchor@rds.edu.mx"
+    ],
+    "archived": false,
+    "authPhotoUrl": "https://lh3.googleusercontent.com/a-/AOh14GjhmTTMA37XLlNHVuauK0h5xs9Sxicusubr1BWACl7SaRtF1mKY_qUAoagIMrrOvLY5vPDv-ebi50BlreeQU7YbQumUMVcPQF_NUOeO42366k8hfyCL1UivFRylSbDp9PZsC5btLv9Ps2pPTS9Hvx2hneGE0vDZhR7IBKMgfpStCrYJ_HJUK4ZpIrtj2Dly_lva8J_l98VK3KSpN0QK-r5In78EjWkVCdpE6reA_3XOBmPe9FpywEv8o2oxxWCNVo9hieYC1wzMf4IKUb5axPcPmDfIXZrFzTUItCpZFqHIioj7xL2QMcrSoL8BmGEsgQ5bF4d8qqG32mQYUnDjDRwlx_LdqQg2mlqC7I2bh7S9F5LcANFGPIQUnspd8ImSYqGE0b6br4iK3Ow9PXRHX4nt3pbvSOUkydu99xfGuiomGtyUgL7OIDK0sfUWPB-f3Zrfuw42OGND1Xyhw55brb60ppR4yhwh2ZCVK9lDYIcWQHhsO3iIPWSyMl7QPMGXu_2O5OpECTqvxZwkklvfBUTJohsDOqq2n9mMzmtcyvk2bgDZXn9lSuQkua_wqk3gUlcCjRnckjanHiVQSyIhGV3_5fILVJvHhTE9u61W4hYWQJIjEvK9TZRaru17AWd71wy_s_rjcLL3owzbYZFG6tQRkWyfcPdWMCW9CStG_VYduAGif9cpDMoctgHrCyyMY_WLX9gTrpv8i8keXdStq2agh_9S3VDs9hNj0lgdwNvt7rFz0RMLT5yDqwjTEVtEgpgubw=s96-c",
+    "changePasswordAtNextLogin": false,
+    "creationTime": "Thu, 22 Jul 2021 04:49:18 GMT",
+    "curp": "MEPJ831104HVZLNL09",
+    "customerId": "C02yt84oj",
+    "displayName": "Julio César Melchor Pinto",
+    "dob": "11/04/1983",
+    "emails": [{
+        "address": "jcmelchorp@gmail.com",
+        "type": "work"
+      },
+      {
+        "address": "julio.melchor@rafaeldiazserdan.net",
+        "primary": true
+      },
+      {
+        "address": "juliocmelchor@rafaeldiazserdan.net"
+      },
+      {
+        "address": "juliocmelchor@rafaeldiazserdan.net.test-google-a.com"
+      },
+      {
+        "address": "julio.melchor@rafaeldiazserdan.net.test-google-a.com"
+      },
+      {
+        "address": "julio.melchor@rds.edu.mx"
+      }
+    ],
+    "etag": "\"Az0e8DeR29WMviNfGpyipHagxRaum75u74lgQVnM5vU/l4ba6OJFFc3kEqDg-tgNkRb0sNg\"",
+    "gender": "hombre",
+    "grade": "",
+    "id": "109366701296393968292",
+    "includeInGlobalAddressList": true,
+    "ipWhitelisted": false,
+    "isAdmin": true,
+    "isDelegatedAdmin": false,
+    "isEnforcedIn2Sv": false,
+    "isEnrolledIn2Sv": true,
+    "isHuman": true,
+    "isMailboxSetup": true,
+    "isNew": false,
+    "isOnline": true,
+    "isTeacher": true,
+    "isVerified": true,
+    "kind": "admin#directory#user",
+    "lastLoginTime": "13/9/2021",
+    "name": {
+      "familyName": "Melchor Pinto",
+      "fullName": "Julio César Melchor Pinto",
+      "givenName": "Julio César"
+    },
+    "nonEditableAliases": [
+      "juliocmelchor@rafaeldiazserdan.net.test-google-a.com",
+      "julio.melchor@rafaeldiazserdan.net.test-google-a.com"
+    ],
+    "orgUnitPath": "/Dirección/Profesores",
+    "password": ".P455w0rd",
+    "permissions": [{
+      "permission": "CREATE_COURSE"
+    }],
+    "phones": [{
+      "type": "mobile",
+      "value": "+52 (646) 189-6922"
+    }],
+    "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Ggo5UUnPkOAtRnZodcAq-5XmR0gxcVoBXY7MD616jMS8zY0RWVmRCsuh49ZYsshqSqlC7pt8uqcUFAUUcJK7KDOM_hG710vMuabgDvpfLB2EKgnyJCBRRd6YN5dqjbBUxCk8pgA2eK5wcGxWXA-6MZ6ybJo6IZjeHmYkygA37wPTj4FR_V1v2xkB1Sk5YkOcjoac82k-S_38tbUuouz6POF1WZHL6MqxdGtX3BvYCSqZ5rAzO7OYjkyFFZ3ebdqcfif0UP96YazIcIH7OA8UsxWolbeRJOesa1gQP9Qum1KEQ_3g42MpuGZNiz8xmd2SaFpBQA7w35jCU-6AevnfVOa1ias1Ei1FUvSQ2KxWaZ27fG8JFfN4xgk0QC4FI_Ymn9TmBSaatUIQz4s2D-KyUtWcik_GsWR0Fke7rD_RNYgMlB74epypdsE4kvjgvI5gf-TBJnct9dnIdq0r6ytAR44moik41wcYZMArHGIxoszOB5VYwQ6E8mThwHD90YRohUzXyevX7yxt8tzOpjkQKvpLtf3p9NXJ2c4iDNG9mI2XTf99ehErO_fVSFOYmEttPPA5vyRLSshYU--rMMZC05RsVAhO5hQDATjgbSTka4Fk6Zio700iQZ2KjFn5IBUkua_WFdk-fiCeJoLLFg3tvCQu9fjInvpAMqLSFxaHnLlCeVQa3oKfDCev_dYSGt3LliDMb4KcyvB5540D8KBb8CPfnSz9ewlsUXNt11DhGTVQsJQ16PntXrHFFVlFfcUJsCdbg=s96-c",
+    "primaryEmail": "julio.melchor@rafaeldiazserdan.net",
+    "recoveryEmail": "jcmelchorp@gmail.com",
+    "recoveryPhone": "+526461896922",
+    "rfc": "MEPJ831104575",
+    "role": "profesores",
+    "suspended": false,
+    "thumbnailPhotoEtag": "\"Az0e8DeR29WMviNfGpyipHagxRaum75u74lgQVnM5vU/bqYwJazgV1JlHloGvMDrAmNdOuU\"",
+    "thumbnailPhotoUrl": "https://www.google.com/s2/photos/private/AIbEiAIAAABECKS1g4a8ps3-gQEiC3ZjYXJkX3Bob3RvKihhMmM4MTg5NGEwNzI4ZWI4MmEwM2UxNjVlNzdhYTk5NjYwMzRjZGIxMAElr1yeyGcg5GKGrdwQf8GltD5ccg",
+    "uid": "DOOnit5UTYYWgVLhm3FXgiZXfNK2"
+  }
+}

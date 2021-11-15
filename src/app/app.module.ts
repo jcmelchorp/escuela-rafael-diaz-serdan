@@ -1,16 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-/* import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAnalytics, getAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { providePerformance, getPerformance } from '@angular/fire/performance'; */
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '@rds-core/core.module';
 import { SharedModule } from '@rds-shared/shared.module';
@@ -18,16 +11,19 @@ import { environment } from '@rds-env/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthModule } from '@rds-auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule, PERSISTENCE, USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AppStoreModule } from '@rds-root/app/store/app-store.module';
+import { AppStoreModule } from '@rds-store/app-store.module';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
+import { provideDatabase, getDatabase, connectDatabaseEmulator } from '@angular/fire/database';
+import { provideFirestore, getFirestore, connectFirestoreEmulator, enableMultiTabIndexedDbPersistence } from '@angular/fire/firestore';
+let resolvePersistenceEnabled: (enabled: boolean) => void;
 
-
+export const persistenceEnabled = new Promise<boolean>(resolve => {
+  resolvePersistenceEnabled = resolve;
+});
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +35,7 @@ import { AppStoreModule } from '@rds-root/app/store/app-store.module';
     SharedModule.forRoot(),
     AuthModule.forRoot(),
     NgxSpinnerModule,
-    ServiceWorkerModule.register('gnaw-worker.js', {
+    ServiceWorkerModule.register('ngrx-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
@@ -50,24 +46,34 @@ import { AppStoreModule } from '@rds-root/app/store/app-store.module';
       easing: 'ease-in',
       closeButton: true,
     }),
-    AngularFireModule.initializeApp(environment.firebase, 'sigio-rds'),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    AngularFirestoreModule.enablePersistence(),
-    /*     const firebaseApp = initializeApp({ });
-    const auth = getAuth();
-    onAuthStateChanged(auth, user => { console.log(user); });
-    provideAnalytics(() => getAnalytics()),
-      provideAuth(() => getAuth()),
-      provideDatabase(() => getDatabase()),
-      provideFirestore(() => getFirestore()),
-      providePerformance(() => getPerformance()), * /
-      ],
-    providers: [
-      { provide: PERSISTENCE, useValue: 'session' },
-      { provide: USE_DEVICE_LANGUAGE, useValue: true },
-      /* ScreenTrackingService, UserTrackingService */
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => {
+      const auth = getAuth();
+      if (environment.useEmulators) {
+        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+      }
+      return auth;
+    }),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      if (environment.useEmulators) {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+      enableMultiTabIndexedDbPersistence(firestore).then(
+        () => resolvePersistenceEnabled(true),
+        () => resolvePersistenceEnabled(false)
+      );
+      return firestore;
+    }),
+    provideDatabase(() => {
+      const database = getDatabase();
+      if (environment.useEmulators) {
+        connectDatabaseEmulator(database, 'localhost', 9000);
+      }
+      return database;
+    })
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

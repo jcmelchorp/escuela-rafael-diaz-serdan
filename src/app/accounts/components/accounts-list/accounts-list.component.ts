@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
 import {
   faCircle,
   faTrashAlt,
@@ -11,16 +10,12 @@ import {
   faIdCard,
   faIdCardAlt,
 } from '@fortawesome/free-solid-svg-icons';
-
 import { ConfirmDialogComponent } from '@rds-shared/components';
-
 import { ToastrService } from 'ngx-toastr';
-
 import { NewAccountConfirmComponent } from './../new-account-confirm/new-account-confirm.component';
-
 import { SaveUserErrorComponent, UserEditDialogComponent } from '..';
 import { User } from '@rds-auth/models/user.model';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Component({
   selector: 'app-accounts-list',

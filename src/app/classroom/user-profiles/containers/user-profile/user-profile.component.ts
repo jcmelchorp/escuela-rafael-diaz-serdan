@@ -8,7 +8,7 @@ import { signOut } from '@rds-auth/state/auth.actions';
 import * as fromAuthActions from '@rds-auth/state/auth.actions';
 import * as fromAuthSelectors from '@rds-auth/state/auth.selectors';
 
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 
 import { Observable } from 'rxjs';
 import { UserProfilesService } from '@rds-classroom/user-profiles/services/user-profiles.service';

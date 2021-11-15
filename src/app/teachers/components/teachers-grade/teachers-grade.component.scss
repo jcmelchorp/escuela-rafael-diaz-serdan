@@ -1,0 +1,37 @@
+@import "./../../../../assets/themes/colors";
+.mat-table {
+  background: none;
+}
+.mat-column-studentName {
+  min-width: 300px;
+}
+.mat-column-unit1,
+.mat-column-unit2,
+.mat-column-unit3 {
+  max-width: 100px;
+  .mat-form-field {
+    width: calc(100% - 10px);
+  }
+}
+.mat-column-recover1,
+.mat-column-recover2,
+.mat-column-recover3 {
+  .mat-form-field {
+    width: calc(100% - 10px);
+  }
+}
+table {
+  color: $deep-blue-color;
+  line-height: 14px !important;
+  width: 100%;
+
+  mat-header-row {
+    height: 50px;
+  }
+
+  .mat-footer-row,
+  .mat-row {
+    height: 30px;
+    cursor: pointer;
+  }
+}

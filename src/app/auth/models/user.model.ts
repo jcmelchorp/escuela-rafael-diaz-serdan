@@ -1,4 +1,3 @@
-import { Grade } from "./grade.model";
 
 export interface User {
   id: string;
@@ -45,9 +44,6 @@ export interface User {
   };
   creationTime?: string;
   lastLoginTime?: string;
-
-  //STUDENT
-  currentGrades?: Grade;
   niev?: string;
   grade?: string;
   level?: string;
@@ -77,11 +73,8 @@ export interface User {
       municipio?: string;
       state?: string;
     }
-
   ];
-  currentPeriod?: {
-
-  };
+  currentGrades?: {};
   label?: 'purple' | 'blue' | 'green' | 'yellow' | 'red' | 'gray';
   // TEACHER
   rfc?: string;
