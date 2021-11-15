@@ -21,15 +21,15 @@ export class AccountsDataService extends DefaultDataService<User> {
   }
 
   getAll(): Observable<User[]> {
-    return this.accountsService.list().pipe(take(1), map(users => users));
+    return this.accountsService.list();
   }
 
   getWithQuery(value: any): Observable<User[]> {
     return this.accountsService.getWithQuery('role', value);
   }
-  /* getWithQuery(queryParams: QueryParams): Observable<User[]> {
-    return this.accountsService.getWithQuery(queryParams);
-  } */
+  /*  getWithQuery(queryParams: QueryParams): Observable<User[]> {
+     return this.accountsService.getWithQuery(queryParams);
+   } */
   getByKey(userId: string): Observable<User> {
     return this.getById(userId)
   }

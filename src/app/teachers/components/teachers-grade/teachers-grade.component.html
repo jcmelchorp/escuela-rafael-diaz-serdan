@@ -1,0 +1,95 @@
+<div class="container py-2">
+  <ng-template #spinner>
+    <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+      <mat-spinner strokeWidth="5" [diameter]="50">
+      </mat-spinner>
+      <span>Buscando ...</span><br>
+    </div>
+  </ng-template>
+  <div *ngIf="(students$|async) as students; else spinner" class="card bg-transparent">
+    <h2 class="card-header">
+      <fa-icon mat-icon-button [routerLink]="['./../asignaturas']" [icon]="faChevronLeft"></fa-icon>
+      &nbsp;&nbsp;{{course.name}}&nbsp;&nbsp;<small class="text-muted">{{course.grade}}</small>
+    </h2>
+
+    <div class="card-body">
+      <div>
+        <form [formGroup]="formGrades" autocomplete="off">
+          <table mat-table class="full-width-table table-hover" [dataSource]="scores.controls" formArrayName="scores">
+
+            <ng-container matColumnDef="studentName">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell style="font-size: 18px;" *matCellDef="let element">
+                {{element.get('studentName').value}}
+                <!--  <mat-form-field floatLabel="never" appearance="outline">
+                  <input matInput formControlName="studentName" [attr.disabled]="true">
+                </mat-form-field> -->
+              </td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="unit1">
+              <th mat-header-cell *matHeaderCellDef>Unidad 1</th>
+              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">
+                <mat-form-field class="mb-n3" floatLabel="never" appearance="outline">
+                  <input matInput formControlName="unit1">
+                </mat-form-field>
+                <mat-checkbox class="mb-n3" formControlName="recover1" color="primary">nivelación
+                </mat-checkbox>
+              </td>
+            </ng-container>
+            <!--  <ng-container matColumnDef="recover1">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" [formGroup]="element">
+
+            </td>
+          </ng-container> -->
+
+            <ng-container matColumnDef="unit2">
+              <th mat-header-cell *matHeaderCellDef>Unidad 2</th>
+              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">
+                <mat-form-field class="mb-n3" floatLabel="never" appearance="outline">
+                  <input matInput formControlName="unit2">
+                </mat-form-field>
+                <mat-checkbox class="mb-n3" formControlName="recover2" color="primary">nivelación
+                </mat-checkbox>
+              </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="recover2">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" [formGroup]="element">
+
+            </td>
+          </ng-container> -->
+            <ng-container matColumnDef="unit3">
+              <th mat-header-cell *matHeaderCellDef>Unidad 3</th>
+              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">
+                <mat-form-field class="mb-n3" floatLabel="never" appearance="outline">
+                  <input matInput formControlName="unit3">
+                </mat-form-field>
+                <mat-checkbox class="mb-n3" formControlName="recover3" color="primary">nivelación
+                </mat-checkbox>
+              </td>
+            </ng-container>
+            <!--  <ng-container matColumnDef="recover3">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" [formGroup]="element">
+
+            </td>
+          </ng-container> -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">
+                <button mat-raised-button color="primary" (click)="publishGrade(element)"
+                  [disabled]="element.dirty">Publicar</button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayColumns"> </tr>
+            <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

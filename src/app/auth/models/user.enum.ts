@@ -15,11 +15,11 @@ export enum SchoolLevel {
 }
 
 export enum CourseLevel {
-  MATERNAL = 'maternal',
-  PREESCOLAR = 'preescolar',
-  PRIMARIA = 'primaria',
-  SECUNDARIA = 'secundaria',
+  MATERNAL = 'Maternal',
+  PREESCOLAR = 'Preescolar',
+  PRIMARIA = 'Primaria',
+  SECUNDARIA = 'Secundaria',
 }
 export enum UserRole {
-  OTROS = 'otros', ALUMNOS = 'alumnos', PROFESORES = 'profesores', ADMINISTRATIVOS = 'administrativos'
+  OTROS = 'Otros', ALUMNOS = 'Alumnos', PROFESORES = 'Profesores', ADMINISTRATIVOS = 'Administrativos'
 }

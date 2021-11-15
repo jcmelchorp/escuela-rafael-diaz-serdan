@@ -125,7 +125,7 @@ export class UserEditDialogComponent {
           }
         });
         if (
-          this.saveForm.get('role')?.value == 'alumnos' &&
+          this.saveForm.get('role')?.value == 'Alumnos' &&
           this.saveForm.get('level')?.value != null &&
           this.saveForm.get('grade')?.value != null
         ) {
@@ -208,7 +208,7 @@ export class UserEditDialogComponent {
     this.dialogRef.close();
   }
   roleChange() {
-    if (this.data.role != 'alumnos') {
+    if (this.data.role != 'Alumnos') {
       this.data.grade = '';
       this.data.level = '';
     } else {

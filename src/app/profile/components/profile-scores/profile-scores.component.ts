@@ -49,7 +49,7 @@ export class ProfileScoresComponent implements OnInit {
       select(selectUser),
       tap(user => console.log(user.id + this.cycle)),
       mergeMap(user => this.profileService.getById(user.id + this.cycle).pipe(
-        tap(score => console.log(score)),
+        //tap(score => console.log(score)),
         map(score => { return { ...user, currentGrades: score } as User }),
 
       ))

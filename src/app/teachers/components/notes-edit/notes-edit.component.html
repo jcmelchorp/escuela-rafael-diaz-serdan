@@ -1,0 +1,20 @@
+<div class="container py-2">
+  <div *ngIf="(students$|async) as students; else spinner" class="card bg-transparent">
+    <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="2px">
+      <div fxFlex="1 0 calc(50% - 2px)">
+        <fa-icon mat-icon-button [routerLink]="['./../asignaturas']" [icon]="faChevronLeft"></fa-icon>
+        &nbsp;<small>Regresar</small>
+      </div>
+      <div fxFlex="1 0 calc(50% - 2px)">
+        <span>{{course.name}}</span>
+      </div>
+    </h2>
+  </div>
+  <ng-template #spinner>
+    <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+      <mat-spinner strokeWidth="12" [diameter]="100">
+      </mat-spinner>
+      <span>Obteniendo alumnos del curso ...</span><br>
+    </div>
+  </ng-template>
+</div>

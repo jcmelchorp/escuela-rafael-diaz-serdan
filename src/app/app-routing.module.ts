@@ -5,6 +5,7 @@ import { AuthGuard } from '@rds-auth/guards/auth.guard';
 import { SettingsComponent } from '@rds-core/components';
 import { LayoutComponent } from '@rds-core/containers';
 import { HomeComponent, NotFoundComponent } from '@rds-shared/components';
+import { TeachersGuard } from './teachers/guards/teachers.guard';
 
 const routes: Routes = [
   {
@@ -40,6 +41,13 @@ const routes: Routes = [
           (m) => m.ClassroomModule),
         canActivate: [AuthGuard],
         data: { breadcrumb: 'Google GSuite' },
+      },
+      {
+        path: 'profesores',
+        loadChildren: () =>
+          import('./teachers/teachers.module').then((m) => m.TeachersModule),
+        canActivate: [TeachersGuard],
+        data: { breadcrumb: 'Profesores' },
       },
       {
         path: 'config',

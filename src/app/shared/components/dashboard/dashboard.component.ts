@@ -40,13 +40,13 @@ export class DashboardComponent {
         imgUrl: 'assets/images/assignment-grades2.png',
         access: this.isOnline$,
       },
-      /* {
+      {
         title: 'Profesores',
-        description: 'Acceso a las funciones docentes.',
+        description: 'Espacio de profesores.',
         route: 'profesores',
-        imgUrl: 'assets/images/dashboard-image2.png',
+        imgUrl: 'assets/images/dashboard-google.png',
         access: this.isTeacher$ || this.isAdmin$,
-      }, */
+      },
       {
         title: 'Dirección',
         description: 'Gestiona usuarios, grupos, clases y horarios en la institución.',
@@ -55,18 +55,10 @@ export class DashboardComponent {
         access: this.isAdmin$,
       },
       {
-        title: 'Cuenta institucional',
-        description: 'Manejo de usuarios de la institución',
-        route: 'usuarios',
-        imgUrl: 'assets/images/assignment-image2.png',
-        access: this.isTeacher$ || this.isAdmin$,
-
-      },
-      {
-        title: 'Usuarios de Google',
+        title: 'Usuarios de la institución',
         description: 'Manejo de usuarios de Google Workspace',
         route: 'usuarios',
-        imgUrl: 'assets/images/dashboard-google.png',
+        imgUrl: 'assets/images/dashboard-image2.png',
         access: this.isTeacher$ || this.isAdmin$,
 
       },
@@ -77,13 +69,7 @@ export class DashboardComponent {
         imgUrl: 'assets/images/google-admin-img.png',
         access: (this.isTeacher$ || this.isAdmin$)
       },
-      {
-        title: 'Profesores',
-        description: 'Espacio de profesores.',
-        route: 'profesores',
-        imgUrl: 'assets/images/google-admin-img.png',
-        access: this.isTeacher$ || this.isAdmin$,
-      },
+
     ];
   }
 }

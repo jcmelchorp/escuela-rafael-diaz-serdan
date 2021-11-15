@@ -55,7 +55,7 @@ export class UserDetailsComponent implements OnInit {
     this.user$ = this.store.select(selectedAccountById).pipe(
       map((user) => {
         if (user) {
-          user.role == 'alumnos'
+          user.role == 'Alumnos'
             ? this.fillStudentForm(user)
             : this.fillUserForm(user);
         }

@@ -12,7 +12,7 @@
     </div>
     <div matLine>{{user.primaryEmail}}</div>
     <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-evenly">
-      <fa-icon *ngIf="user.isHuman" [icon]="user.role=='alumnos'?faIdCard:faIdCardAlt" size="2x" mat-icon-button
+      <fa-icon *ngIf="user.isHuman" [icon]="user.role=='Alumnos'?faIdCard:faIdCardAlt" size="2x" mat-icon-button
         [routerLink]="[user.id]" matTooltip="Información Personal"></fa-icon>
       <!-- <fa-icon [icon]="" size="2x" mat-icon-button *ngIf="user.role=='Profesores'"
           [routerLink]="[user.id]" matTooltip="Edita información personal del docente"></fa-icon> -->

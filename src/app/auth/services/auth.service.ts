@@ -86,7 +86,7 @@ export class AuthService {
     return from(update(doc, { isOnline: status }));
   }
 
-  createUser(user: Partial<AuthUser>) {
+  saveUser(user: Partial<AuthUser>) {
     const key = user.id;
     /*   return this.afStore
         .collection(this.collection)
@@ -105,7 +105,7 @@ export class AuthService {
       .update(user)
   ); */
     const doc = ref(this.database, `${this.collection}/${key}`);
-    return from(push(doc))
+    return from(update(doc, user))
   }
 
   checkAdminRole(id: string): Observable<boolean> {

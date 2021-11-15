@@ -46,30 +46,24 @@ export class AuthEffects implements OnInitEffects {
       ofType(authAction.signIn),
       switchMap(() =>
         this.authService.signInWithPopup().pipe(
-          tap(res => console.log(res)),
           map((res: any) => {
             return {
-              id: res.user?.providerData[0]?.uid,
-              primaryEmail: res.user?.email,
-              photoUrl: res.user?.providerData[0]?.photoURL,
-              authPhotoUrl: res.user?.photoURL,
-              displayName: res.user?.displayName,
-              isVerified: res.user?.emailVerified,
-              isNew: res.aditionalUserData?.isNewUser,
-              creationTime: res.user?.metadata.creationTime,
-              lastLoginTime: res.user?.metadata.lastSignInTime,
-              uid: res.user?.uid,
+              id: res.user.providerData[0].uid,
+              primaryEmail: res.user.email,
+              photoUrl: res.user.providerData[0].photoURL,
+              authPhotoUrl: res.user.photoURL,
+              displayName: res.user.displayName,
+              isVerified: res.user.emailVerified,
+              creationTime: res.user.metadata.creationTime,
+              lastLoginTime: res.user.metadata.lastSignInTime,
+              uid: res.user.uid,
             };
           }),
           switchMap((user) => {
-            if (user.isNew) {
-              return [
-                authAction.signInSuccess({ user }),
-                authAction.saveUser({ user }),
-              ];
-            } else {
-              return [authAction.signInSuccess({ user })];
-            }
+            return [
+              authAction.signInSuccess({ user }),
+              authAction.saveUser({ user })
+            ];
           }),
           catchError((error) => of(authAction.notAuthenticated({ error })))
         )
@@ -97,7 +91,7 @@ export class AuthEffects implements OnInitEffects {
     () =>
       this.actions$.pipe(
         ofType(authAction.saveUser),
-        tap((action) => this.authService.createUser(action.user))
+        tap((action) => this.authService.saveUser(action.user))
       ),
     { dispatch: false }
   );

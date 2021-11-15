@@ -4,10 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-
 import { ConfirmDialogComponent } from '@rds-shared/components';
-
-
 import { ChangeGradeComponent, UserEditDialogComponent } from '..';
 import { AccountsTableDataSource } from './accounts-table-data-source';
 import { User } from '@rds-auth/models/user.model';
@@ -156,7 +153,7 @@ export class AccountsTableComponent implements AfterViewInit {
     if (
       selection.selected
         .map((user) => user.role)
-        .every((role) => role == 'alumnos')
+        .every((role) => role == 'Alumnos')
     ) {
       const gradesArray = selection.selected.map((user) => user.grade);
       const levelArray = selection.selected.map((user) => user.level);

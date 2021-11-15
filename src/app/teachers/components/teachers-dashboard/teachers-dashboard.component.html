@@ -1,0 +1,16 @@
+<div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+  <div *ngFor="let link of teachersCards" fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"
+    fxFlex.lt-sm="100%">
+    <mat-card *ngIf="link.access|async" [@fadeIn]="'fadeIn'" class="mb-2" [routerLink]="link.route" appMaterialElevation
+      [raisedElevation]="raisedElev">
+      <mat-card-header>
+        <fa-icon mat-card-avatar class="rds-icon float-left" [icon]="link.icon" size="2x"></fa-icon>
+
+        <mat-card-title>{{link.title}}</mat-card-title>
+        <mat-card-subtitle>
+          <p>{{link.description}}</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
