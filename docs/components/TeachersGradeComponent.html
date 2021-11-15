@@ -1,0 +1,1308 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sistema RDS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Sistema RDS</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Escribe para buscar"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Componentes</li>
+  <li
+  >
+  TeachersGradeComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>Fichero</h3>
+</p>
+<p class="comment">
+    <code>src/app/teachers/components/teachers-grade/teachers-grade.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implementa</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Meta datos</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-teachers-grade</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./teachers-grade.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./teachers-grade.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Índice</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Propiedades</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#course" >course</a>
+                            </li>
+                            <li>
+                                <a href="#courseId" >courseId</a>
+                            </li>
+                            <li>
+                                <a href="#currentGrades" >currentGrades</a>
+                            </li>
+                            <li>
+                                <a href="#dataSource" >dataSource</a>
+                            </li>
+                            <li>
+                                <a href="#displayColumns" >displayColumns</a>
+                            </li>
+                            <li>
+                                <a href="#faChevronLeft" >faChevronLeft</a>
+                            </li>
+                            <li>
+                                <a href="#formGrades" >formGrades</a>
+                            </li>
+                            <li>
+                                <a href="#loaded$" >loaded$</a>
+                            </li>
+                            <li>
+                                <a href="#loading$" >loading$</a>
+                            </li>
+                            <li>
+                                <a href="#students$" >students$</a>
+                            </li>
+                            <li>
+                                <a href="#studentsSubscription" >studentsSubscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Métodos</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#finalGrades" >finalGrades</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onChange" >onChange</a>
+                            </li>
+                            <li>
+                                <a href="#setScore" >setScore</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accesorios</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#scores" >scores</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, assignedCoursesEntityService: <a href="../injectables/AssignedCoursesEntityService.html" target="_self">AssignedCoursesEntityService</a>, accountsEntityService: <a href="../injectables/AccountsEntityService.html" target="_self">AccountsEntityService</a>, fb: <a href="../interfaces/Form.html" target="_self">FormBuilder</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="40" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:40</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parámetros :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                    <td>Tipo</td>
+                                                <td>Opcional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>assignedCoursesEntityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AssignedCoursesEntityService.html" target="_self" >AssignedCoursesEntityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>accountsEntityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AccountsEntityService.html" target="_self" >AccountsEntityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/Form.html" target="_self" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Métodos
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="finalGrades"></a>
+                    <span class="name">
+                        <span ><b>finalGrades</b></span>
+                        <a href="#finalGrades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>finalGrades(arrayItem: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="145"
+                            class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:145</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>arrayItem</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="169"
+                            class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:169</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="55"
+                            class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onChange"></a>
+                    <span class="name">
+                        <span ><b>onChange</b></span>
+                        <a href="#onChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onChange()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="166"
+                            class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:166</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setScore"></a>
+                    <span class="name">
+                        <span ><b>setScore</b></span>
+                        <a href="#setScore"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setScore(student: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="78"
+                            class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:78</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>student</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Propiedades
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="course"></a>
+                    <span class="name">
+                        <span ><b>course</b></span>
+                        <a href="#course"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/AssignedCourse.html" target="_self" >AssignedCourse | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="31" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="courseId"></a>
+                    <span class="name">
+                        <span ><b>courseId</b></span>
+                        <a href="#courseId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="30" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentGrades"></a>
+                    <span class="name">
+                        <span ><b>currentGrades</b></span>
+                        <a href="#currentGrades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="40" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataSource"></a>
+                    <span class="name">
+                        <span ><b>dataSource</b></span>
+                        <a href="#dataSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>new BehaviorSubject&lt;AbstractControl[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="38" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayColumns"></a>
+                    <span class="name">
+                        <span ><b>displayColumns</b></span>
+                        <a href="#displayColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[&#x27;studentName&#x27;, &#x27;unit1&#x27;, &#x27;unit2&#x27;, &#x27;unit3&#x27;, &#x27;action&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="39" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faChevronLeft"></a>
+                    <span class="name">
+                        <span ><b>faChevronLeft</b></span>
+                        <a href="#faChevronLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>faChevronLeft</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="33" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formGrades"></a>
+                    <span class="name">
+                        <span ><b>formGrades</b></span>
+                        <a href="#formGrades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="36" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaded$"></a>
+                    <span class="name">
+                        <span ><b>loaded$</b></span>
+                        <a href="#loaded$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="35" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading$"></a>
+                    <span class="name">
+                        <span ><b>loading$</b></span>
+                        <a href="#loading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="34" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="students$"></a>
+                    <span class="name">
+                        <span ><b>students$</b></span>
+                        <a href="#students$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="32" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="studentsSubscription"></a>
+                    <span class="name">
+                        <span ><b>studentsSubscription</b></span>
+                        <a href="#studentsSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="37" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accesorios
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="scores"></a>
+                        <span class="name"><b>scores</b><a href="#scores"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>scores()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Definido en <a href="" data-line="141" class="link-to-prism">src/app/teachers/components/teachers-grade/teachers-grade.component.ts:141</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+} from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+
+import { faChevronLeft } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+
+import { mergeMap, switchMap, take, tap } from &#x27;rxjs/operators&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { User } from &#x27;@rds-auth/models/user.model&#x27;;
+import { Assigment } from &#x27;../../../classroom/models/classroom.model&#x27;;
+import { AssignedCourse } from &#x27;../../../school/school-courses/models/school-course.model&#x27;;
+import { AccountsEntityService } from &#x27;../../../store/accounts/accounts-entity.service&#x27;;
+import { AssignedCoursesEntityService } from &#x27;@rds-store/school/assigned-courses/assigned-courses-entity.service&#x27;;
+import { ScoreListItem } from &#x27;@rds-profile/models/score.model&#x27;;
+
+
+@Component({
+  selector: &#x27;app-teachers-grade&#x27;,
+  templateUrl: &#x27;./teachers-grade.component.html&#x27;,
+  styleUrls: [&#x27;./teachers-grade.component.scss&#x27;],
+})
+export class TeachersGradeComponent implements OnInit {
+  courseId: string;
+  course!: AssignedCourse | undefined;
+  students$!: Observable&lt;User[]&gt;;
+  faChevronLeft &#x3D; faChevronLeft;
+  loading$!: Observable&lt;boolean&gt;;
+  loaded$!: Observable&lt;boolean&gt;;
+  formGrades!: FormGroup;
+  studentsSubscription!: Subscription;
+  dataSource &#x3D; new BehaviorSubject&lt;AbstractControl[]&gt;([]);
+  displayColumns &#x3D; [&#x27;studentName&#x27;, &#x27;unit1&#x27;, &#x27;unit2&#x27;, &#x27;unit3&#x27;, &#x27;action&#x27;];
+  currentGrades!: FormGroup;
+  constructor(
+    private route: ActivatedRoute,
+    private assignedCoursesEntityService: AssignedCoursesEntityService,
+    private accountsEntityService: AccountsEntityService,
+    private fb: FormBuilder
+  ) {
+    this.courseId &#x3D; this.route.snapshot.params.courseId;
+    /* this.formGrades &#x3D; this.fb.group({
+      scores: this.fb.array([])
+    }) */
+  }
+  /*  updateView() {
+     this.dataSource.next(this.scores.controls);
+   } */
+  ngOnInit(): void {
+    this.students$ &#x3D; this.assignedCoursesEntityService.entities$.pipe(
+      map((cc: AssignedCourse[]) &#x3D;&gt; cc.find((c) &#x3D;&gt; c.id &#x3D;&#x3D;&#x3D; this.courseId)),
+      tap((course: AssignedCourse) &#x3D;&gt; {
+        this.course &#x3D; course;
+      }),
+      mergeMap((course: AssignedCourse) &#x3D;&gt;
+        this.accountsEntityService.entities$.pipe(
+          map(users &#x3D;&gt; {
+            this.currentGrades &#x3D; this.fb.group({
+              scores: this.fb.array(
+                course.students.map((studentId) &#x3D;&gt; {
+                  const user &#x3D; users.find(u &#x3D;&gt; u.id &#x3D;&#x3D;&#x3D; studentId);
+                  return this.setScore({ id: user.id, name: user.name.fullName })
+                })
+              ),
+            })
+            return users;
+          }),
+        )
+      )
+    )
+  }
+  setScore(student: any): FormGroup {
+    return this.fb.group({
+      studentId: [student.id],
+      studentName: [student.name.fullName],
+      courseName: [this.course!.name],
+      unit1: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).unit1,
+      ],
+      unit2: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).unit2,
+      ],
+      unit3: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).unit3,
+      ],
+      notes1: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).notes1,
+      ],
+      notes2: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).notes2,
+      ],
+      notes3: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).notes3,
+      ],
+      recover1: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).recover1,
+      ],
+      recover2: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).recover2,
+      ],
+      recover3: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).recover3,
+      ],
+      final: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).final,
+      ],
+      isCourseClosed: [
+        student.currentGrades.scores.find(
+          (s: any) &#x3D;&gt; s.courseName &#x3D;&#x3D; this.course!.name
+        ).isCourseClosed,
+      ],
+    });
+  }
+
+  get scores(): FormArray {
+    return this.formGrades.get(&#x27;scores&#x27;) as FormArray;
+  }
+
+  finalGrades(arrayItem: any) {
+    let partialUser: Partial&lt;User&gt; &#x3D; {};
+    let score: Partial&lt;ScoreListItem&gt; &#x3D; {};
+    let studentProps: any &#x3D; {};
+    arrayItem[&#x27;_forEachChild&#x27;]((control: any, name: any) &#x3D;&gt; {
+      if (name &#x3D;&#x3D; &#x27;studentId&#x27; || name &#x3D;&#x3D; &#x27;studentName&#x27;) {
+        studentProps[name] &#x3D; control.value;
+      } else {
+        //score[name] &#x3D; control.value;
+      }
+    });
+    if (score.isCourseClosed)
+      score.prom_materia &#x3D;
+        +Math.trunc((+(score.unit1! + score.unit2 + score.unit3) * 10) / 3) /
+        10;
+
+    return partialUser;
+  }
+
+
+
+  onChange() {
+    this.currentGrades.get(&#x27;&#x27;);
+  }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add &#x27;implements OnDestroy&#x27; to the class.
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container py-2&quot;&gt;
+  &lt;ng-template #spinner&gt;
+    &lt;div style&#x3D;&quot;min-height: 300px;&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;center center&quot;&gt;
+      &lt;mat-spinner strokeWidth&#x3D;&quot;5&quot; [diameter]&#x3D;&quot;50&quot;&gt;
+      &lt;/mat-spinner&gt;
+      &lt;span&gt;Buscando ...&lt;/span&gt;&lt;br&gt;
+    &lt;/div&gt;
+  &lt;/ng-template&gt;
+  &lt;div *ngIf&#x3D;&quot;(students$|async) as students; else spinner&quot; class&#x3D;&quot;card bg-transparent&quot;&gt;
+    &lt;h2 class&#x3D;&quot;card-header&quot;&gt;
+      &lt;fa-icon mat-icon-button [routerLink]&#x3D;&quot;[&#x27;./../asignaturas&#x27;]&quot; [icon]&#x3D;&quot;faChevronLeft&quot;&gt;&lt;/fa-icon&gt;
+      &amp;nbsp;&amp;nbsp;{{course.name}}&amp;nbsp;&amp;nbsp;&lt;small class&#x3D;&quot;text-muted&quot;&gt;{{course.grade}}&lt;/small&gt;
+    &lt;/h2&gt;
+
+    &lt;div class&#x3D;&quot;card-body&quot;&gt;
+      &lt;div&gt;
+        &lt;form [formGroup]&#x3D;&quot;formGrades&quot; autocomplete&#x3D;&quot;off&quot;&gt;
+          &lt;table mat-table class&#x3D;&quot;full-width-table table-hover&quot; [dataSource]&#x3D;&quot;scores.controls&quot; formArrayName&#x3D;&quot;scores&quot;&gt;
+
+            &lt;ng-container matColumnDef&#x3D;&quot;studentName&quot;&gt;
+              &lt;th mat-header-cell *matHeaderCellDef&gt;Nombre&lt;/th&gt;
+              &lt;td mat-cell style&#x3D;&quot;font-size: 18px;&quot; *matCellDef&#x3D;&quot;let element&quot;&gt;
+                {{element.get(&#x27;studentName&#x27;).value}}
+                &lt;!--  &lt;mat-form-field floatLabel&#x3D;&quot;never&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                  &lt;input matInput formControlName&#x3D;&quot;studentName&quot; [attr.disabled]&#x3D;&quot;true&quot;&gt;
+                &lt;/mat-form-field&gt; --&gt;
+              &lt;/td&gt;
+            &lt;/ng-container&gt;
+
+
+
+            &lt;ng-container matColumnDef&#x3D;&quot;unit1&quot;&gt;
+              &lt;th mat-header-cell *matHeaderCellDef&gt;Unidad 1&lt;/th&gt;
+              &lt;td mat-cell style&#x3D;&quot;font-size: 12px;&quot; *matCellDef&#x3D;&quot;let element&quot; [formGroup]&#x3D;&quot;element&quot;&gt;
+                &lt;mat-form-field class&#x3D;&quot;mb-n3&quot; floatLabel&#x3D;&quot;never&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                  &lt;input matInput formControlName&#x3D;&quot;unit1&quot;&gt;
+                &lt;/mat-form-field&gt;
+                &lt;mat-checkbox class&#x3D;&quot;mb-n3&quot; formControlName&#x3D;&quot;recover1&quot; color&#x3D;&quot;primary&quot;&gt;nivelación
+                &lt;/mat-checkbox&gt;
+              &lt;/td&gt;
+            &lt;/ng-container&gt;
+            &lt;!--  &lt;ng-container matColumnDef&#x3D;&quot;recover1&quot;&gt;
+            &lt;th mat-header-cell *matHeaderCellDef&gt;&lt;/th&gt;
+            &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot; [formGroup]&#x3D;&quot;element&quot;&gt;
+
+            &lt;/td&gt;
+          &lt;/ng-container&gt; --&gt;
+
+            &lt;ng-container matColumnDef&#x3D;&quot;unit2&quot;&gt;
+              &lt;th mat-header-cell *matHeaderCellDef&gt;Unidad 2&lt;/th&gt;
+              &lt;td mat-cell style&#x3D;&quot;font-size: 12px;&quot; *matCellDef&#x3D;&quot;let element&quot; [formGroup]&#x3D;&quot;element&quot;&gt;
+                &lt;mat-form-field class&#x3D;&quot;mb-n3&quot; floatLabel&#x3D;&quot;never&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                  &lt;input matInput formControlName&#x3D;&quot;unit2&quot;&gt;
+                &lt;/mat-form-field&gt;
+                &lt;mat-checkbox class&#x3D;&quot;mb-n3&quot; formControlName&#x3D;&quot;recover2&quot; color&#x3D;&quot;primary&quot;&gt;nivelación
+                &lt;/mat-checkbox&gt;
+              &lt;/td&gt;
+            &lt;/ng-container&gt;
+            &lt;!-- &lt;ng-container matColumnDef&#x3D;&quot;recover2&quot;&gt;
+            &lt;th mat-header-cell *matHeaderCellDef&gt;&lt;/th&gt;
+            &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot; [formGroup]&#x3D;&quot;element&quot;&gt;
+
+            &lt;/td&gt;
+          &lt;/ng-container&gt; --&gt;
+            &lt;ng-container matColumnDef&#x3D;&quot;unit3&quot;&gt;
+              &lt;th mat-header-cell *matHeaderCellDef&gt;Unidad 3&lt;/th&gt;
+              &lt;td mat-cell style&#x3D;&quot;font-size: 12px;&quot; *matCellDef&#x3D;&quot;let element&quot; [formGroup]&#x3D;&quot;element&quot;&gt;
+                &lt;mat-form-field class&#x3D;&quot;mb-n3&quot; floatLabel&#x3D;&quot;never&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                  &lt;input matInput formControlName&#x3D;&quot;unit3&quot;&gt;
+                &lt;/mat-form-field&gt;
+                &lt;mat-checkbox class&#x3D;&quot;mb-n3&quot; formControlName&#x3D;&quot;recover3&quot; color&#x3D;&quot;primary&quot;&gt;nivelación
+                &lt;/mat-checkbox&gt;
+              &lt;/td&gt;
+            &lt;/ng-container&gt;
+            &lt;!--  &lt;ng-container matColumnDef&#x3D;&quot;recover3&quot;&gt;
+            &lt;th mat-header-cell *matHeaderCellDef&gt;&lt;/th&gt;
+            &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot; [formGroup]&#x3D;&quot;element&quot;&gt;
+
+            &lt;/td&gt;
+          &lt;/ng-container&gt; --&gt;
+            &lt;ng-container matColumnDef&#x3D;&quot;action&quot;&gt;
+              &lt;th mat-header-cell *matHeaderCellDef&gt;&lt;/th&gt;
+              &lt;td mat-cell style&#x3D;&quot;font-size: 12px;&quot; *matCellDef&#x3D;&quot;let element&quot; [formGroup]&#x3D;&quot;element&quot;&gt;
+                &lt;button mat-raised-button color&#x3D;&quot;primary&quot; (click)&#x3D;&quot;publishGrade(element)&quot;
+                  [disabled]&#x3D;&quot;element.dirty&quot;&gt;Publicar&lt;/button&gt;
+              &lt;/td&gt;
+            &lt;/ng-container&gt;
+            &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayColumns&quot;&gt; &lt;/tr&gt;
+            &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayColumns&quot;&gt;&lt;/tr&gt;
+          &lt;/table&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./teachers-grade.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import &quot;./../../../../assets/themes/colors&quot;;
+.mat-table {
+  background: none;
+}
+.mat-column-studentName {
+  min-width: 300px;
+}
+.mat-column-unit1,
+.mat-column-unit2,
+.mat-column-unit3 {
+  max-width: 100px;
+  .mat-form-field {
+    width: calc(100% - 10px);
+  }
+}
+.mat-column-recover1,
+.mat-column-recover2,
+.mat-column-recover3 {
+  .mat-form-field {
+    width: calc(100% - 10px);
+  }
+}
+table {
+  color: $deep-blue-color;
+  line-height: 14px !important;
+  width: 100%;
+
+  mat-header-row {
+    height: 50px;
+  }
+
+  .mat-footer-row,
+  .mat-row {
+    height: 30px;
+    cursor: pointer;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Leyenda</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Elemento Html</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Componente</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Elemento Html con directiva</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container py-2">  <ng-template #spinner>    <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">      <mat-spinner strokeWidth="5" [diameter]="50">      </mat-spinner>      <span>Buscando ...</span><br>    </div>  </ng-template>  <div *ngIf="(students$|async) as students; else spinner" class="card bg-transparent">    <h2 class="card-header">      <fa-icon mat-icon-button [routerLink]="[\'./../asignaturas\']" [icon]="faChevronLeft"></fa-icon>      &nbsp;&nbsp;{{course.name}}&nbsp;&nbsp;<small class="text-muted">{{course.grade}}</small>    </h2>    <div class="card-body">      <div>        <form [formGroup]="formGrades" autocomplete="off">          <table mat-table class="full-width-table table-hover" [dataSource]="scores.controls" formArrayName="scores">            <ng-container matColumnDef="studentName">              <th mat-header-cell *matHeaderCellDef>Nombre</th>              <td mat-cell style="font-size: 18px;" *matCellDef="let element">                {{element.get(\'studentName\').value}}                <!--  <mat-form-field floatLabel="never" appearance="outline">                  <input matInput formControlName="studentName" [attr.disabled]="true">                </mat-form-field> -->              </td>            </ng-container>            <ng-container matColumnDef="unit1">              <th mat-header-cell *matHeaderCellDef>Unidad 1</th>              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">                <mat-form-field class="mb-n3" floatLabel="never" appearance="outline">                  <input matInput formControlName="unit1">                </mat-form-field>                <mat-checkbox class="mb-n3" formControlName="recover1" color="primary">nivelación                </mat-checkbox>              </td>            </ng-container>            <!--  <ng-container matColumnDef="recover1">            <th mat-header-cell *matHeaderCellDef></th>            <td mat-cell *matCellDef="let element" [formGroup]="element">            </td>          </ng-container> -->            <ng-container matColumnDef="unit2">              <th mat-header-cell *matHeaderCellDef>Unidad 2</th>              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">                <mat-form-field class="mb-n3" floatLabel="never" appearance="outline">                  <input matInput formControlName="unit2">                </mat-form-field>                <mat-checkbox class="mb-n3" formControlName="recover2" color="primary">nivelación                </mat-checkbox>              </td>            </ng-container>            <!-- <ng-container matColumnDef="recover2">            <th mat-header-cell *matHeaderCellDef></th>            <td mat-cell *matCellDef="let element" [formGroup]="element">            </td>          </ng-container> -->            <ng-container matColumnDef="unit3">              <th mat-header-cell *matHeaderCellDef>Unidad 3</th>              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">                <mat-form-field class="mb-n3" floatLabel="never" appearance="outline">                  <input matInput formControlName="unit3">                </mat-form-field>                <mat-checkbox class="mb-n3" formControlName="recover3" color="primary">nivelación                </mat-checkbox>              </td>            </ng-container>            <!--  <ng-container matColumnDef="recover3">            <th mat-header-cell *matHeaderCellDef></th>            <td mat-cell *matCellDef="let element" [formGroup]="element">            </td>          </ng-container> -->            <ng-container matColumnDef="action">              <th mat-header-cell *matHeaderCellDef></th>              <td mat-cell style="font-size: 12px;" *matCellDef="let element" [formGroup]="element">                <button mat-raised-button color="primary" (click)="publishGrade(element)"                  [disabled]="element.dirty">Publicar</button>              </td>            </ng-container>            <tr mat-header-row *matHeaderRowDef="displayColumns"> </tr>            <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>          </table>        </form>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AddStudentsCoursesComponent', 'selector': ''},{'name': 'AdminCoursesComponent', 'selector': 'app-admin-courses'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NotesEditComponent', 'selector': 'app-notes-edit'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileInfoComponent', 'selector': 'app-profile-info'},{'name': 'ProfileMenuComponent', 'selector': 'app-profile-menu'},{'name': 'ProfileScoresBarChartComponent', 'selector': 'app-profile-scores-bar-chart'},{'name': 'ProfileScoresComponent', 'selector': 'app-profile-scores'},{'name': 'ProfileScoresListComponent', 'selector': 'app-profile-scores-list'},{'name': 'ProfileScoresRecommendationComponent', 'selector': 'app-profile-scores-recommendation'},{'name': 'ProfileScoresTableComponent', 'selector': 'app-profile-scores-table'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCourseDialogComponent', 'selector': ''},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'ScoresEditComponent', 'selector': 'app-scores-edit'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StudentsCoursesComponent', 'selector': 'app-students-courses'},{'name': 'TeacherCoursesComponent', 'selector': 'app-teacher-courses'},{'name': 'TeachersComponent', 'selector': 'app-teachers'},{'name': 'TeachersDashboardComponent', 'selector': 'app-teachers-dashboard'},{'name': 'TeachersGradeComponent', 'selector': 'app-teachers-grade'},{'name': 'UploadFileDialogComponent', 'selector': ''},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+    var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
+    var ACTUAL_COMPONENT = {'name': 'TeachersGradeComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> comparación de resultados "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No hay resultados que coincidan "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TeachersGradeComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

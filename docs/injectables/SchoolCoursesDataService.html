@@ -58,7 +58,7 @@
             <h3>Fichero</h3>
         </p>
         <p class="comment">
-            <code>src/app/ngrx-store/school/school-courses/school-courses-data.service.ts</code>
+            <code>src/app/store/school/school-courses/school-courses-data.service.ts</code>
         </p>
 
 
@@ -125,7 +125,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="18" class="link-to-prism">src/app/ngrx-store/school/school-courses/school-courses-data.service.ts:18</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="10" class="link-to-prism">src/app/store/school/school-courses/school-courses-data.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -212,8 +212,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="37"
-                            class="link-to-prism">src/app/ngrx-store/school/school-courses/school-courses-data.service.ts:37</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="29"
+                            class="link-to-prism">src/app/store/school/school-courses/school-courses-data.service.ts:29</a></div>
                 </td>
             </tr>
 
@@ -281,8 +281,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="43"
-                            class="link-to-prism">src/app/ngrx-store/school/school-courses/school-courses-data.service.ts:43</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="35"
+                            class="link-to-prism">src/app/store/school/school-courses/school-courses-data.service.ts:35</a></div>
                 </td>
             </tr>
 
@@ -350,8 +350,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="27"
-                            class="link-to-prism">src/app/ngrx-store/school/school-courses/school-courses-data.service.ts:27</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="19"
+                            class="link-to-prism">src/app/store/school/school-courses/school-courses-data.service.ts:19</a></div>
                 </td>
             </tr>
 
@@ -387,8 +387,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="34"
-                            class="link-to-prism">src/app/ngrx-store/school/school-courses/school-courses-data.service.ts:34</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="26"
+                            class="link-to-prism">src/app/store/school/school-courses/school-courses-data.service.ts:26</a></div>
                 </td>
             </tr>
 
@@ -456,8 +456,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="31"
-                            class="link-to-prism">src/app/ngrx-store/school/school-courses/school-courses-data.service.ts:31</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="23"
+                            class="link-to-prism">src/app/store/school/school-courses/school-courses-data.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -525,8 +525,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="40"
-                            class="link-to-prism">src/app/ngrx-store/school/school-courses/school-courses-data.service.ts:40</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="32"
+                            class="link-to-prism">src/app/store/school/school-courses/school-courses-data.service.ts:32</a></div>
                 </td>
             </tr>
 
@@ -582,20 +582,12 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
-import { StringMap } from &#x27;@angular/compiler/src/compiler_facade_interface&#x27;;
-
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from &#x27;@ngrx/data&#x27;;
 import { Update } from &#x27;@ngrx/entity&#x27;;
-
-
-
-import { concat, from, merge, Observable, of } from &#x27;rxjs&#x27;;
-import { tap, concatMap, switchMap, mergeMap, map, mergeAll, concatAll, toArray } from &#x27;rxjs/operators&#x27;;
-
+import { Observable } from &#x27;rxjs&#x27;;
 import * as fromClass from &#x27;.&#x27;;
-import { SchoolCoursesService } from &#x27;@rds-root/app/school/services/school-courses.service&#x27;;
-import { SchoolCourse } from &#x27;@rds-root/app/school/models/school-course.model&#x27;;
-
+import { SchoolCourse } from &#x27;@rds-school/school-courses/models/school-course.model&#x27;;
+import { SchoolCoursesService } from &#x27;@rds-school/school-courses/services/school-courses.service&#x27;;
 @Injectable()
 export class SchoolCoursesDataService extends DefaultDataService&lt;SchoolCourse&gt; {
   constructor(

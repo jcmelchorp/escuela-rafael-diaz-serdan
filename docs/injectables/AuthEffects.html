@@ -139,7 +139,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="14" class="link-to-prism">src/app/auth/state/auth.effects.ts:14</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="15" class="link-to-prism">src/app/auth/state/auth.effects.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -226,8 +226,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="20"
-                            class="link-to-prism">src/app/auth/state/auth.effects.ts:20</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="21"
+                            class="link-to-prism">src/app/auth/state/auth.effects.ts:21</a></div>
                 </td>
             </tr>
 
@@ -278,7 +278,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="104" class="link-to-prism">src/app/auth/state/auth.effects.ts:104</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="99" class="link-to-prism">src/app/auth/state/auth.effects.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -316,7 +316,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="117" class="link-to-prism">src/app/auth/state/auth.effects.ts:117</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="112" class="link-to-prism">src/app/auth/state/auth.effects.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -348,16 +348,15 @@
               return authAction.signInFail();
             }
           }),
-          catchError((error) &#x3D;&gt; of(authAction.notAuthenticated({ error })))
         )
-      )
+      ), catchError((error) &#x3D;&gt; of(authAction.notAuthenticated({ error })))
     )
   )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="26" class="link-to-prism">src/app/auth/state/auth.effects.ts:26</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="27" class="link-to-prism">src/app/auth/state/auth.effects.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -381,7 +380,7 @@
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(authAction.saveUser),
-        tap((action) &#x3D;&gt; this.authService.createUser(action.user))
+        tap((action) &#x3D;&gt; this.authService.saveUser(action.user))
       ),
     { dispatch: false }
   )</code>
@@ -389,7 +388,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="95" class="link-to-prism">src/app/auth/state/auth.effects.ts:95</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="90" class="link-to-prism">src/app/auth/state/auth.effects.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -414,29 +413,24 @@
       ofType(authAction.signIn),
       switchMap(() &#x3D;&gt;
         this.authService.signInWithPopup().pipe(
-          map((res) &#x3D;&gt; {
+          map((res: any) &#x3D;&gt; {
             return {
-              id: res.user?.providerData[0]?.uid,
-              primaryEmail: res.user?.email,
-              photoUrl: res.user?.providerData[0]?.photoURL,
-              authPhotoUrl: res.user?.photoURL,
-              displayName: res.user?.displayName,
-              isNew: res.additionalUserInfo?.isNewUser,
-              isVerified: res.user?.emailVerified,
-              creationTime: res.user?.metadata.creationTime,
-              lastLoginTime: res.user?.metadata.lastSignInTime,
-              uid: res.user?.uid,
+              id: res.user.providerData[0].uid,
+              primaryEmail: res.user.email,
+              photoUrl: res.user.providerData[0].photoURL,
+              authPhotoUrl: res.user.photoURL,
+              displayName: res.user.displayName,
+              isVerified: res.user.emailVerified,
+              creationTime: res.user.metadata.creationTime,
+              lastLoginTime: res.user.metadata.lastSignInTime,
+              uid: res.user.uid,
             };
           }),
           switchMap((user) &#x3D;&gt; {
-            if (user.isNew) {
-              return [
-                authAction.signInSuccess({ user }),
-                authAction.saveUser({ user }),
-              ];
-            } else {
-              return [authAction.signInSuccess({ user })];
-            }
+            return [
+              authAction.signInSuccess({ user }),
+              authAction.saveUser({ user })
+            ];
           }),
           catchError((error) &#x3D;&gt; of(authAction.notAuthenticated({ error })))
         )
@@ -486,7 +480,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="79" class="link-to-prism">src/app/auth/state/auth.effects.ts:79</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="74" class="link-to-prism">src/app/auth/state/auth.effects.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -523,7 +517,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="131" class="link-to-prism">src/app/auth/state/auth.effects.ts:131</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="126" class="link-to-prism">src/app/auth/state/auth.effects.ts:126</a></div>
                         </td>
                     </tr>
 
@@ -557,7 +551,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="146" class="link-to-prism">src/app/auth/state/auth.effects.ts:146</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="141" class="link-to-prism">src/app/auth/state/auth.effects.ts:141</a></div>
                         </td>
                     </tr>
 
@@ -570,9 +564,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UserCredential } from &#x27;@angular/fire/auth&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
 
-import { Actions, createEffect, ofType, OnInitEffects, ROOT_EFFECTS_INIT } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType, OnInitEffects } from &#x27;@ngrx/effects&#x27;;
 import { User } from &#x27;@rds-auth/models/user.model&#x27;;
 import { of, Observable, defer, from } from &#x27;rxjs&#x27;;
 import { switchMap, map, catchError, take, tap } from &#x27;rxjs/operators&#x27;;
@@ -607,9 +602,8 @@ export class AuthEffects implements OnInitEffects {
               return authAction.signInFail();
             }
           }),
-          catchError((error) &#x3D;&gt; of(authAction.notAuthenticated({ error })))
         )
-      )
+      ), catchError((error) &#x3D;&gt; of(authAction.notAuthenticated({ error })))
     )
   );
 
@@ -618,29 +612,24 @@ export class AuthEffects implements OnInitEffects {
       ofType(authAction.signIn),
       switchMap(() &#x3D;&gt;
         this.authService.signInWithPopup().pipe(
-          map((res) &#x3D;&gt; {
+          map((res: any) &#x3D;&gt; {
             return {
-              id: res.user?.providerData[0]?.uid,
-              primaryEmail: res.user?.email,
-              photoUrl: res.user?.providerData[0]?.photoURL,
-              authPhotoUrl: res.user?.photoURL,
-              displayName: res.user?.displayName,
-              isNew: res.additionalUserInfo?.isNewUser,
-              isVerified: res.user?.emailVerified,
-              creationTime: res.user?.metadata.creationTime,
-              lastLoginTime: res.user?.metadata.lastSignInTime,
-              uid: res.user?.uid,
+              id: res.user.providerData[0].uid,
+              primaryEmail: res.user.email,
+              photoUrl: res.user.providerData[0].photoURL,
+              authPhotoUrl: res.user.photoURL,
+              displayName: res.user.displayName,
+              isVerified: res.user.emailVerified,
+              creationTime: res.user.metadata.creationTime,
+              lastLoginTime: res.user.metadata.lastSignInTime,
+              uid: res.user.uid,
             };
           }),
           switchMap((user) &#x3D;&gt; {
-            if (user.isNew) {
-              return [
-                authAction.signInSuccess({ user }),
-                authAction.saveUser({ user }),
-              ];
-            } else {
-              return [authAction.signInSuccess({ user })];
-            }
+            return [
+              authAction.signInSuccess({ user }),
+              authAction.saveUser({ user })
+            ];
           }),
           catchError((error) &#x3D;&gt; of(authAction.notAuthenticated({ error })))
         )
@@ -668,7 +657,7 @@ export class AuthEffects implements OnInitEffects {
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(authAction.saveUser),
-        tap((action) &#x3D;&gt; this.authService.createUser(action.user))
+        tap((action) &#x3D;&gt; this.authService.saveUser(action.user))
       ),
     { dispatch: false }
   );

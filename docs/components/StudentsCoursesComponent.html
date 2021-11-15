@@ -1,0 +1,1296 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sistema RDS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Sistema RDS</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Escribe para buscar"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Componentes</li>
+  <li
+  >
+  StudentsCoursesComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>Fichero</h3>
+</p>
+<p class="comment">
+    <code>src/app/school/school-courses/containers/students-courses/students-courses.component.ts</code>
+</p>
+
+
+
+
+
+
+<section>
+    <h3>Meta datos</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-students-courses</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./students-courses.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./students-courses.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Índice</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Propiedades</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dataSource" >dataSource</a>
+                            </li>
+                            <li>
+                                <a href="#displayedColumns" >displayedColumns</a>
+                            </li>
+                            <li>
+                                <a href="#filteredEntities$" >filteredEntities$</a>
+                            </li>
+                            <li>
+                                <a href="#filterValues" >filterValues</a>
+                            </li>
+                            <li>
+                                <a href="#gradeKeys" >gradeKeys</a>
+                            </li>
+                            <li>
+                                <a href="#grades" >grades</a>
+                            </li>
+                            <li>
+                                <a href="#groupingColumn" >groupingColumn</a>
+                            </li>
+                            <li>
+                                <a href="#initialData" >initialData</a>
+                            </li>
+                            <li>
+                                <a href="#loaded$" >loaded$</a>
+                            </li>
+                            <li>
+                                <a href="#loading$" >loading$</a>
+                            </li>
+                            <li>
+                                <a href="#reducedGroups" >reducedGroups</a>
+                            </li>
+                            <li>
+                                <a href="#resCount$" >resCount$</a>
+                            </li>
+                            <li>
+                                <a href="#schoolCourses$" >schoolCourses$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Métodos</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#buildDataSource" >buildDataSource</a>
+                            </li>
+                            <li>
+                                <a href="#groupBy" >groupBy</a>
+                            </li>
+                            <li>
+                                <a href="#initData" >initData</a>
+                            </li>
+                            <li>
+                                <a href="#isGroup" >isGroup</a>
+                            </li>
+                            <li>
+                                <a href="#reduceGroup" >reduceGroup</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Entradas</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dataArray" >dataArray</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="28" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parámetros :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                    <td>Tipo</td>
+                                                <td>Opcional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Entradas</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dataArray"></a>
+                        <b>dataArray</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/AssignedCourse.html" target="_self" >AssignedCourse[]</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Definido en <a href="" data-line="15" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:15</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Métodos
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildDataSource"></a>
+                    <span class="name">
+                        <span ><b>buildDataSource</b></span>
+                        <a href="#buildDataSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>buildDataSource()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="50"
+                            class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:50</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rebuilds the datasource after any change to the criterions</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="groupBy"></a>
+                    <span class="name">
+                        <span ><b>groupBy</b></span>
+                        <a href="#groupBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>groupBy(column: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, data: any[], reducedGroups?: any[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="59"
+                            class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:59</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Groups the @param data by distinct values of a @param column
+This adds group lines to the dataSource</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                    <td>Descripción</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>column</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                            <code>any[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reducedGroups</td>
+                                    <td>
+                                            <code>any[]</code>
+                                    </td>
+
+                                    <td>
+                                        Si
+                                    </td>
+
+
+                                    <td>
+                                        <p>is used localy to keep track of the colapsed groups</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initData"></a>
+                    <span class="name">
+                        <span ><b>initData</b></span>
+                        <a href="#initData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initData(data)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="40"
+                            class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:40</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Discovers columns in the data</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isGroup"></a>
+                    <span class="name">
+                        <span ><b>isGroup</b></span>
+                        <a href="#isGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isGroup(index, item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="91"
+                            class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:91</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Since groups are on the same level as the data,
+this function is used by @input(matRowDefWhen)</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>index</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reduceGroup"></a>
+                    <span class="name">
+                        <span ><b>reduceGroup</b></span>
+                        <a href="#reduceGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reduceGroup(row)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="99"
+                            class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:99</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used in the view to collapse a group
+Effectively removing it from the displayed datasource</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>row</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Propiedades
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dataSource"></a>
+                    <span class="name">
+                        <span ><b>dataSource</b></span>
+                        <a href="#dataSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="25" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayedColumns"></a>
+                    <span class="name">
+                        <span ><b>displayedColumns</b></span>
+                        <a href="#displayedColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="24" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredEntities$"></a>
+                    <span class="name">
+                        <span ><b>filteredEntities$</b></span>
+                        <a href="#filteredEntities$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/StudentsCourses.html" target="_self" >Observable&lt;StudentsCourses[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="20" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterValues"></a>
+                    <span class="name">
+                        <span ><b>filterValues</b></span>
+                        <a href="#filterValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/Group.html" target="_self" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="18" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gradeKeys"></a>
+                    <span class="name">
+                        <span ><b>gradeKeys</b></span>
+                        <a href="#gradeKeys"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="22" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="grades"></a>
+                    <span class="name">
+                        <span ><b>grades</b></span>
+                        <a href="#grades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>SchoolLevel</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="23" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="groupingColumn"></a>
+                    <span class="name">
+                        <span ><b>groupingColumn</b></span>
+                        <a href="#groupingColumn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="26" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialData"></a>
+                    <span class="name">
+                        <span ><b>initialData</b></span>
+                        <a href="#initialData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="28" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaded$"></a>
+                    <span class="name">
+                        <span ><b>loaded$</b></span>
+                        <a href="#loaded$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="17" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading$"></a>
+                    <span class="name">
+                        <span ><b>loading$</b></span>
+                        <a href="#loading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="16" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reducedGroups"></a>
+                    <span class="name">
+                        <span ><b>reducedGroups</b></span>
+                        <a href="#reducedGroups"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="27" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resCount$"></a>
+                    <span class="name">
+                        <span ><b>resCount$</b></span>
+                        <a href="#resCount$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;number&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="21" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="schoolCourses$"></a>
+                    <span class="name">
+                        <span ><b>schoolCourses$</b></span>
+                        <a href="#schoolCourses$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../classes/StudentsCourses.html" target="_self" >Observable&lt;StudentsCourses[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="19" class="link-to-prism">src/app/school/school-courses/containers/students-courses/students-courses.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit } from &#x27;@angular/core&#x27;;
+import { FormGroup } from &#x27;@angular/forms&#x27;;
+import { SchoolLevel } from &#x27;@rds-auth/models/user.enum&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { StudentsCourses } from &#x27;../../models/students-courses.model&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { AssignedCourse } from &#x27;../../models/school-course.model&#x27;;
+
+@Component({
+  selector: &#x27;app-students-courses&#x27;,
+  templateUrl: &#x27;./students-courses.component.html&#x27;,
+  styleUrls: [&#x27;./students-courses.component.scss&#x27;]
+})
+export class StudentsCoursesComponent {
+  @Input() dataArray: AssignedCourse[];
+  loading$: Observable&lt;boolean&gt;;
+  loaded$: Observable&lt;boolean&gt;;
+  filterValues: FormGroup;
+  schoolCourses$: Observable&lt;StudentsCourses[]&gt;;
+  filteredEntities$: Observable&lt;StudentsCourses[]&gt;;
+  resCount$: Observable&lt;number&gt;;
+  gradeKeys;
+  grades &#x3D; SchoolLevel;
+  displayedColumns: string[];
+  dataSource &#x3D; [];
+  groupingColumn;
+  reducedGroups &#x3D; [];
+  initialData: any[];
+
+  constructor(private route: ActivatedRoute) {
+    this.route.snapshot.data.courseId
+    let inputData &#x3D; this.dataArray;
+    if (!this.initData(inputData)) return;
+    this.buildDataSource();
+  }
+
+  /**
+   * Discovers columns in the data
+   */
+  initData(data) {
+    if (!data) return false;
+    this.displayedColumns &#x3D; Object.keys(data[0]);
+    this.initialData &#x3D; this.dataArray;
+    return true;
+  }
+
+  /**
+   * Rebuilds the datasource after any change to the criterions
+   */
+  buildDataSource() {
+    this.dataSource &#x3D; this.groupBy(this.groupingColumn, this.initialData, this.reducedGroups);
+  }
+
+  /**
+   * Groups the @param data by distinct values of a @param column
+   * This adds group lines to the dataSource
+   * @param reducedGroups is used localy to keep track of the colapsed groups
+   */
+  groupBy(column: string, data: any[], reducedGroups?: any[]) {
+    if (!column) return data;
+    let collapsedGroups &#x3D; reducedGroups;
+    if (!reducedGroups) collapsedGroups &#x3D; [];
+    const customReducer &#x3D; (accumulator, currentValue) &#x3D;&gt; {
+      let currentGroup &#x3D; currentValue[column];
+      if (!accumulator[currentGroup])
+        accumulator[currentGroup] &#x3D; [{
+          groupName: &#x60;${column} ${currentValue[column]}&#x60;,
+          value: currentValue[column],
+          isGroup: true,
+          reduced: collapsedGroups.some((group) &#x3D;&gt; group.value &#x3D;&#x3D; currentValue[column])
+        }];
+
+      accumulator[currentGroup].push(currentValue);
+
+      return accumulator;
+    }
+    let groups &#x3D; data.reduce(customReducer, {});
+    let groupArray &#x3D; Object.keys(groups).map(key &#x3D;&gt; groups[key]);
+    let flatList &#x3D; groupArray.reduce((a, c) &#x3D;&gt; { return a.concat(c); }, []);
+
+    return flatList.filter((rawLine) &#x3D;&gt; {
+      return rawLine.isGroup ||
+        collapsedGroups.every((group) &#x3D;&gt; rawLine[column] !&#x3D; group.value);
+    });
+  }
+
+  /**
+   * Since groups are on the same level as the data,
+   * this function is used by @input(matRowDefWhen)
+   */
+  isGroup(index, item): boolean {
+    return item.isGroup;
+  }
+
+  /**
+   * Used in the view to collapse a group
+   * Effectively removing it from the displayed datasource
+   */
+  reduceGroup(row) {
+    row.reduced &#x3D; !row.reduced;
+    if (row.reduced)
+      this.reducedGroups.push(row);
+    else
+      this.reducedGroups &#x3D; this.reducedGroups.filter((el) &#x3D;&gt; el.value !&#x3D; row.value);
+
+    this.buildDataSource();
+  }
+}
+
+/**  Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license */
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form [formGroup]&#x3D;&quot;filterValues&quot;&gt;
+  &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-md&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+    &lt;mat-form-field appearance&#x3D;&quot;outline&quot; fxFlex&#x3D;&quot;1 0 calc(33.3% - 5px)&quot;&gt;
+      &lt;mat-label&gt;Nombre&lt;/mat-label&gt;
+      &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Buscar por nombre&quot;&gt;
+      &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;filterValues.controls.name.reset();$event.stopPropagation()&quot;&gt;
+        &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+      &lt;/button&gt;
+    &lt;/mat-form-field&gt;
+    &lt;mat-form-field appearance&#x3D;&quot;outline&quot; fxFlex&#x3D;&quot;1 0 calc(33.3% - 5px)&quot;&gt;
+      &lt;mat-label&gt;Grado escolar&lt;/mat-label&gt;
+      &lt;mat-select formControlName&#x3D;&quot;grade&quot; placeholder&#x3D;&quot;Selecciona un grado&quot;&gt;
+        &lt;mat-option [value]&#x3D;&quot;&quot;&gt;Todos los grados&lt;/mat-option&gt;
+        &lt;mat-option *ngFor&#x3D;&quot;let key of gradeKeys&quot; [value]&#x3D;&quot;key&quot;&gt;
+          {{key}}
+        &lt;/mat-option&gt;
+      &lt;/mat-select&gt;
+      &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;filterValues.controls.grade.reset();$event.stopPropagation()&quot;&gt;
+        &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+      &lt;/button&gt;
+    &lt;/mat-form-field&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+&lt;mat-list&gt;
+  &lt;mat-list-item&gt;Choose a column&lt;/mat-list-item&gt;
+  &lt;mat-list-item&gt;
+    &lt;mat-select placeholder&#x3D;&quot;Group by&quot; [(ngModel)]&#x3D;&quot;groupingColumn&quot; name&#x3D;&quot;item&quot; (ngModelChange)&#x3D;&quot;buildDataSource()&quot;&gt;
+      &lt;mat-option [value]&#x3D;&quot;null&quot;&gt;&lt;/mat-option&gt;
+      &lt;mat-option *ngFor&#x3D;&quot;let item of displayedColumns&quot; [value]&#x3D;&quot;item&quot;&gt;
+        {{item}}
+      &lt;/mat-option&gt;
+    &lt;/mat-select&gt;
+  &lt;/mat-list-item&gt;
+&lt;/mat-list&gt;
+&lt;table mat-table [dataSource]&#x3D;&quot;dataSource&quot; class&#x3D;&quot;mat-elevation-z8&quot;&gt;
+
+  &lt;!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition&quot; --&gt;
+  &lt;ng-container *ngFor&#x3D;&quot;let col of displayedColumns&quot; [matColumnDef]&#x3D;&quot;col&quot;&gt;
+    &lt;th mat-header-cell *matHeaderCellDef&gt;{{ col }}&lt;/th&gt;
+    &lt;td mat-cell *matCellDef&#x3D;&quot;let row&quot;&gt;{{ row[col] }}&lt;/td&gt;
+  &lt;/ng-container&gt;
+
+  &lt;!-- Default Table lines --&gt;
+  &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns; sticky: true&quot;&gt;&lt;/tr&gt;
+  &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns;&quot;&gt;&lt;/tr&gt;
+
+  &lt;!-- Group header cells--&gt;
+  &lt;ng-container matColumnDef&#x3D;&quot;groupHeader&quot;&gt;
+    &lt;td colspan&#x3D;&quot;999&quot; mat-cell *matCellDef&#x3D;&quot;let group&quot;&gt;
+      &lt;strong&gt;{{group.groupName}}&lt;/strong&gt;
+    &lt;/td&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container matColumnDef&#x3D;&quot;groupReducer&quot;&gt;
+    &lt;td colspan&#x3D;&quot;1&quot; mat-cell *matCellDef&#x3D;&quot;let group&quot;&gt;
+      &lt;div fxFill fxLayoutAlign&#x3D;&quot;center center&quot;&gt;
+        &lt;mat-icon *ngIf&#x3D;&quot;!group.reduced&quot;&gt;expand_less&lt;/mat-icon&gt;
+        &lt;mat-icon *ngIf&#x3D;&quot;group.reduced&quot;&gt;expand_more&lt;/mat-icon&gt;
+      &lt;/div&gt;
+    &lt;/td&gt;
+  &lt;/ng-container&gt;
+
+  &lt;!-- Group line --&gt;
+  &lt;tr mat-row class&#x3D;&quot;clickable&quot; *matRowDef&#x3D;&quot;let row; columns: [&#x27;groupReducer&#x27;,&#x27;groupHeader&#x27;]; when: isGroup&quot;
+    (click)&#x3D;&quot;reduceGroup(row)&quot;&gt;
+  &lt;/tr&gt;
+
+&lt;/table&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./students-courses.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Leyenda</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Elemento Html</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Componente</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Elemento Html con directiva</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form [formGroup]="filterValues">  <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">    <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">      <mat-label>Nombre</mat-label>      <input matInput type="text" formControlName="name" placeholder="Buscar por nombre">      <button mat-icon-button matSuffix (click)="filterValues.controls.name.reset();$event.stopPropagation()">        <mat-icon>close</mat-icon>      </button>    </mat-form-field>    <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">      <mat-label>Grado escolar</mat-label>      <mat-select formControlName="grade" placeholder="Selecciona un grado">        <mat-option [value]="">Todos los grados</mat-option>        <mat-option *ngFor="let key of gradeKeys" [value]="key">          {{key}}        </mat-option>      </mat-select>      <button mat-icon-button matSuffix (click)="filterValues.controls.grade.reset();$event.stopPropagation()">        <mat-icon>close</mat-icon>      </button>    </mat-form-field>  </div></form><mat-list>  <mat-list-item>Choose a column</mat-list-item>  <mat-list-item>    <mat-select placeholder="Group by" [(ngModel)]="groupingColumn" name="item" (ngModelChange)="buildDataSource()">      <mat-option [value]="null"></mat-option>      <mat-option *ngFor="let item of displayedColumns" [value]="item">        {{item}}      </mat-option>    </mat-select>  </mat-list-item></mat-list><table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  <!--- Note that these columns can be defined in any order.      The actual rendered columns are set as a property on the row definition" -->  <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">    <th mat-header-cell *matHeaderCellDef>{{ col }}</th>    <td mat-cell *matCellDef="let row">{{ row[col] }}</td>  </ng-container>  <!-- Default Table lines -->  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  <!-- Group header cells-->  <ng-container matColumnDef="groupHeader">    <td colspan="999" mat-cell *matCellDef="let group">      <strong>{{group.groupName}}</strong>    </td>  </ng-container>  <ng-container matColumnDef="groupReducer">    <td colspan="1" mat-cell *matCellDef="let group">      <div fxFill fxLayoutAlign="center center">        <mat-icon *ngIf="!group.reduced">expand_less</mat-icon>        <mat-icon *ngIf="group.reduced">expand_more</mat-icon>      </div>    </td>  </ng-container>  <!-- Group line -->  <tr mat-row class="clickable" *matRowDef="let row; columns: [\'groupReducer\',\'groupHeader\']; when: isGroup"    (click)="reduceGroup(row)">  </tr></table></div>'
+    var COMPONENTS = [{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AddStudentsCoursesComponent', 'selector': ''},{'name': 'AdminCoursesComponent', 'selector': 'app-admin-courses'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NotesEditComponent', 'selector': 'app-notes-edit'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileInfoComponent', 'selector': 'app-profile-info'},{'name': 'ProfileMenuComponent', 'selector': 'app-profile-menu'},{'name': 'ProfileScoresBarChartComponent', 'selector': 'app-profile-scores-bar-chart'},{'name': 'ProfileScoresComponent', 'selector': 'app-profile-scores'},{'name': 'ProfileScoresListComponent', 'selector': 'app-profile-scores-list'},{'name': 'ProfileScoresRecommendationComponent', 'selector': 'app-profile-scores-recommendation'},{'name': 'ProfileScoresTableComponent', 'selector': 'app-profile-scores-table'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCourseDialogComponent', 'selector': ''},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'ScoresEditComponent', 'selector': 'app-scores-edit'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StudentsCoursesComponent', 'selector': 'app-students-courses'},{'name': 'TeacherCoursesComponent', 'selector': 'app-teacher-courses'},{'name': 'TeachersComponent', 'selector': 'app-teachers'},{'name': 'TeachersDashboardComponent', 'selector': 'app-teachers-dashboard'},{'name': 'TeachersGradeComponent', 'selector': 'app-teachers-grade'},{'name': 'UploadFileDialogComponent', 'selector': ''},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+    var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
+    var ACTUAL_COMPONENT = {'name': 'StudentsCoursesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> comparación de resultados "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No hay resultados que coincidan "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StudentsCoursesComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

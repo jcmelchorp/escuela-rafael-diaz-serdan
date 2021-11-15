@@ -78,15 +78,32 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#collection" >collection</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
-                                <a href="#afAuth" >afAuth</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#objectValue$" >objectValue$</a>
+                            </li>
+                            <li>
+                                <a href="#showLoginButton" >showLoginButton</a>
+                            </li>
+                            <li>
+                                <a href="#showLogoutButton" >showLogoutButton</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#user" >user</a>
                             </li>
                             <li>
                                 <a href="#user$" >user$</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#userCollection" >userCollection</a>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#userDisposable" >userDisposable</a>
                             </li>
                         </ul>
                     </td>
@@ -107,16 +124,13 @@
                                 <a href="#checkTeacherRole" >checkTeacherRole</a>
                             </li>
                             <li>
-                                <a href="#createUser" >createUser</a>
-                            </li>
-                            <li>
-                                <a href="#getAuthState" >getAuthState</a>
-                            </li>
-                            <li>
                                 <a href="#getAuthUser" >getAuthUser</a>
                             </li>
                             <li>
-                                <a href="#getUserById" >getUserById</a>
+                                <a href="#getUser" >getUser</a>
+                            </li>
+                            <li>
+                                <a href="#saveUser" >saveUser</a>
                             </li>
                             <li>
                                 <a href="#signInWithCredential" >signInWithCredential</a>
@@ -148,12 +162,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(afAuth: AngularFireAuth, afDatabase: AngularFireDatabase, afStore: AngularFirestore)</code>
+<code>constructor(database: Database, auth: Auth)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="79" class="link-to-prism">src/app/auth/services/auth.service.ts:79</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="17" class="link-to-prism">src/app/auth/services/auth.service.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -171,10 +185,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>afAuth</td>
+                                                        <td>database</td>
                                                   
                                                         <td>
-                                                                    <code>AngularFireAuth</code>
+                                                                    <code>Database</code>
                                                         </td>
                                                   
                                                     <td>
@@ -183,22 +197,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>afDatabase</td>
+                                                        <td>auth</td>
                                                   
                                                         <td>
-                                                                    <code>AngularFireDatabase</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>afStore</td>
-                                                  
-                                                        <td>
-                                                                    <code>AngularFirestore</code>
+                                                                    <code>Auth</code>
                                                         </td>
                                                   
                                                     <td>
@@ -240,8 +242,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="160"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:160</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="111"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:111</a></div>
                 </td>
             </tr>
 
@@ -309,8 +311,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="172"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:172</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="120"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:120</a></div>
                 </td>
             </tr>
 
@@ -362,112 +364,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createUser"></a>
-                    <span class="name">
-                        <span ><b>createUser</b></span>
-                        <a href="#createUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>createUser(user: <a href="../interfaces/User.html" target="_self">Partial&lt;User&gt;</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="140"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:140</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parámetros :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Nombre</td>
-                                    <td>Tipo</td>
-                                    <td>Opcional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>user</td>
-                                    <td>
-                                                <code><a href="../interfaces/User.html" target="_self" >Partial&lt;User&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getAuthState"></a>
-                    <span class="name">
-                        <span ><b>getAuthState</b></span>
-                        <a href="#getAuthState"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getAuthState()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="105"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:105</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Devuelve : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;firebase.User&gt;</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getAuthUser"></a>
                     <span class="name">
                         <span ><b>getAuthUser</b></span>
@@ -484,8 +380,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="91"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:91</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="38"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:38</a></div>
                 </td>
             </tr>
 
@@ -494,7 +390,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Devuelve : </b>    <code>Observable&lt;any&gt;</code>
+                        <b>Devuelve : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;AuthUser | null&gt;</a></code>
 
                     </div>
                 </td>
@@ -505,24 +401,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getUserById"></a>
+                    <a name="getUser"></a>
                     <span class="name">
-                        <span ><b>getUserById</b></span>
-                        <a href="#getUserById"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getUser</b></span>
+                        <a href="#getUser"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getUserById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>getUser(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="86"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:86</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="31"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:31</a></div>
                 </td>
             </tr>
 
@@ -560,7 +456,76 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Devuelve : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User&gt;</a></code>
+                        <b>Devuelve : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;AuthUser&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveUser"></a>
+                    <span class="name">
+                        <span ><b>saveUser</b></span>
+                        <a href="#saveUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveUser(user: <a href="../interfaces/User.html" target="_self">Partial&lt;AuthUser&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="89"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../interfaces/User.html" target="_self" >Partial&lt;AuthUser&gt;</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                     <div class="io-description">
@@ -590,8 +555,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="108"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:108</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="51"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:51</a></div>
                 </td>
             </tr>
 
@@ -659,8 +624,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="113"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:113</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="56"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:56</a></div>
                 </td>
             </tr>
 
@@ -669,7 +634,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Devuelve : </b>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;firebase.auth.UserCredential&gt;</a></code>
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                 </td>
@@ -696,8 +661,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="118"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:118</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="66"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:66</a></div>
                 </td>
             </tr>
 
@@ -765,8 +730,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="122"
-                            class="link-to-prism">src/app/auth/services/auth.service.ts:122</a></div>
+                    <div class="io-line">Definido en <a href="" data-line="70"
+                            class="link-to-prism">src/app/auth/services/auth.service.ts:70</a></div>
                 </td>
             </tr>
 
@@ -836,23 +801,139 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="afAuth"></a>
+                    <a name="collection"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>afAuth</b></span>
-                        <a href="#afAuth"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>collection</b></span>
+                        <a href="#collection"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Tipo : </i>    <code>AngularFireAuth</code>
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;users&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="12" class="link-to-prism">src/app/auth/services/auth.service.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="objectValue$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>objectValue$</b></span>
+                        <a href="#objectValue$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>Observable&lt;any&gt;</code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="81" class="link-to-prism">src/app/auth/services/auth.service.ts:81</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="17" class="link-to-prism">src/app/auth/services/auth.service.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showLoginButton"></a>
+                    <span class="name">
+                        <span ><b>showLoginButton</b></span>
+                        <a href="#showLoginButton"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="15" class="link-to-prism">src/app/auth/services/auth.service.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showLogoutButton"></a>
+                    <span class="name">
+                        <span ><b>showLogoutButton</b></span>
+                        <a href="#showLogoutButton"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="16" class="link-to-prism">src/app/auth/services/auth.service.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>EMPTY</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="14" class="link-to-prism">src/app/auth/services/auth.service.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -878,7 +959,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="78" class="link-to-prism">src/app/auth/services/auth.service.ts:78</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="11" class="link-to-prism">src/app/auth/services/auth.service.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -889,28 +970,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="userCollection"></a>
+                    <a name="userDisposable"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>userCollection</b></span>
-                        <a href="#userCollection"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>userDisposable</b></span>
+                        <a href="#userDisposable"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Tipo : </i>    <code>Subscription | undefined</code>
 
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Valor por defecto : </i><code>&#x27;users&#x27;</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="79" class="link-to-prism">src/app/auth/services/auth.service.ts:79</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="13" class="link-to-prism">src/app/auth/services/auth.service.ts:13</a></div>
                         </td>
                     </tr>
 
@@ -923,73 +1000,79 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-//import { Auth } from &#x27;@angular/fire/auth&#x27;;
-import { AngularFireAuth } from &#x27;@angular/fire/compat/auth&#x27;;
-import { AngularFireDatabase } from &#x27;@angular/fire/compat/database&#x27;;
-import { AngularFirestore } from &#x27;@angular/fire/compat/firestore&#x27;;
-/* import { Database } from &#x27;@angular/fire/compat/database&#x27;;
-import { Firestore } from &#x27;@angular/fire/compat/firestore&#x27;; */
-import { User } from &#x27;@rds-auth/models/user.model&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Optional } from &#x27;@angular/core&#x27;;
+import { User as AuthUser } from &#x27;@rds-auth/models/user.model&#x27;;
 import firebase from &#x27;firebase/compat/app&#x27;;
-import { Observable, of, from } from &#x27;rxjs&#x27;;
-import { switchMap, map, take, pluck } from &#x27;rxjs/operators&#x27;;
+import { Observable, of, from, Subscription, EMPTY } from &#x27;rxjs&#x27;;
+import { switchMap, map, take, pluck, shareReplay } from &#x27;rxjs/operators&#x27;;
+import { Database, objectVal, push, ref, update } from &#x27;@angular/fire/database&#x27;;
+import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User, UserCredential } from &#x27;@angular/fire/auth&#x27;;
 
 @Injectable()
 export class AuthService {
-  /* collection: string &#x3D; &#x27;users&#x27;;
+  user$: Observable&lt;User&gt;;
+  private collection: string &#x3D; &#x27;users&#x27;;
+  public readonly userDisposable: Subscription | undefined;
+  public readonly user: Observable&lt;User&gt; &#x3D; EMPTY;
+  showLoginButton &#x3D; false;
+  showLogoutButton &#x3D; false;
+  public readonly objectValue$: Observable&lt;any&gt;;
   constructor(
-    public readonly afAuth: AngularFireAuth,
-    private afDb: AngularFireDatabase
-  ) { }
+    /* public readonly afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase,
+    private afStore: AngularFirestore */
+    private readonly database: Database, @Optional() private auth: Auth
 
-  getAuthUser(): Observable&lt;any&gt; {
-    return this.afAuth.authState.pipe(
-      take(1),
-      switchMap((user) &#x3D;&gt; {
+  ) {
+
+    const doc &#x3D; ref(this.database, this.collection);
+    this.objectValue$ &#x3D; objectVal(doc)
+
+  }
+
+  getUser(id: string): Observable&lt;AuthUser&gt; {
+    /* return this.afDatabase
+      .object&lt;User&gt;(&#x60;${this.collection}/${id}&#x60;)
+      .valueChanges(); */
+    const doc &#x3D; ref(this.database, &#x60;${this.collection}/${id}&#x60;);
+    return objectVal&lt;AuthUser&gt;(doc, { keyField: &#x27;id&#x27; })
+  }
+  getAuthUser(): Observable&lt;AuthUser | null&gt; {
+    return authState(this.auth).pipe(
+      switchMap((user: User) &#x3D;&gt; {
         if (user) {
-          return this.afDb
-            .object(&#x60;${this.collection}/${user.providerData[0]?.uid}&#x60;)
-            .valueChanges();
+          const doc &#x3D; ref(this.database, &#x60;${this.collection}/${user.providerData[0].uid}&#x60;);
+          return objectVal&lt;AuthUser&gt;(doc, { keyField: &#x27;id&#x27; });
         } else {
-          return of(null);
+          return of(null)
         }
-      })
-    );
-  }
-  saveUser(user: User) {
-    const key &#x3D; user.id;
-    return from(
-      this.afDb.object&lt;User&gt;(&#x60;${this.collection}/${key}&#x60;).update(user)
-    );
+      }
+      ));
   }
 
-  signInWithCredential(credentials: firebase.auth.AuthCredential) {
+  signInWithCredential(
+    credentials: firebase.auth.AuthCredential
+  ): Promise&lt;firebase.auth.UserCredential&gt; {
     return this.signInWithCredential(credentials);
   }
+  signInWithPopup() {
+    const provider &#x3D; new firebase.auth.GoogleAuthProvider()
+    return from(signInWithPopup(this.auth, provider));
+  };
 
-  signOut() {
-    return this.afAuth.signOut();
+  /*  signInWithPopup(): Observable&lt;firebase.auth.UserCredential&gt; {
+     return from(this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(_ &#x3D;&gt; {
+       return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+     }));
+   } */
+  signOut(id: string) {
+    //this.updateOnlineStatus(id, false);
+    return from(signOut(this.auth));
   }
-
-  checkAdminRole(id: string): Observable&lt;boolean&gt; {
-    return this.afDb
-      .object&lt;User&gt;(&#x60;${this.collection}/${id}&#x60;)
-      .valueChanges()
-      .pipe(pluck(&#x27;isAdmin&#x27;));
-  }
-
-  checkTeacherRole(id: string): Observable&lt;boolean&gt; {
-    return this.afDb
-      .object&lt;User&gt;(&#x60;${this.collection}/${id}&#x60;)
-      .valueChanges()
-      .pipe(pluck(&#x27;isTeacher&#x27;));
-  }
-
   updateOnlineStatus(id: string, status: boolean): Observable&lt;void&gt; {
-    if (status) {
+    /* if (status) {
       return from(
-        this.afDb.database
+        this.afDatabase.database
           .ref()
           .child(&#x60;${this.collection}/${id}&#x60;)
           .onDisconnect()
@@ -997,115 +1080,55 @@ export class AuthService {
       );
     }
     return from(
-      this.afDb.object(&#x60;${this.collection}/${id}&#x60;).update({ isOnline: status })
-    );
-  } */
-  user$: Observable&lt;User&gt;;
-  private userCollection: string &#x3D; &#x27;users&#x27;;
-  constructor(
-    public afAuth: AngularFireAuth,
-    private afDatabase: AngularFireDatabase,
-    private afStore: AngularFirestore
-  ) {
-  }
-  getUserById(id: string): Observable&lt;User&gt; {
-    return this.afDatabase
-      .object&lt;User&gt;(&#x60;${this.userCollection}/${id}&#x60;)
-      .valueChanges();
-  }
-  getAuthUser(): Observable&lt;any&gt; {
-    return this.afAuth.authState.pipe(
-      take(1),
-      switchMap((user) &#x3D;&gt; {
-        if (user) {
-          return this.afDatabase
-            .object(&#x60;${this.userCollection}/${user.providerData[0]?.uid}&#x60;)
-            .valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
-  }
-  getAuthState(): Observable&lt;firebase.User&gt; {
-    return this.afAuth.authState;
-  }
-  signInWithCredential(
-    credentials: firebase.auth.AuthCredential
-  ): Promise&lt;firebase.auth.UserCredential&gt; {
-    return this.afAuth.signInWithCredential(credentials);
-  }
-  signInWithPopup(): Observable&lt;firebase.auth.UserCredential&gt; {
-    return from(this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(_ &#x3D;&gt; {
-      return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    }));
-  }
-  signOut(id: string) {
-    //this.updateOnlineStatus(id, false);
-    return from(this.afAuth.signOut());
-  }
-  updateOnlineStatus(id: string, status: boolean): Observable&lt;void&gt; {
-    if (status) {
-      //console.log(&#x27;onDisconect branch&#x27;, status)
-      return from(
-        this.afDatabase.database
-          .ref()
-          .child(&#x60;${this.userCollection}/${id}&#x60;)
-          .onDisconnect()
-          .update({ isOnline: status })
-      );
-    }
-    //console.log(&#x27;outer branch&#x27;, status)
-    return from(
       this.afDatabase
-        .object(&#x60;${this.userCollection}/${id}&#x60;)
+        .object(&#x60;${this.collection}/${id}&#x60;)
         .update({ isOnline: status })
-    );
+    ); */
+    const doc &#x3D; ref(this.database, &#x60;${this.collection}/${id}&#x60;);
+    return from(update(doc, { isOnline: status }));
   }
-  createUser(user: Partial&lt;User&gt;) {
+
+  saveUser(user: Partial&lt;AuthUser&gt;) {
     const key &#x3D; user.id;
-    return this.afStore
-      .collection(this.userCollection)
-      .doc(key)
-      .set(
-        {
-          ...user,
-          isVerified: user.isVerified,
-          uid: user.uid,
-        },
-        { merge: true }
-      )
-      .then(() &#x3D;&gt;
-        this.afDatabase
-          .object&lt;User&gt;(&#x60;${this.userCollection}/${key}&#x60;)
-          .update(user)
-      );
+    /*   return this.afStore
+        .collection(this.collection)
+        .doc(key)
+        .set(
+          {
+            ...user,
+            isVerified: user.isVerified,
+            uid: user.uid,
+          },
+          { merge: true }
+        )
+        .then(() &#x3D;&gt; */
+    /* this.afDatabase
+      .object&lt;AuthUser&gt;(&#x60;${this.collection}/${key}&#x60;)
+      .update(user)
+  ); */
+    const doc &#x3D; ref(this.database, &#x60;${this.collection}/${key}&#x60;);
+    return from(update(doc, user))
   }
 
   checkAdminRole(id: string): Observable&lt;boolean&gt; {
-    const val &#x3D; this.afDatabase
-      .object&lt;User&gt;(&#x60;${this.userCollection}/${id}&#x60;)
-      .valueChanges();
-    let isAdmin: Observable&lt;boolean&gt; &#x3D; val.pipe(
-      map((user) &#x3D;&gt; {
-        return user.isAdmin;
-      })
-    );
-    return isAdmin;
+    /* return this.afDatabase
+      .object&lt;AuthUser&gt;(&#x60;${this.collection}/${id}&#x60;)
+      .valueChanges()
+      .pipe(pluck(&#x27;isAdmin&#x27;)); */
+    const doc &#x3D; ref(this.database, &#x60;${this.collection}/${id}&#x60;);
+    return objectVal(doc).pipe(pluck(&#x27;isAdmin&#x27;));
   }
 
   checkTeacherRole(id: string): Observable&lt;boolean&gt; {
-    const val &#x3D; this.afDatabase
-      .object&lt;User&gt;(&#x60;${this.userCollection}/${id}&#x60;)
-      .valueChanges();
-    let isTeacher: Observable&lt;boolean&gt; &#x3D; val.pipe(
-      map((user) &#x3D;&gt; {
-        return user.isTeacher;
-      })
-    );
-    return isTeacher;
+    /*  return this.afDatabase
+       .object&lt;AuthUser&gt;(&#x60;${this.collection}/${id}&#x60;)
+       .valueChanges()
+       .pipe(pluck(&#x27;isTeacher&#x27;)); */
+    const doc &#x3D; ref(this.database, &#x60;${this.collection}/${id}&#x60;);
+    return objectVal(doc).pipe(pluck(&#x27;isTeacher&#x27;));
   }
 }
+
 </code></pre>
     </div>
 

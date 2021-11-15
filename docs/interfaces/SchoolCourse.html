@@ -65,7 +65,7 @@
             <h3>Fichero</h3>
         </p>
         <p class="comment">
-            <code>src/app/school/models/school-course.model.ts</code>
+            <code>src/app/school/school-courses/models/school-course.model.ts</code>
         </p>
 
 
@@ -111,12 +111,6 @@
                                         <a href="#name" 
 >
                                             name
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#priority" 
->
-                                            priority
                                         </a>
                                 </li>
                             </ul>
@@ -295,39 +289,6 @@
 
                         </tbody>
                     </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="priority"></a>
-                                        <span class="name "><b>priority</b>
-                                            <a href="#priority">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>priority:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
             </section>
     </div>
 
@@ -340,19 +301,30 @@ export interface SchoolCourse {
   name: string;
   description: string;
   grade: SchoolLevel;
-  priority: number;
   courseType: CourseType;
 }
-export interface AssignedCourse {
-  courseId: string;
-  priority: number;
+export class AssignedCourse implements SchoolCourse {
+  id: string;
+  name: string;
+  description: string;
+  grade: SchoolLevel;
+  courseType: CourseType;
   teacherId: string;
-}
-export enum CourseType {
-  formativo,
-  optativo,
+  cycle: string;
+  priority: number;
+  students: string[];
 }
 
+export enum CourseType {
+  FORMATIVO &#x3D; &#x27;Formativo&#x27;,
+  OPTATIVO &#x3D; &#x27;Optativo&#x27;,
+}
+
+export enum Cycle {
+  CE20202021 &#x3D; &#x27;2020-2021&#x27;,
+  CE20212022 &#x3D; &#x27;2021-2022&#x27;,
+  CE20222023 &#x3D; &#x27;2022-2023&#x27;,
+}
 </code></pre>
     </div>
 </div>
