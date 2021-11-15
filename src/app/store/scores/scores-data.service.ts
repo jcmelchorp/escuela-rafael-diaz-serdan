@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { Observable } from 'rxjs';
-import * as fromClass from '.';
-import { SchoolCoursesService } from '@rds-school/school-courses/services/school-courses.service';
+import * as fromScore from '.';
 import { Score } from '@rds-profile/models/score.model';
 import { ProfileService } from '@rds-profile/services/profile.service';
 @Injectable()
@@ -14,7 +13,7 @@ export class ScoresDataService extends DefaultDataService<Score> {
     httpUrlGenerator: HttpUrlGenerator,
     private profileServices: ProfileService
   ) {
-    super(fromClass.entityCollectionName, http, httpUrlGenerator);
+    super(fromScore.entityCollectionName, http, httpUrlGenerator);
   }
 
   getAll(): Observable<Score[]> {

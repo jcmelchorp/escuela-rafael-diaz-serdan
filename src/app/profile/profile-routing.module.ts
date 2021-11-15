@@ -16,9 +16,9 @@ const routes: Routes = [
         component: ProfileMenuComponent,
         children: [
           {
-            path: ':cycle',
+            path: 'calificaciones',
             component: ProfileScoresComponent,
-            resolve: { scores: ScoreResolver }
+            //resolve: { scores: ScoreResolver },
           }
         ]
       },

@@ -22,7 +22,7 @@
     </mat-card-content>
     <mat-card-footer>
       <button mat-raised-button class="d-print-none" *ngIf="user.role=='alumnos'||'profesores'"
-        [routerLink]="['calificaciones']" routerLinkActive="active">
+        [routerLink]="['calificaciones']" [queryParams]="{p: 'CE20212022'}" routerLinkActive="active">
         <fa-icon size="lg" [icon]="faAward"></fa-icon>&nbsp;Calificaciones
       </button>
       <button class="d-print-none" *ngIf="user.isTeacher || user.isAdmin" mat-button [routerLink]="['CE20212022']"
@@ -62,7 +62,7 @@
       </div>
       <div class="mb-n2" fxLayout="row">
         <p class="col-6">Genero:&nbsp;</p>
-        <p class="col-6">{{user.gender}}</p>
+        <p class="col-6">{{user.gender|titlecase}}</p>
       </div>
       <div class="mb-n2" fxLayout="row">
         <p class="col-6">Fecha de nacimiento:&nbsp;</p>

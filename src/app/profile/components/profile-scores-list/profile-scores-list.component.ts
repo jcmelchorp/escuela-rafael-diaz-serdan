@@ -26,13 +26,14 @@ export class ProfileScoresListComponent implements OnInit {
   ngOnInit(): void {
     this.icons = [faComments, faFlagUsa, faSquareRootAlt, faHiking, faTheaterMasks, faHandHoldingHeart, faRunning, faChild]
     this.scores = this.data.scores.map(score => {
-      let remarks: string[] = score.notes3.split('·');
+      console.log(score)
+      let remarks: string[] = score.notes1.split('·').slice(1);
 
       return {
         courseName: score.courseName,
         remarks: remarks,
       }
-    })
+    });
   }
 
 }

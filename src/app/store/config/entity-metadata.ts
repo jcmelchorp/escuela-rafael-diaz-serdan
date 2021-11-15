@@ -95,6 +95,7 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticUpdate: false,
       optimisticSaveEntities: false,
     },
+    selectId: (score: Score) => score.id,
   },
   [fromCourse.entityCollectionName]: {
     entityDispatcherOptions: {

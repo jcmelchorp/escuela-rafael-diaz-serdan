@@ -47,9 +47,7 @@ export class AuthService {
       }
       ));
   }
-  getAuthState(): Observable<AuthUser> {
-    return this.getAuthUser()
-  }
+
   signInWithCredential(
     credentials: firebase.auth.AuthCredential
   ): Promise<firebase.auth.UserCredential> {

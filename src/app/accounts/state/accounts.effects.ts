@@ -18,7 +18,7 @@ export class AccountsEffects {
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) =>
-          r.payload.routerState.url.startsWith('/escuela/cuentas/edit')
+          r.payload.routerState.url.startsWith('/usuarios/edit')
         ),
         map((r: RouterNavigatedAction) => r.payload.routerState.root.params.id),
         //withLatestFrom<string, IUser[]>(this.userEntityService.entities$),
@@ -36,7 +36,7 @@ export class AccountsEffects {
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) =>
-          r.payload.routerState.url.startsWith('/escuela/cuentas')
+          r.payload.routerState.url.startsWith('/usuarios')
         ),
         map((r: RouterNavigatedAction) => r.payload.routerState.url),
         withLatestFrom<string, User[]>(this.accountsEntityService.entities$),

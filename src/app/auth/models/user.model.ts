@@ -74,7 +74,7 @@ export interface User {
       state?: string;
     }
   ];
-  score?: {};
+  currentGrades?: {};
   label?: 'purple' | 'blue' | 'green' | 'yellow' | 'red' | 'gray';
   // TEACHER
   rfc?: string;

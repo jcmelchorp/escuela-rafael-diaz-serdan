@@ -5,13 +5,13 @@ import { PROFILE_CONTAINERS } from './containers';
 import { PROFILE_COMPONENTS } from './components';
 import { ProfileService } from './services/profile.service';
 import { ScoresDataService } from '@rds-store/scores/scores-data.service';
-import { ScoresEntityService } from '@rds-store/scores/school-entity.service';
+import { ScoresEntityService } from '@rds-store/scores/scores-entity.service';
 import { EntityDataService, EntityDefinitionService, EntityServices } from '@ngrx/data';
 import * as fromScores from '@rds-store/scores';
 import * as fromEntity from '@rds-store/config/entity-metadata';
 @NgModule({
   declarations: [
-    PROFILE_CONTAINERS, PROFILE_COMPONENTS
+    ...PROFILE_CONTAINERS, ...PROFILE_COMPONENTS
   ],
   providers: [
     ProfileService,
@@ -32,12 +32,7 @@ export class ProfileModule {
     scoresDataService: ScoresDataService
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
-    entityServices.registerEntityCollectionServices([
-      scoresEntityService
-    ]);
-    entityDataService.registerService(
-      fromScores.entityCollectionName,
-      scoresDataService
-    );
+    entityServices.registerEntityCollectionServices([scoresEntityService]);
+    entityDataService.registerService(fromScores.entityCollectionName, scoresDataService);
   }
 }

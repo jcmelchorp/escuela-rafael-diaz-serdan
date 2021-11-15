@@ -4,19 +4,16 @@ import { User } from '@rds-auth/models/user.model';
 import { Database } from '@angular/fire/database';
 import { Firestore } from '@angular/fire/firestore';
 import { FirebaseV9Service } from '../../shared/generic/firebase-v9.service';
+import { FirestoreV9Service } from '../../shared/generic/firestore-v9.service';
+import * as fromAccounts from '@rds-store/accounts';
+
 @Injectable()
 /** AccountsService
  *  Service to manage user accounts in CRUD operations on Firestore
  */
 export class AccountsService extends FirebaseV9Service<User> {
-  public collectionName: string = 'users';
-  public readonly users!: Observable<User[]>;
-
-  constructor(
-    public db: Firestore,
-    public afDatabase: Database
-  ) {
-    super('users', db, afDatabase);
+  constructor(public db: Firestore, public rtdb: Database) {
+    super('users', db, rtdb);
   }
   /*  create(user: Partial<User>): Observable<User> {
      const userRef = this.afDatabase.object<User>(this.collection);

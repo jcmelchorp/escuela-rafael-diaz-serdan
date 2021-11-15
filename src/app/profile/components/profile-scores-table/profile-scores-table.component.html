@@ -83,9 +83,9 @@
       <mat-cell *matCellDef="let element">{{element.unit3==0?'-':element.unit3}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="final">
+    <ng-container matColumnDef="prom_materia">
       <mat-header-cell *matHeaderCellDef>Final</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.isCourseClosed?element.final:'-'}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.isCourseClosed?element.prom_materia:'-'}}</mat-cell>
     </ng-container>
 
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->

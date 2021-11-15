@@ -21,7 +21,9 @@ export class AuthEffects implements OnInitEffects {
   ngrxOnInitEffects(): Action {
     return { type: authAction.getUser().type };
   }
-  /* init$: Observable<any> = defer(() => [authAction.getUser()]); */
+  /* init$: Observable<any> = defer(() => {
+    return of(authAction.getUser());
+  }); */
   getUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authAction.getUser),
@@ -44,7 +46,8 @@ export class AuthEffects implements OnInitEffects {
       ofType(authAction.signIn),
       switchMap(() =>
         this.authService.signInWithPopup().pipe(
-          map((res: UserCredential) => {
+          tap(res => console.log(res)),
+          map((res: any) => {
             return {
               id: res.user?.providerData[0]?.uid,
               primaryEmail: res.user?.email,
@@ -52,20 +55,21 @@ export class AuthEffects implements OnInitEffects {
               authPhotoUrl: res.user?.photoURL,
               displayName: res.user?.displayName,
               isVerified: res.user?.emailVerified,
+              isNew: res.aditionalUserData?.isNewUser,
               creationTime: res.user?.metadata.creationTime,
               lastLoginTime: res.user?.metadata.lastSignInTime,
               uid: res.user?.uid,
             };
           }),
           switchMap((user) => {
-           /*  if (user.isNew) {
-              return */ [
-              authAction.signInSuccess({ user }),
-              authAction.saveUser({ user }),
-            ];
-            /* } else { */
-            return [authAction.signInSuccess({ user })];
-            /*  } */
+            if (user.isNew) {
+              return [
+                authAction.signInSuccess({ user }),
+                authAction.saveUser({ user }),
+              ];
+            } else {
+              return [authAction.signInSuccess({ user })];
+            }
           }),
           catchError((error) => of(authAction.notAuthenticated({ error })))
         )

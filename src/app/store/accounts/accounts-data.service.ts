@@ -27,6 +27,9 @@ export class AccountsDataService extends DefaultDataService<User> {
   getWithQuery(value: any): Observable<User[]> {
     return this.accountsService.getWithQuery('role', value);
   }
+  /* getWithQuery(queryParams: QueryParams): Observable<User[]> {
+    return this.accountsService.getWithQuery(queryParams);
+  } */
   getByKey(userId: string): Observable<User> {
     return this.getById(userId)
   }

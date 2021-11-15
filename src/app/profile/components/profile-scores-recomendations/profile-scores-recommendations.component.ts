@@ -9,12 +9,14 @@ export class ProfileScoresRecommendationComponent implements OnInit {
   @Input() data: string[];
   raisedElev: number = 10;
   recomendation: string[];
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
     if (this.data) {
       this.recomendation = [...this.data.filter(r => r != null)];
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
 }

@@ -1,9 +1,11 @@
 import { SchoolLevel } from "../../auth/models/user.enum";
 export interface Score {
-  cicleId: string;
+  id: string;
+  cycle: string;
   grade: SchoolLevel;
   isFinished?: boolean;
   notes?: string[];
+  general_recomend?: string
   prom_final?: number;
   scores: ScoreListItem[];
   userId: string;

@@ -19,8 +19,7 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
   styleUrls: ['./accounts-table.component.scss'],
 })
 export class AccountsTableComponent implements AfterViewInit {
-  @Input()
-  data!: User[];
+  @Input() data!: User[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<User>;
@@ -29,11 +28,11 @@ export class AccountsTableComponent implements AfterViewInit {
   columnsToDisplay = [
     {
       propertyName: 'givenName',
-      headerText: 'Nombre',
+      headerText: 'Nombre(s)',
     },
     {
       propertyName: 'familyName',
-      headerText: 'Apellido',
+      headerText: 'Apellido(s)',
     },
     {
       propertyName: 'grade',

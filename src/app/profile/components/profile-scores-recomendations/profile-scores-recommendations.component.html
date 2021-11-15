@@ -1,4 +1,5 @@
 <div *ngIf="recomendation; else noRecomend">
+  {{data|json}}
   <div *ngFor="let unit of recomendation">
     <blockquote class="blockquote">
       <p>{{unit}}</p>

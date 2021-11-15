@@ -6,11 +6,12 @@
   </div>
 </ng-template>
 <div *ngIf="(user$|async) as user;else spinner">
+  <!--  <div>{{user.currentGrades|json}}</div> -->
   <div class="card bg-transparent">
     <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between start">
       <div>
         <span>Calificaciones&nbsp;&nbsp;
-          <small class="font-weight-light">Ciclo escolar{{user.currentGrades.cicleId}} </small>
+          <small class="font-weight-light">Ciclo escolar{{user.currentGrades.cycle}} </small>
         </span>
       </div>
       <div>{{today|date:'medium'}}</div>
@@ -24,16 +25,20 @@
       </button>
     </div>
     <div class="card-body">
-      <app-profile-scores-table *ngIf="user.level=='Preescolar'" [data]="user.currentGrades"></app-profile-scores-table>
+      <app-profile-scores-table *ngIf="user.level!='Preescolar'" [data]="user.currentGrades"></app-profile-scores-table>
       <app-profile-scores-list *ngIf="user.level=='Preescolar'" [data]="user.currentGrades"></app-profile-scores-list>
     </div>
     <div *ngIf="user.level!='Preescolar'" class="card-footer ">
       <h3 class="text-center">Recomendaciones</h3>
-      <app-profile-scores-recomendation [data]="user.currentGrades.scores.notes"></app-profile-scores-recomendation>
+      <app-profile-scores-recomendation [data]="user.currentGrades.notes"></app-profile-scores-recomendation>
       <h3 class="text-center d-print-none">Estadísticas</h3>
       <app-profile-scores-bar-chart class="d-print-none" [data]="user.currentGrades.scores">
       </app-profile-scores-bar-chart>
     </div>
+    <!--  <div *ngIf="user.level=='Preescolar'" class="card-footer ">
+      <h3 class="text-center">Recomendaciones</h3>
+      <app-profile-scores-recomendation [data]="user.currentGrades.notes"></app-profile-scores-recomendation>
+    </div> -->
   </div>
 </div>
 <div *ngIf="(isTeacher$|async)">

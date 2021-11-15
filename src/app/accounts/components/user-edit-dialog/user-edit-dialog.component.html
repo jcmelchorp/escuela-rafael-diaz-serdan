@@ -64,7 +64,7 @@
           <mat-select formControlName="level">
             <mat-option value="">Sin seleccionar</mat-option>
             <mat-option *ngFor="let key of clevelKeys" [value]="clevels[key]">
-              {{clevels[key]}}
+              {{clevels[key]|titlecase}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -72,22 +72,22 @@
       <div fxFlex="0 1 calc(25% - 5px)">
         <mat-label for="role">Rol de usuario:</mat-label>
         <mat-radio-group fxLayout="column" name="role" color="primary" formControlName="role">
-          <mat-radio-button class="mx-2" value="alumnos">
+          <mat-radio-button class="mx-2" value="Alumnos">
             Alumno<mat-icon class="text-secondary"
               matTooltip="Participa en Google Classroom como alumno y su expediente personal se ajustara a este rol.">
               help_outline</mat-icon>
           </mat-radio-button>
-          <mat-radio-button class="mx-2" value="profesores">
+          <mat-radio-button class="mx-2" value="Profesores">
             Docente <mat-icon class="text-secondary"
               matTooltip="Participa en Google Classroom como alumno o profesor y su expediente personal contiene datos laborales.">
               help_outline</mat-icon>
           </mat-radio-button>
-          <mat-radio-button class="mx-2" value="administrativos">
+          <mat-radio-button class="mx-2" value="Administrativos">
             Administrativo <mat-icon class="text-secondary"
               matTooltip="Participa a Google Classroom como alumno o profesor, pero no podrá iniciar clases virtuales a través de Google Meet. Su expediente personal contiene datos laborales.">
               help_outline</mat-icon>
           </mat-radio-button>
-          <mat-radio-button class="mx-2" value="otros">
+          <mat-radio-button class="mx-2" value="Otros">
             Otros<mat-icon class="text-secondary" matTooltip="Rol general sin distinción.">help_outline</mat-icon>
           </mat-radio-button>
         </mat-radio-group>
