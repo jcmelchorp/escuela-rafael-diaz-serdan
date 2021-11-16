@@ -10,12 +10,11 @@ import * as fromEntity from './config/entity-metadata';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { registeredEffects, ToastrStoreService } from './config/registered-effects';
-import * as fromRoot from './reducers';
-import { reducers } from './reducers';
+import * as fromRoot from './app.state';
 @NgModule({
   declarations: [],
   imports: [
-    StoreModule.forRoot(reducers, storeConfig),
+    StoreModule.forRoot(fromRoot.reducers, storeConfig),
     !environment.production
       ? StoreDevtoolsModule.instrument()
       : StoreDevtoolsModule.instrument({
@@ -25,7 +24,7 @@ import { reducers } from './reducers';
           persist: true,
         }
       }),
-    EffectsModule.forRoot([...registeredEffects]),
+    EffectsModule.forRoot(registeredEffects),
     EntityDataModule.forRoot(fromEntity.entityConfig),
     StoreRouterConnectingModule.forRoot({
       stateKey: routerKey,

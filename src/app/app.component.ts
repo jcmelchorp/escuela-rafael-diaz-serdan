@@ -17,15 +17,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   <router-outlet></router-outlet>`,
 })
 export class AppComponent implements OnInit {
-  title = 'escuela-rafael-diaz-serdan';
-  constructor(appRef: ApplicationRef, private seoService: SeoService) {
-    if (isDevMode()) {
-      appRef.isStable
-        .pipe(debounceTime(200), distinctUntilChanged())
-        .subscribe((it) => {
-          console.log('isStable', it);
-        });
-    }
+  title = 'Escuela RDS';
+  constructor(private seoService: SeoService) {
   }
   ngOnInit(): void {
     this.seoService.titleInit();

@@ -47,7 +47,7 @@ export class AccountsModule {
     accountsDataService: AccountsDataService
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
-    entityServices.registerEntityCollectionServices([accountsDomainEntityService, accountsEntityService,]);
+    entityServices.registerEntityCollectionServices([accountsDomainEntityService, accountsEntityService]);
     entityDataService.registerService(
       fromAccounts.entityCollectionName,
       accountsDataService

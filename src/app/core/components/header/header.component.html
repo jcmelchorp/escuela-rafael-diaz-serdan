@@ -1,4 +1,4 @@
-<mat-toolbar class="bg-transparent">
+<mat-toolbar color="primary">
   <mat-toolbar-row fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
       <button *ngIf="isOnline" type="button" aria-label="mostrar menu" mat-icon-button
@@ -15,20 +15,19 @@
     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
       <!-- <span>{{myDate|date:'full':'es-MX'}}</span> -->
       <button *ngIf="isOnline" mat-icon-button [matMenuTriggerFor]="userMenu">
-        <img class="img-fluid rounded-circle" [src]="user.photoUrl?user.photoUrl:user.authPhotoUrl" />
+        <img class="img-fluid rounded-circle" src="{{user.photoUrl?user.photoUrl:user.authPhotoUrl}}" />
       </button>
-      <div *ngIf="!isOnline" mat-raised-button fxLayout="column" fxLayoutAlign="space-around center">
-        <fa-icon class="rds-icon" mat-icon-button (click)="onLogin()" size="lg"
-          [icon]="isDoorOpen?faDoorOpen:faDoorClosed"></fa-icon>
-        <!-- <h5>Ingresar</h5> -->
-      </div>
+      <button *ngIf="!isOnline" mat-button (click)="onLogin()">
+        Iniciar sesión
+        <fa-icon size="lg" [icon]="isDoorOpen?faDoorOpen:faDoorClosed"></fa-icon>
+      </button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <ng-content #progressBar></ng-content>
 <mat-menu #userMenu="matMenu" fxLayoutAlign="right">
   <ng-template matMenuContent>
-    <div mat-list-item *ngIf="isOnline && user" [routerLink]="['perfil']">
+    <div mat-list-item *ngIf="isOnline && user" [routerLink]="['i','perfil']">
       <app-user-card [isOnline]="isOnline" [isAdmin]="isAdmin" [user]="user"> </app-user-card>
     </div>
     <div mat-menu-item *ngIf="isOnline" [routerLink]="['config']">
@@ -43,29 +42,29 @@
 </mat-menu>
 <mat-menu #escuela="matMenu">
   <ng-template matMenuContent>
-    <div mat-menu-item [routerLink]="['about']" routerLinkActive="active">Quiénes somos</div>
+    <div mat-menu-item [routerLink]="['i','about']" routerLinkActive="active">Quiénes somos</div>
     <div mat-menu-item [matMenuTriggerFor]="oferta">Oferta educativa</div>
-    <div mat-menu-item [routerLink]="['location']" routerLinkActive="active">Galería de fotos</div>
-    <div mat-menu-item [routerLink]="['location']" routerLinkActive="active">Ubicación y contacto</div>
+    <div mat-menu-item [routerLink]="['i','location']" routerLinkActive="active">Ubicación y contacto</div>
   </ng-template>
 </mat-menu>
 <mat-menu #webapp="matMenu">
   <ng-template matMenuContent>
     <div mat-menu-item [matMenuTriggerFor]="conduct">Código de conducta</div>
-    <div mat-menu-item [routerLink]="['privacy-policy']" routerLinkActive="active">Políticas de privacidad</div>
-    <div mat-menu-item [routerLink]="['license']" routerLinkActive="active">Licencia</div>
+    <div mat-menu-item [routerLink]="['i','privacy-policy']" routerLinkActive="active">Políticas de privacidad</div>
+    <div mat-menu-item [routerLink]="['i','license']" routerLinkActive="active">Licencia</div>
   </ng-template>
 </mat-menu>
 <mat-menu #conduct="matMenu">
   <ng-template matMenuContent>
-    <div mat-menu-item [routerLink]="['code-conduct-school']" routerLinkActive="active">Para espacios académicos</div>
-    <div mat-menu-item [routerLink]="['code-conduct']" routerLinkActive="active">Para este sitio</div>
+    <div mat-menu-item [routerLink]="['i','code-conduct-school']" routerLinkActive="active">Para espacios académicos
+    </div>
+    <div mat-menu-item [routerLink]="['i','code-conduct']" routerLinkActive="active">Para este sitio</div>
   </ng-template>
 </mat-menu>
 <mat-menu #oferta="matMenu">
   <ng-template matMenuContent>
-    <div mat-menu-item [routerLink]="['remote-learning']" routerLinkActive="active">Educación a distancia</div>
-    <div mat-menu-item [routerLink]="['reopenning']" routerLinkActive="active">Reapertura</div>
+    <div mat-menu-item [routerLink]="['i','remote-learning']" routerLinkActive="active">Educación a distancia</div>
+    <div mat-menu-item [routerLink]="['i','reopenning']" routerLinkActive="active">Reapertura</div>
 
   </ng-template>
 </mat-menu>

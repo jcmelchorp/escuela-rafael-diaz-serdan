@@ -9,9 +9,6 @@ import { FirebaseV9Service } from '../../shared/generic/firebase-v9.service';
  *  Service to manage user accounts in CRUD operations on Firestore
  */
 export class AccountsService extends FirebaseV9Service<User> {
-  public collectionName: string = 'users';
-  public readonly users!: Observable<User[]>;
-
   constructor(
     public db: Firestore,
     public afDatabase: Database

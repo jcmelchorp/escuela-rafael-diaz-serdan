@@ -178,12 +178,56 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { RouterState } from &quot;@ngrx/router-store&quot;;
-import { AuthenticationState, authFeatureKey } from &quot;@rds-auth/state/auth.reducer&quot;;
+import { routerReducer } from &#x27;@ngrx/router-store&#x27;;
+import { Action, ActionReducer, ActionReducerMap, INIT, MetaReducer } from &#x27;@ngrx/store&#x27;;
+import { AuthenticationState, authFeatureKey, authReducer } from &#x27;@rds-auth/state/auth.reducer&#x27;;
+import * as authActions from &#x27;@rds-auth/state/auth.actions&#x27;;
+import { environment } from &#x27;@rds-env/environment&#x27;;
 import { routerKey } from &quot;./router&quot;;
-
 export interface AppState {
   [authFeatureKey]: AuthenticationState;
   [routerKey]: RouterState;
+}
+export const reducers: ActionReducerMap&lt;AppState&gt; &#x3D; {
+  [authFeatureKey]: authReducer,
+  [routerKey]: routerReducer,
+};
+
+export const metaReducers: MetaReducer&lt;AppState&gt;[] &#x3D; !environment.production
+  ? [debug, logout]
+  : [];
+
+export function debug(
+  reducer: ActionReducer&lt;AppState&gt;
+): ActionReducer&lt;AppState&gt; {
+  return (state: AppState | undefined, action: Action) &#x3D;&gt; {
+    console.groupCollapsed(&#x60;Action type: ${action.type}&#x60;);
+    console.log(
+      &#x60;%c Preview State: &#x60;,
+      &#x60;color: #007bb4; font-weight: bold&#x60;,
+      state
+    );
+    console.log(&#x60;%c Action: &#x60;, &#x60;color: #b46c00; font-weight: bold&#x60;, action);
+    const nextState &#x3D; reducer(state, action);
+    console.log(
+      &#x60;%c Next State: &#x60;,
+      &#x60;color: #196d00; font-weight: bold&#x60;,
+      nextState
+    );
+    console.groupEnd();
+    return nextState;
+  };
+}
+
+export function logout(
+  reducer: ActionReducer&lt;AppState, Action&gt;
+): ActionReducer&lt;AppState, Action&gt; {
+  return (state, action) &#x3D;&gt; {
+    if (action !&#x3D; null &amp;&amp; action.type &#x3D;&#x3D;&#x3D; authActions.signOut.type) {
+      return reducer(undefined, { type: INIT });
+    }
+    return reducer(state, action);
+  };
 }
 </code></pre>
     </div>

@@ -32,21 +32,72 @@
                <div class="content getting-started">
                    <div class="content-data">
 
-<h1 id="escuelarafaeldiazserdan">EscuelaRafaelDiazSerdan</h1>
-<p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 12.2.12.</p>
-<h2 id="development-server">Development server</h2>
-<p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The app will automatically reload if you change any of the source files.</p>
-<h2 id="code-scaffolding">Code scaffolding</h2>
-<p>Run <code>ng generate component component-name</code> to generate a new component. You can also use <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
-<h2 id="build">Build</h2>
-<p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
-<h2 id="running-unit-tests">Running unit tests</h2>
-<p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
-<h2 id="running-end-to-end-tests">Running end-to-end tests</h2>
-<p>Run <code>ng e2e</code> to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.</p>
-<h2 id="further-help">Further help</h2>
-<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://angular.io/cli">Angular CLI Overview and Command Reference</a> page.</p>
+<p><img src="https://github.com/jcmelchorp/escuela-rafael-diaz-serdan/workflows/Deploy%20to%20Firebase%20Hosting/badge.svg?branch=main" alt="Deploy to Firebase Hosting on merge" class="img-responsive"></p>
+<h1> <a href="https://escuela-rafael-diaz-serdan.web.app">
+ <img src="src/assets/icons/apple-touch-icon-precomposed.png">
+ </a> Sistema RDS
+ </h1>
 
+<p>Angular webapp for Manage User accounts from Google&#39;s Admin Directory. Domain user&#39;s entities adapted to fit &quot;Escuela Rafael Díaz Serdan&quot; requirements (personal data, students and teachers block enrollment, manage groups and courses, view and edit information as an Admin and Superadmin in Google Workspace, and many more).</p>
+<h3 id="comming-soon">Comming soon</h3>
+<p>Create school grades reports from Google Classroom submissions.</p>
+<h2 id="documentation-and-demo">Documentation and Demo</h2>
+<p>See Documentation for this project at: <a href="https://jcmelchorp.github.io/escuela-rafael-diaz-serdan/">Escuela RDS Doc</a>.</p>
+<p>See Demo app for this project at: <a href="https://rds.edu.mx">Escuela RDS</a>.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Angular 12</li>
+<li>Angular Material 12 with custom theme and dark theme</li>
+<li>NGRX State Management 12 (@ngrx/route-store &amp; @ngrx/data)</li>
+<li>Angular FontAwesome 5.15.1</li>
+<li>Angular Flex-layout 12</li>
+<li>Full Angular PWA 12</li>
+<li>Lasy Loading &amp; SEO.</li>
+<li>Ngx-bootstrap 6.2.0 with Bootstrap 5.0.2</li>
+<li>Google API Auth2 (via GAPI with @types/gapi.auth2) &amp; and Firebase Authentication</li>
+<li>Google Classroom Client (via GAPI with @types/gapi.client.classroom)</li>
+<li>Google Firebase for FireHosting</li>
+<li>Google Firebase Real-Time Database &amp; Firestore</li>
+<li>CompoDoc for automated documentation.</li>
+<li>Angular PWA assets generator for icons.</li>
+</ul>
+<h2 id="screenshots">Screenshots</h2>
+<p><img src="src/assets/screenshots/screenshot01.png" alt="" class="img-responsive"></p>
+<p><strong>Fig. 1</strong> - View example</p>
+<p><img src="src/assets/screenshots/screenshot02.png" alt="" class="img-responsive"></p>
+<p><strong>Fig. 2</strong> - View example</p>
+<p><img src="src/assets/screenshots/screenshot03.png" alt="" class="img-responsive"></p>
+<p><strong>Fig. 3</strong> - View example</p>
+<p><img src="src/assets/screenshots/screenshot04.png" alt="" class="img-responsive"></p>
+<p><strong>Fig. 4</strong> - View example</p>
+<p><img src="src/assets/screenshots/screenshot05.png" alt="" class="img-responsive"></p>
+<p><strong>Fig. 5</strong> - View example</p>
+<p><img src="src/assets/screenshots/screenshot06.png" alt="" class="img-responsive"></p>
+<p><strong>Fig. 6</strong> - View example</p>
+<p><img src="src/assets/screenshots/screenshot07.png" alt="" class="img-responsive"></p>
+<p><strong>Fig. 7</strong> - View example</p>
+<h2 id="install-this-repository">Install this repository</h2>
+<p>If you want to use this repository as a template, run:</p>
+<div><pre class="line-numbers"><code class="language-bash">git clone https://github.com/jcmelchorp/escuela-rafael-diaz-serdan.git</code></pre></div><p>then, enter the workspace directory:</p>
+<div><pre class="line-numbers"><code class="language-bash">cd escuela-rafael-diaz-serdan</code></pre></div><p>and install NPM packages:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm install</code></pre></div><h2 id="build-requirements">Build requirements</h2>
+<p>This repository has the following pre-requisites:</p>
+<ul>
+<li><a href="https://nodejs.org/">NodeJS</a></li>
+<li><a href="https://firebase.google.com/">Google Firebase</a> Account (optional for Hosting and further features)</li>
+<li><a href="https://cli.angular.io/">Angular CLI</a></li>
+</ul>
+<p>The Angular CLI, CompoDoc, PWA asset generator comes with NPM install. If you want to use Angular CLI as a shell command:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm i -g &#64;angular/cli</code></pre></div><h3 id="documentation">Documentation</h3>
+<p>By default, this project generate documentation with Material Theme in <em>docs/</em> directory.</p>
+<p>To generate documentation:</p>
+<div><pre class="line-numbers"><code class="language-bash"> npm run doc:g</code></pre></div><h3 id="deployment">Deployment</h3>
+<p>Build in production environment and deploy on Google Firebase</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run deploy</code></pre></div><h3 id="reset-project-to-default">Reset project to default</h3>
+<p>To reset project just type:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run reset</code></pre></div><h3 id="pwa-assets-generator">PWA Assets Generator</h3>
+<p>To generate Apple icons, MS-Tiles and splash run:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run pwa:asset-std-logo</code></pre></div>
 
 
 

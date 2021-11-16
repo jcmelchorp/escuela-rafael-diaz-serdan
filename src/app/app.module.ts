@@ -12,10 +12,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthModule } from '@rds-auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AppStoreModule } from '@rds-store/app-store.module';
+import { AlertModule } from 'ngx-bootstrap/alert'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import { provideDatabase, getDatabase, connectDatabaseEmulator } from '@angular/fire/database';
-import { provideFirestore, getFirestore, connectFirestoreEmulator, enableMultiTabIndexedDbPersistence } from '@angular/fire/firestore';
+import { provideFirestore as provideFirestorms, getFirestore as getFirestorms, connectFirestoreEmulator as connectFirestormsEmulator, enableMultiTabIndexedDbPersistence } from '@angular/fire/firestore';
 let resolvePersistenceEnabled: (enabled: boolean) => void;
 
 export const persistenceEnabled = new Promise<boolean>(resolve => {
@@ -46,6 +47,7 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
       easing: 'ease-in',
       closeButton: true,
     }),
+    AlertModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => {
       const auth = getAuth();
@@ -54,16 +56,16 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
       }
       return auth;
     }),
-    provideFirestore(() => {
-      const firestore = getFirestore();
+    provideFirestorms(() => {
+      const firestones = getFirestorms();
       if (environment.useEmulators) {
-        connectFirestoreEmulator(firestore, 'localhost', 8080);
+        connectFirestormsEmulator(firestones, 'localhost', 8080);
       }
-      enableMultiTabIndexedDbPersistence(firestore).then(
+      enableMultiTabIndexedDbPersistence(firestones).then(
         () => resolvePersistenceEnabled(true),
         () => resolvePersistenceEnabled(false)
       );
-      return firestore;
+      return firestones;
     }),
     provideDatabase(() => {
       const database = getDatabase();

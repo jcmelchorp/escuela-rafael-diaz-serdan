@@ -90,52 +90,49 @@ const routes: Routes &#x3D; [
     children: [
       { path: &#x27;&#x27;, component: HomeComponent, data: { breadcrumb: null } },
       {
+        path: &#x27;i&#x27;, loadChildren: () &#x3D;&gt; &quot;import(&#x27;./information/information.module&#x27;).then(\
+          m &#x3D;&gt; m.InformationModule)&quot;,
+      },
+      {
         path: &#x27;usuarios&#x27;,
-        loadChildren: () &#x3D;&gt; &quot;import(&#x27;./accounts/accounts.module&#x27;).then(\
+        loadChildren: () &#x3D;&gt; &quot;import(&#x27;@rds-accounts/accounts.module&#x27;).then(\
           m &#x3D;&gt; m.AccountsModule)&quot;,
         canActivate: [AdminGuard],
-        data: { breadcrumb: null }
       },
       {
         path: &#x27;escuela&#x27;,
-        loadChildren: () &#x3D;&gt; &quot;import(&#x27;./school/school.module&#x27;).then(\
+        loadChildren: () &#x3D;&gt; &quot;import(&#x27;@rds-school/school.module&#x27;).then(\
           m &#x3D;&gt; m.SchoolModule)&quot;,
         canActivate: [AdminGuard],
-        data: { breadcrumb: null }
       },
       {
         path: &#x27;perfil&#x27;,
-        loadChildren: () &#x3D;&gt; &quot;import(&#x27;./profile/profile.module&#x27;).then(\
+        loadChildren: () &#x3D;&gt; &quot;import(&#x27;@rds-profile/profile.module&#x27;).then(\
           m &#x3D;&gt; m.ProfileModule)&quot;,
         canActivate: [AuthGuard],
-        data: { breadcrumb: null }
       },
       {
         path: &#x27;gsuite&#x27;,
         loadChildren: () &#x3D;&gt; &quot;import(&#x27;@rds-classroom/classroom.module&#x27;).then(\
           (m) &#x3D;&gt; m.ClassroomModule)&quot;,
         canActivate: [AuthGuard],
-        data: { breadcrumb: &#x27;Google GSuite&#x27; },
       },
       {
         path: &#x27;profesores&#x27;,
-        loadChildren: () &#x3D;&gt;
-          &quot;import(&#x27;./teachers/teachers.module&#x27;).then((m) &#x3D;&gt; m.TeachersModule)&quot;,
+        loadChildren: () &#x3D;&gt; &quot;import(&#x27;@rds-teachers/teachers.module&#x27;).then((m) &#x3D;&gt; m.TeachersModule)&quot;,
         canActivate: [TeachersGuard],
-        data: { breadcrumb: &#x27;Profesores&#x27; },
       },
       {
         path: &#x27;config&#x27;,
         component: SettingsComponent,
         canActivate: [AuthGuard],
-        data: { breadcrumb: &#x27;Configuración&#x27; },
       },
       {
         path: &#x27;**&#x27;,
         component: NotFoundComponent,
       }
     ]
-  }
+  },
 ];
 
 @NgModule({

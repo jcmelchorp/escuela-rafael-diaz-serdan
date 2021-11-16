@@ -57,6 +57,8 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticAdd: false,
       optimisticUpdate: false,
       optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
   },
   [fromSchoolCourses.entityCollectionName]: {

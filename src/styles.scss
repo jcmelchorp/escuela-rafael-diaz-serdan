@@ -1,9 +1,10 @@
 @use "assets/themes/colors" as colors;
-@import "assets/themes/custom-theme.scss";
+@import "assets/themes/rds_theme.scss";
 /* You can add global styles to this file, and also import other style files */
 html,
 body {
   height: 100%;
+  background-color: #ffffff;
 }
 body {
   margin: 0;

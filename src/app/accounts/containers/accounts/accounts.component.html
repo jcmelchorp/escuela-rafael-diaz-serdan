@@ -44,7 +44,7 @@
         <span>Buscando clases ...</span><br>
       </div>
     </ng-template>
-    <mat-tab-group *ngIf="(filteredEntities$|async) as filteredEntities;else spinner" mat-stretch-tabs
+    <mat-tab-group *ngIf="(loaded$|async)&&(filteredEntities$|async) as filteredEntities;else spinner" mat-stretch-tabs
       class="example-stretched-tabs">
       <mat-tab>
         <ng-template mat-tab-label>

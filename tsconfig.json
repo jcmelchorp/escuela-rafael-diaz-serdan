@@ -40,6 +40,9 @@
       "@rds-profile/*": [
         "src/app/profile/*"
       ],
+      "@rds-teachers/*": [
+        "src/app/teachers/*"
+      ],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": false,

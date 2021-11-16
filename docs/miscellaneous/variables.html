@@ -306,6 +306,12 @@
                             <a href="#heightReveal" title="src/app/shared/animations/fade-in.animation.ts" ><b>heightReveal</b>&nbsp;&nbsp;&nbsp;(src/.../fade-in.animation.ts)</a>
                         </li>
                         <li>
+                            <a href="#INFO_COMPONENTS" title="src/app/information/components/index.ts" ><b>INFO_COMPONENTS</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#INFO_CONTAINERS" title="src/app/information/containers/index.ts" ><b>INFO_CONTAINERS</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                        </li>
+                        <li>
                             <a href="#initialState" title="src/app/auth/state/auth.reducer.ts" ><b>initialState</b>&nbsp;&nbsp;&nbsp;(src/.../auth.reducer.ts)</a>
                         </li>
                         <li>
@@ -330,7 +336,7 @@
                             <a href="#localStoreUser" title="src/app/store/actions/app.actions.ts" ><b>localStoreUser</b>&nbsp;&nbsp;&nbsp;(src/.../app.actions.ts)</a>
                         </li>
                         <li>
-                            <a href="#metaReducers" title="src/app/store/reducers/index.ts" ><b>metaReducers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                            <a href="#metaReducers" title="src/app/store/app.state.ts" ><b>metaReducers</b>&nbsp;&nbsp;&nbsp;(src/.../app.state.ts)</a>
                         </li>
                         <li>
                             <a href="#notAuthenticated" title="src/app/auth/state/auth.actions.ts" ><b>notAuthenticated</b>&nbsp;&nbsp;&nbsp;(src/.../auth.actions.ts)</a>
@@ -396,7 +402,7 @@
                             <a href="#PROFILE_CONTAINERS" title="src/app/profile/containers/index.ts" ><b>PROFILE_CONTAINERS</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
                         </li>
                         <li>
-                            <a href="#reducers" title="src/app/store/reducers/index.ts" ><b>reducers</b>&nbsp;&nbsp;&nbsp;(src/.../index.ts)</a>
+                            <a href="#reducers" title="src/app/store/app.state.ts" ><b>reducers</b>&nbsp;&nbsp;&nbsp;(src/.../app.state.ts)</a>
                         </li>
                         <li>
                             <a href="#registeredEffects" title="src/app/store/config/registered-effects.ts" ><b>registeredEffects</b>&nbsp;&nbsp;&nbsp;(src/.../registered-effects.ts)</a>
@@ -3133,6 +3139,8 @@
       optimisticAdd: false,
       optimisticUpdate: false,
       optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
   },
   [fromSchoolCourses.entityCollectionName]: {
@@ -3979,6 +3987,76 @@
         </tbody>
     </table>
 </section>
+    <h3>src/app/information/components/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INFO_COMPONENTS"></a>
+                    <span class="name">
+                        <span ><b>INFO_COMPONENTS</b></span>
+                        <a href="#INFO_COMPONENTS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  AboutComponent,
+  CodeConductComponent,
+  CodeConductSchoolComponent,
+  LicenseComponent,
+  LocationComponent,
+  PrivacyPolicyComponent,
+  RemoteLearningComponent,
+  ReopenningComponent,
+  TermsComponent
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/information/containers/index.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INFO_CONTAINERS"></a>
+                    <span class="name">
+                        <span ><b>INFO_CONTAINERS</b></span>
+                        <a href="#INFO_CONTAINERS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+  InformationComponent
+]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <h3>src/app/store/actions/app.actions.ts</h3>
     <section>
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -4068,7 +4146,7 @@
         </tbody>
     </table>
 </section>
-    <h3>src/app/store/reducers/index.ts</h3>
+    <h3>src/app/store/app.state.ts</h3>
     <section>
     <h3></h3>    <table class="table table-sm table-bordered">
         <tbody>

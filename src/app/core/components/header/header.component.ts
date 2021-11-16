@@ -48,7 +48,7 @@ export class HeaderComponent {
     this.isDoorOpen = true;
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       height: 'fit-content',
-      width: '600px',
+      width: '400px',
       maxWidth: '512px',
       data: {},
     });

@@ -8,9 +8,7 @@ import { from, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import * as fromUser from '.';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AccountsDataService extends DefaultDataService<User> {
   constructor(
     http: HttpClient,

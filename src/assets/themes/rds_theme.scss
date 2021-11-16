@@ -2,19 +2,22 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 /* Importing Datepicker SCSS file. */
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
 // Fonts
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Fredoka+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css?family=Material+Icons+Outlined");
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One:300,400,500");
+//@import url("https://fonts.googleapis.com/css?family=Cabin+Sketch:300,400,500");
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
+@import url("https://fonts.googleapis.com/css?family=Comfortaa:300,400,500");
+/*@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://fonts.googleapis.com/css?family=Dosis:300,400,500");
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,500");
+@import url("https://fonts.googleapis.com/css2?family=Zen+Loop:ital@0;1&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 $fontConfig: (
   display-4:
     mat.define-typography-level(112px, 112px, 300, "Fredoka One", -0.0134em),
@@ -127,8 +130,8 @@ $dark-bg-lighter-5: lighten($dark-background, 5%);
 $dark-bg-lighter-10: lighten($dark-background, 10%);
 $dark-bg-lighter-20: lighten($dark-background, 20%);
 $dark-bg-lighter-30: lighten($dark-background, 30%);
-$light-bg-alpha-4: rgba(#fafafa, 0.04);
-$light-bg-alpha-12: rgba(#fafafa, 0.12);
+$light-bg-alpha-4: rgba(#ffffff, 0.04);
+$light-bg-alpha-12: rgba(#ffffff, 0.12);
 
 // Background palette for dark themes.
 $mat-dark-theme-background: (
@@ -268,6 +271,6 @@ $altTheme: (
   font-size: 24px;
   font-family: "Material Icons Outlined";
   .mat-badge-content {
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins";
   }
 }

@@ -1,4 +1,4 @@
-<div [ngClass]="{'dark-theme': isDarkTheme | async}" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
+<div [ngClass]="{'theme-alternate': isDarkTheme | async}" fxLayout="column" fxFlexFill>
   <app-header fxFlex class="d-print-none" [user]="(user$|async)" [isHandset]="(isHandset$|async)"
     [isAdmin]="(isAdmin$|async)" [isTeacher]="(isTeacher$|async)" [isOnline]="(isOnline$|async)">
     <mat-progress-bar name="progressBar" *ngIf="loading" mode="query" color="primary">

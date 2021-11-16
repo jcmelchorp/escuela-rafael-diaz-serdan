@@ -83,7 +83,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="8" class="link-to-prism">src/app/store/accounts/accounts-entity.service.ts:8</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="6" class="link-to-prism">src/app/store/accounts/accounts-entity.service.ts:6</a></div>
                             </td>
                         </tr>
 
@@ -131,9 +131,7 @@
 import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from &#x27;@ngrx/data&#x27;;
 import { User } from &#x27;@rds-auth/models/user.model&#x27;;
 import * as fromUser from &#x27;.&#x27;;
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
+@Injectable()
 export class AccountsEntityService extends EntityCollectionServiceBase&lt;User&gt; {
   constructor(
     readonly serviceElementsFactory: EntityCollectionServiceElementsFactory

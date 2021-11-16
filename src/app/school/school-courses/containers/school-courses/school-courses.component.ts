@@ -1,13 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { moveIn } from '@rds-shared/animations/router.animations';
 import { Observable, Subject } from 'rxjs';
 import { AssignedCourse, SchoolCourse } from '../../models/school-course.model';
 import { SchoolCourseDialogComponent } from '../../components/school-courses-dialog/school-course-dialog.component';
-import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { UploadFileDialogComponent } from '@rds-shared/components/upload-file-dialog/upload-file-dialog.component';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { map } from 'rxjs/operators';
@@ -33,7 +31,11 @@ export class SchoolCoursesComponent implements OnInit {
     private assignedCourseEntityService: AssignedCoursesEntityService,
     private dialog: MatDialog
   ) {
-    this.coursesCount$ = this.assignedCourseEntityService.count$
+    this.loaded$ = this.assignedCourseEntityService.loaded$;
+    this.loading$ = this.assignedCourseEntityService.loading$;
+    this.schoolCourses$ = this.assignedCourseEntityService.entities$;
+
+    this.filteredEntities$ = this.assignedCourseEntityService.filteredEntities$;
     this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
       grade: new FormControl(),
@@ -48,16 +50,13 @@ export class SchoolCoursesComponent implements OnInit {
         : delete changes.name;
       return this.assignedCourseEntityService.setFilter(changes);
     });
-    this.loaded$ = this.assignedCourseEntityService.loaded$;
-    this.loading$ = this.assignedCourseEntityService.loading$;
-    this.filteredEntities$ = this.assignedCourseEntityService.filteredEntities$;
+
     this.coursesCount$ = this.assignedCourseEntityService.count$
 
   }
 
 
   ngOnInit() {
-    this.schoolCourses$ = this.assignedCourseEntityService.entities$;
   }
 
   editCourse(course: AssignedCourse) {

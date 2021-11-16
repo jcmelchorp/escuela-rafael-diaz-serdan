@@ -18,13 +18,13 @@
 <title>cluster_StudentsModule_providers</title>
 <polygon fill="none" stroke="black" points="719,-40.8 719,-92.8 1115,-92.8 1115,-40.8 719,-40.8"/>
 </g>
-<g id="clust6" class="cluster">
-<title>cluster_StudentsModule_exports</title>
-<polygon fill="none" stroke="black" points="423,-170.8 423,-222.8 611,-222.8 611,-170.8 423,-170.8"/>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_StudentsModule_declarations</title>
 <polygon fill="none" stroke="black" points="309,-40.8 309,-92.8 711,-92.8 711,-40.8 309,-40.8"/>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_StudentsModule_exports</title>
+<polygon fill="none" stroke="black" points="423,-170.8 423,-222.8 611,-222.8 611,-170.8 423,-170.8"/>
 </g>
 <g id="clust5" class="cluster">
 <title>cluster_StudentsModule_imports</title>

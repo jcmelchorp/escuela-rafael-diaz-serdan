@@ -17,7 +17,6 @@ const routes: Routes = [
       {
         path: '',
         component: SchoolDashboardComponent,
-        resolve: { teachers: AccountsResolver },
         data: { breadcrumb: 'Dirección' }
       },
       {

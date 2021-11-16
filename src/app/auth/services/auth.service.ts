@@ -1,10 +1,13 @@
 import { Injectable, Optional } from '@angular/core';
 import { User as AuthUser } from '@rds-auth/models/user.model';
-import firebase from 'firebase/compat/app';
 import { Observable, of, from, Subscription, EMPTY } from 'rxjs';
-import { switchMap, map, take, pluck, shareReplay } from 'rxjs/operators';
+import { switchMap, map, take, pluck, shareReplay, mergeMap } from 'rxjs/operators';
 import { Database, objectVal, push, ref, update } from '@angular/fire/database';
 import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User, UserCredential } from '@angular/fire/auth';
+import { collection, doc, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+
 
 @Injectable()
 export class AuthService {
@@ -19,12 +22,13 @@ export class AuthService {
     /* public readonly afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase,
     private afStore: AngularFirestore */
-    private readonly database: Database, @Optional() private auth: Auth
+    private readonly database: Database, @Optional() private auth: Auth, public readonly afs: Firestore,
+
 
   ) {
 
-    const doc = ref(this.database, this.collection);
-    this.objectValue$ = objectVal(doc)
+    const docRef = ref(this.database, this.collection);
+    this.objectValue$ = objectVal(docRef)
 
   }
 
@@ -32,15 +36,21 @@ export class AuthService {
     /* return this.afDatabase
       .object<User>(`${this.collection}/${id}`)
       .valueChanges(); */
-    const doc = ref(this.database, `${this.collection}/${id}`);
-    return objectVal<AuthUser>(doc, { keyField: 'id' })
+    const docRef = ref(this.database, `${this.collection}/${id}`);
+    return objectVal<AuthUser>(docRef, { keyField: 'id' })
   }
   getAuthUser(): Observable<AuthUser | null> {
     return authState(this.auth).pipe(
       switchMap((user: User) => {
         if (user) {
-          const doc = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
-          return objectVal<AuthUser>(doc, { keyField: 'id' });
+          const docRef = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
+          const refCollection = doc(this.afs, this.collection, user.providerData[0].uid);
+          return from(getDoc(refCollection)).pipe(
+            mergeMap(userFs =>
+              objectVal<AuthUser>(docRef).pipe(
+                map(userDb => { return { ...userFs.data() as AuthUser, ...userDb as AuthUser } })
+              )
+            ));
         } else {
           return of(null)
         }
@@ -88,24 +98,13 @@ export class AuthService {
 
   saveUser(user: Partial<AuthUser>) {
     const key = user.id;
-    /*   return this.afStore
-        .collection(this.collection)
-        .doc(key)
-        .set(
-          {
-            ...user,
-            isVerified: user.isVerified,
-            uid: user.uid,
-          },
-          { merge: true }
-        )
-        .then(() => */
-    /* this.afDatabase
-      .object<AuthUser>(`${this.collection}/${key}`)
-      .update(user)
-  ); */
-    const doc = ref(this.database, `${this.collection}/${key}`);
-    return from(update(doc, user))
+    const rtdbRef = ref(this.database, `${this.collection}/${key}`);
+    const afsRef = doc(this.afs, this.collection, key);
+    return from(update(rtdbRef, user)).pipe(
+      mergeMap(_ => from(updateDoc(afsRef, user)))
+    )
+
+
   }
 
   checkAdminRole(id: string): Observable<boolean> {

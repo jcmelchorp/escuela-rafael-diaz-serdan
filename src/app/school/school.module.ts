@@ -20,13 +20,21 @@ import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts
 import { AssignedCoursesDataService } from '@rds-store/school/assigned-courses/assigned-courses-data.service';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { SchoolDashboardComponent } from './school-dashboard/school-dashboard.component';
+import { AdminGuard } from '@rds-accounts/guards/admin.guard';
+import { AuthGuard } from '@rds-auth/guards/auth.guard';
+import { AccountsResolver } from '@rds-accounts/resolvers/accounts.resolver';
+import { AssignedCoursesService } from './school-courses/services/assigned-courses.service';
+import { SchoolCoursesService } from './school-courses/services/school-courses.service';
 @NgModule({
   declarations: [SchoolComponent, SchoolDashboardComponent],
   imports: [SharedModule, SchoolRoutingModule, SchoolCoursesModule],
   exports: [SharedModule],
   providers: [
+    AccountsResolver,
     AccountsDomainService,
     AccountsService,
+    SchoolCoursesService,
+    AssignedCoursesService,
     SchoolCoursesEntityService,
     SchoolCoursesDataService,
     AccountsDataService,

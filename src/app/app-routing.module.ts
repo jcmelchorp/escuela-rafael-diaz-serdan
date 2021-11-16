@@ -15,52 +15,49 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, data: { breadcrumb: null } },
       {
+        path: 'i', loadChildren: () => import('./information/information.module').then(
+          m => m.InformationModule),
+      },
+      {
         path: 'usuarios',
-        loadChildren: () => import('./accounts/accounts.module').then(
+        loadChildren: () => import('@rds-accounts/accounts.module').then(
           m => m.AccountsModule),
         canActivate: [AdminGuard],
-        data: { breadcrumb: null }
       },
       {
         path: 'escuela',
-        loadChildren: () => import('./school/school.module').then(
+        loadChildren: () => import('@rds-school/school.module').then(
           m => m.SchoolModule),
         canActivate: [AdminGuard],
-        data: { breadcrumb: null }
       },
       {
         path: 'perfil',
-        loadChildren: () => import('./profile/profile.module').then(
+        loadChildren: () => import('@rds-profile/profile.module').then(
           m => m.ProfileModule),
         canActivate: [AuthGuard],
-        data: { breadcrumb: null }
       },
       {
         path: 'gsuite',
         loadChildren: () => import('@rds-classroom/classroom.module').then(
           (m) => m.ClassroomModule),
         canActivate: [AuthGuard],
-        data: { breadcrumb: 'Google GSuite' },
       },
       {
         path: 'profesores',
-        loadChildren: () =>
-          import('./teachers/teachers.module').then((m) => m.TeachersModule),
+        loadChildren: () => import('@rds-teachers/teachers.module').then((m) => m.TeachersModule),
         canActivate: [TeachersGuard],
-        data: { breadcrumb: 'Profesores' },
       },
       {
         path: 'config',
         component: SettingsComponent,
         canActivate: [AuthGuard],
-        data: { breadcrumb: 'Configuración' },
       },
       {
         path: '**',
         component: NotFoundComponent,
       }
     ]
-  }
+  },
 ];
 
 @NgModule({
