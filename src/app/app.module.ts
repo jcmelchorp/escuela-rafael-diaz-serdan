@@ -36,11 +36,9 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
     SharedModule.forRoot(),
     AuthModule.forRoot(),
     NgxSpinnerModule,
-    ServiceWorkerModule.register('ngrx-worker.js', {
+    ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      // Register the ServiceWorker as soon as the app is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:5000'
     }),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
