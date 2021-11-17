@@ -2,7 +2,7 @@
   <h2>Alumnos de la clase</h2>
   <mat-icon matDialogClose mat-icon-button>close</mat-icon>
 </div>
-<mat-dialog-content *ngIf="users$|async">
+<mat-dialog-content>
   <mat-form-field class="example-chip-list" appearance="outlined">
     <mat-label>Busca un nombre o correo electrónico</mat-label>
     <input matInput #studentInput [formControl]="filterValues.controls['fullName']" [matAutocomplete]="auto"

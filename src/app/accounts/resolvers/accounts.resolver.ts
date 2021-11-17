@@ -21,7 +21,7 @@ export class AccountsResolver implements Resolve<boolean> {
           this.accountsEntityService.getAll();
         }
       }),
-      filter((loaded) => !!loaded),
+      filter(loaded => !!loaded),
       first()
     );
   }

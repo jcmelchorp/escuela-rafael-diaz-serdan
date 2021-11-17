@@ -6,8 +6,8 @@ import { TeachersComponent } from './containers';
 
 import { ScoresEditComponent } from './components/scores-edit/scores-edit.component';
 import { TeacherCoursesComponent } from './components/teacher-courses/teacher-courses.component';
-import { TeachersResolver } from '@rds-school/school-courses/resolvers/teachers.resolver';
 import { AssignedCoursesResolver } from '@rds-school/school-courses/resolvers/assigned-courses.resolver';
+import { SchoolTeachersResolver } from '@rds-school/school-courses/resolvers/school-teachers.resolver';
 
 
 const routes: Routes = [
@@ -28,7 +28,7 @@ const routes: Routes = [
         path: ':courseId',
         component: ScoresEditComponent,
         data: { breadcrumb: ':courseId' },
-        resolve: { users: TeachersResolver },
+        resolve: { users: SchoolTeachersResolver },
       },
     ],
   },
@@ -37,6 +37,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [AssignedCoursesResolver, TeachersResolver],
+  providers: [AssignedCoursesResolver, SchoolTeachersResolver],
 })
 export class TeachersRoutingModule { }

@@ -9,6 +9,8 @@ import { SchoolCourseDialogComponent } from '../../components/school-courses-dia
 import { UploadFileDialogComponent } from '@rds-shared/components/upload-file-dialog/upload-file-dialog.component';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { map } from 'rxjs/operators';
+import { User } from '@rds-auth/models/user.model';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -19,23 +21,30 @@ import { map } from 'rxjs/operators';
 export class SchoolCoursesComponent implements OnInit {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
+  teachers_loaded$: Observable<boolean>;
+  teachers_loading$: Observable<boolean>;
   filterValues: FormGroup;
   schoolCourses$: Observable<AssignedCourse[]>;
   filteredEntities$: Observable<AssignedCourse[]>;
+  teachers$: Observable<User[]>;
   coursesCount$: Observable<number>;
   willDownload = false;
   gradeKeys;
   grades = SchoolLevel;
   constructor(
     private fb: FormBuilder,
-    private assignedCourseEntityService: AssignedCoursesEntityService,
+    private schoolTeachersEntityService: SchoolTeachersEntityService,
+    private assignedCoursesEntityService: AssignedCoursesEntityService,
     private dialog: MatDialog
   ) {
-    this.loaded$ = this.assignedCourseEntityService.loaded$;
-    this.loading$ = this.assignedCourseEntityService.loading$;
-    this.schoolCourses$ = this.assignedCourseEntityService.entities$;
+    this.loaded$ = this.assignedCoursesEntityService.loaded$;
+    this.loading$ = this.assignedCoursesEntityService.loading$;
+    this.schoolCourses$ = this.assignedCoursesEntityService.entities$;
+    this.teachers$ = this.schoolTeachersEntityService.entities$;
+    this.teachers_loading$ = this.schoolTeachersEntityService.loading$;
+    this.teachers_loaded$ = this.schoolTeachersEntityService.loaded$;
 
-    this.filteredEntities$ = this.assignedCourseEntityService.filteredEntities$;
+    this.filteredEntities$ = this.assignedCoursesEntityService.filteredEntities$;
     this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
       grade: new FormControl(),
@@ -48,10 +57,10 @@ export class SchoolCoursesComponent implements OnInit {
       Object.keys(changes).includes('name') && changes.name !== ''
         ? (changes.name = { fullName: changes['name'] })
         : delete changes.name;
-      return this.assignedCourseEntityService.setFilter(changes);
+      return this.assignedCoursesEntityService.setFilter(changes);
     });
 
-    this.coursesCount$ = this.assignedCourseEntityService.count$
+    this.coursesCount$ = this.assignedCoursesEntityService.count$
 
   }
 
@@ -61,7 +70,7 @@ export class SchoolCoursesComponent implements OnInit {
 
   editCourse(course: AssignedCourse) {
     console.log(course)
-    this.assignedCourseEntityService.update(course);
+    this.assignedCoursesEntityService.update(course);
   }
 
 
@@ -78,7 +87,7 @@ export class SchoolCoursesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.isNew) {
-          this.assignedCourseEntityService.add(result.course);
+          this.assignedCoursesEntityService.add(result.course);
         } else {
           this.editCourse(result.course);
         }
@@ -99,7 +108,7 @@ export class SchoolCoursesComponent implements OnInit {
       if (result) {
         console.log(result)
         result.output.forEach((x) => {
-          this.assignedCourseEntityService.add(x);
+          this.assignedCoursesEntityService.add(x);
         });
       } else {
         console.log('Dialog closed without changes')
@@ -108,7 +117,7 @@ export class SchoolCoursesComponent implements OnInit {
   }
 
   handleCourseDelete(id: string) {
-    this.assignedCourseEntityService.delete(id);
+    this.assignedCoursesEntityService.delete(id);
   }
 
 }

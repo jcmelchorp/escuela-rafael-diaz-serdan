@@ -1,4 +1,4 @@
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -57,7 +57,14 @@ export class AddStudentsCoursesComponent implements OnInit {
         this.data.course.studentsIds?.forEach(s => {
           this.studentsStr.push(s);
           this.students.push(users.find(u => u.id === s));
-        }))
+        })
+      ),
+      map(users => {
+        if (!users) {
+          this.accountsEntityService.getAll();
+          return users.filter(u => u.role === 'Alumnos' && u.suspended === false)
+        }
+      })
     );
     this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
   }

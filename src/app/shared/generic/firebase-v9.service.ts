@@ -1,12 +1,10 @@
 import { Inject } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
-import { QueryParams } from '@ngrx/data';
 import { Entity, firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
 import { child, Database, query as query_db, onValue, push, ref, set, update, get, objectVal, orderByChild, equalTo } from '@angular/fire/database';
-import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, orderBy, query, setDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, orderBy, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { listVal } from 'rxfire/database';
-import { updateDoc } from 'firebase/firestore';
 export class FirebaseV9Service<T> implements IFirebase<T> {
   public readonly tCollection: string;
   public readonly colects: Observable<T[]>;

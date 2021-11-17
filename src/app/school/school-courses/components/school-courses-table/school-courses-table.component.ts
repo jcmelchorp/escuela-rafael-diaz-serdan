@@ -67,7 +67,7 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
     this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
     this.groupByColumns = ['cycle', 'grade'];
     this.teachers$ = this.accountsEntityService.entities$.pipe(
-      map(teachers => teachers.filter(teacher => teacher.role === 'profesores'))
+      map(teachers => teachers.filter(teacher => teacher.role === 'PSrofesores'))
     );
   }
 
@@ -204,7 +204,8 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
 
   openStudentsToCourse(row) {
     const dialogRef = this.dialog.open(AddStudentsCoursesComponent, {
-      width: '500px',
+      width: '400px',
+      minHeight: '500px',
       height: 'fit-content',
       data: { course: row as AssignedCourse }
     });

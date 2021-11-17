@@ -15,7 +15,7 @@
       <div *ngSwitchCase="column.field==='grade'">
         <mat-cell *matCellDef="let row">{{slevels[row[column.field]]}} </mat-cell>
       </div>
-      <!--  <div *ngSwitchCase="column.field==='teacherId'">
+      <div *ngSwitchCase="column.field==='teacherId'">
         <mat-cell *matCellDef="let row">
           <mat-form-field class="d-block" appearance="outline">
             <mat-label>Profesor</mat-label>
@@ -27,7 +27,7 @@
             </mat-select>
           </mat-form-field>
         </mat-cell>
-      </div> -->
+      </div>
       <div *ngSwitchDefault>
         <mat-cell *matCellDef="let row">{{row[column.field]}}</mat-cell>
       </div>

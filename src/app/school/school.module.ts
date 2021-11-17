@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import * as fromAccounts from '@rds-store/accounts';
 import * as fromAccountsDomain from '@rds-store/accounts-domain';
 import * as fromSchoolCourses from '@rds-store/school/school-courses';
+import * as fromSchoolTeachers from '@rds-store/school/school-teachers';
+
 import * as fromAssignedCourses from '@rds-store/school/assigned-courses';
 import * as fromEntity from '@rds-store/config/entity-metadata';
 import { SchoolRoutingModule } from './school-routing.module';
@@ -25,6 +27,9 @@ import { AuthGuard } from '@rds-auth/guards/auth.guard';
 import { AccountsResolver } from '@rds-accounts/resolvers/accounts.resolver';
 import { AssignedCoursesService } from './school-courses/services/assigned-courses.service';
 import { SchoolCoursesService } from './school-courses/services/school-courses.service';
+import { SchoolTeachersDataService } from '@rds-store/school/school-teachers/school-teacher-data.service';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
+import { SchoolTeachersService } from '@rds-school/school-courses/services/school-tearchers.service';
 @NgModule({
   declarations: [SchoolComponent, SchoolDashboardComponent],
   imports: [SharedModule, SchoolRoutingModule, SchoolCoursesModule],
@@ -34,9 +39,12 @@ import { SchoolCoursesService } from './school-courses/services/school-courses.s
     AccountsDomainService,
     AccountsService,
     SchoolCoursesService,
+    SchoolTeachersService,
     AssignedCoursesService,
     SchoolCoursesEntityService,
     SchoolCoursesDataService,
+    SchoolTeachersEntityService,
+    SchoolTeachersDataService,
     AccountsDataService,
     AccountsEntityService,
     AccountsDomainDataService,
@@ -52,6 +60,8 @@ export class SchoolModule {
     entityDataService: EntityDataService,
     schoolCoursesEntityService: SchoolCoursesEntityService,
     schoolCoursesDataService: SchoolCoursesDataService,
+    schoolTeachersDataService: SchoolTeachersDataService,
+    schoolTeachersEntityService: SchoolTeachersEntityService,
     accountsDomainEntityService: AccountsDomainEntityService,
     accountsDomainDataService: AccountsDomainDataService,
     accountsEntityService: AccountsEntityService,
@@ -61,11 +71,15 @@ export class SchoolModule {
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
     entityServices.registerEntityCollectionServices([
-      schoolCoursesEntityService, accountsDomainEntityService, accountsEntityService, assignedCoursesEntityService
+      schoolTeachersEntityService, schoolCoursesEntityService, accountsDomainEntityService, accountsEntityService, assignedCoursesEntityService
     ]);
     entityDataService.registerService(
       fromSchoolCourses.entityCollectionName,
       schoolCoursesDataService
+    );
+    entityDataService.registerService(
+      fromSchoolTeachers.entityCollectionName,
+      schoolTeachersDataService
     );
     entityDataService.registerService(
       fromAssignedCourses.entityCollectionName,

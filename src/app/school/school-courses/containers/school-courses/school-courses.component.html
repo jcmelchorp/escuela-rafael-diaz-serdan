@@ -39,9 +39,10 @@
     </h2>
     <div>Agrupar elementos por:</div>
   </div>
-  <app-school-courses-table [data]="filteredEntities" (onClickDelete)="handleCourseDelete($event)"
+  <app-school-courses-grouped-by-table [initialData]="filteredEntities" (onClickDelete)="handleCourseDelete($event)"
     (onClickEdit)="openSchoolCourseDialog($event)" (onClickStudents)="editCourse($event)">
-  </app-school-courses-table>
+  </app-school-courses-grouped-by-table>
+  <!-- <router-outlet></router-outlet> -->
 </div>
 <ng-template #spinner>
   <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">

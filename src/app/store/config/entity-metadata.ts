@@ -7,6 +7,7 @@ import { User } from '@rds-auth/models/user.model';
 import * as fromAccount from '@rds-store/accounts';
 import * as fromAccountDomain from '@rds-store/accounts-domain';
 import * as fromSchoolCourses from '@rds-store/school/school-courses';
+import * as fromSchoolTeachers from '@rds-store/school/school-teachers';
 import * as fromAnnouncement from '@rds-store/classroom/announcement';
 import * as fromCourse from '@rds-store/classroom/course';
 import * as fromCourseWork from '@rds-store/classroom/course-work';
@@ -99,6 +100,21 @@ export const entityMetadata: EntityMetadataMap = {
     },
     selectId: (score: Score) => score.id,
   },
+  [fromSchoolTeachers.entityCollectionName]: {
+    filterFn: (entities: User[], { name, primaryEmail, curp }: Partial<User>) =>
+      entities
+        .filter((e) =>
+          name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true
+        )
+        .filter((e) => (primaryEmail ? e.primaryEmail.includes(primaryEmail) : true))
+        .filter((e) => (curp ? e.curp.includes(curp) : true)),
+    selectId: (user: User) => user.id,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+    },
+  },
   [fromCourse.entityCollectionName]: {
     entityDispatcherOptions: {
       optimisticAdd: true,
@@ -176,6 +192,7 @@ const pluralNames = {
   [fromAccountDomain.entityCollectionName]: fromAccountDomain.pluralizedEntityName,
   [fromAccount.entityCollectionName]: fromAccount.pluralizedEntityName,
   [fromSchoolCourses.entityCollectionName]: fromSchoolCourses.pluralizedEntityName,
+  [fromSchoolTeachers.entityCollectionName]: fromSchoolTeachers.pluralizedEntityName,
   [fromAssignedCourses.entityCollectionName]: fromAssignedCourses.pluralizedEntityName,
   [fromScores.entityCollectionName]: fromScores.pluralizedEntityName,
   [fromCourse.entityCollectionName]: fromCourse.pluralizedEntityName,

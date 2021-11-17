@@ -4,8 +4,7 @@ import { from, Observable } from 'rxjs';
 import { firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
 import { QueryParams } from '@ngrx/data';
 import { take, map, switchMap, tap } from 'rxjs/operators';
-import { addDoc, collection, doc, Firestore, getDoc, orderBy, query, setDoc, deleteDoc, updateDoc } from 'firebase/firestore';
-import { collectionData } from '@angular/fire/firestore';
+import { collection, collectionData, collectionGroup, deleteDoc, doc, Firestore, getDoc, getDocs, orderBy, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 export class FirestoreV9Service<T> implements IFirebase<T> {
   public readonly tCollection: string;
   public readonly colects: Observable<T[]>;
@@ -58,9 +57,10 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
     /*     return this.fsCollection.valueChanges({ idField: 'id' });
      */
   }
-  getWithQuery(query: QueryParams): Observable<T[]> {
-    const refCollection = collection(this.afs, this.tCollection);
-    return from(collectionData(refCollection, query)).pipe(map(x => x as T[]));
+  getWithQuery(queryParams: QueryParams): Observable<T[]> {
+    const queryWithParams = query(collection(this.afs, this.tCollection), where('role', '==', queryParams['role']))
+    return collectionData(queryWithParams).pipe(map(x => x as T[]));
+
     /* return this.afs.collection<T>(this.collection, ref => ref.where(
       query['field'].toString(),
       query['operation'] as any,
