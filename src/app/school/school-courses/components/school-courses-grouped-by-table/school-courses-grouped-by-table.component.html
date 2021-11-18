@@ -1,21 +1,30 @@
-<mat-list>
-  <mat-list-item>Choose a column</mat-list-item>
-  <mat-list-item>
-    <mat-select placeholder="Group by" [(ngModel)]="groupingColumn" name="item" (ngModelChange)="buildDataSource()">
-      <mat-option [value]="null"></mat-option>
-      <mat-option *ngFor="let item of displayedColumns" [value]="item.field">
-        {{item.label}}
-      </mat-option>
-    </mat-select>
-  </mat-list-item>
-</mat-list>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
+<mat-form-field appearance="outline">
+  <mat-label>Agrupar elementos por:</mat-label>
+  <mat-select placeholder="Agrupados por" [(ngModel)]="groupingColumn" name="item" (ngModelChange)="buildDataSource()">
+    <mat-option [value]="null">Elije un grupo</mat-option>
+    <mat-option *ngFor="let item of displayedColumns" [value]="item.field">
+      {{item.label}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<!-- <mat-form-field appearance="outline">
+  <mat-label>Ciclo escolar:</mat-label>
+  <mat-select [(ngModel)]="filteredBy" placeholder="Selecciona un grado">
+    <mat-option [value]="">Todos los grados</mat-option>
+    <mat-option *ngFor="let key of cycleKeys" [value]="key">
+      {{cycles[key]}}
+    </mat-option>
+  </mat-select>
+  <button mat-icon-button matSuffix (click)="filterValues.controls.grade.reset();$event.stopPropagation()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field> -->
+<table mat-table [dataSource]="dataSource">
   <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
   <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col.field">
     <th mat-header-cell *matHeaderCellDef>{{ col.label }}</th>
-    <td mat-cell *matCellDef="let row">{{ row[col.field] }}</td>
+    <td mat-cell *matCellDef="let row">{{ col.field==groupingColumn?'':row[col.field] }}</td>
   </ng-container>
 
   <!-- Default Table lines -->
@@ -29,16 +38,16 @@
     </td>
   </ng-container>
   <ng-container matColumnDef="groupReducer">
-    <td colspan="1" mat-cell *matCellDef="let group">
+    <mat-cell colspan="1" mat-cell *matCellDef="let group">
       <div fxFill fxLayoutAlign="center center">
-        <mat-icon *ngIf="!group.reduced">expand_less</mat-icon>
-        <mat-icon *ngIf="group.reduced">expand_more</mat-icon>
+        <mat-icon *ngIf="!group.reduced">expand_more</mat-icon>
+        <mat-icon *ngIf="group.reduced">chevron_right</mat-icon>
       </div>
-    </td>
+    </mat-cell>
   </ng-container>
 
   <!-- Group line -->
-  <tr mat-row class="clickable" *matRowDef="let row; columns: ['groupReducer','groupHeader']; when: isGroup"
+  <tr mat-row class="clickable" *matRowDef="let row; columns: ['groupHeader','groupReducer']; when: isGroup"
     (click)="reduceGroup(row)">
   </tr>
 

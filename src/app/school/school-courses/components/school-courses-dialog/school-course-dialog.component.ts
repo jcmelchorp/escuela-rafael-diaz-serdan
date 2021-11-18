@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { CourseType, SchoolCourse, AssignedCourse, Cycle } from '../../models/school-course.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
+import { SchoolTeachersEntityService } from '../../../../store/school/school-teachers/school-teacher-entity.service';
 
 @Component({
   templateUrl: './school-course-dialog.component.html',
@@ -28,16 +29,14 @@ export class SchoolCourseDialogComponent {
   cycles = Cycle
   constructor(
     private dialogRef: MatDialogRef<SchoolCourseDialogComponent>,
-    private accountEntityService: AccountsEntityService,
+    private schoolTeachersEntityService: SchoolTeachersEntityService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.keys = Object.keys(this.types);
     this.cycleKeys = Object.keys(this.cycles);
     this.slevelKeys = Object.keys(this.slevels);
-    this.teachers$ = this.accountEntityService.entities$.pipe(
-      map((users) => users.filter((u) => u.isTeacher == true))
-    );
+    this.teachers$ = this.schoolTeachersEntityService.entities$
     this.formData = this.fb.group({
       name: new FormControl(this.data.course.name, Validators.required),
       grade: new FormControl(this.data.course.grade),
@@ -61,7 +60,7 @@ export class SchoolCourseDialogComponent {
       cycle: this.formData.controls.cycle.value,
       description: this.formData.controls.description.value,
       courseType: this.formData.controls.courseType.value,
-      teacherId: this.formData.controls.teacherId.value,
+      teacherEmail: this.formData.controls.teacherEmail.value,
       grade: this.formData.controls.grade.value,
     };
     //!this.data.isNew ? course.id = this.data.course.id : null;

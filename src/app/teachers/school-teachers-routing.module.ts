@@ -39,4 +39,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AssignedCoursesResolver, SchoolTeachersResolver],
 })
-export class TeachersRoutingModule { }
+export class SchoolTeachersRoutingModule { }

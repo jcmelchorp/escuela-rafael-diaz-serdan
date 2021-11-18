@@ -8,7 +8,7 @@
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Material+Icons+Outlined");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 @import url("https://fonts.googleapis.com/css?family=Fredoka+One:300,400,500");
 //@import url("https://fonts.googleapis.com/css?family=Cabin+Sketch:300,400,500");
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500");
@@ -269,7 +269,7 @@ $altTheme: (
 
 .material-icons {
   font-size: 24px;
-  font-family: "Material Icons Outlined";
+  font-family: "Material Icons Outlined", "Material Icons";
   .mat-badge-content {
     font-family: "Poppins";
   }

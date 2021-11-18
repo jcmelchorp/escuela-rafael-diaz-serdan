@@ -6,6 +6,7 @@ import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { Cycle } from '../../models/school-course.model';
 
 @Component({
   selector: 'app-school-courses-grouped-by-table',
@@ -18,19 +19,13 @@ export class SchoolCoursesGroupedByTableComponent implements OnInit {
   displayedColumns: any[];
   columnsToDisplay: string[];
   dataSource = [];
-
-  groupingColumn;
-
+  cycles = Cycle;
+  cycleKeys;
+  groupingColumn = "grade";
   reducedGroups = [];
 
   constructor() {
-    /*  // Replace people with any dataArray !
-     let inputData = this.initialData;
-
-     if (!this.initData(inputData)) return;
-     console.log(inputData);
-
-     this.buildDataSource(); */
+    this.cycleKeys = Object.keys(Cycle);
   }
   ngOnInit(): void {
     // Replace people with any dataArray !
@@ -50,7 +45,7 @@ export class SchoolCoursesGroupedByTableComponent implements OnInit {
     this.displayedColumns = [
       { field: 'cycle', label: 'Ciclo escolar' },
       { field: 'grade', label: 'Grado' },
-      { field: 'priority', label: '#' },
+      { field: 'priority', label: '' },
       { field: 'name', label: 'Nombre' },
       { field: 'teacherId', label: 'Profesor' }
     ];

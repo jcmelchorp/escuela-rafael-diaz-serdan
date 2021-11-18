@@ -42,8 +42,8 @@ export class UploadFileDialogComponent {
             courseType: row[3],
             description: row[4],
             cycle: row[5],
-            teacherId: row[6],
-            students: []
+            teacherEmail: row[6],
+            studentsEmails: []
           };
           this.data.output.push(course as AssignedCourse);
         }

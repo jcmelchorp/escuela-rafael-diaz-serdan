@@ -29,7 +29,7 @@ import { AssignedCoursesService } from './school-courses/services/assigned-cours
 import { SchoolCoursesService } from './school-courses/services/school-courses.service';
 import { SchoolTeachersDataService } from '@rds-store/school/school-teachers/school-teacher-data.service';
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
-import { SchoolTeachersService } from '@rds-school/school-courses/services/school-tearchers.service';
+import { SchoolTeachersService } from '@rds-teachers/services/school-tearchers.service';
 @NgModule({
   declarations: [SchoolComponent, SchoolDashboardComponent],
   imports: [SharedModule, SchoolRoutingModule, SchoolCoursesModule],

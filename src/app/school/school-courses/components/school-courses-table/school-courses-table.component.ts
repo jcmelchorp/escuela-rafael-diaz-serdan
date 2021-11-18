@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -6,13 +6,14 @@ import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { AssignedCourse } from '../../models/school-course.model';
 import { AccountsEntityService } from '../../../../store/accounts/accounts-entity.service';
 import { User } from '@rds-auth/models/user.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ConfirmDialogComponent } from '@rds-shared/components';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignedCoursesEntityService } from '../../../../store/school/assigned-courses/assigned-courses-entity.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AddStudentsCoursesComponent } from '../add-students-courses/add-students-courses.component';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
 
 
 export class Group {
@@ -38,7 +39,7 @@ export class Group {
   ],
 })
 
-export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
+export class SchoolCoursesTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() data: AssignedCourse[];
   @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | Group>>;
   @ViewChild(MatSort) sort!: MatSort;
@@ -47,6 +48,8 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
   @Output() onClickStudents = new EventEmitter<AssignedCourse>();
 
   teachers$: Observable<User[]>;
+  teachers: User[];
+  teachersSubscription: Subscription;
   slevels = SchoolLevel;
   dataSource = new MatTableDataSource<any | Group>([]);
   //_alldata: any[];
@@ -56,23 +59,21 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
   isLoading: boolean;
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
-  constructor(private accountsEntityService: AccountsEntityService, private dialog: MatDialog) {
+  constructor(private schoolTeachersEntityService: SchoolTeachersEntityService, private dialog: MatDialog) {
     this.columns = [
       { field: 'cycle', label: 'Ciclo escolar' },
       { field: 'grade', label: 'Grado' },
-      { field: 'priority', label: '#' },
+      { field: 'priority', label: '' },
       { field: 'name', label: 'Nombre' },
-      { field: 'teacherId', label: 'Profesor' }
+      { field: 'teacherEmail', label: 'Profesor' },
+      { field: 'isEdit', label: '' }
     ];
     this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
     this.groupByColumns = ['cycle', 'grade'];
-    this.teachers$ = this.accountsEntityService.entities$.pipe(
-      map(teachers => teachers.filter(teacher => teacher.role === 'PSrofesores'))
-    );
   }
 
   ngOnInit() {
-
+    this.teachersSubscription = this.schoolTeachersEntityService.entities$.subscribe(teachers => this.teachers = teachers);
     this.dataSource.data = this.addGroups(this.data.sort((a, b) => {
       if (a.priority < b.priority) {
         return -1;
@@ -84,13 +85,15 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
     }), this.groupByColumns);
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
     this.dataSource.filter = performance.now().toString();
-
     this.isLoading = false;
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
     this.table.dataSource = this.dataSource;
+  }
+  ngOnDestroy(): void {
+    this.teachersSubscription.unsubscribe();
+
   }
   groupBy(event, column) {
     this.isLoading = false;

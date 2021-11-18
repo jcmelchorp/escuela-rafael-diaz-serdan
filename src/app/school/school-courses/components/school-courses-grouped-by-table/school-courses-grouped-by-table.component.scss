@@ -4,9 +4,9 @@ table {
 
 .clickable:hover {
   cursor: pointer;
-  background-color: rgba(211, 211, 211, 0.349);
+  border: 2px solid #0060a1a1;
 }
 
 .clickable {
-  background-color: rgba(211, 211, 211, 0.349);
+  border: 2px dashed #0060a111;
 }

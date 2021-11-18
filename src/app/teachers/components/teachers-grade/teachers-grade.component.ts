@@ -63,8 +63,8 @@ export class TeachersGradeComponent implements OnInit {
           map(users => {
             this.currentGrades = this.fb.group({
               scores: this.fb.array(
-                course.students.map((studentId) => {
-                  const user = users.find(u => u.id === studentId);
+                course.studentsEmails.map((studentEmail) => {
+                  const user = users.find(u => u.primaryEmail === studentEmail);
                   return this.setScore({ id: user.id, name: user.name.fullName })
                 })
               ),
@@ -155,7 +155,7 @@ export class TeachersGradeComponent implements OnInit {
     });
     if (score.isCourseClosed)
       score.prom_materia =
-        +Math.trunc((+(score.unit1! + score.unit2 + score.unit3) * 10) / 3) /
+        +Math.trunc((+(score.unit1 + score.unit2 + score.unit3) * 10) / 3) /
         10;
 
     return partialUser;

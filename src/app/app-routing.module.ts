@@ -44,7 +44,7 @@ const routes: Routes = [
       },
       {
         path: 'profesores',
-        loadChildren: () => import('@rds-teachers/teachers.module').then((m) => m.TeachersModule),
+        loadChildren: () => import('@rds-teachers/school-teachers.module').then((m) => m.SchoolTeachersModule),
         canActivate: [TeachersGuard],
       },
       {

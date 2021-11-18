@@ -13,10 +13,10 @@ export class AssignedCourse implements SchoolCourse {
   description: string;
   grade: SchoolLevel;
   courseType: CourseType;
-  teacherId: string;
+  teacherEmail: string;
   cycle: string;
   priority: number;
-  students: string[];
+  studentsEmails: string[];
 }
 
 export enum CourseType {

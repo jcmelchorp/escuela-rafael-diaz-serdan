@@ -74,8 +74,8 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
           map(users => {
             this.currentGrades = this.formBuilder.group({
               scores: this.formBuilder.array(
-                course.students.map((studentId) => {
-                  const user = users.find(u => u.id === studentId);
+                course.studentsEmails.map((studentEmail) => {
+                  const user = users.find(u => u.primaryEmail === studentEmail);
                   return this.setScore({ id: user.id, name: user.name.fullName })
                 })
               ),

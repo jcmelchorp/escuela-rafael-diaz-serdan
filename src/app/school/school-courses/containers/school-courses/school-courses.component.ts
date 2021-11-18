@@ -43,7 +43,6 @@ export class SchoolCoursesComponent implements OnInit {
     this.teachers$ = this.schoolTeachersEntityService.entities$;
     this.teachers_loading$ = this.schoolTeachersEntityService.loading$;
     this.teachers_loaded$ = this.schoolTeachersEntityService.loaded$;
-
     this.filteredEntities$ = this.assignedCoursesEntityService.filteredEntities$;
     this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
@@ -59,9 +58,7 @@ export class SchoolCoursesComponent implements OnInit {
         : delete changes.name;
       return this.assignedCoursesEntityService.setFilter(changes);
     });
-
     this.coursesCount$ = this.assignedCoursesEntityService.count$
-
   }
 
 
