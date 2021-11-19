@@ -1,0 +1,10 @@
+@use "./../../../../assets/themes/colors" as colors;
+#new-user {
+  color: white;
+  background-color: colors.$rds-logo-color;
+  position: fixed;
+  bottom: 50px;
+  top: auto;
+  right: 50px;
+  left: auto;
+}

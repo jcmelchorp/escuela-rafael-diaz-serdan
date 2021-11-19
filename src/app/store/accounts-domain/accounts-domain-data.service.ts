@@ -26,7 +26,7 @@ export class AccountsDomainDataService extends DefaultDataService<AccountDomain>
     return from(this.accountsDomainService.updateUser(user.changes));
   }
   getByKey(userKey: string): Observable<AccountDomain> {
-    return from(this.accountsDomainService.getUserDomain(userKey));
+    return from(this.accountsDomainService.getAccountsDomain(userKey));
   }
   add(user: Partial<AccountDomain>) {
     return from(this.accountsDomainService.addUser(user));

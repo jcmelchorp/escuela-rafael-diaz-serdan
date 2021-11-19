@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminGuard } from '@rds-accounts/guards/admin.guard';
+import { AdminGuard } from '@rds-admin/guards/admin.guard';
 import { AuthGuard } from '@rds-auth/guards/auth.guard';
 import { SettingsComponent } from '@rds-core/components';
 import { LayoutComponent } from '@rds-core/containers';
@@ -19,32 +19,33 @@ const routes: Routes = [
           m => m.InformationModule),
       },
       {
-        path: 'usuarios',
+        path: 'u',
         loadChildren: () => import('@rds-accounts/accounts.module').then(
           m => m.AccountsModule),
         canActivate: [AdminGuard],
       },
       {
-        path: 'escuela',
+        path: 'e',
         loadChildren: () => import('@rds-school/school.module').then(
           m => m.SchoolModule),
         canActivate: [AdminGuard],
       },
       {
-        path: 'perfil',
+        path: 'p',
         loadChildren: () => import('@rds-profile/profile.module').then(
           m => m.ProfileModule),
         canActivate: [AuthGuard],
       },
       {
-        path: 'gsuite',
+        path: 'g',
         loadChildren: () => import('@rds-classroom/classroom.module').then(
           (m) => m.ClassroomModule),
         canActivate: [AuthGuard],
       },
       {
-        path: 'profesores',
-        loadChildren: () => import('@rds-teachers/school-teachers.module').then((m) => m.SchoolTeachersModule),
+        path: 'profe',
+        loadChildren: () => import('@rds-teachers/school-teachers.module').then(
+          (m) => m.SchoolTeachersModule),
         canActivate: [TeachersGuard],
       },
       {
@@ -53,15 +54,22 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'admin',
+        loadChildren: () => import('@rds-admin/admin.module').then(
+          m => m.AdminModule)
+      },
+      {
         path: '**',
         component: NotFoundComponent,
       }
     ]
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard, AdminGuard, TeachersGuard]
 })
 export class AppRoutingModule { }

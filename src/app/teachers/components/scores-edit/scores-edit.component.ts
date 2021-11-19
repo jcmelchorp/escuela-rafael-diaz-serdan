@@ -16,11 +16,10 @@ import {
 import { SubscriptionService } from '@rds-shared/services/subscription.service';
 import { User } from '@rds-auth/models/user.model';
 import { ScoreService } from '../../services/score.service';
-import { AssignedCourse } from '@rds-school/school-courses/models/school-course.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { ScoreListItem } from '@rds-profile/models/score.model';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
-
+import { AssignedCourse } from '@rds-school/models/school-course.model';
 @Component({
   selector: 'app-scores-edit',
   templateUrl: './scores-edit.component.html',
@@ -88,7 +87,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   }
 
   async setScore(student: any): Promise<FormGroup> {
-    const currentGrades = await this.scoreService.getById(student.id + this.course.cycle).toPromise()
+    const currentGrades = await this.scoreService.getById(student.id + this.course.cycleId).toPromise()
     return this.formBuilder.group({
       studentId: [student.id, [Validators.required]],
       studentName: [student.name.fullName, Validators.required],
@@ -179,7 +178,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
       }
     });
 
-    const currentGrades = await this.scoreService.getById(studentProps.studentId + this.course.cycle).toPromise()
+    const currentGrades = await this.scoreService.getById(studentProps.studentId + this.course.cycleId).toPromise()
     let pos: number = currentGrades.scores.findIndex(
       (s) => s.courseName == score.courseName
     );
@@ -190,7 +189,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
       scores.map((s) => s.prom_materia).reduce((a, b) => (a + b)) / scores.length : null;
     this.scoreService.update(currentGrades.id, {
       id: currentGrades.id,
-      cycle: this.course.cycle,
+      cycleId: this.course.cycleId,
       grade: this.course.grade,
       isFinished: isFinished,
       notes: currentGrades.notes,

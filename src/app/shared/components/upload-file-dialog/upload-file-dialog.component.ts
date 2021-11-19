@@ -1,8 +1,8 @@
 import { Component, Directive, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSelectionList } from "@angular/material/list";
+import { AssignedCourse } from "@rds-school/models/school-course.model";
 import * as XLSX from 'xlsx';
-import { AssignedCourse } from '../../../school/school-courses/models/school-course.model';
 @Component({
   styleUrls: ['upload-file-dialog.component.scss'],
   templateUrl: 'upload-file-dialog.component.html',
@@ -36,12 +36,12 @@ export class UploadFileDialogComponent {
       outputArray.forEach((row, i) => {
         if (i > 0) {
           const course: Partial<AssignedCourse> = {
-            priority: row[0],
-            grade: row[1],
-            name: row[2],
+            priority: row[1],
+            grade: row[2],
+            name: row[0],
             courseType: row[3],
             description: row[4],
-            cycle: row[5],
+            cycleId: row[5],
             teacherEmail: row[6],
             studentsEmails: []
           };

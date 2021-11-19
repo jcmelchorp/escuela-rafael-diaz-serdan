@@ -13,11 +13,11 @@ import { AssignedCoursesDataService } from '@rds-store/school/assigned-courses/a
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { AssignedCoursesService } from '@rds-school/school-courses/services/assigned-courses.service';
 import { AccountsService } from '../accounts/services/accounts.service';
 import { SchoolTeachersDataService } from '@rds-store/school/school-teachers/school-teacher-data.service';
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
-import { SchoolTeachersService } from './services/school-tearchers.service';
+import { SchoolTeachersService } from '../school/services/school-tearchers.service';
+import { AssignedCoursesService } from '@rds-school/services/assigned-courses.service';
 
 @NgModule({
   declarations: [...TEACHERS_COMPONENTS, ...TEACHERS_CONTAINERS],
@@ -25,8 +25,8 @@ import { SchoolTeachersService } from './services/school-tearchers.service';
   providers: [
     ScoreService,
     AccountsService,
-    SchoolTeachersService,
     AssignedCoursesService,
+    SchoolTeachersService,
     AssignedCoursesEntityService,
     AssignedCoursesDataService,
     AccountsDataService,

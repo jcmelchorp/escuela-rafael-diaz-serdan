@@ -1,0 +1,28 @@
+<div class="p-4">
+  <p><img mat-card-avatar src="https://mytcpip.com/wp-content/uploads/2019/06/nexusae0_icon2.png" /><img
+      class="img-google-logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png">
+    <span class="text-google-logo">&nbsp;Admin</span>
+  </p>
+  <p class="view-subtitle">Administración de dominio.</p>
+  <div class="p-2">
+
+
+
+
+
+    <!--  <mat-card-actions align="end">
+      <button mat-button [routerLink]="['users']" routerLinkActive="active">Todos los usuarios</button>
+      <button mat-button [routerLink]="['school-home']" routerLinkActive="active">Estudiantes</button>
+      <button mat-button [routerLink]="['groups']" routerLinkActive="active">Grupos</button>
+    </mat-card-actions> -->
+
+
+    <nav mat-tab-nav-bar [backgroundColor]="background" mat-align-tabs="center">
+      <a mat-tab-link [routerLink]="[link]" *ngFor="let link of links" (click)="activeLink = link"
+        [active]="activeLink == link"> {{link|titlecase}}
+      </a>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>

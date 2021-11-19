@@ -14,11 +14,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { User } from '@rds-auth/models/user.model';
-import { Assigment } from '../../../classroom/models/classroom.model';
-import { AssignedCourse } from '../../../school/school-courses/models/school-course.model';
-import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { ScoreListItem } from '@rds-profile/models/score.model';
+import { AssignedCourse } from '@rds-school/models/school-course.model';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 
 @Component({

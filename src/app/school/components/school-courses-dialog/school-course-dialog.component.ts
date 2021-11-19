@@ -1,0 +1,76 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { faTimes, faBook } from '@fortawesome/free-solid-svg-icons';
+import { User } from '@rds-auth/models/user.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CourseType, SchoolCourse, AssignedCourse, Cycle } from '../../models/school-course.model';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { SchoolLevel } from '@rds-auth/models/user.enum';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
+
+@Component({
+  templateUrl: './school-course-dialog.component.html',
+  styleUrls: ['./school-course-dialog.component.scss']
+})
+export class SchoolCourseDialogComponent {
+  teachers$: Observable<User[]>;
+  periods$: Observable<string[]>;
+  faTimes = faTimes;
+  faBook = faBook;
+
+  formData: FormGroup;
+  keys;
+  types = CourseType;
+  slevelKeys;
+  slevels = SchoolLevel;
+  cycleKeys;
+  cycles = Cycle
+  constructor(
+    private dialogRef: MatDialogRef<SchoolCourseDialogComponent>,
+    private schoolTeachersEntityService: SchoolTeachersEntityService,
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.keys = Object.keys(this.types);
+    this.cycleKeys = Object.keys(this.cycles);
+    this.slevelKeys = Object.keys(this.slevels);
+    this.teachers$ = this.schoolTeachersEntityService.entities$
+    this.formData = this.fb.group({
+      name: new FormControl(this.data.course.name, Validators.required),
+      grade: new FormControl(this.data.course.grade),
+      courseType: new FormControl(this.data.course.courseType),
+      cycleId: new FormControl(this.data.course.cycleId),
+      description: new FormControl(this.data.course.description),
+      teacherEmail: new FormControl(this.data.course.teacherEmail),
+      priority: new FormControl(this.data.course.priority),
+    });
+
+  }
+
+  resetData() {
+    this.formData.reset();
+  }
+  saveData() {
+    const course: Partial<AssignedCourse> = {
+      id: this.data.course.id,
+      name: this.formData.controls.name.value,
+      priority: this.data.course.priority,
+      cycleId: this.formData.controls.cycleId.value,
+      description: this.formData.controls.description.value,
+      courseType: this.formData.controls.courseType.value,
+      teacherEmail: this.formData.controls.teacherEmail.value,
+      grade: this.formData.controls.grade.value,
+    };
+    //!this.data.isNew ? course.id = this.data.course.id : null;
+    this.dialogRef.close({
+      course: course,
+      isNew: this.data.isNew,
+    });
+  }
+  close() {
+    this.dialogRef.close();
+  }
+
+}

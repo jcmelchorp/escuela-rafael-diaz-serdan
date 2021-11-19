@@ -8,7 +8,7 @@ import {
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-//import { UserDomain, UserInsert } from '@rds-admin/models/users-domain.model';
+//import { AccountsDomain, UserInsert } from '@rds-admin/models/users-domain.model';
 import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts-domain-entity.service';
 import { CourseLevel, SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';

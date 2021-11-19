@@ -15,10 +15,10 @@ import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
 import { selectUser } from '@rds-auth/state/auth.selectors';
 import { moveIn } from '@rds-shared/animations/router.animations';
-import { TeachersCoursesService } from '../../services/teachers-courses.service';
-import { AssignedCourse } from '../../../school/school-courses/models/school-course.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { AssignedCourse } from '@rds-school/models/school-course.model';
+import { SchoolTeachersService } from '@rds-school/services/school-tearchers.service';
 
 @Component({
   selector: 'app-admin-courses',
@@ -40,7 +40,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   periods$: Observable<string[]>;
   selectedCicle = '20202021';
   constructor(
-    private teachersCourses: TeachersCoursesService,
+    private teachersCoursesService: SchoolTeachersService,
     private assignedCoursesEntityService: AssignedCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
     private fb: FormBuilder,
@@ -88,7 +88,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   onSearch() {
     let cicle: string = this.cycle?.value as string;
-    this.searchedCourses$ = this.teachersCourses.getAllCourses().pipe(
+    /* this.searchedCourses$ = this.teachersCoursesService..pipe(
       map((courses) => {
         if (this.grade?.value == '' && this.teacherId?.value == '')
           return courses;
@@ -102,7 +102,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
           );
         return [];
       }),
-    );
+    ); */
   }
 
   ngOnDestroy(): void {

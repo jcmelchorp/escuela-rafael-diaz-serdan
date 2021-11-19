@@ -1,17 +1,16 @@
 import { Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { selectUser } from '@rds-auth/state/auth.selectors';
 import { User } from '@rds-auth/models/user.model';
 import { AppState } from '@rds-store/app.state';
 import { Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { moveInLeft } from '@rds-shared/animations/router.animations';
-import { AssignedCourse } from '@rds-school/school-courses/models/school-course.model';
 import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
-import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { SchoolTeachersEntityService } from '../../../store/school/school-teachers/school-teacher-entity.service';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
+import { AssignedCourse } from '@rds-school/models/school-course.model';
 
 
 @Component({

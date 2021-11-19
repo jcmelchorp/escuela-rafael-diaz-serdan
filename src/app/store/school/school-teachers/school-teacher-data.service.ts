@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { User } from '@rds-auth/models/user.model';
-import { SchoolTeachersService } from '@rds-teachers/services/school-tearchers.service';
+import { SchoolTeachersService } from '@rds-school/services/school-tearchers.service';
 
 import { from, Observable } from 'rxjs';
 

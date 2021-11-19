@@ -104,7 +104,7 @@ export class AccountsDomainService {
     return response.result;
   }
 
-  async getUserDomain(userId: string, domain?: string) {
+  async getAccountsDomain(userId: string, domain?: string) {
     const user = await gapi.client.directory.users
       .get({
         domain: domain || 'rafaeldiazserdan.net',

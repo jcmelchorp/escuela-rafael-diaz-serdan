@@ -6,9 +6,8 @@ import { TeachersComponent } from './containers';
 
 import { ScoresEditComponent } from './components/scores-edit/scores-edit.component';
 import { TeacherCoursesComponent } from './components/teacher-courses/teacher-courses.component';
-import { AssignedCoursesResolver } from '@rds-school/school-courses/resolvers/assigned-courses.resolver';
-import { SchoolTeachersResolver } from '@rds-school/school-courses/resolvers/school-teachers.resolver';
-
+import { AssignedCoursesResolver } from '@rds-school/resolvers/assigned-courses.resolver';
+import { SchoolTeachersResolver } from '@rds-school/resolvers/school-teachers.resolver';
 
 const routes: Routes = [
   {

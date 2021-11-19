@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
-import { AssignedCourse } from '@rds-school/school-courses/models/school-course.model';
-import { AssignedCoursesService } from '@rds-school/school-courses/services/assigned-courses.service';
+import { AssignedCourse } from '@rds-school/models/school-course.model';
+import { AssignedCoursesService } from '@rds-school/services/assigned-courses.service';
+
 import { Observable } from 'rxjs';
 import * as fromAssignedCourses from '.';
 

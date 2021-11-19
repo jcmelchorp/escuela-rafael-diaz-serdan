@@ -1,0 +1,63 @@
+<table mat-table>
+  <ng-container *ngFor="let column of columns; let i = index" matColumnDef="{{ column.field }}">
+    <th mat-header-cell *matHeaderCellDef>
+      <button mat-button [disabled]="!groupByColumns.includes(column.field)"
+        color="{{groupByColumns.includes(column.field)?'primary':'default'}}" (click)="groupByColumns.includes(column.field)
+            ? unGroupBy($event, column)
+            : groupBy($event, column)">
+        {{ column.label }}
+      </button>
+    </th>
+    <div [ngSwitch]="column.field">
+      <div *ngSwitchCase="'grade'">
+        <td mat-cell *matCellDef="let row">{{slevels[row[column.field]]}} </td>
+      </div>
+      <div *ngSwitchDefault>
+        <td mat-cell *matCellDef="let row">{{row[column.field]}}</td>
+      </div>
+    </div>
+  </ng-container>
+  <!--  Actions-->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let row">
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <mat-icon color="accent" mat-icon-button matTooltip="Modifica la información de esta clase"
+          (click)="editAssignedCourse(row)">
+          edit</mat-icon>
+        <mat-icon color="warn" mat-icon-button matTooltip="Elimina esta clase" (click)="deleteAssignedCourse(row)">
+          delete
+        </mat-icon>
+        <mat-icon *ngIf="!row.primaryEmail" mat-icon-button matTooltip="Asigna un profesor a esta clase"
+          (click)="openTeacherToCourse(row)">
+          co_present
+        </mat-icon>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="noData">
+    <tr mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
+      <h3> No se encontraron elementos</h3>
+    </tr>
+  </ng-container>
+
+  <th mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></th>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource.data.length > 0"
+    style="display: flex; justify-content: center; align-items: center;"></tr>
+  <!-- Group header -->
+  <ng-container matColumnDef="groupHeader">
+    <td mat-cell class="mat-h{{4-group.level}} border-bottom-0 px-{{group.level+3}}"
+      [attr.colspan]="displayedColumns.length" *matCellDef="let group">
+      <strong>{{ group.level===1?cycles[group[groupByColumns[group.level - 1]]]:[group[groupByColumns[group.level -
+        1]]]}} </strong>
+      ({{group.totalCounts}})
+      <mat-icon>{{
+        group.expanded ? "expand_more" : "chevron_right"
+        }}</mat-icon>
+    </td>
+  </ng-container>
+  <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isTableGroup" (click)="groupHeaderClick(row)">
+  </tr>
+</table>
