@@ -70,6 +70,7 @@ export class FirebaseV9Service<T> implements IFirebase<T> {
 
   getWithQuery(field: string, value: any): Observable<T[]> {
     const dbref = ref(this.rtdb, this.tCollection);
-    return listVal(dbref, { keyField: 'id' });
+    const queryRef = query_db(dbref, orderByChild(field), equalTo(value));
+    return listVal<T>(dbref, { keyField: 'id' }).pipe(take(1));
   }
 }

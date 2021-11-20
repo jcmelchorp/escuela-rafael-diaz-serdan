@@ -17,13 +17,13 @@ export class SchoolStudentsResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.schoolStudentsEntityService.loading$.pipe(
-      tap((loading) => {
-        if (!loading) {
+    return this.schoolStudentsEntityService.loaded$.pipe(
+      tap((loaded) => {
+        if (!loaded) {
           this.schoolStudentsEntityService.getWithQuery({ role: 'Alumnos' });
         }
       }),
-      filter((loading) => !!loading),
+      filter((loaded) => !!loaded),
       first()
     );
   }

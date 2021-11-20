@@ -37,14 +37,15 @@
         </button> -->
       </div>
     </h2>
+
+    <nav mat-tab-nav-bar mat-align-tabs="center">
+      <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive"
+        [active]="rla.isActive">
+        {{link.label}}
+      </a>
+    </nav>
+    <router-outlet></router-outlet>
   </div>
-  <nav mat-tab-nav-bar mat-align-tabs="center">
-    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive"
-      [active]="rla.isActive">
-      {{link.label}}
-    </a>
-  </nav>
-  <router-outlet></router-outlet>
   <!--  <mat-tab-group mat-align-tabs="center" dynamicHeight>
     <mat-tab label="Materias"
       *ngIf="(loaded$|async)&&!(loading$|async)&&(filteredCourses$|async) as filteredCourses;else spinner">

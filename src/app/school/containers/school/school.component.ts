@@ -7,7 +7,7 @@ import { fadeInAnimation } from '../../../shared/animations/fade-in.animation';
   selector: 'app-school',
   templateUrl: './school.component.html',
   styleUrls: ['./school.component.scss'],
-  animations: [fadeInAnimation], //[@fadeIn]="'fadeIn'"
+  //animations: [fadeInAnimation], //[@fadeIn]="'fadeIn'"
 })
 export class SchoolComponent implements OnInit {
 

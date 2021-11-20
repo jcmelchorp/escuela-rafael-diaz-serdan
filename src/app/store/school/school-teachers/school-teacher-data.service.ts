@@ -24,8 +24,11 @@ export class SchoolTeachersDataService extends DefaultDataService<User> {
     return this.schoolTeachersService.list();
   }
 
-  getWithQuery(queryParams: QueryParams): Observable<User[]> {
+  /* getWithQuery(queryParams: QueryParams): Observable<User[]> {
     return this.schoolTeachersService.getWithQuery(queryParams);
+  } */
+  getWithQuery(queryParams: QueryParams): Observable<User[]> {
+    return this.schoolTeachersService.getWithQuery(Object.keys(queryParams)[0], Object.values(queryParams)[0]);
   }
   getByKey(key: string): Observable<User> {
     return this.schoolTeachersService.getById(key);

@@ -83,14 +83,16 @@ export class SchoolStudentsTableComponent implements OnInit, AfterViewInit, OnDe
     this.loading$ = this.schoolStudentsEntityService.loading$;
     this.loaded$ = this.schoolStudentsEntityService.loaded$;
     this.students$ = this.schoolStudentsEntityService.entities$;
-    this.filteredStudents$ = this.schoolStudentsEntityService.filteredEntities$.pipe(map(courses => this.students = courses));
+    this.filteredStudents$ = this.schoolStudentsEntityService.filteredEntities$.pipe(map(courses => {
+      this.dataSource.data = this.addTableGroups(this.students, this.groupByColumns);
+      this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+      this.dataSource.filter = performance.now().toString();
+      return courses;
+    }));
   }
 
   ngOnInit() {
-    this.dataSource.data = this.addTableGroups(this.students, this.groupByColumns);
-    this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
-    this.dataSource.filter = performance.now().toString();
-    this.isLoading = false;
+
   }
 
   ngAfterViewInit() {

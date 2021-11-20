@@ -76,7 +76,7 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.schoolCourses$.pipe(map(
+    this.schoolCourses$.subscribe(
       (courses) => {
         this.schoolCourses = courses;
         this.dataSource.data = this.addTableGroups(this.schoolCourses, this.groupByColumns);
@@ -84,7 +84,7 @@ export class SchoolCoursesTableComponent implements OnInit, AfterViewInit {
         this.dataSource.filter = performance.now().toString();
       },
       (err: any) => console.log(err)
-    ));
+    );
 
   }
 

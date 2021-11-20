@@ -62,32 +62,9 @@
         No se encontraron elementos
       </tr>
     </ng-container>
-    <!-- Expanded Content Column - The detail row is made up of this one column -->
-    <!--  <ng-container matColumnDef="expandedDetail">
-    <mat-cell *matCellDef="let detail">
-      The symbol for {{detail.element.name}} is {{detail.element.symbol}}
-    </mat-cell>
-  </ng-container> -->
-    <!--  <ng-container matColumnDef="loading">
-    <tfoot mat-footer-cell *matFooterCellDef [attr.colspan]="displayedColumns.length">
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <mat-progress-spinner color="primary" mode="indeterminate">
-        </mat-progress-spinner>
-      </div>
-    </tfoot>
-  </ng-container> -->
-
-    <!--
-  <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
-    [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
-  <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
-    [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden">
-  </mat-row> -->
     <th mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></th>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     <tr mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource.data.length > 0"></tr>
-    <!-- <tr mat-footer-row *matFooterRowDef="['loading']" [hidden]="dataSource !== undefined"></tr> -->
-    <!-- Group header -->
     <ng-container matColumnDef="groupHeader">
       <td mat-cell class="mat-h{{4-group.level}} border-bottom-0 px-{{group.level+3}}"
         [attr.colspan]="displayedColumns.length" *matCellDef="let group">

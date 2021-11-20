@@ -22,12 +22,12 @@ export class AccountsDataService extends DefaultDataService<User> {
     return this.accountsService.list();
   }
 
-  getWithQuery(value: any): Observable<User[]> {
-    return this.accountsService.getWithQuery('role', value);
-  }
-  /*  getWithQuery(queryParams: QueryParams): Observable<User[]> {
-     return this.accountsService.getWithQuery(queryParams);
+  /*  getWithQuery(value: any): Observable<User[]> {
+     return this.accountsService.getWithQuery('role', value);
    } */
+  getWithQuery(queryParams: QueryParams): Observable<User[]> {
+    return this.accountsService.getWithQuery(Object.keys(queryParams)[0], Object.values(queryParams)[0]);
+  }
   getByKey(userId: string): Observable<User> {
     return this.getById(userId)
   }
