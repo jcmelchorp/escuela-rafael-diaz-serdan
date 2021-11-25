@@ -1,7 +1,9 @@
 import { Component, Directive, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSelectionList } from "@angular/material/list";
-import { AssignedCourse } from "@rds-school/models/school-course.model";
+import { ChangeSet, ChangeSetItem, ChangeSetOperation, EntityCacheDispatcher } from "@ngrx/data";
+import { SchoolCourse } from "@rds-school/models/school-course.model";
+import { SchoolCoursesEntityService } from "@rds-store/school/school-courses/school-courses-entity.service";
 import * as XLSX from 'xlsx';
 @Component({
   styleUrls: ['upload-file-dialog.component.scss'],
@@ -9,10 +11,12 @@ import * as XLSX from 'xlsx';
 
 })
 export class UploadFileDialogComponent {
+  importing: boolean = false;
   @ViewChild('selectedCourses') selectedCourses: MatSelectionList;
   constructor(
     private dialogRef: MatDialogRef<UploadFileDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { output: AssignedCourse[] }
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
+    @Inject(MAT_DIALOG_DATA) public data: { output: any[] }
   ) {
 
   }
@@ -35,17 +39,17 @@ export class UploadFileDialogComponent {
       const outputArray = XLSX.utils.sheet_to_json(ws, { header: 1 });
       outputArray.forEach((row, i) => {
         if (i > 0) {
-          const course: Partial<AssignedCourse> = {
+          const course: Partial<SchoolCourse> = {
             priority: row[1],
             grade: row[2],
             name: row[0],
             courseType: row[3],
             description: row[4],
-            cycleId: row[5],
+            cycle: row[5],
             teacherEmail: row[6],
-            studentsEmails: []
+
           };
-          this.data.output.push(course as AssignedCourse);
+          this.data.output.push({ ...course as SchoolCourse, isImported: false });
         }
       });
     };
@@ -55,10 +59,26 @@ export class UploadFileDialogComponent {
   selectAll() {
     this.selectedCourses.selectAll();
   }
-  saveData() {
+  import() {
+    const courses = this.selectedCourses.selectedOptions.selected.map(item => item.value);
+    this.importing = true;
 
-    this.dialogRef.close(this.data);
+    this.data.output.forEach(async (course: SchoolCourse, i: number) => {
+      await this.schoolCoursesEntityService.add({
+        cycle: course.cycle,
+        name: course.name,
+        description: course.description,
+        courseType: course.courseType,
+        teacherEmail: course.teacherEmail,
+        grade: course.grade,
+        priority: course.priority,
+      } as SchoolCourse).toPromise().then(
+        () => { this.data.output[i].isImported = true },
+        () => { this.data.output[i].isImported = false }
+      );
 
+    });
+    this.importing = false;
   }
   close() {
     this.dialogRef.close();

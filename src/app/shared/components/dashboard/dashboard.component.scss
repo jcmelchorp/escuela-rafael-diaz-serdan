@@ -9,3 +9,11 @@
   //border: 1px solid gray;
   box-shadow: none;
 }
+.school-background {
+  width: fit-content;
+  height: 150px;
+  max-height: 300px;
+  background: url("/assets/images/rds-draw01.svg") no-repeat;
+  background-position: bottom;
+  //background-size: cover;
+}

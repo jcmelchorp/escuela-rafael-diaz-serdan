@@ -10,14 +10,14 @@ import { isAdmin, isOnline, isTeacher } from '@rds-auth/state/auth.selectors';
 import { RouterCard } from '@rds-shared/models/router-card.model';
 import { AppState } from '@rds-store/app.state';
 import { Observable } from 'rxjs';
-import { flyInOut } from '../../animations/fade-in.animation';
-import { User } from '../../../auth/models/user.model';
+import { flyInOut, heightReveal } from '../../animations/fade-in.animation';
+import { User } from '@rds-auth/models/user.model';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [flyInOut], //[@fadeIn]="'fadeIn'"
+  animations: [heightReveal], //[@fadeIn]="'fadeIn'"
 })
 export class DashboardComponent {
   @Input()

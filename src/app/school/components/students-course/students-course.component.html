@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label>Select Website</mat-label>
+  <mat-select multiple>
+    <mat-option *ngFor="let student of students$|async" [value]="student.primaryEmail">
+      {{student.name.fullName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

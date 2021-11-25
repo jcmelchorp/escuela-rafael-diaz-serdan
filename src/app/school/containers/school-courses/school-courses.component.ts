@@ -1,12 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { moveIn } from '@rds-shared/animations/router.animations';
-import { AssignedCourse } from '../../models/school-course.model';
+import { Cycle, SchoolCourse } from '../../models/school-course.model';
 import { SchoolCourseDialogComponent } from '../../components/school-courses-dialog/school-course-dialog.component';
-import { UploadFileDialogComponent } from '@rds-shared/components/upload-file-dialog/upload-file-dialog.component';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { UploadFileDialogComponent } from '@rds-school/components/upload-file-dialog/upload-file-dialog.component';
 
 import { Router } from '@angular/router';
+import { SchoolStudentsEntityService } from '@rds-store/school/school-students/school-students-entity.service';
+import { map, mergeMap, switchMap, concatMap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -18,40 +21,53 @@ export class SchoolCoursesComponent implements OnInit {
   willDownload = false;
   activeLinkIndex = -1;
   navLinks: any[];
-
+  studentsEmails$: Observable<string[]>;
+  courses$: Observable<SchoolCourse[]>;
+  subscript: Subscription;
+  cycles = Cycle;
   constructor(
     private router: Router,
-    private assignedCoursesEntityService: AssignedCoursesEntityService,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolStudentsEntityService: SchoolStudentsEntityService,
     private dialog: MatDialog
   ) {
     this.navLinks = [
       {
         label: 'Materias',
-        link: 'c',
+        route: ['m'],
         index: 0
       }, {
         label: 'Alumnos',
-        link: 'a',
+        route: ['a'],
         index: 1
       }
     ];
   }
 
   ngOnInit() {
-    this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
-    });
-  }
 
-  editCourse(course: AssignedCourse) {
+  }
+  populateCourses() {
+    this.schoolStudentsEntityService.entities$.pipe(
+      map(users => users.filter(user => user.role === ('Alumnos' || 'alumnos') && user.suspended === false)),
+      mergeMap(users => this.schoolCoursesEntityService.entities$.pipe(
+        map(courses => courses.filter(c => c.cycle == this.cycles.CE20212022).map(course => {
+          const studentsEmails = users.filter(u => u.grade === course.grade).map(u => u.primaryEmail);
+          return { ...course, studentsEmails: studentsEmails } as SchoolCourse;
+        }))
+      )),
+
+    ).subscribe(courses => courses.forEach(course => /* console.log(course) */this.schoolCoursesEntityService.update(course))).unsubscribe()
+  }
+  editCourse(course: SchoolCourse) {
     console.log(course)
-    this.assignedCoursesEntityService.update(course);
+    this.schoolCoursesEntityService.update(course);
   }
 
 
-  openSchoolCourseDialog(course?: AssignedCourse) {
+  openSchoolCourseDialog(course?: SchoolCourse) {
     let coursesInGrade: number;
-    const newCourse: Partial<AssignedCourse> = {};
+    const newCourse: Partial<SchoolCourse> = {};
     const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
       width: 'fit-content',
       height: 'fit-content',
@@ -62,7 +78,7 @@ export class SchoolCoursesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.isNew) {
-          this.assignedCoursesEntityService.add(result.course);
+          this.schoolCoursesEntityService.add(result.course);
         } else {
           this.editCourse(result.course);
         }
@@ -70,6 +86,10 @@ export class SchoolCoursesComponent implements OnInit {
         console.log('Dialog closed without changes')
       }
     });
+  }
+
+  saveFile() {
+
   }
 
   loadFile() {
@@ -82,9 +102,7 @@ export class SchoolCoursesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log(result)
-        result.output.forEach((x) => {
-          this.assignedCoursesEntityService.add(x);
-        });
+
       } else {
         console.log('Dialog closed without changes')
       }
@@ -92,7 +110,7 @@ export class SchoolCoursesComponent implements OnInit {
   }
 
   handleCourseDelete(id: string) {
-    this.assignedCoursesEntityService.delete(id);
+    this.schoolCoursesEntityService.delete(id);
   }
 
 }

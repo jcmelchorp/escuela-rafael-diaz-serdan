@@ -15,8 +15,8 @@ export class ToastrStoreService {
       ofEntityOp(),
       filter(
         (ea: EntityAction) =>
-          (ea.payload.entityOp.endsWith(OP_SUCCESS) && !ea.payload.entityOp.includes('query'))
-      ),
+        (ea.payload.entityOp.endsWith(OP_SUCCESS) && !ea.payload.entityOp.includes('query') && !ea.payload.entityName.includes('SchoolCourse')
+        ))
     )
       // this service never dies so no need to unsubscribe
       .subscribe(action =>

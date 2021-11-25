@@ -8,8 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { Observable } from 'rxjs';
-import { StudentsCourses } from '../../models/students-courses.model';
-import { AssignedCourse } from '@rds-school/models/school-course.model';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
 
 @Component({
   templateUrl: './add-students-courses.component.html',
@@ -28,7 +27,6 @@ export class AddStudentsCoursesComponent implements OnInit {
   filteredStudents: Observable<User[]>;
   filterValues: FormGroup;
   filteredEntities$: Observable<User[]>;
-  studentsCourses: StudentsCourses;
   studentsStr: string[] = [];
   students: User[] = [];
   constructor(
@@ -127,7 +125,7 @@ export class AddStudentsCoursesComponent implements OnInit {
     this.filterValues.controls['fullName'].setValue(null);
   }
   saveData() {
-    const course: Partial<AssignedCourse> = {
+    const course: Partial<SchoolCourse> = {
       ...this.data.course,
       students: this.studentsStr,
     };

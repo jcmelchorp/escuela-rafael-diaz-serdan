@@ -4,23 +4,23 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 
 
 import { Observable } from 'rxjs';
 import { filter, tap, first } from 'rxjs/operators';
 
 @Injectable()
-export class AssignedCoursesResolver implements Resolve<boolean> {
-  constructor(private assignedCoursesEntityService: AssignedCoursesEntityService) { }
+export class SchoolCoursesResolver implements Resolve<boolean> {
+  constructor(private schoolCoursesEntityService: SchoolCoursesEntityService) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.assignedCoursesEntityService.loaded$.pipe(
+    return this.schoolCoursesEntityService.loaded$.pipe(
       tap((loaded) => {
         if (!loaded) {
-          this.assignedCoursesEntityService.getAll();
+          this.schoolCoursesEntityService.getAll();
         }
       }),
       filter((loaded) => !!loaded),

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
 import { User } from '@rds-auth/models/user.model';
 import { Database } from '@angular/fire/database';
 import { Firestore } from '@angular/fire/firestore';
-import { FirebaseV9Service } from '../../shared/generic/firebase-v9.service';
+import { FirebaseV9Service } from '@rds-shared/generic/firebase-v9.service';
 @Injectable()
 /** AccountsService
  *  Service to manage user accounts in CRUD operations on Firestore

@@ -7,24 +7,24 @@ import { User } from '@rds-auth/models/user.model';
 import * as fromAccount from '@rds-store/accounts';
 import * as fromAccountDomain from '@rds-store/accounts-domain';
 import * as fromSchoolCourses from '@rds-store/school/school-courses';
+import * as fromSchoolClassrooms from '@rds-store/school/school-classrooms';
 import * as fromSchoolTeachers from '@rds-store/school/school-teachers';
 import * as fromSchoolStudents from '@rds-store/school/school-students';
 import * as fromAnnouncement from '@rds-store/classroom/announcement';
 import * as fromCourse from '@rds-store/classroom/course';
 import * as fromCourseWork from '@rds-store/classroom/course-work';
-import * as fromAssignedCourses from '@rds-store/school/assigned-courses';
 import * as fromGuardian from '@rds-store/classroom/guardian';
 import * as fromScores from '@rds-store/scores';
 import * as fromStudent from '@rds-store/classroom/student';
 import * as fromTeacher from '@rds-store/classroom/teacher';
 import * as fromTopic from '@rds-store/classroom/topic';
 import * as fromUserProfile from '@rds-store/classroom/user-profile';
-//import * as fromGroup from '@rds-admin/state/group';
 import * as fromStudentSubmission from '@rds-store/classroom/student-submission';
 
 import { AccountDomain } from '@rds-accounts/models/account-domain.model';
 import { Score } from '@rds-profile/models/score.model';
-import { AssignedCourse, SchoolCourse } from '@rds-school/models/school-course.model';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
+import { SchoolClassroom } from '../../school/models/school-course.model';
 
 
 export const entityMetadata: EntityMetadataMap = {
@@ -69,7 +69,7 @@ export const entityMetadata: EntityMetadataMap = {
         .filter((e) => (name ? e.name === name : true))
         .filter((e) => (grade ? e.grade === grade : true))
         .filter((e) => (description ? e.description === description : true)),
-    selectId: (schoolCourse: SchoolCourse) => schoolCourse.id,
+    selectId: (SchoolCourse: SchoolCourse) => SchoolCourse.id,
     entityDispatcherOptions: {
       optimisticAdd: false,
       optimisticUpdate: false,
@@ -78,20 +78,13 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticUpsert: false,
     },
   },
-  [fromAssignedCourses.entityCollectionName]: {
-    filterFn: (entities: AssignedCourse[], { name, grade, description }: Partial<AssignedCourse>) =>
-      entities
-        .filter((e) => (name ? e.name === name : true))
-        .filter((e) => (grade ? e.grade === grade : true))
-        .filter((e) => (description ? e.description === description : true)),
-    selectId: (assignedCourse: AssignedCourse) => assignedCourse.id,
+  [fromSchoolClassrooms.entityCollectionName]: {
     entityDispatcherOptions: {
       optimisticAdd: false,
       optimisticUpdate: false,
       optimisticSaveEntities: false,
-      optimisticDelete: false,
-      optimisticUpsert: false,
     },
+    selectId: (schoolClassroom: SchoolClassroom) => schoolClassroom.id,
   },
   [fromScores.entityCollectionName]: {
     entityDispatcherOptions: {
@@ -117,6 +110,7 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromSchoolStudents.entityCollectionName]: {
+
     filterFn: (entities: User[], { name, primaryEmail, curp }: Partial<User>) =>
       entities
         .filter((e) =>
@@ -210,7 +204,7 @@ const pluralNames = {
   [fromSchoolCourses.entityCollectionName]: fromSchoolCourses.pluralizedEntityName,
   [fromSchoolTeachers.entityCollectionName]: fromSchoolTeachers.pluralizedEntityName,
   [fromSchoolStudents.entityCollectionName]: fromSchoolStudents.pluralizedEntityName,
-  [fromAssignedCourses.entityCollectionName]: fromAssignedCourses.pluralizedEntityName,
+  [fromSchoolClassrooms.entityCollectionName]: fromSchoolClassrooms.pluralizedEntityName,
   [fromScores.entityCollectionName]: fromScores.pluralizedEntityName,
   [fromCourse.entityCollectionName]: fromCourse.pluralizedEntityName,
   [fromStudent.entityCollectionName]: fromStudent.pluralizedEntityName,

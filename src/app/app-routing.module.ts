@@ -11,9 +11,12 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    data: { breadcrumb: 'Home' },
+    data: { breadcrumb: 'Inicio' },
     children: [
-      { path: '', component: HomeComponent, data: { breadcrumb: null } },
+      {
+        path: '', component: HomeComponent,
+        data: { breadcrumb: '' },
+      },
       {
         path: 'i', loadChildren: () => import('./information/information.module').then(
           m => m.InformationModule),
@@ -28,6 +31,7 @@ const routes: Routes = [
         path: 'e',
         loadChildren: () => import('@rds-school/school.module').then(
           m => m.SchoolModule),
+        data: { breadcrumb: '' },
         canActivate: [AdminGuard],
       },
       {

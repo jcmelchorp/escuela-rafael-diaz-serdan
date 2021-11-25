@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
@@ -28,9 +27,8 @@ import { Cycle } from '@rds-school/models/school-course.model';
   ],
 })
 
-export class SchoolStudentsTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | TableGroup>>;
-  @ViewChild(MatSort) sort!: MatSort;
+export class SchoolStudentsTableComponent implements OnInit/* , AfterViewInit, OnDestroy  */ {
+  @ViewChild(MatSort) sort: MatSort;
   @Output() onClickEdit = new EventEmitter<User>();
   @Output() onClickDelete = new EventEmitter<string>();
   @Output() onClickStudents = new EventEmitter<User>();
@@ -42,12 +40,10 @@ export class SchoolStudentsTableComponent implements OnInit, AfterViewInit, OnDe
   filterValues: FormGroup;
   gradeKeys;
   grades = SchoolLevel;
-  students: User[];
-  studentsSubscription: Subscription;
-  slevels = SchoolLevel;
+  students: any[];
   dataSource = new MatTableDataSource<any | TableGroup>([]);
   //_alldata: any[];
-  columns: any[];
+  columnsToDisplay: any[];
   displayedColumns: string[];
   groupByColumns: string[] = [];
   isLoading: boolean;
@@ -58,11 +54,25 @@ export class SchoolStudentsTableComponent implements OnInit, AfterViewInit, OnDe
     private schoolStudentsEntityService: SchoolStudentsEntityService,
     private dialog: MatDialog
   ) {
-    this.columns = [
-      /* { field: 'priority', label: '' }, */
-      { field: 'grade', label: 'Grado' },
-      { field: 'displayName', label: 'Nombre' },
-      { field: 'primaryEmail', label: 'Usuario' },
+    this.gradeKeys = Object.keys(this.grades);
+
+    this.columnsToDisplay = [
+      {
+        propertyName: 'role',
+        headerText: 'Rol',
+      },
+      {
+        propertyName: 'grade',
+        headerText: 'Grado',
+      },
+      {
+        propertyName: 'givenName',
+        headerText: 'Nombre(s)',
+      },
+      {
+        propertyName: 'familyName',
+        headerText: 'Apellido(s)',
+      },
     ];
     this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
@@ -78,42 +88,44 @@ export class SchoolStudentsTableComponent implements OnInit, AfterViewInit, OnDe
         : delete changes.name;
       return this.schoolStudentsEntityService.setFilter(changes);
     });
-    this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
+    this.displayedColumns = [...this.columnsToDisplay.map((column) => column.propertyName), 'actions'];
     this.groupByColumns = ['grade'];
     this.loading$ = this.schoolStudentsEntityService.loading$;
     this.loaded$ = this.schoolStudentsEntityService.loaded$;
     this.students$ = this.schoolStudentsEntityService.entities$;
-    this.filteredStudents$ = this.schoolStudentsEntityService.filteredEntities$.pipe(map(courses => {
+    this.filteredStudents$ = this.schoolStudentsEntityService.filteredEntities$.pipe(map(students => {
+      this.students = students;
       this.dataSource.data = this.addTableGroups(this.students, this.groupByColumns);
       this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
       this.dataSource.filter = performance.now().toString();
-      return courses;
+      return students;
     }));
   }
 
   ngOnInit() {
 
+
   }
 
-  ngAfterViewInit() {
+  /* ngAfterViewInit() {
     this.table.dataSource = this.dataSource;
   }
   ngOnDestroy(): void {
-    this.studentsSubscription.unsubscribe();
+    //this.studentsSubscription.unsubscribe();
 
-  }
+  } */
   groupBy(event, column) {
-    this.isLoading = false;
+    //this.isLoading = false;
     event.stopPropagation();
-    this.checkTableGroupByColumn(column.field, true);
+    this.checkTableGroupByColumn(column.propertyName, true);
     this.dataSource.data = this.addTableGroups(this.students, this.groupByColumns)
     this.dataSource.filter = performance.now().toString();
   }
 
-  checkTableGroupByColumn(field, add) {
+  checkTableGroupByColumn(propertyName, add) {
     let found = null;
     for (const column of this.groupByColumns) {
-      if (column === field) {
+      if (column === propertyName) {
         found = this.groupByColumns.indexOf(column, 0);
       }
     }
@@ -123,14 +135,13 @@ export class SchoolStudentsTableComponent implements OnInit, AfterViewInit, OnDe
       }
     } else {
       if (add) {
-        this.groupByColumns.push(field);
+        this.groupByColumns.push(propertyName);
       }
     }
   }
   unTableGroupBy(event, column) {
-    ;
     event.stopPropagation();
-    this.checkTableGroupByColumn(column.field, false);
+    this.checkTableGroupByColumn(column.propertyName, false);
     this.dataSource.data = this.addTableGroups(this.students, this.groupByColumns);
     this.dataSource.filter = performance.now().toString();
   }

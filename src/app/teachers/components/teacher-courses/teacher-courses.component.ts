@@ -8,9 +8,9 @@ import { AppState } from '@rds-store/app.state';
 import { Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { moveInLeft } from '@rds-shared/animations/router.animations';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
-import { AssignedCourse } from '@rds-school/models/school-course.model';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ import { AssignedCourse } from '@rds-school/models/school-course.model';
   animations: [moveInLeft()],
 })
 export class TeacherCoursesComponent implements OnInit {
-  courses$!: Observable<AssignedCourse[]>;
+  courses$!: Observable<SchoolCourse[]>;
   isAdmin$!: Observable<boolean>;
   currentTeacher!: User;
   teachers$: Observable<User[]>;
@@ -31,10 +31,10 @@ export class TeacherCoursesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
-    private assignedCoursesEntityService: AssignedCoursesEntityService,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
     private schoolTeachersEntityService: SchoolTeachersEntityService
   ) {
-    this.loading_courses$ = this.assignedCoursesEntityService.loading$;
+    this.loading_courses$ = this.schoolCoursesEntityService.loading$;
     this.initSearchForm();
     this.teacherSubscription = this.store
       .select(selectUser)
@@ -62,10 +62,10 @@ export class TeacherCoursesComponent implements OnInit {
   onSearch() {
     let name: string = this.searchString.value.toLocaleLowerCase();
     let teacherEmail: string = this.teacherEmail.value;
-    this.courses$ = this.assignedCoursesEntityService.entities$.pipe(
+    this.courses$ = this.schoolCoursesEntityService.entities$.pipe(
       map((courses) => {
         if (!courses) {
-          this.assignedCoursesEntityService.getWithQuery({
+          this.schoolCoursesEntityService.getWithQuery({
             field: 'teacherId',
             operation: '==',
             value: teacherEmail,

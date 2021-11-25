@@ -27,7 +27,7 @@
 <ng-content #progressBar></ng-content>
 <mat-menu #userMenu="matMenu" fxLayoutAlign="right">
   <ng-template matMenuContent>
-    <div mat-list-item *ngIf="isOnline && user" [routerLink]="['i','perfil']">
+    <div mat-list-item *ngIf="isOnline && user" [routerLink]="['p']">
       <app-user-card [isOnline]="isOnline" [isAdmin]="isAdmin" [user]="user"> </app-user-card>
     </div>
     <div mat-menu-item *ngIf="isOnline" [routerLink]="['config']">
@@ -65,6 +65,5 @@
   <ng-template matMenuContent>
     <div mat-menu-item [routerLink]="['i','remote-learning']" routerLinkActive="active">Educación a distancia</div>
     <div mat-menu-item [routerLink]="['i','reopenning']" routerLinkActive="active">Reapertura</div>
-
   </ng-template>
 </mat-menu>

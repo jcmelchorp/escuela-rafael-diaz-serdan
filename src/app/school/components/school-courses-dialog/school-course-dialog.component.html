@@ -1,5 +1,5 @@
-<div matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
-  <h2 class="color-rds">{{(data.isNew) ? 'Crea' : 'Modifica'}} una materia</h2>
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>{{(data.isNew) ? 'Crea' : 'Modifica'}} una materia</h2>
   <mat-icon matDialogClose mat-icon-button>close</mat-icon>
 </div>
 <form [formGroup]="formData" (ngSubmit)="saveData()">
@@ -28,7 +28,7 @@
     <div class="d-block" fxLayoutGap="30px">
       <mat-form-field appearance="outline">
         <mat-label>Ciclo escolar</mat-label>
-        <mat-select formControlName="cycleId" placeholder="Ciclo escolar">
+        <mat-select formControlName="cycle" placeholder="Ciclo escolar">
           <mat-option *ngFor="let cycle of cycleKeys" [value]="cycle">
             {{cycles[cycle]}}
           </mat-option>

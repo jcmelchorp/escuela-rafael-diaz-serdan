@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { FirestoreV9Service } from '@rds-shared/generic/firestore-v9.service';
 import { SchoolCourse } from '../models/school-course.model';
-import * as fromSchoolCourses from '@rds-store/school/assigned-courses';
+import * as fromSchoolCourses from '@rds-store/school/school-courses';
 @Injectable()
 /** SchoolCoursesService
  *  Service to manage school courses by CRUD operations on Firestore

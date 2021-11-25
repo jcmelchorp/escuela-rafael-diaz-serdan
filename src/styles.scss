@@ -4,22 +4,26 @@
 html,
 body {
   height: 100%;
-  background-color: #ffffff;
 }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
 .view-title {
   color: colors.$rds-logo-color;
   font-size: calc(1rem + 1.8vw);
   font-family: "fredoka one", cursive;
   text-shadow: -2px -1px 1px colors.$text-shadow-color;
+  background-image: none;
+  background-color: transparent;
 }
 .view-subtitle {
   font-family: "comfortaa";
   font-size: calc(0.5rem + 1vw);
   font-weight: 400;
+  background-image: none;
+  background-color: transparent;
 }
 .display-4-responsive {
   color: colors.$rds-logo-color;
@@ -79,10 +83,10 @@ body {
   height: auto;
 }
 .mcard-title {
-  color: colors.$william-color;
+  color: colors.$rds-logo-color;
   font-size: calc(1rem + 1vw);
   font-weight: 700;
-  font-family: "comfortaa", cursive;
+  font-family: "Fredoka One", cursive;
 }
 .app-name {
   color: colors.$rds-logo-color;
@@ -92,7 +96,7 @@ body {
   display: none;
 }
 .active {
-  color: colors.$rds-logo-color;
+  color: colors.$primary-color;
 }
 
 .text-wrap-right {

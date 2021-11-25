@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewAccountComponent, NewAccountConfirmComponent } from '@rds-accounts/components';
 import { User } from '@rds-auth/models/user.model';
-import { fadeInAnimation } from '../../../shared/animations/fade-in.animation';
+import { fadeInAnimation, heightReveal } from '@rds-shared/animations/fade-in.animation';
 @Component({
   selector: 'app-school',
   templateUrl: './school.component.html',
   styleUrls: ['./school.component.scss'],
-  //animations: [fadeInAnimation], //[@fadeIn]="'fadeIn'"
+  animations: [heightReveal], //[@fadeIn]="'fadeIn'"
 })
 export class SchoolComponent implements OnInit {
 

@@ -2,9 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { Observable } from 'rxjs';
-import { StudentsCourses } from '../../models/students-courses.model';
 import { ActivatedRoute } from '@angular/router';
-import { AssignedCourse } from '../../models/school-course.model';
+import { SchoolCourse, StudentsCourses } from '../../models/school-course.model';
 
 @Component({
   selector: 'app-students-courses',
@@ -12,12 +11,12 @@ import { AssignedCourse } from '../../models/school-course.model';
   styleUrls: ['./students-courses.component.scss']
 })
 export class StudentsCoursesComponent {
-  @Input() dataArray: AssignedCourse[];
+  @Input() dataArray: SchoolCourse[];
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   filterValues: FormGroup;
-  schoolCourses$: Observable<StudentsCourses[]>;
-  filteredEntities$: Observable<StudentsCourses[]>;
+  schoolCourses$: Observable<SchoolCourse[]>;
+  filteredEntities$: Observable<SchoolCourse[]>;
   resCount$: Observable<number>;
   gradeKeys;
   grades = SchoolLevel;

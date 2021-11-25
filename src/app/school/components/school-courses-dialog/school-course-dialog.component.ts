@@ -5,7 +5,7 @@ import { faTimes, faBook } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@rds-auth/models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CourseType, SchoolCourse, AssignedCourse, Cycle } from '../../models/school-course.model';
+import { CourseType, SchoolCourse, Cycle } from '../../models/school-course.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
@@ -41,7 +41,7 @@ export class SchoolCourseDialogComponent {
       name: new FormControl(this.data.course.name, Validators.required),
       grade: new FormControl(this.data.course.grade),
       courseType: new FormControl(this.data.course.courseType),
-      cycleId: new FormControl(this.data.course.cycleId),
+      cycle: new FormControl(this.data.course.cycle),
       description: new FormControl(this.data.course.description),
       teacherEmail: new FormControl(this.data.course.teacherEmail),
       priority: new FormControl(this.data.course.priority),
@@ -53,11 +53,11 @@ export class SchoolCourseDialogComponent {
     this.formData.reset();
   }
   saveData() {
-    const course: Partial<AssignedCourse> = {
+    const course: Partial<SchoolCourse> = {
       id: this.data.course.id,
       name: this.formData.controls.name.value,
       priority: this.data.course.priority,
-      cycleId: this.formData.controls.cycleId.value,
+      cycle: this.formData.controls.cycle.value,
       description: this.formData.controls.description.value,
       courseType: this.formData.controls.courseType.value,
       teacherEmail: this.formData.controls.teacherEmail.value,

@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Score } from '@rds-user/models/grade.model';
+import { Score } from '@rds-profile/models/score.model';
 export class AssignGrade {
   userId!: string;
   score!: Score;

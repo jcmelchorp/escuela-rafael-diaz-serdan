@@ -16,8 +16,8 @@ import { User } from '@rds-auth/models/user.model';
 import { selectUser } from '@rds-auth/state/auth.selectors';
 import { moveIn } from '@rds-shared/animations/router.animations';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
-import { AssignedCourse } from '@rds-school/models/school-course.model';
+import { SchoolCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
 import { SchoolTeachersService } from '@rds-school/services/school-tearchers.service';
 
 @Component({
@@ -27,8 +27,8 @@ import { SchoolTeachersService } from '@rds-school/services/school-tearchers.ser
   animations: [moveIn()],
 })
 export class AdminCoursesComponent implements OnInit, OnDestroy {
-  courses$!: Observable<AssignedCourse[]>;
-  searchedCourses$!: Observable<AssignedCourse[]>;
+  courses$!: Observable<SchoolCourse[]>;
+  searchedCourses$!: Observable<SchoolCourse[]>;
   teachers$: Observable<User[]>;
   loading$!: Observable<boolean>;
   loaded$!: Observable<boolean>;
@@ -41,7 +41,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   selectedCicle = '20202021';
   constructor(
     private teachersCoursesService: SchoolTeachersService,
-    private assignedCoursesEntityService: AssignedCoursesEntityService,
+    private SchoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
     private fb: FormBuilder,
     private store: Store<AppState>
@@ -70,7 +70,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     let cycle: string = this.cycle?.value as string;
-    this.courses$ = this.assignedCoursesEntityService.entities$
+    this.courses$ = this.SchoolCoursesEntityService.entities$
     this.searchedCourses$ = this.courses$;
   }
   initSearchForm() {

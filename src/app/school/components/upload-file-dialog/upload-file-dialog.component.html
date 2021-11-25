@@ -1,0 +1,31 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>Cargar archivo</h2>
+  <mat-icon matDialogClose mat-icon-button>cancel</mat-icon>
+</div>
+
+<mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <input type="file" (change)="onFileChange($event)" multiple="true" />
+    <button mat-button *ngIf="data.output.length>0" (click)="selectAll()">Seleccionar todos</button>
+  </div>
+
+  <mat-selection-list #selectedCourses>
+    <mat-list-option *ngFor="let dato of data.output;">
+      <div mat-line>{{dato.priority}}. {{dato.name}} - {{dato.grade}}</div>
+      <mat-icon class="text-{{dato.isImported?'success':'primary'}}" matListIcon>{{dato.isImported?'verified':'update'}}
+      </mat-icon>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button *ngIf="data" mat-stroked-button color="accent" type="reset" (click)="resetData()">Limpiar</button>
+  <button *ngIf="!data" mat-stroked-button color="warn" matDialogClose>Cancelar</button>
+  <button [disabled]="importing" *ngIf="selectedCourses.selectedOptions.selected.length>0" mat-raised-button
+    color="primary" (click)="import()"><span>Importar
+      ({{selectedCourses.selectedOptions.selected.length}})</span>
+  </button>
+  <button *ngIf="!importing && selectedCourses.selectedOptions.selected.length" mat-raised-button color="primary"
+    (click)="import()"><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">Importar
+      ({{selectedCourses.selectedOptions.selected.length}})</span>
+  </button>
+</mat-dialog-actions>

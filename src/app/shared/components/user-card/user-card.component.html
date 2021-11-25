@@ -1,0 +1,6 @@
+<mat-card *ngIf="user" class="simple-card" fxLayout="column wrap" fxLayoutAlign="space-around center">
+  <img mat-card-avatar src="{{user.photoUrl?user.photoUrl:user.classroomPhotoUrl}}" />
+  <div class="mat-body-strong">{{user.displayName}}</div>
+  <div class="mat-small">{{user.primaryEmail}}</div>
+  <div *ngIf="user.isAdmin" class="mat-small">Administrador de sitio</div>
+</mat-card>

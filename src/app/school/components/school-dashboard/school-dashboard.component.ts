@@ -5,13 +5,13 @@ import {
   faTools,
   faClipboard,
 } from '@fortawesome/free-solid-svg-icons';
-import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
+import { flyInOut, heightReveal } from '@rds-shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-school-dashboard',
   templateUrl: './school-dashboard.component.html',
   styleUrls: ['./school-dashboard.component.scss'],
-  animations: [fadeInAnimation], //[@fadeIn]="'fadeIn'"
+  animations: [heightReveal], //[@fadeIn]="'fadeIn'"
 })
 export class SchoolDashboardComponent implements OnInit {
   raisedElev: number = 12;
@@ -21,8 +21,8 @@ export class SchoolDashboardComponent implements OnInit {
     this.assigmentLinks = [
       {
         title: 'Materias',
-        description: 'Materias y clases dentro de la institución',
-        route: ['m', 'c'],
+        description: 'Grupos, alumnos y materias en la institución',
+        route: ['m'],
         icon: faBook,
       },
       {

@@ -3,10 +3,10 @@
     ".read": "true",
     ".write": "true",
     "courses": {
-      ".indexOn": ["id", "roomId", "mainTeacherId"]
+      ".indexOn": ["id", "roomId", "teacherEmail"]
     },
     "users": {
-      ".indexOn": ["id", "grade", "uid"]
+      ".indexOn": ["id", "grade", "role"]
     }
   }
 }
