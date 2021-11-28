@@ -33,6 +33,7 @@ export class ProfileScoresComponent implements OnInit {
   today: Date = new Date();
   faFilePdf = faFilePdf;
   user: User;
+  timeOpenScores: boolean = false;
   constructor(
     //private scoresEntityService: ScoresEntityService,
     private profileService: ProfileService,

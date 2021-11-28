@@ -7,7 +7,7 @@
 </ng-template>
 <div *ngIf="(user$|async) as user;else spinner" [@fadeIn]="'fadeIn'">
   <!--  <div>{{|json}}</div> -->
-  <div *ngIf="user.currentGrades" class="card bg-transparent">
+  <div *ngIf="timeOpenScores;else comeBack" class="card bg-transparent">
     <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between start">
       <div>
         <span>Calificaciones&nbsp;&nbsp;
@@ -41,6 +41,19 @@
     </div> -->
   </div>
 </div>
+<ng-template #comeBack>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <p>
+          <mat-icon matCardAvatar class="rds-icon">error_outline</mat-icon>Las calificaciones estarán disponibles a
+          pratir del día 30 de noviembre de 2021.
+        </p>
+        <mat-card-subtitle>{{today|date:'long'}}</mat-card-subtitle>
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</ng-template>
 <div class="p-4" *ngIf="(isTeacher$|async)">
   <mat-card>
     <mat-card-header>
