@@ -20,6 +20,7 @@ import { map } from 'rxjs/operators';
 import states from './states.json';
 import { selectedAccountById } from '../../state/accounts.selectors';
 import { PhoneType } from '@rds-auth/models/user-parent.model';
+import { selectUser } from '../../../auth/state/auth.selectors';
 
 @Component({
   selector: 'app-user-details',
@@ -55,7 +56,7 @@ export class UserDetailsComponent implements OnInit {
     this.user$ = this.store.select(selectedAccountById).pipe(
       map((user) => {
         if (user) {
-          user.role == 'Alumnos'
+          (user && user.role == 'alumnos')
             ? this.fillStudentForm(user)
             : this.fillUserForm(user);
         }
@@ -64,8 +65,8 @@ export class UserDetailsComponent implements OnInit {
     );
     /* this.user$ = this.accountsEntityService.entities$.pipe(
       map(users => {
-        const user = users.find(u => u.id == this.userId);
-        user.role == 'alumnos' ? this.fillStudentForm(user) : this.fillUserForm(user);
+        const user = users.find(u => u.id === this.userId);
+        (user && user.role == 'alumnos') ? this.fillStudentForm(user) : this.fillUserForm(user);
         return user
       })
     ); */

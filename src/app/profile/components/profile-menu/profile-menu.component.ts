@@ -30,10 +30,10 @@ export class ProfileMenuComponent implements OnInit {
   constructor(private store: Store<AppState>,
     private subService: SubscriptionService
   ) {
-    this.user$ = this.store.pipe(select(selectUser));
-    this.isOnline$ = this.store.pipe(select(isOnline));
-    this.isAdmin$ = this.store.pipe(select(isAdmin));
-    this.isTeacher$ = this.store.pipe(select(isTeacher));
+    this.user$ = this.store.select(selectUser);
+    this.isOnline$ = this.store.select(isOnline);
+    this.isAdmin$ = this.store.select(isAdmin);
+    this.isTeacher$ = this.store.select(isTeacher);
   }
 
   ngOnInit(): void { }

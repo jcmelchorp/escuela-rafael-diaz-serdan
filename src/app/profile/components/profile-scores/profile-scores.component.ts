@@ -10,13 +10,14 @@ import { Observable, Subscription } from 'rxjs';
 import { map, tap, switchMap, concatMap, mergeMap } from 'rxjs/operators';
 
 import { Score } from '@rds-profile/models/score.model';
-import { ScoresEntityService } from '../../../store/scores/scores-entity.service';
 import { ProfileService } from '../../services/profile.service';
+import { expandFadeInAnimation, fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-profile-scores',
   templateUrl: './profile-scores.component.html',
-  styleUrls: ['./profile-scores.component.scss']
+  styleUrls: ['./profile-scores.component.scss'],
+  animations: [fadeInAnimation]
 })
 export class ProfileScoresComponent implements OnInit {
   @ViewChild('htmlData') htmlData: ElementRef;

@@ -1,13 +1,13 @@
 <ng-template #spinner>
   <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
-    <mat-spinner strokeWidth="3" [diameter]="50">
+    <mat-spinner strokeWidth="6" [diameter]="48">
     </mat-spinner>
     <span>Buscando ...</span><br>
   </div>
 </ng-template>
-<div *ngIf="(user$|async) as user;else spinner">
-  <!--  <div>{{user.currentGrades|json}}</div> -->
-  <div class="card bg-transparent">
+<div *ngIf="(user$|async) as user;else spinner" [@fadeIn]="'fadeIn'">
+  <!--  <div>{{|json}}</div> -->
+  <div *ngIf="user.currentGrades" class="card bg-transparent">
     <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between start">
       <div>
         <span>Calificaciones&nbsp;&nbsp;
@@ -41,12 +41,13 @@
     </div> -->
   </div>
 </div>
-<div *ngIf="(isTeacher$|async)">
+<div class="p-4" *ngIf="(isTeacher$|async)">
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <span class="text-warning"> Por el momento, las calificaciones son de acceso a los alumnos.</span>
+        <div class="color-rds">Las calificaciones son de acceso excusivo para los alumnos.</div>
       </mat-card-title>
+      <mat-card-subtitle>Si eres alumno, contacta a la dirección escolar para más detalles.</mat-card-subtitle>
     </mat-card-header>
   </mat-card>
 </div>

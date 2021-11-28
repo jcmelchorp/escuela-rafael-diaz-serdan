@@ -22,7 +22,6 @@ import { MigrationProgressComponent } from './components/migration-progress/migr
   declarations: [
     ...accountsContainers,
     ...accountsComponents,
-    MigrationProgressComponent
   ],
   imports: [
     SharedModule,

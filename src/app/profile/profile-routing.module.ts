@@ -5,6 +5,8 @@ import { ProfileMenuComponent } from './components';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { ProfileScoresComponent } from './components/profile-scores/profile-scores.component';
 import { ScoreResolver } from './resolvers/score.resolver';
+import { UserDetailsComponent } from '@rds-accounts/components/user-details/user-details.component';
+import { UserEditDialogComponent } from '../accounts/components/user-edit-dialog/user-edit-dialog.component';
 
 const routes: Routes = [
   {
@@ -19,6 +21,10 @@ const routes: Routes = [
             path: 'calificaciones',
             component: ProfileScoresComponent,
             //resolve: { scores: ScoreResolver },
+          },
+          {
+            path: 'editar',
+            component: UserDetailsComponent,
           }
         ]
       },
