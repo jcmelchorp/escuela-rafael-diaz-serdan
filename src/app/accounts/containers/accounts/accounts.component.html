@@ -8,7 +8,7 @@
 <div class="p-4">
   <p class="view-title">Usuarios</p>
   <p class="view-subtitle">Cuentas de usuarios.</p>
-  <div *ngIf="(loaded$|async)&&(filteredEntities$|async) as filteredEntities;else spinner" class="card">
+  <div *ngIf="(loaded$|async)&&(filteredEntities$|async) as filteredEntities;else spinner" class="card bg-transparent">
     <div class="card-body">
       <form [formGroup]="filterValues">
         <button class="float-end" mat-icon-button [matMenuTriggerFor]="menu"
