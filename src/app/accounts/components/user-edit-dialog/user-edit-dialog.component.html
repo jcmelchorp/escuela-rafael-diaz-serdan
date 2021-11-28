@@ -1,6 +1,6 @@
 <form [formGroup]="saveForm" (ngSubmit)="onSubmit()" novalidate>
-  <div matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between">
-    <h2 class="color-rds">{{data.action|titlecase}}r Usuario</h2>
+  <div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between">
+    <h2>{{data.action|titlecase}}r Usuario</h2>
     <fa-icon class="text-secondary" matDialogClose mat-icon-button [icon]="faTimes" (click)="close()"></fa-icon>
   </div>
   <mat-dialog-content>

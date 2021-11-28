@@ -4,7 +4,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { SchoolCourse, Cycle } from '../../models/school-course.model';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, switchMap, mergeMap, pluck, concatMap } from 'rxjs/operators';
 import { ConfirmDialogComponent } from '@rds-shared/components';
 import { MatDialog } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -12,6 +12,9 @@ import { AddStudentsCoursesComponent } from '../add-students-courses/add-student
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TableGroup } from '@rds-school/models/table-group.model';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
+import { User } from '@rds-auth/models/user.model';
+import { faAward } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
@@ -32,11 +35,13 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   @Output() onClickEdit = new EventEmitter<SchoolCourse>();
   @Output() onClickDelete = new EventEmitter<string>();
   @Output() onClickStudents = new EventEmitter<SchoolCourse>();
+  faAward = faAward;
   cycles = Cycle;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   filterValues: FormGroup;
   courses$: Observable<SchoolCourse[]>;
+  teachers$: Observable<User[]>;
   filteredCourses$: Observable<SchoolCourse[]>;
   courses: any[];
   coursesCount$: Observable<number>;
@@ -53,15 +58,20 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   constructor(
     private fb: FormBuilder,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolTeachersEntityService: SchoolTeachersEntityService,
     private dialog: MatDialog
   ) {
     this.columnsToDisplay = [
+      {
+        propertyName: 'teacherEmail',
+        headerText: '',
+      },
       {
         propertyName: 'priority',
         headerText: '',
       },
       {
-        propertyName: 'cycleId',
+        propertyName: 'cycle',
         headerText: 'Ciclo escolar',
       },
       {
@@ -71,10 +81,6 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
       {
         propertyName: 'name',
         headerText: 'Nombre',
-      },
-      {
-        propertyName: 'teacherEmail',
-        headerText: 'Profesor',
       },
     ];
     this.gradeKeys = Object.keys(this.grades);
@@ -96,13 +102,16 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
     this.loaded$ = this.schoolCoursesEntityService.loaded$;
     this.loading$ = this.schoolCoursesEntityService.loading$;
     this.courses$ = this.schoolCoursesEntityService.entities$;
-    this.filteredCourses$ = this.schoolCoursesEntityService.filteredEntities$.pipe(map(courses => {
-      this.courses = courses;
-      this.dataSource.data = this.addTableGroups(this.courses, this.groupByColumns);
-      this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
-      this.dataSource.filter = performance.now().toString();
-      return courses;
-    }));
+    //this.teachers$ = this.schoolTeachersEntityService.entities$;
+    this.filteredCourses$ = this.schoolCoursesEntityService.filteredEntities$.pipe(
+      map(courses => {
+        this.courses = courses;
+        this.dataSource.data = this.addTableGroups(this.courses, this.groupByColumns);
+        this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+        this.dataSource.filter = performance.now().toString();
+        return courses;
+      })
+    );
   }
 
   ngOnInit() { }
@@ -216,7 +225,6 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   }
 
   openStudentsToCourse(row) {
-
     const course: SchoolCourse = { ...row };
     const dialogRef = this.dialog.open(AddStudentsCoursesComponent, {
       width: '400px',
@@ -235,7 +243,8 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
     });
   }
   editSchoolCourse(course?: SchoolCourse) {
-    this.onClickEdit.emit(course);
+    console.log('Course emited: ', course);
+    //this.onClickEdit.emit(course);
   }
   deleteSchoolCourse(course: SchoolCourse) {
     const subject: any = {

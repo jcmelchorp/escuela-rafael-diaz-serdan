@@ -33,13 +33,17 @@ export class SchoolCoursesComponent implements OnInit {
   ) {
     this.navLinks = [
       {
+        label: 'Grupos',
+        route: 'g',
+        index: 0
+      }, {
         label: 'Materias',
         route: ['m'],
-        index: 0
+        index: 1
       }, {
         label: 'Alumnos',
         route: ['a'],
-        index: 1
+        index: 2
       }
     ];
   }

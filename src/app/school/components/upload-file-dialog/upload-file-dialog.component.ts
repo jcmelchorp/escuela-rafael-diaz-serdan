@@ -1,24 +1,28 @@
+import { SelectionModel } from "@angular/cdk/collections";
 import { Component, Directive, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSelectionList } from "@angular/material/list";
-import { ChangeSet, ChangeSetItem, ChangeSetOperation, EntityCacheDispatcher } from "@ngrx/data";
 import { SchoolCourse } from "@rds-school/models/school-course.model";
+import { SchoolClassroomsService } from "@rds-school/services";
+import { SchoolClassroomsEntityService } from "@rds-store/school/school-classrooms/school-classrooms-entity.service";
 import { SchoolCoursesEntityService } from "@rds-store/school/school-courses/school-courses-entity.service";
+import { Observable } from "rxjs";
 import * as XLSX from 'xlsx';
 @Component({
   styleUrls: ['upload-file-dialog.component.scss'],
   templateUrl: 'upload-file-dialog.component.html',
-
 })
 export class UploadFileDialogComponent {
   importing: boolean = false;
-  @ViewChild('selectedCourses') selectedCourses: MatSelectionList;
+  selectionRemain: Observable<number>;
+  @ViewChild('selCourses') selCourses: MatSelectionList;
   constructor(
     private dialogRef: MatDialogRef<UploadFileDialogComponent>,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolClassroomService: SchoolClassroomsService,
     @Inject(MAT_DIALOG_DATA) public data: { output: any[] }
   ) {
-
+    this.selectionRemain = this.schoolCoursesEntityService.count$;
   }
 
   onFileChange(evt: any) {
@@ -57,10 +61,13 @@ export class UploadFileDialogComponent {
   }
 
   selectAll() {
-    this.selectedCourses.selectAll();
+    this.selCourses.selectAll();
+  }
+  deselectAll() {
+    this.selCourses.deselectAll();
   }
   import() {
-    const courses = this.selectedCourses.selectedOptions.selected.map(item => item.value);
+    const courses = this.selCourses.selectedOptions.selected.map(item => item.value);
     this.importing = true;
 
     this.data.output.forEach(async (course: SchoolCourse, i: number) => {
@@ -73,10 +80,13 @@ export class UploadFileDialogComponent {
         grade: course.grade,
         priority: course.priority,
       } as SchoolCourse).toPromise().then(
-        () => { this.data.output[i].isImported = true },
-        () => { this.data.output[i].isImported = false }
-      );
-
+        async (newCourse) => await this.schoolClassroomService.getWithGradeAndCycle(newCourse.grade, newCourse.cycle).toPromise().then(
+          async (classrooms) => {
+            classrooms[0].coursesIds.push(course.id);
+            await this.schoolClassroomService.update(classrooms[0].id, classrooms[0]).toPromise();
+          },
+          () => { this.data.output[i].isImported = false }
+        ));
     });
     this.importing = false;
   }

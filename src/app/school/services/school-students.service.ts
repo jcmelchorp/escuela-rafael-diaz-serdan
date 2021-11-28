@@ -7,9 +7,9 @@ import { Database } from '@angular/fire/database';
 import * as fromSchoolStudents from '@rds-store/school/school-students';
 
 @Injectable()
-export class SchoolStudentsService extends FirebaseV9Service<User> {
+export class SchoolStudentsService extends FirestoreV9Service<User> {
   constructor(
     public afStore: Firestore, public db: Database) {
-    super('users', afStore, db);
+    super('users', afStore, /* db */);
   }
 }

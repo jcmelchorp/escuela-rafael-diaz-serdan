@@ -25,11 +25,10 @@ import { SCHOOL_SERVICES } from './services';
 import { ACCOUNTS_SERVICES } from '@rds-accounts/services';
 import { SchoolClassroomsDataService } from '@rds-store/school/school-classrooms/school-classrooms-data.service';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
-import { SelectCycleDialogComponent } from './components/select-cycle-dialog/select-cycle-dialog.component';
-import { SchoolActionButtonsComponent } from './components/school-action-buttons/school-action-buttons.component';
+
 
 @NgModule({
-  declarations: [...SCHOOL_COMPONENTS, ...SCHOOL_CONTAINERS, SchoolActionButtonsComponent],
+  declarations: [...SCHOOL_COMPONENTS, ...SCHOOL_CONTAINERS],
   imports: [SharedModule, SchoolRoutingModule],
   providers: [
     ...SCHOOL_SERVICES,

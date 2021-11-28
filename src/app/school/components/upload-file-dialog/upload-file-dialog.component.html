@@ -9,7 +9,7 @@
     <button mat-button *ngIf="data.output.length>0" (click)="selectAll()">Seleccionar todos</button>
   </div>
 
-  <mat-selection-list #selectedCourses>
+  <mat-selection-list #selCourses>
     <mat-list-option *ngFor="let dato of data.output;">
       <div mat-line>{{dato.priority}}. {{dato.name}} - {{dato.grade}}</div>
       <mat-icon class="text-{{dato.isImported?'success':'primary'}}" matListIcon>{{dato.isImported?'verified':'update'}}
@@ -18,14 +18,14 @@
   </mat-selection-list>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button *ngIf="data" mat-stroked-button color="accent" type="reset" (click)="resetData()">Limpiar</button>
+  <button *ngIf="data" mat-stroked-button color="accent" type="reset" (click)="deselectAll()">Limpiar selección</button>
   <button *ngIf="!data" mat-stroked-button color="warn" matDialogClose>Cancelar</button>
-  <button [disabled]="importing" *ngIf="selectedCourses.selectedOptions.selected.length>0" mat-raised-button
-    color="primary" (click)="import()"><span>Importar
-      ({{selectedCourses.selectedOptions.selected.length}})</span>
+  <button [disabled]="selCourses.selectedOptions.selected.length<1" *ngIf="!importing" mat-raised-button color="primary"
+    (click)="import()"><span>Importar
+      ({{selCourses.selectedOptions.selected.length}})</span>
   </button>
-  <button *ngIf="!importing && selectedCourses.selectedOptions.selected.length" mat-raised-button color="primary"
+  <button *ngIf="importing && selCourses.selectedOptions.selected.length" mat-raised-button color="primary"
     (click)="import()"><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">Importar
-      ({{selectedCourses.selectedOptions.selected.length}})</span>
+      ({{selCourses.selectedOptions.selected.length}})</span>
   </button>
 </mat-dialog-actions>

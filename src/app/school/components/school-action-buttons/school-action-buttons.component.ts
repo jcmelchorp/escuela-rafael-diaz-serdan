@@ -10,6 +10,8 @@ import { SchoolStudentsEntityService } from '@rds-store/school/school-students/s
 import { UserRole } from '@rds-auth/models/user.enum';
 import { map, mergeMap, pluck, switchMap, tap } from 'rxjs/operators';
 import { SchoolClassroomsService } from '@rds-school/services/school-classrooms.service';
+import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
+import { SchoolLevel } from '../../../auth/models/user.enum';
 
 @Component({
   selector: 'app-school-action-buttons',
@@ -22,12 +24,12 @@ export class SchoolActionButtonsComponent implements OnInit {
   classrooms$: Observable<SchoolClassroom[]>;
   roles = UserRole;
   cycles = Cycle;
+  levels = SchoolLevel;
   constructor(
     private schoolCoursesEntityService: SchoolCoursesEntityService,
-    private schoolStudentsEntityService: SchoolStudentsEntityService,
+    private accountsEntityService: AccountsEntityService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolClassroomsService: SchoolClassroomsService,
-
     private dialog: MatDialog,
   ) {
     this.coursesCount$ = this.schoolCoursesEntityService.count$;
@@ -43,17 +45,18 @@ export class SchoolActionButtonsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((cycle) => {
       if (cycle) {
-        this.schoolStudentsEntityService.entities$.pipe(
-          map(users => users.filter(user => user.role == this.roles.ALUMNOS && user.suspended === false)),
+        this.accountsEntityService.entities$.pipe(
+          map(users => users.filter(user => user.role == "alumnos" && user.suspended === false)),
           mergeMap(users => this.schoolClassroomsEntityService.entities$.pipe(
-            map(courses => courses.filter(c => c.cycle == this.cycles[cycle]).map(course => {
-              const studentsEmails = users.filter(u => u.grade === course.grade).map(u => u.primaryEmail);
-              return { ...course, studentsEmails: studentsEmails } as SchoolClassroom;
+            map(classrooms => classrooms.filter(c => c.cycle == this.cycles[cycle]).map(classroom => {
+              const studentsEmails = users.filter(u => u.grade === classroom.grade).map(u => u.primaryEmail);
+              return { ...classroom, studentsEmails: studentsEmails } as SchoolClassroom;
             }))
           )),
+          switchMap(async (classrooms) => classrooms.forEach(classroom => this.schoolClassroomsEntityService.update(classroom)))
         )
       }
-    });
+    })
   }
   editCourse(course: SchoolClassroom) {
     this.schoolCoursesEntityService.update(course as Partial<SchoolCourse>);
@@ -89,7 +92,8 @@ export class SchoolActionButtonsComponent implements OnInit {
                 } as SchoolClassroom;
               })
             ).subscribe(classroom => this.schoolClassroomsEntityService.update({ ...classroom }))),
-          ).subscribe()
+          )
+
         } else {
           this.editCourse(result.course);
         }

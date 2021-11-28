@@ -4,24 +4,22 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';
-import { selectUser } from '@rds-auth/state/auth.selectors';
-import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
+import { AccountsEntityService } from '../../store/accounts/accounts-entity.service';
 
 @Injectable()
 export class SchoolTeachersResolver implements Resolve<boolean> {
-  constructor(private schoolTeachersEntityService: SchoolTeachersEntityService) { }
+  constructor(/* private schoolTeachersEntityService: SchoolTeachersEntityService */
+    private accountsEntityService: AccountsEntityService) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.schoolTeachersEntityService.loaded$.pipe(
+    return this.accountsEntityService.loaded$.pipe(
       tap((loaded) => {
         if (!loaded) {
-          this.schoolTeachersEntityService.getWithQuery({ role: 'Profesores' });
+          this.accountsEntityService.getWithQuery({ role: 'profesores' });
           /* .pipe(
             map(users => users.filter(user => user.role === 'Profesores'))) */
         }

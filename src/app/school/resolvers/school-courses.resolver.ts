@@ -5,8 +5,6 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
-
-
 import { Observable } from 'rxjs';
 import { filter, tap, first } from 'rxjs/operators';
 

@@ -14,6 +14,7 @@ import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
 import { AppState } from '@rds-store/app.state';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { AccountsDomainService } from '../../services/accounts-domain.service';
+import { MigrationProgressComponent } from '../../components/migration-progress/migration-progress.component';
 
 
 @Component({
@@ -115,5 +116,12 @@ export class AccountsComponent implements OnInit {
         });
       }
     });
+  }
+  sendToFirestore(accounts: User[]) {
+    const dialogRef = this.dialog.open(MigrationProgressComponent, {
+      width: '500px',
+      height: '400px',
+      data: accounts
+    })
   }
 }

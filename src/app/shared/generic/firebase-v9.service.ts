@@ -1,13 +1,10 @@
 import { Inject } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
-import { Entity, firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
-import { child, Database, query as query_db, onValue, push, ref, set, update, get, objectVal, orderByChild, equalTo, endAt, startAt } from '@angular/fire/database';
+import { firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
+import { child, Database, query as query_db, onValue, push, ref, set, update, get, objectVal, orderByChild, equalTo, endAt, startAt, listVal } from '@angular/fire/database';
 import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, orderBy, query, setDoc, updateDoc } from '@angular/fire/firestore';
-import { listVal } from 'rxfire/database';
 import { QueryParams } from '@ngrx/data';
-import { keyframes } from '@angular/animations';
-import { getCurrentQueryParams } from '@rds-store/router/router.selectors';
 export class FirebaseV9Service<T> implements IFirebase<T> {
   public readonly tCollection: string;
   public readonly colects: Observable<T[]>;
@@ -65,13 +62,13 @@ export class FirebaseV9Service<T> implements IFirebase<T> {
   }
   list(): Observable<T[]> {
     const dbref = ref(this.rtdb, this.tCollection);
-    return listVal(dbref);
+    return listVal<T>(dbref).pipe(take(1));
   }
 
   getWithQuery(queryParams: QueryParams): Observable<T[]> {
-    console.log(queryParams)
+    console.log(Object.keys(queryParams).pop())
     const direr = ref(this.rtdb, this.tCollection)
     const queryRef = query_db(direr, orderByChild(Object.keys(queryParams).pop()), equalTo(Object.values(queryParams).pop().toString()));
-    return listVal<T>(direr).pipe(take(1), map(listResult => listResult.filter(item => item[Object.keys(queryParams).pop()] === Object.values(queryParams).pop())));
+    return listVal<T>(direr).pipe(take(1), map(listResult => listResult.filter(item => item['role'] === Object.values(queryParams).pop().toString())));
   }
 }

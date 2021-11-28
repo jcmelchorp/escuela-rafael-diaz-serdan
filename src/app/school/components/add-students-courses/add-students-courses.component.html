@@ -3,6 +3,27 @@
   <mat-icon matDialogClose mat-icon-button>close</mat-icon>
 </div>
 <mat-dialog-content>
+
+  <mat-form-field color="primary" style="width: 100%">
+    <mat-label> Label</mat-label>
+    <mat-select [formControl]="findCtrl" #multiSelect multiple>
+      <mat-select-trigger>
+        <mat-chip-list #chipList selected>
+          <ng-container>
+            <mat-chip color="primary" *ngFor="let fruit of findCtrl?.value; let matChipIndex = index"
+              class="font-weight-normal" selected [removable]="true"
+              (removed)="onRemoveFruit(multiSelect, matChipIndex)">
+              {{fruit}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </ng-container>
+        </mat-chip-list>
+      </mat-select-trigger>
+      <mat-option *ngFor="let item of filteredEntities$|async" [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-form-field class="example-chip-list" appearance="outlined">
     <mat-label>Busca un nombre o correo electrónico</mat-label>
     <input matInput #studentInput [formControl]="filterValues.controls['fullName']" [matAutocomplete]="auto"
@@ -15,18 +36,18 @@
         <small>{{student.role|titlecase}}</small>
       </mat-option>
     </mat-autocomplete>
-  </mat-form-field>
-  <mat-chip-list #chipList aria-label="Inscripción de alumnos">
-    <mat-chip *ngFor="let student of students" [selectable]="selectable" [removable]="removable"
-      (removed)="remove(student.id)">
-      <img matChipAvatar *ngIf="student.photoUrl" [src]="student.photoUrl" alt="{{student.name.fullName}}">
-      <span>{{student.primaryEmail}}</span>
-      <button matChipRemove *ngIf="removable" (click)="remove(student.id)">
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </mat-chip>
-  </mat-chip-list>
-  <!-- <mat-list dense>
+
+    <mat-chip-list #chipList aria-label="Inscripción de alumnos">
+      <mat-chip *ngFor="let student of students" [selectable]="selectable" [removable]="removable"
+        (removed)="remove(student.id)">
+        <img matChipAvatar *ngIf="student.photoUrl" [src]="student.photoUrl" alt="{{student.name.fullName}}">
+        <span>{{student.primaryEmail}}</span>
+        <button matChipRemove *ngIf="removable" (click)="remove(student.id)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+    </mat-chip-list>
+    <!-- <mat-list dense>
     <mat-list-item *ngFor="let student of students">
       <img matListAvatar class="img-responsive rounded-circle" aria-hidden [src]="student.photoUrl">&nbsp;
       <div matLine>{{student.name.fullName}}</div>
@@ -35,6 +56,7 @@
     </mat-list-item>
     <mat-list-item *ngIf="students.length===0"> No hay alumnos inscritos en este curso </mat-list-item>
   </mat-list> -->
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-stroked-button color="accent" matDialogClose>Cancelar</button>

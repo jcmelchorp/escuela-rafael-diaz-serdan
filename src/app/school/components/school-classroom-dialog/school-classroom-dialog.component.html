@@ -6,7 +6,7 @@
   <mat-dialog-content>
     <mat-form-field class="d-block" appearance="outline">
       <mat-label>Grado</mat-label>
-      <mat-select formControlName="label" placeholder="Selecciona el grado escolar">
+      <mat-select formControlName="grade" placeholder="Selecciona el grado escolar">
         <mat-option *ngFor="let key of slevelKeys" [value]="key">
           {{slevels[key]}}
         </mat-option>

@@ -1,22 +1,25 @@
 import { SchoolLevel } from "@rds-auth/models/user.enum";
+import { User } from "@rds-auth/models/user.model";
 export interface StudentsCourses {
   studentId: string;
   courseId: string;
 }
 export interface SchoolCourse {
   id: string;
+  priority: number;
   name: string;
   description: string;
   grade: SchoolLevel;
   courseType: CourseType;
   teacherEmail: string;
+  teacherPhotoUrl?: string;
   cycle: Cycle;
-  priority: number;
+  studentsEmails?: string[];
 }
 
 export interface SchoolClassroom {
   id: string;
-  grade: string;
+  grade: SchoolLevel;
   cycle: Cycle;
   studentsEmails?: string[];
   coursesIds?: string[];

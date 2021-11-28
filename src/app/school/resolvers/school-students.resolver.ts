@@ -8,19 +8,19 @@ import {
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';
-import { SchoolStudentsEntityService } from '@rds-store/school/school-students/school-students-entity.service';
+import { AccountsEntityService } from '../../store/accounts/accounts-entity.service';
 
 @Injectable()
 export class SchoolStudentsResolver implements Resolve<boolean> {
-  constructor(private schoolStudentsEntityService: SchoolStudentsEntityService) { }
+  constructor(private accountsEntityService: AccountsEntityService) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.schoolStudentsEntityService.loaded$.pipe(
+    return this.accountsEntityService.loaded$.pipe(
       tap((loaded) => {
         if (!loaded) {
-          this.schoolStudentsEntityService.getWithQuery({ role: 'Alumnos' });
+          this.accountsEntityService.getWithQuery({ role: 'alumnos' });
         }
       }),
       filter((loaded) => !!loaded),

@@ -15,12 +15,14 @@ import { AccountsDomainDataService } from '@rds-store/accounts-domain/accounts-d
 import { accountsComponents } from './components';
 import { AccountsService } from './services/accounts.service';
 import { AccountsDomainService } from './services/accounts-domain.service';
+import { MigrationProgressComponent } from './components/migration-progress/migration-progress.component';
 
 
 @NgModule({
   declarations: [
     ...accountsContainers,
-    ...accountsComponents
+    ...accountsComponents,
+    MigrationProgressComponent
   ],
   imports: [
     SharedModule,

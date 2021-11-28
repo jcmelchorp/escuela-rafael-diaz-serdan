@@ -31,10 +31,17 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
       this.colects = collectionData(queryCol); */
     // this.fsCollection = this.afs.collection<T>(this.collection);
   }
-  add(entity: T): Observable<T> {
+  add(entity: T, id?: string,): Observable<T> {
     const refColl = collection(this.afs, this.tCollection);
-    const refDoc = doc(refColl)
-    return from(setDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))).pipe(take(1), map(_ => firebaseSerialize({ ...entity, id: refDoc.id })));
+    if (id) {
+      const refDoc = doc(refColl, id)
+      return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(take(1), map(_ => firebaseSerialize(entity)));
+    } else {
+      const refDoc = doc(refColl)
+      return from(setDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))).pipe(take(1), map(_ => firebaseSerialize({ ...entity, id: refDoc.id })));
+    }
+
+
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     const refDoc = doc(this.afs, this.tCollection, id);

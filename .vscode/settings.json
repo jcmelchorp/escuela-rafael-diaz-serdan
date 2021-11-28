@@ -1,4 +1,4 @@
 {
   "angular.enable-strict-mode-prompt": false,
-  "svg.preview.background": "white",
+  "svg.preview.background": "editor",
 }
