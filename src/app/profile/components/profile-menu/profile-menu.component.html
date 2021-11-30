@@ -11,7 +11,7 @@
     <mat-card-header mat-title-group>
       <div class="float-end">
         <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start end">
-          <div class="badge bg-success"> {{ user.role |titlecase}} </div>
+          <div class="badge bg-success"> {{ user.role}} </div>
           <div class="badge bg-danger" *ngIf="user.isAdmin">Administrador</div>
         </div>
       </div>
@@ -39,11 +39,11 @@
   </mat-card>
   <mat-card class="d-print-none" fxFlex="0 1 calc(50% - 20px)" fxFlex.lt-md="100%">
     <mat-card-content>
-      <div *ngIf="user.role=='alumnos'" fxLayout="row">
+      <div *ngIf="user.role==='Alumnos'" fxLayout="row">
         <div class="col-6">NIEV:&nbsp;</div>
         <div class="col-6">{{user.niev}}</div>
       </div>
-      <div *ngIf="user.role=='profesores'" fxLayout="row">
+      <div *ngIf="user.role==='Profesores'" fxLayout="row">
         <div class="col-6">RFC:&nbsp;</div>
         <div class="col-6">{{user.rfc}}</div>
       </div>
@@ -51,11 +51,11 @@
         <div class="col-6">CURP:&nbsp;</div>
         <div class="col-6">{{user.curp}}</div>
       </div>
-      <div *ngIf="user.role=='alumnos'" fxLayout="row">
+      <div *ngIf="user.role==='Alumnos'" fxLayout="row">
         <div class="col-6">Nivel:&nbsp;</div>
         <div class="col-6">{{user.level}}</div>
       </div>
-      <div *ngIf="user.role=='alumnos'" fxLayout="row">
+      <div *ngIf="user.role==='Alumnos'" fxLayout="row">
         <div class="col-6">Grado:&nbsp;</div>
         <div class="col-6">{{user.grade}}</div>
       </div>

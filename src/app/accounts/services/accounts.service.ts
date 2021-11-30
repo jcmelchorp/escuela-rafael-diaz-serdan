@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from '@rds-auth/models/user.model';
-import { Database } from '@angular/fire/database';
+import { Database, listVal, ref } from '@angular/fire/database';
 import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { FirebaseV9Service } from '@rds-shared/generic/firebase-v9.service';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { firebaseSerialize } from '@rds-shared/models/firebase.model';
 import { map, take } from 'rxjs/operators';
 import { FirestoreV9Service } from '@rds-shared/generic/firestore-v9.service';
@@ -22,6 +22,10 @@ export class AccountsService extends FirestoreV9Service<User> {
     const refColl = collection(this.afs, this.tCollection);
     const refDoc = doc(refColl, user.id)
     return setDoc(refDoc, firebaseSerialize(user))
+  }
+  getFromRtdb(): Observable<User[]> {
+    const dbref = ref(this.afDatabase, this.tCollection);
+    return listVal<User>(dbref).pipe(take(1));
   }
   /*  create(user: Partial<User>): Observable<User> {
      const userRef = this.afDatabase.object<User>(this.collection);

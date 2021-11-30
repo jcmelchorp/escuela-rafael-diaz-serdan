@@ -16,6 +16,7 @@ import { Cycle } from '@rds-school/models/school-course.model';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ScoresEntityService } from '@rds-store/scores/scores-entity.service';
 import { selectUserId } from '../../../auth/state/auth.selectors';
+import { CourseLevel } from '@rds-auth/models/user.enum';
 
 @Component({
   selector: 'app-profile-scores',
@@ -29,6 +30,7 @@ export class ProfileScoresComponent implements OnInit {
   isTeacher$: Observable<boolean>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
+  level: CourseLevel;
   cycleKeys;
   cycles = Cycle;
   cycle: FormControl
@@ -70,4 +72,4 @@ export class ProfileScoresComponent implements OnInit {
     this.subService.unsubscribeComponent$;
   }
 }
-/nov/
+
