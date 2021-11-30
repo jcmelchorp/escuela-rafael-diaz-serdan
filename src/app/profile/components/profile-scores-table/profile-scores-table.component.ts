@@ -32,9 +32,10 @@ export class ProfileScoresTableComponent implements OnInit {
   expandedElement: any;
 
   ngOnInit() {
+    /*     console.log(this.data.scores)*/
     this.copyData = [...this.data.scores];
     this.formative = new ScoreListItemDataSource(this.copyData);
-    this.avgData = this.copyData.splice(-1, 1).pop();
+    //this.avgData = this.copyData.splice(-1, 1).pop();
     this.extraData = this.copyData.splice(-2, 2);
     this.optative = new ScoreListItemDataSource(this.extraData)
   }

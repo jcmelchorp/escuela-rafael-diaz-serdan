@@ -37,6 +37,9 @@ export class ProfileMenuComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
   onLogout(id): void {
     this.store.dispatch(signOut({ id }));
     this.canLogout = false;

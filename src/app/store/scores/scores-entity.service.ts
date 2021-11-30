@@ -4,7 +4,7 @@ import {
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
 import * as fromScores from '.';
-import { Score } from '../../profile/models/score.model';
+import { Score } from '@rds-profile/models/score.model';
 @Injectable()
 export class ScoresEntityService extends EntityCollectionServiceBase<Score> {
   constructor(

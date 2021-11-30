@@ -1,66 +1,73 @@
-<ng-template #spinner>
-  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
-    <mat-spinner strokeWidth="6" [diameter]="48">
-    </mat-spinner>
-    <span>Buscando ...</span><br>
-  </div>
-</ng-template>
-<div *ngIf="(user$|async) as user;else spinner" [@fadeIn]="'fadeIn'">
-  <!--  <div>{{|json}}</div> -->
-  <div *ngIf="timeOpenScores;else comeBack" class="card bg-transparent">
-    <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between start">
-      <div>
-        <span>Calificaciones&nbsp;&nbsp;
-          <small class="font-weight-light">Ciclo escolar{{user.currentGrades.cycle}} </small>
-        </span>
+<div *ngIf="timeOpenScores;else comeBack">
+  <div *ngIf="!(isTeacher$|async)&&(user$|async) as user;else onlyStudents" [@fadeIn]="'fadeIn'">
+    <!--  <div>{{|json}}</div> -->
+    <div *ngIf="(loaded$|async)&&selectedScore|async as score;else spinner" class="card bg-transparent">
+      <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between start">
+        <strong class="color-rds"> Calificaciones</strong>
+        <div>Fecha de consulta: {{today|date:'dd/MM/yyyy h:mm:ss a'}}</div>
+      </h2>
+      <div class="card-body">
+        <mat-form-field>
+          <mat-label>Ciclo escolar</mat-label>
+          <mat-select [(value)]="cycle" placeholder="Ciclo escolar" (selectionChanges)="getScoresByCycle($event)">
+            <mat-optio *ngFor="let cycleKey of cycleKeys" [value]="cycleKey">
+              {{cycles[cycleKey]}}
+            </mat-optio>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button (click)="printPage()">
+          <mat-icon class="rds-icon">print</mat-icon>&nbsp;Imprimir
+        </button>
+        <button mat-button (click)="generatePdf()">
+          <fa-icon class="rds-icon" [icon]="faFilePdf" size="lg"></fa-icon>&nbsp;Descargar
+        </button>
+        <app-profile-scores-table *ngIf="user.level!='Preescolar'" [data]="score"></app-profile-scores-table>
+        <app-profile-scores-list *ngIf="user.level=='Preescolar'" [data]="score"></app-profile-scores-list>
       </div>
-      <div>{{today|date:'medium'}}</div>
-    </h2>
-    <div class="float-right">
-      <button mat-button (click)="printPage()">
-        <mat-icon class="rds-icon">print</mat-icon>&nbsp;Imprimir
-      </button>
-      <button mat-button (click)="generatePdf()">
-        <fa-icon class="rds-icon" [icon]="faFilePdf" size="lg"></fa-icon>&nbsp;Descargar
-      </button>
-    </div>
-    <div class="card-body">
-      <app-profile-scores-table *ngIf="user.level!='Preescolar'" [data]="user.currentGrades"></app-profile-scores-table>
-      <app-profile-scores-list *ngIf="user.level=='Preescolar'" [data]="user.currentGrades"></app-profile-scores-list>
-    </div>
-    <div *ngIf="user.level!='Preescolar'" class="card-footer ">
-      <h3 class="text-center">Recomendaciones</h3>
-      <app-profile-scores-recomendation [data]="user.currentGrades.notes"></app-profile-scores-recomendation>
-      <h3 class="text-center d-print-none">Estadísticas</h3>
-      <app-profile-scores-bar-chart class="d-print-none" [data]="user.currentGrades.scores">
-      </app-profile-scores-bar-chart>
-    </div>
-    <!--  <div *ngIf="user.level=='Preescolar'" class="card-footer ">
+      <div *ngIf="user.level!='Preescolar'" class="card-footer ">
+        <h3 class="text-center">Recomendaciones</h3>
+        <app-profile-scores-recomendation [data]="score.notes"></app-profile-scores-recomendation>
+        <h3 class="text-center d-print-none">Estadísticas</h3>
+        <app-profile-scores-bar-chart class="d-print-none" [data]="score.scores">
+        </app-profile-scores-bar-chart>
+      </div>
+      <!--  <div *ngIf="user.level=='Preescolar'" class="card-footer ">
       <h3 class="text-center">Recomendaciones</h3>
       <app-profile-scores-recomendation [data]="user.currentGrades.notes"></app-profile-scores-recomendation>
     </div> -->
+    </div>
+
+
   </div>
+  <ng-template #spinner>
+    <div style="min-height: 100px;" fxLayout="column" fxLayoutAlign="center center">
+      <mat-spinner strokeWidth="6" [diameter]="48">
+      </mat-spinner>
+      <span>Buscando ...</span><br>
+    </div>
+  </ng-template>
 </div>
+<ng-template #onlyStudents>
+  <mat-card class="p-4">
+    <mat-card-header>
+      <mat-card-title>
+        <div class="color-rds">Las calificaciones son de acceso excusivo para los alumnos.</div>
+      </mat-card-title>
+      <mat-card-subtitle>Si eres alumno, contacta a la dirección escolar para informar de este error.
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</ng-template>
 <ng-template #comeBack>
   <mat-card>
     <mat-card-header>
       <mat-card-title>
         <p>
           <mat-icon matCardAvatar class="rds-icon">error_outline</mat-icon>Las calificaciones estarán disponibles a
-          pratir del día 30 de noviembre de 2021.
+          partir del día 30 de noviembre de 2021.
         </p>
         <mat-card-subtitle>{{today|date:'long'}}</mat-card-subtitle>
       </mat-card-title>
     </mat-card-header>
   </mat-card>
 </ng-template>
-<div class="p-4" *ngIf="(isTeacher$|async)">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        <div class="color-rds">Las calificaciones son de acceso excusivo para los alumnos.</div>
-      </mat-card-title>
-      <mat-card-subtitle>Si eres alumno, contacta a la dirección escolar para más detalles.</mat-card-subtitle>
-    </mat-card-header>
-  </mat-card>
-</div>

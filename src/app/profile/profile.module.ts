@@ -13,13 +13,14 @@ import * as fromEntity from '@rds-store/config/entity-metadata';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
 import { ACCOUNTS_SERVICES } from '../accounts/services/index';
+import { ScoresService } from '../teachers/services/scores.service';
 @NgModule({
   declarations: [
     ...PROFILE_CONTAINERS, ...PROFILE_COMPONENTS
   ],
   providers: [
     ...ACCOUNTS_SERVICES,
-    ProfileService,
+    ScoresService,
     ScoresDataService,
     ScoresEntityService,
     AccountsEntityService,
@@ -43,6 +44,6 @@ export class ProfileModule {
     eds.registerMetadataMap(fromEntity.entityMetadata);
     entityServices.registerEntityCollectionServices([scoresEntityService, accountsEntityService]);
     entityDataService.registerService(fromScores.entityCollectionName, scoresDataService);
-    entityDataService.registerService(fromAccounts.entityCollectionName, scoresDataService);
+    entityDataService.registerService(fromAccounts.entityCollectionName, accountsDataService);
   }
 }

@@ -5,7 +5,7 @@ import { FirestoreV9Service } from '@rds-shared/generic/firestore-v9.service';
 import * as fromScores from '@rds-store/scores';
 
 @Injectable()
-export class ScoreService extends FirestoreV9Service<Score> {
+export class ScoresService extends FirestoreV9Service<Score> {
   constructor(public firestore: Firestore) {
     super(fromScores.pluralizedEntityName, firestore);
   }

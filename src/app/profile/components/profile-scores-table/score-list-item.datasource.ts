@@ -34,7 +34,6 @@ export class ScoreListItemDataSource extends DataSource<any> {
     // stream for the data-table to consume.
     const rows = [];
     this.data.forEach(element => rows.push(element, { detailRow: true, element }));
-    console.log(rows)
     return of(rows)
     /* return merge(observableOf(rows), this.paginator.page, this.sort.sortChange)
       .pipe(map(() => {

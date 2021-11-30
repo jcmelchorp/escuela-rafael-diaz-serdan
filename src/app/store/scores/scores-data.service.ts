@@ -5,34 +5,34 @@ import { Update } from '@ngrx/entity';
 import { Observable } from 'rxjs';
 import * as fromScore from '.';
 import { Score } from '@rds-profile/models/score.model';
-import { ProfileService } from '@rds-profile/services/profile.service';
+import { ScoresService } from '../../teachers/services/scores.service';
 @Injectable()
 export class ScoresDataService extends DefaultDataService<Score> {
   constructor(
     http: HttpClient,
     httpUrlGenerator: HttpUrlGenerator,
-    private profileServices: ProfileService
+    private scoreServices: ScoresService
   ) {
     super(fromScore.entityCollectionName, http, httpUrlGenerator);
   }
 
   getAll(): Observable<Score[]> {
-    return this.profileServices.list();
+    return this.scoreServices.list();
   }
 
   getWithQuery(queryParams: QueryParams): Observable<Score[]> {
-    return this.profileServices.getWithQuery(queryParams);
+    return this.scoreServices.getWithQuery(queryParams);
   }
   getByKey(key: string): Observable<Score> {
-    return this.profileServices.getById(key);
+    return this.scoreServices.getById(key);
   }
   add(course: Score): Observable<Score> {
-    return this.profileServices.add(course);
+    return this.scoreServices.add(course);
   }
   update(course: Update<Score>): Observable<Score> {
-    return this.profileServices.update(course.id.toString(), course.changes);
+    return this.scoreServices.update(course.id.toString(), course.changes);
   }
   delete(key: string): Observable<string> {
-    return this.profileServices.delete(key);
+    return this.scoreServices.delete(key);
   }
 }

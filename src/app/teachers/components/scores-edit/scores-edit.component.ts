@@ -15,7 +15,7 @@ import {
 } from 'rxjs/operators';
 import { SubscriptionService } from '@rds-shared/services/subscription.service';
 import { User } from '@rds-auth/models/user.model';
-import { ScoreService } from '../../services/score.service';
+import { ScoresService } from '../../services/scores.service';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { ScoreListItem } from '@rds-profile/models/score.model';
 import { SchoolCourse } from '@rds-school/models/school-course.model';
@@ -42,7 +42,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   currentGrades!: FormGroup;
   constructor(
     private route: ActivatedRoute,
-    private scoreService: ScoreService,
+    private scoresService: ScoresService,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
 
@@ -87,7 +87,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   }
 
   async setScore(student: any): Promise<FormGroup> {
-    const currentGrades = await this.scoreService.getById(student.id + this.course.cycle).toPromise()
+    const currentGrades = await this.scoresService.getById(student.id + this.course.cycle).toPromise()
     return this.formBuilder.group({
       studentId: [student.id, [Validators.required]],
       studentName: [student.name.fullName, Validators.required],
@@ -178,7 +178,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
       }
     });
 
-    const currentGrades = await this.scoreService.getById(studentProps.studentId + this.course.cycle).toPromise()
+    const currentGrades = await this.scoresService.getById(studentProps.studentId + this.course.cycle).toPromise()
     let pos: number = currentGrades.scores.findIndex(
       (s) => s.courseName == score.courseName
     );
@@ -187,7 +187,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
     let isFinished = (scores && scores.every((s) => s.isCourseClosed && s.prom_materia));
     let prom_final = isFinished ?
       scores.map((s) => s.prom_materia).reduce((a, b) => (a + b)) / scores.length : null;
-    this.scoreService.update(currentGrades.id, {
+    this.scoresService.update(currentGrades.id, {
       id: currentGrades.id,
       cycle: this.course.cycle,
       grade: this.course.grade,

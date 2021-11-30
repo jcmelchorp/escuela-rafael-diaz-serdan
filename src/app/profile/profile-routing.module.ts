@@ -4,9 +4,8 @@ import { NotFoundComponent } from '@rds-shared/components';
 import { ProfileMenuComponent } from './components';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { ProfileScoresComponent } from './components/profile-scores/profile-scores.component';
-import { ScoreResolver } from './resolvers/score.resolver';
+import { ScoresResolver } from './resolvers/scores.resolver';
 import { UserDetailsComponent } from '@rds-accounts/components/user-details/user-details.component';
-import { UserEditDialogComponent } from '../accounts/components/user-edit-dialog/user-edit-dialog.component';
 
 const routes: Routes = [
   {
@@ -20,7 +19,7 @@ const routes: Routes = [
           {
             path: 'calificaciones',
             component: ProfileScoresComponent,
-            //resolve: { scores: ScoreResolver },
+            resolve: { scores: ScoresResolver },
           },
           {
             path: 'editar',
@@ -40,6 +39,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ScoreResolver]
+  providers: [ScoresResolver]
 })
 export class ProfileRoutingModule { }

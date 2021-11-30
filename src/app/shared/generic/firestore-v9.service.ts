@@ -73,7 +73,7 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
 
   getWithQuery(queryParams: QueryParams): Observable<T[]> {
     const queryWithParams = query(collection(this.afs, this.tCollection), where(Object.keys(queryParams).pop(), '==', Object.values(queryParams).pop()))
-    return collectionData(queryWithParams).pipe(map(x => x as T[]));
+    return collectionData(queryWithParams, { idField: 'id' }).pipe(take(1), map(x => x as T[]));
 
     /* return this.afs.collection<T>(this.collection, ref => ref.where(
       query['field'].toString(),

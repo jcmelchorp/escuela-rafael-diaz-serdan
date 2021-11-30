@@ -8,7 +8,7 @@ import { TEACHERS_COMPONENTS } from './components';
 import { TEACHERS_CONTAINERS } from './containers';
 import { SchoolTeachersRoutingModule } from './school-teachers-routing.module';
 import { EntityDefinitionService, EntityServices, EntityDataService, } from '@ngrx/data';
-import { ScoreService } from './services/score.service';
+import { ScoresService } from './services/scores.service';
 
 import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
@@ -24,7 +24,7 @@ import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/sch
   declarations: [...TEACHERS_COMPONENTS, ...TEACHERS_CONTAINERS],
   imports: [SharedModule, SchoolTeachersRoutingModule],
   providers: [
-    ScoreService,
+    ScoresService,
     AccountsService,
     SchoolCoursesService,
     SchoolTeachersService,
