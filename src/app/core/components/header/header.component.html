@@ -11,6 +11,8 @@
       <button mat-button [matMenuTriggerFor]="webapp">
         Aplicación
       </button>
+      <a class="text-decoration-none fancy-button" mat-button href="http://rds.edu.mx/envivo" target="_blank">RDS
+        <span>TV</span></a>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
       <!-- <span>{{myDate|date:'full':'es-MX'}}</span> -->
@@ -25,7 +27,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <ng-content #progressBar></ng-content>
-<mat-menu #userMenu="matMenu" fxLayoutAlign="right">
+<mat-menu #userMenu="matMenu" fxLayoutAlign="end">
   <ng-template matMenuContent>
     <div mat-list-item *ngIf="isOnline && user" [routerLink]="['p']">
       <app-user-card [isOnline]="isOnline" [isAdmin]="isAdmin" [user]="user"> </app-user-card>
