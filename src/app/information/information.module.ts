@@ -6,15 +6,15 @@ import { INFO_COMPONENTS } from './components';
 import { INFO_CONTAINERS } from './containers';
 import { SharedModule } from '../shared/shared.module';
 import { AlertModule } from 'ngx-bootstrap/alert';
-
-
+import { YouTubePlayerModule } from '@angular/youtube-player';
 @NgModule({
   declarations: [
     ...INFO_COMPONENTS, ...INFO_CONTAINERS],
   imports: [
     SharedModule,
     InformationRoutingModule,
-    AlertModule
+    AlertModule,
+    YouTubePlayerModule
   ], providers: []
 })
 export class InformationModule { }

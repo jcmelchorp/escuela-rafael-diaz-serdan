@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from '@rds-shared/components';
 import { AboutComponent, ReopenningComponent, RemoteLearningComponent, PrivacyPolicyComponent, LocationComponent, LicenseComponent, CodeConductComponent, CodeConductSchoolComponent, TermsComponent } from './components';
-import { InformationComponent } from './containers';
+import { WellcomeComponent } from './components/wellcome/wellcome.component';
 
 const routes: Routes = [
-  { path: '', component: InformationComponent },
+  { path: '', component: WellcomeComponent },
   {
     path: 'about',
     component: AboutComponent,

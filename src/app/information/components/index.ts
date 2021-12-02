@@ -7,6 +7,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { RemoteLearningComponent } from './remote-learning/remote-learning.component';
 import { ReopenningComponent } from './reopenning/reopenning.component';
 import { TermsComponent } from './terms/terms.component';
+import { WellcomeComponent } from './wellcome/wellcome.component';
 
 export const INFO_COMPONENTS: any[] = [
   AboutComponent,
@@ -17,7 +18,8 @@ export const INFO_COMPONENTS: any[] = [
   PrivacyPolicyComponent,
   RemoteLearningComponent,
   ReopenningComponent,
-  TermsComponent
+  TermsComponent,
+  WellcomeComponent
 ]
 export * from './about/about.component';
 export * from './code-conduct/code-conduct.component';
@@ -28,3 +30,4 @@ export * from './privacy-policy/privacy-policy.component';
 export * from './remote-learning/remote-learning.component';
 export * from './reopenning/reopenning.component';
 export * from './terms/terms.component';
+export * from './wellcome/wellcome.component';
