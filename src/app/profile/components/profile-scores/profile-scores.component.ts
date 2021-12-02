@@ -55,8 +55,8 @@ export class ProfileScoresComponent implements OnInit {
     this.isTeacher$ = this.store.select(isTeacher);
     this.user$ = this.store.select(selectUser).pipe(tap(user => this.userId = user.id));
     this.cycle = this.route.snapshot.queryParams.cycle;
-    this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
-
+    //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
+    this.timeOpenScores = true;
   }
   ngOnInit(): void {
 
