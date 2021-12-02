@@ -14,10 +14,10 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
 import { AccountsDataService } from '@rds-store/accounts/accounts-data.service';
 import { ACCOUNTS_SERVICES } from '../accounts/services/index';
 import { ScoresService } from '../teachers/services/scores.service';
+import { AlertModule } from 'ngx-bootstrap/alert';
 @NgModule({
   declarations: [
-    ...PROFILE_CONTAINERS, ...PROFILE_COMPONENTS
-  ],
+    ...PROFILE_CONTAINERS, ...PROFILE_COMPONENTS],
   providers: [
     ...ACCOUNTS_SERVICES,
     ScoresService,
@@ -28,7 +28,8 @@ import { ScoresService } from '../teachers/services/scores.service';
   ],
   imports: [
     SharedModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    AlertModule
   ]
 })
 export class ProfileModule {
