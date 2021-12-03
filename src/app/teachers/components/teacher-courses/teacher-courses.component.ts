@@ -1,16 +1,16 @@
 import { Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { selectUser } from '@rds-auth/state/auth.selectors';
 import { User } from '@rds-auth/models/user.model';
 import { AppState } from '@rds-store/app.state';
 import { Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { moveInLeft } from '@rds-shared/animations/router.animations';
-import { AssignedCourse } from '@rds-school/school-courses/models/school-course.model';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
-import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ import { AccountsEntityService } from '../../../store/accounts/accounts-entity.s
   animations: [moveInLeft()],
 })
 export class TeacherCoursesComponent implements OnInit {
-  courses$!: Observable<AssignedCourse[]>;
+  courses$!: Observable<SchoolCourse[]>;
   isAdmin$!: Observable<boolean>;
   currentTeacher!: User;
   teachers$: Observable<User[]>;
@@ -31,23 +31,21 @@ export class TeacherCoursesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
-    private assignedCoursesEntityService: AssignedCoursesEntityService,
-    private accountsEntityService: AccountsEntityService
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolTeachersEntityService: SchoolTeachersEntityService
   ) {
-    this.loading_courses$ = this.assignedCoursesEntityService.loading$;
+    this.loading_courses$ = this.schoolCoursesEntityService.loading$;
     this.initSearchForm();
     this.teacherSubscription = this.store
       .select(selectUser)
       .subscribe((user) => {
         this.currentTeacher = user;
         this.searchForm.patchValue({
-          teacherId: user.id,
+          teacherEmail: user.primaryEmail,
         });
         return user;
       });
-    this.teachers$ = this.accountsEntityService.entities$.pipe(
-      map(users => users.filter(u => u.role == 'Profesores'))
-    );
+    this.teachers$ = this.schoolTeachersEntityService.entities$;
   }
 
   ngOnInit(): void {
@@ -57,26 +55,26 @@ export class TeacherCoursesComponent implements OnInit {
   get searchString() {
     return this.searchForm.get('searchString');
   }
-  get teacherId() {
-    return this.searchForm.get('mainTeacherId');
+  get teacherEmail() {
+    return this.searchForm.get('teacherEmail');
   }
 
   onSearch() {
     let name: string = this.searchString.value.toLocaleLowerCase();
-    let teacherId: string = this.teacherId.value;
-    this.courses$ = this.assignedCoursesEntityService.entities$.pipe(
+    let teacherEmail: string = this.teacherEmail.value;
+    this.courses$ = this.schoolCoursesEntityService.entities$.pipe(
       map((courses) => {
         if (!courses) {
-          this.assignedCoursesEntityService.getWithQuery({
+          this.schoolCoursesEntityService.getWithQuery({
             field: 'teacherId',
             operation: '==',
-            value: teacherId,
+            value: teacherEmail,
           });
         }
-        if (name == '' && teacherId == '') return courses;
+        if (name == '' && teacherEmail == '') return courses;
         if (name == '')
-          return courses.filter((c) => c.teacherId === teacherId);
-        if (teacherId == '')
+          return courses.filter((c) => c.teacherEmail === teacherEmail);
+        if (teacherEmail == '')
           return courses.filter((c) =>
             c.name.toLocaleLowerCase().includes(name)
           );
@@ -84,7 +82,7 @@ export class TeacherCoursesComponent implements OnInit {
         return courses.filter(
           (c) =>
             c.name.toLocaleLowerCase().includes(name) &&
-            c.teacherId == teacherId
+            c.teacherEmail == teacherEmail
         );
       }),
       /* switchMap((courses) =>
@@ -101,7 +99,7 @@ export class TeacherCoursesComponent implements OnInit {
         this.teachers$.pipe(
           map((users) =>
             courses.map((course) => {
-              const teacher = users.find((u) => u.id == course.teacherId);
+              const teacher = users.find((u) => u.primaryEmail == course.teacherEmail);
               return { ...course, teacher: teacher };
             })
           )
@@ -113,7 +111,7 @@ export class TeacherCoursesComponent implements OnInit {
   initSearchForm() {
     this.searchForm = this.fb.group({
       searchString: new FormControl(''),
-      teacherId: new FormControl('', Validators.required),
+      teacherEmail: new FormControl('', Validators.required),
     });
   }
   ngOnDestroy(): void {

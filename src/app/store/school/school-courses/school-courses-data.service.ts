@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
+import { SchoolCoursesService } from '@rds-school/services';
 import { Observable } from 'rxjs';
 import * as fromClass from '.';
-import { SchoolCourse } from '@rds-school/school-courses/models/school-course.model';
-import { SchoolCoursesService } from '@rds-school/school-courses/services/school-courses.service';
+
 @Injectable()
 export class SchoolCoursesDataService extends DefaultDataService<SchoolCourse> {
   constructor(

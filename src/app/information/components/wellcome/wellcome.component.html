@@ -1,0 +1,105 @@
+<div class="main-header">
+  <div #parallax id="parallax"></div>
+
+  <!-- <section class="shadow"></section> -->
+  <button class="arrow-down bounce" (click)="aboutUs.scrollIntoView({ behavior: 'smooth', block: 'start' })" mat-fab>
+    <mat-icon>expand_more</mat-icon>
+  </button>
+  <div #aboutUs class="content-about-us">
+    <section class="section-dark">
+      <article class="the-story">
+        <h1 class="section-title">Proyecto pedagógico alternativo (desde 1981)</h1>
+        <hr>
+        <mat-card class="mat-elevation-z10">
+          <mat-card-header>
+            Su espíritu educativo se enfoca en el desarrollo pleno del individuo, el
+            reconocimiento de sus capacidades y
+            el respeto a las etapas del desarrollo integral de cada niño. Fomentado los valores universales, nuestra
+            labor docente no sólo profundiza en la adqisición de saberes, sino que prepara al ser para hacerse
+            responsable de sus decisiones, para que con sabiduría tome de la vida sólo aquello que le dignifique.
+          </mat-card-header>
+
+        </mat-card>
+        <hr>
+
+      </article>
+    </section>
+    <button class="arrow-up bounce" (click)="parallax.scrollIntoView({ behavior: 'smooth', block: 'start' })" mat-fab>
+      <mat-icon>expand_less</mat-icon>
+    </button>
+    <button class="arrow-down bounce" (click)="ninios.scrollIntoView({ behavior: 'smooth', block: 'start' })" mat-fab>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
+  <div #ninios class="content-ninios">
+    <section class="section-dark">
+      <article class="the-story">
+        <h1 class="section-title">Nuestra filosofía</h1>
+        <hr>
+        <app-info-cards>
+          <ng-container name="textcard">
+            <blockquote class="blockquote">
+              <p class="mb-0">Niños felices, abiertos, porque están contentos de trabajar por sí mismos y de que se les
+                halla hecho responsables de su trabajo.</p>
+              <p id="dex-sign">Pierre Faure</p>
+            </blockquote>
+          </ng-container>
+        </app-info-cards>
+        <hr>
+      </article>
+    </section>
+    <button class="arrow-up bounce" (click)="aboutUs.scrollIntoView({ behavior: 'smooth', block: 'start' })" mat-fab>
+      <mat-icon>expand_less</mat-icon>
+    </button>
+    <button class="arrow-down bounce" (click)="art.scrollIntoView({ behavior: 'smooth', block: 'start' })" mat-fab>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
+  <div #art class="content-art">
+    <section class="section-dark">
+      <article class="the-story">
+        <h1 class="section-title">Artes</h1>
+        <hr>
+        <app-info-cards>
+          <ng-container name="textcard">
+            La música tiene un poder que va más allá de las palabras. El placer de compartir la música
+            genera conexiones
+            entre padres e hijos, ancianos y jóvenes, conocidos y desconocidos. Los sonidos y los ritmos traspasan las
+            fronteras de las diferencias y nos unen en un mundo de sensaciones y sentimientos. La música está en todas
+            partes:
+            en un aplauso con las manos, en el balbuceo de un bebé, en el sonido del viento moviéndose entre los
+            árboles,
+            en las gotas de lluvia cayendo sobre el tejado y más que todo en las canciones que su familia atesora.
+            No se necesitan lecciones especiales ni equipos sofisticados para disfrutar de la música. Toda está allí...
+            esperando ser compartida. </ng-container>
+        </app-info-cards>
+        <hr>
+      </article>
+    </section>
+    <button class="arrow-up bounce" (click)="ninios.scrollIntoView({ behavior: 'smooth', block: 'start' })" mat-fab>
+      <mat-icon>expand_less</mat-icon>
+    </button>
+    <button class="arrow-down bounce" (click)="secundaria.scrollIntoView({ behavior: 'smooth', block: 'start' })"
+      mat-fab>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
+  <div #secundaria class="content-secundaria">
+    <section class="section-dark">
+      <article class="the-story">
+        <h1 class="section-title">Escuela Rafael Díaz Serdán</h1>
+        <hr>
+        <youtube-player videoId="pIXtmxDf_nQ" suggestedQuality="highres" [height]="250" [width]="500"
+          [startSeconds]="4">
+        </youtube-player>
+        <youtube-player videoId="8er8lBmMFJA" suggestedQuality="highres" [height]="250" [width]="500"
+          [startSeconds]="4">
+        </youtube-player>
+      </article>
+    </section>
+    <button class="arrow-up bounce" (click)="art.scrollIntoView({ behavior: 'smooth', block: 'start' })" mat-fab>
+      <mat-icon>expand_less</mat-icon>
+    </button>
+  </div>
+
+</div>

@@ -1,0 +1,13 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between">
+  <h2>Migración</h2>
+  <mat-icon matDialogClose mat-icon-button>close</mat-icon>
+</div>
+<mat-dialog-content>
+  <div>Comenzar la migración?</div>
+  <button mat-button (click)="startCounter()">OK</button>
+  <mat-progress-bar mode="determinate" [value]="progress" (animationEnd)="progressInLoading()"></mat-progress-bar>
+  <div class="progress-bar-container">
+    <div class="progress-bar {{color}}" [ngStyle]="{'width': progress + '%'}">
+    </div>
+  </div>
+</mat-dialog-content>

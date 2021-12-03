@@ -19,7 +19,11 @@ export const isTeacher = createSelector(
 );
 export const selectUser = createSelector(
   selectAuthState,
-  (state: AuthenticationState): User => state.user!
+  (state: AuthenticationState): User => state.user
+);
+export const selectUserId = createSelector(
+  selectAuthState,
+  (state: AuthenticationState): string => state.user.id
 );
 
 export const getError = createSelector(

@@ -1,0 +1,94 @@
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>
+<div *ngIf="!(loading$|async)&&(loaded$|async)&&(filteredCourses$|async);else spinner">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container [matColumnDef]="column.propertyName" *ngFor="let column of columnsToDisplay; let i = index">
+      <th mat-header-cell *matHeaderCellDef>
+        <button mat-button [disabled]="!groupByColumns.includes(column.propertyName)"
+          color="{{groupByColumns.includes(column.propertyName)?'primary':'default'}}" (click)="groupByColumns.includes(column.propertyName)
+            ? unGroupBy($event, column)
+            : groupBy($event, column)">
+          {{ column.headerText }}
+        </button>
+      </th>
+      <div [ngSwitch]="column.propertyName">
+        <div *ngSwitchCase="'teacherEmail'">
+          <td mat-cell *matCellDef="let row">
+            <!-- {{cycles[row[column.field]]}} -->
+          </td>
+        </div>
+        <div *ngSwitchCase="'priority'">
+          <td mat-cell *matCellDef="let row"></td>
+        </div>
+        <div *ngSwitchCase="'cycle'">
+          <td mat-cell *matCellDef="let row">
+            <!-- {{cycles[row[column.field]]}} -->
+          </td>
+        </div>
+        <div *ngSwitchCase="'grade'">
+          <td mat-cell *matCellDef="let row">{{grades[row[column.propertyName]]}} </td>
+        </div>
+        <div *ngSwitchDefault>
+          <td mat-cell *matCellDef="let row">
+            {{row[column.propertyName]}}</td>
+        </div>
+      </div>
+    </ng-container>
+    <!--  Actions-->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <!--   <mat-icon color="accent" mat-icon-button matTooltip="Modifica la información de esta clase" >
+            edit</mat-icon> -->
+          <button mat-icon-button style="color:#9d8500"
+            matBadge="{{(row.studentsEmails&&row.studentsEmails.length>0)?row.studentsEmails.length:null}}"
+            (click)="openStudentsToCourse(row)">
+            <mat-icon matTooltip="Asigna alumnos a esta clase">groups</mat-icon>
+          </button>
+          <mat-icon *ngIf="!row.teacherEmail" mat-icon-button matTooltip="Asigna un profesor a esta clase"
+            (click)="openTeacherToCourse(row)">
+            co_present
+          </mat-icon>
+          <fa-icon style="color: #0a6100;" mat-icon-button matTooltip="Calificaciones" size="lg" [icon]="faAward"
+            (click)="openTeacherToCourse(row)">
+            task
+          </fa-icon>
+          <mat-icon color="warn" mat-icon-button matTooltip="Elimina esta clase" (click)="deleteSchoolCourse(row)">
+            delete
+          </mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noData">
+      <tr class="d-block" mat-footer-cell *matFooterCellDef [attr.colspan]="999">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h2 class="text-black-50">Aún no hay elementos en esta lista.</h2>
+        </div>
+      </tr>
+    </ng-container>
+
+    <ng-container matColumnDef="groupHeader">
+      <td mat-cell class="mat-h{{4-group.level}} border-bottom-0 px-{{group.level+3}}"
+        [attr.colspan]="displayedColumns.length" *matCellDef="let group">
+        <strong>{{ group.level===1?cycles[group[groupByColumns[group.level - 1]]]:[group[groupByColumns[group.level -
+          1]]]}} </strong>
+        ({{group.totalCounts}})
+        <mat-icon>{{
+          group.expanded ? "expand_more" : "chevron_right"
+          }}</mat-icon>
+      </td>
+    </ng-container>
+    <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
+    <tr mat-row (click)="editSchoolCourse(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource.data.length>0"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isTableGroup" (click)="groupHeaderClick(row)">
+    </tr>
+  </table>
+</div>

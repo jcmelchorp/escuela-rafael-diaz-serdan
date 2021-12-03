@@ -1,14 +1,14 @@
+@use "./../../../../assets/themes/colors" as colors;
 .breadcrumb {
   background: none;
-  font-size: 1em;
+  // font-size: calc(0.5rem + 1vw);
+  font-family: "poppins", cursive;
+  //text-shadow: -2px -1px 1px colors.$text-shadow-color; */
   margin: 0;
-  a,
-  span {
-    color: rgb(110, 110, 110);
-  }
+
   a:hover,
   span:hover {
-    color: rgb(43, 43, 43);
+    color: colors.$rds-logo-color;
     text-decoration: none;
   }
   li {
@@ -21,7 +21,7 @@
   }
   li::after {
     content: "->";
-    color: darkgrey;
+    color: colors.$rds-logo-alpha-color;
   }
   li:last-child::after {
     content: "";

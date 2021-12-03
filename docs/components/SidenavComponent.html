@@ -751,7 +751,7 @@ import {
 } from &#x27;@rds-shared/animations/animations&#x27;;
 import { User } from &#x27;@rds-auth/models/user.model&#x27;;
 
-import { AppState } from &#x27;@rds-store/index&#x27;;
+import { AppState } from &#x27;@rds-store/app.state&#x27;;
 
 import { LayoutService } from &#x27;../../services&#x27;;
 import { faGoogle } from &#x27;@fortawesome/free-brands-svg-icons&#x27;;
@@ -803,62 +803,67 @@ export class SidenavComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container class&#x3D;&quot;sidenav-container&quot;&gt;
-  &lt;mat-sidenav *ngIf&#x3D;&quot;isOnline&quot; #leftSidenav class&#x3D;&quot;sidenav d-print-none bg-transparent&quot; [fixedInViewport]&#x3D;&quot;false&quot;
+  &lt;mat-sidenav *ngIf&#x3D;&quot;isOnline&quot; #leftSidenav class&#x3D;&quot;sidenav d-print-none&quot; [fixedInViewport]&#x3D;&quot;false&quot;
     [attr.role]&#x3D;&quot;isHandset ? &#x27;dialog&#x27; : &#x27;navigation&#x27;&quot; [@onSideNavChange]&#x3D;&quot;sideNavState ? &#x27;open&#x27; : &#x27;close&#x27;&quot;
-    [mode]&#x3D;&quot;&#x27;side&#x27;&quot; [opened]&#x3D;&quot;isHandset &#x3D;&#x3D;&#x3D; false&quot;&gt;
+    [mode]&#x3D;&quot;isHandset ? &#x27;over&#x27;:&#x27;side&#x27;&quot; [opened]&#x3D;&quot;isHandset &#x3D;&#x3D;&#x3D; false&quot;&gt;
     &lt;div role&#x3D;&quot;navigation&quot; fxLayout&#x3D;&quot;column&quot; fxLayoutAlign&#x3D;&quot;space-between&quot; fxFlexFill&gt;
       &lt;mat-nav-list dense&gt;
-        &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;/&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;
+        &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;/&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
           &lt;mat-icon matListIcon&gt;home&lt;/mat-icon&gt;
           &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Inicio&lt;/span&gt;
         &lt;/mat-list-item&gt;
-        &lt;mat-list-item *ngIf&#x3D;&quot;isTeacher || isAdmin&quot; [routerLink]&#x3D;&quot;[&#x27;gsuite&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;
-          &lt;fa-icon matListIcon [icon]&#x3D;&quot;faGoogle&quot;&gt;&lt;/fa-icon&gt;
-          &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;GSuite&lt;/span&gt;
-        &lt;/mat-list-item&gt;
-        &lt;mat-list-item *ngIf&#x3D;&quot;isTeacher || isAdmin&quot; [routerLink]&#x3D;&quot;[&#x27;escuela&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;
-          &lt;mat-icon matListIcon&gt;apartment&lt;/mat-icon&gt;
-          &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Dirección&lt;/span&gt;
-        &lt;/mat-list-item&gt;
-        &lt;mat-list-item *ngIf&#x3D;&quot;isTeacher&quot; [routerLink]&#x3D;&quot;[&#x27;profesores&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;
-          &lt;mat-icon matListIcon&gt;co_present&lt;/mat-icon&gt;
-          &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Profesores&lt;/span&gt;
-        &lt;/mat-list-item&gt;
-        &lt;!-- &lt;h3 matSubheader [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Alumnos&lt;/h3&gt; --&gt;
-        &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;user&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;
+        &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;perfil&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
           &lt;mat-icon matListIcon&gt;school&lt;/mat-icon&gt;
           &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Alumnos&lt;/span&gt;
         &lt;/mat-list-item&gt;
+        &lt;mat-list-item *ngIf&#x3D;&quot;isTeacher&quot; [routerLink]&#x3D;&quot;[&#x27;profesores&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;
+          (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
+          &lt;mat-icon matListIcon&gt;co_present&lt;/mat-icon&gt;
+          &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Profesores&lt;/span&gt;
+        &lt;/mat-list-item&gt;
+        &lt;mat-list-item *ngIf&#x3D;&quot;isTeacher || isAdmin&quot; [routerLink]&#x3D;&quot;[&#x27;gsuite&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;
+          (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
+          &lt;fa-icon matListIcon [icon]&#x3D;&quot;faGoogle&quot;&gt;&lt;/fa-icon&gt;
+          &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;GSuite&lt;/span&gt;
+        &lt;/mat-list-item&gt;
+        &lt;mat-list-item *ngIf&#x3D;&quot;isTeacher || isAdmin&quot; [routerLink]&#x3D;&quot;[&#x27;escuela&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot;
+          (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
+          &lt;mat-icon matListIcon&gt;apartment&lt;/mat-icon&gt;
+          &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Dirección&lt;/span&gt;
+        &lt;/mat-list-item&gt;
       &lt;/mat-nav-list&gt;
-      &lt;mat-nav-list dense&gt;
-        &lt;!--         &lt;mat-accordion  [displayMode]&#x3D;&quot;flat&quot; [multi]&#x3D;&quot;true&quot; dense&gt;--&gt;
-        &lt;mat-expansion-panel [disabled]&#x3D;&quot;!isAdmin&quot; [class.mat-elevation-z0]&#x3D;&quot;true&quot; dense hideToggle&gt;
-          &lt;mat-expansion-panel-header&gt;
-            &lt;mat-icon matListIcon&gt;admin_panel_settings&lt;/mat-icon&gt;
-            &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Usuarios&lt;/span&gt;
-          &lt;/mat-expansion-panel-header&gt;
-          &lt;ng-template matExpansionPanelContent&gt;
-            &lt;mat-nav-list dense&gt;
-              &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;users&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
-                &lt;mat-icon matListIcon&gt;people_alt&lt;/mat-icon&gt;
-                &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Escuela&lt;/span&gt;
-              &lt;/mat-list-item&gt;
-              &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;admin&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
-                &lt;mat-icon matListIcon&gt;domain&lt;/mat-icon&gt;
-                &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Google&lt;/span&gt;
-              &lt;/mat-list-item&gt;
-            &lt;/mat-nav-list&gt;
-          &lt;/ng-template&gt;
-        &lt;/mat-expansion-panel&gt;
-        &lt;!--         &lt;/mat-accordion&gt;--&gt;
+      &lt;mat-nav-list&gt;
+        &lt;!-- &lt;h3 matSubheader [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Alumnos&lt;/h3&gt; --&gt;
+        &lt;mat-accordion&gt;
+          &lt;mat-expansion-panel [disabled]&#x3D;&quot;!isAdmin&quot; [class.mat-elevation-z0]&#x3D;&quot;true&quot; (opened)&#x3D;&quot;panelOpenState &#x3D; true&quot;
+            (closed)&#x3D;&quot;panelOpenState &#x3D; false&quot; hideToggle&#x3D;&quot;panelOpenState&quot;&gt;
+            &lt;mat-expansion-panel-header&gt;
+              &lt;mat-panel-title&gt;
+                &lt;mat-icon&gt;admin_panel_settings&lt;/mat-icon&gt;
+                &lt;span [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;&amp;nbsp; Usuarios&lt;/span&gt;
+              &lt;/mat-panel-title&gt;
+            &lt;/mat-expansion-panel-header&gt;
+            &lt;ng-template matExpansionPanelContent&gt;
+              &lt;mat-nav-list dense&gt;
+                &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;users&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
+                  &lt;mat-icon matListIcon&gt;people_alt&lt;/mat-icon&gt;
+                  &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Escuela&lt;/span&gt;
+                &lt;/mat-list-item&gt;
+                &lt;mat-list-item [routerLink]&#x3D;&quot;[&#x27;admin&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; (click)&#x3D;&quot;leftSidenav.close()&quot;&gt;
+                  &lt;mat-icon matListIcon&gt;domain&lt;/mat-icon&gt;
+                  &lt;span matLine [@animateText]&#x3D;&quot;linkText ? &#x27;show&#x27; : &#x27;hide&#x27;&quot;&gt;Google&lt;/span&gt;
+                &lt;/mat-list-item&gt;
+              &lt;/mat-nav-list&gt;
+            &lt;/ng-template&gt;
+          &lt;/mat-expansion-panel&gt;
+        &lt;/mat-accordion&gt;
         &lt;mat-list-item (click)&#x3D;&quot;onSidenavToggle()&quot;&gt;
           &lt;fa-icon matListIcon [icon]&#x3D;&quot;sideNavState ? faCompressAlt : faExpandAlt&quot;&gt;&lt;/fa-icon&gt;
         &lt;/mat-list-item&gt;
       &lt;/mat-nav-list&gt;
     &lt;/div&gt;
   &lt;/mat-sidenav&gt;
-  &lt;mat-sidenav-content [@onMainContentChange]&#x3D;&quot;(onSideNavChange) ? &#x27;open&#x27;: &#x27;close&#x27;&quot;&gt;
-
+  &lt;mat-sidenav-content [@onMainContentChange]&#x3D;&quot;(onSideNavChange &amp;&amp; !isHandset) ? &#x27;open&#x27;: &#x27;close&#x27;&quot;&gt;
     &lt;app-main [isOnline]&#x3D;&quot;isOnline&quot;&gt;&lt;/app-main&gt;
   &lt;/mat-sidenav-content&gt;
 &lt;/mat-sidenav-container&gt;
@@ -876,6 +881,10 @@ export class SidenavComponent {
 .sidenav {
   border: none;
   width: 75px;
+}
+.mat-expansion-indicator {
+  position: absolute;
+  left: 15px;
 }
 </code></pre>
     </div>
@@ -905,8 +914,8 @@ export class SidenavComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="sidenav-container">  <mat-sidenav *ngIf="isOnline" #leftSidenav class="sidenav d-print-none bg-transparent" [fixedInViewport]="false"    [attr.role]="isHandset ? \'dialog\' : \'navigation\'" [@onSideNavChange]="sideNavState ? \'open\' : \'close\'"    [mode]="\'side\'" [opened]="isHandset === false">    <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>      <mat-nav-list dense>        <mat-list-item [routerLink]="[\'/\']" routerLinkActive="active">          <mat-icon matListIcon>home</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Inicio</span>        </mat-list-item>        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="[\'gsuite\']" routerLinkActive="active">          <fa-icon matListIcon [icon]="faGoogle"></fa-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">GSuite</span>        </mat-list-item>        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="[\'escuela\']" routerLinkActive="active">          <mat-icon matListIcon>apartment</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Dirección</span>        </mat-list-item>        <mat-list-item *ngIf="isTeacher" [routerLink]="[\'profesores\']" routerLinkActive="active">          <mat-icon matListIcon>co_present</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Profesores</span>        </mat-list-item>        <!-- <h3 matSubheader [@animateText]="linkText ? \'show\' : \'hide\'">Alumnos</h3> -->        <mat-list-item [routerLink]="[\'user\']" routerLinkActive="active">          <mat-icon matListIcon>school</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Alumnos</span>        </mat-list-item>      </mat-nav-list>      <mat-nav-list dense>        <!--         <mat-accordion  [displayMode]="flat" [multi]="true" dense>-->        <mat-expansion-panel [disabled]="!isAdmin" [class.mat-elevation-z0]="true" dense hideToggle>          <mat-expansion-panel-header>            <mat-icon matListIcon>admin_panel_settings</mat-icon>            <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Usuarios</span>          </mat-expansion-panel-header>          <ng-template matExpansionPanelContent>            <mat-nav-list dense>              <mat-list-item [routerLink]="[\'users\']" routerLinkActive="active" (click)="leftSidenav.close()">                <mat-icon matListIcon>people_alt</mat-icon>                <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Escuela</span>              </mat-list-item>              <mat-list-item [routerLink]="[\'admin\']" routerLinkActive="active" (click)="leftSidenav.close()">                <mat-icon matListIcon>domain</mat-icon>                <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Google</span>              </mat-list-item>            </mat-nav-list>          </ng-template>        </mat-expansion-panel>        <!--         </mat-accordion>-->        <mat-list-item (click)="onSidenavToggle()">          <fa-icon matListIcon [icon]="sideNavState ? faCompressAlt : faExpandAlt"></fa-icon>        </mat-list-item>      </mat-nav-list>    </div>  </mat-sidenav>  <mat-sidenav-content [@onMainContentChange]="(onSideNavChange) ? \'open\': \'close\'">    <app-main [isOnline]="isOnline"></app-main>  </mat-sidenav-content></mat-sidenav-container></div>'
-    var COMPONENTS = [{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NewCicleDialogComponent', 'selector': ''},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesDialogComponent', 'selector': ''},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="sidenav-container">  <mat-sidenav *ngIf="isOnline" #leftSidenav class="sidenav d-print-none" [fixedInViewport]="false"    [attr.role]="isHandset ? \'dialog\' : \'navigation\'" [@onSideNavChange]="sideNavState ? \'open\' : \'close\'"    [mode]="isHandset ? \'over\':\'side\'" [opened]="isHandset === false">    <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>      <mat-nav-list dense>        <mat-list-item [routerLink]="[\'/\']" routerLinkActive="active" (click)="leftSidenav.close()">          <mat-icon matListIcon>home</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Inicio</span>        </mat-list-item>        <mat-list-item [routerLink]="[\'perfil\']" routerLinkActive="active" (click)="leftSidenav.close()">          <mat-icon matListIcon>school</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Alumnos</span>        </mat-list-item>        <mat-list-item *ngIf="isTeacher" [routerLink]="[\'profesores\']" routerLinkActive="active"          (click)="leftSidenav.close()">          <mat-icon matListIcon>co_present</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Profesores</span>        </mat-list-item>        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="[\'gsuite\']" routerLinkActive="active"          (click)="leftSidenav.close()">          <fa-icon matListIcon [icon]="faGoogle"></fa-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">GSuite</span>        </mat-list-item>        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="[\'escuela\']" routerLinkActive="active"          (click)="leftSidenav.close()">          <mat-icon matListIcon>apartment</mat-icon>          <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Dirección</span>        </mat-list-item>      </mat-nav-list>      <mat-nav-list>        <!-- <h3 matSubheader [@animateText]="linkText ? \'show\' : \'hide\'">Alumnos</h3> -->        <mat-accordion>          <mat-expansion-panel [disabled]="!isAdmin" [class.mat-elevation-z0]="true" (opened)="panelOpenState = true"            (closed)="panelOpenState = false" hideToggle="panelOpenState">            <mat-expansion-panel-header>              <mat-panel-title>                <mat-icon>admin_panel_settings</mat-icon>                <span [@animateText]="linkText ? \'show\' : \'hide\'">&nbsp; Usuarios</span>              </mat-panel-title>            </mat-expansion-panel-header>            <ng-template matExpansionPanelContent>              <mat-nav-list dense>                <mat-list-item [routerLink]="[\'users\']" routerLinkActive="active" (click)="leftSidenav.close()">                  <mat-icon matListIcon>people_alt</mat-icon>                  <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Escuela</span>                </mat-list-item>                <mat-list-item [routerLink]="[\'admin\']" routerLinkActive="active" (click)="leftSidenav.close()">                  <mat-icon matListIcon>domain</mat-icon>                  <span matLine [@animateText]="linkText ? \'show\' : \'hide\'">Google</span>                </mat-list-item>              </mat-nav-list>            </ng-template>          </mat-expansion-panel>        </mat-accordion>        <mat-list-item (click)="onSidenavToggle()">          <fa-icon matListIcon [icon]="sideNavState ? faCompressAlt : faExpandAlt"></fa-icon>        </mat-list-item>      </mat-nav-list>    </div>  </mat-sidenav>  <mat-sidenav-content [@onMainContentChange]="(onSideNavChange && !isHandset) ? \'open\': \'close\'">    <app-main [isOnline]="isOnline"></app-main>  </mat-sidenav-content></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AddStudentsCoursesComponent', 'selector': ''},{'name': 'AdminCoursesComponent', 'selector': 'app-admin-courses'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'CodeConductComponent', 'selector': 'app-code-conduct'},{'name': 'CodeConductSchoolComponent', 'selector': 'app-code-conduct-school'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'InformationComponent', 'selector': 'app-information'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LicenseComponent', 'selector': 'app-license'},{'name': 'LocationComponent', 'selector': 'app-location'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NotesEditComponent', 'selector': 'app-notes-edit'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileInfoComponent', 'selector': 'app-profile-info'},{'name': 'ProfileMenuComponent', 'selector': 'app-profile-menu'},{'name': 'ProfileScoresBarChartComponent', 'selector': 'app-profile-scores-bar-chart'},{'name': 'ProfileScoresComponent', 'selector': 'app-profile-scores'},{'name': 'ProfileScoresListComponent', 'selector': 'app-profile-scores-list'},{'name': 'ProfileScoresRecommendationComponent', 'selector': 'app-profile-scores-recommendation'},{'name': 'ProfileScoresTableComponent', 'selector': 'app-profile-scores-table'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'RemoteLearningComponent', 'selector': 'app-remote-learning'},{'name': 'ReopenningComponent', 'selector': 'app-reopenning'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCourseDialogComponent', 'selector': ''},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'ScoresEditComponent', 'selector': 'app-scores-edit'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StudentsCoursesComponent', 'selector': 'app-students-courses'},{'name': 'TeacherCoursesComponent', 'selector': 'app-teacher-courses'},{'name': 'TeachersComponent', 'selector': 'app-teachers'},{'name': 'TeachersDashboardComponent', 'selector': 'app-teachers-dashboard'},{'name': 'TeachersGradeComponent', 'selector': 'app-teachers-grade'},{'name': 'TermsComponent', 'selector': 'app-terms'},{'name': 'UploadFileDialogComponent', 'selector': ''},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
     var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
     var ACTUAL_COMPONENT = {'name': 'SidenavComponent'};
 </script>

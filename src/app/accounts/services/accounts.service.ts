@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
 import { User } from '@rds-auth/models/user.model';
-import { Database } from '@angular/fire/database';
-import { Firestore } from '@angular/fire/firestore';
-import { FirebaseV9Service } from '../../shared/generic/firebase-v9.service';
+import { Database, listVal, ref } from '@angular/fire/database';
+import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { FirebaseV9Service } from '@rds-shared/generic/firebase-v9.service';
+import { from, Observable } from 'rxjs';
+import { firebaseSerialize } from '@rds-shared/models/firebase.model';
+import { map, take } from 'rxjs/operators';
+import { FirestoreV9Service } from '@rds-shared/generic/firestore-v9.service';
 @Injectable()
 /** AccountsService
  *  Service to manage user accounts in CRUD operations on Firestore
  */
-export class AccountsService extends FirebaseV9Service<User> {
-  public collectionName: string = 'users';
-  public readonly users!: Observable<User[]>;
-
+export class AccountsService extends FirestoreV9Service<User> {
   constructor(
     public db: Firestore,
     public afDatabase: Database
   ) {
-    super('users', db, afDatabase);
+    super('users', db, /* afDatabase */);
+  }
+  migrationToFirestore(user: User) {
+    const refColl = collection(this.afs, this.tCollection);
+    const refDoc = doc(refColl, user.id)
+    return setDoc(refDoc, firebaseSerialize(user))
+  }
+  getFromRtdb(): Observable<User[]> {
+    const dbref = ref(this.afDatabase, this.tCollection);
+    return listVal<User>(dbref).pipe(take(1));
   }
   /*  create(user: Partial<User>): Observable<User> {
      const userRef = this.afDatabase.object<User>(this.collection);

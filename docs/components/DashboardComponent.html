@@ -407,7 +407,7 @@
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { isAdmin, isOnline, isTeacher } from &#x27;@rds-auth/state/auth.selectors&#x27;;
 import { RouterCard } from &#x27;@rds-shared/models/router-card.model&#x27;;
-import { AppState } from &#x27;@rds-store/index&#x27;;
+import { AppState } from &#x27;@rds-store/app.state&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { flyInOut } from &#x27;../../animations/fade-in.animation&#x27;;
 import { User } from &#x27;../../../auth/models/user.model&#x27;;
@@ -435,17 +435,17 @@ export class DashboardComponent {
       {
         title: &#x27;Alumnos&#x27;,
         description: &#x27;Accede a toda tu información como alumno.&#x27;,
-        route: &#x27;user&#x27;,
+        route: &#x27;perfil&#x27;,
         imgUrl: &#x27;assets/images/assignment-grades2.png&#x27;,
         access: this.isOnline$,
       },
-      /* {
+      {
         title: &#x27;Profesores&#x27;,
-        description: &#x27;Acceso a las funciones docentes.&#x27;,
+        description: &#x27;Espacio de profesores.&#x27;,
         route: &#x27;profesores&#x27;,
-        imgUrl: &#x27;assets/images/dashboard-image2.png&#x27;,
+        imgUrl: &#x27;assets/images/dashboard-google.png&#x27;,
         access: this.isTeacher$ || this.isAdmin$,
-      }, */
+      },
       {
         title: &#x27;Dirección&#x27;,
         description: &#x27;Gestiona usuarios, grupos, clases y horarios en la institución.&#x27;,
@@ -454,10 +454,10 @@ export class DashboardComponent {
         access: this.isAdmin$,
       },
       {
-        title: &#x27;Cuentas de usuario&#x27;,
-        description: &#x27;Manejo de usuarios de la institución&#x27;,
-        route: &#x27;accounts&#x27;,
-        imgUrl: &#x27;assets/images/assignment-grades2.png&#x27;,
+        title: &#x27;Usuarios de la institución&#x27;,
+        description: &#x27;Manejo de usuarios de Google Workspace&#x27;,
+        route: &#x27;usuarios&#x27;,
+        imgUrl: &#x27;assets/images/dashboard-image2.png&#x27;,
         access: this.isTeacher$ || this.isAdmin$,
 
       },
@@ -465,16 +465,10 @@ export class DashboardComponent {
         title: &#x27;Funciones de G Suite&#x27;,
         description: &#x27;Administra Google Classroom y Google Admin Directory.&#x27;,
         route: &#x27;gsuite&#x27;,
-        imgUrl: &#x27;assets/images/dashboard-google.png&#x27;,
+        imgUrl: &#x27;assets/images/google-admin-img.png&#x27;,
         access: (this.isTeacher$ || this.isAdmin$)
-      }
-      /*  {
-         title: &#x27;Cuentas de usuario de Google&#x27;,
-         description: &#x27;Manejo de usuarios de Google Workspace&#x27;,
-         route: &#x27;admin&#x27;,
-         imgUrl: &#x27;assets/images/google-admin-img.png&#x27;,
-         access: this.isTeacher$ || this.isAdmin$,
-       }, */
+      },
+
     ];
   }
 }
@@ -486,8 +480,9 @@ export class DashboardComponent {
   &lt;p class&#x3D;&quot;view-title&quot;&gt;Bienvenido&lt;/p&gt;
   &lt;p class&#x3D;&quot;view-subtitle&quot;&gt;Servicios para estudiantes y profesores.&lt;/p&gt;
   &lt;div class&#x3D;&quot;p-2&quot;&gt;
-    &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-sm&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;10px&quot; fxLayoutAlign&#x3D;&quot;flex-start&quot;&gt;
-      &lt;div *ngFor&#x3D;&quot;let card of cards&quot; fxFlex&#x3D;&quot;0 1 calc(50% - 10px)&quot; fxFlex.lt-md&#x3D;&quot;100%&quot; fxFlex.lt-sm&#x3D;&quot;100%&quot;&gt;
+    &lt;div fxLayout&#x3D;&quot;row wrap&quot; fxLayout.lt-sm&#x3D;&quot;column&quot; fxLayoutGap&#x3D;&quot;20px&quot; fxLayoutAlign&#x3D;&quot;flex-start&quot;&gt;
+      &lt;div *ngFor&#x3D;&quot;let card of cards&quot; fxFlex&#x3D;&quot;0 1 calc(33.33% - 20px)&quot; fxFlex.lt-md&#x3D;&quot;0 1 calc(50% - 20px)&quot;
+        fxFlex.lt-sm&#x3D;&quot;100%&quot;&gt;
         &lt;mat-card *ngIf&#x3D;&quot;card.access|async&quot; [@flyInOut]&#x3D;&quot;&#x27;flyInOut&#x27;&quot; class&#x3D;&quot;dashboard-cards&quot; [routerLink]&#x3D;&quot;card.route&quot;
           appMaterialElevation [raisedElevation]&#x3D;&quot;raisedElev&quot;&gt;
           &lt;mat-card-header&gt;
@@ -548,8 +543,8 @@ export class DashboardComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="p-4">  <p class="view-title">Bienvenido</p>  <p class="view-subtitle">Servicios para estudiantes y profesores.</p>  <div class="p-2">    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="flex-start">      <div *ngFor="let card of cards" fxFlex="0 1 calc(50% - 10px)" fxFlex.lt-md="100%" fxFlex.lt-sm="100%">        <mat-card *ngIf="card.access|async" [@flyInOut]="\'flyInOut\'" class="dashboard-cards" [routerLink]="card.route"          appMaterialElevation [raisedElevation]="raisedElev">          <mat-card-header>            <mat-card-title>{{card.title}}</mat-card-title>            <mat-card-subtitle>              <p>{{card.description}}</p>            </mat-card-subtitle>          </mat-card-header>          <img mat-card-image src="{{card.imgUrl}}" />        </mat-card>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NewCicleDialogComponent', 'selector': ''},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesDialogComponent', 'selector': ''},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+        var COMPONENT_TEMPLATE = '<div><div class="p-4">  <p class="view-title">Bienvenido</p>  <p class="view-subtitle">Servicios para estudiantes y profesores.</p>  <div class="p-2">    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutAlign="flex-start">      <div *ngFor="let card of cards" fxFlex="0 1 calc(33.33% - 20px)" fxFlex.lt-md="0 1 calc(50% - 20px)"        fxFlex.lt-sm="100%">        <mat-card *ngIf="card.access|async" [@flyInOut]="\'flyInOut\'" class="dashboard-cards" [routerLink]="card.route"          appMaterialElevation [raisedElevation]="raisedElev">          <mat-card-header>            <mat-card-title>{{card.title}}</mat-card-title>            <mat-card-subtitle>              <p>{{card.description}}</p>            </mat-card-subtitle>          </mat-card-header>          <img mat-card-image src="{{card.imgUrl}}" />        </mat-card>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AddStudentsCoursesComponent', 'selector': ''},{'name': 'AdminCoursesComponent', 'selector': 'app-admin-courses'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'CodeConductComponent', 'selector': 'app-code-conduct'},{'name': 'CodeConductSchoolComponent', 'selector': 'app-code-conduct-school'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'InformationComponent', 'selector': 'app-information'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LicenseComponent', 'selector': 'app-license'},{'name': 'LocationComponent', 'selector': 'app-location'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NotesEditComponent', 'selector': 'app-notes-edit'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileInfoComponent', 'selector': 'app-profile-info'},{'name': 'ProfileMenuComponent', 'selector': 'app-profile-menu'},{'name': 'ProfileScoresBarChartComponent', 'selector': 'app-profile-scores-bar-chart'},{'name': 'ProfileScoresComponent', 'selector': 'app-profile-scores'},{'name': 'ProfileScoresListComponent', 'selector': 'app-profile-scores-list'},{'name': 'ProfileScoresRecommendationComponent', 'selector': 'app-profile-scores-recommendation'},{'name': 'ProfileScoresTableComponent', 'selector': 'app-profile-scores-table'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'RemoteLearningComponent', 'selector': 'app-remote-learning'},{'name': 'ReopenningComponent', 'selector': 'app-reopenning'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCourseDialogComponent', 'selector': ''},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'ScoresEditComponent', 'selector': 'app-scores-edit'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StudentsCoursesComponent', 'selector': 'app-students-courses'},{'name': 'TeacherCoursesComponent', 'selector': 'app-teacher-courses'},{'name': 'TeachersComponent', 'selector': 'app-teachers'},{'name': 'TeachersDashboardComponent', 'selector': 'app-teachers-dashboard'},{'name': 'TeachersGradeComponent', 'selector': 'app-teachers-grade'},{'name': 'TermsComponent', 'selector': 'app-terms'},{'name': 'UploadFileDialogComponent', 'selector': ''},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
     var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
     var ACTUAL_COMPONENT = {'name': 'DashboardComponent'};
 </script>

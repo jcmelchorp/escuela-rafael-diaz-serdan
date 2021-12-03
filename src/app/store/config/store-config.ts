@@ -1,4 +1,4 @@
-import { metaReducers } from "../reducers";
+import { metaReducers } from "./../app.state";
 
 export const storeConfig = {
   metaReducers,

@@ -14,11 +14,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { User } from '@rds-auth/models/user.model';
-import { Assigment } from '../../../classroom/models/classroom.model';
-import { AssignedCourse } from '../../../school/school-courses/models/school-course.model';
-import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { ScoreListItem } from '@rds-profile/models/score.model';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 
 
 @Component({
@@ -28,7 +27,7 @@ import { ScoreListItem } from '@rds-profile/models/score.model';
 })
 export class TeachersGradeComponent implements OnInit {
   courseId: string;
-  course!: AssignedCourse | undefined;
+  course!: SchoolCourse | undefined;
   students$!: Observable<User[]>;
   faChevronLeft = faChevronLeft;
   loading$!: Observable<boolean>;
@@ -40,7 +39,7 @@ export class TeachersGradeComponent implements OnInit {
   currentGrades!: FormGroup;
   constructor(
     private route: ActivatedRoute,
-    private assignedCoursesEntityService: AssignedCoursesEntityService,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
     private fb: FormBuilder
   ) {
@@ -53,27 +52,27 @@ export class TeachersGradeComponent implements OnInit {
      this.dataSource.next(this.scores.controls);
    } */
   ngOnInit(): void {
-    this.students$ = this.assignedCoursesEntityService.entities$.pipe(
-      map((cc: AssignedCourse[]) => cc.find((c) => c.id === this.courseId)),
-      tap((course: AssignedCourse) => {
-        this.course = course;
-      }),
-      mergeMap((course: AssignedCourse) =>
-        this.accountsEntityService.entities$.pipe(
-          map(users => {
-            this.currentGrades = this.fb.group({
-              scores: this.fb.array(
-                course.students.map((studentId) => {
-                  const user = users.find(u => u.id === studentId);
-                  return this.setScore({ id: user.id, name: user.name.fullName })
-                })
-              ),
-            })
-            return users;
-          }),
-        )
+    /* this.students$ = */ this.schoolCoursesEntityService.entities$.pipe(
+    map((cc: SchoolCourse[]) => cc.find((c) => c.id === this.courseId)),
+    tap((course: SchoolCourse) => {
+      this.course = course;
+    }),
+    /* mergeMap((course: SchoolCourse) =>
+      this.accountsEntityService.entities$.pipe(
+        map(users => {
+          this.currentGrades = this.fb.group({
+            scores: this.fb.array(
+              course.studentsEmails.map((studentEmail) => {
+                const user = users.find(u => u.primaryEmail === studentEmail);
+                return this.setScore({ id: user.id, name: user.name.fullName })
+              })
+            ),
+          })
+          return users;
+        }),
       )
-    )
+    ) */
+  )
   }
   setScore(student: any): FormGroup {
     return this.fb.group({
@@ -155,7 +154,7 @@ export class TeachersGradeComponent implements OnInit {
     });
     if (score.isCourseClosed)
       score.prom_materia =
-        +Math.trunc((+(score.unit1! + score.unit2 + score.unit3) * 10) / 3) /
+        +Math.trunc((+(score.unit1 + score.unit2 + score.unit3) * 10) / 3) /
         10;
 
     return partialUser;

@@ -65,7 +65,7 @@
             <h3>Fichero</h3>
         </p>
         <p class="comment">
-            <code>src/app/auth/models/grade.model.ts</code>
+            <code>src/app/profile/models/score.model.ts</code>
         </p>
 
 
@@ -84,78 +84,61 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#courseName" 
+                                        <a href="#cycle" 
 >
-                                            courseName
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#isCourseClosed" 
->
-                                            isCourseClosed
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#notes1" 
->
-                                            notes1
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#notes2" 
->
-                                            notes2
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#notes3" 
->
-                                            notes3
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#prom_materia" 
->
-                                            prom_materia
+                                            cycle
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Opcional</span>
-                                        <a href="#recover1" 
+                                        <a href="#general_recomend" 
 >
-                                            recover1
+                                            general_recomend
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#grade" 
+>
+                                            grade
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#id" 
+>
+                                            id
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Opcional</span>
-                                        <a href="#recover2" 
+                                        <a href="#isFinished" 
 >
-                                            recover2
+                                            isFinished
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Opcional</span>
-                                        <a href="#recover3" 
+                                        <a href="#notes" 
 >
-                                            recover3
+                                            notes
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#unit1" 
+                                            <span class="modifier">Opcional</span>
+                                        <a href="#prom_final" 
 >
-                                            unit1
+                                            prom_final
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#unit2" 
+                                        <a href="#scores" 
 >
-                                            unit2
+                                            scores
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#unit3" 
+                                        <a href="#userId" 
 >
-                                            unit3
+                                            userId
                                         </a>
                                 </li>
                             </ul>
@@ -173,9 +156,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="courseName"></a>
-                                        <span class="name "><b>courseName</b>
-                                            <a href="#courseName">
+                                        <a name="cycle"></a>
+                                        <span class="name "><b>cycle</b>
+                                            <a href="#cycle">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -183,7 +166,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>courseName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>cycle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -206,9 +189,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="isCourseClosed"></a>
-                                        <span class="name "><b>isCourseClosed</b>
-                                            <a href="#isCourseClosed">
+                                        <a name="general_recomend"></a>
+                                        <span class="name "><b>general_recomend</b>
+                                            <a href="#general_recomend">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -216,7 +199,111 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>isCourseClosed:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                        <code>general_recomend:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Opcional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="grade"></a>
+                                        <span class="name "><b>grade</b>
+                                            <a href="#grade">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>grade:         <code><a href="../miscellaneous/enumerations.html#SchoolLevel" target="_self" >SchoolLevel</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Tipo : </i>        <code><a href="../miscellaneous/enumerations.html#SchoolLevel" target="_self" >SchoolLevel</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="isFinished"></a>
+                                        <span class="name "><b>isFinished</b>
+                                            <a href="#isFinished">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>isFinished:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -229,6 +316,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Opcional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -239,9 +331,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="notes1"></a>
-                                        <span class="name "><b>notes1</b>
-                                            <a href="#notes1">
+                                        <a name="notes"></a>
+                                        <span class="name "><b>notes</b>
+                                            <a href="#notes">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -249,7 +341,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>notes1:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>notes:     <code>string[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -257,44 +349,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Tipo : </i>    <code>string[]</code>
 
                                         </td>
                                     </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="notes2"></a>
-                                        <span class="name "><b>notes2</b>
-                                            <a href="#notes2">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>notes2:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
+                                            <i>Opcional</i>
                                         </td>
                                     </tr>
-
 
 
 
@@ -305,9 +369,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="notes3"></a>
-                                        <span class="name "><b>notes3</b>
-                                            <a href="#notes3">
+                                        <a name="prom_final"></a>
+                                        <span class="name "><b>prom_final</b>
+                                            <a href="#prom_final">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -315,40 +379,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>notes3:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="prom_materia"></a>
-                                        <span class="name "><b>prom_materia</b>
-                                            <a href="#prom_materia">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>prom_materia:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>prom_final:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -361,39 +392,6 @@
                                         </td>
                                     </tr>
 
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="recover1"></a>
-                                        <span class="name "><b>recover1</b>
-                                            <a href="#recover1">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>recover1:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                        </td>
-                                    </tr>
-
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Opcional</i>
@@ -409,9 +407,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="recover2"></a>
-                                        <span class="name "><b>recover2</b>
-                                            <a href="#recover2">
+                                        <a name="scores"></a>
+                                        <span class="name "><b>scores</b>
+                                            <a href="#scores">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -419,7 +417,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>recover2:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                        <code>scores:     <code>ScoreListItem[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -427,83 +425,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Opcional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="recover3"></a>
-                                        <span class="name "><b>recover3</b>
-                                            <a href="#recover3">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>recover3:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Opcional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="unit1"></a>
-                                        <span class="name "><b>unit1</b>
-                                            <a href="#unit1">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>unit1:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Tipo : </i>    <code>ScoreListItem[]</code>
 
                                         </td>
                                     </tr>
@@ -518,9 +440,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="unit2"></a>
-                                        <span class="name "><b>unit2</b>
-                                            <a href="#unit2">
+                                        <a name="userId"></a>
+                                        <span class="name "><b>userId</b>
+                                            <a href="#userId">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -528,40 +450,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>unit2:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="unit3"></a>
-                                        <span class="name "><b>unit3</b>
-                                            <a href="#unit3">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>unit3:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>userId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -585,9 +474,19 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { SchoolLevel } from &quot;./user.enum&quot;;
-
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { SchoolLevel } from &quot;../../auth/models/user.enum&quot;;
 export interface Score {
+  id: string;
+  cycle: string;
+  grade: SchoolLevel;
+  isFinished?: boolean;
+  notes?: string[];
+  general_recomend?: string
+  prom_final?: number;
+  scores: ScoreListItem[];
+  userId: string;
+}
+export interface ScoreListItem {
   courseName: string;
   unit1: string;
   unit2: string;
@@ -600,15 +499,6 @@ export interface Score {
   recover3?: boolean;
   prom_materia: number;
   isCourseClosed: boolean;
-}
-export interface Grade {
-  cicleId: string;
-  grade: SchoolLevel;
-  isFinished?: boolean;
-  notes?: string[];
-  prom_final?: number;
-  scores: Score[];
-  userId: string;
 }
 </code></pre>
     </div>

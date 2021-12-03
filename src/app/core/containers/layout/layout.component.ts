@@ -7,7 +7,7 @@ import {
   Router,
   RouterEvent,
 } from '@angular/router';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { CdkScrollable, OverlayContainer, ScrollDispatcher } from '@angular/cdk/overlay';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -66,10 +66,11 @@ export class LayoutComponent {
     this.isDarkTheme = this.themeService.isDarkTheme;
     this.isDarkTheme.subscribe((isDark) => {
       if (isDark) {
-        this.overlay.getContainerElement().classList.add('dark-theme');
+        this.overlay.getContainerElement().classList.add('theme-alternate');
       } else {
-        this.overlay.getContainerElement().classList.remove('dark-theme');
+        this.overlay.getContainerElement().classList.remove('theme-alternate');
       }
     });
+
   }
 }

@@ -1,0 +1,112 @@
+<mat-card>
+  <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+    <mat-card-content class="card m-n2 bg-transparent">
+      <h1 class="mat-h1 card-header text-light">Tus datos</h1>
+      <div class="card-body">
+        <p class="card-text">
+          Los datos que nos proporciones estan sujetos a verificación de autenticidad y deberán estar respaldados por
+          documentos oficiales en posesión del personal administrativo de la institución. Consulta las
+          <a [routerLink]="['/privacy-policy']">Políticas de Privacidad</a> sobre la información que nos proporcionas.
+        </p>
+        <mat-accordion togglePosition="before">
+          <mat-expansion-panel appMaterialElevation [raisedElevation]="raisedElev">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Datos Personales
+              </mat-panel-title>
+              <mat-panel-description>
+
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="row" fxLayoutGap="5px">
+              <mat-form-field fxFlex class="d-block" appearance="outline">
+                <mat-label>Enlace hacia la imagen</mat-label>
+                <input matInput type="text" placeholder="Inserta un enlace URL (http:// ..)"
+                  formControlName="photoUrl" />
+              </mat-form-field>
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" (focus)="picker.open()" placeholder="Fecha de nacimiento"
+                  color="primary" name="dayOfBirth" formControlName="dayOfBirth">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel appMaterialElevation [raisedElevation]="raisedElev">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Domicilio y contacto
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field class="d-block" appearance="outline">
+              <mat-label>Dirección (Calle, número, colonia, etc.)</mat-label>
+              <textarea matInput placeholder="Dirección" name="addressLine" color="primary"
+                formControlName="addressLine"></textarea>
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutGap="5px">
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Ciudad / municipio</mat-label>
+                <input matInput placeholder="Ciudad" type="text" name="city" color="primary" formControlName="city">
+              </mat-form-field>
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Estado</mat-label>
+                <mat-select placeholder="Estado" type="text" color="primary" name="state" formControlName="state">
+                  <mat-option *ngFor="let sts of states" [value]="sts.nombre">
+                    {{sts.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutGap="5px">
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Código postal</mat-label>
+                <input matInput maxlength="5" type="number" placeholder="Postal Code" color="primary" name="postalCode"
+                  formControlName="postalCode">
+              </mat-form-field>
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>País</mat-label>
+                <input matInput type="text" placeholder="País" name="country" color="primary" formControlName="country">
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel appMaterialElevation [raisedElevation]="raisedElev">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Contacto
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div fxLayout="row" fxLayoutGap="5px">
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Teléfono fijo</mat-label>
+                <input matInput type="tel" placeholder="Teléfono fijo" name="phoneHome" color="primary"
+                  formControlName="phoneHome">
+              </mat-form-field>
+
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Teléfono móvil</mat-label>
+                <input matInput type="tel" placeholder="Teléfono móvil" name="mobilePhone" color="primary"
+                  formControlName="mobilePhone">
+              </mat-form-field>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-card-actions>
+          <button mat-raised-button color="'$rds-logo-color'" type="submit">Submit</button>
+        </mat-card-actions>
+      </div>
+
+    </mat-card-content>
+
+
+  </form>
+</mat-card>

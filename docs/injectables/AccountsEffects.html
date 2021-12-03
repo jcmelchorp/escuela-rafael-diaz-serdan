@@ -181,7 +181,7 @@
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) &#x3D;&gt;
-          r.payload.routerState.url.startsWith(&#x27;/escuela/cuentas/edit&#x27;)
+          r.payload.routerState.url.startsWith(&#x27;/usuarios/edit&#x27;)
         ),
         map((r: RouterNavigatedAction) &#x3D;&gt; r.payload.routerState.root.params.id),
         //withLatestFrom&lt;string, IUser[]&gt;(this.userEntityService.entities$),
@@ -223,7 +223,7 @@
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) &#x3D;&gt;
-          r.payload.routerState.url.startsWith(&#x27;/escuela/cuentas&#x27;)
+          r.payload.routerState.url.startsWith(&#x27;/usuarios&#x27;)
         ),
         map((r: RouterNavigatedAction) &#x3D;&gt; r.payload.routerState.url),
         withLatestFrom&lt;string, User[]&gt;(this.accountsEntityService.entities$),
@@ -273,7 +273,7 @@ export class AccountsEffects {
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) &#x3D;&gt;
-          r.payload.routerState.url.startsWith(&#x27;/escuela/cuentas/edit&#x27;)
+          r.payload.routerState.url.startsWith(&#x27;/usuarios/edit&#x27;)
         ),
         map((r: RouterNavigatedAction) &#x3D;&gt; r.payload.routerState.root.params.id),
         //withLatestFrom&lt;string, IUser[]&gt;(this.userEntityService.entities$),
@@ -291,7 +291,7 @@ export class AccountsEffects {
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) &#x3D;&gt;
-          r.payload.routerState.url.startsWith(&#x27;/escuela/cuentas&#x27;)
+          r.payload.routerState.url.startsWith(&#x27;/usuarios&#x27;)
         ),
         map((r: RouterNavigatedAction) &#x3D;&gt; r.payload.routerState.url),
         withLatestFrom&lt;string, User[]&gt;(this.accountsEntityService.entities$),

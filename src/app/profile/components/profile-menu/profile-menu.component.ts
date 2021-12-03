@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faAward, faSignOutAlt, faUserCheck, faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import { select, Store } from '@ngrx/store';
+import { UserRole } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
 import { signOut } from '@rds-auth/state/auth.actions';
 import { isAdmin, isOnline, isTeacher, selectUser } from '@rds-auth/state/auth.selectors';
@@ -20,6 +21,7 @@ export class ProfileMenuComponent implements OnInit {
   isAdmin$: Observable<boolean>;
   isTeacher$: Observable<boolean>;
   userSub: Subscription;
+  role: UserRole;
   @Output() logout = new EventEmitter<User>();
   faAward = faAward;
   faUserEdit = faUserEdit;
@@ -27,16 +29,20 @@ export class ProfileMenuComponent implements OnInit {
   faUserCheck = faUserCheck;
   faUserTimes = faUserTimes;
   canLogout!: boolean;
-  constructor(private store: Store<AppState>,
+  constructor(
+    private store: Store<AppState>,
     private subService: SubscriptionService
   ) {
-    this.user$ = this.store.pipe(select(selectUser));
-    this.isOnline$ = this.store.pipe(select(isOnline));
-    this.isAdmin$ = this.store.pipe(select(isAdmin));
-    this.isTeacher$ = this.store.pipe(select(isTeacher));
+    this.user$ = this.store.select(selectUser);
+    this.isOnline$ = this.store.select(isOnline);
+    this.isAdmin$ = this.store.select(isAdmin);
+    this.isTeacher$ = this.store.select(isTeacher);
   }
 
   ngOnInit(): void { }
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
   onLogout(id): void {
     this.store.dispatch(signOut({ id }));
     this.canLogout = false;

@@ -21,5 +21,5 @@ export enum CourseLevel {
   SECUNDARIA = 'Secundaria',
 }
 export enum UserRole {
-  OTROS = 'Otros', ALUMNOS = 'Alumnos', PROFESORES = 'Profesores', ADMINISTRATIVOS = 'Administrativos'
+  OTROS = 'Otros', BAJA = 'Baja', ALUMNOS = 'Alumnos', PROFESORES = 'Profesores', GRADUADOS = 'Graduados', ADMINISTRATIVOS = 'Administrativos', SUSPENDIDO = 'Usuarios Suspendidos', INACTIVOS = 'Usuarios Inactivos',
 }

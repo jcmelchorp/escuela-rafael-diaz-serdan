@@ -1,7 +1,8 @@
 import { SchoolLevel } from "../../auth/models/user.enum";
+import { Cycle } from '../../school/models/school-course.model';
 export interface Score {
   id: string;
-  cycle: string;
+  cycle: Cycle;
   grade: SchoolLevel;
   isFinished?: boolean;
   notes?: string[];

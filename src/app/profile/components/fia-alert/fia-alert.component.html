@@ -1,0 +1,7 @@
+<div *ngFor="let alert of alerts">
+  <alert [type]="alert.type" [dismissible]="dismissible" [dismissOnTimeout]="alert.timeout"
+    (onClosed)="onClosed(alert)">
+    <h2 class="alert-heading">A los padres de familia:</h2>
+    <p><span [innerHtml]="alert.msg"></span></p>
+  </alert>
+</div>

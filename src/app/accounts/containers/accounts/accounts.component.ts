@@ -14,6 +14,8 @@ import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
 import { AppState } from '@rds-store/app.state';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { AccountsDomainService } from '../../services/accounts-domain.service';
+import { MigrationProgressComponent } from '../../components/migration-progress/migration-progress.component';
+import { AccountsService } from '@rds-accounts/services';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class AccountsComponent implements OnInit {
   loaded$: Observable<boolean>;
   loading$: Observable<boolean>;
   users$: Observable<User[]>;
+  count$: Observable<number>;
   roleKeys: string[];
   roles = UserRole;
   gradeKeys: string[];
@@ -36,13 +39,13 @@ export class AccountsComponent implements OnInit {
   background: ThemePalette = undefined;
   constructor(
     private accountsEntityService: AccountsEntityService,
+    private accountsService: AccountsService,
     private store: Store<AppState>,
     private dialog: MatDialog,
     private fb: FormBuilder,
     private accountsDomainService: AccountsDomainService
   ) {
     this.accountsDomainService.handleAdminLoad();
-    this.users$ = this.store.select(selectAccounts);
     this.gradeKeys = Object.keys(this.grades);
     this.roleKeys = Object.keys(this.roles);
     this.filterValues = this.fb.group({
@@ -60,11 +63,15 @@ export class AccountsComponent implements OnInit {
         : delete changes.name;
       return this.accountsEntityService.setFilter(changes);
     });
+
+    this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
+    this.count$ = this.accountsEntityService.count$;
+  }
+  ngOnInit(): void {
     this.loaded$ = this.accountsEntityService.loaded$;
     this.loading$ = this.accountsEntityService.loading$;
-    this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
+    this.users$ = this.store.select(selectAccounts);
   }
-  ngOnInit(): void { }
   applyFilterString() {
     const nameForm = this.filterValues.get('name')?.value;
     const gradeForm = this.filterValues.get('grade')?.value;
@@ -105,7 +112,6 @@ export class AccountsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((resp) => {
       if (resp) {
         firebaseUser = resp.firebaseUser;
-        console.log(resp.firebaseUser);
         this.dialog.open(NewAccountConfirmComponent, {
           width: '600px',
           minWidth: 'fit-content',
@@ -115,5 +121,14 @@ export class AccountsComponent implements OnInit {
         });
       }
     });
+  }
+  sendToFirestore() {
+    const accounts: User[] = [];
+    this.accountsService.getFromRtdb().subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
+    const dialogRef = this.dialog.open(MigrationProgressComponent, {
+      width: '500px',
+      height: '400px',
+      data: accounts
+    })
   }
 }

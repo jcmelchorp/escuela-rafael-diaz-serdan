@@ -1,0 +1,8 @@
+<!-- <nav mat-tab-nav-bar mat-stretch-tabs> -->
+<app-school-action-buttons></app-school-action-buttons>
+<nav mat-tab-nav-bar mat-align-tabs="center">
+  <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.route]" routerLinkActive="active">
+    {{link.label}}
+  </a>
+</nav>
+<router-outlet></router-outlet>

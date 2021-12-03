@@ -20,7 +20,7 @@ export class SnackEffects {
         tap((payload) =>
           setTimeout(() => {
             this.snackService.justMessage(
-              `Bienvenido, ${payload.user.name?.givenName}`);
+              `Bienvenido, ${payload.user.name.givenName}`);
           }, 2000)
         )
       ),

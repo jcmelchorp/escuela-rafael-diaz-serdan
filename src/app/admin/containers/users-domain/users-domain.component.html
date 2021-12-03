@@ -1,0 +1,6 @@
+<div class="pt-2" *ngIf="loaded$|async">
+  <app-users-table [data]="users$|async"></app-users-table>
+  <div *ngIf="(users$|async) as users" fxLayoutAlign="center">
+    <button mat-raised-button (click)="onDbBackup(users)">Actualizar DB</button>
+  </div>
+</div>

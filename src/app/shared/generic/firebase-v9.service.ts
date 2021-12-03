@@ -1,12 +1,10 @@
 import { Inject } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
+import { firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
+import { child, Database, query as query_db, onValue, push, ref, set, update, get, objectVal, orderByChild, equalTo, endAt, startAt, listVal } from '@angular/fire/database';
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, orderBy, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { QueryParams } from '@ngrx/data';
-import { Entity, firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
-import { child, Database, query as query_db, onValue, push, ref, set, update, get, objectVal, orderByChild, equalTo } from '@angular/fire/database';
-import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, orderBy, query, setDoc } from '@angular/fire/firestore';
-import { listVal } from 'rxfire/database';
-import { updateDoc } from 'firebase/firestore';
 export class FirebaseV9Service<T> implements IFirebase<T> {
   public readonly tCollection: string;
   public readonly colects: Observable<T[]>;
@@ -31,24 +29,21 @@ export class FirebaseV9Service<T> implements IFirebase<T> {
     });
     const queryCol = query(asf_col, orderBy('grade', 'asc'), orderBy('priority', 'asc'));
     this.colects = collectionData(queryCol);
-
-
   }
   add(entity: T): Observable<T> {
     let key: string;
     const updates = {};
     const refColl = collection(this.afs, this.tCollection);
-    const refDoc = doc(refColl)
+    const refDoc = doc(refColl);
     entity['id'] ? key = entity['id'] : key = refDoc.id// key = push(child(ref(this.rtdb), this.tCollection)).key;
-    updates[`/${this.tCollection}/` + key] = firebaseSerialize(entity);
-    update(ref(this.rtdb), updates);
+    updates[`/${this.tCollection}/` + key] = firebaseSerialize({ ...entity, id: key });
+    update(ref(this.rtdb, `/${this.tCollection}/${key}`), firebaseSerialize(entity));
     console.log(refDoc.id)
     return from(setDoc(refDoc, firebaseSerialize({ ...entity, id: key }))).pipe(map(x => firebaseSerialize({ ...entity, id: key })));
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     const updates = {};
-    updates[`/${this.tCollection}/` + id] = firebaseSerialize(entity);
-    update(ref(this.rtdb), updates);
+    update(ref(this.rtdb, `/${this.tCollection}/${id}`), firebaseSerialize({ ...entity }));
     const refDoc = doc(this.afs, this.tCollection, id);
     return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(map(x => firebaseSerialize(entity)));
   }
@@ -67,11 +62,13 @@ export class FirebaseV9Service<T> implements IFirebase<T> {
   }
   list(): Observable<T[]> {
     const dbref = ref(this.rtdb, this.tCollection);
-    return listVal(dbref, { keyField: 'id' });
+    return listVal<T>(dbref).pipe(take(1));
   }
 
-  getWithQuery(field: string, value: any): Observable<T[]> {
-    const dbref = ref(this.rtdb, this.tCollection);
-    return listVal(dbref, { keyField: 'id' });
+  getWithQuery(queryParams: QueryParams): Observable<T[]> {
+    console.log(Object.keys(queryParams).pop())
+    const direr = ref(this.rtdb, this.tCollection)
+    const queryRef = query_db(direr, orderByChild(Object.keys(queryParams).pop()), equalTo(Object.values(queryParams).pop().toString()));
+    return listVal<T>(direr).pipe(take(1), map(listResult => listResult.filter(item => item['role'] === Object.values(queryParams).pop().toString())));
   }
 }

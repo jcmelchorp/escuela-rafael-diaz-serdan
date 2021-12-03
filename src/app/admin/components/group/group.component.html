@@ -1,0 +1,11 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <ng-content #buttons></ng-content>
+        <p> {{ group.name }} </p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-content #container></ng-content>
+  </mat-expansion-panel>
+</mat-accordion>

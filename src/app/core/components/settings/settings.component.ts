@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ThemeService } from '../../services';
 
@@ -11,21 +12,27 @@ import { ThemeService } from '../../services';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnInit {
   defaultElevation = 4;
   raisedElevation = 6;
   faSun = faSun;
   faMoon = faMoon;
   langs: string[];
-  isDarkTheme: Observable<boolean>;
+  isDarkTheme: boolean;
   constructor(
     public themeService: ThemeService,
   ) {
-    this.isDarkTheme = this.themeService.isDarkTheme;
+
+  }
+  ngOnInit(): void {
+    this.themeService.isDarkTheme.subscribe(isDark => {
+      console.log(isDark);
+      this.isDarkTheme = isDark
+    });
   }
 
-  toggleDarkTheme(isDark: boolean) {
-    this.themeService.setDarkTheme(isDark);
+  toggleDarkTheme() {
+    this.themeService.setDarkTheme(!this.isDarkTheme);
   }
 
 }

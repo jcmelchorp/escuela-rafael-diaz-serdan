@@ -15,12 +15,11 @@ import {
 } from 'rxjs/operators';
 import { SubscriptionService } from '@rds-shared/services/subscription.service';
 import { User } from '@rds-auth/models/user.model';
-import { ScoreService } from '../../services/score.service';
-import { AssignedCourse } from '@rds-school/school-courses/models/school-course.model';
+import { ScoresService } from '../../services/scores.service';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { ScoreListItem } from '@rds-profile/models/score.model';
-import { AssignedCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
-
+import { SchoolCourse } from '@rds-school/models/school-course.model';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 @Component({
   selector: 'app-scores-edit',
   templateUrl: './scores-edit.component.html',
@@ -31,8 +30,8 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   grade: string;
   isKinder: boolean;
   suspended!: boolean;
-  course: AssignedCourse;
-  course$!: Observable<AssignedCourse[]>;
+  course: SchoolCourse;
+  course$!: Observable<SchoolCourse[]>;
   students$!: Observable<User[]>;
   faChevronLeft = faChevronLeft;
   faUserClock = faUserClock;
@@ -43,15 +42,15 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   currentGrades!: FormGroup;
   constructor(
     private route: ActivatedRoute,
-    private scoreService: ScoreService,
-    private assignedCoursesEntityService: AssignedCoursesEntityService,
+    private scoresService: ScoresService,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
 
     private formBuilder: FormBuilder,
     private subscriptionService: SubscriptionService
   ) {
-    this.loaded$ = this.assignedCoursesEntityService.loaded$;
-    this.loading$ = this.assignedCoursesEntityService.loading$;
+    this.loaded$ = this.schoolCoursesEntityService.loaded$;
+    this.loading$ = this.schoolCoursesEntityService.loading$;
 
     this.courseId = this.route.snapshot.params.courseId;
     this.grade = this.route.snapshot.queryParams.grade;
@@ -64,31 +63,31 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.students$ = this.assignedCoursesEntityService.entities$.pipe(
-      map((cc: AssignedCourse[]) => cc.find((c) => c.id === this.courseId)),
-      tap((course: AssignedCourse) => {
-        this.course = course;
-      }),
-      concatMap((course: AssignedCourse) =>
-        this.accountsEntityService.entities$.pipe(
-          map(users => {
-            this.currentGrades = this.formBuilder.group({
-              scores: this.formBuilder.array(
-                course.students.map((studentId) => {
-                  const user = users.find(u => u.id === studentId);
-                  return this.setScore({ id: user.id, name: user.name.fullName })
-                })
-              ),
-            })
-            return users;
-          }),
-        )
-      )
-    )
+    /* this.students$ =  */this.schoolCoursesEntityService.entities$.pipe(
+    map((cc: SchoolCourse[]) => cc.find((c) => c.id === this.courseId)),
+    tap((course: SchoolCourse) => {
+      this.course = course;
+    }),
+    /*  concatMap((course: SchoolCourse) =>
+       this.accountsEntityService.entities$.pipe(
+         map(users => {
+           this.currentGrades = this.formBuilder.group({
+             scores: this.formBuilder.array(
+               course.studentsEmails.map((studentEmail) => {
+                 const user = users.find(u => u.primaryEmail === studentEmail);
+                 return this.setScore({ id: user.id, name: user.name.fullName })
+               })
+             ),
+           })
+           return users;
+         }),
+       )
+     ) */
+  )
   }
 
   async setScore(student: any): Promise<FormGroup> {
-    const currentGrades = await this.scoreService.getById(student.id + this.course.cycle).toPromise()
+    const currentGrades = await this.scoresService.getById(student.id + this.course.cycle).toPromise()
     return this.formBuilder.group({
       studentId: [student.id, [Validators.required]],
       studentName: [student.name.fullName, Validators.required],
@@ -179,7 +178,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
       }
     });
 
-    const currentGrades = await this.scoreService.getById(studentProps.studentId + this.course.cycle).toPromise()
+    const currentGrades = await this.scoresService.getById(studentProps.studentId + this.course.cycle).toPromise()
     let pos: number = currentGrades.scores.findIndex(
       (s) => s.courseName == score.courseName
     );
@@ -188,7 +187,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
     let isFinished = (scores && scores.every((s) => s.isCourseClosed && s.prom_materia));
     let prom_final = isFinished ?
       scores.map((s) => s.prom_materia).reduce((a, b) => (a + b)) / scores.length : null;
-    this.scoreService.update(currentGrades.id, {
+    this.scoresService.update(currentGrades.id, {
       id: currentGrades.id,
       cycle: this.course.cycle,
       grade: this.course.grade,

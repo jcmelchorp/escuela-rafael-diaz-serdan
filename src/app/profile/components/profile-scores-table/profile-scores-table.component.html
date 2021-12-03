@@ -1,37 +1,41 @@
-<h1>Campos y áreas de formación</h1>
-<div *ngIf="data" #htmlData>
-  <mat-table #table [dataSource]="formative">
+<div *ngIf="data">
+  <mat-table #table [dataSource]="formative" id="pdfTable" #pdfTable>
     <!-- Id Column -->
     <ng-container matColumnDef="courseName">
       <mat-header-cell *matHeaderCellDef>Materia</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span matBadge="{{element.notes3?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
-          [matBadgeHidden]="hidden" matBadgeColor="warn">{{element.courseName}}&nbsp;&nbsp;</span>
+        <span>{{element.courseName}}</span>
       </mat-cell>
       <mat-footer-cell *matFooterCellDef> Promedio: </mat-footer-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="unit1">
-      <mat-header-cell *matHeaderCellDef>Unidad 1</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>U1</mat-header-cell>
       <mat-cell class="text-{{element.unit1<6?'danger':'dark'}}" *matCellDef="let element">
-        {{element.unit1==0?'-':element.unit1}} </mat-cell>
+        <span matBadge="{{(element.notes1)?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
+          [matBadgeHidden]="hidden" matBadgeColor="warn">{{element.unit1==0?'-':element.unit1}}</span>
+      </mat-cell>
       <mat-footer-cell *matFooterCellDef>
         {{getAverage()[0]==0?'-':getAverage()[0]|number}}
       </mat-footer-cell>
     </ng-container>
 
     <ng-container matColumnDef="unit2">
-      <mat-header-cell *matHeaderCellDef>Unidad 2</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>U2</mat-header-cell>
       <mat-cell class="text-{{element.unit2<6?'danger':'dark'}}" *matCellDef="let element">
-        {{element.unit2==0?'-':element.unit2}}</mat-cell>
+        <span matBadge="{{(element.notes2)?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
+          [matBadgeHidden]="hidden" matBadgeColor="warn"> {{element.unit2==0?'-':element.unit2}}</span>
+      </mat-cell>
       <mat-footer-cell *matFooterCellDef> {{getAverage()[1]==0?'-':getAverage()[1]|number}} </mat-footer-cell>
     </ng-container>
 
     <ng-container matColumnDef="unit3">
-      <mat-header-cell *matHeaderCellDef>Unidad 3</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>U3</mat-header-cell>
       <mat-cell class="text-{{element.unit3<6?'danger':'dark'}}" *matCellDef="let element">
-        {{element.unit3==0?'-':element.unit3}}</mat-cell>
+        <span matBadge="{{(element.notes3)?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
+          [matBadgeHidden]="hidden" matBadgeColor="warn">{{element.unit3==0?'-':element.unit3}}</span>
+      </mat-cell>
       <mat-footer-cell *matFooterCellDef> {{getAverage()[2]==0?'-':getAverage()[2]|number}}</mat-footer-cell>
     </ng-container>
 
@@ -45,7 +49,15 @@
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let element">
-        <em class=".d-print-block">{{element.element.notes3}}</em>
+        <div *ngIf="element.element.notes1" class="d-print-block">Comentarios de la Unidad 1: <p>
+            {{element.element.notes1}}</p>
+        </div>
+        <div *ngIf="element.element.notes2" class="d-print-block">Comentarios de la Unidad 2: <p>
+            {{element.element.notes2}}</p>
+        </div>
+        <div *ngIf="element.element.notes3" class="d-print-block">Comentarios de la Unidad 3: <p>
+            {{element.element.notes3}}</p>
+        </div>
       </mat-cell>
       <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
     </ng-container>
@@ -58,7 +70,7 @@
     <mat-footer-row class="strong-footer" *matFooterRowDef="displayedColumns"></mat-footer-row>
   </mat-table>
 
-  <h1 class="pt-5">Materias Optativas:</h1>
+  <h2 class="pt-4 text-center">Materias Optativas:</h2>
 
   <mat-table [dataSource]="optative">
     <!-- Id Column -->

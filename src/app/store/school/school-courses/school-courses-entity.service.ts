@@ -3,15 +3,13 @@ import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
-import { Observable } from 'rxjs';
-import * as fromCourseRoom from '.';
-import { QueryParams } from '@ngrx/data';
-import { SchoolCourse } from '@rds-school/school-courses/models/school-course.model';
+import { SchoolCourse } from '@rds-school/models/school-course.model';
+import * as fromSchoolCourses from '@rds-store/school/school-courses';
 @Injectable()
 export class SchoolCoursesEntityService extends EntityCollectionServiceBase<SchoolCourse> {
   constructor(
     readonly serviceElementsFactory: EntityCollectionServiceElementsFactory
   ) {
-    super(fromCourseRoom.entityCollectionName, serviceElementsFactory);
+    super(fromSchoolCourses.entityCollectionName, serviceElementsFactory);
   }
 }

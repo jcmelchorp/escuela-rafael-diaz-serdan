@@ -1,0 +1,10 @@
+<div class="px-4 school-background" [@flyInOut]="'flyInOut'">
+  <p class="view-subtitle">Gestiona usuarios, grupos, clases y horarios en la institución.</p>
+  <p class="view-title">Dirección</p>
+</div>
+<div class="p-4">
+  <router-outlet></router-outlet>
+</div>
+<button mat-fab id="new-user" matTooltip="Nuevo usuario" (click)="openSaveUser()">
+  <mat-icon>person_add</mat-icon>
+</button>

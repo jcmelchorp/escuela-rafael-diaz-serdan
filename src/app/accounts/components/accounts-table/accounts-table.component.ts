@@ -128,7 +128,7 @@ export class AccountsTableComponent implements AfterViewInit {
   suspendMany(selection: SelectionModel<User>) {
     const confirm = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        action: 'suspender',
+        action: 'suspende',
         subject: 'usuarios',
         confirm: false,
         title: `¿Está seguro de que desea suspender ${selection.selected.length == 1 ? 'el' : 'los'

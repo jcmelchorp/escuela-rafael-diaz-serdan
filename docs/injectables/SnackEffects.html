@@ -58,7 +58,7 @@
             <h3>Fichero</h3>
         </p>
         <p class="comment">
-            <code>src/app/ngrx-store/effects/snack.effects.ts</code>
+            <code>src/app/store/effects/snack.effects.ts</code>
         </p>
 
 
@@ -82,9 +82,6 @@
                             </li>
                             <li>
                                 <a href="#unableToLogin$" >unableToLogin$</a>
-                            </li>
-                            <li>
-                                <a href="#welcome$" >welcome$</a>
                             </li>
                             <li>
                                 <a href="#welcomeBack$" >welcomeBack$</a>
@@ -113,7 +110,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="89" class="link-to-prism">src/app/ngrx-store/effects/snack.effects.ts:89</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="89" class="link-to-prism">src/app/store/effects/snack.effects.ts:89</a></div>
                             </td>
                         </tr>
 
@@ -210,7 +207,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="78" class="link-to-prism">src/app/ngrx-store/effects/snack.effects.ts:78</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="78" class="link-to-prism">src/app/store/effects/snack.effects.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -254,43 +251,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="43" class="link-to-prism">src/app/ngrx-store/effects/snack.effects.ts:43</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="welcome$"></a>
-                    <span class="name">
-                        <span ><b>welcome$</b></span>
-                        <a href="#welcome$"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Valor por defecto : </i><code>createEffect(
-    () &#x3D;&gt;
-      this.actions$.pipe(
-        ofType(loadAppSuccess),
-        tap(() &#x3D;&gt;
-          setTimeout(() &#x3D;&gt; {
-            this.snackService.justMessage(&#x27;La aplicación está lista&#x27;);
-          }, 3000)
-        )
-      ),
-    { dispatch: false }
-  )</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="30" class="link-to-prism">src/app/ngrx-store/effects/snack.effects.ts:30</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="43" class="link-to-prism">src/app/store/effects/snack.effects.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -314,11 +275,11 @@
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(fromAuthActions.signInSuccess),
-        tap((user) &#x3D;&gt;
+        tap((payload) &#x3D;&gt;
           setTimeout(() &#x3D;&gt; {
             this.snackService.justMessage(
-              &#x60;Has ingresado como:${user.user?.displayName}&#x60;);
-          }, 3000)
+              &#x60;Bienvenido, ${payload.user.name?.givenName}&#x60;);
+          }, 2000)
         )
       ),
     { dispatch: false }
@@ -327,7 +288,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="16" class="link-to-prism">src/app/ngrx-store/effects/snack.effects.ts:16</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="16" class="link-to-prism">src/app/store/effects/snack.effects.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -359,28 +320,28 @@ export class SnackEffects {
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(fromAuthActions.signInSuccess),
-        tap((user) &#x3D;&gt;
+        tap((payload) &#x3D;&gt;
           setTimeout(() &#x3D;&gt; {
             this.snackService.justMessage(
-              &#x60;Has ingresado como:${user.user?.displayName}&#x60;);
-          }, 3000)
+              &#x60;Bienvenido, ${payload.user.name?.givenName}&#x60;);
+          }, 2000)
         )
       ),
     { dispatch: false }
   );
 
-  welcome$ &#x3D; createEffect(
-    () &#x3D;&gt;
-      this.actions$.pipe(
-        ofType(loadAppSuccess),
-        tap(() &#x3D;&gt;
-          setTimeout(() &#x3D;&gt; {
-            this.snackService.justMessage(&#x27;La aplicación está lista&#x27;);
-          }, 3000)
-        )
-      ),
-    { dispatch: false }
-  );
+  /*  welcome$ &#x3D; createEffect(
+     () &#x3D;&gt;
+       this.actions$.pipe(
+         ofType(loadAppSuccess),
+         tap(() &#x3D;&gt;
+           setTimeout(() &#x3D;&gt; {
+             this.snackService.justMessage(&#x27;La aplicación está lista&#x27;);
+           }, 3000)
+         )
+       ),
+     { dispatch: false }
+   ); */
 
   unableToLogin$ &#x3D; createEffect(
     () &#x3D;&gt;

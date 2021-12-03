@@ -1,7 +1,10 @@
-<ol class="breadcrumb d-print-none">
+<ol class="breadcrumb d-print-none" fxLayout="row" fxLayoutAlign="start center">
   <li *ngFor="let breadcrumb of breadcrumbs">
-    <span [routerLink]="breadcrumb.url" routerLinkActive="active">
-      {{ breadcrumb.label }}
+    <span *ngIf="breadcrumb.label!=='Home';else home" [routerLink]="breadcrumb.url" routerLinkActive="active">
+      {{breadcrumb.label }}
     </span>
   </li>
 </ol>
+<ng-template #home>
+  <mat-icon>home</mat-icon>
+</ng-template>

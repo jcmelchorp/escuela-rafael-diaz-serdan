@@ -8,21 +8,21 @@
           <mat-icon matListIcon>home</mat-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">Inicio</span>
         </mat-list-item>
-        <mat-list-item [routerLink]="['perfil']" routerLinkActive="active" (click)="leftSidenav.close()">
+        <mat-list-item [routerLink]="['p']" routerLinkActive="active" (click)="leftSidenav.close()">
           <mat-icon matListIcon>school</mat-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">Alumnos</span>
         </mat-list-item>
-        <mat-list-item *ngIf="isTeacher" [routerLink]="['profesores']" routerLinkActive="active"
+        <mat-list-item *ngIf="isTeacher" [routerLink]="['profe']" routerLinkActive="active"
           (click)="leftSidenav.close()">
           <mat-icon matListIcon>co_present</mat-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">Profesores</span>
         </mat-list-item>
-        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="['gsuite']" routerLinkActive="active"
+        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="['g']" routerLinkActive="active"
           (click)="leftSidenav.close()">
           <fa-icon matListIcon [icon]="faGoogle"></fa-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">GSuite</span>
         </mat-list-item>
-        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="['escuela']" routerLinkActive="active"
+        <mat-list-item *ngIf="isTeacher || isAdmin" [routerLink]="['e']" routerLinkActive="active"
           (click)="leftSidenav.close()">
           <mat-icon matListIcon>apartment</mat-icon>
           <span matLine [@animateText]="linkText ? 'show' : 'hide'">Dirección</span>
@@ -41,7 +41,7 @@
             </mat-expansion-panel-header>
             <ng-template matExpansionPanelContent>
               <mat-nav-list dense>
-                <mat-list-item [routerLink]="['users']" routerLinkActive="active" (click)="leftSidenav.close()">
+                <mat-list-item [routerLink]="['u']" routerLinkActive="active" (click)="leftSidenav.close()">
                   <mat-icon matListIcon>people_alt</mat-icon>
                   <span matLine [@animateText]="linkText ? 'show' : 'hide'">Escuela</span>
                 </mat-list-item>
