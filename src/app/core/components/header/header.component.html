@@ -44,6 +44,7 @@
 </mat-menu>
 <mat-menu #escuela="matMenu">
   <ng-template matMenuContent>
+    <div mat-menu-item [routerLink]="['i']" routerLinkActive="active">Portada</div>
     <div mat-menu-item [routerLink]="['i','about']" routerLinkActive="active">Quiénes somos</div>
     <div mat-menu-item [matMenuTriggerFor]="oferta">Oferta educativa</div>
     <div mat-menu-item [routerLink]="['i','location']" routerLinkActive="active">Ubicación y contacto</div>

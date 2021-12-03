@@ -2,3 +2,11 @@
   width: 20px;
   height: auto;
 }
+.school-background {
+  width: 100%;
+  height: 265px;
+  max-height: 300px;
+  background: url("/assets/images/rds-front.png") no-repeat;
+  background-position: bottom end;
+  background-size: cover;
+}

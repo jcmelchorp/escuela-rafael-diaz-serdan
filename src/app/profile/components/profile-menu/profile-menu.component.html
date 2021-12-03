@@ -40,39 +40,39 @@
   <mat-card class="d-print-none" fxFlex="0 1 calc(50% - 20px)" fxFlex.lt-md="100%">
     <mat-card-content>
       <div *ngIf="user.role==='Alumnos'" fxLayout="row">
-        <div class="col-6">NIEV:&nbsp;</div>
+        <div class="col-4">NIEV:&nbsp;</div>
         <div class="col-6">{{user.niev}}</div>
       </div>
       <div *ngIf="user.role==='Profesores'" fxLayout="row">
-        <div class="col-6">RFC:&nbsp;</div>
+        <div class="col-4">RFC:&nbsp;</div>
         <div class="col-6">{{user.rfc}}</div>
       </div>
       <div fxLayout="row">
-        <div class="col-6">CURP:&nbsp;</div>
+        <div class="col-4">CURP:&nbsp;</div>
         <div class="col-6">{{user.curp}}</div>
       </div>
       <div *ngIf="user.role==='Alumnos'" fxLayout="row">
-        <div class="col-6">Nivel:&nbsp;</div>
+        <div class="col-4">Nivel:&nbsp;</div>
         <div class="col-6">{{user.level}}</div>
       </div>
       <div *ngIf="user.role==='Alumnos'" fxLayout="row">
-        <div class="col-6">Grado:&nbsp;</div>
+        <div class="col-4">Grado:&nbsp;</div>
         <div class="col-6">{{user.grade}}</div>
       </div>
       <div fxLayout="row">
-        <div class="col-6">Genero:&nbsp;</div>
+        <div class="col-4">Genero:&nbsp;</div>
         <div class="col-6">{{user.gender|titlecase}}</div>
       </div>
       <div fxLayout="row">
-        <div class="col-6">Fecha de nacimiento:&nbsp;</div>
+        <div class="col-4">F. de nacimiento:&nbsp;</div>
         <div class="col-6">{{user.dob|date}}</div>
       </div>
     </mat-card-content>
-    <mat-card-footer>
-      <div>Conoce las <a routerLink="/p/privacy-policy">políticas de privacidad </a>de tus datos.</div>
+    <mat-card-footer align="end">
+      <div>Conoce las <a routerLink="/i/privacy-policy">políticas de privacidad </a>de tus datos.</div>
     </mat-card-footer>
   </mat-card>
 </div>
-<div class="pt-2 px-2" #target>
+<div class="pt-2" #target>
   <router-outlet #calificaciones></router-outlet>
 </div>

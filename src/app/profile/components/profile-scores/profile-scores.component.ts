@@ -33,7 +33,7 @@ export class ProfileScoresComponent implements OnInit {
   level: CourseLevel;
   cycleKeys;
   cycles = Cycle;
-  cycle: FormControl
+  cycleForm: FormGroup;
   selectedScore: Observable<Score>;
   userId: string;
   userName: string;
@@ -44,27 +44,37 @@ export class ProfileScoresComponent implements OnInit {
   timeOpenScores: boolean = false;
   constructor(
     private scoresEntityService: ScoresEntityService,
-    //private profileService: ProfileService,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private subService: SubscriptionService,
   ) {
+    this.initForm();
     this.loading$ = this.scoresEntityService.loading$;
     this.loaded$ = this.scoresEntityService.loaded$;
     this.cycleKeys = Object.keys(this.cycles);
     this.isTeacher$ = this.store.select(isTeacher);
     this.user$ = this.store.select(selectUser).pipe(tap(user => this.userId = user.id));
-    this.cycle = this.route.snapshot.queryParams.cycle;
     //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
     this.timeOpenScores = true;
   }
   ngOnInit(): void {
-
+    this.getScoresByCycle(this.cycle);
+  }
+  get cycle() {
+    return this.cycleForm.get('cycle').value;
+  }
+  getScoresByCycle(cycle: Cycle) {
+    console.log(cycle)
     this.selectedScore = this.scoresEntityService.entities$.pipe(
-      map(scores => scores.find(s => s.id === this.userId + this.cycle)),
+      map(scores => scores.find(s => s.id === this.userId + cycle)),
     );
   }
-
+  initForm() {
+    this.cycleForm = this.fb.group({
+      cycle: new FormControl(this.route.snapshot.queryParams.cycle)
+    });
+  }
   printPage() {
     window.print();
   }

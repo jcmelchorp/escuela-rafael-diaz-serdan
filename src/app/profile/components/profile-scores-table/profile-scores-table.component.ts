@@ -1,10 +1,15 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { faComments } from '@fortawesome/free-regular-svg-icons';
 import { Score, ScoreListItem } from '../../models/score.model';
 import { ScoreListItemDataSource } from './score-list-item.datasource';
+declare var require: any;
 
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+const htmlToPdfmake = require("html-to-pdfmake");
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -61,5 +66,14 @@ export class ProfileScoresTableComponent implements OnInit {
     return [avg1, avg2, avg3, avg4]
   }
 
+  @ViewChild('pdfTable')
+  pdfTable!: ElementRef;
 
+  public downloadAsPDF() {
+    const pdfTable = this.pdfTable.nativeElement;
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).download();
+
+  }
 }

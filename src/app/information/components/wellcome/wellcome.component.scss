@@ -1,12 +1,13 @@
 .main-header {
   position: absolute;
   top: 0;
+
   right: 0;
   height: 100%;
   width: 100%;
   background-image: url("/assets/images/wellcome01.jpg");
   background-size: cover;
-  position: top center;
+  position: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   overflow: auto;
@@ -28,7 +29,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  bottom: 20vh;
+  bottom: 10vh;
   background: url("/assets/images/parallax_house.png"),
     url("/assets/images/parallax_text.png"),
     url("/assets/images/parallax_people.png"),
