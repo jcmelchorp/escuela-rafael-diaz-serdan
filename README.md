@@ -1,11 +1,10 @@
 ![Deploy to Firebase Hosting on merge](https://github.com/jcmelchorp/escuela-rafael-diaz-serdan/workflows/Deploy%20to%20Firebase%20Hosting/badge.svg?branch=main)
 
-<h1> <a href="https://escuela-rafael-diaz-serdan.web.app">
- <img src="src/assets/icons/apple-touch-icon-precomposed.png">
+<h1> <a href="http://rds.edu.mx">
  </a> Sistema RDS
  </h1>
-
 Angular webapp for Manage User accounts from Google's Admin Directory. Domain user's entities adapted to fit "Escuela Rafael Díaz Serdan" requirements (personal data, students and teachers block enrollment, manage groups and courses, view and edit information as an Admin and Superadmin in Google Workspace, and many more).
+ <img src="src/assets/images/rds-draw03.svg">
 
 ### Comming soon
 
