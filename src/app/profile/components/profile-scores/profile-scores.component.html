@@ -19,11 +19,14 @@
               </mat-select>
             </mat-form-field>
             <div>
-              <button mat-button (click)="printPage()">
+              <button mat-button (click)="generatePDF('print')">
                 <mat-icon class="rds-icon">print</mat-icon>&nbsp;Imprimir
               </button>
-              <button mat-button (click)="generatePdf()">
-                <fa-icon class="rds-icon" [icon]="faFilePdf" size="lg"></fa-icon>&nbsp;Descargar
+              <button mat-button (click)="generatePDF('download')">
+                <mat-icon class="rds-icon">file_download</mat-icon>&nbsp;Descargar
+              </button>
+              <button mat-button (click)="generatePDF('open')">
+                <fa-icon class="rds-icon" [icon]="faFilePdf" size="lg"></fa-icon>&nbsp;Ver como PDF
               </button>
             </div>
           </div>
