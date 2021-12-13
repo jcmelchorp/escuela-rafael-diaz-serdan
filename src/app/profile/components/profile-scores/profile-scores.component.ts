@@ -172,7 +172,7 @@ export class ProfileScoresComponent implements OnInit {
       });
     }
 
-    var docDefinition2 = {
+    var docDefinition = {
       header: {
         margin: 40,
         columns: [
@@ -226,7 +226,7 @@ export class ProfileScoresComponent implements OnInit {
         },
         {
           layout: {
-            hLineWidth: (i, node) => { return (i === 0 || i === 1) ? 1 : 0; },
+            hLineWidth: (i, node) => { return (i === 0 || i === -1) ? 1 : 0; },
             vLineWidth: (i, node) => { return (i === 1 || i === 2 || i === 3 || i === 4) ? 1 : 0; },
             hLineColor: (i, node) => { return (i === 1 || i === 2 || i === 3 || i === 4) ? '#0060a0' : '#101010'; },
             vLineColor: (i, node) => { return '#0060a0' },
@@ -285,11 +285,11 @@ export class ProfileScoresComponent implements OnInit {
     };
 
     if (action === 'download') {
-      pdfMake.createPdf(docDefinition2 as unknown as TDocumentDefinitions).download();
+      pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).download(`${this.user.curp.slice(0, 10)}_${this.cycles[this.score.cycle]}.pdf`);
     } else if (action === 'print') {
-      pdfMake.createPdf(docDefinition2 as unknown as TDocumentDefinitions).print();
+      pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).print();
     } else {
-      pdfMake.createPdf(docDefinition2 as unknown as TDocumentDefinitions).open();
+      pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).open();
     }
 
 

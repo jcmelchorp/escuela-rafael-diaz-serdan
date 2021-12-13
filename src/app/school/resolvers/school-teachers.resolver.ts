@@ -19,7 +19,7 @@ export class SchoolTeachersResolver implements Resolve<boolean> {
     return this.accountsEntityService.loaded$.pipe(
       tap((loaded) => {
         if (!loaded) {
-          this.accountsEntityService.getWithQuery({ role: 'profesores' });
+          this.accountsEntityService.getWithQuery({ role: 'Profesores' });
           /* .pipe(
             map(users => users.filter(user => user.role === 'Profesores'))) */
         }

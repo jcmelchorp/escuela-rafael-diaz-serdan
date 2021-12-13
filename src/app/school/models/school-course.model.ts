@@ -21,9 +21,13 @@ export interface SchoolClassroom {
   id: string;
   grade: SchoolLevel;
   cycle: Cycle;
+  priority?: number;
   studentsEmails?: string[];
+  students?: User[];
   coursesIds?: string[];
+  courses?: SchoolCourse[];
 }
+
 
 export enum CourseType {
   FORMATIVO = 'Formativo',

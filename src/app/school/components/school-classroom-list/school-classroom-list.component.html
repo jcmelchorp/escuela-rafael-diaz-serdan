@@ -1,8 +1,0 @@
-<mat-list role="list" dense>
-  <mat-list-item role="listitem" *ngFor="let classroom of classrooms$|async">
-    <div matLine>
-      {{this.slevels[classroom.grade]}} <span class="text-secondary">{{cycles[classroom.cycle]}}</span>
-    </div>
-
-  </mat-list-item>
-</mat-list>

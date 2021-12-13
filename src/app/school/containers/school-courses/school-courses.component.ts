@@ -2,14 +2,13 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { MatDialog } from '@angular/material/dialog';
 import { moveIn } from '@rds-shared/animations/router.animations';
 import { Cycle, SchoolCourse } from '../../models/school-course.model';
-import { SchoolCourseDialogComponent } from '../../components/school-courses-dialog/school-course-dialog.component';
-import { UploadFileDialogComponent } from '@rds-school/components/upload-file-dialog/upload-file-dialog.component';
 
 import { Router } from '@angular/router';
 import { SchoolStudentsEntityService } from '@rds-store/school/school-students/school-students-entity.service';
 import { map, mergeMap, switchMap, concatMap } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { SchoolCourseDialogComponent, UploadFileDialogComponent } from '@rds-school/components';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -53,7 +52,7 @@ export class SchoolCoursesComponent implements OnInit {
   }
   populateCourses() {
     this.schoolStudentsEntityService.entities$.pipe(
-      map(users => users.filter(user => user.role === ('Alumnos' || 'alumnos') && user.suspended === false)),
+      map(users => users.filter(user => user.role === 'Alumnos' && user.suspended === false)),
       mergeMap(users => this.schoolCoursesEntityService.entities$.pipe(
         map(courses => courses.filter(c => c.cycle == this.cycles.CE20212022).map(course => {
           const studentsEmails = users.filter(u => u.grade === course.grade).map(u => u.primaryEmail);

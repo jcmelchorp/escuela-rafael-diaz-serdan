@@ -1,0 +1,29 @@
+<mat-list dense>
+  <h3 matSubheader>Materias</h3>
+  <button *ngIf="(!classroom.coursesIds||classroom.coursesIds.length===0);else coursesList" mat-icon-button
+    (click)="assignCoursesToClassroom(classroom)">
+    <mat-icon>sync alt</mat-icon>
+  </button>
+  <ng-template #coursesList>
+    <mat-list-item *ngFor="let course of classroom.courses">
+      <div mat-line>{{course.name}}</div>
+    </mat-list-item>
+  </ng-template>
+  <!--  <div>
+
+    <div matLine>Encuentra materias para este grupo</div>
+  </div> -->
+
+</mat-list>
+
+<mat-list *ngIf="students$|async as students" dense>
+  <h3 matSubheader>Alumnos</h3>
+  <mat-list-item *ngIf="(!students||students.length===0);else studentsList">
+    <div mat-line>No hay alumnos en este grupo</div>
+  </mat-list-item>
+  <ng-template #studentsList>
+    <mat-list-item *ngFor="let student of students">
+      <div mat-line>{{student.name.fullName}}</div>
+    </mat-list-item>
+  </ng-template>
+</mat-list>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { SchoolClassroom } from '@rds-school/models/school-course.model';
-import { SchoolClassroomsService } from '@rds-school/services';
+import { SchoolClassroomsService, SchoolService } from '@rds-school/services';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import * as fromClassroom from '.';
@@ -13,7 +13,7 @@ export class SchoolClassroomsDataService extends DefaultDataService<SchoolClassr
   constructor(
     http: HttpClient,
     httpUrlGenerator: HttpUrlGenerator,
-    private schoolClassroomsService: SchoolClassroomsService
+    private schoolClassroomsService: SchoolService
   ) {
     super(fromClassroom.entityCollectionName, http, httpUrlGenerator);
   }

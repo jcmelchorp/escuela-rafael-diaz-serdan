@@ -20,7 +20,7 @@ export class SchoolStudentsResolver implements Resolve<boolean> {
     return this.accountsEntityService.loaded$.pipe(
       tap((loaded) => {
         if (!loaded) {
-          this.accountsEntityService.getWithQuery({ role: 'alumnos' });
+          this.accountsEntityService.getWithQuery({ role: 'Alumnos' });
         }
       }),
       filter((loaded) => !!loaded),

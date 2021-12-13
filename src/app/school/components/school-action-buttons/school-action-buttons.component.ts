@@ -4,14 +4,15 @@ import { Cycle, SchoolClassroom, SchoolCourse } from '@rds-school/models/school-
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { Observable } from 'rxjs';
-import { SchoolClassroomDialogComponent, SchoolCourseDialogComponent, UploadFileDialogComponent } from '..';
 import { SelectCycleDialogComponent } from '../select-cycle-dialog/select-cycle-dialog.component';
-import { SchoolStudentsEntityService } from '@rds-store/school/school-students/school-students-entity.service';
 import { UserRole } from '@rds-auth/models/user.enum';
 import { map, mergeMap, pluck, switchMap, tap } from 'rxjs/operators';
 import { SchoolClassroomsService } from '@rds-school/services/school-classrooms.service';
-import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
-import { SchoolLevel } from '../../../auth/models/user.enum';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { SchoolLevel } from '@rds-auth/models/user.enum';
+import { SchoolClassroomDialogComponent } from '@rds-school/components/school-classroom-dialog/school-classroom-dialog.component';
+import { SchoolCourseDialogComponent } from '../school-courses-dialog/school-course-dialog.component';
+import { UploadFileDialogComponent } from '../upload-file-dialog/upload-file-dialog.component';
 
 @Component({
   selector: 'app-school-action-buttons',
@@ -141,7 +142,6 @@ export class SchoolActionButtonsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log(result)
-
       } else {
         console.log('Dialog closed without changes')
       }

@@ -57,19 +57,13 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
   }
   list(): Observable<T[]> {
     const refCollection = collection(this.afs, this.tCollection);
-    return collectionData(refCollection).pipe(map(x => x as T[]));
+    return collectionData(refCollection).pipe(take(1), map(x => x as T[]));
     /* const tCollection = collection(thisrefCollection.afs, this.collection);
     return from(collectionData(tCollection)).pipe(tap(x => console.log(x as T[])), map(x => x.map(data => data.data as T))); */
     /*     return this.fsCollection.valueChanges({ idField: 'id' });
      */
   }
 
-  getWithGradeAndCycle(grade: string, cycle: string): Observable<T[]> {
-    const queryWithParams = query(collection(this.afs, this.tCollection), where('grade', '==', grade), where('cycle', '==', cycle))
-    return collectionData(queryWithParams).pipe(map(x => x as T[]));
-
-
-  }
 
   getWithQuery(queryParams: QueryParams): Observable<T[]> {
     const queryWithParams = query(collection(this.afs, this.tCollection), where(Object.keys(queryParams).pop(), '==', Object.values(queryParams).pop()))

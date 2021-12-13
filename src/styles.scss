@@ -18,6 +18,14 @@ body {
   background-image: none;
   background-color: transparent;
 }
+.view-title-small {
+  color: colors.$rds-logo-color;
+  font-size: calc(0.8rem + 1.2vw);
+  font-family: "fredoka one", cursive;
+  text-shadow: -2px -1px 1px colors.$text-shadow-color;
+  background-image: none;
+  background-color: transparent;
+}
 .view-subtitle {
   font-family: "comfortaa";
   font-size: calc(0.5rem + 1vw);

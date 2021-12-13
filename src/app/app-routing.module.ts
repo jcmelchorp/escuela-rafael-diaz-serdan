@@ -18,7 +18,8 @@ const routes: Routes = [
         data: { breadcrumb: '' },
       },
       {
-        path: 'i', loadChildren: () => import('./information/information.module').then(
+        path: 'i',
+        loadChildren: () => import('./information/information.module').then(
           m => m.InformationModule),
       },
       {
@@ -68,7 +69,6 @@ const routes: Routes = [
       }
     ]
   },
-
 ];
 
 @NgModule({

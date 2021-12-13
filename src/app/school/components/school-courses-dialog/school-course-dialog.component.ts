@@ -5,7 +5,7 @@ import { faTimes, faBook } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@rds-auth/models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CourseType, SchoolCourse, Cycle } from '../../models/school-course.model';
+import { CourseType, SchoolCourse, Cycle } from '../../../school/models/school-course.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';

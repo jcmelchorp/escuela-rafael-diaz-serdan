@@ -2,12 +2,15 @@ import { SelectionModel } from "@angular/cdk/collections";
 import { Component, Directive, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSelectionList } from "@angular/material/list";
-import { SchoolCourse } from "@rds-school/models/school-course.model";
-import { SchoolClassroomsService } from "@rds-school/services";
+import { Cycle, SchoolClassroom, SchoolCourse } from "@rds-school/models/school-course.model";
+import { SchoolClassroomsService, SchoolService } from "@rds-school/services";
 import { SchoolClassroomsEntityService } from "@rds-store/school/school-classrooms/school-classrooms-entity.service";
 import { SchoolCoursesEntityService } from "@rds-store/school/school-courses/school-courses-entity.service";
 import { Observable } from "rxjs";
 import * as XLSX from 'xlsx';
+import { update } from '@angular/fire/database';
+import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { SchoolLevel } from "@rds-auth/models/user.enum";
 @Component({
   styleUrls: ['upload-file-dialog.component.scss'],
   templateUrl: 'upload-file-dialog.component.html',
@@ -15,14 +18,21 @@ import * as XLSX from 'xlsx';
 export class UploadFileDialogComponent {
   importing: boolean = false;
   selectionRemain: Observable<number>;
+  cycles = Cycle;
+  cycleKeys;
+  levels = SchoolLevel;
+  levelKeys;
   @ViewChild('selCourses') selCourses: MatSelectionList;
   constructor(
     private dialogRef: MatDialogRef<UploadFileDialogComponent>,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
-    private schoolClassroomService: SchoolClassroomsService,
+    private schoolClassroomsEntityService: SchoolClassroomsEntityService,
+    private schoolService: SchoolService,
     @Inject(MAT_DIALOG_DATA) public data: { output: any[] }
   ) {
     this.selectionRemain = this.schoolCoursesEntityService.count$;
+    this.levelKeys = Object.keys(this.levels);
+    this.cycleKeys = Object.keys(this.cycles);
   }
 
   onFileChange(evt: any) {
@@ -51,7 +61,6 @@ export class UploadFileDialogComponent {
             description: row[4],
             cycle: row[5],
             teacherEmail: row[6],
-
           };
           this.data.output.push({ ...course as SchoolCourse, isImported: false });
         }
@@ -67,10 +76,24 @@ export class UploadFileDialogComponent {
     this.selCourses.deselectAll();
   }
   import() {
-    const courses = this.selCourses.selectedOptions.selected.map(item => item.value);
     this.importing = true;
+    this.data.output.forEach((course, i) => {
+      this.schoolService.getWithGradeAndCycle(course.grade, course.cycle).pipe(
+        mergeMap(schoolClassroom => this.schoolCoursesEntityService.add(course).pipe(
+          map(newCourse => this.schoolService.addCourseIdToClassroom(schoolClassroom.id, newCourse.id))
+        ))
+      ).subscribe();
+    });
+    /*     this.cycleKeys.forEach(cycle =>
+          this.levelKeys.forEach(level => {
+            console.log(cycle, level);
+            level !== 'MATERNAL_00' ?
+              courses[cycle.toString()][level.toString()] = this.data.output.filter(course => course.grade === level && course.cycle === cycle) as SchoolCourse[] :
+              null
+          })); */
 
-    this.data.output.forEach(async (course: SchoolCourse, i: number) => {
+
+    /* const schoolCourses= this.data.output.map(async (course: SchoolCourse, i: number) =>
       await this.schoolCoursesEntityService.add({
         cycle: course.cycle,
         name: course.name,
@@ -86,9 +109,8 @@ export class UploadFileDialogComponent {
             await this.schoolClassroomService.update(classrooms[0].id, classrooms[0]).toPromise();
           },
           () => { this.data.output[i].isImported = false }
-        ));
-    });
-    this.importing = false;
+        ))
+    ); */
   }
   close() {
     this.dialogRef.close();

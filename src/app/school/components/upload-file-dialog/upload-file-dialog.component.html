@@ -20,12 +20,9 @@
 <mat-dialog-actions align="end">
   <button *ngIf="data" mat-stroked-button color="accent" type="reset" (click)="deselectAll()">Limpiar selección</button>
   <button *ngIf="!data" mat-stroked-button color="warn" matDialogClose>Cancelar</button>
-  <button [disabled]="selCourses.selectedOptions.selected.length<1" *ngIf="!importing" mat-raised-button color="primary"
-    (click)="import()"><span>Importar
-      ({{selCourses.selectedOptions.selected.length}})</span>
-  </button>
-  <button *ngIf="importing && selCourses.selectedOptions.selected.length" mat-raised-button color="primary"
-    (click)="import()"><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true">Importar
+  <button [disabled]="importing || selCourses.selectedOptions.selected.length<1" mat-raised-button color="primary"
+    (click)="import()"><span [ngClass]="{'spinner-grow':importing, 'spinner-grow-sm':importing}" role="status"
+      aria-hidden="true">Importar
       ({{selCourses.selectedOptions.selected.length}})</span>
   </button>
 </mat-dialog-actions>

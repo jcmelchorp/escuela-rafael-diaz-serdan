@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cycle } from '@rds-school/models/school-course.model';
-import { SchoolClassroomDialogComponent } from '..';
 
 @Component({
   templateUrl: './select-cycle-dialog.component.html',
@@ -12,7 +11,7 @@ export class SelectCycleDialogComponent implements OnInit {
   cycles = Cycle;
   selectedCycle;
   constructor(
-    private dialogRef: MatDialogRef<SchoolClassroomDialogComponent>,
+    private dialogRef: MatDialogRef<SelectCycleDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.cycleKeys = Object.keys(this.cycles);

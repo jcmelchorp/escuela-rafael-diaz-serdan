@@ -19,16 +19,11 @@ export class SchoolDashboardComponent implements OnInit {
   constructor() { }
   ngOnInit(): void {
     this.assigmentLinks = [
-      {
-        title: 'Materias',
-        description: 'Grupos, alumnos y materias en la institución',
-        route: ['m'],
-        icon: faBook,
-      },
+
       {
         title: 'Inscripciones',
         description: 'Materias y clases dentro de la institución',
-        route: 'inscripciones',
+        route: 'a',
         icon: faClipboard,
       },
       {

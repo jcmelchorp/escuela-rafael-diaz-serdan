@@ -1,30 +1,25 @@
-<div class="card bg-transparent">
-  <div class="card-body">
-    <!--  <h2 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
-      <div class="view-title">Grupos</div>
-    </h2> -->
-    <div fxLayout="row wrap" fxLayout="stretch center">
-      <div fxFlex="0 1 calc(25%-10px)">
-        <div fxLayoutGap="10px">
-          <!--  <button mat-icon-button matTooltip="Nuevo grupo o materia" [matMenuTriggerFor]="newMenu">
-            <mat-icon>add</mat-icon>
-          </button>
-          <button mat-icon-button matTooltip="Cargar archivo de Excel" [matMenuTriggerFor]="fileMenu">
-            <mat-icon>upload</mat-icon>
-          </button> -->
-          <!-- <button mat-icon-button matTooltip="Guardar resumen de grupo" (click)="saveFile()">
-            <mat-icon>save</mat-icon>
-          </button>
-          <button mat-icon-button matTooltip="Enviar alumnos a clases" (click)="populateCourses()">
-            <mat-icon>groups</mat-icon>
-          </button> -->
-        </div>
-        <router-outlet></router-outlet>
-        <!-- <router-outlet name="classrooms"></router-outlet> -->
+<app-school-action-buttons></app-school-action-buttons>
+<div class="p-4">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="stretch start" fxLayoutGap="10px">
+    <div *ngIf="classrooms$|async as classrooms" class="card bg-transparent" fxFlex="0 1 260px" fxFlex.lt-sm="100%">
+      <div class="card-body">
+        <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
+          <div class="view-title-small">Grupos</div>
+        </h3>
       </div>
-      <div fxFlex="0 1 calc(75%-10px)">
-        <!-- <router-outlet name="courses"></router-outlet> -->
+      <app-school-classroom-group-list class="classroom-list" [classrooms]="classrooms"
+        (onClassroomEdit)="openSchoolClassroomDialog($event)" (onClassroomDelete)="handleCourseDelete($event)"
+        (onClassroomShow)="notify($event)">
+      </app-school-classroom-group-list>
+    </div>
+    <div *ngIf="classroom$|async as classroom" class="card bg-transparent" fxFlex="0 1 calc(75%)" fxFlex.lt-sm="100%">
+      <div class="card-body">
+        <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
+          <div class="view-title-small">{{levels[classroom.grade]}}</div>
+        </h3>
       </div>
+      <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="coursesOnLevel($event)">
+      </app-school-classroom-details>
     </div>
   </div>
 </div>
@@ -36,7 +31,14 @@
 </mat-menu>
 <mat-menu #fileMenu="matMenu" fxLayoutAlign="right">
   <ng-template matMenuContent>
-    <div mat-menu-item (click)="loadClassroomFile()">Importar grupos desde...</div>
-    <div mat-menu-item (click)="loasCoursesFile()">Importar materias desde...</div>
+    <div mat-menu-item (click)="loadClassroomFile()">Importar grupos</div>
+    <div mat-menu-item (click)="loadCoursesFile()">Importar materias</div>
   </ng-template>
 </mat-menu>
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>
