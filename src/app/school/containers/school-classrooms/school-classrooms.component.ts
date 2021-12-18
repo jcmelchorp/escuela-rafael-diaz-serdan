@@ -64,7 +64,7 @@ export class SchoolClassroomsComponent implements OnInit {
         })
       ))
     );
-    this.selectedClassroom$.next(this.filledClassroom);
+    //this.selectedClassroom$.next(this.filledClassroom);
   }
   openSaveUser() {
     const user: User = this.blankUser();
@@ -114,7 +114,7 @@ export class SchoolClassroomsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((cycle) => {
       if (cycle) {
         this.accountsEntityService.entities$.pipe(
-          map(users => users.filter(user => user.role == "alumnos" && user.suspended === false)),
+          map(users => users.filter(user => user.role == "Alumnos" && user.suspended === false)),
           mergeMap(users => this.schoolClassroomsEntityService.entities$.pipe(
             map(classrooms => classrooms.filter(c => c.cycle == this.cycles[cycle]).map(classroom => {
               const studentsEmails = users.filter(u => u.grade === classroom.grade).map(u => u.primaryEmail);

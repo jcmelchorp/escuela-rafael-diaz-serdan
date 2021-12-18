@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: SchoolComponent,
-    resolve: { teachers: SchoolTeachersResolver },
+    resolve: { teachers: SchoolTeachersResolver, students: SchoolStudentsResolver },
     children: [
       {
         path: '',

@@ -3,16 +3,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { Cycle, SchoolClassroom, SchoolCourse } from '@rds-school/models/school-course.model';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { SelectCycleDialogComponent } from '../select-cycle-dialog/select-cycle-dialog.component';
 import { UserRole } from '@rds-auth/models/user.enum';
-import { map, mergeMap, pluck, switchMap, tap } from 'rxjs/operators';
+import { concatMap, map, mergeMap, pluck, switchMap, tap } from 'rxjs/operators';
 import { SchoolClassroomsService } from '@rds-school/services/school-classrooms.service';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { SchoolClassroomDialogComponent } from '@rds-school/components/school-classroom-dialog/school-classroom-dialog.component';
 import { SchoolCourseDialogComponent } from '../school-courses-dialog/school-course-dialog.component';
 import { UploadFileDialogComponent } from '../upload-file-dialog/upload-file-dialog.component';
+import { SchoolService } from '@rds-school/services';
 
 @Component({
   selector: 'app-school-action-buttons',
@@ -29,36 +30,44 @@ export class SchoolActionButtonsComponent implements OnInit {
   constructor(
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
+    private schoolService: SchoolService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolClassroomsService: SchoolClassroomsService,
     private dialog: MatDialog,
   ) {
-    this.coursesCount$ = this.schoolCoursesEntityService.count$;
   }
 
   ngOnInit(): void {
+    this.coursesCount$ = this.schoolCoursesEntityService.count$;
+    this.courses$ = this.schoolCoursesEntityService.entities$;
+    this.classrooms$
   }
-  populateCourses() {
+  poulateCoursesWithStudents(classrooms: SchoolClassroom[]) {
     const dialogRef = this.dialog.open(SelectCycleDialogComponent, {
       width: 'fit-content',
       height: 'fit-content',
       data: { cycle: Cycle }
     });
-    dialogRef.afterClosed().subscribe((cycle) => {
-      if (cycle) {
-        this.accountsEntityService.entities$.pipe(
-          map(users => users.filter(user => user.role == "alumnos" && user.suspended === false)),
-          mergeMap(users => this.schoolClassroomsEntityService.entities$.pipe(
-            map(classrooms => classrooms.filter(c => c.cycle == this.cycles[cycle]).map(classroom => {
-              const studentsEmails = users.filter(u => u.grade === classroom.grade).map(u => u.primaryEmail);
-              return { ...classroom, studentsEmails: studentsEmails } as SchoolClassroom;
-            }))
-          )),
-          switchMap(async (classrooms) => classrooms.forEach(classroom => this.schoolClassroomsEntityService.update(classroom)))
-        )
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.schoolClassroomsEntityService.entities$.pipe(
+          mergeMap(classrooms => classrooms.filter(c => c.cycle === data.cycle).map(
+            classroom =>
+              this.accountsEntityService.entities$.pipe(
+                map(users => {
+                  const students = users.filter(u => u.grade === classroom.grade)
+                  const studentsEmails = students.map(s => s.primaryEmail);
+                  return { ...classroom, studentsEmails: studentsEmails, students: students } as SchoolClassroom;
+                }),
+                mergeMap(classroom => classroom.studentsEmails.map(async email => this.schoolService.addStudentIdToClassroom(classroom.id, email))))
+          )
+          ))
+      } else {
+        console.log('Dialog closed without changes')
       }
-    })
+    });
   }
+
   editCourse(course: SchoolClassroom) {
     this.schoolCoursesEntityService.update(course as Partial<SchoolCourse>);
   }
