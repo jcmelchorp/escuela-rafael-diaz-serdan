@@ -27,15 +27,12 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
   lookForStudents(classroom) {
     let classWithStudents: Partial<SchoolClassroom> = { id: classroom.id, studentsEmails: [] };
-    this.subscription = this.accountsEntityService.entities$.subscribe(users => {
+    this.accountsEntityService.entities$.subscribe(users => {
       this.students = users.filter(user => user.grade === this.levels[classroom.grade]);
-      // classWithStudents.students.push(...this.students);
-
-    });
+    }).unsubscribe();
     this.students.forEach(student => {
       classWithStudents.studentsEmails.push(student.primaryEmail);
     });

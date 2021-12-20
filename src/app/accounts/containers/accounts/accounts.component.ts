@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemePalette } from '@angular/material/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NewAccountConfirmComponent } from './../../components/new-account-confirm/new-account-confirm.component';
 import { NewAccountComponent } from './../../components/new-account/new-account.component';
 import { selectAccounts } from './../../state/accounts.selectors';
@@ -23,7 +23,7 @@ import { AccountsService } from '@rds-accounts/services';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss'],
 })
-export class AccountsComponent implements OnInit {
+export class AccountsComponent implements OnInit, OnDestroy {
   loaded$: Observable<boolean>;
   loading$: Observable<boolean>;
   users$: Observable<User[]>;
@@ -37,6 +37,7 @@ export class AccountsComponent implements OnInit {
   links = ['tabla', 'lista'];
   activeLink: any;
   background: ThemePalette = undefined;
+  subscription: Subscription;
   constructor(
     private accountsEntityService: AccountsEntityService,
     private accountsService: AccountsService,
@@ -66,6 +67,9 @@ export class AccountsComponent implements OnInit {
 
     this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
     this.count$ = this.accountsEntityService.count$;
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   ngOnInit(): void {
     this.loaded$ = this.accountsEntityService.loaded$;
@@ -128,7 +132,16 @@ export class AccountsComponent implements OnInit {
     const dialogRef = this.dialog.open(MigrationProgressComponent, {
       width: '500px',
       height: '400px',
-      data: accounts
+      data: { users: accounts, target: 'firestore' }
+    })
+  }
+  sendToRTDB() {
+    const accounts: User[] = [];
+    this.subscription = this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) });
+    const dialogRef = this.dialog.open(MigrationProgressComponent, {
+      width: '500px',
+      height: '400px',
+      data: { users: accounts, target: 'database' }
     })
   }
 }

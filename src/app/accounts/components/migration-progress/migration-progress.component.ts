@@ -20,19 +20,13 @@ export class MigrationProgressComponent implements OnInit {
   res: Observable<String>;
   constructor(
     private accountsService: AccountsService,
-    private accountsEntityService: AccountsEntityService,
-    private dialogRef: MatDialogRef<MigrationProgressComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
-    this.accountsEntityService.count$.subscribe(count => {
-      this.total = count;
-      this.interval = count / 100;
-    });
-    this.accountsEntityService.entities$.subscribe(users => {
-      this.users = users;
-    });
+
+    this.total = this.data.users.length;
+    this.interval = 100 / this.data.users.length;
     //if we don't have progress, set it to 0.
     if (!this.progress) {
       this.progress = 0;
@@ -58,10 +52,19 @@ export class MigrationProgressComponent implements OnInit {
     }
   }
   async startCounter() {
-    this.users.forEach(async user => {
-      await this.accountsService.migrationToFirestore(user).then(_ => console.log('User migrated'));
-      this.progress = this.progress + this.interval;
-    })
+    if (this.data.target === 'firestore') {
+      this.data.users.forEach(async user => {
+        await this.accountsService.migrationToFirestore(user).then(_ => console.log('User migrated'));
+        this.progress = this.progress + this.interval;
+      });
+    } else if (this.data.target === 'database') {
+      this.data.users.forEach(async user => {
+        await this.accountsService.migrationToDatabase(user).then(_ => console.log('User migrated'));
+        this.progress = this.progress + this.interval;
+      });
+    } else {
+      console.log('Error target')
+    }
   }
 
   progressInLoading() {

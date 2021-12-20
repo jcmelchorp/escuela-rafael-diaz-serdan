@@ -20,6 +20,10 @@
             <mat-icon>cloud_sync</mat-icon>
             <span>Enviar a Firestore</span>
           </button>
+          <button mat-menu-item (click)="sendToRTDB()">
+            <mat-icon>cloud_sync</mat-icon>
+            <span>Enviar a Realtime-Database</span>
+          </button>
         </mat-menu>
         <div class="position-sticky" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
           <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
