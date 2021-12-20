@@ -15,7 +15,13 @@
     <div *ngIf="classroom$|async as classroom" class="card bg-transparent" fxFlex="0 1 calc(75%)" fxFlex.lt-sm="100%">
       <div class="card-body">
         <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
-          <div class="view-title-small">{{levels[classroom.grade]}}</div>
+          <div fxLayout="column">
+            <span class="view-title-small">{{levels[classroom.grade]}}</span>
+            <span class="view-subtitle-small">{{cycles[classroom.cycle]}}</span>
+          </div>
+          <button mat-icon-button (click)="classroomToPDF(classroom)">
+            <mat-icon matTooltip="Imprime lista de grupo">print</mat-icon>
+          </button>
         </h3>
       </div>
       <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="coursesOnLevel($event)">

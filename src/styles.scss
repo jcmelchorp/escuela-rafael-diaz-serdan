@@ -33,6 +33,14 @@ body {
   background-image: none;
   background-color: transparent;
 }
+.view-subtitle-small {
+  font-family: "poppins";
+  color: gray;
+  font-size: calc(0.5rem + 0.5vw);
+  font-weight: 500;
+  background-image: none;
+  background-color: transparent;
+}
 .display-4-responsive {
   color: colors.$rds-logo-color;
   font-size: calc(1rem + 3vw);
