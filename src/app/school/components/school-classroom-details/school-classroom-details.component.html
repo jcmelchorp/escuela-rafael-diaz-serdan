@@ -6,9 +6,9 @@
       (click)="assignCoursesToClassroom(classroom)">
       <mat-icon>sync alt</mat-icon>
     </mat-list-item>
-    <mat-list-item class="drag-and-drop-box" cdkDrag *ngFor="let course of coursesIds;let j = index"
+    <mat-list-item class="drag-and-drop-box" cdkDrag *ngFor="let course of classroom.courses;let j = index"
       [attr.data-index]="j">
-      <div mat-line>{{j+1}}. {{course}}</div>
+      <div mat-line>{{j+1}}. {{course.name}}</div>
     </mat-list-item>
   </mat-list>
   <mat-list class="drag-and-drop-list" cdkDropList #studentList="cdkDropList" [cdkDropListData]="studentsEmails"
@@ -20,9 +20,9 @@
         en este grupo
       </div>
     </mat-list-item>
-    <mat-list-item class="drag-and-drop-box" cdkDrag *ngFor="let student of studentsEmails;let i = index">
-      <mat-icon matListIcon cdkDragHandle class="handle">drag_indicator</mat-icon>
-      <div matLine>{{i+1}}. {{student}}</div>
+    <mat-list-item class="drag-and-drop-box" cdkDrag *ngFor="let student of students;let i = index">
+      <!--       <mat-icon matListIcon cdkDragHandle class="handle">drag_indicator</mat-icon>-->
+      <div matLine>{{i+1}}. {{student.name.fullName}}</div>
     </mat-list-item>
 
   </mat-list>

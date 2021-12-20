@@ -1,3 +1,4 @@
+import { SchoolCourse } from '@rds-school/models/school-course.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
@@ -20,6 +21,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   students: User[];
   studentsEmails: string[];
   coursesIds: string[];
+  courses: SchoolCourse[];
   students$: Observable<User[]>;
   levels = SchoolLevel;
   subscription: Subscription
@@ -34,6 +36,8 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.studentsEmails = [...this.classroom.studentsEmails];
     this.coursesIds = [...this.classroom.coursesIds];
+    this.courses = [...this.classroom.courses];
+    this.students = [...this.classroom.students]
   }
   ngOnDestroy(): void {
   }
@@ -52,6 +56,8 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   dropCourses(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.courses, event.previousIndex, event.currentIndex);
+      this.classroom.courses = this.courses;
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
@@ -62,6 +68,8 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   dropStudents(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.students, event.previousIndex, event.currentIndex);
+      this.classroom.students = this.students;
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
