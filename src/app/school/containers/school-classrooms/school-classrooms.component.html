@@ -23,9 +23,10 @@
             <mat-icon matTooltip="Imprime lista de grupo">print</mat-icon>
           </button>
         </h3>
+        <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="coursesOnLevel($event)">
+        </app-school-classroom-details>
       </div>
-      <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="coursesOnLevel($event)">
-      </app-school-classroom-details>
+
     </div>
   </div>
 </div>
