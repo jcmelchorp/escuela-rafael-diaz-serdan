@@ -1,7 +1,9 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolClassroom } from '@rds-school/models/school-course.model';
+import { SchoolService } from '@rds-school/services';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
@@ -16,6 +18,8 @@ import { map, tap } from 'rxjs/operators';
 export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   @Input() classroom: SchoolClassroom;
   students: User[];
+  studentsEmails: string[];
+  coursesIds: string[];
   students$: Observable<User[]>;
   levels = SchoolLevel;
   subscription: Subscription
@@ -23,8 +27,13 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private accountsEntityService: AccountsEntityService,
+    private schoolService: SchoolService,
   ) {
 
+  }
+  ngOnInit(): void {
+    this.studentsEmails = [...this.classroom.studentsEmails];
+    this.coursesIds = [...this.classroom.coursesIds];
   }
   ngOnDestroy(): void {
   }
@@ -40,8 +49,24 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
     console.log(classWithStudents)
   }
 
-  ngOnInit(): void {
+  dropCourses(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
 
+    this.schoolService.updateCoursesInClassroom(this.classroom.id, event.container.data)
+  }
+
+  dropStudents(event: CdkDragDrop<string[]>): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
+
+    this.schoolService.updateStudentsInClassroom(this.classroom.id, event.container.data)
   }
   assignCoursesToClassroom(classroom: SchoolClassroom) {
 

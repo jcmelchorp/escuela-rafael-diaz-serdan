@@ -1,28 +1,29 @@
 <div fxLayout="row" fxLayout="stretch center" fxLayoutGap="10px">
-  <mat-list dense>
+  <mat-list class="drag-and-drop-list" cdkDropList #courseList="cdkDropList" [cdkDropListData]="coursesIds"
+    (cdkDropListDropped)="dropCourses($event)" dense>
     <h3 matSubheader>Materias</h3>
-    <mat-list-item *ngIf="(!classroom.coursesIds||classroom.coursesIds.length===0);else coursesList" mat-icon-button
+    <mat-list-item *ngIf="(!coursesIds||coursesIds.length<1)" mat-icon-button
       (click)="assignCoursesToClassroom(classroom)">
       <mat-icon>sync alt</mat-icon>
     </mat-list-item>
-    <ng-template #coursesList>
-      <mat-list-item *ngFor="let course of classroom.courses;let i = index" [attr.data-index]="i">
-        <div mat-line>{{i+1}}. {{course.name}}</div>
-      </mat-list-item>
-    </ng-template>
+    <mat-list-item class="drag-and-drop-box" cdkDrag *ngFor="let course of coursesIds;let j = index"
+      [attr.data-index]="j">
+      <div mat-line>{{j+1}}. {{course}}</div>
+    </mat-list-item>
   </mat-list>
-  <mat-list dense>
+  <mat-list class="drag-and-drop-list" cdkDropList #studentList="cdkDropList" [cdkDropListData]="studentsEmails"
+    (cdkDropListDropped)="dropStudents($event)" dense>
     <h3 matSubheader>Alumnos</h3>
-    <mat-list-item *ngIf="(!classroom.students||classroom.students.length<1);else studentsList">
+    <mat-list-item *ngIf="(!studentsEmails||studentsEmails.length<1)">
       <mat-icon matListIcon mat-button-icon (click)="lookForStudents(classroom)">search</mat-icon>
-      <div mat-line>No hay alumnos
+      <div matLine>No hay alumnos
         en este grupo
       </div>
     </mat-list-item>
-    <ng-template #studentsList>
-      <mat-list-item *ngFor="let student of classroom.students;let i = index">
-        <div mat-line>{{i+1}}. {{student.name.fullName}}</div>
-      </mat-list-item>
-    </ng-template>
+    <mat-list-item class="drag-and-drop-box" cdkDrag *ngFor="let student of studentsEmails;let i = index">
+      <mat-icon matListIcon cdkDragHandle class="handle">drag_indicator</mat-icon>
+      <div matLine>{{i+1}}. {{student}}</div>
+    </mat-list-item>
+
   </mat-list>
 </div>
