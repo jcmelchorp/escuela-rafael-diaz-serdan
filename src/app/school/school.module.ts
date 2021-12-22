@@ -29,7 +29,7 @@ import { SchoolClassroomDetailsComponent } from './components/school-classroom-d
 
 
 @NgModule({
-  declarations: [...SCHOOL_COMPONENTS, ...SCHOOL_CONTAINERS, SchoolClassroomDetailsComponent],
+  declarations: [...SCHOOL_COMPONENTS, ...SCHOOL_CONTAINERS],
   imports: [SharedModule, SchoolRoutingModule],
   providers: [
     ...SCHOOL_SERVICES,

@@ -51,9 +51,13 @@ export class SchoolService {
     const refDoc = doc(this.afs, this.tCollection, classroomId);
     return await updateDoc(refDoc, { studentsEmails: studentsEmails });
   }
-  async removeCourseFromClassroom(id: string, courseId: string) {
-    const refDoc = doc(this.afs, this.tCollection, id);
+  async removeCourseFromClassroom(classroomId: string, courseId: string) {
+    const refDoc = doc(this.afs, this.tCollection, classroomId);
     return await updateDoc(refDoc, { coursesIds: arrayRemove(courseId) });
+  }
+  async removeStudentFromClassroom(classroomId: string, studentEmail: string) {
+    const refDoc = doc(this.afs, this.tCollection, classroomId);
+    return await updateDoc(refDoc, { studentsEmails: arrayRemove(studentEmail) });
   }
   getById(id: string): Observable<SchoolClassroom> {
     const refDoc = doc(this.afs, this.tCollection, id);

@@ -11,7 +11,7 @@ import { SelectCycleDialogComponent, SchoolCourseDialogComponent, SchoolClassroo
 import { SchoolClassroomsService } from '@rds-school/services';
 import { heightReveal } from '@rds-shared/animations/fade-in.animation';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { User } from '@rds-auth/models/user.model';
 import * as pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import pdfMake from "pdfmake/build/pdfmake";
@@ -28,17 +28,18 @@ export class SchoolClassroomsComponent implements OnInit {
   classrooms$: Observable<SchoolClassroom[]>;
   classroom$: Observable<SchoolClassroom>;
   coursesCount$: Observable<number>;
-  selectedClassroom$: Subject<SchoolClassroom> = new Subject<SchoolClassroom>();
   filledClassroom: SchoolClassroom;
   roles = UserRole;
   cycles = Cycle;
   levels = SchoolLevel;
+  selClassroom: SchoolClassroom;
   constructor(
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolClassroomsService: SchoolClassroomsService,
     private dialog: MatDialog,
+    private route: Router
   ) {
 
   }
@@ -265,23 +266,32 @@ export class SchoolClassroomsComponent implements OnInit {
 
   }
   notify(classroom: SchoolClassroom) {
-    this.filledClassroom = { ...classroom };
-    this.classroom$ = this.accountsEntityService.entities$.pipe(
-      map(users => {
-        const students = this.filledClassroom.studentsEmails.map(
-          email => users.find(user => user.primaryEmail === email));
-        return { ...classroom, students }
-      }),
-      switchMap(classroom => this.schoolCoursesEntityService.entities$.pipe(
-        map(schoolCourses => {
-          const courses = this.filledClassroom.coursesIds.map(
-            courseId =>
-              schoolCourses.find(course => course.id === courseId))
-          return { ...classroom, courses }
-        })
-      ))
-    );
-    //this.selectedClassroom$.next(this.filledClassroom);
+    this.classroom$ = this.classrooms$.pipe(map(classrooms => classrooms.find(c => c.id === classroom.id)),
+      mergeMap(cl => this.accountsEntityService.entities$.pipe(
+        /*  tap(users => {
+           if (!users) this.accountsEntityService.getWithQuery({ grade: classroom.grade });
+         }), */
+        map(users => {
+          return cl.studentsEmails.map(
+            email => users.find(user => user.primaryEmail === email));
+        }),
+        mergeMap(students => this.schoolCoursesEntityService.entities$.pipe(
+          /* tap(schoolCourses => {
+            if (!schoolCourses) this.schoolCoursesEntityService.getWithQuery({ grade: this.levels[classroom.grade] });
+          }), */
+          map(schoolCourses => {
+            const courses = cl.coursesIds.map(
+              courseId => {
+                const course = schoolCourses.find(course => course.id === courseId);
+
+                return course
+              }
+            );
+            return { ...classroom, courses: courses, students: students }
+          })
+        )),
+        tap(classroom => console.log(classroom))
+      )));
   }
   openSaveUser() {
     const user: User = this.blankUser();

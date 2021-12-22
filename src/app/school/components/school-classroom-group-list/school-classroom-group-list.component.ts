@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { Cycle, SchoolClassroom } from '@rds-school/models/school-course.model';
 import { TableGroup } from '@rds-school/models/table-group.model';
+import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
 
 @Component({
   selector: 'app-school-classroom-group-list',
@@ -161,7 +162,7 @@ export class SchoolClassroomGroupListComponent implements OnInit {
   editClassroom(classroom?: SchoolClassroom) {
     this.onClassroomEdit.emit(classroom);
   }
-  showClassroom(classroom?: SchoolClassroom) {
+  showClassroom(classroom: SchoolClassroom) {
     this.onClassroomShow.emit(classroom);
   }
 

@@ -9,8 +9,10 @@ import { SchoolActionButtonsComponent } from './school-action-buttons/school-act
 import { SchoolClassroomGroupListComponent } from "./school-classroom-group-list/school-classroom-group-list.component";
 import { UploadFileDialogComponent } from "./upload-file-dialog/upload-file-dialog.component";
 import { SchoolClassroomDialogComponent } from './school-classroom-dialog/school-classroom-dialog.component';
-import { SchoolCourseDialogComponent } from '@rds-school/components/school-courses-dialog/school-course-dialog.component';
 import { SchoolClassroomDetailsComponent } from './school-classroom-details/school-classroom-details.component';
+import { SchoolCourseComponent } from './school-course/school-course.component';
+import { SchoolStudentComponent } from './school-student/school-student.component';
+import { SchoolCourseDialogComponent } from "./school-course-dialog/school-course-dialog.component";
 
 export const SCHOOL_COMPONENTS: any[] = [
   AddStudentsCoursesComponent,
@@ -20,6 +22,8 @@ export const SCHOOL_COMPONENTS: any[] = [
   SchoolCoursesTableComponent,
   SchoolClassroomDialogComponent,
   SchoolCourseDialogComponent,
+  SchoolCourseComponent,
+  SchoolStudentComponent,
   StudentsCoursesComponent,
   SchoolStudentsTableComponent,
   SchoolDashboardComponent,
@@ -38,5 +42,7 @@ export * from "./select-cycle-dialog/select-cycle-dialog.component";
 export * from "./school-action-buttons/school-action-buttons.component";
 export * from "./school-classroom-group-list/school-classroom-group-list.component";
 export * from "./school-classroom-dialog/school-classroom-dialog.component";
-export * from "./school-courses-dialog/school-course-dialog.component";
+export * from "./school-course-dialog/school-course-dialog.component";
 export * from "./school-classroom-details/school-classroom-details.component";
+export * from "./school-course/school-course.component";
+export * from "./school-student/school-student.component";

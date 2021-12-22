@@ -12,7 +12,7 @@ export interface SchoolCourse {
   grade: SchoolLevel;
   courseType: CourseType;
   teacherEmail: string;
-  teacherPhotoUrl?: string;
+  teacher?: User;
   cycle: Cycle;
   studentsEmails?: string[];
 }

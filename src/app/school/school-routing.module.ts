@@ -9,25 +9,25 @@ import { SchoolClassroomsResolver } from './resolvers/school-classrooms.resolver
 import { SchoolTeachersResolver } from './resolvers/school-teachers.resolver';
 import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
 import { SchoolClassroomsComponent } from './containers/school-classrooms/school-classrooms.component';
+import { SchoolClassroomDetailsComponent } from './components/school-classroom-details/school-classroom-details.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SchoolComponent,
-    resolve: { teachers: SchoolTeachersResolver, students: SchoolStudentsResolver },
+    //resolve: { teachers: SchoolTeachersResolver, students: SchoolStudentsResolver },
     children: [
       {
         path: '',
         component: SchoolDashboardComponent,
         data: { breadcrumb: 'Dirección' },
-        resolve: { classrooms: SchoolClassroomsResolver, courses: SchoolCoursesResolver },
       },
       {
         //path: '',
         path: 'a',
         component: SchoolClassroomsComponent,
         data: { breadcrumb: 'Grupos, alumnos y materias' },
-        resolve: { students: SchoolStudentsResolver },
+        resolve: { classrooms: SchoolClassroomsResolver, courses: SchoolCoursesResolver, students: SchoolStudentsResolver },
       },
       {
         path: '**',

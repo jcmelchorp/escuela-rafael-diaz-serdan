@@ -9,7 +9,8 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-school-classroom-details',
@@ -18,7 +19,9 @@ import { map, tap } from 'rxjs/operators';
 })
 export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   @Input() classroom: SchoolClassroom;
-  students: User[];
+  classroom$: Observable<SchoolClassroom>;
+  classroomId: string;
+  students: any[];
   studentsEmails: string[];
   coursesIds: string[];
   courses: SchoolCourse[];
@@ -28,6 +31,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   @Output() onClassroomEmit = new EventEmitter<SchoolClassroom>();
   constructor(
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
     private schoolService: SchoolService,
   ) {
@@ -38,6 +42,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
     this.coursesIds = [...this.classroom.coursesIds];
     this.courses = [...this.classroom.courses];
     this.students = [...this.classroom.students]
+
   }
   ngOnDestroy(): void {
   }
@@ -57,14 +62,20 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       moveItemInArray(this.courses, event.previousIndex, event.currentIndex);
+      this.courses = this.courses.map((course, i) => { return { ...course, priority: i + 1 } as SchoolCourse });
       this.classroom.courses = this.courses;
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
 
     this.schoolService.updateCoursesInClassroom(this.classroom.id, event.container.data)
-  }
 
+    event.container.data.forEach((courseId, i) => this.schoolCoursesEntityService.update({ id: courseId, priority: i + 1 } as SchoolCourse));
+  }
+  removeStudent(student: User, i: number) {
+    this.schoolService.removeStudentFromClassroom(this.classroom.id, this.studentsEmails[i]);
+    this.students.splice(i, 1)
+  }
   dropStudents(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

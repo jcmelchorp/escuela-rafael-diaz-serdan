@@ -11,7 +11,7 @@ import { SchoolClassroomsService } from '@rds-school/services/school-classrooms.
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { SchoolClassroomDialogComponent } from '@rds-school/components/school-classroom-dialog/school-classroom-dialog.component';
-import { SchoolCourseDialogComponent } from '../school-courses-dialog/school-course-dialog.component';
+import { SchoolCourseDialogComponent } from '../school-course-dialog/school-course-dialog.component';
 import { UploadFileDialogComponent } from '../upload-file-dialog/upload-file-dialog.component';
 import { SchoolService } from '@rds-school/services';
 

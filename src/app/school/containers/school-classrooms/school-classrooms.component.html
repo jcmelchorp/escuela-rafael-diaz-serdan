@@ -10,6 +10,7 @@
       <app-school-classroom-group-list class="classroom-list" [classrooms]="classrooms"
         (onClassroomEdit)="openSchoolClassroomDialog($event)" (onClassroomDelete)="handleCourseDelete($event)"
         (onClassroomShow)="notify($event)">
+
       </app-school-classroom-group-list>
     </div>
     <div *ngIf="classroom$|async as classroom" class="card bg-transparent" fxFlex="0 1 calc(75%)" fxFlex.lt-sm="100%">
@@ -25,6 +26,7 @@
         </h3>
         <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="coursesOnLevel($event)">
         </app-school-classroom-details>
+        <!-- <router-outlet name="classroom-outlet"></router-outlet> -->
       </div>
 
     </div>
