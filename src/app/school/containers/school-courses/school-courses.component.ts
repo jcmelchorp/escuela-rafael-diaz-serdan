@@ -1,92 +1,89 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
-import { SchoolLevel } from '@rds-auth/models/user.enum';
-import { User } from '@rds-auth/models/user.model';
 import { moveIn } from '@rds-shared/animations/router.animations';
-import { Subscription, Observable, Subject } from 'rxjs';
-import { SchoolCourse } from '../../models/school-course.model';
-import { SchoolCoursesDialogComponent } from '../../components/school-courses-dialog/school-courses-dialog.component';
-import { SchoolCoursesEntityService } from '@rds-root/app/store/school/school-courses/school-courses-entity.service';
-import * as XLSX from 'xlsx';
+import { Cycle, SchoolCourse } from '../../models/school-course.model';
+
+import { Router } from '@angular/router';
+import { SchoolStudentsEntityService } from '@rds-store/school/school-students/school-students-entity.service';
+import { map, mergeMap, switchMap, concatMap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { SchoolCourseDialogComponent, UploadFileDialogComponent } from '@rds-school/components';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
   styleUrls: ['./school-courses.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [moveIn()],
 })
 export class SchoolCoursesComponent implements OnInit {
-  courseRooms: SchoolCourse[];
-  coursesSubscription: Subscription;
-  teachers$: Observable<User[]>;
-  loading_users$: Observable<boolean>;
-  loaded_users$: Observable<boolean>;
-  loading_courses$: Observable<boolean>;
-  loaded_courses$: Observable<boolean>;
-  newClass$: Observable<SchoolCourse>;
-  courseRoomsSub: Subject<SchoolCourse> = new Subject<SchoolCourse>();
-  slevelKeys;
-  slevels = SchoolLevel;
-  faChalkboardTeacher = faChalkboardTeacher;
-  filterValues: FormGroup;
-  filteredEntities$: Observable<SchoolCourse[]>;
-  courses$: Observable<SchoolCourse[]>;
-  coursesByGrade$: Observable<SchoolCourse[]>[];
-  resCount$: Observable<number>;
   willDownload = false;
+  activeLinkIndex = -1;
+  navLinks: any[];
+  studentsEmails$: Observable<string[]>;
+  courses$: Observable<SchoolCourse[]>;
+  subscript: Subscription;
+  cycles = Cycle;
   constructor(
-    private fb: FormBuilder,
-    private schoolCourseEntityService: SchoolCoursesEntityService,
-    //private accountsEntityService: AccountsEntityService,
+    private router: Router,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolStudentsEntityService: SchoolStudentsEntityService,
     private dialog: MatDialog
   ) {
-    this.resCount$ = this.schoolCourseEntityService.count$
-    this.loaded_courses$ = this.schoolCourseEntityService.loaded$;
-    this.loading_courses$ = this.schoolCourseEntityService.loading$;
-    this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
-    this.filterValues = this.fb.group({
-      name: new FormControl(),
-      grade: new FormControl(),
-    });
-    this.filterValues.valueChanges.subscribe((changes) => {
-      Object.keys(changes).forEach(
-        (key) => changes[key] == null && delete changes[key]
-      );
-      return this.schoolCourseEntityService.setFilter(changes);
-    });
-    this.filteredEntities$ = this.schoolCourseEntityService.filteredEntities$;
+    this.navLinks = [
+      {
+        label: 'Grupos',
+        route: 'g',
+        index: 0
+      }, {
+        label: 'Materias',
+        route: ['m'],
+        index: 1
+      }, {
+        label: 'Alumnos',
+        route: ['a'],
+        index: 2
+      }
+    ];
   }
 
   ngOnInit() {
+
+  }
+  populateCourses() {
+    this.schoolStudentsEntityService.entities$.pipe(
+      map(users => users.filter(user => user.role === 'Alumnos' && user.suspended === false)),
+      mergeMap(users => this.schoolCoursesEntityService.entities$.pipe(
+        map(courses => courses.filter(c => c.cycle == this.cycles.CE20212022).map(course => {
+          const studentsEmails = users.filter(u => u.grade === course.grade).map(u => u.primaryEmail);
+          return { ...course, studentsEmails: studentsEmails } as SchoolCourse;
+        }))
+      )),
+
+    ).subscribe(courses => courses.forEach(course => /* console.log(course) */this.schoolCoursesEntityService.update(course))).unsubscribe()
+  }
+  editCourse(course: SchoolCourse) {
+    console.log(course)
+    this.schoolCoursesEntityService.update(course);
   }
 
-  applyFilterString() {
-    const nameForm: string = (this.filterValues.get('name').value as string);
-    const gradeForm: string = this.filterValues.get('grade').value as string;
-    const name = nameForm === undefined || nameForm == null || nameForm == '' ? '' : nameForm.toLocaleLowerCase();
-    const grade = gradeForm === undefined || gradeForm == null || gradeForm == '' ? '' : gradeForm;
-    const filter = JSON.parse(
-      JSON.stringify({ name: name, grade: grade })
-    );
-  }
 
   openSchoolCourseDialog(course?: SchoolCourse) {
+    let coursesInGrade: number;
     const newCourse: Partial<SchoolCourse> = {};
-    const dialogRef = this.dialog.open(SchoolCoursesDialogComponent, {
+    const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
       width: 'fit-content',
-      minWidth: '400px',
       height: 'fit-content',
       data: course
-        ? { course, isNew: false }
+        ? { course: course, isNew: false }
         : { course: newCourse, isNew: true },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.isNew) {
-          this.schoolCourseEntityService.add(result.course);
+          this.schoolCoursesEntityService.add(result.course);
         } else {
-          this.schoolCourseEntityService.update(result.course);
+          this.editCourse(result.course);
         }
       } else {
         console.log('Dialog closed without changes')
@@ -94,35 +91,29 @@ export class SchoolCoursesComponent implements OnInit {
     });
   }
 
-  handleCourseDelete(course: SchoolCourse) {
-    this.schoolCourseEntityService.delete(course);
+  saveFile() {
+
   }
-  onFileChange(ev) {
-    let workBook = null;
-    let jsonData = null;
-    const reader = new FileReader();
-    const file = ev.target.files[0];
-    reader.onload = (event) => {
-      const data = reader.result;
-      workBook = XLSX.read(data, { type: 'binary' });
-      jsonData = workBook.SheetNames.reduce((initial, name) => {
-        const sheet = workBook.Sheets[name];
-        initial[name] = XLSX.utils.sheet_to_json(sheet);
-        return initial;
-      }, {});
-      const dataString = JSON.stringify(jsonData);
-      document.getElementById('output').innerHTML = dataString.slice(0, 300).concat("...");
-      this.setDownload(dataString);
-    }
-    reader.readAsBinaryString(file);
+
+  loadFile() {
+    const dialogRef = this.dialog.open(UploadFileDialogComponent, {
+      width: 'fit-content',
+      minWidth: '700px',
+      height: 'fit-content',
+      data: { output: [] },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result)
+
+      } else {
+        console.log('Dialog closed without changes')
+      }
+    });
   }
-  setDownload(data) {
-    this.willDownload = true;
-    setTimeout(() => {
-      const el = document.querySelector("#download");
-      el.setAttribute("href", `data:text/json;charset=utf-8,${encodeURIComponent(data)}`);
-      el.setAttribute("download", 'xlsxtojson.json');
-    }, 1000)
+
+  handleCourseDelete(id: string) {
+    this.schoolCoursesEntityService.delete(id);
   }
 
 }

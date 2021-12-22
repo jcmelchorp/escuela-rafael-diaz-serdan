@@ -7,16 +7,14 @@ import {
   Router,
   RouterEvent,
 } from '@angular/router';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { CdkScrollable, OverlayContainer, ScrollDispatcher } from '@angular/cdk/overlay';
 
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LayoutService, ThemeService } from '@rds-core/services';
 import { User } from '@rds-auth/models/user.model';
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 import * as fromAuthSelectors from '@rds-auth/state/auth.selectors';
-import { signInSuccess } from '@rds-auth/state/auth.actions';
-
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -68,10 +66,11 @@ export class LayoutComponent {
     this.isDarkTheme = this.themeService.isDarkTheme;
     this.isDarkTheme.subscribe((isDark) => {
       if (isDark) {
-        this.overlay.getContainerElement().classList.add('dark-theme');
+        this.overlay.getContainerElement().classList.add('theme-alternate');
       } else {
-        this.overlay.getContainerElement().classList.remove('dark-theme');
+        this.overlay.getContainerElement().classList.remove('theme-alternate');
       }
     });
+
   }
 }

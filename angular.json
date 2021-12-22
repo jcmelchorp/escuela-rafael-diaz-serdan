@@ -23,7 +23,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["xlsx"],
+            "allowedCommonJsDependencies": [
+              "chartjs-plugin-annotation",
+              "chartjs-plugin-datalabels",
+              "chart.js",
+              "xlsx"
+            ],
             "outputPath": "dist/escuela-rafael-diaz-serdan",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -42,8 +47,7 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "3mb",
                   "maximumError": "5mb"
@@ -54,10 +58,13 @@
                   "maximumError": "10kb"
                 }
               ],
-              "fileReplacements": [
-                {
+              "fileReplacements": [{
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/emulators.ts",
+                  "with": "src/environments/emulators.prod.ts"
                 }
               ],
               "outputHashing": "all"

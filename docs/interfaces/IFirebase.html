@@ -102,12 +102,6 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#getWithQuery" 
->
-                                        getWithQuery
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="#list" 
 >
                                         list
@@ -354,75 +348,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getWithQuery"></a>
-                    <span class="name">
-                        <span ><b>getWithQuery</b></span>
-                        <a href="#getWithQuery"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getWithQuery(query: QueryParams)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Definido en <a href="" data-line="16"
-                            class="link-to-prism">src/app/shared/models/firebase.model.ts:16</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parámetros :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Nombre</td>
-                                    <td>Tipo</td>
-                                    <td>Opcional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>query</td>
-                                    <td>
-                                            <code>QueryParams</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Devuelve : </b>    <code>Observable&lt;T[]&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="list"></a>
                     <span class="name">
                         <span ><b>list</b></span>
@@ -558,7 +483,7 @@ export interface IFirebase&lt;T&gt; {
   getById(id: string): Observable&lt;T&gt;;
   delete(id: string): Observable&lt;string&gt;;
   list(): Observable&lt;T[]&gt;;
-  getWithQuery(query: QueryParams): Observable&lt;T[]&gt;;
+  //getWithQuery(field: string, value: any): Observable&lt;T[]&gt;;
 }
 /**
  * function that will turn our JS Objects into an Object that Firestore can work with

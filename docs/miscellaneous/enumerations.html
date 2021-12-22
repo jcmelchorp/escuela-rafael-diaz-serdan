@@ -72,10 +72,13 @@
                             <a href="#CourseState" title="src/app/classroom/models/classroom.enum.ts" ><b>CourseState</b>&nbsp;&nbsp;&nbsp;(src/.../classroom.enum.ts)</a>
                         </li>
                         <li>
-                            <a href="#CourseType" title="src/app/school/models/school-course.model.ts" ><b>CourseType</b>&nbsp;&nbsp;&nbsp;(src/.../school-course.model.ts)</a>
+                            <a href="#CourseType" title="src/app/school/school-courses/models/school-course.model.ts" ><b>CourseType</b>&nbsp;&nbsp;&nbsp;(src/.../school-course.model.ts)</a>
                         </li>
                         <li>
                             <a href="#CourseWorkType" title="src/app/classroom/models/classroom.enum.ts" ><b>CourseWorkType</b>&nbsp;&nbsp;&nbsp;(src/.../classroom.enum.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Cycle" title="src/app/school/school-courses/models/school-course.model.ts" ><b>Cycle</b>&nbsp;&nbsp;&nbsp;(src/.../school-course.model.ts)</a>
                         </li>
                         <li>
                             <a href="#GradeChangeType" title="src/app/classroom/models/classroom.enum.ts" ><b>GradeChangeType</b>&nbsp;&nbsp;&nbsp;(src/.../classroom.enum.ts)</a>
@@ -465,22 +468,42 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;Maternal
+                                &nbsp;MATERNAL
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;Preescolar
+                                <i>Valor : </i><code>Maternal</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;Primaria
+                                &nbsp;PREESCOLAR
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;Secundaria
+                                <i>Valor : </i><code>Preescolar</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PRIMARIA
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>Primaria</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;SECUNDARIA
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>Secundaria</code>
                             </td>
                         </tr>
             </tbody>
@@ -495,67 +518,132 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;Maternal
+                                &nbsp;MATERNAL_00
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;1° de Preescolar
+                                <i>Valor : </i><code>Maternal</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;2° de Preescolar
+                                &nbsp;PREESCOLAR_1
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;3° de Preescolar
+                                <i>Valor : </i><code>1° de Preescolar</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;1° de Primaria
+                                &nbsp;PREESCOLAR_2
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;2° de Primaria
+                                <i>Valor : </i><code>2° de Preescolar</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;3° de Primaria
+                                &nbsp;PREESCOLAR_3
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;4° de Primaria
+                                <i>Valor : </i><code>3° de Preescolar</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;5° de Primaria
+                                &nbsp;PRIMARIA_1
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;6° de Primaria
+                                <i>Valor : </i><code>1° de Primaria</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;1° de Secundaria
+                                &nbsp;PRIMARIA_2
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;2° de Secundaria
+                                <i>Valor : </i><code>2° de Primaria</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;3° de Secundaria
+                                &nbsp;PRIMARIA_3
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>3° de Primaria</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PRIMARIA_4
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>4° de Primaria</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PRIMARIA_5
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>5° de Primaria</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PRIMARIA_6
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>6° de Primaria</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;SECUNDARIA_1
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>1° de Secundaria</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;SECUNDARIA_2
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>2° de Secundaria</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;SECUNDARIA_3
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>3° de Secundaria</code>
                             </td>
                         </tr>
             </tbody>
@@ -570,28 +658,48 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;otros
+                                &nbsp;OTROS
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;alumnos
+                                <i>Valor : </i><code>Otros</code>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;profesores
+                                &nbsp;ALUMNOS
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;administrativos
+                                <i>Valor : </i><code>Alumnos</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;PROFESORES
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>Profesores</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;ADMINISTRATIVOS
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>Administrativos</code>
                             </td>
                         </tr>
             </tbody>
         </table>
 </section>
-    <h3>src/app/school/models/school-course.model.ts</h3>
+    <h3>src/app/school/school-courses/models/school-course.model.ts</h3>
     <section>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -603,12 +711,62 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;formativo
+                                &nbsp;FORMATIVO
                             </td>
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                &nbsp;optativo
+                                <i>Valor : </i><code>Formativo</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;OPTATIVO
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>Optativo</code>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Cycle"></a>
+                        <span class="name "><b>Cycle</b><a href="#Cycle"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;CE20202021
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>2020-2021</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;CE20212022
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>2021-2022</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                &nbsp;CE20222023
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Valor : </i><code>2022-2023</code>
                             </td>
                         </tr>
             </tbody>

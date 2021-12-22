@@ -1,0 +1,44 @@
+<ng-content></ng-content>
+<table mat-table class="full-width-table table-hover" matSort aria-label="Course work table">
+  <!-- Id Column -->
+  <!--  <ng-container matColumnDef="id">
+    <th mat-header-cell class="medium-th" *matHeaderCellDef mat-sort-header>Id</th>
+    <td mat-cell *matCellDef="let row">{{row.id}}</td>
+  </ng-container> -->
+  <ng-container matColumnDef="photo">
+    <th mat-header-cell class="medium-th" *matHeaderCellDef mat-sort-header></th>
+    <td mat-cell *matCellDef="let row"><img class="img-small rounded-circle" [src]="row.thumbnailPhotoUrl"></td>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell class="large-th" *matHeaderCellDef mat-sort-header>Nombre</th>
+    <td mat-cell *matCellDef="let row" [routerLink]="[row.id]">{{row.name.fullName}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="primaryEmail">
+    <th mat-header-cell class="large-th" *matHeaderCellDef mat-sort-header>Email</th>
+    <td mat-cell *matCellDef="let row"> {{row.primaryEmail}} </td>
+  </ng-container>
+  <ng-container matColumnDef="org">
+    <th mat-header-cell class="large-th" *matHeaderCellDef mat-sort-header>org</th>
+    <td mat-cell *matCellDef="let row"> {{row.orgUnitPath}} </td>
+  </ng-container>
+  <!-- Buttons column -->
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell class="medium-th" *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let row">
+      <fa-icon mat-icon-button (click)="onDetails(row)" matTooltip="Información" matTooltipPosition="above"
+        [icon]="faEdit"></fa-icon>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <!-- Row shown when there is no matching data.-->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No hay actividades que coincidan con la búsqueda "{{courseName}}"</td>
+  </tr>
+</table>
+
+<mat-paginator [ngStyle]="{'background-color':'inherit'}" #paginator [length]="dataSource?.data?.length" [pageIndex]="0"
+  [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100, 250]">
+</mat-paginator>

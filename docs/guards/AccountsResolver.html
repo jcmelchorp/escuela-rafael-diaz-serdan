@@ -102,7 +102,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(accountEntityService: <a href="../injectables/AccountsEntityService.html" target="_self">AccountsEntityService</a>)</code>
+<code>constructor(accountsEntityService: <a href="../injectables/AccountsEntityService.html" target="_self">AccountsEntityService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -125,7 +125,7 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>accountEntityService</td>
+                                                        <td>accountsEntityService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/AccountsEntityService.html" target="_self" >AccountsEntityService</a></code>
@@ -248,15 +248,15 @@ import { filter, first, map, takeUntil, tap } from &#x27;rxjs/operators&#x27;;
 
 @Injectable()
 export class AccountsResolver implements Resolve&lt;boolean&gt; {
-  constructor(private accountEntityService: AccountsEntityService) { }
+  constructor(private accountsEntityService: AccountsEntityService) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable&lt;boolean&gt; {
-    return this.accountEntityService.loaded$.pipe(
+    return this.accountsEntityService.loaded$.pipe(
       tap((loaded) &#x3D;&gt; {
         if (!loaded) {
-          this.accountEntityService.getAll();
+          this.accountsEntityService.getAll();
         }
       }),
       filter((loaded) &#x3D;&gt; !!loaded),

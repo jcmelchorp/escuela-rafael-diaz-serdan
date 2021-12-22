@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemePalette } from '@angular/material/core';
 
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NewAccountConfirmComponent } from './../../components/new-account-confirm/new-account-confirm.component';
 import { NewAccountComponent } from './../../components/new-account/new-account.component';
-import { selectAccounts } from '../../state/accounts.selectors';
+import { selectAccounts } from './../../state/accounts.selectors';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
-import { AppState } from '@rds-root/app/store/app.state';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AppState } from '@rds-store/app.state';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { AccountsDomainService } from '../../services/accounts-domain.service';
+import { MigrationProgressComponent } from '../../components/migration-progress/migration-progress.component';
+import { AccountsService } from '@rds-accounts/services';
 
 
 @Component({
@@ -21,10 +23,11 @@ import { AccountsDomainService } from '../../services/accounts-domain.service';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss'],
 })
-export class AccountsComponent implements OnInit {
+export class AccountsComponent implements OnInit, OnDestroy {
   loaded$: Observable<boolean>;
   loading$: Observable<boolean>;
   users$: Observable<User[]>;
+  count$: Observable<number>;
   roleKeys: string[];
   roles = UserRole;
   gradeKeys: string[];
@@ -34,17 +37,18 @@ export class AccountsComponent implements OnInit {
   links = ['tabla', 'lista'];
   activeLink: any;
   background: ThemePalette = undefined;
+  subscription: Subscription;
   constructor(
     private accountsEntityService: AccountsEntityService,
+    private accountsService: AccountsService,
     private store: Store<AppState>,
     private dialog: MatDialog,
     private fb: FormBuilder,
     private accountsDomainService: AccountsDomainService
   ) {
     this.accountsDomainService.handleAdminLoad();
-    this.users$ = this.store.select(selectAccounts);
-    this.gradeKeys = Object.keys(this.grades).filter(Number);
-    this.roleKeys = Object.keys(this.roles).filter(Number);
+    this.gradeKeys = Object.keys(this.grades);
+    this.roleKeys = Object.keys(this.roles);
     this.filterValues = this.fb.group({
       grade: new FormControl(),
       role: new FormControl(),
@@ -60,11 +64,18 @@ export class AccountsComponent implements OnInit {
         : delete changes.name;
       return this.accountsEntityService.setFilter(changes);
     });
+
+    this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
+    this.count$ = this.accountsEntityService.count$;
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+  ngOnInit(): void {
     this.loaded$ = this.accountsEntityService.loaded$;
     this.loading$ = this.accountsEntityService.loading$;
-    this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
+    this.users$ = this.store.select(selectAccounts);
   }
-  ngOnInit(): void { }
   applyFilterString() {
     const nameForm = this.filterValues.get('name')?.value;
     const gradeForm = this.filterValues.get('grade')?.value;
@@ -105,7 +116,6 @@ export class AccountsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((resp) => {
       if (resp) {
         firebaseUser = resp.firebaseUser;
-        console.log(resp.firebaseUser);
         this.dialog.open(NewAccountConfirmComponent, {
           width: '600px',
           minWidth: 'fit-content',
@@ -115,5 +125,23 @@ export class AccountsComponent implements OnInit {
         });
       }
     });
+  }
+  sendToFirestore() {
+    const accounts: User[] = [];
+    this.accountsService.getFromRtdb().subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
+    const dialogRef = this.dialog.open(MigrationProgressComponent, {
+      width: '500px',
+      height: '400px',
+      data: { users: accounts, target: 'firestore' }
+    })
+  }
+  sendToRTDB() {
+    const accounts: User[] = [];
+    this.subscription = this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) });
+    const dialogRef = this.dialog.open(MigrationProgressComponent, {
+      width: '500px',
+      height: '400px',
+      data: { users: accounts, target: 'database' }
+    })
   }
 }

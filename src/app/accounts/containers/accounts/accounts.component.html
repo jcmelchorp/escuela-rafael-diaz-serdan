@@ -1,9 +1,30 @@
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="10" [diameter]="100">
+    </mat-spinner>
+    <span>Buscando clases ...</span><br>
+  </div>
+</ng-template>
 <div class="p-4">
   <p class="view-title">Usuarios</p>
   <p class="view-subtitle">Cuentas de usuarios.</p>
-  <div class="card">
-    <div class="card-body">
+  <div *ngIf="(loaded$|async)&&(filteredEntities$|async) as filteredEntities;else spinner" class="card bg-transparent">
+    <div *ngIf="(count$|async) as count" class="card-body">
       <form [formGroup]="filterValues">
+        <button class="float-end" mat-icon-button [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="sendToFirestore()">
+            <mat-icon>cloud_sync</mat-icon>
+            <span>Enviar a Firestore</span>
+          </button>
+          <button mat-menu-item (click)="sendToRTDB()">
+            <mat-icon>cloud_sync</mat-icon>
+            <span>Enviar a Realtime-Database</span>
+          </button>
+        </mat-menu>
         <div class="position-sticky" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
           <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
             <mat-label>Nombre</mat-label>
@@ -36,29 +57,23 @@
           </mat-form-field>
         </div>
       </form>
+      <div class="text-success">Se encontraron <strong>{{count}}</strong> usuarios.</div>
     </div>
-    <ng-template #spinner>
-      <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
-        <mat-spinner strokeWidth="10" [diameter]="100">
-        </mat-spinner>
-        <span>Buscando clases ...</span><br>
-      </div>
-    </ng-template>
-    <mat-tab-group *ngIf="(filteredEntities$|async) as filteredEntities;else spinner" mat-stretch-tabs
-      class="example-stretched-tabs">
+
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>table_rows</mat-icon>
           Tabla
         </ng-template>
-        <!-- <app-accounts-table [data]="filteredEntities"></app-accounts-table> -->
+        <app-accounts-table [data]="filteredEntities"></app-accounts-table>
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>list</mat-icon>
           Lista
         </ng-template>
-        <!-- <app-accounts-list [data]="filteredEntities"></app-accounts-list> -->
+        <app-accounts-list [data]="filteredEntities"></app-accounts-list>
       </mat-tab>
     </mat-tab-group>
     <!--   <nav mat-tab-nav-bar [backgroundColor]="background" mat-align-tabs="center">

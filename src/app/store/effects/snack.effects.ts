@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 
 import { SnackService } from '@rds-shared/services';
-import { loadAppSuccess } from '@rds-root/app/store/actions/app.actions';
+import { loadAppSuccess } from '@rds-store/actions/app.actions';
 
 @Injectable()
 export class SnackEffects {
@@ -17,28 +17,28 @@ export class SnackEffects {
     () =>
       this.actions$.pipe(
         ofType(fromAuthActions.signInSuccess),
-        tap((user) =>
+        tap((payload) =>
           setTimeout(() => {
             this.snackService.justMessage(
-              `Has ingresado como:${user.user?.displayName}`);
-          }, 3000)
+              `Bienvenido, ${payload.user.name.givenName}`);
+          }, 2000)
         )
       ),
     { dispatch: false }
   );
 
-  welcome$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(loadAppSuccess),
-        tap(() =>
-          setTimeout(() => {
-            this.snackService.justMessage('La aplicación está lista');
-          }, 3000)
-        )
-      ),
-    { dispatch: false }
-  );
+  /*  welcome$ = createEffect(
+     () =>
+       this.actions$.pipe(
+         ofType(loadAppSuccess),
+         tap(() =>
+           setTimeout(() => {
+             this.snackService.justMessage('La aplicación está lista');
+           }, 3000)
+         )
+       ),
+     { dispatch: false }
+   ); */
 
   unableToLogin$ = createEffect(
     () =>

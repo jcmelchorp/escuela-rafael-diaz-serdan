@@ -1,45 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
-
+import { NewAccountComponent, NewAccountConfirmComponent } from '@rds-accounts/components';
 import { User } from '@rds-auth/models/user.model';
-
-
-import { NewCicleDialogComponent } from '../../components/new-cicle-dialog/new-cicle-dialog.component';
-import { SchoolService } from '../../services/school.service';
-import { NewAccountComponent } from '../../../accounts/components/new-account/new-account.component';
-import { NewAccountConfirmComponent } from '../../../accounts/components/new-account-confirm/new-account-confirm.component';
-import { AccountDomain } from '../../../accounts/models/account-domain.model';
-
+import { fadeInAnimation, heightReveal } from '@rds-shared/animations/fade-in.animation';
 @Component({
   selector: 'app-school',
   templateUrl: './school.component.html',
   styleUrls: ['./school.component.scss'],
+  animations: [heightReveal], //[@fadeIn]="'fadeIn'"
 })
 export class SchoolComponent implements OnInit {
-  newUser: AccountDomain;
+
+  selectedId: string;
+  //cycleKeys;
+  //cycles = Cycle;
   constructor(
     private dialog: MatDialog,
-    private schoolService: SchoolService
-  ) { }
-
-  ngOnInit(): void { }
-  newCicle() {
-    const dialogRef = this.dialog.open(NewCicleDialogComponent, {
-      width: 'fit-content',
-      minWidth: '300px',
-      height: 'fit-content',
-      minHeight: '200px',
-      data: { yearInit: '', yearFinal: '' },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (!result) {
-        console.log('Creating New User Canceled');
-      } else {
-        this.schoolService.createPeriod(result.yearInit, result.yearFinal);
-      }
-    });
+  ) {
+    //this.cycleKeys = Object.keys(this.cycles).filter((x) => x.length > 5);
   }
+
+  ngOnInit(): void {
+  }
+
   openSaveUser() {
     const user: User = this.blankUser();
     const dialogRef = this.dialog.open(NewAccountComponent, {
@@ -80,3 +63,4 @@ export class SchoolComponent implements OnInit {
     return user;
   }
 }
+

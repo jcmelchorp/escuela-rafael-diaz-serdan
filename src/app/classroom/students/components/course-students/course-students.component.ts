@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { faBlind } from '@fortawesome/free-solid-svg-icons';
 
-import { StudentEntityService } from '@rds-root/app/store/classroom/student/student-entity.service';
+import { StudentEntityService } from '@rds-store/classroom/student/student-entity.service';
 
 
 import { Observable } from 'rxjs';

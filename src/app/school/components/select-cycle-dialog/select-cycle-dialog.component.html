@@ -1,0 +1,25 @@
+<div class="color-rds" matDialogTitle fxLayout="row wrap" fxLayoutAlign="space-between start">
+  <h2>Selecciona un ciclo escolar</h2>
+  <mat-icon matDialogClose mat-icon-button>close</mat-icon>
+</div>
+<mat-dialog-content>
+  <p>
+    Esta función requere que los estudiantes ya tengan asignado un grado escolar.
+    Si no estás seguro de este proceso, consulta a tu administrador ya que podrías sobreescribir datos importantes.
+    Si estás asignando estudiantes a un nuevo ciclo escolar, deberás asignar a los estudiantes al siguiente grado en el
+    panel de usuarios en la institución, bajo la función de "cambiar grado".
+  </p>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Ciclo escolar</mat-label>
+    <mat-select [(ngModel)]="selectedCycle" placeholder="Ciclo escolar">
+      <mat-option *ngFor="let cycle of cycleKeys" [value]="cycle">
+        {{cycles[cycle]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button *ngIf="data.isNew" mat-stroked-button color="accent" type="reset" (click)="resetData()">Limpiar</button>
+  <button *ngIf="!data.isNew" mat-stroked-button color="warn" matDialogClose>Cancelar</button>
+  <button mat-stroked-button color="primary" type="submit" (click)="saveData()">Seleccionar</button>
+</mat-dialog-actions>

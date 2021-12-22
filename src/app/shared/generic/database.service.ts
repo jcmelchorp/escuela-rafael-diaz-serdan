@@ -52,7 +52,7 @@ export class DatabaseService<T extends Entity> implements IFirebase<T> {
 
   getWithQuery(query: QueryParams): Observable<T[]> {
     return this.afdb.list<T>(this.collection, ref => ref
-      .child(Object.keys(query)[0])
+      .child(Object.keys(query).pop())
       .equalTo(Object.values(query)[0].toString())
       .orderByValue())
       .valueChanges()

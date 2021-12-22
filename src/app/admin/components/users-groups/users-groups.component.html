@@ -1,0 +1,17 @@
+<div style="min-height: 50vh;" *ngIf="!users" fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner strokeWidth="3" [diameter]="50">
+  </mat-spinner>
+  <span>Buscando Usuarios...</span><br>
+</div>
+<mat-card *ngFor="let user of users" cdkDrag>
+  <mat-card-header>
+    <mat-icon cdkDragHandle class="handle">drag_indicator</mat-icon>
+    <mat-card-title>
+      {{ user.name?.fullName }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ user.id }}
+    </mat-card-subtitle>
+    <img mat-card-avatar src="{{user.thumbnailPhotoUrl}}">
+  </mat-card-header>
+</mat-card>

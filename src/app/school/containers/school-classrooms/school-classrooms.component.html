@@ -1,0 +1,53 @@
+<app-school-action-buttons></app-school-action-buttons>
+<div class="p-4">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="stretch start" fxLayoutGap="10px">
+    <div *ngIf="classrooms$|async as classrooms" class="card bg-transparent" fxFlex="0 1 260px" fxFlex.lt-sm="100%">
+      <div class="card-body">
+        <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
+          <div class="view-title-small">Grupos</div>
+        </h3>
+      </div>
+      <app-school-classroom-group-list class="classroom-list" [classrooms]="classrooms"
+        (onClassroomEdit)="openSchoolClassroomDialog($event)" (onClassroomDelete)="handleCourseDelete($event)"
+        (onClassroomShow)="notify($event)">
+
+      </app-school-classroom-group-list>
+    </div>
+    <div *ngIf="classroom$|async as classroom" class="card bg-transparent" fxFlex="0 1 calc(75%)" fxFlex.lt-sm="100%">
+      <div class="card-body">
+        <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
+          <div fxLayout="column">
+            <span class="view-title-small">{{levels[classroom.grade]}}</span>
+            <span class="view-subtitle-small">{{cycles[classroom.cycle]}}</span>
+          </div>
+          <button mat-icon-button (click)="classroomToPDF(classroom)">
+            <mat-icon matTooltip="Imprime lista de grupo">print</mat-icon>
+          </button>
+        </h3>
+        <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="coursesOnLevel($event)">
+        </app-school-classroom-details>
+        <!-- <router-outlet name="classroom-outlet"></router-outlet> -->
+      </div>
+
+    </div>
+  </div>
+</div>
+<mat-menu #newMenu="matMenu" fxLayoutAlign="right">
+  <ng-template matMenuContent>
+    <div mat-menu-item (click)="openSchoolClassroomDialog()">Nuevo grupo</div>
+    <div mat-menu-item (click)="openSchoolCourseDialog()">Nueva materia</div>
+  </ng-template>
+</mat-menu>
+<mat-menu #fileMenu="matMenu" fxLayoutAlign="right">
+  <ng-template matMenuContent>
+    <div mat-menu-item (click)="loadClassroomFile()">Importar grupos</div>
+    <div mat-menu-item (click)="loadCoursesFile()">Importar materias</div>
+  </ng-template>
+</mat-menu>
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>

@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  SchoolDashboardComponent,
-} from './components';
-import { SchoolComponent, SchoolCoursesComponent } from './containers';
+import { NotFoundComponent } from '@rds-shared/components';
 import { SchoolCoursesResolver } from './resolvers/school-courses.resolver';
-import { SchoolUsersResolver } from './resolvers/school-users.resolver';
-
+import { SchoolStudentsResolver } from './resolvers/school-students.resolver';
+import { SchoolComponent } from './containers/school/school.component';
+import { SchoolDashboardComponent } from './components/school-dashboard/school-dashboard.component';
+import { SchoolClassroomsResolver } from './resolvers/school-classrooms.resolver';
+import { SchoolTeachersResolver } from './resolvers/school-teachers.resolver';
+import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
+import { SchoolClassroomsComponent } from './containers/school-classrooms/school-classrooms.component';
+import { SchoolClassroomDetailsComponent } from './components/school-classroom-details/school-classroom-details.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SchoolComponent,
-    data: { breadcrumb: null },
+    //resolve: { teachers: SchoolTeachersResolver, students: SchoolStudentsResolver },
     children: [
       {
         path: '',
@@ -20,18 +23,22 @@ const routes: Routes = [
         data: { breadcrumb: 'Dirección' },
       },
       {
-        path: 'materias',
-        component: SchoolCoursesComponent,
-        resolve: { schoolUsers: SchoolCoursesResolver },
-        data: { breadcrumb: 'Materias' },
+        //path: '',
+        path: 'a',
+        component: SchoolClassroomsComponent,
+        data: { breadcrumb: 'Grupos, alumnos y materias' },
+        resolve: { classrooms: SchoolClassroomsResolver, courses: SchoolCoursesResolver, students: SchoolStudentsResolver },
       },
-    ],
-  },
+      {
+        path: '**',
+        component: NotFoundComponent,
+      }
+    ]
+  }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SchoolUsersResolver, SchoolCoursesResolver],
+  providers: [SchoolCoursesResolver, SchoolStudentsResolver, SchoolClassroomsResolver, SchoolTeachersResolver, AccountsResolver]
 })
 export class SchoolRoutingModule { }

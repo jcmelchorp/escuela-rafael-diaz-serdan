@@ -1,0 +1,35 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+.strong-footer {
+  font-weight: 800;
+  font-size: 1.5em;
+}
+.mat-table {
+  overflow: auto;
+}
+.mat-column-courseName {
+  flex: none;
+  width: 55%;
+}
+/* .mat-column-unidad1 .mat-column-unidad2 .mat-column-unidad3 {
+  display:flex
+} */
+.element-row {
+  position: relative;
+  //padding-right: 100px;
+}
+.element-row:not(.expanded) {
+  cursor: pointer;
+}
+
+.element-row:not(.expanded):hover {
+  background: #f5f5f550;
+}
+
+.element-row.expanded {
+  border-bottom-color: transparent;
+}

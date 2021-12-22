@@ -12,7 +12,7 @@ const routes: Routes = [
     resolve: { users: AccountsResolver },
     children: [
       {
-        path: 'edit', component: UserDetailsComponent,
+        path: 'edit/:id', component: UserDetailsComponent,
         resolve: { user: AccountResolver }
       },
     ]

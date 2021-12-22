@@ -68,7 +68,7 @@ export const heightReveal = trigger('flyInOut', [
 ]);
 
 export const expandFadeInAnimation = trigger('expandFadeIn', [
-  // state('void', style({ top: '-35rem' })),
+  state('void', style({ top: '-35rem' })),
   state(
     'show',
     style({
@@ -83,6 +83,6 @@ export const expandFadeInAnimation = trigger('expandFadeIn', [
       transform: 'scale(0.4)'
     })
   ),
-  transition('show => hide', animate('300ms ease-in')),
-  transition('hide => show', animate('300ms ease-in'))
+  transition('show => hide', animate('3000ms ease-in')),
+  transition('hide => show', animate('3000ms ease-in'))
 ]);

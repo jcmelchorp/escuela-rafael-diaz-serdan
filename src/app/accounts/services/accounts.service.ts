@@ -1,51 +1,63 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { DatabaseReference } from '@angular/fire/compat/database/interfaces';
 import { User } from '@rds-auth/models/user.model';
-
+import { Database, listVal, ref, update } from '@angular/fire/database';
+import { collection, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { FirebaseV9Service } from '@rds-shared/generic/firebase-v9.service';
+import { from, Observable } from 'rxjs';
+import { firebaseSerialize } from '@rds-shared/models/firebase.model';
+import { map, take } from 'rxjs/operators';
+import { FirestoreV9Service } from '@rds-shared/generic/firestore-v9.service';
 @Injectable()
-export class AccountsService {
-  collection: string = 'users';
-  userRef!: DatabaseReference;
-  public readonly users!: Observable<User[]>;
-
+/** AccountsService
+ *  Service to manage user accounts in CRUD operations on Firestore
+ */
+export class AccountsService extends FirestoreV9Service<User> {
   constructor(
-    /* private db: Firestore */
-    private afDatabase: AngularFireDatabase
+    public db: Firestore,
+    public afDatabase: Database
   ) {
-    //this.userRef = ref(this.afDatabase, this.collection);
+    super('users', db, /* afDatabase */);
   }
-  create(user: Partial<User>): Observable<User> {
-    const userRef = this.afDatabase.object<User>(this.collection);
-    return from(userRef.update(user).then(() => user as User));
+  migrationToFirestore(user: User) {
+    const refColl = collection(this.afs, this.tCollection);
+    const refDoc = doc(refColl, user.id)
+    return setDoc(refDoc, firebaseSerialize(user))
   }
+  migrationToDatabase(user: User) {
+    return update(ref(this.afDatabase, `/${this.tCollection}/${user.id}`), firebaseSerialize(user));
+  }
+  getFromRtdb(): Observable<User[]> {
+    const dbref = ref(this.afDatabase, this.tCollection);
+    return listVal<User>(dbref).pipe(take(1));
+  }
+  /*  create(user: Partial<User>): Observable<User> {
+     const userRef = this.afDatabase.object<User>(this.collection);
+     return from(userRef.update(user).then(() => user as User));
+   }
 
-  update(id: string, user: Partial<User>): Observable<User> {
-    const userRef = this.afDatabase.object<User>(`${this.collection}/${id}`);
-    return from(userRef.update(user).then(() => user as User));
-  }
-  getList(): Observable<User[]> {
-    return this.afDatabase
-      .list<User>(this.collection, (ref) =>
-        ref.orderByChild('name/familyName')
-      )
-      .valueChanges()
-      .pipe(take(1));
-    //return this.db.collection<User>(`${this.collection}`).valueChanges().pipe(take(1));
-    //return this.afDatabase.list<User>(`${this.collection}`, ref => ref.orderByChild('name/familyName')).valueChanges().pipe(take(1));
-  }
-  getById(id: string) {
-    const userRef = this.afDatabase.object<User>(`${this.collection}/${id}`);
-    return userRef.valueChanges();
-  }
+   update(id: string, user: Partial<User>): Observable<User> {
+     const userRef = this.afDatabase.object<User>(`${this.collection}/${id}`);
+     return from(userRef.update(user).then(() => user as User));
+   }
+   getList(): Observable<User[]> {
+     return this.afDatabase
+       .list<User>(this.collection, (ref) =>
+         ref.orderByChild('name/familyName')
+       )
+       .valueChanges()
+       .pipe(take(1));
+     //return this.db.collection<User>(`${this.collection}`).valueChanges().pipe(take(1));
+     //return this.afDatabase.list<User>(`${this.collection}`, ref => ref.orderByChild('name/familyName')).valueChanges().pipe(take(1));
+   }
+   getById(id: string) {
+     const userRef = this.afDatabase.object<User>(`${this.collection}/${id}`);
+     return userRef.valueChanges();
+   }
 
-  delete(id: string): Observable<string> {
-    const userRef = this.afDatabase.object<User>(`${this.collection}/${id}`);
-    return from(userRef.remove()).pipe(map(() => id));
-  }
+   delete(id: string): Observable<string> {
+     const userRef = this.afDatabase.object<User>(`${this.collection}/${id}`);
+     return from(userRef.remove()).pipe(map(() => id));
+   } */
 
   /*  upsert(item: User): Observable<User> {
     const itemToUpsert = item as User;

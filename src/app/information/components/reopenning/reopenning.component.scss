@@ -1,0 +1,41 @@
+@import "./../../../../assets/themes/colors.scss";
+
+.tg {
+  border-collapse: collapse;
+  border-color: #9abad9;
+  border-spacing: 0;
+  margin: 0px auto;
+}
+.tg td {
+  background-color: #ebf5ff;
+  border-color: $gray-chateau-color;
+  border-style: solid;
+  border-width: 1px;
+  color: #444;
+  overflow: hidden;
+  padding: 10px 5px;
+  word-break: normal;
+}
+.tg th {
+  background-color: $rds-logo-color;
+  border-color: $rds-logo-color;
+  border-style: solid;
+  border-width: 1px;
+  color: #fff;
+  overflow: hidden;
+  padding: 10px 5px;
+  word-break: normal;
+}
+.tg .tg-0w8i {
+  font-size: 100%;
+  text-align: left;
+  vertical-align: top;
+}
+.tg .tg-lqy6 {
+  text-align: right;
+  vertical-align: top;
+}
+.tg .tg-0lax {
+  text-align: left;
+  vertical-align: top;
+}

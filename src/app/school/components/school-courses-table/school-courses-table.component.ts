@@ -1,59 +1,132 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-
-import { MatTableDataSource } from '@angular/material/table';
-
-export class Group {
-  level = 0;
-  parent: Group;
-  expanded = false;
-  totalCounts = 0;
-  get visible(): boolean {
-    return !this.parent || (this.parent.visible && this.parent.expanded);
-  }
-}
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { SchoolLevel } from '@rds-auth/models/user.enum';
+import { SchoolCourse, Cycle } from '../../models/school-course.model';
+import { Observable } from 'rxjs';
+import { map, tap, switchMap, mergeMap, pluck, concatMap } from 'rxjs/operators';
+import { ConfirmDialogComponent } from '@rds-shared/components';
+import { MatDialog } from '@angular/material/dialog';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AddStudentsCoursesComponent } from '../add-students-courses/add-students-courses.component';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { TableGroup } from '@rds-school/models/table-group.model';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
+import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
+import { User } from '@rds-auth/models/user.model';
+import { faAward } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
   styleUrls: ['./school-courses-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
-export class SchoolCoursesTableComponent implements OnInit {
-  @Input() data: any[];
-  /*   @ViewChild(MatTable) table!: MatTable<MatTableDataSource<any | Group>>;*/
-  public dataSource = new MatTableDataSource<any | Group>([]);
+
+export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */ {
+  //@ViewChild(MatTable) table: MatTable<MatTableDataSource<any | TableGroup>>;
+  @ViewChild(MatSort) sort: MatSort;
+  @Output() onClickEdit = new EventEmitter<SchoolCourse>();
+  @Output() onClickDelete = new EventEmitter<string>();
+  @Output() onClickStudents = new EventEmitter<SchoolCourse>();
+  faAward = faAward;
+  cycles = Cycle;
+  loading$: Observable<boolean>;
+  loaded$: Observable<boolean>;
+  filterValues: FormGroup;
+  courses$: Observable<SchoolCourse[]>;
+  teachers$: Observable<User[]>;
+  filteredCourses$: Observable<SchoolCourse[]>;
+  courses: any[];
+  coursesCount$: Observable<number>;
+  gradeKeys;
+  grades = SchoolLevel;
+  dataSource = new MatTableDataSource<any | TableGroup>([]);
   //_alldata: any[];
-  columns: any[];
+  columnsToDisplay: any[];
   displayedColumns: string[];
   groupByColumns: string[] = [];
-
-  constructor() {
-    this.columns = [
-      { field: 'grade', label: 'Grado' },
-      { field: 'name', label: 'Nombre' },
-      { field: 'courseType', label: 'Tipo' },
+  isLoading: boolean;
+  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
+  expandedElement: any;
+  constructor(
+    private fb: FormBuilder,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolTeachersEntityService: SchoolTeachersEntityService,
+    private dialog: MatDialog
+  ) {
+    this.columnsToDisplay = [
+      {
+        propertyName: 'teacherEmail',
+        headerText: '',
+      },
+      {
+        propertyName: 'priority',
+        headerText: '',
+      },
+      {
+        propertyName: 'cycle',
+        headerText: 'Ciclo escolar',
+      },
+      {
+        propertyName: 'grade',
+        headerText: 'Grado',
+      },
+      {
+        propertyName: 'name',
+        headerText: 'Nombre',
+      },
     ];
-    this.displayedColumns = [...this.columns.map((column) => column.field), 'actions'];
-    this.groupByColumns = ['grade'];
+    this.gradeKeys = Object.keys(this.grades);
+    this.filterValues = this.fb.group({
+      grade: new FormControl(),
+      name: new FormControl(),
+    });
+    this.filterValues.valueChanges.subscribe((changes) => {
+      Object.keys(changes).forEach(
+        (key) => changes[key] == null && delete changes[key]
+      );
+      Object.keys(changes).includes('name') && changes.name !== ''
+        ? (changes.name = { fullName: changes['name'] })
+        : delete changes.name;
+      return this.schoolCoursesEntityService.setFilter(changes);
+    });
+    this.displayedColumns = [...this.columnsToDisplay.map((column) => column.propertyName), 'actions'];
+    this.groupByColumns = ['cycle', 'grade'];
+    this.loaded$ = this.schoolCoursesEntityService.loaded$;
+    this.loading$ = this.schoolCoursesEntityService.loading$;
+    this.courses$ = this.schoolCoursesEntityService.entities$;
+    //this.teachers$ = this.schoolTeachersEntityService.entities$;
+    this.filteredCourses$ = this.schoolCoursesEntityService.filteredEntities$.pipe(
+      map(courses => {
+        this.courses = courses;
+        this.dataSource.data = this.addTableGroups(this.courses, this.groupByColumns);
+        this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+        this.dataSource.filter = performance.now().toString();
+        return courses;
+      })
+    );
   }
 
-  ngOnInit() {
-    this.dataSource.data = this.addGroups(this.data, this.groupByColumns);
-    this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
-    this.dataSource.filter = performance.now().toString();
-
-  }
+  ngOnInit() { }
 
   groupBy(event, column) {
     event.stopPropagation();
-    this.checkGroupByColumn(column.field, true);
-    this.dataSource.data = this.addGroups(this.data, this.groupByColumns);
+    this.checkTableGroupByColumn(column.propertyName, true);
+    this.dataSource.data = this.addTableGroups(this.courses, this.groupByColumns);
     this.dataSource.filter = performance.now().toString();
   }
 
-  checkGroupByColumn(field, add) {
+  checkTableGroupByColumn(propertyName, add) {
     let found = null;
     for (const column of this.groupByColumns) {
-      if (column === field) {
+      if (column === propertyName) {
         found = this.groupByColumns.indexOf(column, 0);
       }
     }
@@ -63,25 +136,25 @@ export class SchoolCoursesTableComponent implements OnInit {
       }
     } else {
       if (add) {
-        this.groupByColumns.push(field);
+        this.groupByColumns.push(propertyName);
       }
     }
   }
-  unGroupBy(event, column) {
+  unTableGroupBy(event, column) {
     event.stopPropagation();
-    this.checkGroupByColumn(column.field, false);
-    this.dataSource.data = this.addGroups(this.data, this.groupByColumns);
+    this.checkTableGroupByColumn(column.propertyName, false);
+    this.dataSource.data = this.addTableGroups(this.courses, this.groupByColumns);
     this.dataSource.filter = performance.now().toString();
   }
   // below is for grid row grouping
-  customFilterPredicate(data: any | Group, filter: string): boolean {
-    return (data instanceof Group) ? data.visible : this.getDataRowVisible(data);
+  customFilterPredicate(data: any | TableGroup, filter: string): boolean {
+    return (data instanceof TableGroup) ? data.visible : this.getDataRowVisible(data);
   }
 
   getDataRowVisible(data: any): boolean {
     const groupRows = this.dataSource.data.filter(
       row => {
-        if (!(row instanceof Group)) {
+        if (!(row instanceof TableGroup)) {
           return false;
         }
         let match = true;
@@ -97,7 +170,7 @@ export class SchoolCoursesTableComponent implements OnInit {
     if (groupRows.length === 0) {
       return true;
     }
-    const parent = groupRows[0] as Group;
+    const parent = groupRows[0] as TableGroup;
     return parent.visible && parent.expanded;
   }
 
@@ -105,19 +178,19 @@ export class SchoolCoursesTableComponent implements OnInit {
     row.expanded = !row.expanded;
     this.dataSource.filter = performance.now().toString();  // bug here need to fix
   }
-  addGroups(data: any[], groupByColumns: string[]): any[] {
-    const rootGroup = new Group();
-    rootGroup.expanded = true;
-    return this.getSublevel(data, 0, groupByColumns, rootGroup);
+  addTableGroups(data: any[], groupByColumns: string[]): any[] {
+    const rootTableGroup = new TableGroup();
+    rootTableGroup.expanded = true;
+    return this.getSublevel(data, 0, groupByColumns, rootTableGroup);
   }
-  getSublevel(data: any[], level: number, groupByColumns: string[], parent: Group): any[] {
+  getSublevel(data: any[], level: number, groupByColumns: string[], parent: TableGroup): any[] {
     if (level >= groupByColumns.length) {
       return data;
     }
     const groups = this.uniqueBy(
       data.map(
         row => {
-          const result = new Group();
+          const result = new TableGroup();
           result.level = level + 1;
           result.parent = parent;
           for (let i = 0; i <= level; i++) {
@@ -129,15 +202,15 @@ export class SchoolCoursesTableComponent implements OnInit {
       JSON.stringify);
 
     const currentColumn = groupByColumns[level];
-    let subGroups = [];
+    let subTableGroups = [];
     groups.forEach(group => {
-      const rowsInGroup = data.filter(row => group[currentColumn] === row[currentColumn]);
-      group.totalCounts = rowsInGroup.length;
-      const subGroup = this.getSublevel(rowsInGroup, level + 1, groupByColumns, group);
-      subGroup.unshift(group);
-      subGroups = subGroups.concat(subGroup);
+      const rowsInTableGroup = data.filter(row => group[currentColumn] === row[currentColumn]);
+      group.totalCounts = rowsInTableGroup.length;
+      const subTableGroup = this.getSublevel(rowsInTableGroup, level + 1, groupByColumns, group);
+      subTableGroup.unshift(group);
+      subTableGroups = subTableGroups.concat(subTableGroup);
     });
-    return subGroups;
+    return subTableGroups;
   }
   uniqueBy(a, key) {
     const seen = {};
@@ -147,8 +220,55 @@ export class SchoolCoursesTableComponent implements OnInit {
     });
   }
 
-  isGroup(index, item): boolean {
+  isTableGroup(index, item): boolean {
     return item.level;
   }
 
+  openStudentsToCourse(row) {
+    const course: SchoolCourse = { ...row };
+    const dialogRef = this.dialog.open(AddStudentsCoursesComponent, {
+      width: '400px',
+      minHeight: '500px',
+      height: 'fit-content',
+      data: { course }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onClickStudents.emit(result.course);
+      }
+      else {
+        console.log('The dialog was closed');
+      }
+    });
+  }
+  editSchoolCourse(course?: SchoolCourse) {
+    console.log('Course emited: ', course);
+    //this.onClickEdit.emit(course);
+  }
+  deleteSchoolCourse(course: SchoolCourse) {
+    const subject: any = {
+      id: course.id,
+      action: 'elimina',
+      subject: 'clase',
+      confirm: false,
+    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '500px',
+      height: 'fit-content',
+      data: {
+        ...subject,
+        title: `¿Está seguro de ${subject.action}r la ${subject.subject} ${course.name} ${this.grades[course.grade]}?`,
+        message: `La ${subject.subject} se ${subject.action}rá de la base de datos y no podrá ser recuperada.`,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.confirm) {
+        //this.onClickDelete.emit(result.id);
+        this.schoolCoursesEntityService.delete(result.id);
+      } else {
+        console.log('Dialog closed without changes')
+      }
+    });
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { select, Store } from '@ngrx/store';
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 import * as fromAuthSelectors from '@rds-auth/state/auth.selectors';
 import { User } from '@rds-auth/models/user.model';
 

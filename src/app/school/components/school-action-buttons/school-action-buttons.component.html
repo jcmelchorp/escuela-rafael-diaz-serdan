@@ -1,0 +1,32 @@
+<div *ngIf="(classrooms$|async) as classrooms" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <button mat-icon-button [matMenuTriggerFor]="newMenu">
+    <mat-icon matTooltip="Nuevo grupo o materia">add</mat-icon>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="fileMenu">
+    <mat-icon matTooltip="Cargar archivo de Excel">upload</mat-icon>
+  </button>
+  <button [disabled]="true" mat-icon-button (click)="saveFile()">
+    <mat-icon matTooltip="Guardar resumen de grupo">save</mat-icon>
+  </button>
+  <button [disabled]="(coursesCount$|async)==0" mat-icon-button (click)="poulateCoursesWithStudents(classrooms)">
+    <mat-icon matTooltip="Enviar alumnos a clases">groups</mat-icon>
+  </button>
+</div>
+<!-- <router-outlet name="classrooms"></router-outlet> -->
+
+<!--<div fxFlex="0 1 calc(75%-10px)">
+     <router-outlet name="courses"></router-outlet>
+  </div>
+</div>-->
+<mat-menu #newMenu="matMenu" fxLayoutAlign="right">
+  <ng-template matMenuContent>
+    <div mat-menu-item (click)="openSchoolClassroomDialog()">Nuevo grupo</div>
+    <div mat-menu-item (click)="openSchoolCourseDialog()">Nueva materia</div>
+  </ng-template>
+</mat-menu>
+<mat-menu #fileMenu="matMenu" fxLayoutAlign="right">
+  <ng-template matMenuContent>
+    <div mat-menu-item (click)="loadClassroomFile()">Importar grupos</div>
+    <div mat-menu-item (click)="loadCoursesFile()">Importar materias</div>
+  </ng-template>
+</mat-menu>

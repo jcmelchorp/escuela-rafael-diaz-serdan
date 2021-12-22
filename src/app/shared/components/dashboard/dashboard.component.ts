@@ -8,16 +8,16 @@ import {
 import { Store } from '@ngrx/store';
 import { isAdmin, isOnline, isTeacher } from '@rds-auth/state/auth.selectors';
 import { RouterCard } from '@rds-shared/models/router-card.model';
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 import { Observable } from 'rxjs';
-import { flyInOut } from '../../animations/fade-in.animation';
-import { User } from '../../../auth/models/user.model';
+import { flyInOut, heightReveal } from '../../animations/fade-in.animation';
+import { User } from '@rds-auth/models/user.model';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [flyInOut], //[@fadeIn]="'fadeIn'"
+  animations: [heightReveal], //[@fadeIn]="'fadeIn'"
 })
 export class DashboardComponent {
   @Input()
@@ -36,46 +36,40 @@ export class DashboardComponent {
       {
         title: 'Alumnos',
         description: 'Accede a toda tu información como alumno.',
-        route: 'user',
+        route: 'p',
         imgUrl: 'assets/images/assignment-grades2.png',
         access: this.isOnline$,
       },
-      /* {
+      {
         title: 'Profesores',
-        description: 'Acceso a las funciones docentes.',
-        route: 'profesores',
-        imgUrl: 'assets/images/dashboard-image2.png',
+        description: 'Espacio de profesores.',
+        route: 'profe',
+        imgUrl: 'assets/images/dashboard-google.png',
         access: this.isTeacher$ || this.isAdmin$,
-      }, */
+      },
       {
         title: 'Dirección',
         description: 'Gestiona usuarios, grupos, clases y horarios en la institución.',
-        route: 'escuela',
+        route: 'e',
         imgUrl: 'assets/images/dashboard-image.png',
         access: this.isAdmin$,
       },
       {
-        title: 'Cuentas de usuario',
-        description: 'Manejo de usuarios de la institución',
-        route: 'accounts',
-        imgUrl: 'assets/images/assignment-grades2.png',
+        title: 'Usuarios de la institución',
+        description: 'Manejo de usuarios de Google Workspace',
+        route: 'u',
+        imgUrl: 'assets/images/dashboard-image2.png',
         access: this.isTeacher$ || this.isAdmin$,
 
       },
       {
         title: 'Funciones de G Suite',
         description: 'Administra Google Classroom y Google Admin Directory.',
-        route: 'gsuite',
-        imgUrl: 'assets/images/dashboard-google.png',
+        route: 'g',
+        imgUrl: 'assets/images/google-admin-img.png',
         access: (this.isTeacher$ || this.isAdmin$)
-      }
-      /*  {
-         title: 'Cuentas de usuario de Google',
-         description: 'Manejo de usuarios de Google Workspace',
-         route: 'admin',
-         imgUrl: 'assets/images/google-admin-img.png',
-         access: this.isTeacher$ || this.isAdmin$,
-       }, */
+      },
+
     ];
   }
 }

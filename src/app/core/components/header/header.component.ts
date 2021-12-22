@@ -8,7 +8,7 @@ import {
   faSignOutAlt,
   faSlidersH,
 } from '@fortawesome/free-solid-svg-icons';
-import { AppState } from '@rds-root/app/store/app.state';
+import { AppState } from '@rds-store/app.state';
 import { LoginDialogComponent } from '@rds-auth/components';
 import { User } from '@rds-auth/models/user.model';
 import { signOut } from '@rds-auth/state/auth.actions';
@@ -48,7 +48,7 @@ export class HeaderComponent {
     this.isDoorOpen = true;
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       height: 'fit-content',
-      width: '600px',
+      width: '400px',
       maxWidth: '512px',
       data: {},
     });

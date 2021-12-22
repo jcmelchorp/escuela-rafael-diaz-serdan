@@ -7,6 +7,7 @@ import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog.com
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { SaveUserErrorComponent } from './save-user-error/save-user-error.component';
 import { UsersListComponent } from './users-list/users-list.component';
+import { MigrationProgressComponent } from './migration-progress/migration-progress.component';
 
 export const accountsComponents: any[] = [
   UserEditDialogComponent,
@@ -16,6 +17,7 @@ export const accountsComponents: any[] = [
   ChangeGradeComponent,
   AccountsTableComponent,
   AccountsListComponent,
+  MigrationProgressComponent,
   NewAccountComponent,
   NewAccountConfirmComponent
 ]
@@ -28,3 +30,4 @@ export * from './users-list/users-list.component';
 export * from './accounts-table/accounts-table.component';
 export * from './accounts-list/accounts-list.component';
 export * from './new-account/new-account.component';
+export * from './migration-progress/migration-progress.component';

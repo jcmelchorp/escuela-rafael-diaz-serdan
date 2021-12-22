@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot,
 } from '@angular/router';
 
-import { GuardianEntityService } from '@rds-root/app/store/classroom/guardian/guardian-entity.service';
+import { GuardianEntityService } from '@rds-store/classroom/guardian/guardian-entity.service';
 
 import { Observable, of } from 'rxjs';
 import { filter, first, tap } from 'rxjs/operators';

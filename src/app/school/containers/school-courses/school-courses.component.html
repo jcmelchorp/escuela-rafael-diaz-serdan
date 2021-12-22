@@ -1,49 +1,8 @@
-<div class="card bg-transparent">
-  <div class="card-body">
-    <h2 style="margin-top: -30px">
-      <span class="mcard-title bg-white">Materias</span>
-      <!-- <input matInput type="file" (change)="onFileChange($event)" />
-
-      <div id="output"></div> -->
-
-    </h2>
-    <form [formGroup]="filterValues" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="2px">
-      <mat-form-field fxFlex="1 0 calc(33.3% - 2px)" appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input type="text" placeholder="Nombre del curso" matInput formControlName="name" (keyup)="applyFilterString()">
-      </mat-form-field>
-      <mat-form-field fxFlex="1 0 calc(33.3% - 2px)" appearance="outline">
-        <mat-label>Grado</mat-label>
-        <mat-select formControlName="grade" placeholder="Selecciona el grado" (selectionChange)="applyFilterString()">
-          <mat-option value="">Sin especificar</mat-option>
-          <mat-option *ngFor="let key of slevelKeys" [value]="key">
-            {{key}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
-    <!--     <div>Se encontraron {{resCount$|async}} resultados en la búsqueda.</div -->
-    <div *ngIf="(loaded_courses$|async) && !(loading_courses$|async)">
-      <app-school-courses-table [data]="filteredEntities$|async"></app-school-courses-table>
-      <!-- <mat-list role="list" dense *ngIf="courses.length==0">
-        <mat-list-item class="text-center"> No hay materias para mostrar.
-        </mat-list-item>
-      </mat-list>
-      <mat-nav-list role="list" dense>
-        <mat-list-item class="border" role="listitem" *ngFor="let course of courses">
-          <div (click)="openSchoolCourseDialog(course)" matLine>{{course.name}}
-            &nbsp;
-            <span class="text-secondary">({{course.grade}})</span>
-            &nbsp;
-            <span class="badge bg-{{course.courseType=='formativo'?'primary':'warning'}} text-light">
-              {{course.courseType}}</span>
-          </div>
-          <app-delete-button (delete)="handleCourseDelete(course)"></app-delete-button>
-        </mat-list-item>
-      </mat-nav-list> -->
-    </div>
-  </div>
-  <button mat-mini-fab id="new-room-course" matTooltip="Nuevo curso" (click)="openSchoolCourseDialog()">
-    <mat-icon>assignment_turned_in_outlined</mat-icon>
-  </button>
-</div>
+<!-- <nav mat-tab-nav-bar mat-stretch-tabs> -->
+<app-school-action-buttons></app-school-action-buttons>
+<nav mat-tab-nav-bar mat-align-tabs="center">
+  <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.route]" routerLinkActive="active">
+    {{link.label}}
+  </a>
+</nav>
+<router-outlet></router-outlet>

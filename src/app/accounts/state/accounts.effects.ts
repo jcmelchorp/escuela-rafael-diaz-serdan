@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ROUTER_NAVIGATION, RouterNavigatedAction } from '@ngrx/router-store';
 import { User } from '@rds-auth/models/user.model';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { filter, map, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class AccountsEffects {
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) =>
-          r.payload.routerState.url.startsWith('/escuela/cuentas/edit')
+          r.payload.routerState.url.startsWith('/usuarios/edit')
         ),
         map((r: RouterNavigatedAction) => r.payload.routerState.root.params.id),
         //withLatestFrom<string, IUser[]>(this.userEntityService.entities$),
@@ -36,7 +36,7 @@ export class AccountsEffects {
       this.actions$.pipe(
         ofType(ROUTER_NAVIGATION),
         filter((r: RouterNavigatedAction) =>
-          r.payload.routerState.url.startsWith('/escuela/cuentas')
+          r.payload.routerState.url.startsWith('/usuarios')
         ),
         map((r: RouterNavigatedAction) => r.payload.routerState.url),
         withLatestFrom<string, User[]>(this.accountsEntityService.entities$),

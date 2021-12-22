@@ -127,13 +127,6 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Opcional</span>
-                                        <a href="#currentPeriod" 
->
-                                            currentPeriod
-                                        </a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Opcional</span>
                                         <a href="#customerId" 
 >
                                             customerId
@@ -570,45 +563,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>currentGrades:         <code><a href="../interfaces/Grade.html" target="_self" >Grade</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Tipo : </i>        <code><a href="../interfaces/Grade.html" target="_self" >Grade</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Opcional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="currentPeriod"></a>
-                                        <span class="name "><b>currentPeriod</b>
-                                            <a href="#currentPeriod">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>currentPeriod:     <code>literal type</code>
+                                        <code>currentGrades:     <code>literal type</code>
 </code>
                                     </td>
                                 </tr>
@@ -1848,9 +1803,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Grade } from &quot;./grade.model&quot;;
-
-export interface User {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface User {
   id: string;
   uid?: string
   customerId?: string;
@@ -1895,9 +1848,6 @@ export interface User {
   };
   creationTime?: string;
   lastLoginTime?: string;
-
-  //STUDENT
-  currentGrades?: Grade;
   niev?: string;
   grade?: string;
   level?: string;
@@ -1927,11 +1877,8 @@ export interface User {
       municipio?: string;
       state?: string;
     }
-
   ];
-  currentPeriod?: {
-
-  };
+  currentGrades?: {};
   label?: &#x27;purple&#x27; | &#x27;blue&#x27; | &#x27;green&#x27; | &#x27;yellow&#x27; | &#x27;red&#x27; | &#x27;gray&#x27;;
   // TEACHER
   rfc?: string;

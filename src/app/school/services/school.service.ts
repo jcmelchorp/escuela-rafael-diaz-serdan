@@ -1,146 +1,97 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  AngularFireDatabase,
-  AngularFireList,
-} from '@angular/fire/compat/database';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { Inject, Injectable } from '@angular/core';
+import { arrayUnion, collection, collectionData, deleteDoc, doc, Firestore, getDoc, query, serverTimestamp, setDoc, updateDoc, where, orderBy } from '@angular/fire/firestore';
 import { QueryParams } from '@ngrx/data';
-
-import { User } from '@rds-auth/models/user.model';
-
-
-import { ToastrService } from 'ngx-toastr';
-
-import { from, Observable, of } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
-
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import { Grade, Score } from '@rds-auth/models/grade.model';
-
+import { SchoolClassroom, SchoolCourse } from '@rds-school/models/school-course.model';
+import { firebaseSerialize } from '@rds-shared/models/firebase.model';
+import { arrayRemove } from 'firebase/firestore';
+import { from, Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Injectable()
 export class SchoolService {
-  user$: Observable<firebase.User>;
-  private periodCollection: string = 'periods';
-  private userCollection: string = 'users';
-  private currentScore: string = 'currentGrades';
-  usersDb: AngularFireList<User>;
-
+  public readonly tCollection: string;
+  public readonly colects: Observable<SchoolClassroom[]>;
   constructor(
-    public afAuth: AngularFireAuth,
-    private afDatabase: AngularFireDatabase,
-    private afStore: AngularFirestore,
-    private toastrService: ToastrService
+    public readonly afs: Firestore,
   ) {
-    this.user$ = this.getAuthState().pipe(
-      switchMap((user) => {
-        if (user) {
-          return this.afDatabase
-            .object<User[]>(
-              `${this.userCollection}/${user.providerData[0].uid}`
-            )
-            .valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
-    this.usersDb = this.afDatabase.list<User>(this.userCollection);
+    this.tCollection = 'classrooms';
+    if (!this.tCollection) {
+      throw new Error('Firestore called with no collection name');
+    }
   }
-  createPeriod(yi: string, yf: string) {
-    this.afStore
-      .collection(this.periodCollection)
-      .doc(`${yi}${yf}`)
-      .set({ cicle: `${yi}-${yf}` });
+  add(entity: SchoolClassroom, id?: string,): Observable<SchoolClassroom> {
+    const refColl = collection(this.afs, this.tCollection);
+    if (id) {
+      const refDoc = doc(refColl, id)
+      return from(updateDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))).pipe(take(1), map(_ => firebaseSerialize({ ...entity, id: refDoc.id })));
+    } else {
+      const refDoc = doc(refColl)
+      return from(setDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))).pipe(take(1), map(_ => firebaseSerialize({ ...entity, id: refDoc.id })));
+    }
+
+
   }
-  getAuthState(): Observable<firebase.User> {
-    return this.afAuth.authState;
+  update(id: string, entity: Partial<SchoolClassroom>): Observable<SchoolClassroom> {
+    const refDoc = doc(this.afs, this.tCollection, id);
+    return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(take(1), map(x => firebaseSerialize(entity)));
   }
-  getUsers() {
-    const usersRef = this.afDatabase.list<User>(
-      `${this.userCollection}`,
-      (ref) => ref.orderByChild('name/familyName')
-    );
-    return usersRef.valueChanges();
+  async addCourseIdToClassroom(id: string, courseId: string) {
+    const refDoc = doc(this.afs, this.tCollection, id);
+    return await updateDoc(refDoc, { coursesIds: arrayUnion(courseId) });
+  }
+  async addStudentIdToClassroom(id: string, studentEmail: string) {
+    const refDoc = doc(this.afs, this.tCollection, id);
+    return await updateDoc(refDoc, { studentsEmails: arrayUnion(studentEmail) });
+  }
+  async updateCoursesInClassroom(classroomId: string, coursesIds) {
+    const refDoc = doc(this.afs, this.tCollection, classroomId);
+    return await updateDoc(refDoc, { coursesIds: coursesIds });
+  }
+  async updateStudentsInClassroom(classroomId: string, studentsEmails: string[]) {
+    const refDoc = doc(this.afs, this.tCollection, classroomId);
+    return await updateDoc(refDoc, { studentsEmails: studentsEmails });
+  }
+  async removeCourseFromClassroom(classroomId: string, courseId: string) {
+    const refDoc = doc(this.afs, this.tCollection, classroomId);
+    return await updateDoc(refDoc, { coursesIds: arrayRemove(courseId) });
+  }
+  async removeStudentFromClassroom(classroomId: string, studentEmail: string) {
+    const refDoc = doc(this.afs, this.tCollection, classroomId);
+    return await updateDoc(refDoc, { studentsEmails: arrayRemove(studentEmail) });
+  }
+  getById(id: string): Observable<SchoolClassroom> {
+    const refDoc = doc(this.afs, this.tCollection, id);
+    return from(getDoc(refDoc)).pipe(map(x => x.data() as SchoolClassroom));
+  }
+  getWithGradeAndCycle(grade: string, cycle: string): Observable<SchoolClassroom> {
+    const queryWithParams = query(collection(this.afs, this.tCollection), where('grade', '==', grade), where('cycle', '==', cycle))
+    return collectionData(queryWithParams).pipe(take(1), map(x => x[0] as SchoolClassroom));
+  }
+  delete(id: string): Observable<string> {
+    const refDoc = doc(this.afs, this.tCollection, id);
+    return from(deleteDoc(refDoc)).pipe(take(1), map(_ => id));
+  }
+  list(): Observable<SchoolClassroom[]> {
+    const refCollection = collection(this.afs, this.tCollection);
+    const queryCollection = query(refCollection, orderBy('grade', 'asc'));
+    return collectionData(queryCollection).pipe(map(x => x as SchoolClassroom[]));
   }
 
-  getUser(id: string): Observable<User> {
-    return this.afDatabase
-      .object<User>(`${this.userCollection}/${id}`)
-      .valueChanges();
-  }
-  getCurrentScore(id: string): Observable<Grade> {
-    return this.afDatabase
-      .object<Grade>(`${this.userCollection}/${id}/${this.currentScore}`)
-      .valueChanges();
-  }
-  getScores(id: string): Observable<Score> {
-    return this.afDatabase
-      .object<Score>(`${this.userCollection}/${id}/${this.currentScore}/scores`)
-      .valueChanges();
-  }
-  createUser(user: any): Observable<User> {
-    const key = user.id;
-    this.afStore
-      .collection(`${this.userCollection}`)
-      .doc(key)
-      .set(user, { merge: true })
-      .then(
-        () => console.log('User created on Firestore'),
-        () => console.log('Error creating user on Firestore')
-      );
-    this.afDatabase
-      .object<User>(`${this.userCollection}/${key}`)
-      .set(user)
-      .then(
-        () => console.log('User created on Realtime DB'),
-        () => console.log('Error creating user on Realtime DB')
-      );
-    return this.afDatabase
-      .object<User>(`${this.userCollection}/${key}`)
-      .valueChanges();
-  }
-  updateUser(id: string, user: Partial<User>): Observable<User> {
-    this.afDatabase
-      .object<User>(`${this.userCollection}/${id}`)
-      .update(user)
-      .then(() => { })
-      .catch((reason) =>
-        this.toastrService.error(`Ocurrió un error: ${reason}`, 'Error', {
-          timeOut: 10000,
-        })
-      );
-    this.afStore
-      .collection<User>(`${this.userCollection}`)
-      .doc(id)
-      .update(user)
-      .then(() => { })
-      .catch((reason) =>
-        this.toastrService.error(`Ocurrió un error: ${reason}`, 'Error', {
-          timeOut: 10000,
-        })
-      );
-    return this.getUser(id);
-  }
-  deleteUser(userId: string): Promise<string> {
-    return this.afDatabase
-      .object<User>(`${this.userCollection}/${userId}`)
-      .remove()
-      .then(
-        () => userId,
-        () => {
-          console.log('Error deleting user on Realtime DB');
-          return userId;
-        }
-      );
+
+  getWithQuery(queryParams: QueryParams): Observable<SchoolClassroom[]> {
+    const queryWithParams = query(collection(this.afs, this.tCollection), orderBy('grade', 'asc'), where(Object.keys(queryParams).pop(), '==', Object.values(queryParams).pop()))
+    return collectionData(queryWithParams, { idField: 'id' }).pipe(take(1), map(x => x as SchoolClassroom[]));
+
   }
 
-  changeAdminPrivileges(id: string, isAdmin: boolean): Observable<void> {
-    const adminsRef = this.afDatabase.object(`${this.userCollection}/${id}`);
-    this.afDatabase.object(`${this.userCollection}/${id}`).update({ isAdmin });
-    return from(adminsRef.set(true));
+  upsert(entity: SchoolClassroom): Observable<any> {
+    const tCollection = doc(collection(this.afs, this.tCollection));
+    return from(setDoc(tCollection, entity, { merge: true }));
+  }
+
+
+  getMany(field: string, predicate: any, value: any): Observable<SchoolClassroom[]> {
+    const queryWithParams = query(collection(this.afs, this.tCollection), orderBy('priority', 'asc'), where(field, predicate, value));
+    return collectionData(queryWithParams, { idField: 'id' }).pipe(take(1), map(x => x as SchoolClassroom[]));
   }
 }

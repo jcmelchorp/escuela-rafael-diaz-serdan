@@ -1,0 +1,30 @@
+<div class="m-4">
+  <p class="view-title"> Educación a distancia</p>
+  <p class="view-subtitle">en respuesta a la emergencia sanitaria.</p>
+  <div class="p-2" fxLayout="row wrap" fxLayoutAlign="center start">
+    <carousel fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%">
+      <slide *ngFor="let pict of picts; let index=index">
+        <img class="img-fluid" [src]="pict.path" alt="first slide" height="auto">
+      </slide>
+    </carousel>
+  </div>
+  <p>
+    Descarga de manuales para el manejo y prevencion de eventualidades en la modalidad de educación a distancia
+  </p>
+  <div class="p-2" fxLayout="row wrap" fxLayoutGap="5px">
+    <div *ngFor="let infoManual of infographics" fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)"
+      fxFlex.lt-sm="100%">
+      <div class="card border-success bg-transparent" fxLayout="row wrap">
+        <div fxFlex="70%" class="card-body">
+          <h3 class="card-title">{{infoManual.title}}</h3>
+          <p class="card-text">{{infoManual.description}}</p>
+          <p class="card-text"><small class="text-muted">{{infoManual.size}}</small></p>
+        </div>
+        <div fxFlex="30%">
+          <a [href]="infoManual.file" target="_blank" rel="noopener">
+            <img class="img-fluid img-thumbnail" [src]="infoManual.file" alt="{{infoManual.title}}">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>

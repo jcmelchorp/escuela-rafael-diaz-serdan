@@ -4,24 +4,24 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AccountsEntityService } from '@rds-root/app/store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { Observable } from 'rxjs';
 import { filter, first, map, takeUntil, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AccountsResolver implements Resolve<boolean> {
-  constructor(private accountEntityService: AccountsEntityService) { }
+  constructor(private accountsEntityService: AccountsEntityService) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.accountEntityService.loaded$.pipe(
+    return this.accountsEntityService.loaded$.pipe(
       tap((loaded) => {
         if (!loaded) {
-          this.accountEntityService.getAll();
+          this.accountsEntityService.getAll();
         }
       }),
-      filter((loaded) => !!loaded),
+      filter(loaded => !!loaded),
       first()
     );
   }

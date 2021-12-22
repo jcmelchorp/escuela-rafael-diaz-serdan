@@ -1,0 +1,798 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Sistema RDS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/material.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Sistema RDS</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Escribe para buscar"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Componentes</li>
+  <li
+  >
+  RemoteLearningComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>Fichero</h3>
+</p>
+<p class="comment">
+    <code>src/app/information/components/remote-learning/remote-learning.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implementa</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Meta datos</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>{ provide: CarouselConfig, useValue: { interval: , noPause: true, showIndicators: true } }</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-remote-learning</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./remote-learning.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./remote-learning.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Índice</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Propiedades</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#infographics" >infographics</a>
+                            </li>
+                            <li>
+                                <a href="#itemsPerSlide" >itemsPerSlide</a>
+                            </li>
+                            <li>
+                                <a href="#noWrap" >noWrap</a>
+                            </li>
+                            <li>
+                                <a href="#picts" >picts</a>
+                            </li>
+                            <li>
+                                <a href="#singleSlideOffset" >singleSlideOffset</a>
+                            </li>
+                            <li>
+                                <a href="#slidesChangeMessage" >slidesChangeMessage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Métodos</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSlideRangeChange" >onSlideRangeChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="78" class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:78</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Métodos
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="81"
+                            class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:81</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSlideRangeChange"></a>
+                    <span class="name">
+                        <span ><b>onSlideRangeChange</b></span>
+                        <a href="#onSlideRangeChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSlideRangeChange(indexes: number[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Definido en <a href="" data-line="83"
+                            class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>indexes</td>
+                                    <td>
+                                            <code>number[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Propiedades
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="infographics"></a>
+                    <span class="name">
+                        <span ><b>infographics</b></span>
+                        <a href="#infographics"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+    {
+      file: &#x27;assets/scene/tu-cuenta-institucional.png&#x27;,
+      title: &#x27;Manual de cuentas institucionales&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/social-distance.png&#x27;,
+      title: &#x27;Medidas de distanciamiento social&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/statement-template.png&#x27;,
+      title: &#x27;Regreso a clases virtuales&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/classroom01.png&#x27;,
+      title: &#x27;Manual de Google Classroom&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/tareas.png&#x27;,
+      title: &#x27;Entrega de tareas&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/ayuda.png&#x27;,
+      title: &#x27;Línea de apoyo&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="41" class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="itemsPerSlide"></a>
+                    <span class="name">
+                        <span ><b>itemsPerSlide</b></span>
+                        <a href="#itemsPerSlide"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>2</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="14" class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="noWrap"></a>
+                    <span class="name">
+                        <span ><b>noWrap</b></span>
+                        <a href="#noWrap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="16" class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="picts"></a>
+                    <span class="name">
+                        <span ><b>picts</b></span>
+                        <a href="#picts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>[
+    {
+      path: &#x27;assets/scene/120896489_3353318561372251_3413422127144432972_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+    },
+    {
+      path: &#x27;assets/scene/145554877_3674428962594541_6430858538444380710_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+
+    },
+    {
+      path: &#x27;assets/scene/142807647_3651180938252677_2666928967365985320_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+
+    },
+    {
+      path: &#x27;assets/scene/136731354_3609776659059772_5825083095735666824_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="19" class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="singleSlideOffset"></a>
+                    <span class="name">
+                        <span ><b>singleSlideOffset</b></span>
+                        <a href="#singleSlideOffset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="15" class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="slidesChangeMessage"></a>
+                    <span class="name">
+                        <span ><b>slidesChangeMessage</b></span>
+                        <a href="#slidesChangeMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Valor por defecto : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Definido en <a href="" data-line="17" class="link-to-prism">src/app/information/components/remote-learning/remote-learning.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+
+import { CarouselConfig } from &#x27;ngx-bootstrap/carousel&#x27;;
+
+@Component({
+  selector: &#x27;app-remote-learning&#x27;,
+  templateUrl: &#x27;./remote-learning.component.html&#x27;,
+  styleUrls: [&#x27;./remote-learning.component.scss&#x27;],
+  providers: [
+    { provide: CarouselConfig, useValue: { interval: 1500, noPause: true, showIndicators: true } }
+  ]
+})
+export class RemoteLearningComponent implements OnInit {
+  itemsPerSlide &#x3D; 2;
+  singleSlideOffset &#x3D; false;
+  noWrap &#x3D; false;
+  slidesChangeMessage &#x3D; &#x27;&#x27;;
+
+  picts: any[] &#x3D; [
+    {
+      path: &#x27;assets/scene/120896489_3353318561372251_3413422127144432972_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+    },
+    {
+      path: &#x27;assets/scene/145554877_3674428962594541_6430858538444380710_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+
+    },
+    {
+      path: &#x27;assets/scene/142807647_3651180938252677_2666928967365985320_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+
+    },
+    {
+      path: &#x27;assets/scene/136731354_3609776659059772_5825083095735666824_o.jpg&#x27;,
+      altText: &#x27;picture&#x27;,
+
+    },
+  ];
+
+  infographics: any[] &#x3D; [
+    {
+      file: &#x27;assets/scene/tu-cuenta-institucional.png&#x27;,
+      title: &#x27;Manual de cuentas institucionales&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/social-distance.png&#x27;,
+      title: &#x27;Medidas de distanciamiento social&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/statement-template.png&#x27;,
+      title: &#x27;Regreso a clases virtuales&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/classroom01.png&#x27;,
+      title: &#x27;Manual de Google Classroom&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/tareas.png&#x27;,
+      title: &#x27;Entrega de tareas&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    },
+    {
+      file: &#x27;assets/scene/ayuda.png&#x27;,
+      title: &#x27;Línea de apoyo&#x27;,
+      description: &#x27;haz click en la imagen para descargar&#x27;,
+      size: &#x27;&#x27;
+    }
+  ];
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+  onSlideRangeChange(indexes: number[]): void {
+    this.slidesChangeMessage &#x3D; &#x60;Slides have been switched: ${indexes}&#x60;;
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;m-4&quot;&gt;
+  &lt;p class&#x3D;&quot;view-title&quot;&gt; Educación a distancia&lt;/p&gt;
+  &lt;p class&#x3D;&quot;view-subtitle&quot;&gt;en respuesta a la emergencia sanitaria.&lt;/p&gt;
+  &lt;div class&#x3D;&quot;p-2&quot; fxLayout&#x3D;&quot;row wrap&quot; fxLayoutAlign&#x3D;&quot;center start&quot;&gt;
+    &lt;carousel fxFlex&#x3D;&quot;0 1 calc(33.3% - 10px)&quot; fxFlex.lt-md&#x3D;&quot;0 1 calc(50% - 10px)&quot; fxFlex.lt-sm&#x3D;&quot;100%&quot;&gt;
+      &lt;slide *ngFor&#x3D;&quot;let pict of picts; let index&#x3D;index&quot;&gt;
+        &lt;img class&#x3D;&quot;img-fluid&quot; [src]&#x3D;&quot;pict.path&quot; alt&#x3D;&quot;first slide&quot; height&#x3D;&quot;auto&quot;&gt;
+      &lt;/slide&gt;
+    &lt;/carousel&gt;
+  &lt;/div&gt;
+  &lt;p&gt;
+    Descarga de manuales para el manejo y prevencion de eventualidades en la modalidad de educación a distancia
+  &lt;/p&gt;
+  &lt;div class&#x3D;&quot;p-2&quot; fxLayout&#x3D;&quot;row wrap&quot; fxLayoutGap&#x3D;&quot;5px&quot;&gt;
+    &lt;div *ngFor&#x3D;&quot;let infoManual of infographics&quot; fxFlex&#x3D;&quot;0 1 calc(33.3% - 10px)&quot; fxFlex.lt-md&#x3D;&quot;0 1 calc(50% - 10px)&quot;
+      fxFlex.lt-sm&#x3D;&quot;100%&quot;&gt;
+      &lt;div class&#x3D;&quot;card border-success bg-transparent&quot; fxLayout&#x3D;&quot;row wrap&quot;&gt;
+        &lt;div fxFlex&#x3D;&quot;70%&quot; class&#x3D;&quot;card-body&quot;&gt;
+          &lt;h3 class&#x3D;&quot;card-title&quot;&gt;{{infoManual.title}}&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;card-text&quot;&gt;{{infoManual.description}}&lt;/p&gt;
+          &lt;p class&#x3D;&quot;card-text&quot;&gt;&lt;small class&#x3D;&quot;text-muted&quot;&gt;{{infoManual.size}}&lt;/small&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div fxFlex&#x3D;&quot;30%&quot;&gt;
+          &lt;a [href]&#x3D;&quot;infoManual.file&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener&quot;&gt;
+            &lt;img class&#x3D;&quot;img-fluid img-thumbnail&quot; [src]&#x3D;&quot;infoManual.file&quot; alt&#x3D;&quot;{{infoManual.title}}&quot;&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./remote-learning.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.img-carousel {
+  width: 25%;
+  height: auto;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Leyenda</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Elemento Html</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Componente</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Elemento Html con directiva</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="m-4">  <p class="view-title"> Educación a distancia</p>  <p class="view-subtitle">en respuesta a la emergencia sanitaria.</p>  <div class="p-2" fxLayout="row wrap" fxLayoutAlign="center start">    <carousel fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%">      <slide *ngFor="let pict of picts; let index=index">        <img class="img-fluid" [src]="pict.path" alt="first slide" height="auto">      </slide>    </carousel>  </div>  <p>    Descarga de manuales para el manejo y prevencion de eventualidades en la modalidad de educación a distancia  </p>  <div class="p-2" fxLayout="row wrap" fxLayoutGap="5px">    <div *ngFor="let infoManual of infographics" fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)"      fxFlex.lt-sm="100%">      <div class="card border-success bg-transparent" fxLayout="row wrap">        <div fxFlex="70%" class="card-body">          <h3 class="card-title">{{infoManual.title}}</h3>          <p class="card-text">{{infoManual.description}}</p>          <p class="card-text"><small class="text-muted">{{infoManual.size}}</small></p>        </div>        <div fxFlex="30%">          <a [href]="infoManual.file" target="_blank" rel="noopener">            <img class="img-fluid img-thumbnail" [src]="infoManual.file" alt="{{infoManual.title}}">          </a>        </div>      </div>    </div>  </div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'AccountsComponent', 'selector': 'app-accounts'},{'name': 'AccountsListComponent', 'selector': 'app-accounts-list'},{'name': 'AccountsTableComponent', 'selector': 'app-accounts-table'},{'name': 'AddStudentsCoursesComponent', 'selector': ''},{'name': 'AdminCoursesComponent', 'selector': 'app-admin-courses'},{'name': 'AnnouncementDialogComponent', 'selector': ''},{'name': 'AnnouncementResultComponent', 'selector': ''},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ChangeGradeComponent', 'selector': ''},{'name': 'ClassroomComponent', 'selector': 'app-classroom'},{'name': 'CodeConductComponent', 'selector': 'app-code-conduct'},{'name': 'CodeConductSchoolComponent', 'selector': 'app-code-conduct-school'},{'name': 'ConfirmDialogComponent', 'selector': ''},{'name': 'CourseAnnouncementsComponent', 'selector': 'app-course-announcements'},{'name': 'CourseComponent', 'selector': 'app-course'},{'name': 'CourseDialogComponent', 'selector': ''},{'name': 'CoursesComponent', 'selector': 'app-courses'},{'name': 'CoursesListComponent', 'selector': 'app-courses-list'},{'name': 'CourseStudentsComponent', 'selector': 'app-course-students'},{'name': 'CourseTeachersComponent', 'selector': 'app-course-teachers'},{'name': 'CourseUserDialogComponent', 'selector': ''},{'name': 'CourseWorkComponent', 'selector': 'app-course-work'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DeleteButtonComponent', 'selector': 'app-delete-button'},{'name': 'EditProfileComponent', 'selector': 'app-edit-profile'},{'name': 'GuardiansListDialogComponent', 'selector': ''},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'InfoCardsComponent', 'selector': 'app-info-cards'},{'name': 'InformationComponent', 'selector': 'app-information'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LicenseComponent', 'selector': 'app-license'},{'name': 'LocationComponent', 'selector': 'app-location'},{'name': 'LoginDialogComponent', 'selector': ''},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'NewAccountComponent', 'selector': ''},{'name': 'NewAccountConfirmComponent', 'selector': ''},{'name': 'NotesEditComponent', 'selector': 'app-notes-edit'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'ParallaxSpaceComponent', 'selector': 'app-parallax-space'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileInfoComponent', 'selector': 'app-profile-info'},{'name': 'ProfileMenuComponent', 'selector': 'app-profile-menu'},{'name': 'ProfileScoresBarChartComponent', 'selector': 'app-profile-scores-bar-chart'},{'name': 'ProfileScoresComponent', 'selector': 'app-profile-scores'},{'name': 'ProfileScoresListComponent', 'selector': 'app-profile-scores-list'},{'name': 'ProfileScoresRecommendationComponent', 'selector': 'app-profile-scores-recommendation'},{'name': 'ProfileScoresTableComponent', 'selector': 'app-profile-scores-table'},{'name': 'ProfileUserComponent', 'selector': 'app-profile-user'},{'name': 'RemoteLearningComponent', 'selector': 'app-remote-learning'},{'name': 'ReopenningComponent', 'selector': 'app-reopenning'},{'name': 'SaveUserErrorComponent', 'selector': 'save-user-error'},{'name': 'SchoolComponent', 'selector': 'app-school'},{'name': 'SchoolCourseDialogComponent', 'selector': ''},{'name': 'SchoolCoursesComponent', 'selector': 'app-school-courses'},{'name': 'SchoolCoursesTableComponent', 'selector': 'app-school-courses-table'},{'name': 'SchoolDashboardComponent', 'selector': 'app-school-dashboard'},{'name': 'ScoresEditComponent', 'selector': 'app-scores-edit'},{'name': 'SettingsComponent', 'selector': 'app-settings'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StudentsCoursesComponent', 'selector': 'app-students-courses'},{'name': 'TeacherCoursesComponent', 'selector': 'app-teacher-courses'},{'name': 'TeachersComponent', 'selector': 'app-teachers'},{'name': 'TeachersDashboardComponent', 'selector': 'app-teachers-dashboard'},{'name': 'TeachersGradeComponent', 'selector': 'app-teachers-grade'},{'name': 'TermsComponent', 'selector': 'app-terms'},{'name': 'UploadFileDialogComponent', 'selector': ''},{'name': 'UserDetailsComponent', 'selector': 'app-user-details'},{'name': 'UserEditDialogComponent', 'selector': ''},{'name': 'UserProfileComponent', 'selector': 'app-user-profile'},{'name': 'UsersListComponent', 'selector': 'app-users-list'}];
+    var DIRECTIVES = [{'name': 'MaterialElevationDirective', 'selector': '[appMaterialElevation]'},{'name': 'ParallaxDirective', 'selector': '[appParallax]'}];
+    var ACTUAL_COMPONENT = {'name': 'RemoteLearningComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> comparación de resultados "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No hay resultados que coincidan "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RemoteLearningComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

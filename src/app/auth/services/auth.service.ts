@@ -1,70 +1,86 @@
-import { Injectable } from '@angular/core';
-//import { Auth } from '@angular/fire/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-/* import { Database } from '@angular/fire/compat/database';
-import { Firestore } from '@angular/fire/compat/firestore'; */
-import { User } from '@rds-auth/models/user.model';
+import { Injectable, Optional } from '@angular/core';
+import { User as AuthUser } from '@rds-auth/models/user.model';
+import { Observable, of, from, Subscription, EMPTY } from 'rxjs';
+import { switchMap, map, take, pluck, shareReplay, mergeMap } from 'rxjs/operators';
+import { Database, objectVal, push, ref, update } from '@angular/fire/database';
+import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User, UserCredential } from '@angular/fire/auth';
+import { collection, doc, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
 import firebase from 'firebase/compat/app';
-import { Observable, of, from } from 'rxjs';
-import { switchMap, map, take, pluck } from 'rxjs/operators';
+import 'firebase/compat/auth';
+
 
 @Injectable()
 export class AuthService {
-  /* collection: string = 'users';
+  user$: Observable<User>;
+  private collection: string = 'users';
+  public readonly userDisposable: Subscription | undefined;
+  public readonly user: Observable<User> = EMPTY;
+  showLoginButton = false;
+  showLogoutButton = false;
+  public readonly objectValue$: Observable<any>;
   constructor(
-    public readonly afAuth: AngularFireAuth,
-    private afDb: AngularFireDatabase
-  ) { }
+    /* public readonly afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase,
+    private afStore: AngularFirestore */
+    private readonly database: Database, @Optional() private auth: Auth, public readonly afs: Firestore,
 
-  getAuthUser(): Observable<any> {
-    return this.afAuth.authState.pipe(
-      take(1),
-      switchMap((user) => {
+
+  ) {
+
+    const docRef = ref(this.database, this.collection);
+    this.objectValue$ = objectVal(docRef)
+
+  }
+
+  getUser(id: string): Observable<AuthUser> {
+    /* return this.afDatabase
+      .object<User>(`${this.collection}/${id}`)
+      .valueChanges(); */
+    const docRef = ref(this.database, `${this.collection}/${id}`);
+    return objectVal<AuthUser>(docRef, { keyField: 'id' })
+  }
+  getAuthUser(): Observable<AuthUser | null> {
+    return authState(this.auth).pipe(
+      switchMap((user: User) => {
         if (user) {
-          return this.afDb
-            .object(`${this.collection}/${user.providerData[0]?.uid}`)
-            .valueChanges();
+          const docRef = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
+          const refCollection = doc(this.afs, this.collection, user.providerData[0].uid);
+          return from(getDoc(refCollection)).pipe(
+            mergeMap(userFs =>
+              objectVal<AuthUser>(docRef).pipe(
+                map(userDb => { return { ...userFs.data() as AuthUser, ...userDb as AuthUser } })
+              )
+            ));
         } else {
-          return of(null);
+          return of(null)
         }
-      })
-    );
-  }
-  saveUser(user: User) {
-    const key = user.id;
-    return from(
-      this.afDb.object<User>(`${this.collection}/${key}`).update(user)
-    );
+      }
+      ));
   }
 
-  signInWithCredential(credentials: firebase.auth.AuthCredential) {
+  signInWithCredential(
+    credentials: firebase.auth.AuthCredential
+  ): Promise<firebase.auth.UserCredential> {
     return this.signInWithCredential(credentials);
   }
+  signInWithPopup() {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    return from(signInWithPopup(this.auth, provider));
+  };
 
-  signOut() {
-    return this.afAuth.signOut();
+  /*  signInWithPopup(): Observable<firebase.auth.UserCredential> {
+     return from(this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(_ => {
+       return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+     }));
+   } */
+  signOut(id: string) {
+    //this.updateOnlineStatus(id, false);
+    return from(signOut(this.auth));
   }
-
-  checkAdminRole(id: string): Observable<boolean> {
-    return this.afDb
-      .object<User>(`${this.collection}/${id}`)
-      .valueChanges()
-      .pipe(pluck('isAdmin'));
-  }
-
-  checkTeacherRole(id: string): Observable<boolean> {
-    return this.afDb
-      .object<User>(`${this.collection}/${id}`)
-      .valueChanges()
-      .pipe(pluck('isTeacher'));
-  }
-
   updateOnlineStatus(id: string, status: boolean): Observable<void> {
-    if (status) {
+    /* if (status) {
       return from(
-        this.afDb.database
+        this.afDatabase.database
           .ref()
           .child(`${this.collection}/${id}`)
           .onDisconnect()
@@ -72,112 +88,41 @@ export class AuthService {
       );
     }
     return from(
-      this.afDb.object(`${this.collection}/${id}`).update({ isOnline: status })
-    );
-  } */
-  user$: Observable<User>;
-  private userCollection: string = 'users';
-  constructor(
-    public afAuth: AngularFireAuth,
-    private afDatabase: AngularFireDatabase,
-    private afStore: AngularFirestore
-  ) {
-  }
-  getUserById(id: string): Observable<User> {
-    return this.afDatabase
-      .object<User>(`${this.userCollection}/${id}`)
-      .valueChanges();
-  }
-  getAuthUser(): Observable<any> {
-    return this.afAuth.authState.pipe(
-      take(1),
-      switchMap((user) => {
-        if (user) {
-          return this.afDatabase
-            .object(`${this.userCollection}/${user.providerData[0]?.uid}`)
-            .valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
-  }
-  getAuthState(): Observable<firebase.User> {
-    return this.afAuth.authState;
-  }
-  signInWithCredential(
-    credentials: firebase.auth.AuthCredential
-  ): Promise<firebase.auth.UserCredential> {
-    return this.afAuth.signInWithCredential(credentials);
-  }
-  signInWithPopup(): Observable<firebase.auth.UserCredential> {
-    return from(this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(_ => {
-      return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    }));
-  }
-  signOut(id: string) {
-    //this.updateOnlineStatus(id, false);
-    return from(this.afAuth.signOut());
-  }
-  updateOnlineStatus(id: string, status: boolean): Observable<void> {
-    if (status) {
-      //console.log('onDisconect branch', status)
-      return from(
-        this.afDatabase.database
-          .ref()
-          .child(`${this.userCollection}/${id}`)
-          .onDisconnect()
-          .update({ isOnline: status })
-      );
-    }
-    //console.log('outer branch', status)
-    return from(
       this.afDatabase
-        .object(`${this.userCollection}/${id}`)
+        .object(`${this.collection}/${id}`)
         .update({ isOnline: status })
-    );
+    ); */
+    const doc = ref(this.database, `${this.collection}/${id}`);
+    return from(update(doc, { isOnline: status }));
   }
-  createUser(user: Partial<User>) {
+
+  saveUser(user: Partial<AuthUser>) {
     const key = user.id;
-    return this.afStore
-      .collection(this.userCollection)
-      .doc(key)
-      .set(
-        {
-          ...user,
-          isVerified: user.isVerified,
-          uid: user.uid,
-        },
-        { merge: true }
-      )
-      .then(() =>
-        this.afDatabase
-          .object<User>(`${this.userCollection}/${key}`)
-          .update(user)
-      );
+    const rtdbRef = ref(this.database, `${this.collection}/${key}`);
+    const afsRef = doc(this.afs, this.collection, key);
+    return from(update(rtdbRef, user)).pipe(
+      mergeMap(_ => from(updateDoc(afsRef, user)))
+    )
+
+
   }
 
   checkAdminRole(id: string): Observable<boolean> {
-    const val = this.afDatabase
-      .object<User>(`${this.userCollection}/${id}`)
-      .valueChanges();
-    let isAdmin: Observable<boolean> = val.pipe(
-      map((user) => {
-        return user.isAdmin;
-      })
-    );
-    return isAdmin;
+    /* return this.afDatabase
+      .object<AuthUser>(`${this.collection}/${id}`)
+      .valueChanges()
+      .pipe(pluck('isAdmin')); */
+    const doc = ref(this.database, `${this.collection}/${id}`);
+    return objectVal(doc).pipe(pluck('isAdmin'));
   }
 
   checkTeacherRole(id: string): Observable<boolean> {
-    const val = this.afDatabase
-      .object<User>(`${this.userCollection}/${id}`)
-      .valueChanges();
-    let isTeacher: Observable<boolean> = val.pipe(
-      map((user) => {
-        return user.isTeacher;
-      })
-    );
-    return isTeacher;
+    /*  return this.afDatabase
+       .object<AuthUser>(`${this.collection}/${id}`)
+       .valueChanges()
+       .pipe(pluck('isTeacher')); */
+    const doc = ref(this.database, `${this.collection}/${id}`);
+    return objectVal(doc).pipe(pluck('isTeacher'));
   }
 }
+

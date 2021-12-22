@@ -1,13 +1,10 @@
-<div class="p-4">
+<div class="px-4 school-background" [@flyInOut]="'flyInOut'">
+  <p class="view-subtitle">Administra grupos, clases, alumnos y profesores en la institución.</p>
   <p class="view-title">Dirección</p>
-  <p class="view-subtitle">Gestiona usuarios, grupos, clases y horarios en la institución.</p>
-  <div class="py-2">
-    <router-outlet></router-outlet>
-  </div>
 </div>
-<button mat-fab id="new-cicle" matTooltip="Nuevo ciclo escolar" (click)="newCicle()">
-  <mat-icon>more_time</mat-icon>
-</button>
+<div class="p-4">
+  <router-outlet></router-outlet>
+</div>
 <button mat-fab id="new-user" matTooltip="Nuevo usuario" (click)="openSaveUser()">
   <mat-icon>person_add</mat-icon>
 </button>

@@ -20,7 +20,7 @@ export class SeoService {
     private metaService: Meta,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   titleInit() {
     this.router.events
@@ -91,7 +91,7 @@ export class SeoService {
       { property: 'og:title', content: title },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: title },
-      { property: 'og:url', content: 'http://classroom-rds.web.app' },
+      { property: 'og:url', content: 'http://escuela-rafael-diaz-serdan.web.app' },
       { property: 'og:image:url', content: image },
       { property: 'og:image:secure_url', content: image },
       { property: 'og:image:alt', content: 'Website view example' },

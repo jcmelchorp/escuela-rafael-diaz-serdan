@@ -1,0 +1,31 @@
+.img-small {
+  height: 30px;
+  width: auto;
+}
+.full-width-table {
+  width: 100%;
+  background-color: inherit;
+
+}
+table {
+  height: 40px;
+  .large-th {
+    min-width: 200px;
+    min-height: 10px;
+  }
+
+  .medium-th {
+    min-width: 100px;
+    min-height: 10px;
+  }
+
+  .small-th {
+    min-width: 20px;
+    min-height: 10px;
+  }
+}
+tr.mat-header-row, tr.mat-row {
+  min-height: 10px;
+  max-height: 30px;
+
+}

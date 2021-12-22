@@ -1,12 +1,12 @@
-<!-- <ng-template #spinner>
-  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
-    <mat-spinner strokeWidth="10" [diameter]="100">
+<ng-template #spinner>
+  <div style="min-height: 00px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="6" [diameter]="48">
     </mat-spinner>
-    <span>Buscando clases ...</span><br>
+    <span>Buscando ...</span><br>
   </div>
-</ng-template> -->
+</ng-template>
 <fa-icon mat-icon-button [routerLink]="['..']" [icon]="faChevronLeft"></fa-icon>
-<div *ngIf="(user$|async) as user">
+<div *ngIf="(user$|async) as user;else spinner">
   <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="mat-elevation-z0 bg-transparent">
       <mat-card-header>
@@ -28,12 +28,12 @@
               <mat-label>CURP</mat-label>
               <input matInput placeholder="CURP" formControlName="curp">
             </mat-form-field>
-            <mat-form-field *ngIf="user.role=='alumnos' && user.isHuman" fxFlex="0 1 calc(33% - 5px)"
+            <mat-form-field *ngIf="user.role=='Alumnos' && user.isHuman" fxFlex="0 1 calc(33% - 5px)"
               fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>NIEV</mat-label>
               <input matInput placeholder="NIEV" formControlName="niev">
             </mat-form-field>
-            <mat-form-field *ngIf="(user.role=='profesores'|| user.role=='administrativos') && user.isHuman"
+            <mat-form-field *ngIf="(user.role=='rofesores'|| user.role=='Administrativos') && user.isHuman"
               fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>RFC</mat-label>
               <input matInput placeholder="RFC" formControlName="rfc">
@@ -50,13 +50,13 @@
             <div *ngIf="user.isHuman" fxLayout="row wrap" fxLayoutAlign="cener center">
               <mat-label for="gender">Genero: </mat-label>
               <mat-radio-group name="gender" color="primary" formControlName="gender">
-                <mat-radio-button class="mx-2" value="hombre">
+                <mat-radio-button class="mx-2" value="Hombre">
                   Hombre
                 </mat-radio-button>
-                <mat-radio-button class="mx-2" value="mujer">
+                <mat-radio-button class="mx-2" value="Mujer">
                   Mujer
                 </mat-radio-button>
-                <mat-radio-button class="mx-2" value="inespecífico">
+                <mat-radio-button class="mx-2" value="Inespecífico">
                   Prefiero no decir
                 </mat-radio-button>
               </mat-radio-group>
@@ -70,7 +70,7 @@
         </div>
         <!--  </mat-expansion-panel> -->
         <!--   parent form    -->
-        <div *ngIf="user.role=='alumnos' && user.isHuman">
+        <div *ngIf="user.role=='Alumnos' && user.isHuman">
           <h2>Datos de los representantes</h2>
           <mat-accordion togglePosition="before">
             <div class="card bg-transparent" formArrayName="parents">

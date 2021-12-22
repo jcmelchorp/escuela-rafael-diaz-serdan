@@ -58,7 +58,7 @@
             <h3>Fichero</h3>
         </p>
         <p class="comment">
-            <code>src/app/school/services/school-courses.service.ts</code>
+            <code>src/app/school/school-courses/services/school-courses.service.ts</code>
         </p>
 
 
@@ -67,7 +67,7 @@
                 <h3>Extiende</h3>
             </p>
             <p class="comment">
-                        <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                        <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
             </p>
 
 
@@ -85,16 +85,7 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#afDatabase" >afDatabase</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#afStore" >afStore</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#afdb" >afdb</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -102,20 +93,18 @@
                                 <a href="#afs" >afs</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#collection" >collection</a>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#colects" >colects</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#collectionName" >collectionName</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#fsCollection" >fsCollection</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#rtdbList" >rtdbList</a>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#tCollection" >tCollection</a>
                             </li>
                         </ul>
                     </td>
@@ -147,6 +136,9 @@
                             <li>
                                 <a href="#update" >update</a>
                             </li>
+                            <li>
+                                <a href="#upsert" >upsert</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -165,12 +157,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(afDatabase: AngularFireDatabase, afStore: AngularFirestore)</code>
+<code>constructor(afStore: Firestore)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="9" class="link-to-prism">src/app/school/services/school-courses.service.ts:9</a></div>
+                                <div class="io-line">Definido en <a href="" data-line="10" class="link-to-prism">src/app/school/school-courses/services/school-courses.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -188,22 +180,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>afDatabase</td>
-                                                  
-                                                        <td>
-                                                                    <code>AngularFireDatabase</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
                                                         <td>afStore</td>
                                                   
                                                         <td>
-                                                                    <code>AngularFirestore</code>
+                                                                    <code>Firestore</code>
                                                         </td>
                                                   
                                                     <td>
@@ -238,20 +218,20 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>add(entity: T, id?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>add(entity: T)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                    <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:24</a></code>
+                        <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:35</a></code>
 </div>
                 </td>
             </tr>
@@ -280,18 +260,6 @@
 
                                     <td>
                                         No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        Si
                                     </td>
 
 
@@ -332,13 +300,13 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                    <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:55</a></code>
+                        <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:49</a></code>
 </div>
                 </td>
             </tr>
@@ -407,13 +375,13 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                    <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:41</a></code>
+                        <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:45</a></code>
 </div>
                 </td>
             </tr>
@@ -482,13 +450,13 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                    <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:64</a></code>
+                        <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:61</a></code>
 </div>
                 </td>
             </tr>
@@ -550,20 +518,20 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>list()</code>
+<code>list(query?: QueryParams)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                    <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:60</a></code>
+                        <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:53</a></code>
 </div>
                 </td>
             </tr>
@@ -573,8 +541,40 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>query</td>
+                                    <td>
+                                            <code>QueryParams</code>
+                                    </td>
+
+                                    <td>
+                                        Si
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Devuelve : </b>    <code>Observable&lt;T[]&gt;</code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -600,13 +600,13 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                    <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:36</a></code>
+                        <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:41</a></code>
 </div>
                 </td>
             </tr>
@@ -667,39 +667,87 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="upsert"></a>
+                    <span class="name">
+                        <span ><b>upsert</b></span>
+                        <a href="#upsert"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>upsert(entity: T)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:71</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parámetros :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Nombre</td>
+                                    <td>Tipo</td>
+                                    <td>Opcional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>entity</td>
+                                    <td>
+                                            <code>T</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Devuelve : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
     <h3 id="inputs">
         Propiedades
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="afDatabase"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>afDatabase</b></span>
-                        <a href="#afDatabase"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Tipo : </i>    <code>AngularFireDatabase</code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="11" class="link-to-prism">src/app/school/services/school-courses.service.ts:11</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -714,48 +762,13 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Tipo : </i>    <code>AngularFirestore</code>
+                        <i>Tipo : </i>    <code>Firestore</code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en <a href="" data-line="12" class="link-to-prism">src/app/school/services/school-courses.service.ts:12</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="afdb"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Readonly</span>
-                        <span ><b>afdb</b></span>
-                        <a href="#afdb"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Tipo : </i>    <code>AngularFireDatabase</code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
-</div>
-                            </td>
-                        </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:15</a></code>
-</div>
+                                <div class="io-line">Definido en <a href="" data-line="12" class="link-to-prism">src/app/school/school-courses/services/school-courses.service.ts:12</a></div>
                         </td>
                     </tr>
 
@@ -777,19 +790,19 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Tipo : </i>    <code>AngularFirestore</code>
+                        <i>Tipo : </i>    <code>Firestore</code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                                <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                             </td>
                         </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:14</a></code>
+                                <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:14</a></code>
 </div>
                         </td>
                     </tr>
@@ -801,29 +814,30 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="collection"></a>
+                    <a name="colects"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>collection</b></span>
-                        <a href="#collection"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>colects</b></span>
+                        <a href="#colects"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Tipo : </i>    <code>Observable&lt;T[]&gt;</code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                                <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                             </td>
                         </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:9</a></code>
+                                <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:11</a></code>
 </div>
                         </td>
                     </tr>
@@ -860,13 +874,13 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                                <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                             </td>
                         </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:13</a></code>
+                                <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:13</a></code>
 </div>
                         </td>
                     </tr>
@@ -878,63 +892,30 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="fsCollection"></a>
+                    <a name="tCollection"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>fsCollection</b></span>
-                        <a href="#fsCollection"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tCollection</b></span>
+                        <a href="#tCollection"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Tipo : </i>    <code>AngularFirestoreCollection&lt;T&gt;</code>
+                        <i>Tipo : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
+                                <div class="io-line">Heredado desde         <code><a href="../classes/FirestoreV9Service.html" target="_self" >FirestoreV9Service</a></code>
 </div>
                             </td>
                         </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:10</a></code>
-</div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="rtdbList"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>rtdbList</b></span>
-                        <a href="#rtdbList"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Tipo : </i>    <code>AngularFireList&lt;T&gt;</code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Heredado desde         <code><a href="../classes/FirebaseService.html" target="_self" >FirebaseService</a></code>
-</div>
-                            </td>
-                        </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Definido en         <code><a href="../classes/FirebaseService.html#source" target="_self" >FirebaseService:11</a></code>
+                                <div class="io-line">Definido en         <code><a href="../classes/FirestoreV9Service.html#source" target="_self" >FirestoreV9Service:10</a></code>
 </div>
                         </td>
                     </tr>
@@ -949,18 +930,18 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { AngularFireDatabase } from &#x27;@angular/fire/compat/database&#x27;;
-import { AngularFirestore } from &#x27;@angular/fire/compat/firestore&#x27;;
-import { FirebaseService } from &#x27;@rds-shared/generic/firebase.service&#x27;;
-
+import { Firestore } from &#x27;@angular/fire/firestore&#x27;;
+import { FirestoreV9Service } from &#x27;@rds-shared/generic/firestore-v9.service&#x27;;
 import { SchoolCourse } from &#x27;../models/school-course.model&#x27;;
-
+import * as fromSchoolCourses from &#x27;@rds-store/school/assigned-courses&#x27;;
 @Injectable()
-export class SchoolCoursesService extends FirebaseService&lt;SchoolCourse&gt; {
+/** SchoolCoursesService
+ *  Service to manage school courses by CRUD operations on Firestore
+ */
+export class SchoolCoursesService extends FirestoreV9Service&lt;SchoolCourse&gt; {
   constructor(
-    public afDatabase: AngularFireDatabase,
-    public afStore: AngularFirestore) {
-    super(&#x27;courses&#x27;, afStore, afDatabase);
+    public afStore: Firestore) {
+    super(fromSchoolCourses.pluralizedEntityName, afStore);
   }
 }
 </code></pre>

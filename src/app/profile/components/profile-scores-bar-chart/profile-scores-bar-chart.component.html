@@ -1,0 +1,11 @@
+<mat-expansion-panel appMaterialElevation [raisedElevation]="raisedElev">
+  <mat-expansion-panel-header>
+    Comparativo por materia
+  </mat-expansion-panel-header>
+  <div *ngIf="copyData.length>0">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+      [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+    </canvas>
+    {{copyData.courseName}}
+  </div>
+</mat-expansion-panel>

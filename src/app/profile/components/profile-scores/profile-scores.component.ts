@@ -1,0 +1,299 @@
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
+import { select, Store } from '@ngrx/store';
+import { User } from '@rds-auth/models/user.model';
+import { isTeacher, selectUser } from '@rds-auth/state/auth.selectors';
+import { SubscriptionService } from '@rds-shared/services';
+import { AppState } from '@rds-store/app.state';
+import { Observable, Subscription } from 'rxjs';
+import { map, tap, switchMap, concatMap, mergeMap, pluck } from 'rxjs/operators';
+
+import { Score } from '@rds-profile/models/score.model';
+import { ProfileService } from '../../services/profile.service';
+import { expandFadeInAnimation, fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
+import { Cycle } from '@rds-school/models/school-course.model';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ScoresEntityService } from '@rds-store/scores/scores-entity.service';
+import { selectUserId } from '../../../auth/state/auth.selectors';
+import { CourseLevel } from '@rds-auth/models/user.enum';
+// Import pdfmake-wrapper and the fonts to use
+import { Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
+import * as pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+import pdfMake from "pdfmake/build/pdfmake";
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+@Component({
+  selector: 'app-profile-scores',
+  templateUrl: './profile-scores.component.html',
+  styleUrls: ['./profile-scores.component.scss'],
+  animations: [fadeInAnimation]
+})
+export class ProfileScoresComponent implements OnInit {
+  userScore: Observable<Score>;
+  user$: Observable<User>;
+  user: User;
+  score: Score
+  isTeacher$: Observable<boolean>;
+  loading$: Observable<boolean>;
+  loaded$: Observable<boolean>;
+  level: CourseLevel;
+  cycleKeys;
+  cycles = Cycle;
+  cycleForm: FormGroup;
+  selectedScore: Observable<Score>;
+  userId: string;
+  userName: string;
+  userSub: Subscription;
+  today: Date = new Date();
+  faFilePdf = faFilePdf;
+  timeOpenScores: boolean = false;
+  constructor(
+    private scoresEntityService: ScoresEntityService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private store: Store<AppState>,
+    private subService: SubscriptionService,
+  ) {
+    this.initForm();
+    this.loading$ = this.scoresEntityService.loading$;
+    this.loaded$ = this.scoresEntityService.loaded$;
+    this.cycleKeys = Object.keys(this.cycles);
+    this.isTeacher$ = this.store.select(isTeacher);
+    this.user$ = this.store.select(selectUser).pipe(tap(user => { this.user = user; this.userId = user.id }));
+    //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
+    this.timeOpenScores = true;
+  }
+  ngOnInit(): void {
+    this.getScoresByCycle(this.cycle);
+  }
+  get cycle() {
+    return this.cycleForm.get('cycle').value;
+  }
+  getScoresByCycle(cycle: Cycle) {
+    console.log(cycle)
+    this.selectedScore = this.scoresEntityService.entities$.pipe(
+      map(scores => scores.find(s => s.id === this.userId + cycle)),
+      tap(score => this.score = score)
+    );
+  }
+  initForm() {
+    this.cycleForm = this.fb.group({
+      cycle: new FormControl(this.route.snapshot.queryParams.cycle)
+    });
+  }
+  printPage() {
+    window.print();
+  }
+  ngOnDestroy() {
+    this.subService.unsubscribeComponent$;
+  }
+  /* async generatePdf() {
+    PdfMakeWrapper.setFonts(pdfFonts);
+
+    const pdf = new PdfMakeWrapper();
+    pdf.info({
+      title: 'Calificaciones',
+      author: 'Escuela Rafael Díaz Serdán',
+      subject: 'Boleta de calificaciones de la escuela',
+    });
+    pdf.permissions('123', {
+      printing: 'highResolution',
+      copying: false,
+      modifying: false,
+      annotating: true,
+      fillingForms: true,
+      documentAssembly: true,
+      contentAccessibility: true
+    });
+    content: [
+      {
+        text: 'PROFILE',
+        bold: true,
+        fontSize: 20,
+        alignment: 'center',
+        margin: [0, 0, 0, 20]
+      },
+      {
+        columns: [
+          [{
+            text: 'Firstname : ' + this.user.name.fullName
+          },
+          {
+            text: 'Lastname : ' + this.user.name.givenName
+          },
+          {
+            text: 'Display : ' + this.user.displayName
+          },
+          {
+            text: 'Email : ' + this.user.primaryEmail
+          }]
+        ]
+      }];
+
+    pdf.add(await new Img('assets/images/rds-newlogo-transparent.png').build());
+    pdf.watermark(new Txt('Documento sin validez oficial').color('#0060a0').end);
+    pdf.create().open();
+  } */
+  async generatePDF(action) {
+    this.selectedScore.pipe(tap(score => this.score = score));
+    this.user$.pipe(tap(user => this.user = user));
+    const buildTableBody = (data, columns) => {
+      var body = [];
+      //body.push(columns);
+      data.forEach((row) => {
+        var dataRow = [];
+        columns.forEach((column) => {
+          dataRow.push(row[column]);
+        });
+
+        body.push(dataRow);
+      });
+
+      return body;
+    }
+    const getBase64ImageFromURL = (url) => {
+      return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.setAttribute("crossOrigin", "anonymous");
+        img.onload = () => {
+          var canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+          var dataURL = canvas.toDataURL("image/png");
+          resolve(dataURL);
+        };
+        img.onerror = error => {
+          reject(error);
+        };
+        img.src = url;
+      });
+    }
+
+    var docDefinition = {
+      header: {
+        margin: 40,
+        columns: [
+          {
+            // usually you would use a dataUri instead of the name for client-side printing
+            // sampleImage.jpg however works inside playground so you can play with it
+            image: await getBase64ImageFromURL(
+              '/assets/images/rds-newlogo-transparent.png'),
+            width: 95
+          },
+
+        ]
+      }, content: [
+        {
+          text: 'Escuela Rafael Díaz Serdán',
+          fontSize: 20,
+          alignment: 'center',
+          color: '#0060a0',
+          bold: true,
+        },
+
+        {
+          text: 'Informe de calificaciones',
+          fontSize: 16,
+          bold: false,
+          alignment: 'center',
+        },
+        {
+          margin: [0, 64, 0, 16],
+          columns: [
+            [
+              {
+                text: this.user.name.fullName,
+                bold: true
+              },
+              { text: this.user.primaryEmail },
+              { text: this.user.grade },
+              { text: this.user.curp, bold: true }
+            ],
+            [
+              {
+                text: `Fecha de consulta: ${new Date().toLocaleString()}`,
+                alignment: 'right'
+              },
+              {
+                text: `Ciclo escolar: ${this.cycles[this.score.cycle]}`,
+                alignment: 'right'
+              }
+            ]
+          ]
+        },
+        {
+          layout: {
+            hLineWidth: (i, node) => { return (i === 0 || i === -1) ? 1 : 0; },
+            vLineWidth: (i, node) => { return (i === 1 || i === 2 || i === 3 || i === 4) ? 1 : 0; },
+            hLineColor: (i, node) => { return (i === 1 || i === 2 || i === 3 || i === 4) ? '#0060a0' : '#101010'; },
+            vLineColor: (i, node) => { return '#0060a0' },
+            paddingBottom: (i, node) => {
+              switch (i) {
+                case 0:
+                  return 5;
+                case 1:
+                  return 2;
+                default:
+                  return 0;
+              }
+            },
+            paddingTop: (i, node) => {
+              switch (i) {
+                case 0:
+                  return 0;
+                case 1:
+                  return 2;
+                default:
+                  return 10;
+              }
+            }
+          },
+          table: {
+            headerRows: 0,
+            widths: ['*', 'auto', 'auto', 'auto', 'auto'],
+            alignment: 'center',
+            body: [
+              ['Materia', 'Unidad 1', 'Unidad 2', 'Unidad 3', 'Final'],
+              ...buildTableBody(this.score.scores, ['courseName', 'unit1', 'unit2', 'unit3', 'prom_materia'])
+            ]
+          },
+        },
+        {
+          text: 'Retroalimentación',
+          style: 'sectionHeader'
+        },
+        {
+          ul: [
+            `Comentarios sobre la Unidad 1: \n ${this.score.scores.filter(score => score.notes1 !== '').map(score => score.notes1).join('\n')}`,
+            `Comentarios sobre la Unidad 2: \n ${this.score.scores.filter(score => score.notes2 !== '').map(score => score.notes2).join('\n')}`,
+            `Comentarios sobre la Unidad 3: \n ${this.score.scores.filter(score => score.notes3 !== '').map(score => score.notes3).join('\n')}`, ,
+          ],
+          fontSize: 10,
+        }
+      ],
+      styles: {
+        sectionHeader: {
+          bold: true,
+          decoration: 'underline',
+          fontSize: 14,
+          margin: [0, 15, 0, 15]
+        }
+      }
+    };
+
+    if (action === 'download') {
+      pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).download(`${this.user.curp.slice(0, 10)}_${this.cycles[this.score.cycle]}.pdf`);
+    } else if (action === 'print') {
+      pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).print();
+    } else {
+      pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).open();
+    }
+
+
+  }
+
+}
+

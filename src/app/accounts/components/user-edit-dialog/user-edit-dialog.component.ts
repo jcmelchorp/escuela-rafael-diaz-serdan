@@ -34,8 +34,8 @@ export class UserEditDialogComponent {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.clevelKeys = Object.keys(this.clevels).filter(Number);
-    this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
+    this.clevelKeys = Object.keys(this.clevels);
+    this.slevelKeys = Object.keys(this.slevels);
     this.initForm();
   }
 
@@ -86,7 +86,7 @@ export class UserEditDialogComponent {
           ),
         };
         if (
-          this.saveForm.get('role')?.value == 'alumnos' &&
+          this.saveForm.get('role')?.value == 'Alumnos' &&
           this.saveForm.get('level')?.value != null &&
           this.saveForm.get('grade')?.value != null
         ) {
@@ -125,7 +125,7 @@ export class UserEditDialogComponent {
           }
         });
         if (
-          this.saveForm.get('role')?.value == 'alumnos' &&
+          this.saveForm.get('role')?.value == 'Alumnos' &&
           this.saveForm.get('level')?.value != null &&
           this.saveForm.get('grade')?.value != null
         ) {
@@ -208,7 +208,7 @@ export class UserEditDialogComponent {
     this.dialogRef.close();
   }
   roleChange() {
-    if (this.data.role != 'alumnos') {
+    if (this.data.role != 'Alumnos') {
       this.data.grade = '';
       this.data.level = '';
     } else {

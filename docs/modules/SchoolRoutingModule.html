@@ -75,39 +75,42 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
-import {
-  SchoolDashboardComponent,
-} from &#x27;./components&#x27;;
-import { SchoolComponent, SchoolCoursesComponent } from &#x27;./containers&#x27;;
-import { SchoolCoursesResolver } from &#x27;./resolvers/school-courses.resolver&#x27;;
-import { SchoolUsersResolver } from &#x27;./resolvers/school-users.resolver&#x27;;
-
-
+import { AssignedCoursesResolver } from &#x27;./school-courses/resolvers/assigned-courses.resolver&#x27;;
+import { SchoolComponent } from &#x27;./school.component&#x27;;
+import { SchoolDashboardComponent } from &#x27;./school-dashboard/school-dashboard.component&#x27;;
+import { SchoolUsersResolver } from &#x27;./school-courses/resolvers/school-users.resolver&#x27;;
+import { SchoolCoursesComponent } from &#x27;./school-courses/containers/school-courses/school-courses.component&#x27;;
+import { NotFoundComponent } from &#x27;@rds-shared/components&#x27;;
+import { StudentsCoursesComponent } from &#x27;./school-courses/containers/students-courses/students-courses.component&#x27;;
+import { TeachersResolver } from &#x27;./school-courses/resolvers/teachers.resolver&#x27;;
+import { AccountsResolver } from &#x27;../accounts/resolvers/accounts.resolver&#x27;;
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
     component: SchoolComponent,
-    data: { breadcrumb: null },
     children: [
       {
         path: &#x27;&#x27;,
         component: SchoolDashboardComponent,
-        data: { breadcrumb: &#x27;Dirección&#x27; },
+        data: { breadcrumb: &#x27;Dirección&#x27; }
       },
       {
         path: &#x27;materias&#x27;,
         component: SchoolCoursesComponent,
-        resolve: { schoolUsers: SchoolCoursesResolver },
-        data: { breadcrumb: &#x27;Materias&#x27; },
+        resolve: { courses: AssignedCoursesResolver },
+        data: { breadcrumb: &#x27;Materias&#x27; }
+      },
+      {
+        path: &#x27;**&#x27;,
+        component: NotFoundComponent,
       },
     ],
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SchoolUsersResolver, SchoolCoursesResolver],
+  providers: [AssignedCoursesResolver, SchoolUsersResolver, TeachersResolver, AccountsResolver],
 })
 export class SchoolRoutingModule { }
 </code></pre>

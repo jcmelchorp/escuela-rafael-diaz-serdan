@@ -1,0 +1,43 @@
+<div class="p-2">
+  <div class="d-block" fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-form-field appearance="outline">
+      <mat-label>Nivel</mat-label>
+      <mat-select [(ngModel)]="level" placeholder="Selecciona el nivel escolar" (change)="onLevelelection($event)">
+        <mat-option *ngFor="let ckey of clevelKeys" [value]="clevels[ckey]">
+          {{clevels[ckey]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select [(ngModel)]="grade" placeholder="Selecciona el estado" (change)="onGradeSelection($event)">
+        <mat-option *ngFor="let skey of slevelKeys" [value]="slevels[skey]">
+          {{slevels[skey]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button (click)="onSearch()">Buscar</button>
+  </div>
+  <!--   <div class="d-block">
+    <mat-form-field class="my-n2" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-md="100%" appearance="outline">
+      <mat-label>Busca una clase por nombre</mat-label>
+      <input matInput type="search" class="dc-search" placeholder="Search Course" (keyup)="applyFilter()"
+        [(ngModel)]="fullName" (click)="searching = true" />
+      <button mat-icon-button matSuffix (click)="name = ''; applyFilter(''); searching = !searching"
+        color="accent">
+        <mat-icon *ngIf="!searching">search</mat-icon>
+        <mat-icon *ngIf="searching">clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </div> -->
+</div>
+<mat-accordion *ngIf="loaded$|async" hideToggle>
+  <mat-expansion-panel *ngFor="let user of users$|async" appMaterialElevation [raisedElevation]="raisedElev">
+    <mat-expansion-panel-header>
+      <img class="img-small rounded-circle" src="{{user.thumbnailPhotoUrl}}">
+      <mat-panel-title>{{user.name?.fullName}}</mat-panel-title>
+      <mat-panel-description>{{user.primaryEmail}}</mat-panel-description>
+    </mat-expansion-panel-header>
+    {{user|json}}
+  </mat-expansion-panel>
+</mat-accordion>

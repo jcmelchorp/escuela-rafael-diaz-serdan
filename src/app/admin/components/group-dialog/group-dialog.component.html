@@ -1,0 +1,37 @@
+<div mat-dialog-title fxLayout="row" fxLayoutAlign="space-between top">
+  <h2>{{ data.isNew ? 'Crear' : 'Modificar' }} Grupo</h2>
+  <mat-icon mat-button (click)="onClose()" [mat-dialog-close]>close</mat-icon>
+</div>
+
+<p>ID: {{data.group.id}}</p>
+<div mat-dialog-content>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input type="text" placeholder="Escribe un nombre distintivo" matInput [(ngModel)]="data.group.name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nivel</mat-label>
+    <mat-select [(ngModel)]="data.group.level" placeholder="Selecciona el nivel escolar"
+      (change)="onLevelSelection($event)">
+      <mat-option *ngFor="let key of levelKeys" [value]="levels[key]">
+        {{levels[key]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Grado</mat-label>
+    <input placeholder="Grado" matInput [(ngModel)]="data.group.grade">
+  </mat-form-field>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Priority</mat-label>
+    <input placeholder="priority" matInput [(ngModel)]="data.group.priority" />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    {{ data.isNew ? 'Crear' : 'Modificar' }}
+  </button>
+</div>

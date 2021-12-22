@@ -1,19 +1,18 @@
-@import "./../../../../assets/themes/colors";
+@use "./../../../../assets/themes/colors" as colors;
 #new-user {
   color: white;
-  background-color: $rds-logo-color;
+  background-color: colors.$rds-logo-color;
   position: fixed;
   bottom: 50px;
   top: auto;
   right: 50px;
   left: auto;
 }
-#new-cicle {
-  color: white;
-  background-color: $rds-logo-color;
-  position: fixed;
-  bottom: 120px;
-  top: auto;
-  right: 50px;
-  left: auto;
+.school-background {
+  width: fit-content;
+  height: 150px;
+  max-height: 300px;
+  background: url("/assets/images/rds-draw02.svg") no-repeat;
+  background-position: bottom right;
+  //background-size: cover;
 }

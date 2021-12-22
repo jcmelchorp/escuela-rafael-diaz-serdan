@@ -56,7 +56,7 @@
             <h3>Fichero</h3>
         </p>
         <p class="comment">
-            <code>src/app/classroom/teachers/teachers-routing.module.ts</code>
+            <code>src/app/teachers/teachers-routing.module.ts</code>
         </p>
 
 
@@ -76,14 +76,43 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 
-import { TeachersResolver } from &#x27;./services/teachers.resolver&#x27;;
-import { CourseTeachersComponent } from &#x27;./components/course-teachers/course-teachers.component&#x27;;
+import { TeachersDashboardComponent } from &#x27;./components&#x27;;
+import { TeachersComponent } from &#x27;./containers&#x27;;
 
-const routes: Routes &#x3D; [{ path: &#x27;&#x27;, component: CourseTeachersComponent, resolve: { teachers: TeachersResolver } }];
+import { ScoresEditComponent } from &#x27;./components/scores-edit/scores-edit.component&#x27;;
+import { TeacherCoursesComponent } from &#x27;./components/teacher-courses/teacher-courses.component&#x27;;
+import { TeachersResolver } from &#x27;@rds-school/school-courses/resolvers/teachers.resolver&#x27;;
+import { AssignedCoursesResolver } from &#x27;@rds-school/school-courses/resolvers/assigned-courses.resolver&#x27;;
+
+
+const routes: Routes &#x3D; [
+  {
+    path: &#x27;&#x27;,
+    component: TeachersComponent,
+    children: [
+      { path: &#x27;&#x27;, component: TeachersDashboardComponent },
+      {
+        path: &#x27;calificaciones&#x27;,
+        component: TeacherCoursesComponent,
+        data: {
+          breadcrumb: &#x27;Calificaciones&#x27;,
+        },
+        resolve: { users: AssignedCoursesResolver },
+      },
+      {
+        path: &#x27;:courseId&#x27;,
+        component: ScoresEditComponent,
+        data: { breadcrumb: &#x27;:courseId&#x27; },
+        resolve: { users: TeachersResolver },
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AssignedCoursesResolver, TeachersResolver],
 })
 export class TeachersRoutingModule { }
 </code></pre>

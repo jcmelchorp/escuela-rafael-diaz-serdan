@@ -1,0 +1,78 @@
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="8" [diameter]="64">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>
+<div *ngIf="(user$|async) as user;else spinner" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center"
+  fxLayoutGap="20px">
+  <mat-card fxFlex="0 1 calc(50% - 20px)" fxFlex.lt-md="100%">
+    <mat-card-header mat-title-group>
+      <div class="float-end">
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start end">
+          <div class="badge bg-success"> {{ user.role}} </div>
+          <div class="badge bg-danger" *ngIf="user.isAdmin">Administrador</div>
+        </div>
+      </div>
+      <img matCardAvatar class="img-fluid rounded-circle d-print-none" alt="Usuario conectado"
+        src="{{user.photoUrl?user.photoUrl:user.authPhotoUrl}}" />
+      <mat-card-title *ngIf="user.name">{{ user.name.fullName }}</mat-card-title>
+      <mat-card-subtitle>{{ user.primaryEmail }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-footer align="start">
+      <button mat-button (click)="scroll(target)" class="d-print-none" [routerLink]="['calificaciones']"
+        [queryParams]="{cycle: 'CE20212022'}" routerLinkActive="active">
+        <fa-icon size="lg" [icon]="faAward"></fa-icon>&nbsp;Boleta
+      </button>
+      <button class="d-print-none" *ngIf="user.isTeacher || user.isAdmin" mat-button [routerLink]="['editar']"
+        [queryParams]="{id: user.id}" routerLinkActive="active">
+        <mat-icon>how_to_reg</mat-icon>&nbsp;Actualizar
+      </button>
+      <button class="d-print-none" mat-button (click)="canLogout ? onLogout(user.id) : prepareForLogout()">
+        <fa-icon size="lg" [icon]="faSignOutAlt" *ngIf="!canLogout"></fa-icon>&nbsp;<span *ngIf="!canLogout">Cerrar
+          sesión</span>
+        <span class="text-danger" *ngIf="canLogout">¿Deseas salir?</span>
+      </button>
+      <button *ngIf="canLogout" mat-button (click)="cancel()">Cancelar</button>
+    </mat-card-footer>
+  </mat-card>
+  <mat-card class="d-print-none" fxFlex="0 1 calc(50% - 20px)" fxFlex.lt-md="100%">
+    <mat-card-content>
+      <div *ngIf="user.role==='Alumnos'" fxLayout="row">
+        <div class="col-4">NIEV:&nbsp;</div>
+        <div class="col-6">{{user.niev}}</div>
+      </div>
+      <div *ngIf="user.role==='Profesores'" fxLayout="row">
+        <div class="col-4">RFC:&nbsp;</div>
+        <div class="col-6">{{user.rfc}}</div>
+      </div>
+      <div fxLayout="row">
+        <div class="col-4">CURP:&nbsp;</div>
+        <div class="col-6">{{user.curp}}</div>
+      </div>
+      <div *ngIf="user.role==='Alumnos'" fxLayout="row">
+        <div class="col-4">Nivel:&nbsp;</div>
+        <div class="col-6">{{user.level}}</div>
+      </div>
+      <div *ngIf="user.role==='Alumnos'" fxLayout="row">
+        <div class="col-4">Grado:&nbsp;</div>
+        <div class="col-6">{{user.grade}}</div>
+      </div>
+      <div fxLayout="row">
+        <div class="col-4">Genero:&nbsp;</div>
+        <div class="col-6">{{user.gender|titlecase}}</div>
+      </div>
+      <div fxLayout="row">
+        <div class="col-4">F. de nacimiento:&nbsp;</div>
+        <div class="col-6">{{user.dob|date}}</div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer align="end">
+      <div>Conoce las <a routerLink="/i/privacy-policy">políticas de privacidad </a>de tus datos.</div>
+    </mat-card-footer>
+  </mat-card>
+</div>
+<div class="pt-2" #target>
+  <router-outlet #calificaciones></router-outlet>
+</div>
