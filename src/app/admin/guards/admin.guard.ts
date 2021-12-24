@@ -8,15 +8,13 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { AuthService } from '../../auth/services/auth.service';
+import { isAdmin } from '../../auth/state/auth.selectors';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AdminGuard implements CanActivate {
   constructor(
     private store: Store<AppState>,
     private router: Router,
-    private authFireService: AuthService,
     private toastr: ToastrService,
   ) { }
   canActivate(
@@ -31,7 +29,7 @@ export class AdminGuard implements CanActivate {
             this.router.navigateByUrl('/');
             return of(false);
           }
-          return this.authFireService.checkAdminRole(user.id)
+          return this.store.select(isAdmin)
             .pipe(
               map(isAdmin => {
                 if (isAdmin) {

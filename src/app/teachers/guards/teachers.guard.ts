@@ -11,17 +11,14 @@ import { AppState } from '@rds-store/app.state';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TeachersGuard implements CanActivate {
-  constructor(private store: Store<AppState>, private router: Router) {}
+  constructor(private store: Store<AppState>, private router: Router) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.store.pipe(
-      select(isTeacher),
+    return this.store.select(isTeacher).pipe(
       tap((isTeacher) => {
         if (!isTeacher) {
           this.router.navigateByUrl('/');

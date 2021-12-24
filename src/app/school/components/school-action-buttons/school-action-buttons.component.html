@@ -1,4 +1,4 @@
-<div *ngIf="(classrooms$|async) as classrooms" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+<div *ngIf="classrooms" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
   <button mat-icon-button [matMenuTriggerFor]="newMenu">
     <mat-icon matTooltip="Nuevo grupo o materia">add</mat-icon>
   </button>

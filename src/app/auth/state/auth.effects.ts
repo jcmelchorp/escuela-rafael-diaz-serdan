@@ -1,11 +1,9 @@
-import { UserCredential } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { User } from '@rds-auth/models/user.model';
 import { of, Observable, defer, from } from 'rxjs';
 import { switchMap, map, catchError, take, tap } from 'rxjs/operators';
-import firebase from 'firebase/compat/app'
 import * as authAction from './auth.actions';
 
 import { Action, INIT } from '@ngrx/store';
@@ -47,6 +45,7 @@ export class AuthEffects implements OnInitEffects {
       switchMap(() =>
         this.authService.signInWithPopup().pipe(
           map((res: any) => {
+            console.log(res)
             return {
               id: res.user.providerData[0].uid,
               primaryEmail: res.user.email,

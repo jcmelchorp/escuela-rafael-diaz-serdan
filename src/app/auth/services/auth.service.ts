@@ -7,50 +7,40 @@ import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User, Us
 import { collection, doc, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { firebaseSerialize } from '@rds-shared/models/firebase.model';
+import { isTeacher } from '../state/auth.selectors';
+import { environment } from '@rds-env/environment';
 
 
 @Injectable()
 export class AuthService {
-  user$: Observable<User>;
   private collection: string = 'users';
-  public readonly userDisposable: Subscription | undefined;
-  public readonly user: Observable<User> = EMPTY;
-  showLoginButton = false;
-  showLogoutButton = false;
-  public readonly objectValue$: Observable<any>;
   constructor(
-    /* public readonly afAuth: AngularFireAuth,
-    private afDatabase: AngularFireDatabase,
-    private afStore: AngularFirestore */
-    private readonly database: Database, @Optional() private auth: Auth, public readonly afs: Firestore,
-
-
-  ) {
-
-    const docRef = ref(this.database, this.collection);
-    this.objectValue$ = objectVal(docRef)
-
-  }
+    private readonly database: Database,
+    @Optional() private auth: Auth,
+    public readonly afs: Firestore,
+  ) { }
 
   getUser(id: string): Observable<AuthUser> {
-    /* return this.afDatabase
-      .object<User>(`${this.collection}/${id}`)
-      .valueChanges(); */
-    const docRef = ref(this.database, `${this.collection}/${id}`);
-    return objectVal<AuthUser>(docRef, { keyField: 'id' })
+    if (environment.useEmulators) {
+      const docRef = ref(this.database, `${this.collection}/${id}`);
+      return objectVal<AuthUser>(docRef, { keyField: 'id' });
+    } else {
+      const refCollection = doc(this.afs, this.collection, id);
+      return from(getDoc(refCollection))
+    }
   }
   getAuthUser(): Observable<AuthUser | null> {
     return authState(this.auth).pipe(
       switchMap((user: User) => {
         if (user) {
-          const docRef = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
-          const refCollection = doc(this.afs, this.collection, user.providerData[0].uid);
-          return from(getDoc(refCollection)).pipe(
-            mergeMap(userFs =>
-              objectVal<AuthUser>(docRef).pipe(
-                map(userDb => { return { ...userFs.data() as AuthUser, ...userDb as AuthUser } })
-              )
-            ));
+          if (environment.useEmulators) {
+            const docRef = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
+            return objectVal<AuthUser>(docRef)
+          } else {
+            const refCollection = doc(this.afs, this.collection, user.providerData[0].uid);
+            return from(getDoc(refCollection))
+          }
         } else {
           return of(null)
         }
@@ -92,37 +82,43 @@ export class AuthService {
         .object(`${this.collection}/${id}`)
         .update({ isOnline: status })
     ); */
-    const doc = ref(this.database, `${this.collection}/${id}`);
-    return from(update(doc, { isOnline: status }));
+    if (environment.useEmulators) {
+      const doc = ref(this.database, `${this.collection}/${id}`);
+      return from(update(doc, { isOnline: status }));
+    } else {
+      const afsRef = doc(this.afs, this.collection, id);
+      return from(updateDoc(afsRef, { isOnline: status }));
+    }
   }
 
-  saveUser(user: Partial<AuthUser>) {
+  saveUser(user: AuthUser) {
     const key = user.id;
-    const rtdbRef = ref(this.database, `${this.collection}/${key}`);
-    const afsRef = doc(this.afs, this.collection, key);
-    return from(update(rtdbRef, user)).pipe(
-      mergeMap(_ => from(updateDoc(afsRef, user)))
-    )
-
-
+    if (environment.useEmulators) {
+      const rtdbRef = ref(this.database, `${this.collection}/${key}`);
+      return from(update(rtdbRef, user))
+    } else {
+      const afsRef = doc(this.afs, this.collection, key);
+      return from(updateDoc(afsRef, firebaseSerialize(user)))
+    }
   }
-
   checkAdminRole(id: string): Observable<boolean> {
-    /* return this.afDatabase
-      .object<AuthUser>(`${this.collection}/${id}`)
-      .valueChanges()
-      .pipe(pluck('isAdmin')); */
-    const doc = ref(this.database, `${this.collection}/${id}`);
-    return objectVal(doc).pipe(pluck('isAdmin'));
+    if (environment.useEmulators) {
+      const doc = ref(this.database, `${this.collection}/${id}`);
+      return objectVal(doc).pipe(pluck('isAdmin'));
+    } else {
+      const afsRef = doc(this.afs, this.collection, id);
+      return from(getDoc(afsRef).then(user => user.data().isAdmin));
+    }
   }
 
   checkTeacherRole(id: string): Observable<boolean> {
-    /*  return this.afDatabase
-       .object<AuthUser>(`${this.collection}/${id}`)
-       .valueChanges()
-       .pipe(pluck('isTeacher')); */
-    const doc = ref(this.database, `${this.collection}/${id}`);
-    return objectVal(doc).pipe(pluck('isTeacher'));
+    if (environment.useEmulators) {
+      const doc = ref(this.database, `${this.collection}/${id}`);
+      return objectVal(doc).pipe(pluck('isTeacher'));
+    } else {
+      const afsRef = doc(this.afs, this.collection, id);
+      return from(getDoc(afsRef).then(user => user.data().isTeacher));
+    }
   }
 }
 

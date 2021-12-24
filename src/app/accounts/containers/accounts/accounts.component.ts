@@ -128,7 +128,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   }
   sendToFirestore() {
     const accounts: User[] = [];
-    this.accountsService.getFromRtdb().subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
+    this.subscription = this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) });
     const dialogRef = this.dialog.open(MigrationProgressComponent, {
       width: '500px',
       height: '400px',

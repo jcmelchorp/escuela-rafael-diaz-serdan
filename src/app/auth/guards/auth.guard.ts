@@ -19,15 +19,13 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-    return this.store
-      .pipe(
-        select(isOnline),
-        tap(isOnline => {
-          if (!isOnline) {
-            this.router.navigateByUrl('/');
-          }
-        })
-      )
+    return this.store.select(isOnline).pipe(
+      tap(isOnline => {
+        if (!isOnline) {
+          this.router.navigateByUrl('/');
+        }
+      })
+    );
   }
 
 }

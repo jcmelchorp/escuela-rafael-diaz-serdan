@@ -21,6 +21,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   @Input() classroom: SchoolClassroom;
   classroom$: Observable<SchoolClassroom>;
   classroomId: string;
+  studentEmail: string;
   students: any[];
   studentsEmails: string[];
   coursesIds: string[];
@@ -32,7 +33,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
-    private accountsEntityService: AccountsEntityService,
+    public readonly accountsEntityService: AccountsEntityService,
     private schoolService: SchoolService,
   ) {
 
@@ -73,7 +74,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
     event.container.data.forEach((courseId, i) => this.schoolCoursesEntityService.update({ id: courseId, priority: i + 1 } as SchoolCourse));
   }
   removeStudent(student: User, i: number) {
-    this.schoolService.removeStudentFromClassroom(this.classroom.id, this.studentsEmails[i]);
+    this.schoolService.removeStudentFromClassroom(this.classroom.id, student.primaryEmail);
     this.students.splice(i, 1)
   }
   dropStudents(event: CdkDragDrop<string[]>): void {
@@ -87,7 +88,10 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
 
     this.schoolService.updateStudentsInClassroom(this.classroom.id, event.container.data)
   }
-  assignCoursesToClassroom(classroom: SchoolClassroom) {
-
+  addStudent() {
+    this.schoolService.addStudentEmailToClassroom(this.classroom.id, this.studentEmail);
+    this.studentsEmails.push(this.studentEmail);
+    this.classroom.studentsEmails = this.studentsEmails;
   }
+
 }

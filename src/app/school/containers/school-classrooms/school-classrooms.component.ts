@@ -266,7 +266,8 @@ export class SchoolClassroomsComponent implements OnInit {
 
   }
   notify(classroom: SchoolClassroom) {
-    this.classroom$ = this.classrooms$.pipe(map(classrooms => classrooms.find(c => c.id === classroom.id)),
+    this.classroom$ = this.classrooms$.pipe(
+      map(classrooms => classrooms.find(c => c.id === classroom.id)),
       mergeMap(cl => this.accountsEntityService.entities$.pipe(
         /*  tap(users => {
            if (!users) this.accountsEntityService.getWithQuery({ grade: classroom.grade });
@@ -456,7 +457,7 @@ export class SchoolClassroomsComponent implements OnInit {
     });
   }
 
-  handleCourseDelete(id: string) {
-    this.schoolCoursesEntityService.delete(id);
+  handleClassroomDelete(id: string) {
+    this.schoolClassroomsEntityService.delete(id);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Cycle, SchoolClassroom, SchoolCourse } from '@rds-school/models/school-course.model';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
@@ -21,9 +21,9 @@ import { SchoolService } from '@rds-school/services';
   styleUrls: ['./school-action-buttons.component.scss']
 })
 export class SchoolActionButtonsComponent implements OnInit {
+  @Input() classrooms: SchoolClassroom[];
   courses$: Observable<SchoolCourse[]>;
   coursesCount$: Observable<number>;
-  classrooms$: Observable<SchoolClassroom[]>;
   roles = UserRole;
   cycles = Cycle;
   levels = SchoolLevel;
@@ -40,7 +40,6 @@ export class SchoolActionButtonsComponent implements OnInit {
   ngOnInit(): void {
     this.coursesCount$ = this.schoolCoursesEntityService.count$;
     this.courses$ = this.schoolCoursesEntityService.entities$;
-    this.classrooms$
   }
   poulateCoursesWithStudents(classrooms: SchoolClassroom[]) {
     const dialogRef = this.dialog.open(SelectCycleDialogComponent, {
@@ -50,18 +49,16 @@ export class SchoolActionButtonsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        this.schoolClassroomsEntityService.entities$.pipe(
-          mergeMap(classrooms => classrooms.filter(c => c.cycle === data.cycle).map(
-            classroom =>
-              this.accountsEntityService.entities$.pipe(
-                map(users => {
-                  const students = users.filter(u => u.grade === classroom.grade)
-                  const studentsEmails = students.map(s => s.primaryEmail);
-                  return { ...classroom, studentsEmails: studentsEmails, students: students } as SchoolClassroom;
-                }),
-                mergeMap(classroom => classroom.studentsEmails.map(async email => this.schoolService.addStudentIdToClassroom(classroom.id, email))))
-          )
-          ))
+        this.classrooms.filter(c => c.cycle === data.cycle).map(
+          classroom =>
+            this.accountsEntityService.entities$.pipe(
+              map(users => {
+                const students = users.filter(u => u.grade === classroom.grade)
+                const studentsEmails = students.map(s => s.primaryEmail);
+                return { ...classroom, studentsEmails: studentsEmails, students: students } as SchoolClassroom;
+              }),
+              mergeMap(classroom => classroom.studentsEmails.map(async email => this.schoolService.addStudentEmailToClassroom(classroom.id, email))))
+        )
       } else {
         console.log('Dialog closed without changes')
       }
@@ -135,10 +132,6 @@ export class SchoolActionButtonsComponent implements OnInit {
         console.log('Dialog closed without changes')
       }
     });
-  }
-
-  saveFile() {
-
   }
 
   loadCoursesFile() {

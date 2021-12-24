@@ -32,7 +32,6 @@ export const authReducer = createReducer<AuthenticationState>(
     return {
       ...state,
       user: null,
-      isOnline: false,
     };
   }),
   on(authActions.notAuthenticated, (state, action) => {

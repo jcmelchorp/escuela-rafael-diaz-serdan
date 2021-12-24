@@ -54,12 +54,12 @@ export class MigrationProgressComponent implements OnInit {
   async startCounter() {
     if (this.data.target === 'firestore') {
       this.data.users.forEach(async user => {
-        await this.accountsService.migrationToFirestore(user).then(_ => console.log('User migrated'));
+        await this.accountsService.migrationToFirestore(user);
         this.progress = this.progress + this.interval;
       });
     } else if (this.data.target === 'database') {
       this.data.users.forEach(async user => {
-        await this.accountsService.migrationToDatabase(user).then(_ => console.log('User migrated'));
+        await this.accountsService.migrationToDatabase(user);
         this.progress = this.progress + this.interval;
       });
     } else {

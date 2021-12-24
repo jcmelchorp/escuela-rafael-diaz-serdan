@@ -13,10 +13,10 @@ import { AuthModule } from '@rds-auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AppStoreModule } from '@rds-store/app-store.module';
 import { AlertModule } from 'ngx-bootstrap/alert'
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getApps, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 import { provideDatabase, getDatabase, connectDatabaseEmulator } from '@angular/fire/database';
-import { provideFirestore as provideFirestorms, getFirestore as getFirestorms, connectFirestoreEmulator as connectFirestormsEmulator, enableMultiTabIndexedDbPersistence } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore, connectFirestoreEmulator, enableMultiTabIndexedDbPersistence } from '@angular/fire/firestore';
 let resolvePersistenceEnabled: (enabled: boolean) => void;
 
 export const persistenceEnabled = new Promise<boolean>(resolve => {
@@ -46,27 +46,30 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
       closeButton: true,
     }),
     AlertModule.forRoot(),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirebaseApp(() => initializeApp(environment.firebase, 'escuela-rds')),
     provideAuth(() => {
-      const auth = getAuth();
+      const auth = getAuth(getApps().find(app => app.name === 'escuela-rds'));
       if (environment.useEmulators) {
-        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+        connectAuthEmulator(auth, 'http://localhost:9090', { disableWarnings: false });
       }
       return auth;
     }),
-    provideFirestorms(() => {
-      const firestones = getFirestorms();
+    provideFirestore(() => {
+      const firestore = getFirestore(getApps().find(app => app.name === 'escuela-rds'));
       if (environment.useEmulators) {
-        connectFirestormsEmulator(firestones, 'localhost', 8080);
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
       }
-      enableMultiTabIndexedDbPersistence(firestones).then(
+      enableMultiTabIndexedDbPersistence(firestore).then(
         () => resolvePersistenceEnabled(true),
         () => resolvePersistenceEnabled(false)
       );
-      return firestones;
+      return firestore;
     }),
     provideDatabase(() => {
-      const database = getDatabase();
+      const database = getDatabase(getApps().find(app => app.name === 'escuela-rds'),
+        environment.useEmulators ?
+          'http://localhost:9000/?ns=escuela-rafael-diaz-serdan-default-rtdb' :
+          'https://escuela-rafael-diaz-serdan-default-rtdb.firebaseio.com/');
       if (environment.useEmulators) {
         connectDatabaseEmulator(database, 'localhost', 9000);
       }
@@ -77,3 +80,5 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

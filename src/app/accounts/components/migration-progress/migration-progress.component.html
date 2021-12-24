@@ -3,8 +3,8 @@
   <mat-icon matDialogClose mat-icon-button>close</mat-icon>
 </div>
 <mat-dialog-content>
-  <div>Comenzar la migración?</div>
-  <button mat-button (click)="startCounter()">OK</button>
+  <div>¿Desea comenzar la migración de Usuarios? Este proceso puede tardar varios minutos.</div>
+  <button mat-button (click)="startCounter()">Comenzar</button>
   <mat-progress-bar mode="determinate" [value]="progress" (animationEnd)="progressInLoading()"></mat-progress-bar>
   <div class="progress-bar-container">
     <div class="progress-bar {{color}}" [ngStyle]="{'width': progress + '%'}">

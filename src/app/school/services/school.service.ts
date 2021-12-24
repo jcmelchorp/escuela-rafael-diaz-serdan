@@ -39,8 +39,8 @@ export class SchoolService {
     const refDoc = doc(this.afs, this.tCollection, id);
     return await updateDoc(refDoc, { coursesIds: arrayUnion(courseId) });
   }
-  async addStudentIdToClassroom(id: string, studentEmail: string) {
-    const refDoc = doc(this.afs, this.tCollection, id);
+  async addStudentEmailToClassroom(classroomId: string, studentEmail: string) {
+    const refDoc = doc(this.afs, this.tCollection, classroomId);
     return await updateDoc(refDoc, { studentsEmails: arrayUnion(studentEmail) });
   }
   async updateCoursesInClassroom(classroomId: string, coursesIds) {

@@ -1,27 +1,42 @@
 <div fxLayout="row" fxLayout="stretch center" fxLayoutGap="10px">
-  <mat-list class="drag-and-drop-list" cdkDropList #courseList="cdkDropList" [cdkDropListData]="classroom.coursesIds"
+  <mat-list class="drag-and-drop-list" cdkDropList #courseList="cdkDropList" [cdkDropListData]="coursesIds"
     (cdkDropListDropped)="dropCourses($event)" dense>
     <h3 matSubheader>Materias</h3>
-    <mat-list-item *ngIf="(!classroom.coursesIds||classroom.coursesIds.length<1)" mat-icon-button
+    <mat-list-item *ngIf="(!coursesIds||coursesIds.length<1)" mat-icon-button
       (click)="assignCoursesToClassroom(classroom)">
       <mat-icon>sync alt</mat-icon>
     </mat-list-item>
     <div>Las materias apareceran asignadas en este orden.</div>
     <app-school-course class="drag-and-drop-box" cdkDrag [course]="course" *ngFor="let course of classroom.courses">
+      <mat-icon matListIcon class="text-danger" (click)="removeCourse(course,i)" name="removeCourse">close
+      </mat-icon>
     </app-school-course>
   </mat-list>
-  <mat-list class="drag-and-drop-list" cdkDropList #studentList="cdkDropList"
-    [cdkDropListData]="classroom.studentsEmails" (cdkDropListDropped)="dropStudents($event)" dense>
+  <mat-list class="drag-and-drop-list" cdkDropList #studentList="cdkDropList" [cdkDropListData]="studentsEmails"
+    (cdkDropListDropped)="dropStudents($event)" dense>
     <h3 matSubheader>Alumnos</h3>
-    <mat-list-item *ngIf="(!classroom.studentsEmails||classroom.studentsEmails.length<1)">
+    <mat-list-item *ngIf="(!studentsEmails||studentsEmails.length<1)">
       <mat-icon matListIcon mat-button-icon (click)="lookForStudents(classroom)">search</mat-icon>
       <div matLine>No hay alumnos
         en este grupo
       </div>
     </mat-list-item>
+    <div mat-list-item class="px-2 pt-2 drag-and-drop-box">
+      <mat-form-field appearance="outlined">
+        <mat-label>Agrega un alumno</mat-label>
+        <mat-select [(ngModel)]="studentEmail" placeholder="selecciona un nuevo alumno">
+          <mat-option *ngFor="let student of accountsEntityService.entities$|async" value="{{student.email}}">
+            {{student.name.fullName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button (click)="addStudent()">
+        <mat-icon matListIcon class="text-success">add</mat-icon>
+      </button>
+    </div>
     <app-school-student class="drag-and-drop-box" cdkDrag *ngFor="let student of classroom.students;let i = index"
       [student]="student" [priority]="i+1">
-      <mat-icon matListIcon class="text-danger" (click)="removeStudent(student,i)" name="removeStudent">delete
+      <mat-icon matListIcon class="text-danger" (click)="removeStudent(student,i)" name="removeStudent">close
       </mat-icon>
     </app-school-student>
 
