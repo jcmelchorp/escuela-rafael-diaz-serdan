@@ -8,7 +8,7 @@ import { SchoolService } from '@rds-school/services';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
@@ -20,7 +20,9 @@ import { ActivatedRoute } from '@angular/router';
 export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   @Input() classroom: SchoolClassroom;
   classroom$: Observable<SchoolClassroom>;
+  users$: Observable<User[]>;
   classroomId: string;
+  //classroomSub: Subject<SchoolClassroom> = new Subject();
   studentEmail: string;
   students: any[];
   studentsEmails: string[];
@@ -33,12 +35,14 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
-    public readonly accountsEntityService: AccountsEntityService,
+    private accountsEntityService: AccountsEntityService,
     private schoolService: SchoolService,
   ) {
 
   }
   ngOnInit(): void {
+    //this.classroomSub.next(this.classroom);
+    this.users$ = this.accountsEntityService.entities$;
     this.studentsEmails = [...this.classroom.studentsEmails];
     this.coursesIds = [...this.classroom.coursesIds];
     this.courses = [...this.classroom.courses];
@@ -75,7 +79,9 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   }
   removeStudent(student: User, i: number) {
     this.schoolService.removeStudentFromClassroom(this.classroom.id, student.primaryEmail);
-    this.students.splice(i, 1)
+    this.students.splice(i, 1);
+    this.classroom.students = this.students;
+
   }
   dropStudents(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
@@ -90,8 +96,14 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
   }
   addStudent() {
     this.schoolService.addStudentEmailToClassroom(this.classroom.id, this.studentEmail);
+    this.users$.subscribe(users => {
+      const user = users.find(user => user.primaryEmail === this.studentEmail);
+      this.students.push(user);
+      this.classroom.students = this.students;
+    })
     this.studentsEmails.push(this.studentEmail);
     this.classroom.studentsEmails = this.studentsEmails;
+    //this.classroomSub.next(this.classroom);
   }
 
 }

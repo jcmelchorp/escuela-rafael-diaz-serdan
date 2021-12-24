@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayout="stretch center" fxLayoutGap="10px">
+<div *ngIf="classroom;else spinner" fxLayout="row" fxLayout="stretch center" fxLayoutGap="10px">
   <mat-list class="drag-and-drop-list" cdkDropList #courseList="cdkDropList" [cdkDropListData]="coursesIds"
     (cdkDropListDropped)="dropCourses($event)" dense>
     <h3 matSubheader>Materias</h3>
@@ -25,7 +25,7 @@
       <mat-form-field appearance="outlined">
         <mat-label>Agrega un alumno</mat-label>
         <mat-select [(ngModel)]="studentEmail" placeholder="selecciona un nuevo alumno">
-          <mat-option *ngFor="let student of accountsEntityService.entities$|async" value="{{student.email}}">
+          <mat-option *ngFor="let student of users$|async" value="{{student.primaryEmail}}">
             {{student.name.fullName}}
           </mat-option>
         </mat-select>
