@@ -104,6 +104,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
     this.studentsEmails.push(this.studentEmail);
     this.classroom.studentsEmails = this.studentsEmails;
     //this.classroomSub.next(this.classroom);
+    this.studentEmail = '';
   }
 
 }

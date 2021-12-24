@@ -21,8 +21,8 @@
         en este grupo
       </div>
     </mat-list-item>
-    <div mat-list-item class="px-2 pt-2 drag-and-drop-box">
-      <mat-form-field appearance="outlined">
+    <div mat-list-item class="drag-and-drop-box">
+      <mat-form-field class="px-2 pt-2" appearance="outlined">
         <mat-label>Agrega un alumno</mat-label>
         <mat-select [(ngModel)]="studentEmail" placeholder="selecciona un nuevo alumno">
           <mat-option *ngFor="let student of users$|async" value="{{student.primaryEmail}}">
@@ -30,9 +30,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-icon-button (click)="addStudent()">
-        <mat-icon matListIcon class="text-success">add</mat-icon>
-      </button>
+      <mat-icon mat-icon-button (click)="addStudent()" class="text-success">add</mat-icon>
     </div>
     <app-school-student class="drag-and-drop-box" cdkDrag *ngFor="let student of classroom.students;let i = index"
       [student]="student" [priority]="i+1">
