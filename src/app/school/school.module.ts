@@ -38,10 +38,6 @@ import { SchoolClassroomDetailsComponent } from './components/school-classroom-d
     SchoolCoursesDataService,
     SchoolClassroomsDataService,
     SchoolClassroomsEntityService,
-    SchoolStudentsEntityService,
-    SchoolStudentsDataService,
-    SchoolTeachersEntityService,
-    SchoolTeachersDataService,
     AccountsDataService,
     AccountsEntityService,
     AccountsDomainDataService,
@@ -53,10 +49,10 @@ export class SchoolModule {
     eds: EntityDefinitionService,
     entityServices: EntityServices,
     entityDataService: EntityDataService,
-    schoolStudentsDataService: SchoolStudentsDataService,
+    /* schoolStudentsDataService: SchoolStudentsDataService,
     schoolStudentsEntityService: SchoolStudentsEntityService,
     schoolTeachersDataService: SchoolTeachersDataService,
-    schoolTeachersEntityService: SchoolTeachersEntityService,
+    schoolTeachersEntityService: SchoolTeachersEntityService, */
     schoolCoursesDataService: SchoolCoursesDataService,
     schoolCoursesEntityService: SchoolCoursesEntityService,
     schoolClassroomsDataService: SchoolClassroomsDataService,
@@ -68,16 +64,16 @@ export class SchoolModule {
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
     entityServices.registerEntityCollectionServices([
-      schoolTeachersEntityService, schoolStudentsEntityService, accountsDomainEntityService, accountsEntityService, schoolCoursesEntityService, schoolClassroomsEntityService
+      /* schoolTeachersEntityService, schoolStudentsEntityService, */ accountsDomainEntityService, accountsEntityService, schoolCoursesEntityService, schoolClassroomsEntityService
     ]);
-    entityDataService.registerService(
-      fromSchoolTeachers.entityCollectionName,
-      schoolTeachersDataService
-    );
-    entityDataService.registerService(
-      fromSchoolStudents.entityCollectionName,
-      schoolStudentsDataService
-    );
+    /*  entityDataService.registerService(
+       fromSchoolTeachers.entityCollectionName,
+       schoolTeachersDataService
+     );
+     entityDataService.registerService(
+       fromSchoolStudents.entityCollectionName,
+       schoolStudentsDataService
+     ); */
     entityDataService.registerService(
       fromSchoolCourses.entityCollectionName,
       schoolCoursesDataService

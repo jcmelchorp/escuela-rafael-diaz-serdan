@@ -32,8 +32,8 @@ import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/sch
     SchoolCoursesDataService,
     AccountsDataService,
     AccountsEntityService,
-    SchoolTeachersEntityService,
-    SchoolTeachersDataService,
+    /* SchoolTeachersEntityService,
+    SchoolTeachersDataService, */
   ],
 })
 export class SchoolTeachersModule {
@@ -45,18 +45,18 @@ export class SchoolTeachersModule {
     schoolCoursesDataService: SchoolCoursesDataService,
     accountsEntityService: AccountsEntityService,
     accountsDataService: AccountsDataService,
-    schoolTeachersDataService: SchoolTeachersDataService,
-    schoolTeachersEntityService: SchoolTeachersEntityService,
+    /* schoolTeachersDataService: SchoolTeachersDataService,
+    schoolTeachersEntityService: SchoolTeachersEntityService, */
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
     entityServices.registerEntityCollectionServices([
-      schoolTeachersEntityService,
+      /* schoolTeachersEntityService, */
       schoolCoursesEntityService,
       accountsEntityService
     ]);
     entityDataService.registerService(fromSchoolCourses.entityCollectionName, schoolCoursesDataService);
     entityDataService.registerService(fromAccounts.entityCollectionName, accountsDataService);
-    entityDataService.registerService(fromSchoolTeachers.entityCollectionName, schoolTeachersDataService);
+    /* entityDataService.registerService(fromSchoolTeachers.entityCollectionName, schoolTeachersDataService); */
 
   }
 }
