@@ -22,6 +22,7 @@ import { Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
 import * as pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 import pdfMake from "pdfmake/build/pdfmake";
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-profile-scores',
@@ -46,10 +47,12 @@ export class ProfileScoresComponent implements OnInit {
   userName: string;
   userSub: Subscription;
   today: Date = new Date();
+  dayOfBirth: Date;
   faFilePdf = faFilePdf;
   timeOpenScores: boolean = false;
   constructor(
     private scoresEntityService: ScoresEntityService,
+    private accountsEntityService: AccountsEntityService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private store: Store<AppState>,
@@ -60,7 +63,22 @@ export class ProfileScoresComponent implements OnInit {
     this.loaded$ = this.scoresEntityService.loaded$;
     this.cycleKeys = Object.keys(this.cycles);
     this.isTeacher$ = this.store.select(isTeacher);
-    this.user$ = this.store.select(selectUser).pipe(tap(user => { this.user = user; this.userId = user.id }));
+    this.user$ = this.store.select(selectUser)
+      .pipe(
+        mergeMap(user => this.accountsEntityService.getByKey(user.id)
+          .pipe(
+            map(account => {
+              if (account.dob.toString().includes('/')) {
+                const arr = account.dob.split('/')
+                this.dayOfBirth = new Date(+arr[2], +arr[1] - 1, +arr[0]);
+              } else {
+                this.dayOfBirth = new Date(account.dob)
+              }
+              return account;
+            })
+          )),
+        tap(user => { console.log(user); this.user = user; this.userId = user.id })
+      );
     //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
     this.timeOpenScores = true;
   }
@@ -205,7 +223,7 @@ export class ProfileScoresComponent implements OnInit {
           columns: [
             [
               {
-                text: this.user.name.fullName,
+                text: this.user.displayName,
                 bold: true
               },
               { text: this.user.primaryEmail },
