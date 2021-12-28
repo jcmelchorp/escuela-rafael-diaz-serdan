@@ -6,10 +6,10 @@
   </div>
 </ng-template>
 <div class="card bg-transparent">
-  <div *ngIf="(selectedCicle|async) && (teachers$|async) as teachers" class="card-body">
+  <div *ngIf="(teachers$|async) as teachers" class="card-body">
     <h2 class="card-title" fxLayout="row wrap" fxLayoutAlign="space-between center">
       <div>Calificaciones</div>
-      <div>{{(selectedCicle|async).cicle}}</div>
+      <!--  <div>{{(selectedCicle|async).cicle}}</div> -->
     </h2>
     <form [formGroup]="searchForm" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="2px">
       <mat-form-field fxFlex="1 0 calc(50% - 2px)" appearance="outline">
@@ -21,7 +21,7 @@
         <mat-hint *ngIf="currentTeacher.isAdmin">Como administrador puedes seleccionar los cursos de cualquier
           profesor.
         </mat-hint>
-        <mat-select formControlName="mainTeacherId" placeholder="Selecciona el profesor" (selectionChange)="onSearch()"
+        <mat-select formControlName="teacherEmail" placeholder="Selecciona el profesor" (selectionChange)="onSearch()"
           [attr.disabled]="!currentTeacher.isAdmin">
           <mat-option value="">Todos los profesores</mat-option>
           <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
@@ -40,12 +40,11 @@
     <mat-list role="list" dense>
       <mat-list-item role="listitem" *ngFor="let course of courses" matRipple [routerLink]="['..',course.id]"
         [queryParams]="{grade:course.grade,type:course.courseType  }">
-        <img matListAvatar
-          *ngIf="course.mainTeacher && (course.mainTeacher.photoUrl || course.mainTeacher.thumbnailPhotoUrl)"
-          src="{{course.mainTeacher.photoUrl?course.mainTeacher.photoUrl:course.mainTeacher.thumbnailPhotoUrl}}">>
+        <img matListAvatar *ngIf="course.teacher && (course.teacher.photoUrl || course.teacher.thumbnailPhotoUrl)"
+          src="{{course.teacher.photoUrl?course.teacher.photoUrl:course.teacher.thumbnailPhotoUrl}}">>
         <div *ngIf="course" matLine>{{course.name}}&nbsp;<span class="text-secondary">({{course.grade}})</span>
         </div>
-        <div *ngIf="course" matLine>{{course.mainTeacher.name.fullName}}&nbsp;<span
+        <div *ngIf="course" matLine>{{course.teacher.name.fullName}}&nbsp;<span
             class="badge bg-{{course.courseType=='formativo'?'primary':'warning'}} text-light">{{course.courseType}}</span>
         </div>
         <mat-divider></mat-divider>

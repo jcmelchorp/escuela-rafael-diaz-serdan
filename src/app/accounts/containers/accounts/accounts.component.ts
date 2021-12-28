@@ -55,7 +55,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
       name: new FormControl(),
       suspended: new FormControl(),
     });
-    this.filterValues.valueChanges.subscribe((changes) => {
+    this.subscription = this.filterValues.valueChanges.subscribe((changes) => {
       Object.keys(changes).forEach(
         (key) => changes[key] == null && delete changes[key]
       );
@@ -64,16 +64,17 @@ export class AccountsComponent implements OnInit, OnDestroy {
         : delete changes.name;
       return this.accountsEntityService.setFilter(changes);
     });
-
     this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
+
     this.count$ = this.accountsEntityService.count$;
+    this.loaded$ = this.accountsEntityService.loaded$;
+    this.loading$ = this.accountsEntityService.loading$;
+
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
   ngOnInit(): void {
-    this.loaded$ = this.accountsEntityService.loaded$;
-    this.loading$ = this.accountsEntityService.loading$;
     this.users$ = this.store.select(selectAccounts);
   }
   applyFilterString() {
@@ -101,7 +102,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
         ? ''
         : suspendedForm.toString();
     const filter = JSON.parse(
-      JSON.stringify({ name: { fullName: name }, grade: grade, role: role })
+      JSON.stringify({ name: { fullName: name }, grade: grade, role: this.roles[role], suspended: suspended })
     );
   }
   onCreateUser() {
@@ -128,7 +129,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   }
   sendToFirestore() {
     const accounts: User[] = [];
-    this.subscription = this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) });
+    this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
     const dialogRef = this.dialog.open(MigrationProgressComponent, {
       width: '500px',
       height: '400px',
@@ -137,7 +138,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   }
   sendToRTDB() {
     const accounts: User[] = [];
-    this.subscription = this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) });
+    this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
     const dialogRef = this.dialog.open(MigrationProgressComponent, {
       width: '500px',
       height: '400px',

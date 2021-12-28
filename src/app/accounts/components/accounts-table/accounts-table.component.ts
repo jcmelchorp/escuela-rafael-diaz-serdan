@@ -1,9 +1,9 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from '@rds-shared/components';
 import { ChangeGradeComponent, UserEditDialogComponent } from '..';
 import { AccountsTableDataSource } from './accounts-table-data-source';
@@ -15,12 +15,12 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
   templateUrl: './accounts-table.component.html',
   styleUrls: ['./accounts-table.component.scss'],
 })
-export class AccountsTableComponent implements AfterViewInit {
-  @Input() data!: User[];
+export class AccountsTableComponent implements OnInit, AfterViewInit {
+  @Input() data: User[];
+  @ViewChild(MatTable) table: MatTable<User>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<User>;
-  dataSource: AccountsTableDataSource;
+  dataSource: MatTableDataSource<User> = new MatTableDataSource();
   selection = new SelectionModel<User>(true, []);
   columnsToDisplay = [
     {
@@ -50,15 +50,18 @@ export class AccountsTableComponent implements AfterViewInit {
   constructor(
     private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog
-  ) { }
+  ) {
+
+
+  }
   ngOnInit() {
-    this.dataSource = new AccountsTableDataSource();
     this.dataSource.data = this.data;
   }
+
   ngAfterViewInit(): void {
+    /* this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    this.table.dataSource = this.dataSource; */
   }
   onEditUser(user?: User) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {

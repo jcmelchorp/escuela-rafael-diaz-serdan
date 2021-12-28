@@ -8,12 +8,15 @@
   },
   "emulators": {
     "auth": {
+      "host": "localhost",
       "port": 9090
     },
     "firestore": {
-      "port": 8080
+      "host": "localhost",
+      "port": 8000
     },
     "database": {
+      "host": "localhost",
       "port": 9000
     },
     "ui": {

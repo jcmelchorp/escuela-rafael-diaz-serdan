@@ -9,24 +9,42 @@ import * as authAction from './auth.actions';
 import { Action, INIT } from '@ngrx/store';
 import { AuthService } from '@rds-auth/services';
 import { GapiService } from '../services/gapi.service';
+import { Auth, authState, GoogleAuthProvider, signInWithPopup, User as FireUser } from '@angular/fire/auth';
 @Injectable()
 export class AuthEffects implements OnInitEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private gapiService: GapiService
+    private auth: Auth
   ) { }
   ngrxOnInitEffects(): Action {
-    return { type: authAction.getUser().type };
+    return { type: authAction.getUser.type };
   }
-  /* init$: Observable<any> = defer(() => {
-    return of(authAction.getUser());
-  }); */
+  /*  init$: Observable<any> = defer(() => {
+     return of(authAction.getUser());
+   }); */
   getUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authAction.getUser),
-      switchMap(() =>
-        this.authService.getAuthUser().pipe(
+      switchMap(() => authState(this.auth)
+        .pipe(
+          map((fireUser: FireUser) => {
+            if (fireUser) {
+              return {
+                id: fireUser.providerData[0].uid,
+                primaryEmail: fireUser.email,
+                photoUrl: fireUser.photoURL,
+                authPhotoUrl: fireUser.providerData[0].photoURL,
+                displayName: fireUser.displayName,
+                isVerified: fireUser.emailVerified,
+                creationTime: fireUser.metadata.creationTime,
+                lastLoginTime: fireUser.metadata.lastSignInTime,
+                uid: fireUser.uid,
+              } as User;
+            } else {
+              return null;
+            }
+          }),
           map((user) => {
             if (user) {
               return authAction.signInSuccess({ user });
@@ -43,9 +61,10 @@ export class AuthEffects implements OnInitEffects {
     this.actions$.pipe(
       ofType(authAction.signIn),
       switchMap(() =>
-        this.authService.signInWithPopup().pipe(
+        from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
+          //this.authService.signInWithPopup().pipe(
           map((res: any) => {
-            console.log(res)
+            //console.log(res)
             return {
               id: res.user.providerData[0].uid,
               primaryEmail: res.user.email,
@@ -60,8 +79,9 @@ export class AuthEffects implements OnInitEffects {
           }),
           switchMap((user) => {
             return [
-              authAction.signInSuccess({ user }),
-              authAction.saveUser({ user })
+              authAction.saveUser({ user }),
+              authAction.signInSuccess({ user })
+
             ];
           }),
           catchError((error) => of(authAction.notAuthenticated({ error })))

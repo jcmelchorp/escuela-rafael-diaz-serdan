@@ -1,14 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolTeachersService } from '@rds-school/services/school-tearchers.service';
-
 import { from, Observable } from 'rxjs';
-
-import * as fromTeacher from '.';
+import * as fromAccounts from './../../accounts';
 
 @Injectable()
 export class SchoolTeachersDataService extends DefaultDataService<User> {
@@ -17,16 +14,12 @@ export class SchoolTeachersDataService extends DefaultDataService<User> {
     httpUrlGenerator: HttpUrlGenerator,
     private schoolTeachersService: SchoolTeachersService
   ) {
-    super(fromTeacher.entityCollectionName, http, httpUrlGenerator);
+    super(fromAccounts.entityCollectionName, http, httpUrlGenerator);
   }
 
   getAll(): Observable<User[]> {
     return this.schoolTeachersService.list();
   }
-
-  /* getWithQuery(queryParams: QueryParams): Observable<User[]> {
-    return this.schoolTeachersService.getWithQuery(queryParams);
-  } */
   getWithQuery(queryParams: QueryParams): Observable<User[]> {
     return this.schoolTeachersService.getWithQuery(queryParams);
   }

@@ -21,13 +21,13 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Calificaciones',
         },
-        resolve: { users: SchoolCoursesResolver },
+        resolve: { teachers: SchoolTeachersResolver, users: SchoolCoursesResolver },
       },
       {
         path: ':courseId',
         component: ScoresEditComponent,
         data: { breadcrumb: ':courseId' },
-        resolve: { users: SchoolTeachersResolver },
+        // resolve: { users: SchoolTeachersResolver },
       },
     ],
   },

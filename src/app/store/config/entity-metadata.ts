@@ -47,13 +47,13 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromAccount.entityCollectionName]: {
-    filterFn: (entities: User[], { name, primaryEmail, curp }: Partial<User>) =>
+    filterFn: (entities: User[], { name, role, grade }: Partial<User>) =>
       entities
         .filter((e) =>
           name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true
         )
-        .filter((e) => (primaryEmail ? e.primaryEmail.includes(primaryEmail) : true))
-        .filter((e) => (curp ? e.curp.includes(curp) : true)),
+        .filter((e) => (role ? e.role === role : true))
+        .filter((e) => (grade ? e.grade === grade : true)),
     selectId: (user: User) => user.id,
     entityDispatcherOptions: {
       optimisticAdd: false,
@@ -94,7 +94,7 @@ export const entityMetadata: EntityMetadataMap = {
     },
     selectId: (score: Score) => score.id,
   },
-  [fromSchoolTeachers.entityCollectionName]: {
+  /* [fromSchoolTeachers.entityCollectionName]: {
     filterFn: (entities: User[], { name, primaryEmail, curp }: Partial<User>) =>
       entities
         .filter((e) =>
@@ -124,7 +124,7 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticUpdate: false,
       optimisticSaveEntities: false,
     },
-  },
+  }, */
   [fromCourse.entityCollectionName]: {
     entityDispatcherOptions: {
       optimisticAdd: true,

@@ -10,7 +10,6 @@ import { map, take } from 'rxjs/operators';
 @Injectable()
 export class SchoolService {
   public readonly tCollection: string;
-  public readonly colects: Observable<SchoolClassroom[]>;
   constructor(
     public readonly afs: Firestore,
   ) {

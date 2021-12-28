@@ -26,7 +26,6 @@ export class TeacherCoursesComponent implements OnInit {
   teachers$: Observable<User[]>;
   searchForm!: FormGroup;
   teacherSubscription: Subscription;
-  selectedCicle: Observable<{ id: string, cicle: string }>;
   loading_courses$: Observable<boolean>;
   constructor(
     private fb: FormBuilder,
@@ -66,7 +65,7 @@ export class TeacherCoursesComponent implements OnInit {
       map((courses) => {
         if (!courses) {
           this.schoolCoursesEntityService.getWithQuery({
-            field: 'teacherId',
+            field: 'teacherEmail',
             operation: '==',
             value: teacherEmail,
           });

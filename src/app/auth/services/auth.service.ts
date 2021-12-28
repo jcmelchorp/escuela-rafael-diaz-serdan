@@ -1,9 +1,9 @@
 import { Injectable, Optional } from '@angular/core';
 import { User as AuthUser } from '@rds-auth/models/user.model';
-import { Observable, of, from, Subscription, EMPTY } from 'rxjs';
+import { Observable, of, from, Subscription, EMPTY, Subject } from 'rxjs';
 import { switchMap, map, take, pluck, shareReplay, mergeMap } from 'rxjs/operators';
 import { Database, objectVal, push, ref, update } from '@angular/fire/database';
-import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User, UserCredential } from '@angular/fire/auth';
+import { Auth, authState, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, User, UserCredential } from '@angular/fire/auth';
 import { collection, doc, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -15,38 +15,31 @@ import { environment } from '@rds-env/environment';
 @Injectable()
 export class AuthService {
   private collection: string = 'users';
+  private authenticatedUser: Subject<User>;
   constructor(
     private readonly database: Database,
     @Optional() private auth: Auth,
     public readonly afs: Firestore,
   ) { }
 
-  getUser(id: string): Observable<AuthUser> {
-    if (environment.useEmulators) {
-      const docRef = ref(this.database, `${this.collection}/${id}`);
-      return objectVal<AuthUser>(docRef, { keyField: 'id' });
-    } else {
-      const refCollection = doc(this.afs, this.collection, id);
-      return from(getDoc(refCollection))
-    }
-  }
-  getAuthUser(): Observable<AuthUser | null> {
-    return authState(this.auth).pipe(
-      switchMap((user: User) => {
-        if (user) {
-          if (environment.useEmulators) {
-            const docRef = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
-            return objectVal<AuthUser>(docRef)
-          } else {
-            const refCollection = doc(this.afs, this.collection, user.providerData[0].uid);
-            return from(getDoc(refCollection))
-          }
+
+  /* getAuthUser() {
+    return onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+         if (environment.useAuthEmulator) {
+          const docRef = ref(this.database, `${this.collection}/${user.providerData[0].uid}`);
+          return objectVal<AuthUser>(docRef)
         } else {
-          return of(null)
-        }
+        const refCollection = doc(this.afs, this.collection, user.providerData[0].uid);
+        return from(getDoc(refCollection))
+       }
+      } else {
+        return of(null)
       }
-      ));
-  }
+    }
+    )
+  } */
+
 
   signInWithCredential(
     credentials: firebase.auth.AuthCredential
@@ -54,8 +47,9 @@ export class AuthService {
     return this.signInWithCredential(credentials);
   }
   signInWithPopup() {
+    const auth = getAuth();
     const provider = new firebase.auth.GoogleAuthProvider()
-    return from(signInWithPopup(this.auth, provider));
+    return from(signInWithPopup(auth, provider));
   };
 
   /*  signInWithPopup(): Observable<firebase.auth.UserCredential> {
@@ -82,43 +76,51 @@ export class AuthService {
         .object(`${this.collection}/${id}`)
         .update({ isOnline: status })
     ); */
-    if (environment.useEmulators) {
-      const doc = ref(this.database, `${this.collection}/${id}`);
-      return from(update(doc, { isOnline: status }));
-    } else {
-      const afsRef = doc(this.afs, this.collection, id);
-      return from(updateDoc(afsRef, { isOnline: status }));
-    }
+    /*  if (environment.useAuthEmulator) {
+       const doc = ref(this.database, `${this.collection}/${id}`);
+       return from(update(doc, { isOnline: status }));
+     } else { */
+    const afsRef = doc(this.afs, this.collection, id);
+    return from(updateDoc(afsRef, { isOnline: status }));
+    /*  } */
   }
-
+  getUser(id: string): Observable<AuthUser> {
+    /*  if (environment.useAuthEmulator) {
+       const docRef = ref(this.database, `${this.collection}/${id}`);
+       return objectVal<AuthUser>(docRef, { keyField: 'id' });
+     } else { */
+    const refCollection = doc(this.afs, this.collection, id);
+    return from(getDoc(refCollection))
+    /*  } */
+  }
   saveUser(user: AuthUser) {
     const key = user.id;
-    if (environment.useEmulators) {
-      const rtdbRef = ref(this.database, `${this.collection}/${key}`);
-      return from(update(rtdbRef, user))
-    } else {
-      const afsRef = doc(this.afs, this.collection, key);
-      return from(updateDoc(afsRef, firebaseSerialize(user)))
-    }
+    /*  if (environment.useAuthEmulator) {
+       const rtdbRef = ref(this.database, `${this.collection}/${key}`);
+       return from(update(rtdbRef, user))
+     } else { */
+    const afsRef = doc(this.afs, this.collection, key);
+    return from(updateDoc(afsRef, firebaseSerialize(user)))
+    /* } */
   }
   checkAdminRole(id: string): Observable<boolean> {
-    if (environment.useEmulators) {
-      const doc = ref(this.database, `${this.collection}/${id}`);
-      return objectVal(doc).pipe(pluck('isAdmin'));
-    } else {
-      const afsRef = doc(this.afs, this.collection, id);
-      return from(getDoc(afsRef).then(user => user.data().isAdmin));
-    }
+    /*  if (environment.useAuthEmulator) {
+       const doc = ref(this.database, `${this.collection}/${id}`);
+       return objectVal(doc).pipe(pluck('isAdmin'));
+     } else { */
+    const afsRef = doc(this.afs, this.collection, id);
+    return from(getDoc(afsRef).then(user => user.data().isAdmin));
+    /* } */
   }
 
   checkTeacherRole(id: string): Observable<boolean> {
-    if (environment.useEmulators) {
-      const doc = ref(this.database, `${this.collection}/${id}`);
-      return objectVal(doc).pipe(pluck('isTeacher'));
-    } else {
-      const afsRef = doc(this.afs, this.collection, id);
-      return from(getDoc(afsRef).then(user => user.data().isTeacher));
-    }
+    /*  if (environment.useAuthEmulator) {
+       const doc = ref(this.database, `${this.collection}/${id}`);
+       return objectVal(doc).pipe(pluck('isTeacher'));
+     } else { */
+    const afsRef = doc(this.afs, this.collection, id);
+    return from(getDoc(afsRef).then(user => user.data().isTeacher));
+    /* } */
   }
 }
 

@@ -16,9 +16,9 @@ export class AccountsTableDataSource extends DataSource<User> {
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor() {
+  constructor(input: User[]) {
     super();
-    //this.data = input;
+    this.data = input;
   }
 
   /**

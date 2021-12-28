@@ -16,11 +16,11 @@ export class SnackEffects {
   welcomeBack$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(fromAuthActions.signInSuccess),
+        ofType(fromAuthActions.saveUser),
         tap((payload) =>
           setTimeout(() => {
             this.snackService.justMessage(
-              `Bienvenido, ${payload.user.name.givenName}`);
+              `Bienvenido, ${payload.user.displayName}`);
           }, 2000)
         )
       ),

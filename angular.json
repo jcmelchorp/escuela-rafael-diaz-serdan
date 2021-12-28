@@ -27,6 +27,7 @@
               "chartjs-plugin-annotation",
               "chartjs-plugin-datalabels",
               "chart.js",
+              "pdfmake",
               "xlsx"
             ],
             "outputPath": "dist/escuela-rafael-diaz-serdan",

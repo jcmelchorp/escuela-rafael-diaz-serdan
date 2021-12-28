@@ -8,7 +8,7 @@
 <div class="p-4">
   <p class="view-title">Usuarios</p>
   <p class="view-subtitle">Cuentas de usuarios.</p>
-  <div *ngIf="(loaded$|async)&&(filteredEntities$|async) as filteredEntities;else spinner" class="card bg-transparent">
+  <div *ngIf="(filteredEntities$|async) as filteredEntities;else spinner" class="card bg-transparent">
     <div *ngIf="(count$|async) as count" class="card-body">
       <button class="float-end" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
@@ -35,8 +35,8 @@
           <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
             <mat-label>Grado escolar</mat-label>
             <mat-select formControlName="grade" placeholder="Selecciona un grado">
-              <mat-option *ngFor="let key of gradeKeys" [value]="key">
-                {{key}}
+              <mat-option *ngFor="let key of gradeKeys" [value]="grades[key]">
+                {{grades[key]}}
               </mat-option>
             </mat-select>
             <button mat-icon-button matSuffix (click)="filterValues.controls.grade.reset();$event.stopPropagation()">
@@ -46,7 +46,7 @@
           <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
             <mat-label>Rol de usuario</mat-label>
             <mat-select formControlName="role" placeholder="Selecciona un rol">
-              <mat-option *ngFor="let key of roleKeys" [value]="key">
+              <mat-option *ngFor="let key of roleKeys" [value]="key|titlecase">
                 {{key|titlecase}}
               </mat-option>
             </mat-select>
