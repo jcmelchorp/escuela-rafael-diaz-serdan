@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +18,10 @@ import { provideAuth, getAuth, initializeAuth, indexedDBLocalPersistence, browse
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore, enableMultiTabIndexedDbPersistence, initializeFirestore } from '@angular/fire/firestore';
 import { connectAuthEmulatorInDevMode, connectDatabaseEmulatorInDevMode, connectFirestoreEmulatorInDevMode } from '@rds-env/emulators';
+import localeEs from "@angular/common/locales/es";
+import { registerLocaleData } from "@angular/common";
 let resolvePersistenceEnabled: (enabled: boolean) => void;
-
+registerLocaleData(localeEs, "es");
 export const persistenceEnabled = new Promise<boolean>(resolve => {
   resolvePersistenceEnabled = resolve;
 });
@@ -80,7 +82,7 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
       return database;
     })
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: "es" }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

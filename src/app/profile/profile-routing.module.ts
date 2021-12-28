@@ -6,6 +6,8 @@ import { ProfileComponent } from './containers/profile/profile.component';
 import { ProfileScoresComponent } from './components/profile-scores/profile-scores.component';
 import { ScoresResolver } from './resolvers/scores.resolver';
 import { UserDetailsComponent } from '@rds-accounts/components/user-details/user-details.component';
+import { AccountResolver } from '@rds-accounts/resolvers/account.resolver';
+import { UserResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
   {
@@ -15,6 +17,7 @@ const routes: Routes = [
       {
         path: '',
         component: ProfileMenuComponent,
+        resolve: { user: UserResolver },
         children: [
           {
             path: 'calificaciones',
@@ -39,6 +42,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ScoresResolver]
+  providers: [ScoresResolver, UserResolver]
 })
 export class ProfileRoutingModule { }

@@ -17,7 +17,7 @@
       </div>
       <img matCardAvatar class="img-fluid rounded-circle d-print-none" alt="Usuario conectado"
         src="{{user.photoUrl?user.photoUrl:user.authPhotoUrl}}" />
-      <mat-card-title *ngIf="user.name">{{ user.name.fullName }}</mat-card-title>
+      <mat-card-title>{{ user.displayName }}</mat-card-title>
       <mat-card-subtitle>{{ user.primaryEmail }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-footer align="start">
@@ -65,7 +65,7 @@
       </div>
       <div fxLayout="row">
         <div class="col-4">F. de nacimiento:&nbsp;</div>
-        <div class="col-6">{{user.dob|date}}</div>
+        <div class="col-6">{{dayOfBirth|date:'fullDate'}}</div>
       </div>
     </mat-card-content>
     <mat-card-footer align="end">
