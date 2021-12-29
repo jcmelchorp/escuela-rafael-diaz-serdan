@@ -6,6 +6,7 @@ import { ProfileScoresComponent } from "./profile-scores/profile-scores.componen
 import { ProfileScoresRecommendationComponent } from "./profile-scores-recomendations/profile-scores-recommendations.component";
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { FiaAlertComponent } from "./fia-alert/fia-alert.component";
+import { SchoolCalendarComponent } from './school-calendar/school-calendar.component';
 export const PROFILE_COMPONENTS: any[] = [
   FiaAlertComponent,
   ProfileMenuComponent,
@@ -14,6 +15,7 @@ export const PROFILE_COMPONENTS: any[] = [
   ProfileScoresListComponent,
   // ProfileScoresBarChartComponent,
   ProfileScoresRecommendationComponent,
+  SchoolCalendarComponent,
   ProfileInfoComponent
 ];
 export * from "./profile-info/profile-info.component";
@@ -24,3 +26,4 @@ export * from "./profile-scores-list/profile-scores-list.component";
 export * from "./profile-scores-recomendations/profile-scores-recommendations.component";
 export * from "./profile-scores-table/profile-scores-table.component";
 export * from "./fia-alert/fia-alert.component";
+export * from "./school-calendar/school-calendar.component";

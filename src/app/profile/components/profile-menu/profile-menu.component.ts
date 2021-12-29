@@ -9,7 +9,7 @@ import { SubscriptionService } from '@rds-shared/services';
 import { AppState } from '@rds-store/app.state';
 import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
-import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Component({
   selector: 'app-profile-menu',
@@ -30,6 +30,7 @@ export class ProfileMenuComponent implements OnInit {
   faSignOutAlt = faSignOutAlt;
   faUserCheck = faUserCheck;
   faUserTimes = faUserTimes;
+
   canLogout!: boolean;
   dayOfBirth: Date;
   constructor(

@@ -8,6 +8,7 @@ import { ScoresResolver } from './resolvers/scores.resolver';
 import { UserDetailsComponent } from '@rds-accounts/components/user-details/user-details.component';
 import { AccountResolver } from '@rds-accounts/resolvers/account.resolver';
 import { UserResolver } from './resolvers/user.resolver';
+import { SchoolCalendarComponent } from './components/school-calendar/school-calendar.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
             path: 'calificaciones',
             component: ProfileScoresComponent,
             resolve: { scores: ScoresResolver },
+          },
+          {
+            path: 'calendario',
+            component: SchoolCalendarComponent,
+
           },
           {
             path: 'editar',

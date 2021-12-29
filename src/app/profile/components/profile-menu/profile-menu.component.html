@@ -25,6 +25,9 @@
         [queryParams]="{cycle: 'CE20212022'}" routerLinkActive="active">
         <fa-icon size="lg" [icon]="faAward"></fa-icon>&nbsp;Boleta
       </button>
+      <button mat-button class="d-print-none" [routerLink]="['calendario']" routerLinkActive="active">
+        <mat-icon>calendar</mat-icon>&nbsp;Calendario
+      </button>
       <button class="d-print-none" *ngIf="user.isTeacher || user.isAdmin" mat-button [routerLink]="['editar']"
         [queryParams]="{id: user.id}" routerLinkActive="active">
         <mat-icon>how_to_reg</mat-icon>&nbsp;Actualizar
