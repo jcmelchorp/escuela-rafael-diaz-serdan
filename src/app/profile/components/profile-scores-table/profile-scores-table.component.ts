@@ -4,12 +4,6 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { faComments } from '@fortawesome/free-regular-svg-icons';
 import { Score, ScoreListItem } from '../../models/score.model';
 import { ScoreListItemDataSource } from './score-list-item.datasource';
-declare var require: any;
-
-import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
-const htmlToPdfmake = require("html-to-pdfmake");
-(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -26,7 +20,7 @@ const htmlToPdfmake = require("html-to-pdfmake");
 })
 export class ProfileScoresTableComponent implements OnInit {
   @Input() data: Score;
-  copyData: ScoreListItem[];
+  copyData: ScoreListItem[] = [];
   extraData: ScoreListItem[];
   avgData: ScoreListItem;
   faComments = faComments;
@@ -37,8 +31,8 @@ export class ProfileScoresTableComponent implements OnInit {
   expandedElement: any;
 
   ngOnInit() {
-    /*     console.log(this.data.scores)*/
-    this.copyData = [...this.data.scores];
+    console.log(this.data.scores)
+    this.copyData.push(...this.data.scores);
     this.formative = new ScoreListItemDataSource(this.copyData);
     //this.avgData = this.copyData.splice(-1, 1).pop();
     this.extraData = this.copyData.splice(-2, 2);
@@ -66,14 +60,5 @@ export class ProfileScoresTableComponent implements OnInit {
     return [avg1, avg2, avg3, avg4]
   }
 
-  @ViewChild('pdfTable')
-  pdfTable!: ElementRef;
 
-  public downloadAsPDF() {
-    const pdfTable = this.pdfTable.nativeElement;
-    var html = htmlToPdfmake(pdfTable.innerHTML);
-    const documentDefinition = { content: html };
-    pdfMake.createPdf(documentDefinition).download();
-
-  }
 }

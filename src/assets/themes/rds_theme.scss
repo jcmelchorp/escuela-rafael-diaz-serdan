@@ -3,9 +3,9 @@
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 /* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap.scss";
 /* Importing Datepicker SCSS file. */
-@import "~ngx-bootstrap/datepicker/bs-datepicker";
+@import "~ngx-bootstrap/datepicker/bs-datepicker.scss";
 
 // Fonts
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");

@@ -1,29 +1,48 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { User } from '@rds-auth/models/user.model';
 import { isTeacher, selectUser } from '@rds-auth/state/auth.selectors';
 import { SubscriptionService } from '@rds-shared/services';
 import { AppState } from '@rds-store/app.state';
 import { Observable, Subscription } from 'rxjs';
-import { map, tap, switchMap, concatMap, mergeMap, pluck } from 'rxjs/operators';
+import { map, tap, mergeMap } from 'rxjs/operators';
 
 import { Score } from '@rds-profile/models/score.model';
-import { ProfileService } from '../../services/profile.service';
-import { expandFadeInAnimation, fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
+import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
 import { Cycle } from '@rds-school/models/school-course.model';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ScoresEntityService } from '@rds-store/scores/scores-entity.service';
-import { selectUserId } from '../../../auth/state/auth.selectors';
 import { CourseLevel } from '@rds-auth/models/user.enum';
-// Import pdfmake-wrapper and the fonts to use
-import { Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
-import * as pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
-import pdfMake from "pdfmake/build/pdfmake";
-import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "src/assets/pdf/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.fonts = {
+  Roboto: {
+    normal: 'Roboto-Regular.ttf',
+    bold: 'Roboto-Medium.ttf',
+    italics: 'Roboto-Italic.ttf',
+    bolditalics: 'Roboto-MediumItalic.ttf'
+  },
+  Poppins: {
+    normal: 'Poppins-Light.ttf',
+    bold: 'Poppins-Bold.ttf',
+    italics: 'Poppins-LightItalic.ttf',
+    bolditalics: 'Poppins-BoldItalic.ttf'
+  },
+  FredokaOne: {
+    normal: 'FredokaOne-Regular.ttf',
+    bold: 'FredokaOne-Regular.ttf',
+    italics: 'FredokaOne-Regular.ttf',
+    bolditalics: 'FredokaOne-Regular.ttf',
+  },
+}
+//import * as fr from 'src/assets/pdf/FredokaOne.ttf.Base64.encoded';
+import { ScoreListItem } from '../../models/score.model';
+
 @Component({
   selector: 'app-profile-scores',
   templateUrl: './profile-scores.component.html',
@@ -77,7 +96,7 @@ export class ProfileScoresComponent implements OnInit {
               return account;
             })
           )),
-        tap(user => { console.log(user); this.user = user; this.userId = user.id })
+        tap(user => { this.user = user; this.userId = user.id })
       );
     //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
     this.timeOpenScores = true;
@@ -92,7 +111,18 @@ export class ProfileScoresComponent implements OnInit {
     console.log(cycle)
     this.selectedScore = this.scoresEntityService.entities$.pipe(
       map(scores => scores.find(s => s.id === this.userId + cycle)),
-      tap(score => this.score = score)
+      tap(score => {
+        this.score = { ...score };
+        this.score.scores = score.scores.map(scoreCourse => {
+          return {
+            ...scoreCourse,
+            unit1: scoreCourse.unit1 ? (scoreCourse.unit1 === 'Acreditado' ? 'A' : scoreCourse.unit1) : '---',
+            unit2: scoreCourse.unit2 ? (scoreCourse.unit2 === 'Acreditado' ? 'A' : scoreCourse.unit2) : '---',
+            unit3: scoreCourse.unit3 ? (scoreCourse.unit3 === 'Acreditado' ? 'A' : scoreCourse.unit3) : '---',
+            //prom_materia: scoreCourse.prom_materia ? scoreCourse.prom_materia.toString() : '---'
+          } as ScoreListItem
+        });
+      })
     );
   }
   initForm() {
@@ -106,70 +136,34 @@ export class ProfileScoresComponent implements OnInit {
   ngOnDestroy() {
     this.subService.unsubscribeComponent$;
   }
-  /* async generatePdf() {
-    PdfMakeWrapper.setFonts(pdfFonts);
-
-    const pdf = new PdfMakeWrapper();
-    pdf.info({
-      title: 'Calificaciones',
-      author: 'Escuela Rafael Díaz Serdán',
-      subject: 'Boleta de calificaciones de la escuela',
-    });
-    pdf.permissions('123', {
-      printing: 'highResolution',
-      copying: false,
-      modifying: false,
-      annotating: true,
-      fillingForms: true,
-      documentAssembly: true,
-      contentAccessibility: true
-    });
-    content: [
-      {
-        text: 'PROFILE',
-        bold: true,
-        fontSize: 20,
-        alignment: 'center',
-        margin: [0, 0, 0, 20]
-      },
-      {
-        columns: [
-          [{
-            text: 'Firstname : ' + this.user.name.fullName
-          },
-          {
-            text: 'Lastname : ' + this.user.name.givenName
-          },
-          {
-            text: 'Display : ' + this.user.displayName
-          },
-          {
-            text: 'Email : ' + this.user.primaryEmail
-          }]
-        ]
-      }];
-
-    pdf.add(await new Img('assets/images/rds-newlogo-transparent.png').build());
-    pdf.watermark(new Txt('Documento sin validez oficial').color('#0060a0').end);
-    pdf.create().open();
-  } */
   async generatePDF(action) {
     this.selectedScore.pipe(tap(score => this.score = score));
     this.user$.pipe(tap(user => this.user = user));
-    const buildTableBody = (data, columns) => {
+    //pdfFonts.pdfMake.vfs['FredokaOne.ttf'] = fr.fredokaOne;
+    //console.log(pdfFonts)
+
+    //pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+    console.log(pdfMake)
+    const buildTableBody = (data: any[], columns: string[]) => {
       var body = [];
       //body.push(columns);
       data.forEach((row) => {
         var dataRow = [];
         columns.forEach((column) => {
-          dataRow.push(row[column]);
+          if (columns.indexOf(column) === 0) {
+            dataRow.push({ text: row[column], alignment: 'left' });
+          } else if (columns.indexOf(column) === columns.length - 1) {
+            dataRow.push({ text: row[column], fillColor: '#0060a0', fillOpacity: 0.3, alignment: 'center' });
+          } else {
+            dataRow.push({ text: row[column], fillColor: '#0060a0', fillOpacity: 0.05, alignment: 'center' })
+          }
+          //dataRow.push(row[column]);
         });
-
         body.push(dataRow);
       });
-
       return body;
-    }
+    };
     const getBase64ImageFromURL = (url) => {
       return new Promise((resolve, reject) => {
         var img = new Image();
@@ -189,8 +183,15 @@ export class ProfileScoresComponent implements OnInit {
         img.src = url;
       });
     }
-
-    var docDefinition = {
+    const docDefinition = {
+      info: {
+        title: 'Boleta escolar - RDS',
+        author: 'Servicios Escolares',
+        //subject: this.pdfData.subject,
+        //keywords: this.pdfData.keywords,
+        creator: 'Dirección escolar',
+        creationDate: new Date(),
+      },
       header: {
         margin: 40,
         columns: [
@@ -203,19 +204,20 @@ export class ProfileScoresComponent implements OnInit {
           },
 
         ]
-      }, content: [
+      },
+      content: [
         {
           text: 'Escuela Rafael Díaz Serdán',
+          font: 'FredokaOne',
           fontSize: 20,
-          alignment: 'center',
+          bold: false,
           color: '#0060a0',
-          bold: true,
+          alignment: 'center',
         },
 
         {
           text: 'Informe de calificaciones',
-          fontSize: 16,
-          bold: false,
+          fontSize: 14,
           alignment: 'center',
         },
         {
@@ -224,84 +226,102 @@ export class ProfileScoresComponent implements OnInit {
             [
               {
                 text: this.user.displayName,
-                bold: true
+                fontSize: 14,
+                alignment: 'left'
               },
-              { text: this.user.primaryEmail },
-              { text: this.user.grade },
-              { text: this.user.curp, bold: true }
+              {
+                text: this.user.curp,
+                fontSize: 11,
+                alignment: 'left',
+                color: '#40555e',
+              },
+              {
+                text: this.user.primaryEmail,
+                fontSize: 11,
+                alignment: 'left',
+                color: '#40555e',
+              },
             ],
             [
               {
-                text: `Fecha de consulta: ${new Date().toLocaleString()}`,
-                alignment: 'right'
+                text: `Ciclo escolar: ${this.cycles[this.score.cycle]}`,
+                alignment: 'right',
+                fontSize: 11,
               },
               {
-                text: `Ciclo escolar: ${this.cycles[this.score.cycle]}`,
-                alignment: 'right'
+                text: `Grado: ${this.user.grade}`,
+                alignment: 'right',
+                fontSize: 11,
+              },
+              {
+                text: `Fecha de consulta: ${new Date().toLocaleString()}`,
+                alignment: 'right',
+                fontSize: 11,
               }
             ]
           ]
         },
         {
           layout: {
-            hLineWidth: (i, node) => { return (i === 0 || i === -1) ? 1 : 0; },
-            vLineWidth: (i, node) => { return (i === 1 || i === 2 || i === 3 || i === 4) ? 1 : 0; },
-            hLineColor: (i, node) => { return (i === 1 || i === 2 || i === 3 || i === 4) ? '#0060a0' : '#101010'; },
+            hLineWidth: (i, node) => { return i > this.score.scores.length ? 1 : 0; },
+            vLineWidth: (i, node) => { return (i === 0 || i === 1 || i === 2 || i === 3 || i === 4 || i === 5) ? 1 : 0; },
+            hLineColor: (i, node) => { return i > this.score.scores.length ? '#0060a0' : '#ffffff'; },
             vLineColor: (i, node) => { return '#0060a0' },
             paddingBottom: (i, node) => {
               switch (i) {
                 case 0:
-                  return 5;
-                case 1:
-                  return 2;
+                  return 4;
                 default:
-                  return 0;
+                  return 2;
               }
             },
             paddingTop: (i, node) => {
               switch (i) {
                 case 0:
-                  return 0;
-                case 1:
-                  return 2;
+                  return 4;
                 default:
-                  return 10;
+                  return 2;
               }
             }
           },
           table: {
             headerRows: 0,
             widths: ['*', 'auto', 'auto', 'auto', 'auto'],
+            fontSize: 11,
             alignment: 'center',
             body: [
-              ['Materia', 'Unidad 1', 'Unidad 2', 'Unidad 3', 'Final'],
+              [
+                { text: 'Materia', fillColor: '#0060a0', color: 'white', bold: true, fontSize: 10 },
+                { text: '1° trim.', fillColor: '#0060a0', color: 'white', bold: true, fontSize: 10 },
+                { text: '2° trim.', fillColor: '#0060a0', color: 'white', bold: true, fontSize: 10 },
+                { text: '3° trim.', fillColor: '#0060a0', color: 'white', bold: true, fontSize: 10 },
+                { text: 'Final', fillColor: '#0060a0', color: 'white', bold: true, fontSize: 10 },
+              ],
               ...buildTableBody(this.score.scores, ['courseName', 'unit1', 'unit2', 'unit3', 'prom_materia'])
             ]
           },
         },
         {
-          text: 'Retroalimentación',
-          style: 'sectionHeader'
+          text: 'Comentarios de los profesores',
+          margin: [0, 15, 0, 15],
+          fontSize: 12,
         },
         {
           ul: [
-            `Comentarios sobre la Unidad 1: \n ${this.score.scores.filter(score => score.notes1 !== '').map(score => score.notes1).join('\n')}`,
-            `Comentarios sobre la Unidad 2: \n ${this.score.scores.filter(score => score.notes2 !== '').map(score => score.notes2).join('\n')}`,
-            `Comentarios sobre la Unidad 3: \n ${this.score.scores.filter(score => score.notes3 !== '').map(score => score.notes3).join('\n')}`, ,
+            `Unidad 1: \n ${this.score.scores.filter(score => score.notes1 !== '').map(score => score.notes1).join('\n')}`,
+            `Unidad 2: \n ${this.score.scores.filter(score => score.notes2 !== '').map(score => score.notes2).join('\n')}`,
+            `Unidad 3: \n ${this.score.scores.filter(score => score.notes3 !== '').map(score => score.notes3).join('\n')}`, ,
           ],
           fontSize: 10,
         }
       ],
-      styles: {
-        sectionHeader: {
-          bold: true,
-          decoration: 'underline',
-          fontSize: 14,
-          margin: [0, 15, 0, 15]
-        }
+      defaultStyle: {
+        font: 'Poppins',
+        fontSize: 12,
+        bold: false,
+        color: 'black'
       }
     };
-
     if (action === 'download') {
       pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).download(`${this.user.curp.slice(0, 10)}_${this.cycles[this.score.cycle]}.pdf`);
     } else if (action === 'print') {

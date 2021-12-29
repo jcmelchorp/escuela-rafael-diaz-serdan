@@ -45,7 +45,7 @@ export class ProfileScoresBarChartComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.copyData = [...this.data];
+    this.copyData = [...Object.values(this.data)];
     this.avgData = this.copyData.splice(-1, 1).pop();
     this.extraData = this.copyData.splice(-2, 2);
     const nameArray: string[] = this.copyData.map(score => score.courseName);
