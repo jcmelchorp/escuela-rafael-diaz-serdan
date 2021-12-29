@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./school-calendar.component.scss']
 })
 export class SchoolCalendarComponent implements OnInit {
-
+  raisedElev: number = 12;
   constructor() { }
 
   ngOnInit() {

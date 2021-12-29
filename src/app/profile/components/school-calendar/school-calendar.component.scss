@@ -1,3 +1,7 @@
+.mat-card {
+  padding: 0;
+  margin: 0;
+}
 .main,
 .main * {
   display: flex;
@@ -6,6 +10,9 @@
 section {
   flex-direction: column;
   align-self: center;
+}
+.calendar {
+  gap: 1rem;
 }
 .calendar,
 .month {
@@ -184,7 +191,27 @@ h4 {
 h4 {
   font-size: 1em;
   text-transform: uppercase;
-  background: #be955b;
+  background: #0060a0;
   color: #fff;
-  padding: 0.3em 0;
+  padding-top: 0;
+  border-radius: 5px;
+}
+.titulo_blanco {
+  color: white;
+  font-size: 2.2em;
+}
+h1 {
+  justify-content: center;
+  align-self: stretch;
+}
+.texto-leyenda {
+  color: rgb(172, 172, 172);
+  font-size: 0.5em;
+  font-weight: normal;
+}
+.dorado-t {
+  color: #d4c19c;
+}
+.strong {
+  font-weight: bold !important;
 }
