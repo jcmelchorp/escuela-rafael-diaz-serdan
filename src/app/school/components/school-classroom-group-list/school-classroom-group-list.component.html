@@ -58,7 +58,7 @@
     </td>
   </ng-container>
   <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
-  <tr mat-row (click)="showClassroom(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row (click)="showClassroom(row.id)" *matRowDef="let row; columns: displayedColumns;"></tr>
   <tr mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource.data.length>0"></tr>
   <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isTableGroup" (click)="groupHeaderClick(row)">
   </tr>

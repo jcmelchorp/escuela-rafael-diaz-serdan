@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Cycle, SchoolClassroom, SchoolCourse } from '../../models/school-course.model';
 import { MatDialog } from '@angular/material/dialog';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 import { NewAccountComponent, NewAccountConfirmComponent } from '@rds-accounts/components';
@@ -26,6 +26,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class SchoolClassroomsComponent implements OnInit {
   classrooms$: Observable<SchoolClassroom[]>;
+  //classroom$: BehaviorSubject<SchoolClassroom> = new BehaviorSubject(null);
   classroom$: Observable<SchoolClassroom>;
   coursesCount$: Observable<number>;
   filledClassroom: SchoolClassroom;
@@ -35,21 +36,18 @@ export class SchoolClassroomsComponent implements OnInit {
   selClassroom: SchoolClassroom;
   constructor(
     private schoolCoursesEntityService: SchoolCoursesEntityService,
-    private accountsEntityService: AccountsEntityService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolClassroomsService: SchoolClassroomsService,
     private dialog: MatDialog,
-    private route: Router
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     this.coursesCount$ = this.schoolCoursesEntityService.count$;
     this.classrooms$ = this.schoolClassroomsEntityService.entities$;
   }
-  assignCoursesToClassroom() { }
-  deliveryDocument() { }
+  notify(classroomId: string) {
+    this.classroom$ = this.classrooms$.pipe(map(classrooms => classrooms.find(c => c.id === classroomId)));
+  }
   async classroomToPDF(classroom: SchoolClassroom) {
     console.log(classroom);
     const buildTableBody = (data, columns) => {
@@ -256,44 +254,9 @@ export class SchoolClassroomsComponent implements OnInit {
         }
       }
     };
-
-
     pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).open();
-
-
-
-
-
   }
-  notify(classroom: SchoolClassroom) {
-    this.classroom$ = this.classrooms$.pipe(
-      map(classrooms => classrooms.find(c => c.id === classroom.id)),
-      mergeMap(cl => this.accountsEntityService.entities$.pipe(
-        /*  tap(users => {
-           if (!users) this.accountsEntityService.getWithQuery({ grade: classroom.grade });
-         }), */
-        map(users => {
-          return cl.studentsEmails.map(
-            email => users.find(user => user.primaryEmail === email));
-        }),
-        mergeMap(students => this.schoolCoursesEntityService.entities$.pipe(
-          /* tap(schoolCourses => {
-            if (!schoolCourses) this.schoolCoursesEntityService.getWithQuery({ grade: this.levels[classroom.grade] });
-          }), */
-          map(schoolCourses => {
-            const courses = cl.coursesIds.map(
-              courseId => {
-                const course = schoolCourses.find(course => course.id === courseId);
 
-                return course
-              }
-            );
-            return { ...classroom, courses: courses, students: students }
-          })
-        )),
-        tap(classroom => console.log(classroom))
-      )));
-  }
   openSaveUser() {
     const user: User = this.blankUser();
     const dialogRef = this.dialog.open(NewAccountComponent, {
@@ -333,47 +296,34 @@ export class SchoolClassroomsComponent implements OnInit {
     };
     return user;
   }
-  populateCourses() {
-    const dialogRef = this.dialog.open(SelectCycleDialogComponent, {
-      width: 'fit-content',
-      height: 'fit-content',
-      data: { cycle: Cycle }
-    });
-    dialogRef.afterClosed().subscribe((cycle) => {
-      if (cycle) {
-        this.accountsEntityService.entities$.pipe(
-          map(users => users.filter(user => user.role == "Alumnos" && user.suspended === false)),
-          mergeMap(users => this.schoolClassroomsEntityService.entities$.pipe(
-            map(classrooms => classrooms.filter(c => c.cycle == this.cycles[cycle]).map(classroom => {
-              const studentsEmails = users.filter(u => u.grade === classroom.grade).map(u => u.primaryEmail);
-              return { ...classroom, studentsEmails: studentsEmails } as SchoolClassroom;
-            }))
-          )),
-          switchMap(async (classrooms) => classrooms.forEach(classroom => this.schoolClassroomsEntityService.update(classroom)))
-        )
-      }
-    })
-  }
+  /*  populateCourses() {
+     const dialogRef = this.dialog.open(SelectCycleDialogComponent, {
+       width: 'fit-content',
+       height: 'fit-content',
+       data: { cycle: Cycle }
+     });
+     dialogRef.afterClosed().subscribe((cycle) => {
+       if (cycle) {
+         this.accountsEntityService.entities$.pipe(
+           map(users => users.filter(user => user.role == "Alumnos" && user.suspended === false)),
+           mergeMap(users => this.schoolClassroomsEntityService.entities$.pipe(
+             map(classrooms => classrooms.filter(c => c.cycle == this.cycles[cycle]).map(classroom => {
+               const studentsEmails = users.filter(u => u.grade === classroom.grade).map(u => u.primaryEmail);
+               return { ...classroom, studentsEmails: studentsEmails } as SchoolClassroom;
+             }))
+           )),
+           switchMap(async (classrooms) => classrooms.forEach(classroom => this.schoolClassroomsEntityService.update(classroom)))
+         )
+       }
+     })
+   } */
   editCourse(course: SchoolCourse) {
     this.schoolCoursesEntityService.update(course as Partial<SchoolCourse>);
   }
   editClassroom(classroom: SchoolClassroom) {
     return this.schoolClassroomsEntityService.update(classroom as Partial<SchoolClassroom>);
   }
-  // TODO:incluir filtrado por cycle
-  coursesOnLevel(classroom: SchoolClassroom) {
-    const classToEdit: SchoolClassroom = { ...classroom };
-    this.schoolCoursesEntityService.entities$.pipe(
-      map(courses => courses
-        .filter(course => course.grade === classroom.grade)
-        .filter(course => course.cycle === classroom.cycle)
-      ),
-      map(courses => {
-        classToEdit.coursesIds.push(...courses.map(course => course.id));
-        this.editClassroom(classroom)
-      })
-    )
-  }
+
 
   openSchoolCourseDialog(course?: SchoolCourse) {
     const newCourse: Partial<SchoolCourse> = {};
@@ -418,7 +368,7 @@ export class SchoolClassroomsComponent implements OnInit {
   }
 
   openSchoolClassroomDialog(classroom?: SchoolClassroom) {
-    const newClassroom: Partial<SchoolClassroom> = {};
+    const newClassroom: SchoolClassroom = new SchoolClassroom();
     const dialogRef = this.dialog.open(SchoolClassroomDialogComponent, {
       width: 'fit-content',
       minWidth: '400px',

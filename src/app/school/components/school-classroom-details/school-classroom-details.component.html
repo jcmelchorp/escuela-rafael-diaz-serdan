@@ -1,45 +1,59 @@
-<div *ngIf="classroom;else spinner" fxLayout="row" fxLayout="stretch center" fxLayoutGap="10px">
-  <mat-list class="drag-and-drop-list" cdkDropList #courseList="cdkDropList" [cdkDropListData]="coursesIds"
-    (cdkDropListDropped)="dropCourses($event)" dense>
+<div *ngIf="currentClassroom;else spinner" fxLayout="row" fxLayout.lt-md="column" fxLayout="start center"
+  fxLayoutGap="10px">
+  <mat-list fxFlex="1 0 calc(50% - 5px)" class="drag-and-drop-list" cdkDropList #courseList="cdkDropList"
+    [cdkDropListData]="currentClassroom.coursesIds" (cdkDropListDropped)="dropCourses($event)" dense>
     <h3 matSubheader>Materias</h3>
-    <mat-list-item *ngIf="(!coursesIds||coursesIds.length<1)" mat-icon-button
-      (click)="assignCoursesToClassroom(classroom)">
-      <mat-icon>sync alt</mat-icon>
-    </mat-list-item>
-    <div>Las materias apareceran asignadas en este orden.</div>
-    <app-school-course class="drag-and-drop-box" cdkDrag [course]="course" *ngFor="let course of classroom.courses">
-      <mat-icon matListIcon class="text-danger" (click)="removeCourse(course,i)" name="removeCourse">close
-      </mat-icon>
-    </app-school-course>
-  </mat-list>
-  <mat-list class="drag-and-drop-list" cdkDropList #studentList="cdkDropList" [cdkDropListData]="studentsEmails"
-    (cdkDropListDropped)="dropStudents($event)" dense>
-    <h3 matSubheader>Alumnos</h3>
-    <mat-list-item *ngIf="(!studentsEmails||studentsEmails.length<1)">
-      <mat-icon matListIcon mat-button-icon (click)="lookForStudents(classroom)">search</mat-icon>
-      <div matLine>No hay alumnos
-        en este grupo
+    <div *ngIf="(currentClassroom.courses&&currentClassroom.courses.length>0);else noCourseList">
+      <app-school-course class="drag-and-drop-box" cdkDrag [course]="course"
+        *ngFor="let course of currentClassroom.courses">
+        <mat-icon matListIcon class="text-danger" (click)="removeCourse(course,i)" name="removeCourse">close
+        </mat-icon>
+      </app-school-course>
+    </div>
+    <ng-template #noCourseList>
+      <div mat-list-item>
+        <p>No se encontraron materias</p>
+        <button mat-raised-button (click)="lookForCourses(classroom)">
+          <mat-icon matListIcon>search</mat-icon>Buscar
+        </button>
       </div>
-    </mat-list-item>
+    </ng-template>
+  </mat-list>
+  <mat-list fxFlex="1 0 calc(50% - 5px)" class="drag-and-drop-list" cdkDropList #studentList="cdkDropList"
+    [cdkDropListData]="currentClassroom.studentsEmails" (cdkDropListDropped)="dropStudents($event)" dense>
+    <h3 matSubheader>Alumnos</h3>
     <div mat-list-item class="drag-and-drop-box">
       <mat-form-field class="px-2 pt-2" appearance="outlined">
         <mat-label>Agrega un alumno</mat-label>
         <mat-select [(ngModel)]="studentEmail" placeholder="selecciona un nuevo alumno">
-          <mat-option *ngFor="let student of users$|async" value="{{student.primaryEmail}}">
-            {{student.name.fullName}}
+          <mat-option *ngFor="let student of users" value="{{student.primaryEmail}}">
+            <img matListAvatar class="rounded-circle" aria-hidden [src]="student.photoUrl" height="25">&nbsp;
+            <span>{{student.name.familyName}} {{student.name.givenName}}</span>&nbsp;|&nbsp;
+            <small>{{student.role|titlecase}}</small>
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-icon mat-icon-button (click)="addStudent()" class="text-success">add</mat-icon>
     </div>
-    <app-school-student class="drag-and-drop-box" cdkDrag *ngFor="let student of classroom.students;let i = index"
-      [student]="student" [priority]="i+1">
-      <mat-icon matListIcon class="text-danger" (click)="removeStudent(student,i)" name="removeStudent">close
-      </mat-icon>
-    </app-school-student>
-
+    <div *ngIf="(currentClassroom.studentsEmails&&currentClassroom.studentsEmails.length>0);else noStudentList">
+      <app-school-student class="drag-and-drop-box" cdkDrag
+        *ngFor="let student of currentClassroom.students;let i = index" [student]="student" [priority]="i+1">
+        <mat-icon matListIcon class="text-danger" (click)="removeStudent(student,i)" name="removeStudent">close
+        </mat-icon>
+      </app-school-student>
+    </div>
+    <ng-template #noStudentList>
+      <div mat-list-item>
+        <p>No se encontraron alumnos</p>
+        <button mat-raised-button (click)="lookForStudents(classroom)">
+          <mat-icon matListIcon>search</mat-icon>Buscar
+        </button>
+      </div>
+    </ng-template>
   </mat-list>
 </div>
+
+
 <ng-template #spinner>
   <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
     <mat-spinner strokeWidth="5" [diameter]="50">

@@ -4,6 +4,7 @@ import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { Cycle, SchoolClassroom } from '@rds-school/models/school-course.model';
 import { TableGroup } from '@rds-school/models/table-group.model';
 import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
+import { stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-school-classroom-group-list',
@@ -16,7 +17,7 @@ export class SchoolClassroomGroupListComponent implements OnInit {
   @Input() classrooms: SchoolClassroom[];
   @Output() onClassroomEdit: EventEmitter<SchoolClassroom> = new EventEmitter<SchoolClassroom>();
   @Output() onClassroomDelete: EventEmitter<string> = new EventEmitter<string>();
-  @Output() onClassroomShow: EventEmitter<SchoolClassroom> = new EventEmitter<SchoolClassroom>();
+  @Output() onClassroomShow: EventEmitter<string> = new EventEmitter<string>();
   cycles = Cycle;
   cycleKeys: string[];
   levels = SchoolLevel;
@@ -162,8 +163,8 @@ export class SchoolClassroomGroupListComponent implements OnInit {
   editClassroom(classroom?: SchoolClassroom) {
     this.onClassroomEdit.emit(classroom);
   }
-  showClassroom(classroom: SchoolClassroom) {
-    this.onClassroomShow.emit(classroom);
+  showClassroom(classroomId: string) {
+    this.onClassroomShow.emit(classroomId);
   }
 
   deleteClassroom(classroom: SchoolClassroom) {

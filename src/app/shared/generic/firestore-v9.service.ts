@@ -3,7 +3,7 @@ import { Inject } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
 import { QueryParams } from '@ngrx/data';
-import { take, map, switchMap, tap } from 'rxjs/operators';
+import { take, map, mergeMap } from 'rxjs/operators';
 import { collection, collectionData, collectionGroup, deleteDoc, doc, Firestore, getDoc, getDocs, orderBy, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 export class FirestoreV9Service<T> implements IFirebase<T> {
   public readonly tCollection: string;
@@ -45,7 +45,7 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     const refDoc = doc(this.afs, this.tCollection, id);
-    return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(map(x => firebaseSerialize(entity)));
+    return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(mergeMap(x => this.getById(id)));
   }
   getById(id: string): Observable<T> {
     const refCollection = doc(this.afs, this.tCollection, id);

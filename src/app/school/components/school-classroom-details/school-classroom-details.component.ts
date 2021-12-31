@@ -1,110 +1,150 @@
 import { SchoolCourse } from '@rds-school/models/school-course.model';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolClassroom } from '@rds-school/models/school-course.model';
 import { SchoolService } from '@rds-school/services';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
+
 
 @Component({
   selector: 'app-school-classroom-details',
   templateUrl: './school-classroom-details.component.html',
   styleUrls: ['./school-classroom-details.component.scss']
 })
-export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy {
+export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnChanges {
   @Input() classroom: SchoolClassroom;
+  currentClassroom: SchoolClassroom;
   classroom$: Observable<SchoolClassroom>;
-  users$: Observable<User[]>;
+  users: User[];
   classroomId: string;
-  //classroomSub: Subject<SchoolClassroom> = new Subject();
   studentEmail: string;
-  students: any[];
-  studentsEmails: string[];
-  coursesIds: string[];
-  courses: SchoolCourse[];
   students$: Observable<User[]>;
   levels = SchoolLevel;
-  subscription: Subscription
-  @Output() onClassroomEmit = new EventEmitter<SchoolClassroom>();
+  subscription: Subscription;
+  @Output() onClassroomEmit = new EventEmitter<string>();
   constructor(
-    private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private accountsEntityService: AccountsEntityService,
     private schoolService: SchoolService,
   ) {
 
   }
+  ngOnChanges(changes: SimpleChanges) {
+    const courses: SchoolCourse[] = [];
+    const students: User[] = [];
+    const classroomChange: SimpleChange = changes.classroom;
+    if (classroomChange.currentValue) {
+      this.currentClassroom = new SchoolClassroom({
+        id: classroomChange.currentValue.id,
+        grade: classroomChange.currentValue.grade,
+        cycle: classroomChange.currentValue.cycle,
+        priority: classroomChange.currentValue.priority,
+        coursesIds: classroomChange.currentValue.coursesIds,
+        studentsEmails: classroomChange.currentValue.studentsEmails
+      });
+      this.currentClassroom.coursesIds.forEach(courseId => {
+
+        this.schoolCoursesEntityService.setFilter({ id: courseId });
+        this.schoolCoursesEntityService.filteredEntities$.subscribe(course => {
+          courses.push(course.pop());
+          //console.log(course.pop());
+        }).unsubscribe();
+      });
+      this.currentClassroom.addCourses(courses);
+
+      this.currentClassroom.studentsEmails.forEach(studentEmail => {
+        this.accountsEntityService.setFilter({ primaryEmail: studentEmail });
+        this.accountsEntityService.filteredEntities$.subscribe(student => {
+          students.push(student.pop());
+          //console.log(student.pop());
+        }).unsubscribe();
+      });
+      this.currentClassroom.addStudents(students);
+    }
+    console.log(this.currentClassroom)
+  }
   ngOnInit(): void {
-    //this.classroomSub.next(this.classroom);
-    this.users$ = this.accountsEntityService.entities$;
-    this.studentsEmails = [...this.classroom.studentsEmails];
-    this.coursesIds = [...this.classroom.coursesIds];
-    this.courses = [...this.classroom.courses];
-    this.students = [...this.classroom.students]
+    this.accountsEntityService.entities$.subscribe(users => this.users = users);
+  }
+
+  updateStudentList() {
 
   }
   ngOnDestroy(): void {
   }
-  lookForStudents(classroom) {
-    let classWithStudents: Partial<SchoolClassroom> = { id: classroom.id, studentsEmails: [] };
-    this.accountsEntityService.entities$.subscribe(users => {
-      this.students = users.filter(user => user.grade === this.levels[classroom.grade]);
+  lookForCourses(classroom) {
+    const coursesFn: SchoolCourse[] = [];
+    const coursesIdsFn: string[] = [];
+    this.schoolCoursesEntityService.setFilter({ grade: classroom.grade, cycle: classroom.cycle });
+    this.schoolCoursesEntityService.filteredEntities$.subscribe(courses => {
+      coursesFn.push(...courses.sort(
+        (a, b) => (a.priority < b.priority) ? -1 : (a.priority > b.priority) ? 1 : 0
+      ));
+      coursesIdsFn.push(...coursesFn.map(course => course.id));
     }).unsubscribe();
-    this.students.forEach(student => {
-      classWithStudents.studentsEmails.push(student.primaryEmail);
-    });
-    this.schoolClassroomsEntityService.update(classWithStudents);
-    console.log(classWithStudents)
+    this.schoolService.updateCoursesInClassroom(classroom.id, coursesIdsFn).then(
+      () => this.onClassroomEmit.emit(this.currentClassroom.id)
+    );
+  }
+  lookForStudents(classroom) {
+    const studentsFn: User[] = [];
+    const studentsEmailsFn: string[] = [];
+    this.accountsEntityService.setFilter({ grade: this.levels[classroom.grade] });
+    this.accountsEntityService.filteredEntities$.subscribe(students => {
+      studentsFn.push(...students.sort(
+        (a, b) => (a.name.familyName < b.name.familyName) ? -1 : (a.name.familyName > b.name.familyName) ? 1 : 0
+      ));
+      studentsEmailsFn.push(...studentsFn.map(student => student.primaryEmail));
+    }).unsubscribe();
+    this.schoolService.updateStudentsInClassroom(classroom.id, studentsEmailsFn).then(
+      () => this.onClassroomEmit.emit(this.currentClassroom.id)
+    );
   }
 
   dropCourses(event: CdkDragDrop<string[]>) {
+    const coursesIds: string[] = [];
+    coursesIds.push(...event.container.data);
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      moveItemInArray(this.courses, event.previousIndex, event.currentIndex);
-      this.courses = this.courses.map((course, i) => { return { ...course, priority: i + 1 } as SchoolCourse });
-      this.classroom.courses = this.courses;
+      moveItemInArray(coursesIds, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      transferArrayItem(event.previousContainer.data, coursesIds, event.previousIndex, event.currentIndex);
     }
+    this.schoolService.updateCoursesInClassroom(this.currentClassroom.id, coursesIds).then(
+      () => this.onClassroomEmit.emit(this.currentClassroom.id));
+  }
 
-    this.schoolService.updateCoursesInClassroom(this.classroom.id, event.container.data)
-
-    event.container.data.forEach((courseId, i) => this.schoolCoursesEntityService.update({ id: courseId, priority: i + 1 } as SchoolCourse));
+  dropStudents(event: CdkDragDrop<string[]>): void {
+    const studentsEmails: string[] = [];
+    studentsEmails.push(...event.container.data);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(studentsEmails, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, studentsEmails, event.previousIndex, event.currentIndex);
+    }
+    this.schoolService.updateStudentsInClassroom(this.currentClassroom.id, studentsEmails).then(
+      () => this.onClassroomEmit.emit(this.currentClassroom.id));
   }
   removeStudent(student: User, i: number) {
-    this.schoolService.removeStudentFromClassroom(this.classroom.id, student.primaryEmail);
-    this.students.splice(i, 1);
-    this.classroom.students = this.students;
-
+    const studentsEmails: string[] = this.currentClassroom.studentsEmails;
+    studentsEmails.splice(this.currentClassroom.studentsEmails.findIndex(s => s === student.primaryEmail), 1);
+    this.schoolClassroomsEntityService.update({ ...this.currentClassroom, studentsEmails: studentsEmails });
   }
-  dropStudents(event: CdkDragDrop<string[]>): void {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      moveItemInArray(this.students, event.previousIndex, event.currentIndex);
-      this.classroom.students = this.students;
-    } else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-    }
-
-    this.schoolService.updateStudentsInClassroom(this.classroom.id, event.container.data)
+  removeCourse(course: SchoolCourse, i: number) {
+    this.schoolService.removeCourseFromClassroom(this.currentClassroom.id, course.id).then(
+      () => this.onClassroomEmit.emit(this.currentClassroom.id));
   }
   addStudent() {
-    this.schoolService.addStudentEmailToClassroom(this.classroom.id, this.studentEmail);
-    this.users$.subscribe(users => {
-      const user = users.find(user => user.primaryEmail === this.studentEmail);
-      this.students.push(user);
-      this.classroom.students = this.students;
-    })
-    this.studentsEmails.push(this.studentEmail);
-    this.classroom.studentsEmails = this.studentsEmails;
-    //this.classroomSub.next(this.classroom);
-    this.studentEmail = '';
+    this.schoolService.addStudentEmailToClassroom(this.classroom.id, this.studentEmail).then(
+      () => {
+        this.studentEmail = '';
+        this.onClassroomEmit.emit(this.currentClassroom.id)
+      });
   }
-
 }

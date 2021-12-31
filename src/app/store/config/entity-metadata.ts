@@ -44,17 +44,22 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticAdd: false,
       optimisticUpdate: false,
       optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
   },
   [fromAccount.entityCollectionName]: {
-    filterFn: (entities: User[], { name, role, grade }: Partial<User>) =>
+    filterFn: (entities: User[], { primaryEmail, name, role, grade, suspended }: Partial<User>) =>
       entities
         .filter((e) =>
           name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true
         )
+        .filter((e) => (primaryEmail ? e.primaryEmail === primaryEmail : true))
         .filter((e) => (role ? e.role === role : true))
-        .filter((e) => (grade ? e.grade === grade : true)),
+        .filter((e) => (grade ? e.grade === grade : true))
+        .filter((e) => (suspended ? e.suspended === suspended : true)),
     selectId: (user: User) => user.id,
+    sortComparer: (a: User, b: User) => a.name.familyName.localeCompare(b.name.familyName),
     entityDispatcherOptions: {
       optimisticAdd: false,
       optimisticUpdate: false,
@@ -64,11 +69,12 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromSchoolCourses.entityCollectionName]: {
-    filterFn: (entities: SchoolCourse[], { name, grade, description }: Partial<SchoolCourse>) =>
+    filterFn: (entities: SchoolCourse[], { id, name, grade, cycle }: Partial<SchoolCourse>) =>
       entities
+        .filter((e) => (id ? e.id === id : true))
         .filter((e) => (name ? e.name === name : true))
         .filter((e) => (grade ? e.grade === grade : true))
-        .filter((e) => (description ? e.description === description : true)),
+        .filter((e) => (cycle ? e.cycle === cycle : true)),
     selectId: (SchoolCourse: SchoolCourse) => SchoolCourse.id,
     entityDispatcherOptions: {
       optimisticAdd: false,
@@ -83,6 +89,8 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticAdd: false,
       optimisticUpdate: false,
       optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (schoolClassroom: SchoolClassroom) => schoolClassroom.id,
   },
@@ -91,6 +99,8 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticAdd: false,
       optimisticUpdate: false,
       optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (score: Score) => score.id,
   },
@@ -227,4 +237,8 @@ export function propsFilter(entities: User[], pattern: string) {
 }
 export function nameFilter(entities: { name: string }[], search: string) {
   return entities.filter((e) => -1 < e.name.indexOf(search));
+}
+/** Simple sort comparator for example ID/Name columns (for client-side sorting). */
+export function compare(a: string | number, b: string | number, isAsc: boolean): number {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

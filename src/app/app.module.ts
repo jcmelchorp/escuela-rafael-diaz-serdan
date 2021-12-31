@@ -49,7 +49,7 @@ export const persistenceEnabled = new Promise<boolean>(resolve => {
       closeButton: true,
     }),
     AlertModule.forRoot(),
-    provideFirebaseApp(() => initializeApp(environment.firebase, '[DEFAULT]')),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => {
       const auth = initializeAuth(getApp(), {
         persistence: indexedDBLocalPersistence,

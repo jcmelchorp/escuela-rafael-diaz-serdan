@@ -30,16 +30,13 @@ export class SchoolClassroomDialogComponent implements OnInit {
   ngOnInit(): void {
   }
   saveData() {
-    const classroom: SchoolClassroom = {
-      id: this.data.classroom.id,
-      grade: this.formData.controls.grade.value,
-      cycle: this.formData.controls.cycle.value,
-      coursesIds: [],
-      studentsEmails: []
-    };
-    //!this.data.isNew ? course.id = this.data.course.id : null;
+
     this.dialogRef.close({
-      classroom: classroom,
+      classroom: new SchoolClassroom({
+        id: this.data.classroom.id,
+        grade: this.formData.controls.grade.value,
+        cycle: this.formData.controls.cycle.value,
+      }),
       isNew: this.data.isNew,
     });
   }

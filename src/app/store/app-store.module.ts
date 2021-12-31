@@ -21,6 +21,8 @@ import * as fromRoot from './app.state';
         maxAge: 30,
         logOnly: environment.production,
         features: {
+          //pause: false,
+          //lock: true,
           persist: true,
         }
       }),

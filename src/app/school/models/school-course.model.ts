@@ -17,7 +17,7 @@ export interface SchoolCourse {
   studentsEmails?: string[];
 }
 
-export interface SchoolClassroom {
+export interface ISchoolClassroom {
   id: string;
   grade: SchoolLevel;
   cycle: Cycle;
@@ -26,8 +26,35 @@ export interface SchoolClassroom {
   students?: User[];
   coursesIds?: string[];
   courses?: SchoolCourse[];
+  addCourses?(courses: SchoolCourse[]): void
+  addStudents?(students: User[]): void
 }
+export class SchoolClassroom implements ISchoolClassroom {
+  id: string;
+  grade: SchoolLevel;
+  cycle: Cycle;
+  priority?: number;
+  public studentsEmails?: string[];
+  public students?: User[];
+  public coursesIds?: string[];
+  public courses?: SchoolCourse[];
 
+  constructor(inputClassroom?: ISchoolClassroom) {
+    this.id = inputClassroom?.id;
+    this.grade = inputClassroom?.grade;
+    this.cycle = inputClassroom?.cycle;
+    this.studentsEmails = inputClassroom.studentsEmails || [];
+    this.coursesIds = inputClassroom.coursesIds || [];
+    this.students = [];
+    this.courses = [];
+  }
+  addCourses?(courses: SchoolCourse[]) {
+    this.courses.push(...courses);
+  }
+  addStudents?(students: User[]) {
+    this.students.push(...students);
+  }
+}
 
 export enum CourseType {
   FORMATIVO = 'Formativo',
