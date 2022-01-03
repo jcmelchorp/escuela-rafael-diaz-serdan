@@ -15,8 +15,6 @@ import { stagger } from '@angular/animations';
 })
 export class SchoolClassroomGroupListComponent implements OnInit {
   @Input() classrooms: SchoolClassroom[];
-  @Output() onClassroomEdit: EventEmitter<SchoolClassroom> = new EventEmitter<SchoolClassroom>();
-  @Output() onClassroomDelete: EventEmitter<string> = new EventEmitter<string>();
   @Output() onClassroomShow: EventEmitter<string> = new EventEmitter<string>();
   cycles = Cycle;
   cycleKeys: string[];
@@ -39,7 +37,7 @@ export class SchoolClassroomGroupListComponent implements OnInit {
         headerText: 'Grado',
       },
     ];
-    this.displayedColumns = [...this.columnsToDisplay.map((column) => column.propertyName), 'actions'];
+    this.displayedColumns = [...this.columnsToDisplay.map((column) => column.propertyName)];
     this.groupByColumns = ['cycle'];
 
 
@@ -160,14 +158,10 @@ export class SchoolClassroomGroupListComponent implements OnInit {
   isTableGroup(index, item): boolean {
     return item.level;
   }
-  editClassroom(classroom?: SchoolClassroom) {
-    this.onClassroomEdit.emit(classroom);
-  }
+
   showClassroom(classroomId: string) {
     this.onClassroomShow.emit(classroomId);
   }
 
-  deleteClassroom(classroom: SchoolClassroom) {
-    this.onClassroomDelete.emit(classroom.id);
-  }
+
 }

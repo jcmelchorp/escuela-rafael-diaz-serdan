@@ -85,6 +85,13 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromSchoolClassrooms.entityCollectionName]: {
+    sortComparer: (a: SchoolClassroom, b: SchoolClassroom) => a.grade.localeCompare(b.grade),
+    filterFn: (entities: SchoolClassroom[], { id, grade, cycle }: Partial<SchoolClassroom>) =>
+      entities
+        .filter((e) => (id ? e.id === id : true))
+        .filter((e) => (grade ? e.grade === grade : true))
+        .filter((e) => (cycle ? e.cycle === cycle : true)),
+    selectId: (schoolClassroom: SchoolClassroom) => schoolClassroom.id,
     entityDispatcherOptions: {
       optimisticAdd: false,
       optimisticUpdate: false,
@@ -92,7 +99,7 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticDelete: false,
       optimisticUpsert: false,
     },
-    selectId: (schoolClassroom: SchoolClassroom) => schoolClassroom.id,
+
   },
   [fromScores.entityCollectionName]: {
     entityDispatcherOptions: {

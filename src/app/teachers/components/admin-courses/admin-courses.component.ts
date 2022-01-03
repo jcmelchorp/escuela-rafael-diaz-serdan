@@ -16,9 +16,9 @@ import { User } from '@rds-auth/models/user.model';
 import { selectUser } from '@rds-auth/state/auth.selectors';
 import { moveIn } from '@rds-shared/animations/router.animations';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { SchoolCoursesEntityService } from '@rds-store/school/assigned-courses/assigned-courses-entity.service';
 import { SchoolCourse } from '@rds-school/models/school-course.model';
 import { SchoolTeachersService } from '@rds-school/services/school-tearchers.service';
+import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 
 @Component({
   selector: 'app-admin-courses',
@@ -41,7 +41,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   selectedCicle = '20202021';
   constructor(
     private teachersCoursesService: SchoolTeachersService,
-    private SchoolCoursesEntityService: SchoolCoursesEntityService,
+    private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
     private fb: FormBuilder,
     private store: Store<AppState>
@@ -70,7 +70,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     let cycle: string = this.cycle?.value as string;
-    this.courses$ = this.SchoolCoursesEntityService.entities$
+    this.courses$ = this.schoolCoursesEntityService.entities$
     this.searchedCourses$ = this.courses$;
   }
   initSearchForm() {

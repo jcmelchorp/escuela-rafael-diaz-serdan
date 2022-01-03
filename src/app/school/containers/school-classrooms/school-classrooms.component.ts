@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Cycle, SchoolClassroom, SchoolCourse } from '../../models/school-course.model';
 import { MatDialog } from '@angular/material/dialog';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
@@ -25,6 +25,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   animations: [heightReveal],
 })
 export class SchoolClassroomsComponent implements OnInit {
+  @ViewChild('targetScroll', { static: true }) targetScroll: HTMLElement;
   classrooms$: Observable<SchoolClassroom[]>;
   //classroom$: BehaviorSubject<SchoolClassroom> = new BehaviorSubject(null);
   classroom$: Observable<SchoolClassroom>;
@@ -43,10 +44,14 @@ export class SchoolClassroomsComponent implements OnInit {
 
   ngOnInit(): void {
     this.coursesCount$ = this.schoolCoursesEntityService.count$;
-    this.classrooms$ = this.schoolClassroomsEntityService.entities$;
+    this.classrooms$ = this.schoolClassroomsEntityService.filteredEntities$;
   }
+
   notify(classroomId: string) {
     this.classroom$ = this.classrooms$.pipe(map(classrooms => classrooms.find(c => c.id === classroomId)));
+  }
+  setFilter(cycle?: string) {
+    this.schoolClassroomsEntityService.setFilter({ cycle: cycle });
   }
   async classroomToPDF(classroom: SchoolClassroom) {
     console.log(classroom);
@@ -256,7 +261,9 @@ export class SchoolClassroomsComponent implements OnInit {
     };
     pdfMake.createPdf(docDefinition as unknown as TDocumentDefinitions).open();
   }
-
+  deleteClassroom(id: string) {
+    this.schoolClassroomsEntityService.delete(id);
+  }
   openSaveUser() {
     const user: User = this.blankUser();
     const dialogRef = this.dialog.open(NewAccountComponent, {
@@ -296,34 +303,6 @@ export class SchoolClassroomsComponent implements OnInit {
     };
     return user;
   }
-  /*  populateCourses() {
-     const dialogRef = this.dialog.open(SelectCycleDialogComponent, {
-       width: 'fit-content',
-       height: 'fit-content',
-       data: { cycle: Cycle }
-     });
-     dialogRef.afterClosed().subscribe((cycle) => {
-       if (cycle) {
-         this.accountsEntityService.entities$.pipe(
-           map(users => users.filter(user => user.role == "Alumnos" && user.suspended === false)),
-           mergeMap(users => this.schoolClassroomsEntityService.entities$.pipe(
-             map(classrooms => classrooms.filter(c => c.cycle == this.cycles[cycle]).map(classroom => {
-               const studentsEmails = users.filter(u => u.grade === classroom.grade).map(u => u.primaryEmail);
-               return { ...classroom, studentsEmails: studentsEmails } as SchoolClassroom;
-             }))
-           )),
-           switchMap(async (classrooms) => classrooms.forEach(classroom => this.schoolClassroomsEntityService.update(classroom)))
-         )
-       }
-     })
-   } */
-  editCourse(course: SchoolCourse) {
-    this.schoolCoursesEntityService.update(course as Partial<SchoolCourse>);
-  }
-  editClassroom(classroom: SchoolClassroom) {
-    return this.schoolClassroomsEntityService.update(classroom as Partial<SchoolClassroom>);
-  }
-
 
   openSchoolCourseDialog(course?: SchoolCourse) {
     const newCourse: Partial<SchoolCourse> = {};
@@ -343,7 +322,7 @@ export class SchoolClassroomsComponent implements OnInit {
           this.schoolCoursesEntityService.add(result.course).pipe(
             map(course => this.schoolClassroomsService.getWithQuery({ grade: course.grade }).pipe(
               map(classrooms => {
-                console.log(classrooms);
+
                 const classroom = classrooms.find(cl => cl.cycle === course.cycle);
                 //ids.push(...classrooms[0].coursesIds);
                 ids.push(course.id);
@@ -359,7 +338,7 @@ export class SchoolClassroomsComponent implements OnInit {
           )
 
         } else {
-          this.editCourse(result.course);
+          this.schoolCoursesEntityService.update(result.course);
         }
       } else {
         console.log('Dialog closed without changes')
@@ -368,21 +347,21 @@ export class SchoolClassroomsComponent implements OnInit {
   }
 
   openSchoolClassroomDialog(classroom?: SchoolClassroom) {
-    const newClassroom: SchoolClassroom = new SchoolClassroom();
     const dialogRef = this.dialog.open(SchoolClassroomDialogComponent, {
       width: 'fit-content',
       minWidth: '400px',
       height: 'fit-content',
       data: classroom
         ? { classroom: classroom, isNew: false }
-        : { classroom: newClassroom, isNew: true },
+        : { classroom: new SchoolClassroom({ grade: null, cycle: null }), isNew: true },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        console.log(result.classroom);
         if (result.isNew) {
-          this.schoolClassroomsEntityService.add(result.classroom);
+          this.schoolClassroomsEntityService.add({ ...result.classroom });
         } else {
-          this.editClassroom(result.classroom);
+          this.schoolClassroomsEntityService.update({ ...result.classroom });
         }
       } else {
         console.log('Dialog closed without changes')
@@ -407,7 +386,5 @@ export class SchoolClassroomsComponent implements OnInit {
     });
   }
 
-  handleClassroomDelete(id: string) {
-    this.schoolClassroomsEntityService.delete(id);
-  }
+
 }

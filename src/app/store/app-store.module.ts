@@ -18,12 +18,12 @@ import * as fromRoot from './app.state';
     !environment.production
       ? StoreDevtoolsModule.instrument()
       : StoreDevtoolsModule.instrument({
-        maxAge: 30,
+        maxAge: 25,
         logOnly: environment.production,
         features: {
           //pause: false,
           //lock: true,
-          persist: true,
+          //persist: true,
         }
       }),
     EffectsModule.forRoot(registeredEffects),

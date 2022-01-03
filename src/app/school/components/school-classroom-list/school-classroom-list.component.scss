@@ -1,0 +1,12 @@
+@use "./../../../../assets/themes/colors" as colors;
+.selected-classroom,
+.selected-classroom:hover {
+  background-color: colors.$rds-logo-color;
+  color: colors.$concrete-color;
+  font-size: 1.2em;
+}
+.classroom-list {
+  height: fit-content;
+  max-height: 350px;
+  overflow-y: auto;
+}

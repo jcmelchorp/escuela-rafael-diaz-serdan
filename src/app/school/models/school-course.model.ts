@@ -18,7 +18,7 @@ export interface SchoolCourse {
 }
 
 export interface ISchoolClassroom {
-  id: string;
+  id?: string;
   grade: SchoolLevel;
   cycle: Cycle;
   priority?: number;
@@ -30,7 +30,7 @@ export interface ISchoolClassroom {
   addStudents?(students: User[]): void
 }
 export class SchoolClassroom implements ISchoolClassroom {
-  id: string;
+  id?: string;
   grade: SchoolLevel;
   cycle: Cycle;
   priority?: number;
@@ -43,8 +43,8 @@ export class SchoolClassroom implements ISchoolClassroom {
     this.id = inputClassroom?.id;
     this.grade = inputClassroom?.grade;
     this.cycle = inputClassroom?.cycle;
-    this.studentsEmails = inputClassroom.studentsEmails || [];
-    this.coursesIds = inputClassroom.coursesIds || [];
+    this.studentsEmails = [];
+    this.coursesIds = [];
     this.students = [];
     this.courses = [];
   }
@@ -53,6 +53,12 @@ export class SchoolClassroom implements ISchoolClassroom {
   }
   addStudents?(students: User[]) {
     this.students.push(...students);
+  }
+  addCoursesIds?(coursesIds: string[]) {
+    this.coursesIds.push(...coursesIds);
+  }
+  addStudentsEmails?(studentsEmails: string[]) {
+    this.studentsEmails.push(...studentsEmails);
   }
 }
 

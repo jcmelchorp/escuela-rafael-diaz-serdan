@@ -1,35 +1,54 @@
 <div *ngIf="classrooms$|async as classrooms">
-  <app-school-action-buttons [classrooms]="classrooms"></app-school-action-buttons>
-  <div class="p-4">
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="stretch start" fxLayoutGap="10px">
-      <div class="card bg-transparent" fxFlex="0 1 260px" fxFlex.lt-sm="100%">
-        <div class="card-body">
-          <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
-            <div class="view-title-small">Grupos</div>
-          </h3>
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <div fxLayout="column" style="width: fit-content;" class="card bg-transparent">
+      <div class="card-body">
+        <div class="float-end">
+          <button mat-icon-button [matMenuTriggerFor]="newMenu">
+            <mat-icon matTooltip="Nuevo grupo o materia">add</mat-icon>
+          </button>
+          <button mat-icon-button [matMenuTriggerFor]="fileMenu">
+            <mat-icon matTooltip="Cargar archivo de Excel">upload</mat-icon>
+          </button>
         </div>
-        <app-school-classroom-group-list class="classroom-list" [classrooms]="classrooms"
-          (onClassroomEdit)="openSchoolClassroomDialog($event)" (onClassroomDelete)="handleClassroomDelete($event)"
-          (onClassroomShow)="notify($event)">
-        </app-school-classroom-group-list>
+        <h3 style="margin-top: -30px">
+          <div class="view-title-small">Grupos</div>
+        </h3>
+        <!-- <app-school-action-buttons [classrooms]="classrooms" (onNewClassroom)="openSchoolClassroomDialog($event)">
+        </app-school-action-buttons> -->
       </div>
-      <div *ngIf="classroom$|async as classroom" class="card bg-transparent" fxFlex="0 1 calc(75%)" fxFlex.lt-sm="100%">
-        <div class="card-body">
-          <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
-            <div fxLayout="column">
-              <span class="view-title-small">{{levels[classroom.grade]}}</span>
-              <span class="view-subtitle-small">{{cycles[classroom.cycle]}}</span>
-            </div>
-            <button mat-icon-button (click)="classroomToPDF(classroom)">
-              <mat-icon matTooltip="Imprime lista de grupo">print</mat-icon>
+      <app-school-classroom-list [classrooms]="classrooms" (onClassroomShow)="notify($event)"
+        (onCycleChange)="setFilter($event)">
+      </app-school-classroom-list>
+    </div>
+    <div *ngIf="classroom$|async as classroom" class="card bg-transparent" fxFlex>
+      <div class="card-body">
+        <div class="float-end">
+          <button mat-icon-button (click)="classroomToPDF(classroom)">
+            <mat-icon matTooltip="Imprime lista de grupo">print</mat-icon>
+          </button>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openSchoolClassroomDialog(classroom)">
+              <mat-icon color="accent">edit</mat-icon>Modificar
             </button>
-          </h3>
-          <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="notify($event)">
-          </app-school-classroom-details>
-          <!-- <router-outlet name="classroom-outlet"></router-outlet> -->
+            <button mat-menu-item (click)="deleteClassroom(classroom)">
+              <mat-icon color="warn">delete</mat-icon>Eliminar
+            </button>
+          </mat-menu>
         </div>
-
+        <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
+          <div fxLayout="column">
+            <span class="view-title-small">{{levels[classroom.grade]}}</span>
+            <span class="view-subtitle-small">{{cycles[classroom.cycle]}}</span>
+          </div>
+        </h3>
+        <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="notify($event)">
+        </app-school-classroom-details>
+        <!-- <router-outlet name="classroom-outlet"></router-outlet> -->
       </div>
+
     </div>
   </div>
 </div>

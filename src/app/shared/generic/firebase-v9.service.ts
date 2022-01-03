@@ -30,7 +30,7 @@ export class FirebaseV9Service<T> implements IFirebase<T> {
     const queryCol = query(asf_col, orderBy('grade', 'asc'), orderBy('priority', 'asc'));
     this.colects = collectionData(queryCol);
   }
-  add(entity: T): Observable<T> {
+  add(entity: T): Promise<T> {
     let key: string;
     const updates = {};
     const refColl = collection(this.afs, this.tCollection);
@@ -39,7 +39,7 @@ export class FirebaseV9Service<T> implements IFirebase<T> {
     updates[`/${this.tCollection}/` + key] = firebaseSerialize({ ...entity, id: key });
     update(ref(this.rtdb, `/${this.tCollection}/${key}`), firebaseSerialize(entity));
     console.log(refDoc.id)
-    return from(setDoc(refDoc, firebaseSerialize({ ...entity, id: key }))).pipe(map(x => firebaseSerialize({ ...entity, id: key })));
+    return setDoc(refDoc, firebaseSerialize({ ...entity, id: key })).then(x => firebaseSerialize({ ...entity, id: key }));
   }
   update(id: string, entity: Partial<T>): Observable<T> {
     const updates = {};

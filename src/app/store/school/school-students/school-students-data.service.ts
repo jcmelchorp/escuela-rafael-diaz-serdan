@@ -25,11 +25,11 @@ export class SchoolStudentsDataService extends DefaultDataService<User> {
   getByKey(key: string): Observable<User> {
     return this.schoolStudentsService.getById(key);
   }
-  add(course: User): Observable<User> {
-    return this.schoolStudentsService.add(course);
+  add(user: User): Observable<User> {
+    return from(this.schoolStudentsService.add(user));
   }
-  update(course: Update<User>): Observable<User> {
-    return this.schoolStudentsService.update(course.id.toString(), course.changes);
+  update(user: Update<User>): Observable<User> {
+    return this.schoolStudentsService.update(user.id.toString(), user.changes as User);
   }
   delete(key: string): Observable<string> {
     return this.schoolStudentsService.delete(key);

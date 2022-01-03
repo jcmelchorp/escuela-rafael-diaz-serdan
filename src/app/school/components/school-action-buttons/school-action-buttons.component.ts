@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Cycle, SchoolClassroom, SchoolCourse } from '@rds-school/models/school-course.model';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
@@ -22,6 +22,7 @@ import { SchoolService } from '@rds-school/services';
 })
 export class SchoolActionButtonsComponent implements OnInit {
   @Input() classrooms: SchoolClassroom[];
+  @Output() onNewClassroom: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   courses$: Observable<SchoolCourse[]>;
   coursesCount$: Observable<number>;
   roles = UserRole;
@@ -109,30 +110,32 @@ export class SchoolActionButtonsComponent implements OnInit {
       }
     });
   }
-
-  openSchoolClassroomDialog(classroom?: SchoolClassroom) {
-    let coursesInGrade: number;
-    const newClassroom: Partial<SchoolClassroom> = {};
-    const dialogRef = this.dialog.open(SchoolClassroomDialogComponent, {
-      width: 'fit-content',
-      minWidth: '400px',
-      height: 'fit-content',
-      data: classroom
-        ? { classroom: classroom, isNew: false }
-        : { classroom: newClassroom, isNew: true },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        if (result.isNew) {
-          this.schoolClassroomsEntityService.add(result.classroom);
-        } else {
-          this.editCourse(result.classroom);
-        }
-      } else {
-        console.log('Dialog closed without changes')
-      }
-    });
+  addClassroom() {
+    this.onNewClassroom.emit(true);
   }
+  /*  openSchoolClassroomDialog(classroom?: SchoolClassroom) {
+     let coursesInGrade: number;
+     const newClassroom: Partial<SchoolClassroom> = {};
+     const dialogRef = this.dialog.open(SchoolClassroomDialogComponent, {
+       width: 'fit-content',
+       minWidth: '400px',
+       height: 'fit-content',
+       data: classroom
+         ? { classroom: classroom, isNew: false }
+         : { classroom: newClassroom, isNew: true },
+     });
+     dialogRef.afterClosed().subscribe((result) => {
+       if (result) {
+         if (result.isNew) {
+           this.schoolClassroomsEntityService.add(result.classroom as SchoolClassroom);
+         } else {
+           this.editCourse(result.classroom);
+         }
+       } else {
+         console.log('Dialog closed without changes')
+       }
+     });
+   } */
 
   loadCoursesFile() {
     const dialogRef = this.dialog.open(UploadFileDialogComponent, {

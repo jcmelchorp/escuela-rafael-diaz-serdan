@@ -46,29 +46,26 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
         grade: classroomChange.currentValue.grade,
         cycle: classroomChange.currentValue.cycle,
         priority: classroomChange.currentValue.priority,
-        coursesIds: classroomChange.currentValue.coursesIds,
-        studentsEmails: classroomChange.currentValue.studentsEmails
       });
-      this.currentClassroom.coursesIds.forEach(courseId => {
-
+      classroomChange.currentValue.coursesIds.forEach(courseId => {
         this.schoolCoursesEntityService.setFilter({ id: courseId });
         this.schoolCoursesEntityService.filteredEntities$.subscribe(course => {
           courses.push(course.pop());
-          //console.log(course.pop());
         }).unsubscribe();
       });
       this.currentClassroom.addCourses(courses);
+      this.currentClassroom.addCoursesIds(classroomChange.currentValue.coursesIds);
 
-      this.currentClassroom.studentsEmails.forEach(studentEmail => {
+      classroomChange.currentValue.studentsEmails.forEach(studentEmail => {
         this.accountsEntityService.setFilter({ primaryEmail: studentEmail });
         this.accountsEntityService.filteredEntities$.subscribe(student => {
           students.push(student.pop());
-          //console.log(student.pop());
         }).unsubscribe();
       });
       this.currentClassroom.addStudents(students);
+      this.currentClassroom.addStudentsEmails(classroomChange.currentValue.studentsEmails);
     }
-    console.log(this.currentClassroom)
+    //console.log(this.currentClassroom)
   }
   ngOnInit(): void {
     this.accountsEntityService.entities$.subscribe(users => this.users = users);
@@ -89,9 +86,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
       ));
       coursesIdsFn.push(...coursesFn.map(course => course.id));
     }).unsubscribe();
-    this.schoolService.updateCoursesInClassroom(classroom.id, coursesIdsFn).then(
-      () => this.onClassroomEmit.emit(this.currentClassroom.id)
-    );
+    this.schoolClassroomsEntityService.update({ id: classroom.id, coursesIds: coursesIdsFn });
   }
   lookForStudents(classroom) {
     const studentsFn: User[] = [];
@@ -103,9 +98,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
       ));
       studentsEmailsFn.push(...studentsFn.map(student => student.primaryEmail));
     }).unsubscribe();
-    this.schoolService.updateStudentsInClassroom(classroom.id, studentsEmailsFn).then(
-      () => this.onClassroomEmit.emit(this.currentClassroom.id)
-    );
+    this.schoolClassroomsEntityService.update({ id: classroom.id, studentsEmails: studentsEmailsFn });
   }
 
   dropCourses(event: CdkDragDrop<string[]>) {
@@ -116,8 +109,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     } else {
       transferArrayItem(event.previousContainer.data, coursesIds, event.previousIndex, event.currentIndex);
     }
-    this.schoolService.updateCoursesInClassroom(this.currentClassroom.id, coursesIds).then(
-      () => this.onClassroomEmit.emit(this.currentClassroom.id));
+    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, coursesIds: coursesIds });
   }
 
   dropStudents(event: CdkDragDrop<string[]>): void {
@@ -128,8 +120,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     } else {
       transferArrayItem(event.previousContainer.data, studentsEmails, event.previousIndex, event.currentIndex);
     }
-    this.schoolService.updateStudentsInClassroom(this.currentClassroom.id, studentsEmails).then(
-      () => this.onClassroomEmit.emit(this.currentClassroom.id));
+    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, studentsEmails });
   }
   removeStudent(student: User, i: number) {
     const studentsEmails: string[] = this.currentClassroom.studentsEmails;

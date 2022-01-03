@@ -38,10 +38,10 @@ export class AccountsDataService extends DefaultDataService<User> {
     return this.accountsService.getById(userId);
   }
   add(user: Partial<User>): Observable<User> {
-    return this.accountsService.add(user as User);
+    return from(this.accountsService.add(user as User));
   }
   update(update: Update<User>): Observable<User> {
-    return this.accountsService.update(update.id.toString(), update.changes);
+    return this.accountsService.update(update.id.toString(), update.changes as User);
   }
   delete(userId: string): Observable<string> {
     return from(this.accountsService.delete(userId));

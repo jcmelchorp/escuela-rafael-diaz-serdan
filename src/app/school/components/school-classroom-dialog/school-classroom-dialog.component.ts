@@ -18,19 +18,18 @@ export class SchoolClassroomDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<SchoolClassroomDialogComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.cycleKeys = Object.keys(this.cycles);
     this.slevelKeys = Object.keys(this.slevels);
     this.formData = this.fb.group({
-      grade: new FormControl(this.data.classroom.grade),
-      cycle: new FormControl(this.data.classroom.cycle),
+      grade: new FormControl(this.data.classroom.grade, Validators.required),
+      cycle: new FormControl(this.data.classroom.cycle, Validators.required),
     });
-  }
-
-  ngOnInit(): void {
+    //console.log(this.data)
   }
   saveData() {
-
     this.dialogRef.close({
       classroom: new SchoolClassroom({
         id: this.data.classroom.id,

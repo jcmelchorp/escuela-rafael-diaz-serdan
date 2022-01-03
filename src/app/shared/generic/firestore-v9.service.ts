@@ -1,63 +1,58 @@
 import { Inject } from '@angular/core';
-
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { firebaseSerialize, IFirebase } from '@rds-shared/models/firebase.model';
 import { QueryParams } from '@ngrx/data';
 import { take, map, mergeMap } from 'rxjs/operators';
-import { collection, collectionData, collectionGroup, deleteDoc, doc, Firestore, getDoc, getDocs, orderBy, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { DocumentData, CollectionReference, collection, collectionData, deleteDoc, doc, Firestore, getDoc, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+
 export class FirestoreV9Service<T> implements IFirebase<T> {
   public readonly tCollection: string;
-  public readonly colects: Observable<T[]>;
+  public colRef: CollectionReference;
   constructor(
     @Inject('DEFAULT_COLLECTION_NAME') public collectionName: string,
-    public readonly afs: Firestore,
+    public afs: Firestore,
   ) {
-
-    this.tCollection = collectionName;
-    if (!this.tCollection) {
+    if (!collectionName) {
       throw new Error('Firestore called with no collection name');
+    } else {
+
     }
-    /*   const asf_col = collection(this.afs, this.tCollection).withConverter({
-        fromFirestore: snapshot => {
-          const { ...T } = snapshot.data();
-          const { id } = snapshot;
-          const { hasPendingWrites } = snapshot.metadata;
-          return { id, ...T, hasPendingWrites };
-        },
-        // TODO unused can we make implicit?
-        toFirestore: (it: any) => it,
-      });
-      const queryCol = query(asf_col, orderBy('grade', 'asc'), orderBy('priority', 'asc'));
-      this.colects = collectionData(queryCol); */
-    // this.fsCollection = this.afs.collection<T>(this.collection);
+    this.tCollection = collectionName;
+    this.colRef = collection(this.afs, this.collectionName);
   }
-  add(entity: T, id?: string,): Observable<T> {
+  add(entity: T, id?: string): Promise<T> {
+    let result: T;
     const refColl = collection(this.afs, this.tCollection);
     if (id) {
-      const refDoc = doc(refColl, id)
-      return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(take(1), map(_ => firebaseSerialize(entity)));
+      console.log('Entity with Id: ' + id + ' added');
+      const refDoc = doc(refColl, id);
+      return setDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))
+        .then(() => { return { ...entity, id: refDoc.id } as T });
     } else {
-      const refDoc = doc(refColl)
-      return from(setDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))).pipe(take(1), map(_ => firebaseSerialize({ ...entity, id: refDoc.id })));
+      console.log('Entity with no Id');
+      const refDoc = doc(refColl);
+      return setDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))
+        .then(() => { return { ...entity, id: refDoc.id } as T });
     }
-
-
   }
-  update(id: string, entity: Partial<T>): Observable<T> {
+
+
+
+  update(id: string, entity: T): Observable<T> {
     const refDoc = doc(this.afs, this.tCollection, id);
-    return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(mergeMap(x => this.getById(id)));
+    return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(map(_ => entity));
   }
   getById(id: string): Observable<T> {
-    const refCollection = doc(this.afs, this.tCollection, id);
-    return from(getDoc(refCollection)).pipe(map(x => x.data() as T));
+    const refDoc = doc(this.afs, this.tCollection, id);
+    return from(getDoc(refDoc)).pipe(map(x => x.data() as T));
   }
   delete(id: string): Observable<string> {
-    const refCollection = doc(this.afs, `${this.tCollection}/${id}`);
-    return from(deleteDoc(refCollection)).pipe(take(1), map(_ => id));
+    const refDoc = doc(this.afs, this.tCollection, id);
+    return from(deleteDoc(refDoc)).pipe(map(_ => id));
   }
   list(): Observable<T[]> {
     const refCollection = collection(this.afs, this.tCollection);
-    return collectionData(refCollection).pipe(take(1), map(x => x as T[]));
+    return collectionData(refCollection, { idField: 'id' }).pipe(take(1), map(x => x as T[]));
     /* const tCollection = collection(thisrefCollection.afs, this.collection);
     return from(collectionData(tCollection)).pipe(tap(x => console.log(x as T[])), map(x => x.map(data => data.data as T))); */
     /*     return this.fsCollection.valueChanges({ idField: 'id' });
@@ -100,4 +95,5 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
      )).valueChanges(); */
 
 }
+
 

@@ -8,8 +8,8 @@ export interface Entity {
   id?: string; // Optional for new Entities
 }
 export interface IFirebase<T> {
-  add(entity: T, id?: string): Observable<T>;
-  update(id: string, entity: Partial<T>): Observable<T>;
+  add(entity: T, id?: string): Promise<T>;
+  update(id: string, entity: T): Observable<T>;
   getById(id: string): Observable<T>;
   delete(id: string): Observable<string>;
   list(): Observable<T[]>;
