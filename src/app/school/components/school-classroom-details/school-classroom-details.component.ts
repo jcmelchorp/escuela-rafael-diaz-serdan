@@ -33,9 +33,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private accountsEntityService: AccountsEntityService,
     private schoolService: SchoolService,
-  ) {
-
-  }
+  ) { }
   ngOnChanges(changes: SimpleChanges) {
     const courses: SchoolCourse[] = [];
     const students: User[] = [];
@@ -70,10 +68,6 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
   ngOnInit(): void {
     this.accountsEntityService.entities$.subscribe(users => this.users = users);
   }
-
-  updateStudentList() {
-
-  }
   ngOnDestroy(): void {
   }
   lookForCourses(classroom) {
@@ -100,7 +94,6 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     }).unsubscribe();
     this.schoolClassroomsEntityService.update({ id: classroom.id, studentsEmails: studentsEmailsFn });
   }
-
   dropCourses(event: CdkDragDrop<string[]>) {
     const coursesIds: string[] = [];
     coursesIds.push(...event.container.data);
@@ -111,7 +104,6 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     }
     this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, coursesIds: coursesIds });
   }
-
   dropStudents(event: CdkDragDrop<string[]>): void {
     const studentsEmails: string[] = [];
     studentsEmails.push(...event.container.data);

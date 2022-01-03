@@ -63,10 +63,8 @@ export class SchoolClassroomsComponent implements OnInit {
         columns.forEach((column) => {
           dataRow.push(row[column]);
         });
-
         body.push(dataRow);
       });
-
       return body;
     }
     const getBase64ImageFromURL = (url) => {
@@ -303,7 +301,6 @@ export class SchoolClassroomsComponent implements OnInit {
     };
     return user;
   }
-
   openSchoolCourseDialog(course?: SchoolCourse) {
     const newCourse: Partial<SchoolCourse> = {};
     const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
@@ -345,7 +342,6 @@ export class SchoolClassroomsComponent implements OnInit {
       }
     });
   }
-
   openSchoolClassroomDialog(classroom?: SchoolClassroom) {
     const dialogRef = this.dialog.open(SchoolClassroomDialogComponent, {
       width: 'fit-content',
@@ -368,7 +364,6 @@ export class SchoolClassroomsComponent implements OnInit {
       }
     });
   }
-
   loadCoursesFile() {
     const dialogRef = this.dialog.open(UploadFileDialogComponent, {
       width: 'fit-content',
@@ -385,6 +380,4 @@ export class SchoolClassroomsComponent implements OnInit {
       }
     });
   }
-
-
 }
