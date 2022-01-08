@@ -127,24 +127,21 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
   removeStudent(student: User, i: number) {
     const studentsEmails: string[] = this.currentClassroom.studentsEmails;
     studentsEmails.splice(this.currentClassroom.studentsEmails.findIndex(s => s === student.primaryEmail), 1);
-    this.schoolClassroomsEntityService.update({ ...this.currentClassroom, studentsEmails: studentsEmails });
+    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, studentsEmails });
   }
   removeCourse(course: SchoolCourse, i: number) {
-    this.schoolClassroomsService.removeCourseFromClassroom(this.currentClassroom.id, course.id).then(
-      () => this.onClassroomEmit.emit(this.currentClassroom.id));
+    const coursesIds: string[] = this.currentClassroom.coursesIds;
+    coursesIds.splice(this.currentClassroom.coursesIds.findIndex(s => s === course.id), 1);
+    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, coursesIds });
   }
   addStudent() {
-    this.schoolClassroomsService.addStudentEmailToClassroom(this.classroom.id, this.studentEmail).then(
-      () => {
-        this.studentEmail = '';
-        this.onClassroomEmit.emit(this.currentClassroom.id)
-      });
+    const studentsEmails: string[] = this.currentClassroom.studentsEmails;
+    studentsEmails.push(this.studentEmail);
+    this.schoolClassroomsEntityService.update({ ...this.currentClassroom, studentsEmails: studentsEmails });
   }
   addCourse() {
-    this.schoolClassroomsService.addCourseIdToClassroom(this.classroom.id, this.courseId).then(
-      () => {
-        this.courseId = '';
-        this.onClassroomEmit.emit(this.currentClassroom.id)
-      });
+    const coursesIds: string[] = this.currentClassroom.coursesIds;
+    coursesIds.push(this.courseId);
+    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, coursesIds });
   }
 }

@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { filter, first, map, tap } from 'rxjs/operators';
+import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Injectable()
@@ -19,7 +19,10 @@ export class SchoolStudentsResolver implements Resolve<boolean> {
     return this.accountsEntityService.loading$.pipe(
       tap((loading) => {
         if (!loading) {
-          this.accountsEntityService.getWithQuery({ role: 'Alumnos' });
+          this.accountsEntityService.getWithQuery({ role: 'Alumnos' })
+            .pipe(
+              mergeMap(_ => this.accountsEntityService.getWithQuery({ role: 'Graduates' })))
+
         }
       }),
       filter((loading) => !!loading),

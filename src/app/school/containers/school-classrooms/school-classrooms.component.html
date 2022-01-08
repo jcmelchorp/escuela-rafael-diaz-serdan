@@ -1,5 +1,5 @@
-<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
-  <div *ngIf="classrooms$|async as classrooms" class="card bg-transparent">
+<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+  <div *ngIf="classrooms$|async as classrooms" fxFlex class="card bg-transparent">
     <div class="card-body">
       <div class="float-end">
         <button mat-icon-button [matMenuTriggerFor]="newMenu">
@@ -14,7 +14,7 @@
       (onCycleChange)="setFilter($event)">
     </app-school-classroom-list>
   </div>
-  <div *ngIf="classroom$|async as classroom" class="card bg-transparent">
+  <div *ngIf="classroom$|async as classroom" fxFlex="0 1 calc(70% - 10px)" class="card bg-transparent">
     <div class="card-body">
       <div class="float-end">
         <button mat-icon-button (click)="classroomToPDF(classroom)">

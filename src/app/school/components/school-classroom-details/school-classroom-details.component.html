@@ -1,9 +1,9 @@
-<div *ngIf="currentClassroom;else spinner" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayout="space-around"
-  fxLayoutGap="20px">
-  <mat-list fxFlex.lt-sm="100%" class="drag-and-drop-list" cdkDropList #courseList="cdkDropList"
+<div *ngIf="currentClassroom;else spinner">
+  <mat-list class="d-block" class="drag-and-drop-list" cdkDropList #courseList="cdkDropList"
     [cdkDropListData]="currentClassroom.coursesIds" (cdkDropListDropped)="dropCourses($event)" dense>
     <h3 matSubheader>Materias</h3>
-    <div class="mb-2 select-element" mat-list-item fxLayout="row wrap" fxLayoutAlign="space-around start">
+    <div class="mb-2 select-element" mat-list-item fxLayout="row wrap" fxLayout.lt-md="column"
+      fxLayoutAlign="space-around start">
       <mat-form-field fxFlex appearance="outline">
         <mat-label>Agrega una materia</mat-label>
         <mat-select [(ngModel)]="courseId" placeholder="selecciona una materia">
@@ -42,8 +42,8 @@
       </div>
     </ng-template>
   </mat-list>
-  <mat-list fxFlex fxFlex.lt-sm="100%" class="drag-and-drop-list" cdkDropList #studentList="cdkDropList"
-    [cdkDropListData]="currentClassroom.studentsEmails" (cdkDropListDropped)="dropStudents($event)" dense>
+  <mat-list class="d-block" cdkDropList #studentList="cdkDropList" [cdkDropListData]="currentClassroom.studentsEmails"
+    (cdkDropListDropped)="dropStudents($event)" dense>
     <h3 matSubheader>Alumnos</h3>
     <div class="mb-2  select-element" mat-list-item fxLayout="row wrap" fxLayoutAlign="space-between start">
       <mat-form-field fxFlex appearance="outline">

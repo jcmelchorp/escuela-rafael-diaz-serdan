@@ -11,6 +11,8 @@ import { SchoolClassroomsComponent } from './containers/school-classrooms/school
 import { SchoolCoursesTableComponent } from './components';
 import { SchoolCoursesComponent } from './containers';
 import { SchoolPlaceholderComponent } from './components/school-placeholder/school-placeholder.component';
+import { SchoolGraduatesResolver } from './resolvers/school-graduates.resolver';
+import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
 
 const routes: Routes = [
   {
@@ -27,7 +29,7 @@ const routes: Routes = [
         path: 'i',
         component: SchoolClassroomsComponent,
         data: { breadcrumb: 'Inscripciones' },
-        resolve: { classrooms: SchoolClassroomsResolver, courses: SchoolCoursesResolver, students: SchoolStudentsResolver },
+        resolve: { classrooms: SchoolClassroomsResolver, courses: SchoolCoursesResolver, accounts: AccountsResolver },
       },
       {
         //path: '',
@@ -49,6 +51,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SchoolCoursesResolver, SchoolStudentsResolver, SchoolClassroomsResolver, SchoolTeachersResolver]
+  providers: [SchoolCoursesResolver, SchoolStudentsResolver, SchoolClassroomsResolver, SchoolTeachersResolver, AccountsResolver]
 })
 export class SchoolRoutingModule { }
