@@ -5,10 +5,9 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';
-import { AccountsEntityService } from '../../store/accounts/accounts-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Injectable()
 export class SchoolStudentsResolver implements Resolve<boolean> {
@@ -17,13 +16,13 @@ export class SchoolStudentsResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.accountsEntityService.loaded$.pipe(
-      tap((loaded) => {
-        if (!loaded) {
+    return this.accountsEntityService.loading$.pipe(
+      tap((loading) => {
+        if (!loading) {
           this.accountsEntityService.getWithQuery({ role: 'Alumnos' });
         }
       }),
-      filter((loaded) => !!loaded),
+      filter((loading) => !!loading),
       first()
     );
   }

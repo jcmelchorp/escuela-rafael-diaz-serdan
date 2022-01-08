@@ -4,6 +4,7 @@ import {
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
 import { SchoolClassroom } from '@rds-school/models/school-course.model';
+import { Observable } from 'rxjs';
 import * as fromClassroom from '.';
 
 @Injectable()
@@ -13,4 +14,5 @@ export class SchoolClassroomsEntityService extends EntityCollectionServiceBase<S
   ) {
     super(fromClassroom.entityCollectionName, serviceElementsFactory);
   }
+
 }

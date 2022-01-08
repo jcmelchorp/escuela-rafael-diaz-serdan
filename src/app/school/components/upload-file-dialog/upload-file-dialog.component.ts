@@ -27,7 +27,7 @@ export class UploadFileDialogComponent {
     private dialogRef: MatDialogRef<UploadFileDialogComponent>,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
-    private schoolService: SchoolService,
+    private schoolClassroomsService: SchoolClassroomsService,
     @Inject(MAT_DIALOG_DATA) public data: { output: any[] }
   ) {
     this.selectionRemain = this.schoolCoursesEntityService.count$;
@@ -78,9 +78,9 @@ export class UploadFileDialogComponent {
   import() {
     this.importing = true;
     this.data.output.forEach((course, i) => {
-      this.schoolService.getWithGradeAndCycle(course.grade, course.cycle).pipe(
+      this.schoolClassroomsService.getWithGradeAndCycle(course.grade, course.cycle).pipe(
         mergeMap(schoolClassroom => this.schoolCoursesEntityService.add(course).pipe(
-          map(newCourse => this.schoolService.addCourseIdToClassroom(schoolClassroom.id, newCourse.id))
+          map(newCourse => this.schoolClassroomsService.addCourseIdToClassroom(schoolClassroom.id, newCourse.id))
         ))
       ).subscribe();
     });

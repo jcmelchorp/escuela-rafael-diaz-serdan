@@ -16,15 +16,15 @@ export class SchoolTeachersResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.accountsEntityService.loaded$.pipe(
-      tap((loaded) => {
-        if (!loaded) {
+    return this.accountsEntityService.loading$.pipe(
+      tap((loading) => {
+        if (!loading) {
           this.accountsEntityService.getWithQuery({ role: 'Profesores' });
           /* .pipe(
             map(users => users.filter(user => user.role === 'Profesores'))) */
         }
       }),
-      filter((loaded) => !!loaded),
+      filter((loading) => !!loading),
       first()
     );
   }

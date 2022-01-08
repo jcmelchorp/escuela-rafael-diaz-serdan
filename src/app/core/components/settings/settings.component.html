@@ -2,7 +2,7 @@
   <p class="view-title">Ajustes</p>
   <p class="view-subtitle">Configura la aplicación.</p>
   <div class="mx-3" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around" fxLayoutGap="10px">
-    <mat-card class="my-4 {{isDarkTheme ?'':'border'}}" fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-sm="100%">
+    <mat-card class="my-4 {{(isDarkTheme$|async) ? '':'border'}}" fxFlex fxFlex.lt-sm="100%">
       <mat-card-header style="margin-top: -25px">
         <mat-card-title>
           <span [ngClass]="{'bg-white': !isDarkTheme}" class="card-title">Apariencia</span>
@@ -10,7 +10,8 @@
       </mat-card-header>
       <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="start top" fxLayoutGap="10px">
-          <mat-slide-toggle [checked]="isDarkTheme" labelPosition="before" (change)="toggleDarkTheme()">
+          <mat-slide-toggle [checked]="isDarkTheme$|async" labelPosition="before"
+            (change)="toggleDarkTheme(isDarkTheme)">
           </mat-slide-toggle>
           <fa-icon [icon]="isDarkTheme?faMoon:faSun" size="lg"></fa-icon>
           <div>Modo {{isDarkTheme?'nocturno':'diurno'}}</div>

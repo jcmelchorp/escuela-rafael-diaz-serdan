@@ -15,6 +15,7 @@ import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/sch
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
 import { User } from '@rds-auth/models/user.model';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
+import { SchoolCourseDialogComponent } from '..';
 @Component({
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
@@ -58,18 +59,9 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   constructor(
     private fb: FormBuilder,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
-    private schoolTeachersEntityService: SchoolTeachersEntityService,
     private dialog: MatDialog
   ) {
     this.columnsToDisplay = [
-      {
-        propertyName: 'teacherEmail',
-        headerText: '',
-      },
-      {
-        propertyName: 'priority',
-        headerText: '',
-      },
       {
         propertyName: 'cycle',
         headerText: 'Ciclo escolar',
@@ -79,8 +71,16 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
         headerText: 'Grado',
       },
       {
+        propertyName: 'priority',
+        headerText: '',
+      },
+      {
         propertyName: 'name',
         headerText: 'Nombre',
+      },
+      {
+        propertyName: 'teacherEmail',
+        headerText: '',
       },
     ];
     this.gradeKeys = Object.keys(this.grades);
@@ -115,7 +115,28 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   }
 
   ngOnInit() { }
-
+  openSchoolCourseDialog(course?: SchoolCourse) {
+    console.log(course);
+    const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
+      width: 'fit-content',
+      height: 'fit-content',
+      data: course
+        ? { course: course, isNew: false }
+        : { course: {}, isNew: true },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        if (result.isNew) {
+          this.schoolCoursesEntityService.add({ ...result.course });
+        } else {
+          console.log(result)
+          this.schoolCoursesEntityService.update({ ...result.course });
+        }
+      } else {
+        console.log('Dialog closed without changes')
+      }
+    });
+  }
   groupBy(event, column) {
     event.stopPropagation();
     this.checkTableGroupByColumn(column.propertyName, true);
@@ -242,10 +263,7 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
       }
     });
   }
-  editSchoolCourse(course?: SchoolCourse) {
-    console.log('Course emited: ', course);
-    //this.onClickEdit.emit(course);
-  }
+
   deleteSchoolCourse(course: SchoolCourse) {
     const subject: any = {
       id: course.id,

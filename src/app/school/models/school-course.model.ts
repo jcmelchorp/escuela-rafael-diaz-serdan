@@ -14,7 +14,7 @@ export interface SchoolCourse {
   teacherEmail: string;
   teacher?: User;
   cycle: Cycle;
-  studentsEmails?: string[];
+  /*  studentsEmails?: string[]; */
 }
 
 export interface ISchoolClassroom {
@@ -43,6 +43,7 @@ export class SchoolClassroom implements ISchoolClassroom {
     this.id = inputClassroom?.id;
     this.grade = inputClassroom?.grade;
     this.cycle = inputClassroom?.cycle;
+    this.priority = inputClassroom?.priority;
     this.studentsEmails = [];
     this.coursesIds = [];
     this.students = [];

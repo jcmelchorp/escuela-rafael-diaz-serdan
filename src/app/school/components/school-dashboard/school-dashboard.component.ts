@@ -27,10 +27,10 @@ export class SchoolDashboardComponent implements OnInit {
         icon: faClipboard,
       },
       {
-        title: 'Configuración',
-        description: 'Servicios de configuración y base de datos',
-        route: 'playground',
-        icon: faTools,
+        title: 'Materias',
+        description: 'Administra materias y clases',
+        route: 'm',
+        icon: faBook,
       },
     ];
   }

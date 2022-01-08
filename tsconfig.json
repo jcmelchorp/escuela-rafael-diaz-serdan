@@ -7,9 +7,6 @@
       "@emulator/*": [
         "src/emulator/*"
       ],
-      "@rds-admin/*": [
-        "src/app/admin/*"
-      ],
       "@rds-env/*": [
         "src/environments/*"
       ],
@@ -25,6 +22,9 @@
       "@rds-core/*": [
         "src/app/core/*"
       ],
+      "@rds-admin/*": [
+        "src/app/admin/*"
+      ],
       "@rds-auth/*": [
         "src/app/auth/*"
       ],
@@ -33,6 +33,9 @@
       ],
       "@rds-classroom/*": [
         "src/app/classroom/*"
+      ],
+      "@rds-info/*": [
+        "src/app/information/*"
       ],
       "@rds-store/*": [
         "src/app/store/*"

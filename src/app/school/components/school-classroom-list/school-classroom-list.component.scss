@@ -6,7 +6,7 @@
   font-size: 1.2em;
 }
 .classroom-list {
-  height: fit-content;
-  max-height: 350px;
+  height: 100%;
+  //max-height: 200px;
   overflow-y: auto;
 }

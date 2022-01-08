@@ -39,6 +39,7 @@ export class SchoolClassroomsComponent implements OnInit {
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolClassroomsService: SchoolClassroomsService,
+    private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog,
   ) { }
 
@@ -48,13 +49,43 @@ export class SchoolClassroomsComponent implements OnInit {
   }
 
   notify(classroomId: string) {
-    this.classroom$ = this.classrooms$.pipe(map(classrooms => classrooms.find(c => c.id === classroomId)));
+    const courses: SchoolCourse[] = [];
+    const students: User[] = [];
+    this.classroom$ = this.classrooms$
+      .pipe(
+        map(classrooms => {
+          const classroom = classrooms.find(c => c.id === classroomId);
+          const newClassroom = new SchoolClassroom({
+            id: classroom.id,
+            grade: classroom.grade,
+            cycle: classroom.cycle,
+            priority: classroom.priority,
+          });
+
+          classroom.coursesIds.forEach(courseId => {
+            this.schoolCoursesEntityService.setFilter({ id: courseId });
+            this.schoolCoursesEntityService.filteredEntities$.subscribe(course => {
+              courses.push(course.pop());
+            }).unsubscribe();
+          });
+          newClassroom.addCourses(courses);
+          newClassroom.addCoursesIds(classroom.coursesIds);
+          classroom.studentsEmails.forEach(studentEmail => {
+            this.accountsEntityService.setFilter({ primaryEmail: studentEmail });
+            this.accountsEntityService.filteredEntities$.subscribe(student => {
+              students.push(student.pop());
+            }).unsubscribe();
+          });
+          newClassroom.addStudents(students);
+          newClassroom.addStudentsEmails(classroom.studentsEmails);
+          return newClassroom;
+        })
+      );
   }
   setFilter(cycle?: string) {
     this.schoolClassroomsEntityService.setFilter({ cycle: cycle });
   }
   async classroomToPDF(classroom: SchoolClassroom) {
-    console.log(classroom);
     const buildTableBody = (data, columns) => {
       var body = [];
       //body.push(columns);

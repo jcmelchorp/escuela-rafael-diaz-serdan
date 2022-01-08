@@ -31,7 +31,6 @@ export class SchoolActionButtonsComponent implements OnInit {
   constructor(
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
-    private schoolService: SchoolService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private schoolClassroomsService: SchoolClassroomsService,
     private dialog: MatDialog,
@@ -58,7 +57,7 @@ export class SchoolActionButtonsComponent implements OnInit {
                 const studentsEmails = students.map(s => s.primaryEmail);
                 return { ...classroom, studentsEmails: studentsEmails, students: students } as SchoolClassroom;
               }),
-              mergeMap(classroom => classroom.studentsEmails.map(async email => this.schoolService.addStudentEmailToClassroom(classroom.id, email))))
+              mergeMap(classroom => classroom.studentsEmails.map(async email => this.schoolClassroomsService.addStudentEmailToClassroom(classroom.id, email))))
         )
       } else {
         console.log('Dialog closed without changes')
@@ -113,29 +112,7 @@ export class SchoolActionButtonsComponent implements OnInit {
   addClassroom() {
     this.onNewClassroom.emit(true);
   }
-  /*  openSchoolClassroomDialog(classroom?: SchoolClassroom) {
-     let coursesInGrade: number;
-     const newClassroom: Partial<SchoolClassroom> = {};
-     const dialogRef = this.dialog.open(SchoolClassroomDialogComponent, {
-       width: 'fit-content',
-       minWidth: '400px',
-       height: 'fit-content',
-       data: classroom
-         ? { classroom: classroom, isNew: false }
-         : { classroom: newClassroom, isNew: true },
-     });
-     dialogRef.afterClosed().subscribe((result) => {
-       if (result) {
-         if (result.isNew) {
-           this.schoolClassroomsEntityService.add(result.classroom as SchoolClassroom);
-         } else {
-           this.editCourse(result.classroom);
-         }
-       } else {
-         console.log('Dialog closed without changes')
-       }
-     });
-   } */
+
 
   loadCoursesFile() {
     const dialogRef = this.dialog.open(UploadFileDialogComponent, {

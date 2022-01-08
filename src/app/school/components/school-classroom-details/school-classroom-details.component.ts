@@ -4,7 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output, OnDestroy, OnChanges, S
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolClassroom } from '@rds-school/models/school-course.model';
-import { SchoolService } from '@rds-school/services';
+import { SchoolClassroomsService, SchoolService } from '@rds-school/services';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { Observable, Subscription } from 'rxjs';
@@ -22,8 +22,10 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
   currentClassroom: SchoolClassroom;
   classroom$: Observable<SchoolClassroom>;
   users: User[];
+  courses: SchoolCourse[];
   classroomId: string;
   studentEmail: string;
+  courseId: string;
   students$: Observable<User[]>;
   levels = SchoolLevel;
   subscription: Subscription;
@@ -32,7 +34,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private accountsEntityService: AccountsEntityService,
-    private schoolService: SchoolService,
+    private schoolClassroomsService: SchoolClassroomsService,
   ) { }
   ngOnChanges(changes: SimpleChanges) {
     const courses: SchoolCourse[] = [];
@@ -63,12 +65,20 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
       this.currentClassroom.addStudents(students);
       this.currentClassroom.addStudentsEmails(classroomChange.currentValue.studentsEmails);
     }
-    //console.log(this.currentClassroom)
+    this.schoolCoursesEntityService.entities$.subscribe(courses =>
+      this.courses = courses
+        .filter(c => c.grade === this.currentClassroom.grade)
+        .filter(c => c.cycle === this.currentClassroom.cycle)
+    ).unsubscribe();
+
   }
   ngOnInit(): void {
     this.accountsEntityService.entities$.subscribe(users => this.users = users);
+    this.schoolCoursesEntityService.entities$.subscribe(courses => this.courses = courses.filter(c => c.grade === this.currentClassroom.grade).filter(c => c.cycle === this.currentClassroom.cycle));
   }
   ngOnDestroy(): void {
+    this.schoolCoursesEntityService.setFilter({});
+    this.accountsEntityService.setFilter({});
   }
   lookForCourses(classroom) {
     const coursesFn: SchoolCourse[] = [];
@@ -120,13 +130,20 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     this.schoolClassroomsEntityService.update({ ...this.currentClassroom, studentsEmails: studentsEmails });
   }
   removeCourse(course: SchoolCourse, i: number) {
-    this.schoolService.removeCourseFromClassroom(this.currentClassroom.id, course.id).then(
+    this.schoolClassroomsService.removeCourseFromClassroom(this.currentClassroom.id, course.id).then(
       () => this.onClassroomEmit.emit(this.currentClassroom.id));
   }
   addStudent() {
-    this.schoolService.addStudentEmailToClassroom(this.classroom.id, this.studentEmail).then(
+    this.schoolClassroomsService.addStudentEmailToClassroom(this.classroom.id, this.studentEmail).then(
       () => {
         this.studentEmail = '';
+        this.onClassroomEmit.emit(this.currentClassroom.id)
+      });
+  }
+  addCourse() {
+    this.schoolClassroomsService.addCourseIdToClassroom(this.classroom.id, this.courseId).then(
+      () => {
+        this.courseId = '';
         this.onClassroomEmit.emit(this.currentClassroom.id)
       });
   }

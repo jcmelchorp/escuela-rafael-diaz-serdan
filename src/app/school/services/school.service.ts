@@ -34,30 +34,7 @@ export class SchoolService {
     const refDoc = doc(this.afs, this.tCollection, id);
     return from(updateDoc(refDoc, firebaseSerialize(entity))).pipe(take(1), map(x => firebaseSerialize(entity)));
   }
-  async addCourseIdToClassroom(id: string, courseId: string) {
-    const refDoc = doc(this.afs, this.tCollection, id);
-    return await updateDoc(refDoc, { coursesIds: arrayUnion(courseId) });
-  }
-  async addStudentEmailToClassroom(classroomId: string, studentEmail: string) {
-    const refDoc = doc(this.afs, this.tCollection, classroomId);
-    return updateDoc(refDoc, { studentsEmails: arrayUnion(studentEmail) });
-  }
-  async updateCoursesInClassroom(classroomId: string, coursesIds) {
-    const refDoc = doc(this.afs, this.tCollection, classroomId);
-    return await updateDoc(refDoc, { coursesIds: coursesIds });
-  }
-  async updateStudentsInClassroom(classroomId: string, studentsEmails: string[]) {
-    const refDoc = doc(this.afs, this.tCollection, classroomId);
-    return await updateDoc(refDoc, { studentsEmails: studentsEmails });
-  }
-  async removeCourseFromClassroom(classroomId: string, courseId: string) {
-    const refDoc = doc(this.afs, this.tCollection, classroomId);
-    return await updateDoc(refDoc, { coursesIds: arrayRemove(courseId) });
-  }
-  async removeStudentFromClassroom(classroomId: string, studentEmail: string) {
-    const refDoc = doc(this.afs, this.tCollection, classroomId);
-    return await updateDoc(refDoc, { studentsEmails: arrayRemove(studentEmail) });
-  }
+
   getById(id: string): Observable<SchoolClassroom> {
     const refDoc = doc(this.afs, this.tCollection, id);
     return from(getDoc(refDoc)).pipe(map(x => x.data() as SchoolClassroom));

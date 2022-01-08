@@ -1,4 +1,5 @@
-<mat-list-item>
-  <div mat-line>{{priority}}. {{student.name.familyName}} {{student.name.givenName}}</div>
-  <ng-content></ng-content>
-</mat-list-item>
+<div mat-list-item class="card bg-transparent drag-and-drop-box">
+  <ng-content #dragHandle></ng-content>
+  <div class="text-truncate" mat-line>{{priority}}. {{student.name.familyName}} {{student.name.givenName}}</div>
+  <ng-content #removeStudent></ng-content>
+</div>

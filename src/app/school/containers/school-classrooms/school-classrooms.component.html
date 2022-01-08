@@ -1,57 +1,51 @@
-<div *ngIf="classrooms$|async as classrooms">
-  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
-    <div fxLayout="column" style="width: fit-content;" class="card bg-transparent">
-      <div class="card-body">
-        <div class="float-end">
-          <button mat-icon-button [matMenuTriggerFor]="newMenu">
-            <mat-icon matTooltip="Nuevo grupo o materia">add</mat-icon>
-          </button>
-          <button mat-icon-button [matMenuTriggerFor]="fileMenu">
-            <mat-icon matTooltip="Cargar archivo de Excel">upload</mat-icon>
-          </button>
-        </div>
-        <h3 style="margin-top: -30px">
-          <div class="view-title-small">Grupos</div>
-        </h3>
-        <!-- <app-school-action-buttons [classrooms]="classrooms" (onNewClassroom)="openSchoolClassroomDialog($event)">
-        </app-school-action-buttons> -->
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+  <div *ngIf="classrooms$|async as classrooms" class="card bg-transparent">
+    <div class="card-body">
+      <div class="float-end">
+        <button mat-icon-button [matMenuTriggerFor]="newMenu">
+          <mat-icon matTooltip="Nuevo grupo o materia">add</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="fileMenu">
+          <mat-icon matTooltip="Cargar archivo de Excel">upload</mat-icon>
+        </button>
       </div>
-      <app-school-classroom-list [classrooms]="classrooms" (onClassroomShow)="notify($event)"
-        (onCycleChange)="setFilter($event)">
-      </app-school-classroom-list>
     </div>
-    <div *ngIf="classroom$|async as classroom" class="card bg-transparent" fxFlex>
-      <div class="card-body">
-        <div class="float-end">
-          <button mat-icon-button (click)="classroomToPDF(classroom)">
-            <mat-icon matTooltip="Imprime lista de grupo">print</mat-icon>
+    <app-school-classroom-list [classrooms]="classrooms" (onClassroomShow)="notify($event)"
+      (onCycleChange)="setFilter($event)">
+    </app-school-classroom-list>
+  </div>
+  <div *ngIf="classroom$|async as classroom" class="card bg-transparent">
+    <div class="card-body">
+      <div class="float-end">
+        <button mat-icon-button (click)="classroomToPDF(classroom)">
+          <mat-icon matTooltip="Imprime lista de grupo">receipt_long</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openSchoolClassroomDialog(classroom)">
+            <mat-icon color="accent">edit</mat-icon>Modificar
           </button>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
+          <button mat-menu-item (click)="deleteClassroom(classroom)">
+            <mat-icon color="warn">delete</mat-icon>Eliminar
           </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openSchoolClassroomDialog(classroom)">
-              <mat-icon color="accent">edit</mat-icon>Modificar
-            </button>
-            <button mat-menu-item (click)="deleteClassroom(classroom)">
-              <mat-icon color="warn">delete</mat-icon>Eliminar
-            </button>
-          </mat-menu>
-        </div>
-        <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
-          <div fxLayout="column">
-            <span class="view-title-small">{{levels[classroom.grade]}}</span>
-            <span class="view-subtitle-small">{{cycles[classroom.cycle]}}</span>
-          </div>
-        </h3>
-        <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="notify($event)">
-        </app-school-classroom-details>
-        <!-- <router-outlet name="classroom-outlet"></router-outlet> -->
+        </mat-menu>
       </div>
-
+      <h3 style="margin-top: -30px" fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="column">
+          <span class="view-title-small">{{levels[classroom.grade]}}</span>
+          <span class="view-subtitle-small">{{cycles[classroom.cycle]}}</span>
+        </div>
+      </h3>
+      <app-school-classroom-details [classroom]="classroom" (onClassroomEmit)="notify($event)">
+      </app-school-classroom-details>
     </div>
   </div>
 </div>
+
+
+
 <mat-menu #newMenu="matMenu" fxLayoutAlign="right">
   <ng-template matMenuContent>
     <div mat-menu-item (click)="openSchoolClassroomDialog()">Nuevo grupo</div>

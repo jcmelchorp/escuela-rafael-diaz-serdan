@@ -49,17 +49,15 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromAccount.entityCollectionName]: {
+    sortComparer: (a: User, b: User) => a.name.familyName.localeCompare(b.name.familyName),
     filterFn: (entities: User[], { primaryEmail, name, role, grade, suspended }: Partial<User>) =>
       entities
-        .filter((e) =>
-          name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true
-        )
+        .filter((e) => name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true)
         .filter((e) => (primaryEmail ? e.primaryEmail === primaryEmail : true))
         .filter((e) => (role ? e.role === role : true))
         .filter((e) => (grade ? e.grade === grade : true))
         .filter((e) => (suspended ? e.suspended === suspended : true)),
     selectId: (user: User) => user.id,
-    sortComparer: (a: User, b: User) => a.name.familyName.localeCompare(b.name.familyName),
     entityDispatcherOptions: {
       optimisticAdd: false,
       optimisticUpdate: false,
@@ -69,12 +67,15 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromSchoolCourses.entityCollectionName]: {
-    filterFn: (entities: SchoolCourse[], { id, name, grade, cycle }: Partial<SchoolCourse>) =>
+    sortComparer: (a: SchoolCourse, b: SchoolCourse) => (a.priority < b.priority ? -1 : 1),
+    filterFn: (entities: SchoolCourse[], { id, name, grade, cycle, priority, courseType }: Partial<SchoolCourse>) =>
       entities
         .filter((e) => (id ? e.id === id : true))
-        .filter((e) => (name ? e.name === name : true))
+        .filter((e) => (name ? e.name.includes(name) : true))
+        .filter((e) => (courseType ? e.courseType === courseType : true))
         .filter((e) => (grade ? e.grade === grade : true))
-        .filter((e) => (cycle ? e.cycle === cycle : true)),
+        .filter((e) => (cycle ? e.cycle === cycle : true))
+        .filter((e) => (priority ? e.priority === priority : true)),
     selectId: (SchoolCourse: SchoolCourse) => SchoolCourse.id,
     entityDispatcherOptions: {
       optimisticAdd: false,
@@ -246,6 +247,6 @@ export function nameFilter(entities: { name: string }[], search: string) {
   return entities.filter((e) => -1 < e.name.indexOf(search));
 }
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
-export function compare(a: string | number, b: string | number, isAsc: boolean): number {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+export function compare(a: string | number, b: string | number): number {
+  return (a < b ? -1 : 1);
 }

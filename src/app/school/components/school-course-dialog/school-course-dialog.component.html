@@ -38,7 +38,7 @@
         <mat-label>Tipo de curso</mat-label>
         <mat-select formControlName="courseType" placeholder="Selecciona el tipo">
           <mat-option [value]="">Sin especificar</mat-option>
-          <mat-option *ngFor="let key of keys" [value]="key">
+          <mat-option *ngFor="let key of keys" [value]="types[key]">
             {{types[key]}}
           </mat-option>
         </mat-select>

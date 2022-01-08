@@ -29,14 +29,15 @@ export class SchoolCourseDialogComponent {
   cycles = Cycle
   constructor(
     private dialogRef: MatDialogRef<SchoolCourseDialogComponent>,
-    private schoolTeachersEntityService: SchoolTeachersEntityService,
+    private accountsEntityService: AccountsEntityService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.keys = Object.keys(this.types);
     this.cycleKeys = Object.keys(this.cycles);
     this.slevelKeys = Object.keys(this.slevels);
-    this.teachers$ = this.schoolTeachersEntityService.entities$
+    this.accountsEntityService.setFilter({ role: 'Profesores', suspended: false });
+    this.teachers$ = this.accountsEntityService.filteredEntities$;
     this.formData = this.fb.group({
       name: new FormControl(this.data.course.name, Validators.required),
       grade: new FormControl(this.data.course.grade),

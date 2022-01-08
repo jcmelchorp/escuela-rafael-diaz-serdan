@@ -5,13 +5,16 @@ import { AuthenticationState, authFeatureKey, authReducer } from '@rds-auth/stat
 import * as authActions from '@rds-auth/state/auth.actions';
 import { environment } from '@rds-env/environment';
 import { routerKey } from "./router";
+import { configFeatureKey, configReducer, ConfigState } from '@rds-core/state/config.reducer';
 export interface AppState {
   [authFeatureKey]: AuthenticationState;
   [routerKey]: RouterState;
+  [configFeatureKey]: ConfigState
 }
 export const reducers: ActionReducerMap<AppState> = {
   [authFeatureKey]: authReducer,
   [routerKey]: routerReducer,
+  [configFeatureKey]: configReducer
 };
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production

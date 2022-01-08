@@ -37,6 +37,12 @@ export class SchoolClassroomsDataService extends DefaultDataService<SchoolClassr
   delete(key: string): Observable<string> {
     return this.schoolClassroomsService.delete(key);
   }
+  addCourseIdToClassroom(id: string, courseId: string) { }
+  addStudentEmailToClassroom(classroomId: string, studentEmail: string) { }
+  updateCoursesInClassroom(classroomId: string, coursesIds) { }
+  updateStudentsInClassroom(classroomId: string, studentsEmails: string[]) { }
+  removeCourseFromClassroom(classroomId: string, courseId: string) { }
+  removeStudentFromClassroom(classroomId: string, studentEmail: string) { }
 }
 function createClassroomId(grade: string, cycle: string) {
   let x1: string = grade.substring(0, 3);

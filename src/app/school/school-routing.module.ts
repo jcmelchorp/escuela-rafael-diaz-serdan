@@ -7,27 +7,37 @@ import { SchoolComponent } from './containers/school/school.component';
 import { SchoolDashboardComponent } from './components/school-dashboard/school-dashboard.component';
 import { SchoolClassroomsResolver } from './resolvers/school-classrooms.resolver';
 import { SchoolTeachersResolver } from './resolvers/school-teachers.resolver';
-import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
 import { SchoolClassroomsComponent } from './containers/school-classrooms/school-classrooms.component';
-import { SchoolClassroomDetailsComponent } from './components/school-classroom-details/school-classroom-details.component';
+import { SchoolCoursesTableComponent } from './components';
+import { SchoolCoursesComponent } from './containers';
+import { SchoolPlaceholderComponent } from './components/school-placeholder/school-placeholder.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SchoolComponent,
-    //resolve: { teachers: SchoolTeachersResolver, students: SchoolStudentsResolver },
+    data: { breadcrumb: 'Dirección' },
     children: [
       {
         path: '',
-        component: SchoolDashboardComponent,
-        data: { breadcrumb: 'Dirección' },
+        component: SchoolPlaceholderComponent,
       },
       {
         //path: '',
-        path: 'a',
+        path: 'i',
         component: SchoolClassroomsComponent,
-        data: { breadcrumb: 'Grupos, alumnos y materias' },
+        data: { breadcrumb: 'Inscripciones' },
         resolve: { classrooms: SchoolClassroomsResolver, courses: SchoolCoursesResolver, students: SchoolStudentsResolver },
+      },
+      {
+        //path: '',
+        path: 'm',
+        component: SchoolCoursesTableComponent,
+        data: { breadcrumb: 'Materias' },
+        resolve: { courses: SchoolCoursesResolver, teachers: SchoolTeachersResolver },
+        /* children: [
+          { path: '', component: SchoolCoursesTableComponent },
+        ] */
       },
       {
         path: '**',
@@ -39,6 +49,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SchoolCoursesResolver, SchoolStudentsResolver, SchoolClassroomsResolver, SchoolTeachersResolver, AccountsResolver]
+  providers: [SchoolCoursesResolver, SchoolStudentsResolver, SchoolClassroomsResolver, SchoolTeachersResolver]
 })
 export class SchoolRoutingModule { }

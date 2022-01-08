@@ -15,6 +15,8 @@ import { LayoutService, ThemeService } from '@rds-core/services';
 import { User } from '@rds-auth/models/user.model';
 import { AppState } from '@rds-store/app.state';
 import * as fromAuthSelectors from '@rds-auth/state/auth.selectors';
+import { setDarkMode } from '@rds-core/state/config.actions';
+import { isDarkMode } from '@rds-core/state/config.selectors';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -63,7 +65,11 @@ export class LayoutComponent {
     }
   }
   ngOnInit(): void {
-    this.isDarkTheme = this.themeService.isDarkTheme;
+    this.isDarkTheme = this.store.select(isDarkMode);
+    const isDark: boolean = JSON.parse(localStorage.getItem('rds-config-is-dark'));
+    if (isDark) {
+      this.store.dispatch(setDarkMode({ isDark: isDark }));
+    }
     this.isDarkTheme.subscribe((isDark) => {
       if (isDark) {
         this.overlay.getContainerElement().classList.add('theme-alternate');

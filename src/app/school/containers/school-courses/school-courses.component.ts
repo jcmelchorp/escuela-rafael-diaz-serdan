@@ -9,6 +9,7 @@ import { map, mergeMap, switchMap, concatMap } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { SchoolCourseDialogComponent, UploadFileDialogComponent } from '@rds-school/components';
+import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
 @Component({
   selector: 'app-school-courses',
   templateUrl: './school-courses.component.html',
@@ -25,9 +26,8 @@ export class SchoolCoursesComponent implements OnInit {
   subscript: Subscription;
   cycles = Cycle;
   constructor(
-    private router: Router,
+    private accountsEntityService: AccountsEntityService,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
-    private schoolStudentsEntityService: SchoolStudentsEntityService,
     private dialog: MatDialog
   ) {
     this.navLinks = [
@@ -37,7 +37,7 @@ export class SchoolCoursesComponent implements OnInit {
         index: 0
       }, {
         label: 'Materias',
-        route: ['m'],
+        route: [''],
         index: 1
       }, {
         label: 'Alumnos',
@@ -51,7 +51,7 @@ export class SchoolCoursesComponent implements OnInit {
 
   }
   populateCourses() {
-    this.schoolStudentsEntityService.entities$.pipe(
+    this.accountsEntityService.entities$.pipe(
       map(users => users.filter(user => user.role === 'Alumnos' && user.suspended === false)),
       mergeMap(users => this.schoolCoursesEntityService.entities$.pipe(
         map(courses => courses.filter(c => c.cycle == this.cycles.CE20212022).map(course => {
