@@ -72,7 +72,10 @@
       <div fxFlex="0 1 calc(25% - 5px)">
         <mat-label for="role">Rol de usuario:</mat-label>
         <mat-radio-group fxLayout="column" name="role" color="primary" formControlName="role">
-          <mat-radio-button class="mx-2" value="Alumnos">
+          <mat-radio-button *ngFor="let role of rolekeys" class="mx-2" [value]="roles[role]">
+            {{roles[role]}}
+          </mat-radio-button>
+          <!--  <mat-radio-button class="mx-2" value="Alumnos">
             Alumno<mat-icon class="text-secondary"
               matTooltip="Participa en Google Classroom como alumno y su expediente personal se ajustara a este rol.">
               help_outline</mat-icon>
@@ -89,7 +92,7 @@
           </mat-radio-button>
           <mat-radio-button class="mx-2" value="Otros">
             Otros<mat-icon class="text-secondary" matTooltip="Rol general sin distinción.">help_outline</mat-icon>
-          </mat-radio-button>
+          </mat-radio-button> -->
         </mat-radio-group>
       </div>
       <div fxLayout="column" fxFlex="0 1 calc(25% - 5px)">

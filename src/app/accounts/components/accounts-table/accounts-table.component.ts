@@ -2,13 +2,22 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from '@rds-shared/components';
 import { ChangeGradeComponent, UserEditDialogComponent } from '..';
 import { AccountsTableDataSource } from './accounts-table-data-source';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '@rds-store/app.state';
+import { selectAccounts } from '@rds-accounts/state/accounts.selectors';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-accounts-table',
@@ -16,12 +25,23 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
   styleUrls: ['./accounts-table.component.scss'],
 })
 export class AccountsTableComponent implements OnInit, AfterViewInit {
-  @Input() data: User[];
+  //@Input() data: User[];
   @ViewChild(MatTable) table: MatTable<User>;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  dataSource: MatTableDataSource<User> = new MatTableDataSource();
+  loaded$: Observable<boolean>;
+  loading$: Observable<boolean>;
+  users$: Observable<User[]>;
+  count$: BehaviorSubject<number> = new BehaviorSubject(0);
+  roleKeys: string[];
+  roles = UserRole;
+  gradeKeys: string[];
+  grades = SchoolLevel;
+  filterValues: FormGroup;
+  filteredEntities$: Observable<User[]>;
+  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
+  /* ataSource: MatTableDataSource<User>; */
   selection = new SelectionModel<User>(true, []);
+  subscription: Subscription;
+
   columnsToDisplay = [
     {
       propertyName: 'givenName',
@@ -48,20 +68,73 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   ];
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   constructor(
+    private _liveAnnouncer: LiveAnnouncer,
     private accountsEntityService: AccountsEntityService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private store: Store<AppState>,
+    private fb: FormBuilder,
   ) {
 
 
   }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit() {
-    this.dataSource.data = this.data;
+    this.users$ = this.store.select(selectAccounts);
+    this.gradeKeys = Object.keys(this.grades);
+    this.roleKeys = Object.keys(this.roles);
+    this.filterValues = this.fb.group({
+      grade: new FormControl(),
+      role: new FormControl(),
+      name: new FormControl(),
+      suspended: new FormControl(),
+    });
+    this.subscription = this.filterValues.valueChanges.subscribe((changes) => {
+      Object.keys(changes).forEach(
+        (key) => changes[key] == null && delete changes[key]
+      );
+      Object.keys(changes).includes('name') && changes.name !== ''
+        ? (changes.name = { fullName: changes['name'] })
+        : delete changes.name;
+      return this.accountsEntityService.setFilter(changes);
+    });
+
+
+
+    this.filteredEntities$ = this.accountsEntityService.filteredEntities$.pipe(map(users => {
+      //this.dataSource = new MatTableDataSource<User>(users);
+      //this.dataSource.setData(users);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.data = users;
+
+      this.count$.next(this.dataSource.data.length);
+      return users;
+    }));
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.loaded$ = this.accountsEntityService.loaded$;
+    this.loading$ = this.accountsEntityService.loading$;
   }
 
   ngAfterViewInit(): void {
-    /* this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.table.dataSource = this.dataSource; */
+
+    //this.table.dataSource = this.dataSource;
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
+  }
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
   onEditUser(user?: User) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {

@@ -26,7 +26,7 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<gapi.client.classroom.Course>;
-  public displayedColumns: string[] = ['courseState', 'name', 'section', 'room'];
+  public displayedColumns: string[] = ['courseState', 'name', 'section', 'room', 'creationTime'];
   public dataSource: MatTableDataSource<gapi.client.classroom.Course>;
   public courseTotal$: Observable<number>;
   public filterSubject = new Subject<string>();

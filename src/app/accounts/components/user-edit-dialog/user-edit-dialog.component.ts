@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import states from './states.json';
 import { CourseLevel, SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
+import { UserRole } from '../../../auth/models/user.enum';
 
 @Component({
   templateUrl: './user-edit-dialog.component.html',
@@ -23,6 +24,8 @@ export class UserEditDialogComponent {
   faUserPlus = faUserPlus;
   hide: boolean = true;
   saveForm!: FormGroup;
+  roles = UserRole;
+  rolekeys: string[];
   newUser!: Observable<AccountDomain>;
   clevelKeys: string[];
   clevels: any = CourseLevel;
@@ -34,8 +37,9 @@ export class UserEditDialogComponent {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.clevelKeys = Object.keys(this.clevels);
-    this.slevelKeys = Object.keys(this.slevels);
+    this.rolekeys = Object.keys(UserRole);
+    this.clevelKeys = Object.keys(CourseLevel);
+    this.slevelKeys = Object.keys(SchoolLevel);
     this.initForm();
   }
 
@@ -62,7 +66,7 @@ export class UserEditDialogComponent {
       isTeacher: new FormControl(this.data.user.isTeacher),
       suspended: new FormControl(this.data.user.suspended),
       curp: new FormControl(this.data.user.curp),
-      niev: new FormControl(this.data.user.niev),
+      niev: new FormControl({ value: this.data.user.niev, disabled: this.data.user.isAdmin }),
       rfc: new FormControl(this.data.user.rfc),
     });
   }
@@ -91,7 +95,7 @@ export class UserEditDialogComponent {
           this.saveForm.get('grade')?.value != null
         ) {
           googleUser.orgUnitPath = [
-            googleUser.orgUnitPath,
+            ...googleUser.orgUnitPath,
             this.saveForm.get('level')?.value,
             this.saveForm.get('grade')?.value,
           ].join('/');

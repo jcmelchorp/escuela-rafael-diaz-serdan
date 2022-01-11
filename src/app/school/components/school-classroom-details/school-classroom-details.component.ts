@@ -8,7 +8,7 @@ import { SchoolClassroomsService, SchoolService } from '@rds-school/services';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
 
 
@@ -86,7 +86,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     this.schoolCoursesEntityService.setFilter({ grade: classroom.grade, cycle: classroom.cycle });
     this.schoolCoursesEntityService.filteredEntities$.subscribe(courses => {
       coursesFn.push(...courses.sort(
-        (a, b) => (a.priority < b.priority) ? -1 : (a.priority > b.priority) ? 1 : 0
+        (a, b) => (a?.priority! < b?.priority!) ? -1 : (a?.priority! > b?.priority!) ? 1 : 0
       ));
       coursesIdsFn.push(...coursesFn.map(course => course.id));
     }).unsubscribe();
@@ -112,7 +112,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     } else {
       transferArrayItem(event.previousContainer.data, coursesIds, event.previousIndex, event.currentIndex);
     }
-    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, coursesIds: coursesIds });
+    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, coursesIds: coursesIds }).pipe(distinctUntilChanged(),);
   }
   dropStudents(event: CdkDragDrop<string[]>): void {
     const studentsEmails: string[] = [];
@@ -122,7 +122,7 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     } else {
       transferArrayItem(event.previousContainer.data, studentsEmails, event.previousIndex, event.currentIndex);
     }
-    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, studentsEmails });
+    this.schoolClassroomsEntityService.update({ id: this.currentClassroom.id, studentsEmails }).pipe(distinctUntilChanged());
   }
   removeStudent(student: User, i: number) {
     const studentsEmails: string[] = this.currentClassroom.studentsEmails;

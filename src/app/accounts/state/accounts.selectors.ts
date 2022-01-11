@@ -4,6 +4,7 @@ import { User } from '@rds-auth/models/user.model';
 import { getCurrentQueryParams } from '@rds-store/router/router.selectors';
 
 import * as fromAccounts from '@rds-store/accounts';
+import { getCurrentParams } from '../../store/router/router.selectors';
 export const accountSelectors = new EntitySelectorsFactory().create<User>(
   fromAccounts.entityCollectionName
 );
@@ -14,8 +15,8 @@ export const selectAccounts = createSelector(
 );
 
 export const selectedAccountById = createSelector(
-  getCurrentQueryParams,
+  getCurrentParams,
   accountSelectors.selectEntities,
-  (queryParams, accountEntities) =>
-    accountEntities.find((u) => u.id == queryParams.id)
+  (params, accountEntities) =>
+    accountEntities.find((u) => u.id == params.id)
 );

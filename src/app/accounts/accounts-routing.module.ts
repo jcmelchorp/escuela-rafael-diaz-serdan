@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserDetailsComponent } from './components';
+import { AccountsListComponent, AccountsTableComponent, UserDetailsComponent } from './components';
 import { AccountsComponent } from './containers';
 import { AccountResolver } from './resolvers/account.resolver';
 import { AccountsResolver } from './resolvers/accounts.resolver';
@@ -12,9 +12,21 @@ const routes: Routes = [
     resolve: { users: AccountsResolver },
     children: [
       {
-        path: 'edit/:id', component: UserDetailsComponent,
-        resolve: { user: AccountResolver }
+        path: 'accounts', component: AccountsTableComponent,
+        data: { breadcrumb: 'Tabla de usuarios' },
+
       },
+      {
+        path: 'edit/:id', component: UserDetailsComponent,
+        resolve: { user: AccountResolver },
+        data: { breadcrumb: 'Edita usuario' },
+
+      },
+      {
+        path: 'list', component: AccountsListComponent,
+        data: { breadcrumb: 'Lista de usuarios' },
+      },
+      { path: '', redirectTo: 'accounts', pathMatch: 'full' },
     ]
   }];
 

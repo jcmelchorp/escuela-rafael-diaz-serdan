@@ -30,10 +30,10 @@ export class AnnouncementDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data
   ) {
     this.keys = Object.keys(this.states).filter(Number);
-    this.levelKeys = Object.keys(this.levels).filter(Number);
+    this.levelKeys = Object.keys(this.levels)
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   onStateSelection(event) {
     this.data.newAnnouncement.state = event.key;
   }

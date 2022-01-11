@@ -14,7 +14,7 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
 
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 
 import states from './states.json';
@@ -54,9 +54,13 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this.store.select(selectedAccountById).pipe(
+      tap(user => {
+        console.log(JSON.stringify(user))
+        this.userId = user?.id;
+      }),
       map((user) => {
         if (user) {
-          (user && user.role == 'alumnos')
+          (user && user.role == 'Alumnos')
             ? this.fillStudentForm(user)
             : this.fillUserForm(user);
         }
@@ -74,7 +78,7 @@ export class UserDetailsComponent implements OnInit {
   fillStudentForm(user?: Partial<User>) {
     this.userForm = this.fb.group({
       curp: new FormControl(user?.curp),
-      niev: new FormControl(user?.niev),
+      niev: new FormControl({ value: user?.niev, disabled: !user.isAdmin }),
       dob: new FormControl(new Date(user?.dob!)),
       gender: new FormControl(user?.gender),
       parents: this.fb.array(
@@ -103,11 +107,11 @@ export class UserDetailsComponent implements OnInit {
         postUser[name] = this.userForm.controls[name].value;
       }
       if (name == 'role')
-        postUser[name] = this.userForm.controls[name].value.toLowerCase();
+        postUser[name] = this.userForm.controls[name].value;
     });
 
     console.log(postUser);
-    this.accountsEntityService.update(postUser);
+    this.accountsEntityService.update({ ...postUser, id: this.userId });
   }
   onEstadoChange(estado: string) {
     this.municipiosNames = Object.values(states).find((state) =>

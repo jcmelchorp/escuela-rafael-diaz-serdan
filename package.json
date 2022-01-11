@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "ng deploy",
-    "emulator": "cd ~/beaverNet/jcmelchorp/escuela-rafael-diaz-serdan/src/emulator && firebase emulators:exec --import=./seed --export-on-exit --ui \"cd ~/beaverNet/jcmelchorp/escuela-rafael-diaz-serdan/ && ng serve\"",
+    "emulator": "cd ~/beaverNet/jcmelchorp/escuela-rafael-diaz-serdan/src/emulator && firebase emulators:exec --import=./seed --export-on-exit --ui \"cd ~/beaverNet/jcmelchorp/escuela-rafael-diaz-serdan/ && ng serve --configuration local-dev\"",
     "clean": "rm -rf ./node_modules yarn.lock package-lock.json",
     "doc:g": "npx @compodoc/compodoc -p ./tsconfig.json --output ./docs --name \"Sistema RDS\" --customFavicon ./src/assets/icons/favicon-196.png --customLogo ./src/assets/images/rds-newlogo-transparent.png --theme material --hideGenerator --language es-ES"
   },
@@ -53,14 +53,15 @@
     "rxfire": "^6.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "xlsx": "^0.17.3",
     "webpack": "5.0.0",
+    "xlsx": "^0.17.3",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.1.2",
     "@angular/cli": "~13.1.2",
     "@angular/compiler-cli": "~13.1.1",
+    "@angular/localize": "13.1.1",
     "@types/gapi": "^0.0.41",
     "@types/gapi.auth2": "^0.0.55",
     "@types/gapi.client": "^1.0.5",

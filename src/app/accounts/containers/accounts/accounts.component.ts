@@ -34,18 +34,39 @@ export class AccountsComponent implements OnInit, OnDestroy {
   grades = SchoolLevel;
   filterValues: FormGroup;
   filteredEntities$: Observable<User[]>;
-  links = ['tabla', 'lista'];
+  links = ['', 'list', 'edit'];
+  navLinks: any[];
   activeLink: any;
   background: ThemePalette = undefined;
   subscription: Subscription;
   constructor(
     private accountsEntityService: AccountsEntityService,
-    private accountsService: AccountsService,
     private store: Store<AppState>,
     private dialog: MatDialog,
     private fb: FormBuilder,
     private accountsDomainService: AccountsDomainService
   ) {
+    this.navLinks = [
+      {
+        label: 'Usuarios',
+        icon: 'people',
+        route: 'accounts',
+        index: 1
+      },
+      {
+        label: 'Lista',
+        icon: 'follow_the_signs',
+        route: 'list',
+        index: 0
+      },
+    ];
+    this.activeLink = this.navLinks[0]
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.users$ = this.store.select(selectAccounts);
     this.accountsDomainService.handleAdminLoad();
     this.gradeKeys = Object.keys(this.grades);
     this.roleKeys = Object.keys(this.roles);
@@ -69,13 +90,6 @@ export class AccountsComponent implements OnInit, OnDestroy {
     this.count$ = this.accountsEntityService.count$;
     this.loaded$ = this.accountsEntityService.loaded$;
     this.loading$ = this.accountsEntityService.loading$;
-
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-  ngOnInit(): void {
-    this.users$ = this.store.select(selectAccounts);
   }
   applyFilterString() {
     const nameForm = this.filterValues.get('name')?.value;

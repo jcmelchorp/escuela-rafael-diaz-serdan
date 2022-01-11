@@ -10,8 +10,7 @@ import { SchoolClassroomGroupListComponent } from "./school-classroom-group-list
 import { UploadFileDialogComponent } from "./upload-file-dialog/upload-file-dialog.component";
 import { SchoolClassroomDialogComponent } from './school-classroom-dialog/school-classroom-dialog.component';
 import { SchoolClassroomDetailsComponent } from './school-classroom-details/school-classroom-details.component';
-import { SchoolCourseComponent } from './school-course/school-course.component';
-import { SchoolStudentComponent } from './school-student/school-student.component';
+
 import { SchoolCourseDialogComponent } from "./school-course-dialog/school-course-dialog.component";
 import { SchoolClassroomListComponent } from './school-classroom-list/school-classroom-list.component';
 import { SchoolPlaceholderComponent } from './school-placeholder/school-placeholder.component';
@@ -24,8 +23,6 @@ export const SCHOOL_COMPONENTS: any[] = [
   SchoolCoursesTableComponent,
   SchoolClassroomDialogComponent,
   SchoolCourseDialogComponent,
-  SchoolCourseComponent,
-  SchoolStudentComponent,
   StudentsCoursesComponent,
   SchoolStudentsTableComponent,
   SchoolDashboardComponent,
@@ -48,7 +45,5 @@ export * from "./school-classroom-group-list/school-classroom-group-list.compone
 export * from "./school-classroom-dialog/school-classroom-dialog.component";
 export * from "./school-course-dialog/school-course-dialog.component";
 export * from "./school-classroom-details/school-classroom-details.component";
-export * from "./school-course/school-course.component";
-export * from "./school-student/school-student.component";
 export * from "./school-classroom-list/school-classroom-list.component";
 export * from "./school-placeholder/school-placeholder.component";

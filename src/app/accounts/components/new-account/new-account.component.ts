@@ -128,7 +128,7 @@ export class NewAccountComponent implements OnInit {
         });
         console.log(`The Domain User is ${JSON.stringify(user)}`);
         this.data.googleUser = user;
-        this.accountsEntityService.add(this.data.googleUser as User);
+        this.accountsEntityService.add({ ...this.data.googleUser, id: user.id } as User);
       },
       (err) => {
         this.creating.next(false);
@@ -141,7 +141,7 @@ export class NewAccountComponent implements OnInit {
   onFirebaseCreate() {
     this.creating.next(true);
     const postUser = this.firebaseUser(this.data.googleUser);
-    this.accountsEntityService.update(postUser).subscribe(
+    this.accountsEntityService.update({ ...postUser, id: this.data.googleUser.id }).subscribe(
       (user) => {
         this.creating.next(false);
         this.created.next(true);
@@ -170,7 +170,7 @@ export class NewAccountComponent implements OnInit {
       isHuman: this.secondFormGroup.get('isHuman')?.value,
       orgUnitPath: googleUser.orgUnitPath,
       password: this.secondFormGroup.get('password')?.value,
-      role: this.secondFormGroup.get('role')?.value.toLowerCase(),
+      role: this.secondFormGroup.get('role')?.value,
       level: this.secondFormGroup.get('level')?.value,
       grade: this.secondFormGroup.get('grade')?.value,
       archived: false,
@@ -187,12 +187,12 @@ export class NewAccountComponent implements OnInit {
       suspended: false,
       suspensionReason: '',
       curp: '',
-      dob: dayOfBirth,
+      dob: dob,
       isNew: true,
       isOnline: false,
       isVerified: false,
-      authPhotoUrl: '',
-      photoUrl: '',
+      authPhotoUrl: '//lh3.googleusercontent.com/a/default-user',
+      photoUrl: '//lh3.googleusercontent.com/a/default-user',
       displayName: [
         this.secondFormGroup.get('givenName')?.value,
         this.secondFormGroup.get('familyName')?.value,
@@ -202,7 +202,7 @@ export class NewAccountComponent implements OnInit {
 
       permission: '',
     };
-    if (firebaseUser.role == 'alumnos') {
+    if (firebaseUser.role == 'Alumnos') {
       firebaseUser.niev = '';
       firebaseUser.parents = [
         {

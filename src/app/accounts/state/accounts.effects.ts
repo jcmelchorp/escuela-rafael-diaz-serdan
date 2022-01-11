@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ROUTER_NAVIGATION, RouterNavigatedAction } from '@ngrx/router-store';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { filter, map, withLatestFrom } from 'rxjs/operators';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 @Injectable()
 export class AccountsEffects {
@@ -20,13 +20,14 @@ export class AccountsEffects {
         filter((r: RouterNavigatedAction) =>
           r.payload.routerState.url.startsWith('/u/edit')
         ),
-        map((r: RouterNavigatedAction) => r.payload.routerState.root.params.id),
-        //withLatestFrom<string, IUser[]>(this.userEntityService.entities$),
-        map(([id, users]) => {
-          if (!users) {
-            return this.accountsEntityService.getByKey(id);
+        //tap((r: RouterNavigatedAction) => console.log(r.payload.routerState)),
+        map((r: RouterNavigatedAction) => r.payload.routerState['params']['id']),
+        withLatestFrom(this.accountsEntityService.entities$),
+        map(([id, courses]) => {
+          if (!courses) {
+            return this.accountsEntityService.getByKey(id)
           }
-          return users.find((u: any) => u.id == id);
+          return courses.find(u => u.id == id)
         })
       ),
     { dispatch: false }

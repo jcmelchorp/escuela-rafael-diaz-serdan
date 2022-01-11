@@ -16,6 +16,12 @@ import { NewAccountConfirmComponent } from './../new-account-confirm/new-account
 import { SaveUserErrorComponent, UserEditDialogComponent } from '..';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
+import { Observable, Subscription } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '@rds-store/app.state';
+import { selectAccounts } from '@rds-accounts/state/accounts.selectors';
+import { UserRole, SchoolLevel } from '@rds-auth/models/user.enum';
 
 @Component({
   selector: 'app-accounts-list',
@@ -23,8 +29,20 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
   styleUrls: ['./accounts-list.component.scss'],
 })
 export class AccountsListComponent implements OnInit {
-  @Input()
-  data!: User[];
+  /* @Input()
+  data!: User[]; */
+  loaded$: Observable<boolean>;
+  loading$: Observable<boolean>;
+  users$: Observable<User[]>;
+  count$: Observable<number>;
+  roleKeys: string[];
+  roles = UserRole;
+  gradeKeys: string[];
+  grades = SchoolLevel;
+  filterValues: FormGroup;
+  filteredEntities$: Observable<User[]>;
+
+  subscription: Subscription;
   faCircle = faCircle;
   faTrashAlt = faTrashAlt;
   faUserSlash = faUserSlash;
@@ -36,10 +54,35 @@ export class AccountsListComponent implements OnInit {
   constructor(
     private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog,
+    private store: Store<AppState>,
+    private fb: FormBuilder,
     private toastr: ToastrService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.users$ = this.store.select(selectAccounts);
+    this.gradeKeys = Object.keys(this.grades);
+    this.roleKeys = Object.keys(this.roles);
+    this.filterValues = this.fb.group({
+      grade: new FormControl(),
+      role: new FormControl(),
+      name: new FormControl(),
+      suspended: new FormControl(),
+    });
+    this.subscription = this.filterValues.valueChanges.subscribe((changes) => {
+      Object.keys(changes).forEach(
+        (key) => changes[key] == null && delete changes[key]
+      );
+      Object.keys(changes).includes('name') && changes.name !== ''
+        ? (changes.name = { fullName: changes['name'] })
+        : delete changes.name;
+      return this.accountsEntityService.setFilter(changes);
+    });
+    this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
+    this.count$ = this.accountsEntityService.count$;
+    this.loaded$ = this.accountsEntityService.loaded$;
+    this.loading$ = this.accountsEntityService.loading$;
+  }
   openEditUser(user: Partial<User>) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {
       width: '60%',

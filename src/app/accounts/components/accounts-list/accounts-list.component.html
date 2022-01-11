@@ -1,30 +1,88 @@
-<mat-list role="list" dense>
-  <mat-list-item role="listitem" *ngFor="let user of data" routerLinkActive="active">
-    <img matListAvatar src="{{user.photoUrl}}">
-    <div matLine>
-      <fa-icon matTooltip="Última conexión: {{user.lastLoginTime}}" [icon]="faCircle"
-        class="{{user.isOnline?'text-success':'text-danger'}}">
-      </fa-icon>&nbsp;
-      <span>
-        {{user.name?.fullName}}
-      </span>&nbsp;
-      <span class="text-secondary">{{user.id}}</span>
-    </div>
-    <div matLine>{{user.primaryEmail}}</div>
-    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-evenly">
-      <fa-icon *ngIf="user.isHuman" [icon]="user.role=='Alumnos'?faIdCard:faIdCardAlt" size="2x" mat-icon-button
-        [routerLink]="[user.id]" matTooltip="Información Personal"></fa-icon>
-      <!-- <fa-icon [icon]="" size="2x" mat-icon-button *ngIf="user.role=='Profesores'"
+<ng-template #spinner>
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
+    </mat-spinner>
+    <span>Buscando ...</span><br>
+  </div>
+</ng-template>
+<div *ngIf="(loaded$|async)&&(filteredEntities$|async) as filteredEntities;else spinner">
+  <div *ngIf="(count$|async) as count" class="card-body">
+    <button class="float-end" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="sendToFirestore()">
+        <mat-icon>cloud_sync</mat-icon>
+        <span>Enviar a Firestore</span>
+      </button>
+      <button mat-menu-item (click)="sendToRTDB()">
+        <mat-icon>cloud_sync</mat-icon>
+        <span>Enviar a Realtime-Database</span>
+      </button>
+    </mat-menu>
+    <form [formGroup]="filterValues">
+      <div class="position-sticky" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+        <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="Buscar por nombre">
+          <button mat-icon-button matSuffix (click)="filterValues.controls.name.reset();$event.stopPropagation()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
+          <mat-label>Grado escolar</mat-label>
+          <mat-select formControlName="grade" placeholder="Selecciona un grado">
+            <mat-option *ngFor="let key of gradeKeys" [value]="grades[key]">
+              {{grades[key]}}
+            </mat-option>
+          </mat-select>
+          <button mat-icon-button matSuffix (click)="filterValues.controls.grade.reset();$event.stopPropagation()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex="1 0 calc(33.3% - 5px)">
+          <mat-label>Rol de usuario</mat-label>
+          <mat-select formControlName="role" placeholder="Selecciona un rol">
+            <mat-option *ngFor="let key of roleKeys" [value]="key|titlecase">
+              {{key|titlecase}}
+            </mat-option>
+          </mat-select>
+          <button mat-icon-button matSuffix (click)="filterValues.controls.role.reset();$event.stopPropagation()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="text-success">Se encontraron <strong>{{count}}</strong> usuarios.</div>
+  </div>
+  <mat-list role="list" dense>
+    <mat-list-item role="listitem" *ngFor="let user of filteredEntities" routerLinkActive="active">
+      <img matListAvatar src="{{user.photoUrl}}">
+      <div matLine>
+        <fa-icon matTooltip="Última conexión: {{user.lastLoginTime}}" [icon]="faCircle"
+          class="{{user.isOnline?'text-success':'text-danger'}}">
+        </fa-icon>&nbsp;
+        <span>
+          {{user.name?.fullName}}
+        </span>&nbsp;
+        <span class="text-secondary">{{user.id}}</span>
+      </div>
+      <div matLine>{{user.primaryEmail}}</div>
+      <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-evenly">
+        <fa-icon *ngIf="user.isHuman" [icon]="user.role=='Alumnos'?faIdCard:faIdCardAlt" size="2x" mat-icon-button
+          [routerLink]="[user.id]" matTooltip="Información Personal"></fa-icon>
+        <!-- <fa-icon [icon]="" size="2x" mat-icon-button *ngIf="user.role=='Profesores'"
           [routerLink]="[user.id]" matTooltip="Edita información personal del docente"></fa-icon> -->
-      <fa-icon color="primary" [icon]="faUserCircle" size="2x" (click)="openEditUser(user)"
-        matTooltip="Cuenta de usuario">
-      </fa-icon>
-      <fa-icon [icon]="faUserSlash" size="2x" class="text-danger" (click)="openSuspendUser(user)"
-        matTooltip="{{user.suspended ? 'Reestablecer o habilitar' : 'Suspender o inhabilitar'}} usuario">
-      </fa-icon>
-      <fa-icon [icon]="faTrashAlt" size="2x" class="text-danger" (click)="openDeleteUser(user)"
-        matTooltip="Borrar usuario"></fa-icon>
-    </div>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>
+        <fa-icon color="primary" [icon]="faUserCircle" size="2x" (click)="openEditUser(user)"
+          matTooltip="Cuenta de usuario">
+        </fa-icon>
+        <fa-icon [icon]="faUserSlash" size="2x" class="text-danger" (click)="openSuspendUser(user)"
+          matTooltip="{{user.suspended ? 'Reestablecer o habilitar' : 'Suspender o inhabilitar'}} usuario">
+        </fa-icon>
+        <fa-icon [icon]="faTrashAlt" size="2x" class="text-danger" (click)="openDeleteUser(user)"
+          matTooltip="Borrar usuario"></fa-icon>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>

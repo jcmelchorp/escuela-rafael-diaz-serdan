@@ -25,11 +25,12 @@ export class AccountResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.accountsEntityService.loading$
+    return this.accountsEntityService.loaded$
       .pipe(
         tap(loaded => {
           if (!loaded) {
-            this.accountsEntityService.getByKey(route.queryParams.id);
+            console.log(route.params.id)
+            this.accountsEntityService.getByKey(route.params.id);
           }
         }),
         filter(loaded => !!loaded),

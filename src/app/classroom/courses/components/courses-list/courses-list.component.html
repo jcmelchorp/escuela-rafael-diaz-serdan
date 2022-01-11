@@ -82,7 +82,12 @@
           {{ element.room }}
         </mat-cell>
       </ng-container>
-
+      <ng-container matColumnDef="creationTime">
+        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Creado</mat-header-cell>
+        <mat-cell class="dc-content" *matCellDef="let element">
+          {{ element.creationTime|date:'short' }}
+        </mat-cell>
+      </ng-container>
       <ng-container matColumnDef="noRecord">
         <mat-footer-cell *matFooterCellDef class="text-danger">
           No hay resultados que coincidan con la búsqueda.

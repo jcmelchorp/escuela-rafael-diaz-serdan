@@ -1,11 +1,11 @@
 <ng-template #spinner>
-  <div style="min-height: 00px;" fxLayout="column" fxLayoutAlign="center center">
-    <mat-spinner strokeWidth="6" [diameter]="48">
+  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="5" [diameter]="50">
     </mat-spinner>
     <span>Buscando ...</span><br>
   </div>
 </ng-template>
-<fa-icon mat-icon-button [routerLink]="['..']" [icon]="faChevronLeft"></fa-icon>
+<fa-icon mat-icon-button [routerLink]="['..','..']" [icon]="faChevronLeft"></fa-icon>
 <div *ngIf="(user$|async) as user;else spinner">
   <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="mat-elevation-z0 bg-transparent">

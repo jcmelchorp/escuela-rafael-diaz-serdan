@@ -1,10 +1,11 @@
-import { DataSource } from '@angular/cdk/collections';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
+import { Observable, of as observableOf, merge, ReplaySubject, BehaviorSubject, of } from 'rxjs';
 import { User } from '@rds-auth/models/user.model';
+import { AccountsEntityService } from '../../../store/accounts/accounts-entity.service';
 
 /**
  * Data source for the AccountsTable view. This class should
@@ -12,13 +13,15 @@ import { User } from '@rds-auth/models/user.model';
  * (including sorting, pagination, and filtering).
  */
 export class AccountsTableDataSource extends DataSource<User> {
-  data!: User[];
+  private _dataStream = new ReplaySubject<User[]>();
+  data: User[];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
-
-  constructor(input: User[]) {
+  private usersSubject = new BehaviorSubject<User[]>([]);
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  public loading$ = this.loadingSubject.asObservable();
+  constructor(private entityService: AccountsEntityService) {
     super();
-    this.data = input;
   }
 
   /**
@@ -26,12 +29,12 @@ export class AccountsTableDataSource extends DataSource<User> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<User[]> {
-    if (this.paginator && this.sort) {
+  connect(collectionViewer: CollectionViewer): Observable<User[]> {
+    /* if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
       return merge(
-        observableOf(this.data),
+        this._dataStream,
         this.paginator.page,
         this.sort.sortChange
       ).pipe(
@@ -43,14 +46,26 @@ export class AccountsTableDataSource extends DataSource<User> {
       throw Error(
         'Please set the paginator and sort on the data source before connecting.'
       );
-    }
+    } */
+    return this.usersSubject.asObservable();
   }
-
+  loadData() {
+    this.loadingSubject.next(true);
+    this.entityService.entities$.pipe(
+      catchError(() => of([])),
+      finalize(() => this.loadingSubject.next(false))
+    )
+      .subscribe(users => this.usersSubject.next(users));
+  }
   /**
+   *
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect(): void { }
+  disconnect(collectionViewer: CollectionViewer): void {
+    this.usersSubject.complete();
+    this.loadingSubject.complete();
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,

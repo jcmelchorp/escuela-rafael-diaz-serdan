@@ -49,10 +49,14 @@ export const entityMetadata: EntityMetadataMap = {
     },
   },
   [fromAccount.entityCollectionName]: {
-    sortComparer: (a: User, b: User) => a.name.familyName.localeCompare(b.name.familyName),
+    sortComparer: (a: User, b: User) => a.name?.familyName.localeCompare(b.name?.familyName),
     filterFn: (entities: User[], { primaryEmail, name, role, grade, suspended }: Partial<User>) =>
       entities
-        .filter((e) => name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true)
+        .filter((e) => (name && e.name && e.name.fullName
+          ? e.name.fullName
+            .toLocaleLowerCase()
+            .includes(`${name.fullName!.toLocaleLowerCase()}`)
+          : true))
         .filter((e) => (primaryEmail ? e.primaryEmail === primaryEmail : true))
         .filter((e) => (role ? e.role === role : true))
         .filter((e) => (grade ? e.grade === grade : true))

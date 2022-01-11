@@ -21,13 +21,14 @@ export class FirestoreV9Service<T> implements IFirebase<T> {
     this.colRef = collection(this.afs, this.collectionName);
   }
   add(entity: T, id?: string): Promise<T> {
-    let result: T;
+    let key: string = '';
     const refColl = collection(this.afs, this.tCollection);
-    if (id) {
-      console.log('Entity with Id: ' + id + ' added');
-      const refDoc = doc(refColl, id);
-      return setDoc(refDoc, firebaseSerialize({ ...entity, id: refDoc.id }))
-        .then(() => { return { ...entity, id: refDoc.id } as T });
+    entity['id'] ? (key = entity['id']) : (key = null);
+    if (key !== null) {
+      console.log('Entity with Id: ' + key + ' added');
+      const refDoc = doc(refColl, key);
+      return setDoc(refDoc, firebaseSerialize({ ...entity, id: key }))
+        .then(() => { return { ...entity, id: key } as T });
     } else {
       console.log('Entity with no Id');
       const refDoc = doc(refColl);
