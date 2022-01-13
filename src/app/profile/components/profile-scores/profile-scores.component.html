@@ -1,3 +1,6 @@
+<button class="float-start" appMaterialElevation mat-icon-button [routerLink]="['..']">
+  <mat-icon>arrow_back_ios</mat-icon>
+</button>
 <div *ngIf="timeOpenScores;else comeBack">
   <div *ngIf="!(isTeacher$|async)&&(user$|async) as user;else onlyStudents" [@fadeIn]="'fadeIn'">
     <!--  <div>{{|json}}</div> -->

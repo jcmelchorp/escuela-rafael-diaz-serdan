@@ -9,6 +9,7 @@ import { UserDetailsComponent } from '@rds-accounts/components/user-details/user
 import { AccountResolver } from '@rds-accounts/resolvers/account.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { SchoolCalendarComponent } from './components/school-calendar/school-calendar.component';
+import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
 
           },
           {
-            path: 'editar',
+            path: ':id',
             component: UserDetailsComponent,
           }
         ]
@@ -48,6 +49,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ScoresResolver, UserResolver]
+  providers: [ScoresResolver, UserResolver, AccountsResolver]
 })
 export class ProfileRoutingModule { }
