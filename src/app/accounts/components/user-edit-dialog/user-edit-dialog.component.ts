@@ -33,7 +33,6 @@ export class UserEditDialogComponent {
   slevels: any = SchoolLevel;
   constructor(
     private dialogRef: MatDialogRef<UserEditDialogComponent>,
-    private toast: ToastrService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -56,7 +55,7 @@ export class UserEditDialogComponent {
         Validators.email,
       ]),
       password: new FormControl(this.data.user.password),
-      dob: new FormControl(new Date(this.data.user.dob)),
+      /*  dob: new FormControl(new Date(this.data.user.dob)), */
       role: new FormControl(this.data.user.role),
       grade: new FormControl(this.data.user.grade),
       level: new FormControl(this.data.user.level),
@@ -65,9 +64,9 @@ export class UserEditDialogComponent {
       isAdmin: new FormControl(this.data.user.isAdmin),
       isTeacher: new FormControl(this.data.user.isTeacher),
       suspended: new FormControl(this.data.user.suspended),
-      curp: new FormControl(this.data.user.curp),
-      niev: new FormControl({ value: this.data.user.niev, disabled: this.data.user.isAdmin }),
-      rfc: new FormControl(this.data.user.rfc),
+      /*  curp: new FormControl(this.data.user.curp),
+       niev: new FormControl({ value: this.data.user.niev, disabled: this.data.user.isAdmin }),
+       rfc: new FormControl(this.data.user.rfc), */
     });
   }
   onSubmit() {
@@ -85,9 +84,7 @@ export class UserEditDialogComponent {
             ].join(' '),
           },
           changePasswordAtNextLogin: false,
-          orgUnitPath: ['/Dirección', this.saveForm.get('role')?.value].join(
-            '/'
-          ),
+          orgUnitPath: ['/Dirección', this.saveForm.get('role')?.value].join('/'),
         };
         if (
           this.saveForm.get('role')?.value == 'Alumnos' &&
@@ -125,7 +122,7 @@ export class UserEditDialogComponent {
 
             if (name == 'role')
               firebaseUser[name] =
-                this.saveForm.controls[name].value.toLowerCase();
+                this.saveForm.controls[name].value;
           }
         });
         if (
@@ -142,15 +139,12 @@ export class UserEditDialogComponent {
         this.data.user = firebaseUser;
         this.dialogRef.close(this.data);
       } else if (!this.saveForm.get('isInGoogle')?.value) {
-        this.toast.warning('Esta opcion no esta lista aún', 'Pendiente');
+        alert('Esta opcion no esta lista aún');
       }
     }
   }
 
   firebaseUser(googleUser: AccountDomain) {
-    const dayOfBirth: string = this.saveForm
-      .get('dob')
-      ?.value.toLocaleDateString();
     const firebaseUser: User = {
       id: googleUser.id ? googleUser.id : ' ',
       primaryEmail: googleUser.primaryEmail,
@@ -159,11 +153,11 @@ export class UserEditDialogComponent {
       isHuman: this.saveForm.get('isHuman')?.value,
       orgUnitPath: googleUser.orgUnitPath!,
       password: this.saveForm.get('password')?.value,
-      role: this.saveForm.get('role')?.value.toLowerCase(),
+      role: this.saveForm.get('role')?.value,
       level: this.saveForm.get('level')?.value,
       grade: this.saveForm.get('grade')?.value,
       archived: false,
-      gender: this.saveForm.get('gender')?.value,
+      //gender: this.saveForm.get('gender')?.value,
       name: {
         givenName: googleUser.name?.givenName,
         familyName: googleUser.name?.familyName,
@@ -175,9 +169,6 @@ export class UserEditDialogComponent {
       customerId: googleUser.customerId!,
       suspended: this.saveForm.get('suspended')?.value,
       suspensionReason: '',
-      curp: '',
-      rfc: '',
-      dob: dayOfBirth,
       isNew: true,
       isOnline: false,
       isVerified: false,
@@ -189,7 +180,6 @@ export class UserEditDialogComponent {
       ].join(' '),
       creationTime: googleUser.creationTime,
       lastLoginTime: '',
-      niev: '',
       parents: [
         {
           name: {

@@ -6,11 +6,10 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from '@rds-shared/components';
 import { ChangeGradeComponent, UserEditDialogComponent } from '..';
-import { AccountsTableDataSource } from './accounts-table-data-source';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -25,8 +24,6 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
   styleUrls: ['./accounts-table.component.scss'],
 })
 export class AccountsTableComponent implements OnInit, AfterViewInit {
-  //@Input() data: User[];
-  @ViewChild(MatTable) table: MatTable<User>;
   loaded$: Observable<boolean>;
   loading$: Observable<boolean>;
   users$: Observable<User[]>;
@@ -37,11 +34,8 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   grades = SchoolLevel;
   filterValues: FormGroup;
   filteredEntities$: Observable<User[]>;
-  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
-  /* ataSource: MatTableDataSource<User>; */
   selection = new SelectionModel<User>(true, []);
   subscription: Subscription;
-
   columnsToDisplay = [
     {
       propertyName: 'givenName',
@@ -62,80 +56,85 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   ];
   displayedColumns: string[] = [
     'select',
-    'badges',
+    'photoUrl',
     ...this.columnsToDisplay.map((c) => c.propertyName),
     'actions',
   ];
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   constructor(
-    private _liveAnnouncer: LiveAnnouncer,
     private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog,
     private store: Store<AppState>,
     private fb: FormBuilder,
-  ) {
-
-
-  }
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  ) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<User>;
 
   ngOnInit() {
-    this.users$ = this.store.select(selectAccounts);
-    this.gradeKeys = Object.keys(this.grades);
-    this.roleKeys = Object.keys(this.roles);
+    //this.users$ = this.store.select(selectAccounts);
+    this.loaded$ = this.accountsEntityService.loaded$;
+    this.loading$ = this.accountsEntityService.loading$;
+    this.gradeKeys = Object.keys(SchoolLevel);
+    this.roleKeys = Object.keys(UserRole);
     this.filterValues = this.fb.group({
       grade: new FormControl(),
       role: new FormControl(),
       name: new FormControl(),
       suspended: new FormControl(),
     });
-    this.subscription = this.filterValues.valueChanges.subscribe((changes) => {
-      Object.keys(changes).forEach(
-        (key) => changes[key] == null && delete changes[key]
+
+    this.filteredEntities$ = this.accountsEntityService.filteredEntities$
+      .pipe(
+        tap(users => {
+          this.dataSource = new MatTableDataSource(users);
+          /* this.dataSource.sort = this.sort;
+          if (this.paginator) {
+            this.paginator.pageSize = 10;
+          }
+          this.dataSource.paginator = this.paginator; */
+          //this.dataSource.data = users;
+          this.count$.next(this.dataSource.data.length);
+        })
       );
-      Object.keys(changes).includes('name') && changes.name !== ''
-        ? (changes.name = { fullName: changes['name'] })
-        : delete changes.name;
-      return this.accountsEntityService.setFilter(changes);
-    });
+    this.subscription = this.filterValues.valueChanges
+      .subscribe((changes) => {
+        Object.keys(changes).forEach((key) => changes[key] == null && delete changes[key]);
+        (Object.keys(changes).includes('name') && changes.name !== '')
+          ? (changes.name = { fullName: changes['name'] })
+          : delete changes.name;
+        this.accountsEntityService.setFilter(changes);
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+      });
 
+  }
 
-
-    this.filteredEntities$ = this.accountsEntityService.filteredEntities$.pipe(map(users => {
-      //this.dataSource = new MatTableDataSource<User>(users);
-      //this.dataSource.setData(users);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.data = users;
-
-      this.count$.next(this.dataSource.data.length);
-      return users;
-    }));
-    this.dataSource.sort = this.sort;
+  /**
+    * Set the paginator and sort after the view init since this component will
+    * be able to query its view for the initialized paginator and sort.
+    */
+  ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.loaded$ = this.accountsEntityService.loaded$;
-    this.loading$ = this.accountsEntityService.loading$;
+    this.dataSource.sort = this.sort;
   }
 
-  ngAfterViewInit(): void {
-
-    //this.table.dataSource = this.dataSource;
-  }
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.displayedColumns, event.previousIndex, event.currentIndex);
-  }
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
+  onSortChange(sortState: Sort) {
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.pageIndex = 0;
     }
   }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.columnsToDisplay, event.previousIndex, event.currentIndex);
+    this.displayedColumns = [
+      'select',
+      'photoUrl',
+      ...this.columnsToDisplay.map((c) => c.propertyName),
+      'actions',
+    ];
+  }
+
   onEditUser(user?: User) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {
       width: '60%',

@@ -8,7 +8,7 @@ export class MaterialElevationDirective implements OnChanges {
   defaultElevation = 0;
 
   @Input()
-  raisedElevation = 2;
+  raisedElevation = 4;
 
   constructor(
     private element: ElementRef,
@@ -40,6 +40,8 @@ export class MaterialElevationDirective implements OnChanges {
 
     // add the given elevation class
     const newClass = `mat-elevation-z${amount}`;
+
     this.renderer.addClass(this.element.nativeElement, newClass);
+
   }
 }

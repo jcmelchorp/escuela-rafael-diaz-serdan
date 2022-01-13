@@ -26,7 +26,7 @@ const routes: Routes = [
         path: 'u',
         loadChildren: () => import('@rds-accounts/accounts.module').then(
           m => m.AccountsModule),
-        canActivate: [AdminGuard],
+        canActivate: [TeachersGuard],
       },
       {
         path: 'e',

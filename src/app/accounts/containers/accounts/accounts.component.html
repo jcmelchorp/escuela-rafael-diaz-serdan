@@ -8,17 +8,13 @@
 <div class="p-4">
   <p class="view-title">Usuarios</p>
   <p class="view-subtitle">Cuentas de usuarios.</p>
-  <nav class="sticky-top" mat-tab-nav-bar [backgroundColor]="background" mat-stretch-tabs>
+  <!--  <nav class="sticky-top" mat-tab-nav-bar [backgroundColor]="background" mat-stretch-tabs>
     <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.route]" (click)="activeLink = link"
       [active]="activeLink == link" routerLinkActive="active">
       <mat-icon>{{link.icon}}</mat-icon>&nbsp;&nbsp;
       <div>{{link.label}}</div>
     </a>
-    <a mat-tab-link disabled [routerLink]="['edit']" (click)="activeLink = 'edit'" [active]="activeLink === 'edit'"
-      routerLinkActive="active">
-      <mat-icon>manage_accounts</mat-icon>&nbsp;&nbsp;Editar
-    </a>
-  </nav>
+  </nav> -->
   <router-outlet></router-outlet>
 </div>
 <button class="mat-fab-bottom-right mat-elevation-z8" mat-fab color="primary" matTooltip="Nuevo usuario"

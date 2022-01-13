@@ -1,26 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-
 import {
   faTrashAlt,
   faPlus,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
-
 import { Store } from '@ngrx/store';
 import { User } from '@rds-auth/models/user.model';
 import { AppState } from '@rds-store/app.state';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-
-
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-
-
 import states from './states.json';
-import { selectedAccountById } from '../../state/accounts.selectors';
+import { selectedAccountById } from '@rds-accounts/state/accounts.selectors';
 import { PhoneType } from '@rds-auth/models/user-parent.model';
-import { selectUser } from '../../../auth/state/auth.selectors';
 
 @Component({
   selector: 'app-user-details',
@@ -60,7 +53,7 @@ export class UserDetailsComponent implements OnInit {
       }),
       map((user) => {
         if (user) {
-          (user && user.role == 'Alumnos')
+          (user && (user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendido'))
             ? this.fillStudentForm(user)
             : this.fillUserForm(user);
         }
@@ -79,7 +72,7 @@ export class UserDetailsComponent implements OnInit {
     this.userForm = this.fb.group({
       curp: new FormControl(user?.curp),
       niev: new FormControl({ value: user?.niev, disabled: !user.isAdmin }),
-      dob: new FormControl(new Date(user?.dob!)),
+      dob: new FormControl(new Date(user?.dob)),
       gender: new FormControl(user?.gender),
       parents: this.fb.array(
         user?.parents
@@ -89,10 +82,11 @@ export class UserDetailsComponent implements OnInit {
     });
   }
   fillUserForm(user?: Partial<User>) {
+
     this.userForm = this.fb.group({
       curp: new FormControl(user?.curp),
       rfc: new FormControl(user?.rfc),
-      dob: new FormControl(new Date(user?.dob!)),
+      dob: new FormControl(new Date(user?.dob)),
       gender: new FormControl(user?.gender),
     });
   }

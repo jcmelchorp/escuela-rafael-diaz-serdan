@@ -15,13 +15,13 @@ export class AccountsResolver implements Resolve<boolean> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.accountsEntityService.loading$.pipe(
-      tap((loading) => {
-        if (!loading) {
+    return this.accountsEntityService.loaded$.pipe(
+      tap((loaded) => {
+        if (!loaded) {
           this.accountsEntityService.getAll();
         }
       }),
-      filter(loading => !!loading),
+      filter(loaded => !!loaded),
       first()
     );
   }

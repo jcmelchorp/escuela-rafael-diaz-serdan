@@ -2,13 +2,25 @@
   <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
     <mat-spinner strokeWidth="5" [diameter]="50">
     </mat-spinner>
-    <span>Buscando ...</span><br>
+    <span>Procesando datos...</span><br>
   </div>
 </ng-template>
-<fa-icon mat-icon-button [routerLink]="['..','..']" [icon]="faChevronLeft"></fa-icon>
+
 <div *ngIf="(user$|async) as user;else spinner">
-  <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <button appMaterialElevation mat-icon-button [routerLink]="['..']">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <div class="alert alert-danger" *ngIf="user.role=='Baja'">Este usuario se encuentra dado de baja.
+    </div>
+    <div class="alert alert-danger" *ngIf="user.role=='Suspendido'">Este usuario se encuentra suspendido.
+    </div>
+  </div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <mat-card class="mat-elevation-z0 bg-transparent">
+      <button class="float-end" mat-raised-button type="submit" [disabled]="!userForm.dirty">
+        <mat-icon class="{{userForm.dirty?'text-success':'text-muted'}}">save</mat-icon>&nbsp;Guardar
+      </button>
       <mat-card-header>
         <img mat-card-avatar [src]="user.photoUrl" alt="imagen de {{user.name?.fullName}}">
         <mat-card-title>{{user.name?.fullName}}</mat-card-title>
@@ -18,27 +30,27 @@
       <mat-card-content>
         <ng-template #notHuman>
           <div class="alert alert-danger" role="alert">
-            <div>Esta cuenta no es una persona.</div>
+            <div>Esta cuenta no es una persona. Por lo tanto, no contiene información personal asociada.</div>
           </div>
         </ng-template>
         <div *ngIf="user.isHuman;else notHuman">
           <h2>Datos personales</h2>
           <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
-            <mat-form-field *ngIf="user.isHuman" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+            <mat-form-field fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>CURP</mat-label>
               <input matInput placeholder="CURP" formControlName="curp">
             </mat-form-field>
-            <mat-form-field *ngIf="user.role=='Alumnos' && user.isHuman" fxFlex="0 1 calc(33% - 5px)"
-              fxFlex.lt-lg="100%" appearance="outline">
+            <mat-form-field *ngIf="(user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendido')"
+              fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>NIEV</mat-label>
               <input matInput placeholder="NIEV" formControlName="niev">
             </mat-form-field>
-            <mat-form-field *ngIf="(user.role=='rofesores'|| user.role=='Administrativos') && user.isHuman"
-              fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+            <mat-form-field *ngIf="user.role=='Profesores'||user.role=='Administrativos'" fxFlex="0 1 calc(33% - 5px)"
+              fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>RFC</mat-label>
               <input matInput placeholder="RFC" formControlName="rfc">
             </mat-form-field>
-            <mat-form-field *ngIf="user.isHuman" fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+            <mat-form-field fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>Fecha de nacimiento</mat-label>
               <input matInput [matDatepicker]="picker" (focus)="picker.open()" placeholder="Fecha de nacimiento"
                 color="primary" name="dob" formControlName="dob">
@@ -62,138 +74,140 @@
               </mat-radio-group>
             </div>
           </div>
-          <div class="text-center">
-            <button class="btn btn-info-outline" mat-button type="submit" [disabled]="!userForm.dirty">
-              <mat-icon class="{{userForm.dirty?'text-success':'text-muted'}}">save</mat-icon>Guardar
-            </button>
-          </div>
+
         </div>
         <!--  </mat-expansion-panel> -->
         <!--   parent form    -->
         <div *ngIf="user.role=='Alumnos' && user.isHuman">
           <h2>Datos de los representantes</h2>
-          <mat-accordion togglePosition="before">
-            <div class="card bg-transparent" formArrayName="parents">
-              <span class="card-name bg-transparent"></span>
-              <div class="my-2" *ngFor="let parent of parents.controls; let j=index">
-                <div [formGroupName]="j">
-                  <mat-expansion-panel appMaterialElevation [raisedElevation]="raisedElev">
-                    <mat-expansion-panel-header>
-
-                      <mat-panel-description>
-                        <div *ngIf="parent.get('relationType')?.value=='Otro';else relationType">
-                          {{parent.get('relationType')?.value}}
+          <button mat-button type="button" (click)="addParent()">
+            <mat-icon class="text-success">add</mat-icon>&nbsp;Agrega padre o tutor
+          </button>
+          <ng-template #noParents>
+            <div class="alert alert-warning" role="alert">
+              <div>No hay representantes registrados.</div>
+            </div>
+          </ng-template>
+          <mat-accordion *ngIf="parents.controls.length>0;else noParents" togglePosition="before"
+            formArrayName="parents">
+            <div *ngFor="let parent of parents.controls; let j=index">
+              <div [formGroupName]="j">
+                <mat-expansion-panel appMaterialElevation [raisedElevation]="raisedElev">
+                  <mat-expansion-panel-header>
+                    <mat-panel-description>
+                      <div *ngIf="parent.get('relationType')?.value=='Otro';else relationType">
+                        {{parent.get('relationType')?.value}}
+                      </div>
+                      <ng-template #relationType>
+                        {{parent.get('relationType')?.value}}
+                      </ng-template>
+                    </mat-panel-description>
+                    <mat-panel-title>
+                      {{parent.get('givenName')?.value}}&nbsp;{{parent.get('familyName')?.value}}
+                    </mat-panel-title>
+                    <fa-icon class="text-danger" [icon]="faTrashAlt" size="lg" mat-icon-button
+                      (click)="removeParent(j)"></fa-icon>
+                  </mat-expansion-panel-header>
+                  <!-- <form [formGroup]="parentForm" novalidate (ngSubmit)="onSubmitParent()"> -->
+                  <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
+                    <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+                      <mat-label>Nombre(s)</mat-label>
+                      <input matInput placeholder="Nombre(s)" formControlName="givenName">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+                      <mat-label>Apellido(s)</mat-label>
+                      <input matInput placeholder="Apellido(s)" formControlName="familyName">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
+                    <div fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%">
+                      <mat-label for="relation">Parentezco: </mat-label>
+                      <mat-radio-group fxLayout="row wrap" fxLayoutAlign="cener center" name="relation" color="primary"
+                        formControlName="relationType">
+                        <mat-radio-button class="mx-2" value="Madre">
+                          Madre
+                        </mat-radio-button>
+                        <mat-radio-button class="mx-2" value="Padre">
+                          Padre
+                        </mat-radio-button>
+                        <mat-radio-button class="mx-2" value="Otro">
+                          Otro
+                        </mat-radio-button>
+                        <div *ngIf="parent.get('relationType')?.value=='Otro'">
+                          <mat-form-field class="d-flex" appearance="outline">
+                            <mat-label>Parentesco</mat-label>
+                            <input matInput placeholder="Parentesco" formControlName="relationCustom">
+                          </mat-form-field>
                         </div>
-                        <ng-template #relationType>
-                          {{parent.get('relationType')?.value}}
-                        </ng-template>
-                      </mat-panel-description>
-                      <mat-panel-title>
-                        {{parent.get('givenName')?.value}}&nbsp;{{parent.get('familyName')?.value}}
-                      </mat-panel-title>
-                      <fa-icon class="text-danger" [icon]="faTrashAlt" size="lg" mat-icon-button
-                        (click)="removeParent(j)"></fa-icon>
-                    </mat-expansion-panel-header>
-                    <!-- <form [formGroup]="parentForm" novalidate (ngSubmit)="onSubmitParent()"> -->
-                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
-                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
-                        <mat-label>Nombre(s)</mat-label>
-                        <input matInput placeholder="Nombre(s)" formControlName="givenName">
-                      </mat-form-field>
-                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
-                        <mat-label>Apellido(s)</mat-label>
-                        <input matInput placeholder="Apellido(s)" formControlName="familyName">
-                      </mat-form-field>
+                      </mat-radio-group>
                     </div>
-                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
-                      <div fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%">
-                        <mat-label for="relation">Parentezco: </mat-label>
-                        <mat-radio-group fxLayout="row wrap" fxLayoutAlign="cener center" name="relation"
-                          color="primary" formControlName="relationType">
-                          <mat-radio-button class="mx-2" value="Madre">
-                            Madre
-                          </mat-radio-button>
-                          <mat-radio-button class="mx-2" value="Padre">
-                            Padre
-                          </mat-radio-button>
-                          <mat-radio-button class="mx-2" value="Otro">
-                            Otro
-                          </mat-radio-button>
-                          <div *ngIf="parent.get('relationType')?.value=='Otro'">
-                            <mat-form-field class="d-flex" appearance="outline">
-                              <mat-label>Parentesco</mat-label>
-                              <input matInput placeholder="Parentesco" formControlName="relationCustom">
-                            </mat-form-field>
-                          </div>
-                        </mat-radio-group>
-                      </div>
-                      <div fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%">
-                        <mat-label for="gender">Genero: </mat-label>
-                        <mat-radio-group fxLayout="row wrap" fxLayoutAlign="cener center" name="gender" color="primary"
-                          formControlName="gender">
-                          <mat-radio-button class="mx-2" value="Hombre">
-                            Hombre
-                          </mat-radio-button>
-                          <mat-radio-button class="mx-2" value="Mujer">
-                            Mujer
-                          </mat-radio-button>
-                        </mat-radio-group>
-                      </div>
+                    <div fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%">
+                      <mat-label for="gender">Genero: </mat-label>
+                      <mat-radio-group fxLayout="row wrap" fxLayoutAlign="cener center" name="gender" color="primary"
+                        formControlName="gender">
+                        <mat-radio-button class="mx-2" value="Hombre">
+                          Hombre
+                        </mat-radio-button>
+                        <mat-radio-button class="mx-2" value="Mujer">
+                          Mujer
+                        </mat-radio-button>
+                      </mat-radio-group>
                     </div>
-                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
-                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
-                        <mat-label>CURP</mat-label>
-                        <input matInput placeholder="CURP" formControlName="curp">
-                      </mat-form-field>
-                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
-                        <mat-label>Correo electrónico</mat-label>
-                        <input matInput placeholder="Correo electrónico" formControlName="email">
-                      </mat-form-field>
-                    </div>
-                    <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
-                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-md="100%" appearance="outline">
-                        <mat-label>Dirección</mat-label>
-                        <input matInput placeholder="Calle/Av., Num.Int./Ext." formControlName="streetAddress">
-                      </mat-form-field>
-                      <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-md="100%" appearance="outline">
-                        <mat-label>Colonia</mat-label>
-                        <input matInput placeholder="Colonia, barrio o fraccionamiento" formControlName="neighborhood">
-                      </mat-form-field>
-                    </div>
-                    <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
-                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"
-                        fxFlex.lt-md="100%" appearance="outline">
-                        <mat-label>Código Postal</mat-label>
-                        <input matInput #postalCode maxlength="5" placeholder="Código Postal" type="number"
-                          formControlName="postalCode">
-                        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-                      </mat-form-field>
-                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"
-                        fxFlex.lt-md="100%" appearance="outline">
-                        <mat-label>Estado</mat-label>
-                        <mat-select placeholder="Estado" formControlName="state"
-                          (selectionChange)="onEstadoChange($event.value)">
-                          <mat-option *ngFor="let state of statesNames" [value]="state">
-                            {{ state }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"
-                        fxFlex.lt-md="100%" appearance="outline">
-                        <mat-label>Municipio</mat-label>
-                        <mat-select placeholder="Municipio" formControlName="municipio">
-                          <mat-option *ngFor="let municipio of municipiosNames" [value]="municipio">
-                            {{ municipio }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)"
-                        fxFlex.lt-md="100%" appearance="outline">
-                        <mat-label>Ciudad</mat-label>
-                        <input matInput placeholder="Ciudad" formControlName="city">
-                      </mat-form-field>
-                    </div>
-                    <!-- <div formArrayName="phones">
+                  </div>
+                  <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
+                    <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+                      <mat-label>CURP</mat-label>
+                      <input matInput placeholder="CURP" formControlName="curp">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
+                      <mat-label>Correo electrónico</mat-label>
+                      <input matInput placeholder="Correo electrónico" formControlName="email">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
+                    <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-md="100%" appearance="outline">
+                      <mat-label>Dirección</mat-label>
+                      <input matInput placeholder="Calle/Av., Num.Int./Ext." formControlName="streetAddress">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="0 1 calc(50% - 5px)" fxFlex.lt-md="100%" appearance="outline">
+                      <mat-label>Colonia</mat-label>
+                      <input matInput placeholder="Colonia, barrio o fraccionamiento" formControlName="neighborhood">
+                    </mat-form-field>
+                  </div>
+                  <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
+                    <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)" fxFlex.lt-md="100%"
+                      appearance="outline">
+                      <mat-label>Código Postal</mat-label>
+                      <input matInput #postalCode maxlength="5" placeholder="Código Postal" type="number"
+                        formControlName="postalCode">
+                      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)" fxFlex.lt-md="100%"
+                      appearance="outline">
+                      <mat-label>Estado</mat-label>
+                      <mat-select placeholder="Estado" formControlName="state"
+                        (selectionChange)="onEstadoChange($event.value)">
+                        <mat-option *ngFor="let state of statesNames" [value]="state">
+                          {{ state }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)" fxFlex.lt-md="100%"
+                      appearance="outline">
+                      <mat-label>Municipio</mat-label>
+                      <mat-select placeholder="Municipio" formControlName="municipio">
+                        <mat-option *ngFor="let municipio of municipiosNames" [value]="municipio">
+                          {{ municipio }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="0 1 calc(25% - 5px)" fxFlex.lt-lg="0 1 calc(50% - 10px)" fxFlex.lt-md="100%"
+                      appearance="outline">
+                      <mat-label>Ciudad</mat-label>
+                      <input matInput placeholder="Ciudad" formControlName="city">
+                    </mat-form-field>
+                  </div>
+                  <!-- <div formArrayName="phones">
                       <div *ngFor="let phone of phones.controls; let i=index">
                         <div [formGroupName]="i" fxLayout="row wrap" fxLayoutGap="5px"
                           fxLayoutAlign="space-around center">
@@ -218,19 +232,13 @@
                         <button mat-icon-button type="button" (click)="addPhone()">Añadir teléfono</button>
                       </p>
                     </div> -->
-                    <div class="text-center">
-                      <button class="btn btn-info-outline" mat-button type="submit" [disabled]="!parent.dirty">
-                        <mat-icon class="{{parent.dirty?'text-success':'text-muted'}}">save</mat-icon>Guardar
-                      </button>
-                    </div>
-                    <!-- </form> -->
-                  </mat-expansion-panel>
-                </div>
-              </div>
-              <div class="text-center">
-                <button mat-button type="button" (click)="addParent()">
-                  <mat-icon class="text-success">add</mat-icon>&nbsp;Agrega padre o tutor
-                </button>
+                  <div class="text-center">
+                    <button class="btn btn-info-outline" mat-button type="submit" [disabled]="!parent.dirty">
+                      <mat-icon class="{{parent.dirty?'text-success':'text-muted'}}">save</mat-icon>Guardar
+                    </button>
+                  </div>
+                  <!-- </form> -->
+                </mat-expansion-panel>
               </div>
             </div>
           </mat-accordion>

@@ -17,7 +17,7 @@ const routes: Routes = [
 
       },
       {
-        path: 'edit/:id', component: UserDetailsComponent,
+        path: ':id', component: UserDetailsComponent,
         resolve: { user: AccountResolver },
         data: { breadcrumb: 'Edita usuario' },
 
