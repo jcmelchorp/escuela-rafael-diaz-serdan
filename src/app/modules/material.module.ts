@@ -46,13 +46,28 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MaterialElevationDirective } from './material-elevation.directive';
 import { ParallaxDirective } from './parallax.directive';
 import { MyCustomPaginatorIntl } from './my-custom-paginator-intl';
-
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD-MM-YYYY',
+  },
+  display: {
+    dateInput: 'MMM DD, YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @NgModule({
   declarations: [MaterialElevationDirective, ParallaxDirective],
-  providers: [{ provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl }],
+  providers: [
+    { provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
   exports: [
     ParallaxDirective,
     MaterialElevationDirective,
+    MomentDateModule,
     A11yModule,
     DragDropModule,
     LayoutModule,

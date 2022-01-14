@@ -40,12 +40,12 @@
               <mat-label>CURP</mat-label>
               <input matInput placeholder="CURP" formControlName="curp">
             </mat-form-field>
-            <mat-form-field *ngIf="(user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendido')"
+            <mat-form-field *ngIf="(user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendidos')"
               fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>NIEV</mat-label>
               <input matInput placeholder="NIEV" formControlName="niev">
             </mat-form-field>
-            <mat-form-field *ngIf="user.role=='Profesores'||user.role=='Administrativos'" fxFlex="0 1 calc(33% - 5px)"
+            <mat-form-field *ngIf="user.role=='Profesores'|| user.role=='Administrativos'" fxFlex="0 1 calc(33% - 5px)"
               fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>RFC</mat-label>
               <input matInput placeholder="RFC" formControlName="rfc">

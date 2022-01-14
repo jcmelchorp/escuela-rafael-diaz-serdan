@@ -14,7 +14,10 @@ import { map, tap } from 'rxjs/operators';
 import states from './states.json';
 import { selectedAccountById } from '@rds-accounts/state/accounts.selectors';
 import { PhoneType } from '@rds-auth/models/user-parent.model';
+import * as _moment from 'moment';
+import { Moment } from 'moment';
 
+const moment = _moment;
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -53,7 +56,7 @@ export class UserDetailsComponent implements OnInit {
       }),
       map((user) => {
         if (user) {
-          (user && (user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendido'))
+          (user && (user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendidos'))
             ? this.fillStudentForm(user)
             : this.fillUserForm(user);
         }
@@ -71,8 +74,8 @@ export class UserDetailsComponent implements OnInit {
   fillStudentForm(user?: Partial<User>) {
     this.userForm = this.fb.group({
       curp: new FormControl(user?.curp),
-      niev: new FormControl({ value: user?.niev, disabled: !user.isAdmin }),
-      dob: new FormControl(new Date(user?.dob)),
+      niev: new FormControl(user?.niev),
+      dob: new FormControl(moment(user?.dob, "DD/MM/YYYY")),
       gender: new FormControl(user?.gender),
       parents: this.fb.array(
         user?.parents
@@ -86,7 +89,7 @@ export class UserDetailsComponent implements OnInit {
     this.userForm = this.fb.group({
       curp: new FormControl(user?.curp),
       rfc: new FormControl(user?.rfc),
-      dob: new FormControl(new Date(user?.dob)),
+      dob: new FormControl(moment(user?.dob, "DD/MM/YYYY")),
       gender: new FormControl(user?.gender),
     });
   }
@@ -102,6 +105,8 @@ export class UserDetailsComponent implements OnInit {
       }
       if (name == 'role')
         postUser[name] = this.userForm.controls[name].value;
+      if (name == 'dob')
+        postUser[name] = moment(this.userForm.controls[name].value, "DD/MM/YYYY").toDate().toLocaleDateString();
     });
 
     console.log(postUser);
