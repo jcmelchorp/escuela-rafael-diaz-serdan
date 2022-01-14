@@ -1,21 +1,9 @@
-<ng-template #spinner>
-  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
-    <mat-spinner strokeWidth="5" [diameter]="50">
-    </mat-spinner>
-    <span>Buscando ...</span><br>
-  </div>
-</ng-template>
-<div class="p-4">
+<div class="py-4">
   <p class="view-title">Usuarios</p>
   <p class="view-subtitle">Cuentas de usuarios.</p>
-  <!--  <nav class="sticky-top" mat-tab-nav-bar [backgroundColor]="background" mat-stretch-tabs>
-    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.route]" (click)="activeLink = link"
-      [active]="activeLink == link" routerLinkActive="active">
-      <mat-icon>{{link.icon}}</mat-icon>&nbsp;&nbsp;
-      <div>{{link.label}}</div>
-    </a>
-  </nav> -->
-  <router-outlet></router-outlet>
+  <div class="p-4">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 <button class="mat-fab-bottom-right mat-elevation-z8" mat-fab color="primary" matTooltip="Nuevo usuario"
   (click)="onCreateUser()">

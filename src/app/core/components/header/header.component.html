@@ -11,8 +11,12 @@
       <button mat-button [matMenuTriggerFor]="webapp">
         Aplicación
       </button>
-      <a class="text-decoration-none fancy-button" mat-button href="http://rds.edu.mx/envivo" target="_blank">RDS
-        <span>TV</span></a>
+      <a mat-button class="text-decoration-none" href="http://rds.edu.mx/envivo" target="_blank">
+        <span>Canal</span>&nbsp;<fa-icon [icon]="faYoutube"></fa-icon>
+      </a>
+      <a mat-button class="no-hover" href="http://tablaperiodica-rds.web.app" target="_blank">
+        <span> Tabla Periódica</span>&nbsp;<mat-icon>science</mat-icon>
+      </a>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
       <!-- <span>{{myDate|date:'full':'es-MX'}}</span> -->
@@ -36,10 +40,35 @@
       <fa-icon matListIcon [icon]="faSlidersH" size="lg"></fa-icon>
       <span>&nbsp;Configuración</span>
     </div>
-    <div mat-menu-item *ngIf="isOnline" (click)="onLogout(user.id)">
-      <fa-icon matListIcon [icon]="faSignOutAlt" size="lg"></fa-icon>
-      <span>&nbsp;Cerrar Sesión</span>
-    </div>
+    <mat-accordion>
+      <mat-expansion-panel [class.mat-elevation-z0]="true" (opened)="panelOpenState = true"
+        (closed)="canLogout = true;panelOpenState = false" (click)="$event.stopPropagation();"
+        hideToggle="panelOpenState">
+        <mat-expansion-panel-header>
+          <mat-icon matListIcon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </mat-expansion-panel-header>
+        <mat-nav-list role="list" dense>
+          <mat-list-item class="right text-danger" (click)="onLogout()" role="listitem">
+            <mat-icon>directions_run</mat-icon><span>Salir</span>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <!-- <mat-accordion displayMode="flat">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header (click)="$event.stopPropagation();">
+          <mat-panel-title>
+            <mat-icon *ngIf="!canLogout">logout</mat-icon>
+            <span *ngIf="!canLogout">Cerrar sesión</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item class="text-danger" *ngIf="canLogout">¿Deseas salir?</mat-list-item>
+          <mat-list-item *ngIf="canLogout" (click)="cancel()">Cancelar</mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion> -->
   </ng-template>
 </mat-menu>
 <mat-menu #escuela="matMenu">

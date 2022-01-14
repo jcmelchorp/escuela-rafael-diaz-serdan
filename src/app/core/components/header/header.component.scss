@@ -1,13 +1,19 @@
+.mat-expansion-panel-body {
+  padding: 0 !important;
+  margin-top: -10px;
+}
+.mat-expansion-panel-header {
+  margin-left: -10px !important;
+}
+.mat-nav-list .mat-list-item.right .mat-list-item-content {
+  justify-content: flex-end;
+}
 .mat-toolbar {
   min-height: 50px !important;
   .mat-toolbar-row {
     max-height: 50px !important;
   }
 }
-.fancy-button {
+a:hover {
   color: white;
-  span {
-    font-size: 1.5rem;
-    font-family: "Rubik", "sans-serif";
-  }
 }

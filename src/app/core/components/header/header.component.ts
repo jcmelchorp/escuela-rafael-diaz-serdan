@@ -5,17 +5,18 @@ import { Store } from '@ngrx/store';
 import {
   faDoorClosed,
   faDoorOpen,
-  faSignOutAlt,
   faSlidersH,
 } from '@fortawesome/free-solid-svg-icons';
 import { AppState } from '@rds-store/app.state';
 import { LoginDialogComponent } from '@rds-auth/components';
 import { User } from '@rds-auth/models/user.model';
 import { signOut } from '@rds-auth/state/auth.actions';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
   @Input()
@@ -32,9 +33,9 @@ export class HeaderComponent {
   faSlidersH = faSlidersH;
   faDoorOpen = faDoorOpen;
   faDoorClosed = faDoorClosed;
-  faSignOutAlt = faSignOutAlt;
+  faYoutube = faYoutube;
   isDoorOpen: boolean = false;
-
+  canLogout!: boolean;
   constructor(
     private layoutService: LayoutService,
     private dialog: MatDialog,
@@ -61,5 +62,9 @@ export class HeaderComponent {
   onLogout(id: string) {
     this.isDoorOpen = false;
     this.store.dispatch(signOut({ id }));
+  }
+  prepareForLogout(): void {
+
+    this.canLogout = true;
   }
 }

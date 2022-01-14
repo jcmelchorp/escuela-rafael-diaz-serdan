@@ -19,21 +19,21 @@ const routes: Routes = [
       },
       {
         path: 'i',
-        loadChildren: () => import('./information/information.module').then(
+        loadChildren: () => import('@rds-info/information.module').then(
           m => m.InformationModule),
       },
       {
         path: 'u',
         loadChildren: () => import('@rds-accounts/accounts.module').then(
           m => m.AccountsModule),
-        canActivate: [TeachersGuard],
+        canActivate: [(TeachersGuard || AdminGuard)],
       },
       {
         path: 'e',
         loadChildren: () => import('@rds-school/school.module').then(
           m => m.SchoolModule),
         data: { breadcrumb: '' },
-        canActivate: [AdminGuard],
+        canActivate: [(TeachersGuard || AdminGuard)],
       },
       {
         path: 'p',
@@ -45,13 +45,13 @@ const routes: Routes = [
         path: 'g',
         loadChildren: () => import('@rds-classroom/classroom.module').then(
           (m) => m.ClassroomModule),
-        canActivate: [AuthGuard],
+        canActivate: [(TeachersGuard || AdminGuard)],
       },
       {
         path: 'profe',
         loadChildren: () => import('@rds-teachers/school-teachers.module').then(
           (m) => m.SchoolTeachersModule),
-        canActivate: [TeachersGuard],
+        canActivate: [(TeachersGuard || AdminGuard)],
       },
       {
         path: 'config',
@@ -61,7 +61,8 @@ const routes: Routes = [
       {
         path: 'admin',
         loadChildren: () => import('@rds-admin/admin.module').then(
-          m => m.AdminModule)
+          m => m.AdminModule),
+        canActivate: [(TeachersGuard || AdminGuard)],
       },
       {
         path: '**',
