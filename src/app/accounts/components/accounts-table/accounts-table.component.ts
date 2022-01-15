@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from '@rds-shared/components';
-import { ChangeGradeComponent, UserEditDialogComponent } from '..';
+import { ChangeGradeComponent, MigrationProgressComponent, UserEditDialogComponent } from '..';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
@@ -141,12 +141,30 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   editRole(id: string) {
     this.accountsEntityService.update({ id: id, role: this.fastRole.value });
   }
-  saveAsJson(data) {
-    const fileName = 'users'
-    const exportType = 'json'
-
-    exportFromJSON({ data, fileName, exportType })
+  sendToFirestore() {
+    const accounts: User[] = [];
+    this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
+    const dialogRef = this.dialog.open(MigrationProgressComponent, {
+      width: '500px',
+      height: '400px',
+      data: { users: accounts, target: 'firestore' }
+    })
   }
+  sendToRTDB() {
+    const accounts: User[] = [];
+    this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
+    const dialogRef = this.dialog.open(MigrationProgressComponent, {
+      width: '500px',
+      height: '400px',
+      data: { users: accounts, target: 'database' }
+    })
+  }
+  exportAsJson() {
+    const fileName = 'users';
+    const exportType = 'json';
+    this.accountsEntityService.entities$.subscribe((data) => exportFromJSON({ data, fileName, exportType })).unsubscribe();
+  }
+
   onEditUser(user?: User) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {
       width: '60%',

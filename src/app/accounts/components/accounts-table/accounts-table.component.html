@@ -19,9 +19,9 @@
         <mat-icon>cloud_sync</mat-icon>
         <span>Enviar a Realtime-Database</span>
       </button>
-      <button mat-menu-item (click)="saveAsJson(filteredEntities)">
-        <mat-icon>cloud_sync</mat-icon>
-        <span>Exportar JSON</span>
+      <button mat-menu-item (click)="exportAsJson()">
+        <mat-icon>data_object</mat-icon>
+        <span>Exportar todo JSON</span>
       </button>
     </mat-menu>
     <form [formGroup]="filterValues">
@@ -150,11 +150,11 @@
         <td mat-cell *matCellDef="let row">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
             <button appMaterialElevation [matTooltip]="'Cuenta de Usuario'" mat-icon-button (click)="onEditUser(row)">
-              <mat-icon class="text-secondary">account_circle</mat-icon>
+              <mat-icon class="text-secondary">manage_accounts</mat-icon>
             </button>
             <button *ngIf="row.role !== 'Otros'" appMaterialElevation matTooltip="Datos personales {{row.id}}"
               mat-icon-button [routerLink]="['..',row.id]">
-              <mat-icon class="text-secondary">account_box</mat-icon>
+              <mat-icon class="text-secondary">badge</mat-icon>
             </button>
           </div>
         </td>

@@ -33,7 +33,6 @@ export class AccountsComponent implements OnInit {
   background: ThemePalette = undefined;
   subscription: Subscription;
   constructor(
-    private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog,
   ) {
     this.navLinks = [
@@ -78,22 +77,5 @@ export class AccountsComponent implements OnInit {
       }
     });
   }
-  sendToFirestore() {
-    const accounts: User[] = [];
-    this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
-    const dialogRef = this.dialog.open(MigrationProgressComponent, {
-      width: '500px',
-      height: '400px',
-      data: { users: accounts, target: 'firestore' }
-    })
-  }
-  sendToRTDB() {
-    const accounts: User[] = [];
-    this.accountsEntityService.entities$.subscribe((resp) => { accounts.push(...resp) }).unsubscribe();
-    const dialogRef = this.dialog.open(MigrationProgressComponent, {
-      width: '500px',
-      height: '400px',
-      data: { users: accounts, target: 'database' }
-    })
-  }
+
 }
