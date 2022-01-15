@@ -1,21 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemePalette } from '@angular/material/core';
-
-import { Store } from '@ngrx/store';
-
 import { Observable, Subscription } from 'rxjs';
 import { NewAccountConfirmComponent } from './../../components/new-account-confirm/new-account-confirm.component';
 import { NewAccountComponent } from './../../components/new-account/new-account.component';
-import { selectAccounts } from './../../state/accounts.selectors';
 import { User } from '@rds-auth/models/user.model';
 import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
-import { AppState } from '@rds-store/app.state';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
-import { AccountsDomainService } from '../../services/accounts-domain.service';
 import { MigrationProgressComponent } from '../../components/migration-progress/migration-progress.component';
-import { AccountsService } from '@rds-accounts/services';
 
 
 @Component({
@@ -23,7 +16,7 @@ import { AccountsService } from '@rds-accounts/services';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss'],
 })
-export class AccountsComponent implements OnInit, OnDestroy {
+export class AccountsComponent implements OnInit {
   loaded$: Observable<boolean>;
   loading$: Observable<boolean>;
   users$: Observable<User[]>;
@@ -41,10 +34,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   constructor(
     private accountsEntityService: AccountsEntityService,
-    private store: Store<AppState>,
     private dialog: MatDialog,
-    private fb: FormBuilder,
-    private accountsDomainService: AccountsDomainService
   ) {
     this.navLinks = [
       {
@@ -62,62 +52,9 @@ export class AccountsComponent implements OnInit, OnDestroy {
     ];
     this.activeLink = this.navLinks[0]
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+
   ngOnInit(): void {
-    this.users$ = this.store.select(selectAccounts);
-    this.accountsDomainService.handleAdminLoad();
-    this.gradeKeys = Object.keys(this.grades);
-    this.roleKeys = Object.keys(this.roles);
-    this.filterValues = this.fb.group({
-      grade: new FormControl(),
-      role: new FormControl(),
-      name: new FormControl(),
-      suspended: new FormControl(),
-    });
-    this.subscription = this.filterValues.valueChanges.subscribe((changes) => {
-      Object.keys(changes).forEach(
-        (key) => changes[key] == null && delete changes[key]
-      );
-      Object.keys(changes).includes('name') && changes.name !== ''
-        ? (changes.name = { fullName: changes['name'] })
-        : delete changes.name;
-      return this.accountsEntityService.setFilter(changes);
-    });
-    this.filteredEntities$ = this.accountsEntityService.filteredEntities$;
 
-    this.count$ = this.accountsEntityService.count$;
-    this.loaded$ = this.accountsEntityService.loaded$;
-    this.loading$ = this.accountsEntityService.loading$;
-  }
-  applyFilterString() {
-    const nameForm = this.filterValues.get('name')?.value;
-    const gradeForm = this.filterValues.get('grade')?.value;
-    const roleForm = this.filterValues.get('role')?.value;
-    const suspendedForm = this.filterValues.get('suspended')?.value;
-
-    const name =
-      nameForm === undefined || nameForm == null || nameForm == ''
-        ? ''
-        : nameForm;
-    const grade =
-      gradeForm === undefined || gradeForm == null || gradeForm == ''
-        ? ''
-        : gradeForm;
-    const role =
-      roleForm === undefined || roleForm == null || roleForm == ''
-        ? ''
-        : roleForm;
-    const suspended =
-      suspendedForm === undefined ||
-        suspendedForm == null ||
-        suspendedForm == ''
-        ? ''
-        : suspendedForm.toString();
-    const filter = JSON.parse(
-      JSON.stringify({ name: { fullName: name }, grade: grade, role: this.roles[role], suspended: suspended })
-    );
   }
   onCreateUser() {
     let firebaseUser: User;

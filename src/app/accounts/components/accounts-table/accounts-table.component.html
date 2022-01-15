@@ -104,9 +104,39 @@
           </div>
         </th>
         <td mat-cell *matCellDef="let row">
-          {{row.name&&(column.propertyName.includes('givenName')||column.propertyName.includes('familyName'))
-          ? row.name[column.propertyName]
-          : row[column.propertyName]}}
+          <!-- Name column -->
+          <div
+            *ngIf="row.name&&(column.propertyName==='givenName'||column.propertyName==='familyName');else commonProp">
+            {{row.name[column.propertyName]}}
+          </div>
+          <!-- Columns which is NOT name -->
+          <ng-template #commonProp>
+            <!-- Role column -->
+            <div *ngIf="column.propertyName=='role'" fxLayout="row" fxLayoutAlign="start center">
+              <button *ngIf="(row.isRoleEditable||isEditable)" mat-icon-button
+                (click)="row.isRoleEditable=!row.isRoleEditable;this.fastRole.setValue(row.role);isEditable=!isEditable">
+                <mat-icon class="scaled-icon {{(row.isRoleEditable||!isEditable)?'text-danger':'text-secondary'}}">
+                  {{row.isRoleEditable?'close':'edit'}}
+                </mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="row.isRoleEditable"
+                (click)="editRole(row.id);row.isRoleEditable=!row.isRoleEditable;fastRole.reset()">
+                <mat-icon class="scaled-icon text-success">done</mat-icon>
+              </button>
+              <div *ngIf="!row.isRoleEditable">{{row[column.propertyName]}}</div>
+              <mat-form-field *ngIf="row.isRoleEditable" floatLabel="never">
+                <mat-select [formControl]="fastRole">
+                  <mat-option *ngFor="let key of roleKeys" [value]="key|titlecase">
+                    {{key|titlecase}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+            <div *ngIf="column.propertyName!=='role'">{{row[column.propertyName]}} </div>
+          </ng-template>
+
+
         </td>
       </ng-container>
       <!-- Actions-->
@@ -118,8 +148,8 @@
             <button appMaterialElevation [matTooltip]="'Cuenta de Usuario'" mat-icon-button (click)="onEditUser(row)">
               <mat-icon class="text-secondary">account_circle</mat-icon>
             </button>
-            <button appMaterialElevation matTooltip="Datos personales {{row.id}}" mat-icon-button
-              [routerLink]="['..',row.id]">
+            <button *ngIf="row.role !== 'Otros'" appMaterialElevation matTooltip="Datos personales {{row.id}}"
+              mat-icon-button [routerLink]="['..',row.id]">
               <mat-icon class="text-secondary">account_box</mat-icon>
             </button>
           </div>

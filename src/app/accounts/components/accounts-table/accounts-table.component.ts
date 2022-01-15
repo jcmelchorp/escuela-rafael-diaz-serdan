@@ -33,9 +33,11 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   gradeKeys: string[];
   grades = SchoolLevel;
   filterValues: FormGroup;
+  fastRole: FormControl = new FormControl();
   filteredEntities$: Observable<User[]>;
   selection = new SelectionModel<User>(true, []);
   subscription: Subscription;
+  isEditable: boolean = true;
   columnsToDisplay = [
     {
       propertyName: 'givenName',
@@ -87,7 +89,8 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
     this.filteredEntities$ = this.accountsEntityService.filteredEntities$
       .pipe(
         tap(users => {
-          this.dataSource = new MatTableDataSource(users);
+          const editableUsers = users.map(user => { return { ...user, isRoleEditable: false, isGradeEditable: false } });
+          this.dataSource = new MatTableDataSource(editableUsers);
           /* this.dataSource.sort = this.sort;
           if (this.paginator) {
             this.paginator.pageSize = 10;
@@ -134,7 +137,9 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
       'actions',
     ];
   }
-
+  editRole(id: string) {
+    this.accountsEntityService.update({ id: id, role: this.fastRole.value });
+  }
   onEditUser(user?: User) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {
       width: '60%',

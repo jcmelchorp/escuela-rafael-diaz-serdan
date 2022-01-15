@@ -56,7 +56,11 @@ export class UserDetailsComponent implements OnInit {
       }),
       map((user) => {
         if (user) {
-          (user && (user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendidos'))
+          (user && (user.role == 'Alumnos' ||
+            user.role == 'Baja' ||
+            user.role == 'Suspendidos' ||
+            user.role == 'Graduados' ||
+            user.role == 'Inactivos'))
             ? this.fillStudentForm(user)
             : this.fillUserForm(user);
         }

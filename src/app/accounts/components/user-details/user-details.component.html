@@ -40,7 +40,8 @@
               <mat-label>CURP</mat-label>
               <input matInput placeholder="CURP" formControlName="curp">
             </mat-form-field>
-            <mat-form-field *ngIf="(user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendidos')"
+            <mat-form-field
+              *ngIf="(user.role == 'Alumnos' || user.role == 'Baja' || user.role == 'Suspendidos' || user.role == 'Graduados' || user.role == 'Inactivos')"
               fxFlex="0 1 calc(33% - 5px)" fxFlex.lt-lg="100%" appearance="outline">
               <mat-label>NIEV</mat-label>
               <input matInput placeholder="NIEV" formControlName="niev">
