@@ -4212,6 +4212,11 @@ exit-on-epipe@~1.0.1:
   resolved "https://registry.npmjs.org/exit-on-epipe/-/exit-on-epipe-1.0.1.tgz"
   integrity sha512-h2z5mrROTxce56S+pnvAV890uu7ls7f1kEvVGJbw1OlFH3/mlJ5bkXu0KRyW94v37zzHPiUd55iLn3DA7TjWpw==
 
+export-from-json@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/export-from-json/-/export-from-json-1.4.1.tgz#7700516406b4c0b6d1a279d3e4dfb6254b109bcb"
+  integrity sha512-7kg3g55+jKUTu13w0byDBTZIr4pR/yBlusqWuBCF3pukbyUC8wTsqRmqqTHELWXkCzdik7n/qSPGVvZC7sSuVQ==
+
 express@^4.17.1:
   version "4.17.2"
   resolved "https://registry.npmjs.org/express/-/express-4.17.2.tgz"

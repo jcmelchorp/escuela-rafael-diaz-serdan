@@ -45,6 +45,7 @@
     "chart.js": "^3.4.0",
     "chartjs-plugin-annotation": "^0.5.7",
     "chartjs-plugin-datalabels": "^2.0.0",
+    "export-from-json": "^1.4.1",
     "firebase": "^9.4.0",
     "moment": "^2.29.1",
     "ng2-charts": "^3.0.5",

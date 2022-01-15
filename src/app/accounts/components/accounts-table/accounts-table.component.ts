@@ -17,6 +17,7 @@ import { AppState } from '@rds-store/app.state';
 import { selectAccounts } from '@rds-accounts/state/accounts.selectors';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import exportFromJSON from 'export-from-json';
 
 @Component({
   selector: 'app-accounts-table',
@@ -139,6 +140,12 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   }
   editRole(id: string) {
     this.accountsEntityService.update({ id: id, role: this.fastRole.value });
+  }
+  saveAsJson(data) {
+    const fileName = 'users'
+    const exportType = 'json'
+
+    exportFromJSON({ data, fileName, exportType })
   }
   onEditUser(user?: User) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {

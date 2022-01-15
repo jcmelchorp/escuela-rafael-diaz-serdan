@@ -19,6 +19,10 @@
         <mat-icon>cloud_sync</mat-icon>
         <span>Enviar a Realtime-Database</span>
       </button>
+      <button mat-menu-item (click)="saveAsJson(filteredEntities)">
+        <mat-icon>cloud_sync</mat-icon>
+        <span>Exportar JSON</span>
+      </button>
     </mat-menu>
     <form [formGroup]="filterValues">
       <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">
