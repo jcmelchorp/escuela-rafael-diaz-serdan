@@ -18,7 +18,11 @@ import { selectAccounts } from '@rds-accounts/state/accounts.selectors';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import exportFromJSON from 'export-from-json';
-
+import * as XLSX from 'xlsx';
+import { ExportService } from '@rds-shared/services/export.service';
+import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-accounts-table',
   templateUrl: './accounts-table.component.html',
@@ -39,6 +43,7 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   selection = new SelectionModel<User>(true, []);
   subscription: Subscription;
   isEditable: boolean = true;
+  faFileExcel = faFileExcel;
   columnsToDisplay = [
     {
       propertyName: 'givenName',
@@ -67,6 +72,7 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   constructor(
     private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog,
+    private exportService: ExportService,
     private store: Store<AppState>,
     private fb: FormBuilder,
   ) { }
@@ -163,6 +169,9 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
     const fileName = 'users';
     const exportType = 'json';
     this.accountsEntityService.entities$.subscribe((data) => exportFromJSON({ data, fileName, exportType })).unsubscribe();
+  }
+  exportAsXls() {
+    this.exportService.exportExcel(this.dataSource.data, 'users');
   }
 
   onEditUser(user?: User) {

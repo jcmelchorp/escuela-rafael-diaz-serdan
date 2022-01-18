@@ -11,18 +11,22 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="sendToFirestore()">
-        <mat-icon>cloud_sync</mat-icon>
+      <div mat-menu-item (click)="sendToFirestore()">
+        <mat-icon matListIcon>cloud_sync</mat-icon>
         <span>Enviar a Firestore</span>
-      </button>
-      <button mat-menu-item (click)="sendToRTDB()">
+      </div>
+      <div mat-menu-item (click)="sendToRTDB()">
         <mat-icon>cloud_sync</mat-icon>
         <span>Enviar a Realtime-Database</span>
-      </button>
-      <button mat-menu-item (click)="exportAsJson()">
+      </div>
+      <div mat-menu-item (click)="exportAsJson()">
         <mat-icon>data_object</mat-icon>
-        <span>Exportar todo JSON</span>
-      </button>
+        <span>Exportar JSON</span>
+      </div>
+      <div mat-menu-item (click)="exportAsXls()">
+        <mat-icon>folder_shared</mat-icon>
+        <span>Exportar XLS</span>
+      </div>
     </mat-menu>
     <form [formGroup]="filterValues">
       <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap="5px">

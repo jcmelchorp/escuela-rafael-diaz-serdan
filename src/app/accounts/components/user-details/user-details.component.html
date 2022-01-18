@@ -60,7 +60,7 @@
             </mat-form-field>
           </div>
           <div fxLayout="row wrap" fxLayout.lt-lg="column" fxLayoutGap="5px">
-            <div *ngIf="user.isHuman" fxLayout="row wrap" fxLayoutAlign="cener center">
+            <div fxLayout="row wrap" fxLayoutAlign="cener center">
               <mat-label for="gender">Genero: </mat-label>
               <mat-radio-group name="gender" color="primary" formControlName="gender">
                 <mat-radio-button class="mx-2" value="Hombre">
@@ -75,11 +75,14 @@
               </mat-radio-group>
             </div>
           </div>
-
         </div>
-        <!--  </mat-expansion-panel> -->
-        <!--   parent form    -->
-        <div *ngIf="user.role=='Alumnos' && user.isHuman">
+        <div *ngIf="(
+            user.role == 'Alumnos' ||
+            user.role == 'Baja' ||
+            user.role == 'Suspendidos' ||
+            user.role == 'Graduados' ||
+            user.role == 'Inactivos'
+            )">
           <h2>Datos de los representantes</h2>
           <button mat-button type="button" (click)="addParent()">
             <mat-icon class="text-success">add</mat-icon>&nbsp;Agrega padre o tutor
@@ -208,31 +211,31 @@
                       <input matInput placeholder="Ciudad" formControlName="city">
                     </mat-form-field>
                   </div>
-                  <!-- <div formArrayName="phones">
-                      <div *ngFor="let phone of phones.controls; let i=index">
-                        <div [formGroupName]="i" fxLayout="row wrap" fxLayoutGap="5px"
-                          fxLayoutAlign="space-around center">
-                          <mat-form-field fxFlex="0 1 calc(40% - 5px)" appearance="outline">
-                            <mat-label>Telefono</mat-label>
-                            <input matInput type="text" formControlName="value">
-                          </mat-form-field>
-                          <mat-form-field fxFlex="0 1 calc(40% - 5px)" appearance="outline">
-                            <mat-label>Tipo de teléfono</mat-label>
-                            <mat-select placeholder="Tipo de teléfono" formControlName="type">
-                              <mat-option *ngFor="let phoneKey of phoneKeys" [value]="phoneEnum[phoneKey]">
-                                {{ phoneEnum[phoneKey] }}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
-                          <button mat-icon-button (click)="removeSkill(i)">
-                            <fa-icon class="text-danger" [icon]="faTrashAlt" size="lg"></fa-icon>
-                          </button>
-                        </div>
+                  <div formArrayName="phones">
+                    <div *ngFor="let phone of phones.controls; let i=index">
+                      <div [formGroupName]="i" fxLayout="row wrap" fxLayoutGap="5px"
+                        fxLayoutAlign="space-around center">
+                        <mat-form-field fxFlex="0 1 calc(40% - 5px)" appearance="outline">
+                          <mat-label>Telefono</mat-label>
+                          <input matInput type="text" formControlName="value">
+                        </mat-form-field>
+                        <mat-form-field fxFlex="0 1 calc(40% - 5px)" appearance="outline">
+                          <mat-label>Tipo de teléfono</mat-label>
+                          <mat-select placeholder="Tipo de teléfono" formControlName="type">
+                            <mat-option *ngFor="let phoneKey of phoneKeys" [value]="phoneEnum[phoneKey]">
+                              {{ phoneEnum[phoneKey] }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <button mat-icon-button (click)="removeSkill(i)">
+                          <fa-icon class="text-danger" [icon]="faTrashAlt" size="lg"></fa-icon>
+                        </button>
                       </div>
-                      <p>
-                        <button mat-icon-button type="button" (click)="addPhone()">Añadir teléfono</button>
-                      </p>
-                    </div> -->
+                    </div>
+                    <p>
+                      <button mat-icon-button type="button" (click)="addPhone()">Añadir teléfono</button>
+                    </p>
+                  </div>
                   <div class="text-center">
                     <button class="btn btn-info-outline" mat-button type="submit" [disabled]="!parent.dirty">
                       <mat-icon class="{{parent.dirty?'text-success':'text-muted'}}">save</mat-icon>Guardar

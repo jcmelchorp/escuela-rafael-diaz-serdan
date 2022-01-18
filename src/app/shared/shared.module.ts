@@ -2,9 +2,10 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { sharedServices } from './services';
 import { sharedComponents } from './components';
 import { commonModules, formsModules, uiModules } from '@rds-modules/index';
+import { ExportDirective } from '@rds-modules/exports.directive';
 
 @NgModule({
-  declarations: [...sharedComponents],
+  declarations: [...sharedComponents, ExportDirective],
   imports: [...commonModules, ...formsModules, ...uiModules],
   exports: [...commonModules, ...formsModules, ...uiModules, ...sharedComponents],
   providers: [...sharedServices]
