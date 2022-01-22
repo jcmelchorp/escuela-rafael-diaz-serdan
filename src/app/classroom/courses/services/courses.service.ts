@@ -98,6 +98,22 @@ export class CoursesService {
     return response.result;
   }
   /**
+   * Patch a courses in Google Classroom
+   *
+   * @param resource Course object to be created.
+   */
+  async patchCourse(
+    courseId: string | number,
+    course: gapi.client.classroom.Course
+  ): Promise<gapi.client.classroom.Course> {
+    const response: gapi.client.Response<gapi.client.classroom.Course> =
+      await gapi.client.classroom.courses.patch({
+        id: courseId.toString(),
+        resource: course,
+      });
+    return response.result;
+  }
+  /**
    * Update a courses in Google Classroom
    *
    * @param resource Course object to be created.

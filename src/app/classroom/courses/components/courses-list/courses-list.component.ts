@@ -12,6 +12,7 @@ import { CourseState } from '@rds-classroom/models/classroom.enum';
 
 import { filter } from 'rxjs/operators';
 import { concat, Observable, Subject } from 'rxjs';
+import { CLASSROOM_COURSES_SCHEME } from '@rds-classroom/models/classroom.model';
 
 @Component({
   selector: 'app-courses-list',
@@ -26,11 +27,20 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<gapi.client.classroom.Course>;
-  public displayedColumns: string[] = ['courseState', 'name', 'section', 'room', 'creationTime'];
+  columnsToDisplay: any[] = [
+    { propertyName: 'courseState', label: 'Estado' },
+    { propertyName: 'name', label: 'Nombre de la clase' },
+    { propertyName: 'section', label: 'Grado' },
+    { propertyName: 'room', label: 'Cico Escolar' },
+    { propertyName: 'creationTime', label: 'Fecha de Creación' },
+    { propertyName: 'actions', label: '' },
+  ];
+  displayedColumns: any[] = [...this.columnsToDisplay.map(x => x.propertyName)];
   public dataSource: MatTableDataSource<gapi.client.classroom.Course>;
   public courseTotal$: Observable<number>;
   public filterSubject = new Subject<string>();
   public defaultSort: Sort = { active: 'name', direction: 'asc' };
+  dataSchema = CLASSROOM_COURSES_SCHEME;
   faEdit = faEdit;
   faStudents = faUserGraduate;
   faTeachers = faUserTie;
@@ -60,7 +70,9 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   ) {
     this.keys = Object.keys(this.states).filter(Number);
     this.courseTotal$ = this.courseEntityService.count$
-    this.courseEntityService.entities$.subscribe(courses => this.courses = courses);
+    this.courseEntityService.entities$.subscribe(courses => this.courses = courses.map(course => {
+      return { ...course, isSectionEditable: false, isNameEditable: false, isRoomEditable: false }
+    }));
   }
   ngOnInit(): void {
     this.searchFormInit();
@@ -80,7 +92,11 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
       //selectedStates: new FormControl()
     });
   }
-
+  editProperty(id: string, update: gapi.client.classroom.Course) {
+    console.log({ ...update });
+    console.log(JSON.parse(JSON.stringify({ ...update })));
+    this.courseEntityService.update(JSON.parse(JSON.stringify({ ...update, id: id })))
+  }
   /* this method well be called for each row in table  */
   getFilterPredicate() {
     return (row: gapi.client.classroom.Course, filters: string) => {

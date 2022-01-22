@@ -166,12 +166,20 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
     })
   }
   exportAsJson() {
-    const fileName = 'users';
+    const fileName = 'UsuariosRDS';
     const exportType = 'json';
     this.accountsEntityService.entities$.subscribe((data) => exportFromJSON({ data, fileName, exportType })).unsubscribe();
   }
   exportAsXls() {
-    this.exportService.exportExcel(this.dataSource.data, 'users');
+    const data = this.dataSource.data.map(user => {
+      return {
+        ...user,
+        givenName: user.name.givenName,
+        familyName: user.name.familyName,
+        fullName: user.name.fullName
+      }
+    })
+    this.exportService.exportExcel(data, 'users');
   }
 
   onEditUser(user?: User) {

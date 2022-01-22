@@ -37,73 +37,131 @@
       </form>
     </mat-expansion-panel>
   </mat-accordion>
-  <div class="table-container">
-    <mat-table class="full-width-table table-hover" matSort aria-label="Course work table">
-      <ng-container matColumnDef="courseState">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Estado</mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <div [ngSwitch]="row.courseState">
+  <table mat-table class="w-100" matSort aria-label="Course work table">
+    <ng-container [matColumnDef]="column.propertyName" *ngFor="let column of columnsToDisplay">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column.label}}</th>
+      <td mat-cell *matCellDef="let row">
+        <!-- <div [ngSwitch]="column.propertyName"> -->
+        <div *ngIf="column.propertyName==='actions'">
+          <button mat-icon-button [routerLink]="[row.id]">
+            <mat-icon style="transform: scale(0.75);" class="text-info">article</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="column.propertyName==='courseState'">
+          <div [ngSwitch]="row[column.propertyName]">
             <div *ngSwitchCase="'COURSE_STATE_UNSPECIFIED'">
               <fa-icon [icon]="faExclamation" size="lg"></fa-icon>
             </div>
             <div *ngSwitchCase="'ACTIVE'">
-              <fa-icon class="text-success" [icon]="faCheck" size="lg"></fa-icon>
+              <fa-icon class="text-success" matTooltip="Activo" [icon]="faCheck" size="lg"></fa-icon>
             </div>
             <div *ngSwitchCase="'ARCHIVED'">
-              <fa-icon class="text-warning" [icon]="faFileArchive" size="lg"></fa-icon>
+              <fa-icon class="text-warning" matTooltip="Archivado" [icon]="faFileArchive" size="lg"></fa-icon>
             </div>
             <div *ngSwitchCase="'PROVISIONED'">
-              <fa-icon class="text-info" [icon]="faScrewdriver" size="lg"></fa-icon>
+              <fa-icon class="text-info" matTooltip="Provisional" [icon]="faScrewdriver" size="lg"></fa-icon>
             </div>
             <div *ngSwitchCase="'DECLINED'">
-              <fa-icon class="text-danger" [icon]="faTimes" size="lg"></fa-icon>
+              <fa-icon class="text-danger" matTooltip="Rechazado" [icon]="faTimes" size="lg"></fa-icon>
             </div>
             <div *ngSwitchCase="'SUSPENDED'">
-              <fa-icon class="text-dark" [icon]="faBan" size="lg"></fa-icon>
+              <fa-icon class="text-dark" matTooltip="Suspendido" [icon]="faBan" size="lg"></fa-icon>
             </div>
           </div>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
-        <mat-cell class="dc-content" *matCellDef="let element">{{ element.name }}
-        </mat-cell>
-      </ng-container>
+        </div>
+        <div *ngIf="column.propertyName==='section'">
+          <div *ngIf="row.isSectionEditable; else plainText" class="d-block">
+            <button mat-icon-button (click)="row.isSectionEditable=!row.isSectionEditable">
+              <mat-icon style="transform: scale(0.75);" class="text-danger">close</mat-icon>
+            </button>
+            <button mat-icon-button (click)="
+            editProperty(row.id,{id:row.id,name:row.name,section:row.section,courseState:row.courseState});
+                  row.isSectionEditable=!row.isSectionEditable">
+              <mat-icon style="transform: scale(0.75);" class="text-success">done</mat-icon>
+            </button>
+            <mat-form-field floatLabel="never">
+              <mat-label>{{column.label}}</mat-label>
+              <input [type]="dataSchema[column.propertyName]" matInput [(ngModel)]="row[column.propertyName]">
+            </mat-form-field>
+          </div>
+          <ng-template #plainText>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <button mat-icon-button (click)="row.isSectionEditable=!row.isSectionEditable">
+                <mat-icon style="transform: scale(0.75);" class="text-warning">bolt</mat-icon>
+              </button>
+              <div class="text-truncate">{{row[column.propertyName]}}</div>
+            </div>
+          </ng-template>
+        </div>
+        <div *ngIf="column.propertyName==='name'">
+          <div *ngIf="row.isNameEditable; else plainText" class="d-block">
+            <button mat-icon-button (click)="row.isNameEditable=!row.isNameEditable">
+              <mat-icon style="transform: scale(0.75);" class="text-danger">close</mat-icon>
+            </button>
+            <button mat-icon-button (click)="
+            editProperty(row.id,{id:row.id,name:row.name,section:row.section,courseState:row.courseState});
+                  row.isNameEditable=!row.isNameEditable">
+              <mat-icon style="transform: scale(0.75);" class="text-success">done</mat-icon>
+            </button>
+            <mat-form-field floatLabel="never">
+              <mat-label>{{column.label}}</mat-label>
+              <input [type]="dataSchema[column.propertyName]" matInput [(ngModel)]="row[column.propertyName]">
+            </mat-form-field>
+          </div>
+          <ng-template #plainText>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <button mat-icon-button (click)="row.isNameEditable=!row.isNameEditable">
+                <mat-icon style="transform: scale(0.75);" class="text-warning">bolt</mat-icon>
+              </button>
+              <div class="text-truncate">{{row[column.propertyName]}}</div>
+            </div>
+          </ng-template>
+        </div>
+        <div *ngIf="column.propertyName==='room'">
+          <div *ngIf="row.isRoomEditable; else plainText" class="d-block">
+            <button mat-icon-button (click)="row.isRoomEditable=!row.isRoomEditable">
+              <mat-icon style="transform: scale(0.75);" class="text-danger">close</mat-icon>
+            </button>
+            <button mat-icon-button (click)="
+            editProperty(row.id,{id:row.id,name:row.name,section:row.section,courseState:row.courseState});
+                  row.isRoomEditable=!row.isRoomEditable">
+              <mat-icon style="transform: scale(0.75);" class="text-success">done</mat-icon>
+            </button>
+            <mat-form-field floatLabel="never">
+              <mat-label>{{column.label}}</mat-label>
+              <input [type]="dataSchema[column.propertyName]" matInput [(ngModel)]="row[column.propertyName]">
+            </mat-form-field>
+          </div>
+          <ng-template #plainText>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <button mat-icon-button (click)="row.isRoomEditable=!row.isRoomEditable">
+                <mat-icon style="transform: scale(0.75);" class="text-warning">bolt</mat-icon>
+              </button>
+              <div class="text-truncate">{{row[column.propertyName]}}</div>
+            </div>
+          </ng-template>
+        </div>
+        <div *ngIf="column.propertyName==='creationTime'">
+          {{ row[column.propertyName]|date:'MMM d, y, h:mm:ss a' }}
+        </div>
+        <!-- </div> -->
+      </td>
+    </ng-container>
 
-      <ng-container matColumnDef="section">
-        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Nivel</mat-header-cell>
-        <mat-cell class="dc-content" *matCellDef="let element">{{ element.section }}
-        </mat-cell>
-      </ng-container>
+    <ng-container matColumnDef="noRecord">
+      <tr mat-footer-cell *matFooterCellDef class="text-danger">
+        No hay resultados que coincidan con la búsqueda.
+      </tr>
+    </ng-container>
 
-      <ng-container matColumnDef="room">
-        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Grado</mat-header-cell>
-        <mat-cell class="dc-content" *matCellDef="let element">
-          {{ element.room }}
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="creationTime">
-        <mat-header-cell class="dc-label" *matHeaderCellDef mat-sort-header>Creado</mat-header-cell>
-        <mat-cell class="dc-content" *matCellDef="let element">
-          {{ element.creationTime|date:'short' }}
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="noRecord">
-        <mat-footer-cell *matFooterCellDef class="text-danger">
-          No hay resultados que coincidan con la búsqueda.
-        </mat-footer-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns" class="course-row" [routerLink]="[row.id]">
-      </mat-row>
-      <!-- Row shown when there is no matching data.-->
-      <mat-footer-row *matFooterRowDef="!dataSource.data.length ? ['noRecord'] : []" colSpan="3"
-        style="text-align: center;">
-      </mat-footer-row>
-    </mat-table>
-    <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageSize]="10" [pageIndex]="0"
-      [pageSizeOptions]="[5, 10, 20, 50, 100]">
-    </mat-paginator>
-  </div>
+    <th mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></th>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="course-row"></tr>
+    <!-- Row shown when there is no matching data.-->
+    <tr mat-footer-row *matFooterRowDef="!dataSource.data.length ? ['noRecord'] : []" colSpan="3"
+      style="text-align: center;">
+    </tr>
+  </table>
+  <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageSize]="10" [pageIndex]="0"
+    [pageSizeOptions]="[5, 10, 20, 50, 100]">
+  </mat-paginator>
 </div>

@@ -23,7 +23,7 @@ import { UserProfilesModule } from './user-profiles/user-profiles.module';
     ClassroomRoutingModule,
     UserProfilesModule,
     TeachersModule,
-    CoursesModule,
+    //CoursesModule,
     StudentsModule,
     AnnouncementsModule,
     EffectsModule.forFeature([UserProfileEffects])

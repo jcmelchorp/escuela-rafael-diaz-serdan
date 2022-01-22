@@ -112,3 +112,10 @@ export interface RoleSelectorId {
   studentId?: string;
   teacherId?: string
 }
+
+export const CLASSROOM_COURSES_SCHEME = {
+  name: 'text',
+  section: 'text',
+  room: 'text',
+  creationDate: 'date',
+}
