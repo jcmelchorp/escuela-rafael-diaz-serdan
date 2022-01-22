@@ -17,7 +17,8 @@
 @import url("https://fonts.googleapis.com/css?family=Dosis:300,400,500");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,500");
 @import url("https://fonts.googleapis.com/css2?family=Zen+Loop:ital@0;1&display=swap"); */
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap");
 $fontConfig: (
   display-4:
     mat.define-typography-level(112px, 112px, 300, "Fredoka One", -0.0134em),
@@ -35,7 +36,7 @@ $fontConfig: (
   body-2: mat.define-typography-level(14px, 24px, 300, "Poppins", 0.0179em),
   body-1: mat.define-typography-level(14px, 20px, 300, "Poppins", 0.0179em),
   button: mat.define-typography-level(14px, 14px, 400, "Poppins", 0.0893em),
-  caption: mat.define-typography-level(12px, 20px, 300, "Rubik", 0.0333em),
+  caption: mat.define-typography-level(12px, 20px, 300, "Poppins", 0.0333em),
   input: mat.define-typography-level(inherit, 1.125, 400, "Poppins", 1.5px),
 );
 // Foreground Elements

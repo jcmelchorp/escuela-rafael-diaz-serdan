@@ -1,5 +1,12 @@
 <mat-card>
   <mat-card-content>
-    <div class="school-background" [@flyInOut]="'flyInOut'"></div>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center start">
+      <div fxFlex="0 1 calc(70% - 10px)" fxFlex.lt-md="100%">
+        <img src="assets/images/rds-draw02.svg" class="img-fluid" alt="Poop Logo" />
+      </div>
+      <div class="dash-message" fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="100%">
+        En esta sección podrás administrar materias, grupos, alumnos y profesores, para cada período escolar.
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>
