@@ -14,9 +14,11 @@ import { SchoolClassroomDetailsComponent } from './school-classroom-details/scho
 import { SchoolCourseDialogComponent } from "./school-course-dialog/school-course-dialog.component";
 import { SchoolClassroomListComponent } from './school-classroom-list/school-classroom-list.component';
 import { SchoolPlaceholderComponent } from './school-placeholder/school-placeholder.component';
+import { AddSchoolCycleDialogComponent } from "./add-school-cycle-dialog/add-school-cycle-dialog.component";
 
 export const SCHOOL_COMPONENTS: any[] = [
   AddStudentsCoursesComponent,
+  AddSchoolCycleDialogComponent,
   SchoolActionButtonsComponent,
   SchoolClassroomGroupListComponent,
   SchoolClassroomDetailsComponent,
@@ -47,3 +49,4 @@ export * from "./school-course-dialog/school-course-dialog.component";
 export * from "./school-classroom-details/school-classroom-details.component";
 export * from "./school-classroom-list/school-classroom-list.component";
 export * from "./school-placeholder/school-placeholder.component";
+export * from "./add-school-cycle-dialog/add-school-cycle-dialog.component";
