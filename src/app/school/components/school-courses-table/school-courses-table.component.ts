@@ -16,6 +16,7 @@ import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/s
 import { User } from '@rds-auth/models/user.model';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { SchoolCourseDialogComponent } from '..';
+import { COURSE_SCHEME } from '../../models/school-schemes.model';
 @Component({
   selector: 'app-school-courses-table',
   templateUrl: './school-courses-table.component.html',
@@ -54,6 +55,7 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   displayedColumns: string[];
   groupByColumns: string[] = [];
   isLoading: boolean;
+  dataSchema = COURSE_SCHEME;
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
   constructor(
@@ -82,6 +84,10 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
         propertyName: 'teacherEmail',
         headerText: '',
       },
+      {
+        propertyName: 'isEdit',
+        headerText: '',
+      },
     ];
     this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
@@ -99,13 +105,17 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
     });
     this.displayedColumns = [...this.columnsToDisplay.map((column) => column.propertyName), 'actions'];
     this.groupByColumns = ['cycle', 'grade'];
+
+  }
+
+  ngOnInit() {
     this.loaded$ = this.schoolCoursesEntityService.loaded$;
     this.loading$ = this.schoolCoursesEntityService.loading$;
     this.courses$ = this.schoolCoursesEntityService.entities$;
     //this.teachers$ = this.schoolTeachersEntityService.entities$;
     this.filteredCourses$ = this.schoolCoursesEntityService.filteredEntities$.pipe(
       map(courses => {
-        this.courses = courses;
+        this.courses = courses.map(user => { return { ...user, isNameEditable: false, isTeacherEmailEditable: false } });
         this.dataSource.data = this.addTableGroups(this.courses, this.groupByColumns);
         this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
         this.dataSource.filter = performance.now().toString();
@@ -113,8 +123,6 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
       })
     );
   }
-
-  ngOnInit() { }
   openSchoolCourseDialog(course?: SchoolCourse) {
     console.log(course);
     const dialogRef = this.dialog.open(SchoolCourseDialogComponent, {
@@ -136,6 +144,9 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
         console.log('Dialog closed without changes')
       }
     });
+  }
+  editProperty(update: any) {
+    this.schoolCoursesEntityService.update(update);
   }
   groupBy(event, column) {
     event.stopPropagation();

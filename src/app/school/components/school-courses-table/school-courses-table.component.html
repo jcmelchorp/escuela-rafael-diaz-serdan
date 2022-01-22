@@ -1,10 +1,5 @@
 <ng-template #spinner>
-  <div style="min-height: 300px" fxLayout="column" fxLayoutAlign="center center">
-    <mat-spinner [diameter]="50" strokeWidth="5">
-    </mat-spinner>
-    <span>Buscando ...</span>
-    <br>
-  </div>
+  <app-spinner [spinnerText]="'Buscando Materias...'"></app-spinner>
 </ng-template>
 <div *ngIf="
     !(loading$ | async) && (loaded$ | async) && (filteredCourses$ | async);
@@ -23,32 +18,73 @@
           {{ column.headerText }}
         </button>
       </th>
-      <div [ngSwitch]="column.propertyName">
-        <div *ngSwitchCase="'cycle'">
-          <td *matCellDef="let row" mat-cell>
-            <!-- {{cycles[row[column.field]]}} -->
-          </td>
-        </div>
-        <div *ngSwitchCase="'grade'">
-          <td *matCellDef="let row" mat-cell>
+      <td *matCellDef="let row" mat-cell>
+        <div [ngSwitch]="column.propertyName">
+          <div *ngSwitchCase="'cycle'">
+          </div>
+          <div *ngSwitchCase="'grade'">
             <!-- {{ grades[row[column.propertyName]] }} -->
-          </td>
-        </div>
+          </div>
+          <div *ngSwitchCase="'name'">
+            <div *ngIf="row.isNameEditable; else plainText" class="d-block">
+              <button mat-icon-button (click)="row.isNameEditable = !row.isNameEditable">
+                <mat-icon style="transform: scale(0.75);" class="text-danger">close</mat-icon>
+              </button>
+              <button mat-icon-button (click)="
+              editProperty({id:row.id,name:row[column.propertyName]});
+                row.isNameEditable=!row.isNameEmailEditable">
+                <mat-icon style="transform: scale(0.75);" class="text-success">done</mat-icon>
+              </button>
+              <mat-form-field floatLabel="never">
+                <mat-label>{{column.headerText}}</mat-label>
+                <input [type]="dataSchema[column.propertyName]" matInput [(ngModel)]="row[column.propertyName]">
+              </mat-form-field>
+            </div>
+            <ng-template #plainText>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button (click)="row.isNameEditable = !row.isNameEditable">
+                  <mat-icon style="transform: scale(0.75);" class="text-warning">flash_on</mat-icon>
+                </button>
+                <div class="text-truncate">{{row[column.propertyName]}}</div>
+              </div>
+            </ng-template>
+          </div>
+          <div *ngSwitchCase="'teacherEmail'">
+            <div *ngIf="row.isTeacherEmailEditable; else plainText" class="d-block">
+              <button mat-icon-button (click)="row.isTeacherEmailEditable=!row.isTeacherEmailEditable">
+                <mat-icon style="transform: scale(0.75);" class="text-danger">close</mat-icon>
+              </button>
+              <button mat-icon-button (click)="
+              editProperty({id:row.id,teacherEmail:row[column.propertyName]});
+                row.isTeacherEmailEditable=!row.isTeacherEmailEditable">
+                <mat-icon style="transform: scale(0.75);" class="text-success">done</mat-icon>
+              </button>
+              <mat-form-field floatLabel="never">
+                <mat-label>{{column.headerText}}</mat-label>
+                <input [type]="dataSchema[column.propertyName]" matInput [(ngModel)]="row[column.propertyName]">
+              </mat-form-field>
+            </div>
+            <ng-template #plainText>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button (click)="row.isTeacherEmailEditable = !row.isTeacherEmailEditable">
+                  <mat-icon style="transform: scale(0.75);" class="text-warning">flash_on</mat-icon>
+                </button>
+                <div class="text-truncate">{{row[column.propertyName]}}</div>
+              </div>
+            </ng-template>
+          </div>
+          <span *ngSwitchDefault>
+            {{row[column.propertyName]}}
+          </span>
 
-        <div *ngSwitchDefault>
-          <td *matCellDef="let row" mat-cell>
-            {{ row[column.propertyName] }}
-          </td>
         </div>
-      </div>
+      </td>
     </ng-container>
     <!-- Actions -->
     <ng-container matColumnDef="actions">
       <th *matHeaderCellDef mat-header-cell></th>
       <td *matCellDef="let row" mat-cell>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-          <!-- <mat-icon color="accent" mat-icon-button matTooltip="Modifica la información de esta clase" >
-            edit</mat-icon> -->
           <button (click)="openStudentsToCourse(row)" mat-icon-button style="color: #9d8500"
             [matBadge]="(row.studentsEmails && row.studentsEmails.length > 0)? row.studentsEmails.length : null">
             <mat-icon matTooltip="Asigna alumnos a esta clase">groups</mat-icon>
@@ -59,8 +95,8 @@
             </mat-icon>
           </button>
           <button (click)="openSchoolCourseDialog(row)" mat-icon-button>
-            <mat-icon matTooltip="Modifica esta materia">
-              edit
+            <mat-icon class="text-info" matTooltip="Modifica esta materia">
+              fact_check
             </mat-icon>
           </button>
           <fa-icon [icon]="faAward" (click)="openTeacherToCourse(row)" style="color: #0a6100" mat-icon-button
@@ -92,14 +128,14 @@
           [ngClass]="{'cycle-header': (group.level===1),'grade-header':(group.level===2)}" class="mat-h{{ 4 - group.level }} border-bottom-0 px-{{
           group.level + 3
         }}">
-            {{ (group.level === 1) ? cycles[group[groupByColumns[group.level - 1]]] :
-            (group.level === 2) ? grades[group[groupByColumns[group.level - 1]]] :
-            [group[groupByColumns[group.level - 1]]] }} ({{ group.totalCounts }})
-            <mat-icon>{{ group.expanded ? "expand_more" : "chevron_right" }} </mat-icon>
+          {{ (group.level === 1) ? cycles[group[groupByColumns[group.level - 1]]] :
+          (group.level === 2) ? grades[group[groupByColumns[group.level - 1]]] :
+          [group[groupByColumns[group.level - 1]]] }} ({{ group.totalCounts }})
+          <mat-icon>{{ group.expanded ? "expand_more" : "chevron_right" }} </mat-icon>
         </td>
       </ng-container>
       <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="openSchoolCourseDialog(row)"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       <tr mat-footer-row *matFooterRowDef="['noData']" [hidden]="dataSource.data.length > 0"></tr>
       <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isTableGroup" (click)="groupHeaderClick(row)">
       </tr>

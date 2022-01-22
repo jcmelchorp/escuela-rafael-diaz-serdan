@@ -8,32 +8,31 @@
   background-color: rgba(85, 107, 47, 0.631);
   border-radius: 5px;
 }
-
-.mat-column-name {
+td.mat-column-priority,
+td.mat-column-actions {
+  width: fit-content;
+  max-width: 20%;
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 45% !important;
-  width: 100% !important;
+  //flex: 0 0 20% !important;
+  //width: 100% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
-
   word-break: break-word;
-
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
 }
-.mat-column-priority {
-  word-wrap: break-word !important;
+td.mat-column-teacherEmail,
+td.mat-column-name {
+  word-wrap: normal !important;
   white-space: unset !important;
-  flex: 0 0 15% !important;
-  width: 15% !important;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-
-  word-break: break-word;
-
+  flex: 0 0 50% !important;
+  width: fit-content;
+  max-width: 200px;
+  overflow-wrap: inherit;
+  word-break: auto;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;

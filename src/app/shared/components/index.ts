@@ -8,6 +8,7 @@ import { ParallaxSpaceComponent } from './parallax-space/parallax-space.componen
 import { DeleteButtonComponent } from './delete-button/delete-button.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { EmptyListComponent } from './empty-list/empty-list.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 export const sharedComponents: any[] = [
   BreadcrumbComponent,
   ConfirmDialogComponent,
@@ -18,6 +19,7 @@ export const sharedComponents: any[] = [
   InfoCardsComponent,
   NotFoundComponent,
   ParallaxSpaceComponent,
+  SpinnerComponent,
   UserCardComponent
 ];
 export * from './breadcrumb/breadcrumb.component';
@@ -30,3 +32,4 @@ export * from './not-found/not-found.component';
 export * from './parallax-space/parallax-space.component';
 export * from './user-card/user-card.component';
 export * from './empty-list/empty-list.component';
+export * from './spinner/spinner.component';
