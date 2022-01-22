@@ -16,7 +16,11 @@ export interface SchoolCourse {
   cycle: Cycle;
   /*  studentsEmails?: string[]; */
 }
-
+export interface SchoolCycle {
+  id: string;
+  label: string;
+  isCurrentDefault: boolean;
+}
 export interface ISchoolClassroom {
   id?: string;
   grade: SchoolLevel;

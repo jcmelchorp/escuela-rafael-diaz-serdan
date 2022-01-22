@@ -13,6 +13,8 @@ import { SchoolCoursesComponent } from './containers';
 import { SchoolPlaceholderComponent } from './components/school-placeholder/school-placeholder.component';
 import { SchoolGraduatesResolver } from './resolvers/school-graduates.resolver';
 import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
+import { SchoolCyclesResolver } from './resolvers/school-cycles.resolver';
+import { SchoolCyclesComponent } from './containers/school-cycles/school-cycles.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,13 @@ const routes: Routes = [
       {
         path: '',
         component: SchoolPlaceholderComponent,
+      },
+      {
+        //path: '',
+        path: 'p',
+        component: SchoolCyclesComponent,
+        data: { breadcrumb: 'Ciclo Escolar' },
+        resolve: { cycles: SchoolCyclesResolver },
       },
       {
         //path: '',
@@ -51,6 +60,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SchoolCoursesResolver, SchoolStudentsResolver, SchoolClassroomsResolver, SchoolTeachersResolver, AccountsResolver]
+  providers: [SchoolCoursesResolver, SchoolStudentsResolver, SchoolClassroomsResolver, SchoolTeachersResolver, AccountsResolver, SchoolCyclesResolver]
 })
 export class SchoolRoutingModule { }

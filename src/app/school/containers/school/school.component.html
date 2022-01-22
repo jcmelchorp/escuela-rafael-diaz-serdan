@@ -2,14 +2,13 @@
   <p class="view-subtitle">Administra grupos, clases, alumnos y profesores en la institución.</p>
   <p class="view-title">Dirección</p>
   <nav class="fixed-top" mat-tab-nav-bar mat-stretch-tabs>
-    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.route]" routerLinkActive="active">
+    <a mat-tab-link class="text-reset" *ngFor="let link of navLinks" [routerLink]="[link.route]"
+      (click)="activeLink = link" [active]="activeLink == link">
       <mat-icon>{{link.icon}}</mat-icon>&nbsp;&nbsp;
       <div>{{link.label}}</div>
     </a>
   </nav>
-  <div class="py-4">
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet></router-outlet>
 </div>
 <button mat-fab id="new-user" matTooltip="Nuevo usuario" (click)="openSaveUser()">
   <mat-icon>person_add</mat-icon>

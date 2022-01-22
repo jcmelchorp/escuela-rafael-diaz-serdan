@@ -10,6 +10,7 @@ import * as fromSchoolCourses from '@rds-store/school/school-courses';
 import * as fromSchoolClassrooms from '@rds-store/school/school-classrooms';
 import * as fromSchoolTeachers from '@rds-store/school/school-teachers';
 import * as fromSchoolStudents from '@rds-store/school/school-students';
+import * as fromSchoolCycles from '@rds-store/school/school-cycles';
 import * as fromAnnouncement from '@rds-store/classroom/announcement';
 import * as fromCourse from '@rds-store/classroom/course';
 import * as fromCourseWork from '@rds-store/classroom/course-work';
@@ -23,7 +24,7 @@ import * as fromStudentSubmission from '@rds-store/classroom/student-submission'
 
 import { AccountDomain } from '@rds-accounts/models/account-domain.model';
 import { Score } from '@rds-profile/models/score.model';
-import { SchoolCourse } from '@rds-school/models/school-course.model';
+import { SchoolCourse, SchoolCycle } from '@rds-school/models/school-course.model';
 import { SchoolClassroom } from '../../school/models/school-course.model';
 
 
@@ -89,6 +90,22 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticUpsert: false,
     },
   },
+  [fromSchoolCycles.entityCollectionName]: {
+    sortComparer: (a: SchoolCycle, b: SchoolCycle) => (a.label < b.label ? -1 : 1),
+    filterFn: (entities: SchoolCycle[], { id, label, isCurrentDefault }: Partial<SchoolCycle>) =>
+      entities
+        .filter((e) => (id ? e.id.includes(id) : true))
+        .filter((e) => (label ? e.label.includes(label) : true))
+        .filter((e) => (isCurrentDefault ? e.isCurrentDefault === isCurrentDefault : true)),
+    selectId: (SchoolCycle: SchoolCycle) => SchoolCycle.id,
+    entityDispatcherOptions: {
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
+    },
+  },
   [fromSchoolClassrooms.entityCollectionName]: {
     sortComparer: (a: SchoolClassroom, b: SchoolClassroom) => a.grade.localeCompare(b.grade),
     filterFn: (entities: SchoolClassroom[], { id, grade, cycle }: Partial<SchoolClassroom>) =>
@@ -116,105 +133,96 @@ export const entityMetadata: EntityMetadataMap = {
     },
     selectId: (score: Score) => score.id,
   },
-  /* [fromSchoolTeachers.entityCollectionName]: {
-    filterFn: (entities: User[], { name, primaryEmail, curp }: Partial<User>) =>
-      entities
-        .filter((e) =>
-          name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true
-        )
-        .filter((e) => (primaryEmail ? e.primaryEmail.includes(primaryEmail) : true))
-        .filter((e) => (curp ? e.curp.includes(curp) : true)),
-    selectId: (user: User) => user.id,
-    entityDispatcherOptions: {
-      optimisticAdd: false,
-      optimisticUpdate: false,
-      optimisticSaveEntities: false,
-    },
-  },
-  [fromSchoolStudents.entityCollectionName]: {
 
-    filterFn: (entities: User[], { name, primaryEmail, curp }: Partial<User>) =>
-      entities
-        .filter((e) =>
-          name && e.name ? e.name.fullName.toLowerCase().includes(name.fullName) : true
-        )
-        .filter((e) => (primaryEmail ? e.primaryEmail.includes(primaryEmail) : true))
-        .filter((e) => (curp ? e.curp.includes(curp) : true)),
-    selectId: (user: User) => user.id,
-    entityDispatcherOptions: {
-      optimisticAdd: false,
-      optimisticUpdate: false,
-      optimisticSaveEntities: false,
-    },
-  }, */
   [fromCourse.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (course: gapi.client.classroom.Course) => course.id,
   },
   [fromStudent.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (student: gapi.client.classroom.Student) => student.userId,
   },
   [fromTeacher.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (teacher: gapi.client.classroom.Teacher) => teacher.userId,
   },
   [fromCourseWork.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (courseWork: gapi.client.classroom.CourseWork) => courseWork.id,
   },
   [fromUserProfile.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (profile: gapi.client.classroom.UserProfile) => profile.id,
   },
   [fromGuardian.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (guardian: gapi.client.classroom.UserProfile) => guardian.id,
   },
   [fromAnnouncement.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (announcement: gapi.client.classroom.Announcement) =>
       announcement.id,
   },
   [fromStudentSubmission.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (studentSubmission: gapi.client.classroom.StudentSubmission) =>
       studentSubmission.id,
   },
   [fromTopic.entityCollectionName]: {
     entityDispatcherOptions: {
-      optimisticAdd: true,
-      optimisticUpdate: true,
-      optimisticSaveEntities: true,
+      optimisticAdd: false,
+      optimisticUpdate: false,
+      optimisticSaveEntities: false,
+      optimisticDelete: false,
+      optimisticUpsert: false,
     },
     selectId: (topics: gapi.client.classroom.Topic) => topics.topicId,
   },
@@ -224,8 +232,7 @@ const pluralNames = {
   [fromAccountDomain.entityCollectionName]: fromAccountDomain.pluralizedEntityName,
   [fromAccount.entityCollectionName]: fromAccount.pluralizedEntityName,
   [fromSchoolCourses.entityCollectionName]: fromSchoolCourses.pluralizedEntityName,
-  [fromSchoolTeachers.entityCollectionName]: fromSchoolTeachers.pluralizedEntityName,
-  [fromSchoolStudents.entityCollectionName]: fromSchoolStudents.pluralizedEntityName,
+  [fromSchoolCycles.entityCollectionName]: fromSchoolCycles.pluralizedEntityName,
   [fromSchoolClassrooms.entityCollectionName]: fromSchoolClassrooms.pluralizedEntityName,
   [fromScores.entityCollectionName]: fromScores.pluralizedEntityName,
   [fromCourse.entityCollectionName]: fromCourse.pluralizedEntityName,

@@ -11,6 +11,7 @@ import { fadeInAnimation, heightReveal } from '@rds-shared/animations/fade-in.an
 })
 export class SchoolComponent implements OnInit {
   navLinks: any[];
+  activeLink = undefined;
   selectedId: string;
   //cycleKeys;
   //cycles = Cycle;
@@ -23,16 +24,19 @@ export class SchoolComponent implements OnInit {
   ngOnInit(): void {
     this.navLinks = [
       {
+        label: 'Ciclo Escolar',
+        icon: 'history',
+        route: 'p',
+      },
+      {
         label: 'Materias',
         icon: 'auto_stories',
         route: 'm',
-        index: 1
       },
       {
         label: 'Inscripciones',
         icon: 'follow_the_signs',
         route: 'i',
-        index: 0
       }
     ];
   }
