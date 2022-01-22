@@ -9,6 +9,7 @@ import { ConfigEffects } from './state/config.effects';
 import { configFeatureKey, configReducer } from './state/config.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
   declarations: [...coreComponents, ...coreContainers],
   imports: [SharedModule,

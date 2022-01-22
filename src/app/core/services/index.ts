@@ -3,7 +3,7 @@ import { ThemeService } from './theme.service';
 
 export const coreServices: any[] = [
   LayoutService,
-  ThemeService
+  ThemeService,
 ];
 export * from './layout.service';
 export * from './theme.service';

@@ -60,6 +60,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content [@onMainContentChange]="(onSideNavChange && !isHandset) ? 'open': 'close'">
-    <app-main [isOnline]="isOnline"></app-main>
+    <app-main fxFill [isOnline]="isOnline"></app-main>
+    <app-footer class="sticky-bottom"></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

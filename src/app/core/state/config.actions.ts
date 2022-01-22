@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Cycle } from "@rds-school/models/school-course.model";
 
 export const toggleDarkMode = createAction(
   '[Core Theme] Toggle dark mode',
@@ -18,7 +19,7 @@ export const saveDarkMode = createAction(
   props<{ isDark: boolean }>()
 );
 export const removeDarkMode = createAction(
-  '[Core Theme] Check dark mode',
+  '[Core Theme] Remove dark mode',
 );
 export const setDarkMode = createAction(
   '[Core Theme] Set dark mode',
@@ -31,11 +32,9 @@ export const setDarkModeSuccess = createAction(
 export const setDarkModeFail = createAction(
   '[Core Theme] Set dark mode fail',
   props<{ error: any }>()
-
 );
 export const changeDarkMode = createAction(
   '[Core Theme] Change dark mode',
   props<{ isDark: boolean }>()
 );
-
 
