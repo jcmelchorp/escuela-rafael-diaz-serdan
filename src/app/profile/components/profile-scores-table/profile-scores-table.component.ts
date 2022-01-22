@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, SimpleChange, SimpleChanges, OnChanges } from '@angular/core';
 
 import { faComments } from '@fortawesome/free-regular-svg-icons';
 import { Score, ScoreListItem } from '../../models/score.model';
@@ -18,7 +18,7 @@ import { ScoreListItemDataSource } from './score-list-item.datasource';
     ]),
   ],
 })
-export class ProfileScoresTableComponent implements OnInit {
+export class ProfileScoresTableComponent implements OnInit, OnChanges {
   @Input() data: Score;
   copyData: ScoreListItem[] = [];
   extraData: ScoreListItem[];
@@ -29,16 +29,24 @@ export class ProfileScoresTableComponent implements OnInit {
   formative: ScoreListItemDataSource;
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
-
+  ngOnChanges(changes: SimpleChanges): void {
+    const dataChange: SimpleChange = changes.data;
+    if (dataChange.currentValue) {
+      this.data = dataChange.currentValue;
+      this.prepareData();
+    }
+  }
   ngOnInit() {
-    console.log(this.data.scores)
+    this.prepareData();
+  }
+  prepareData() {
+    this.copyData = [];
     this.copyData.push(...this.data.scores);
     this.formative = new ScoreListItemDataSource(this.copyData);
     //this.avgData = this.copyData.splice(-1, 1).pop();
     this.extraData = this.copyData.splice(-2, 2);
     this.optative = new ScoreListItemDataSource(this.extraData)
   }
-
   getAverage() {
     let sum1: number = 0;
     let sum2: number = 0;

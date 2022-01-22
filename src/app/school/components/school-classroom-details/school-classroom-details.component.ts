@@ -34,7 +34,6 @@ export class SchoolClassroomDetailsComponent implements OnInit, OnDestroy, OnCha
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private schoolClassroomsEntityService: SchoolClassroomsEntityService,
     private accountsEntityService: AccountsEntityService,
-    private schoolClassroomsService: SchoolClassroomsService,
   ) { }
   ngOnChanges(changes: SimpleChanges) {
     const courses: SchoolCourse[] = [];

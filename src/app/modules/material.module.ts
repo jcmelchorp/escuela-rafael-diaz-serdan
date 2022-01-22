@@ -15,7 +15,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { ErrorStateMatcher, MatNativeDateModule, MatRippleModule, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -48,6 +48,7 @@ import { ParallaxDirective } from './parallax.directive';
 import { MyCustomPaginatorIntl } from './my-custom-paginator-intl';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MomentDateModule } from '@angular/material-moment-adapter';
+import { ExportDirective } from './exports.directive';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD-MM-YYYY',
@@ -60,10 +61,12 @@ export const MY_DATE_FORMATS = {
   },
 };
 @NgModule({
-  declarations: [MaterialElevationDirective, ParallaxDirective],
+  declarations: [MaterialElevationDirective, ParallaxDirective, ExportDirective],
   providers: [
     { provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl },
-    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }],
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+  ],
   exports: [
     ParallaxDirective,
     MaterialElevationDirective,

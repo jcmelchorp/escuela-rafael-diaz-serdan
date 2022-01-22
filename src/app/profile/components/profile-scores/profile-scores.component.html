@@ -2,63 +2,55 @@
   <mat-icon>arrow_back_ios</mat-icon>
 </button>
 <div *ngIf="timeOpenScores;else comeBack">
-  <div *ngIf="!(isTeacher$|async)&&(user$|async) as user;else onlyStudents" [@fadeIn]="'fadeIn'">
+  <div *ngIf="!(isTeacher$|async)&&(cycles$|async)&&(user$|async) as user;else onlyStudents" [@fadeIn]="'fadeIn'">
     <!--  <div>{{|json}}</div> -->
-    <div *ngIf="(loaded$|async)&&selectedScore|async as score;else spinner" class="card bg-transparent">
+    <div class="card bg-transparent">
       <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between start">
         <strong class="color-rds"> Calificaciones</strong>
         <small class="text-secondary">Fecha de consulta: {{today|date:'dd/MM/yyyy h:mm:ss a'}}</small>
       </h2>
       <div class="card-body">
-        <form [formGroup]="cycleForm">
-          <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+        <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+          <form [formGroup]="cycleForm">
             <mat-form-field fxFlex="0 1 calc(50% -10px)" appearance="outline">
               <mat-label>Ciclo escolar</mat-label>
-              <mat-select formControlName="cycle" placeholder="Ciclo escolar"
-                (selectionChanges)="getScoresByCycle($event)">
-                <mat-option *ngFor="let cycleKey of cycleKeys" [value]="cycleKey">
-                  {{cycles[cycleKey]}}
+              <mat-select formControlName="cycleId" placeholder="Ciclo escolar">
+                <mat-option *ngFor="let cycle of cycles" [value]="cycle.id">
+                  {{cycle.label}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div>
-              <button mat-button (click)="generatePDF('print')">
-                <mat-icon class="rds-icon">print</mat-icon>&nbsp;Imprimir
-              </button>
-              <button mat-button (click)="generatePDF('download')">
-                <mat-icon class="rds-icon">file_download</mat-icon>&nbsp;Descargar
-              </button>
-              <button mat-button (click)="generatePDF('open')">
-                <fa-icon class="rds-icon" [icon]="faFilePdf" size="lg"></fa-icon>&nbsp;Ver como PDF
-              </button>
-            </div>
+          </form>
+          <div>
+            <button mat-button (click)="generatePDF('print')">
+              <mat-icon class="rds-icon">print</mat-icon>&nbsp;Imprimir
+            </button>
+            <button mat-button (click)="generatePDF('download')">
+              <mat-icon class="rds-icon">file_download</mat-icon>&nbsp;Descargar
+            </button>
+            <button mat-button (click)="generatePDF('open')">
+              <fa-icon class="rds-icon" [icon]="faFilePdf" size="lg"></fa-icon>&nbsp;Ver como PDF
+            </button>
           </div>
-        </form>
-
+        </div>
       </div>
-      <app-profile-scores-table *ngIf="user.level!='Preescolar'" [data]="score"></app-profile-scores-table>
-      <app-profile-scores-list *ngIf="user.level=='Preescolar'" [data]="score"></app-profile-scores-list>
-      <div *ngIf="user.level!='Preescolar'" class="card-footer ">
-        <h3 class="text-center">Recomendaciones</h3>
-        <app-profile-scores-recomendation [data]="score.notes"></app-profile-scores-recomendation>
-        <h3 class="text-center d-print-none">Estadísticas</h3>
-        <app-profile-scores-bar-chart class="d-print-none" [data]="score.scores">
-        </app-profile-scores-bar-chart>
+      <div *ngIf="(loaded$|async) && (selectedScore$|async) as score;else spinner">
+        <app-profile-scores-table *ngIf="user.level!='Preescolar'" [data]="score[0]"></app-profile-scores-table>
+        <app-profile-scores-list *ngIf="user.level=='Preescolar'" [data]="score[0]"></app-profile-scores-list>
+        <div *ngIf="user.level!='Preescolar'" class="card-footer ">
+          <h3 class="text-center">Recomendaciones</h3>
+          <app-profile-scores-recomendation [data]="score[0].notes"></app-profile-scores-recomendation>
+          <h3 class="text-center d-print-none">Estadísticas</h3>
+          <app-profile-scores-bar-chart class="d-print-none" [data]="score[0].scores">
+          </app-profile-scores-bar-chart>
+        </div>
       </div>
-      <!--  <div *ngIf="user.level=='Preescolar'" class="card-footer ">
-      <h3 class="text-center">Recomendaciones</h3>
-      <app-profile-scores-recomendation [data]="user.currentGrades.notes"></app-profile-scores-recomendation>
-    </div> -->
     </div>
 
 
   </div>
   <ng-template #spinner>
-    <div style="min-height: 100px;" fxLayout="column" fxLayoutAlign="center center">
-      <mat-spinner strokeWidth="6" [diameter]="48">
-      </mat-spinner>
-      <span>Buscando ...</span><br>
-    </div>
+    <app-spinner [spinnerText]="'Buscando ...'"></app-spinner>
   </ng-template>
 </div>
 <ng-template #onlyStudents>

@@ -20,14 +20,8 @@ import { SCHOOL_SERVICES } from './services';
 import { ACCOUNTS_SERVICES } from '@rds-accounts/services';
 import { SchoolClassroomsDataService } from '@rds-store/school/school-classrooms/school-classrooms-data.service';
 import { SchoolClassroomsEntityService } from '@rds-store/school/school-classrooms/school-classrooms-entity.service';
-import { SchoolClassroomListComponent } from './components/school-classroom-list/school-classroom-list.component';
 import { SchoolCyclesDataService } from '@rds-store/school/school-cycles/school-cycles-data.service';
 import { SchoolCyclesEntityService } from '@rds-store/school/school-cycles/school-cycles-entity.service';
-import { SchoolCyclesComponent } from './containers/school-cycles/school-cycles.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { AddSchoolCycleDialogComponent } from './components/add-school-cycle-dialog/add-school-cycle-dialog.component';
 
 
 @NgModule({

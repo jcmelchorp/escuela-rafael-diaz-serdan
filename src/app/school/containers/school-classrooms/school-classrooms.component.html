@@ -1,5 +1,8 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="20px">
-  <div *ngIf="classrooms$|async as classrooms" fxFlex class="card bg-transparent">
+<div class="py-4" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start" fxLayoutGap="10px">
+  <ng-template #spinner>
+    <app-spinner [spinnerText]="'Buscando...'"></app-spinner>
+  </ng-template>
+  <div class="card bg-transparent" *ngIf="classrooms$|async as classrooms; else spinner" fxFlex.lt-md="100%">
     <div class="card-body">
       <div class="float-end">
         <button mat-icon-button [matMenuTriggerFor]="newMenu">
@@ -9,12 +12,24 @@
           <mat-icon matTooltip="Cargar archivo de Excel">upload</mat-icon>
         </button>
       </div>
+      <mat-menu #newMenu="matMenu" fxLayoutAlign="right">
+        <ng-template matMenuContent>
+          <div mat-menu-item (click)="openSchoolClassroomDialog()">Nuevo grupo</div>
+          <div mat-menu-item (click)="openSchoolCourseDialog()">Nueva materia</div>
+        </ng-template>
+      </mat-menu>
+      <mat-menu #fileMenu="matMenu" fxLayoutAlign="right">
+        <ng-template matMenuContent>
+          <div mat-menu-item (click)="loadClassroomFile()">Importar grupos</div>
+          <div mat-menu-item (click)="loadCoursesFile()">Importar materias</div>
+        </ng-template>
+      </mat-menu>
+      <app-school-classroom-list [classrooms]="classrooms" (onClassroomShow)="notify($event)"
+        (onCycleChange)="setFilter($event)">
+      </app-school-classroom-list>
     </div>
-    <app-school-classroom-list [classrooms]="classrooms" (onClassroomShow)="notify($event)"
-      (onCycleChange)="setFilter($event)">
-    </app-school-classroom-list>
   </div>
-  <div *ngIf="classroom$|async as classroom" fxFlex="0 1 calc(70% - 10px)" class="card bg-transparent">
+  <div class="card bg-transparent" *ngIf="classroom$|async as classroom" fxFlex fxFlex.lt-md="100%">
     <div class="card-body">
       <div class="float-end">
         <button mat-icon-button (click)="classroomToPDF(classroom)">
@@ -43,25 +58,3 @@
     </div>
   </div>
 </div>
-
-
-
-<mat-menu #newMenu="matMenu" fxLayoutAlign="right">
-  <ng-template matMenuContent>
-    <div mat-menu-item (click)="openSchoolClassroomDialog()">Nuevo grupo</div>
-    <div mat-menu-item (click)="openSchoolCourseDialog()">Nueva materia</div>
-  </ng-template>
-</mat-menu>
-<mat-menu #fileMenu="matMenu" fxLayoutAlign="right">
-  <ng-template matMenuContent>
-    <div mat-menu-item (click)="loadClassroomFile()">Importar grupos</div>
-    <div mat-menu-item (click)="loadCoursesFile()">Importar materias</div>
-  </ng-template>
-</mat-menu>
-<ng-template #spinner>
-  <div style="min-height: 300px;" fxLayout="column" fxLayoutAlign="center center">
-    <mat-spinner strokeWidth="5" [diameter]="50">
-    </mat-spinner>
-    <span>Buscando ...</span><br>
-  </div>
-</ng-template>

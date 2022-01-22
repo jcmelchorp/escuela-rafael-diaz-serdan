@@ -10,6 +10,7 @@ import { AccountResolver } from '@rds-accounts/resolvers/account.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { SchoolCalendarComponent } from './components/school-calendar/school-calendar.component';
 import { AccountsResolver } from '../accounts/resolvers/accounts.resolver';
+import { SchoolCyclesResolver } from '../school/resolvers/school-cycles.resolver';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
           {
             path: 'calificaciones',
             component: ProfileScoresComponent,
-            resolve: { scores: ScoresResolver },
+            resolve: { scores: ScoresResolver, cycles: SchoolCyclesResolver },
           },
           {
             path: 'calendario',
@@ -49,6 +50,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ScoresResolver, UserResolver, AccountsResolver]
+  providers: [ScoresResolver, UserResolver, AccountsResolver, SchoolCyclesResolver]
 })
 export class ProfileRoutingModule { }

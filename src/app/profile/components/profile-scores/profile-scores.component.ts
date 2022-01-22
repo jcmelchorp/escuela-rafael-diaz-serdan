@@ -6,12 +6,12 @@ import { User } from '@rds-auth/models/user.model';
 import { isTeacher, selectUser } from '@rds-auth/state/auth.selectors';
 import { SubscriptionService } from '@rds-shared/services';
 import { AppState } from '@rds-store/app.state';
-import { Observable, Subscription } from 'rxjs';
+import { merge, Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map, tap, mergeMap } from 'rxjs/operators';
 
 import { Score } from '@rds-profile/models/score.model';
 import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
-import { Cycle } from '@rds-school/models/school-course.model';
+import { Cycle, SchoolCycle } from '@rds-school/models/school-course.model';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ScoresEntityService } from '@rds-store/scores/scores-entity.service';
 import { CourseLevel } from '@rds-auth/models/user.enum';
@@ -42,6 +42,7 @@ pdfMake.fonts = {
 }
 //import * as fr from 'src/assets/pdf/FredokaOne.ttf.Base64.encoded';
 import { ScoreListItem } from '../../models/score.model';
+import { SchoolCyclesEntityService } from '@rds-store/school/school-cycles/school-cycles-entity.service';
 
 @Component({
   selector: 'app-profile-scores',
@@ -52,16 +53,20 @@ import { ScoreListItem } from '../../models/score.model';
 export class ProfileScoresComponent implements OnInit {
   userScore: Observable<Score>;
   user$: Observable<User>;
+  cycles$: Observable<SchoolCycle[]>;
+  //cycleId: string;
   user: User;
   score: Score
   isTeacher$: Observable<boolean>;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
+  loading_cycles$: Observable<boolean>;
   level: CourseLevel;
-  cycleKeys;
-  cycles = Cycle;
+  cycle: SchoolCycle;
+  cycles: SchoolCycle[];
   cycleForm: FormGroup;
-  selectedScore: Observable<Score>;
+  selectedScore: BehaviorSubject<Score> = new BehaviorSubject(null);
+  selectedScore$: Observable<Score[]>;
   userId: string;
   userName: string;
   userSub: Subscription;
@@ -72,48 +77,61 @@ export class ProfileScoresComponent implements OnInit {
   constructor(
     private scoresEntityService: ScoresEntityService,
     private accountsEntityService: AccountsEntityService,
+    private schoolCyclesEntityService: SchoolCyclesEntityService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private subService: SubscriptionService,
-  ) {
-    this.initForm();
+  ) { }
+  ngOnInit(): void {
+    //this.cycleId = this.route.snapshot.queryParams.cycle;
     this.loading$ = this.scoresEntityService.loading$;
-    this.loaded$ = this.scoresEntityService.loaded$;
-    this.cycleKeys = Object.keys(this.cycles);
+    this.loading_cycles$ = this.schoolCyclesEntityService.loading$;
+    this.loaded$ = this.scoresEntityService.loaded$.pipe(
+      mergeMap(loaded => this.schoolCyclesEntityService.loaded$.pipe(
+        map(loaded_cycles => loaded && loaded_cycles)
+      ))
+    );
+    this.cycles$ = this.schoolCyclesEntityService.entities$.pipe(tap(cycles => {
+      this.cycles = cycles;
+      this.cycle = cycles.find(cycle => cycle.isCurrentDefault === true);
+    }));
     this.isTeacher$ = this.store.select(isTeacher);
     this.user$ = this.store.select(selectUser)
       .pipe(
-        mergeMap(user => this.accountsEntityService.getByKey(user.id)
-          .pipe(
-            map(account => {
-              if (account.dob.toString().includes('/')) {
-                const arr = account.dob.split('/')
-                this.dayOfBirth = new Date(+arr[2], +arr[1] - 1, +arr[0]);
-              } else {
-                this.dayOfBirth = new Date(account.dob)
-              }
-              return account;
-            })
-          )),
-        tap(user => { this.user = user; this.userId = user.id })
+        tap(user => { this.user = user; this.userId = user.id }),
+        mergeMap(user => this.accountsEntityService.getByKey(user.id)),
       );
+    this.cycleForm = this.fb.group({
+      cycleId: new FormControl(this.route.snapshot.queryParams.cycle)
+    });
+    this.scoresEntityService.setFilter({ cycle: this.route.snapshot.queryParams.cycle, userId: this.userId });
+    this.cycleForm.valueChanges
+      .subscribe((changes) => {
+        Object.keys(changes).forEach((key) => changes[key] == null && delete changes[key]);
+        this.scoresEntityService.setFilter({ id: this.userId + changes.cycleId });
+      });
+    this.selectedScore$ = this.scoresEntityService.filteredEntities$;
     //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
     this.timeOpenScores = true;
+    //this.initForm();
+    //this.selectScore(this.route.snapshot.queryParams.cycle)
   }
-  ngOnInit(): void {
-    this.getScoresByCycle(this.cycle);
+  get cycleId() {
+    return this.cycleForm.get('cycleId').value;
   }
-  get cycle() {
-    return this.cycleForm.get('cycle').value;
-  }
-  getScoresByCycle(cycle: Cycle) {
-    console.log(cycle)
-    this.selectedScore = this.scoresEntityService.entities$.pipe(
-      map(scores => scores.find(s => s.id === this.userId + cycle)),
-      tap(score => {
-        this.score = { ...score };
-        this.score.scores = score.scores.map(scoreCourse => {
+
+  /*   initForm() {
+
+    } */
+
+  /* selectScore(cycleId?: string) {
+    console.log(cycleId)
+    this.scoresEntityService.entities$.pipe(
+      map(scores => scores.find(s => s.id === this.userId + cycleId)))
+      .subscribe(score => {
+        console.log(score);
+        const scores_ph = score.scores.map(scoreCourse => {
           return {
             ...scoreCourse,
             unit1: scoreCourse.unit1 ? (scoreCourse.unit1 === 'Acreditado' ? 'A' : scoreCourse.unit1) : '---',
@@ -121,15 +139,11 @@ export class ProfileScoresComponent implements OnInit {
             unit3: scoreCourse.unit3 ? (scoreCourse.unit3 === 'Acreditado' ? 'A' : scoreCourse.unit3) : '---',
             //prom_materia: scoreCourse.prom_materia ? scoreCourse.prom_materia.toString() : '---'
           } as ScoreListItem
-        });
-      })
-    );
-  }
-  initForm() {
-    this.cycleForm = this.fb.group({
-      cycle: new FormControl(this.route.snapshot.queryParams.cycle)
-    });
-  }
+        })
+        const score_ph = { ...score, scores: scores_ph } as Score;
+        this.selectedScore$.next(score_ph);
+      });
+  } */
   printPage() {
     window.print();
   }

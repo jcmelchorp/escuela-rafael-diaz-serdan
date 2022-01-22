@@ -5,8 +5,16 @@
   color: colors.$concrete-color;
   font-size: 1.2em;
 }
-.classroom-list {
+.classrooms-list {
+  //position: relative;
+  //width: auto;
+  //top: 0;
+  left: 0;
+  right: 0;
   height: 100%;
-  max-height: 400px;
+  //max-height: 100vh;
   overflow-y: auto;
+  @media (max-width: 960px) {
+    max-height: 80px;
+  }
 }

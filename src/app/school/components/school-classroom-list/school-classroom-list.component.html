@@ -1,23 +1,25 @@
-<mat-form-field class="d-block" appearance="outline">
-  <mat-label>Ciclo escolar</mat-label>
-  <mat-select [(ngModel)]="selectedCycle" (selectionChange)="onSelectionChange();selectedIndex=null">
-    <mat-option value="">Todos</mat-option>
-    <mat-option *ngFor="let cycle of cycleKeys" [value]="cycle">
-      {{cycles[cycle]}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-list class="classroom-list" dense>
-  <div *ngIf="!classrooms||classrooms.length === 0;else classroomList">
-    <mat-list-item>
-      <h3 matLine>No hay aulas</h3>
-    </mat-list-item>
-  </div>
-  <ng-template #classroomList>
-    <mat-list-item [ngClass]="{'selected-classroom': selectedIndex===i}"
-      (click)="showClassroom(classroom.id);selectedIndex=i" *ngFor="let classroom of classrooms; let i = index">
-      <div matLine>{{levels[classroom.grade]}}</div>
-      <small matLine>{{cycles[classroom.cycle]}}</small>
-    </mat-list-item>
-  </ng-template>
-</mat-list>
+<div class="d-block">
+  <mat-form-field appearance="outline">
+    <mat-label>Ciclo escolar</mat-label>
+    <mat-select [(ngModel)]="selectedCycle" (selectionChange)="onSelectionChange();selectedIndex=null">
+      <mat-option value="">Todos</mat-option>
+      <mat-option *ngFor="let cycle of cycleKeys" [value]="cycle">
+        {{cycles[cycle]}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-list class="classrooms-list" dense>
+    <div *ngIf="!classrooms||classrooms.length === 0;else classroomList">
+      <mat-list-item>
+        <h3 matLine>No hay aulas</h3>
+      </mat-list-item>
+    </div>
+    <ng-template #classroomList>
+      <mat-list-item [ngClass]="{'selected-classroom': selectedIndex===i}"
+        (click)="showClassroom(classroom.id);selectedIndex=i" *ngFor="let classroom of classrooms; let i = index">
+        <div matLine>{{levels[classroom.grade]}}</div>
+        <small matLine>{{cycles[classroom.cycle]}}</small>
+      </mat-list-item>
+    </ng-template>
+  </mat-list>
+</div>

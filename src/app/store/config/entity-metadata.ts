@@ -124,6 +124,12 @@ export const entityMetadata: EntityMetadataMap = {
 
   },
   [fromScores.entityCollectionName]: {
+    filterFn: (entities: Score[], { id, cycle, userId }: Partial<Score>) =>
+      entities
+        .filter((e) => (id ? e.id.includes(id) : true))
+        .filter((e) => (cycle ? e.cycle.includes(cycle) : true))
+        .filter((e) => (userId ? e.userId === userId : true)),
+    selectId: (score: Score) => score.id,
     entityDispatcherOptions: {
       optimisticAdd: false,
       optimisticUpdate: false,
@@ -131,7 +137,6 @@ export const entityMetadata: EntityMetadataMap = {
       optimisticDelete: false,
       optimisticUpsert: false,
     },
-    selectId: (score: Score) => score.id,
   },
 
   [fromCourse.entityCollectionName]: {
