@@ -46,14 +46,16 @@ export class AuthEffects implements OnInitEffects {
             }
           }),
           map((user) => {
-            if (user) {
+            if (user != null) {
               return authAction.signInSuccess({ user });
             } else {
               return authAction.signInFail();
             }
           }),
+          catchError((error) => of(authAction.notAuthenticated({ error })))
         )
-      ), catchError((error) => of(authAction.notAuthenticated({ error })))
+      ),
+      catchError((error) => of(authAction.notAuthenticated({ error })))
     )
   );
 

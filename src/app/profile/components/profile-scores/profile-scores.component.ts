@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
 import { Store } from '@ngrx/store';
 import { User } from '@rds-auth/models/user.model';
-import { isTeacher, selectUser } from '@rds-auth/state/auth.selectors';
+import { isTeacher, selectUser, selectUserId } from '@rds-auth/state/auth.selectors';
 import { SubscriptionService } from '@rds-shared/services';
 import { AppState } from '@rds-store/app.state';
 import { merge, Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { map, tap, mergeMap } from 'rxjs/operators';
+import { map, tap, mergeMap, switchMap } from 'rxjs/operators';
 
 import { Score } from '@rds-profile/models/score.model';
 import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
@@ -54,6 +54,7 @@ export class ProfileScoresComponent implements OnInit {
   userScore: Observable<Score>;
   user$: Observable<User>;
   cycles$: Observable<SchoolCycle[]>;
+  cycle$: Observable<SchoolCycle>;
   //cycleId: string;
   user: User;
   score: Score
@@ -66,7 +67,7 @@ export class ProfileScoresComponent implements OnInit {
   cycles: SchoolCycle[];
   cycleForm: FormGroup;
   selectedScore: BehaviorSubject<Score> = new BehaviorSubject(null);
-  selectedScore$: Observable<Score[]>;
+  selectedScore$: Observable<Score>;
   userId: string;
   userName: string;
   userSub: Subscription;
@@ -85,6 +86,17 @@ export class ProfileScoresComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     //this.cycleId = this.route.snapshot.queryParams.cycle;
+    this.user$ = this.store.select(selectUser)
+      .pipe(
+        tap(user => {
+          this.userId = user.id;
+          this.scoresEntityService.setFilter({ id: user.id + this.route.snapshot.queryParams.cycle });
+        }),
+        mergeMap(user => this.accountsEntityService.entities$.pipe(map(accounts => {
+          return accounts.find(account => account.id === user.id);
+        }))),
+        //tap(user => console.log(user))
+      );
     this.loading$ = this.scoresEntityService.loading$;
     this.loading_cycles$ = this.schoolCyclesEntityService.loading$;
     this.loaded$ = this.scoresEntityService.loaded$.pipe(
@@ -92,33 +104,50 @@ export class ProfileScoresComponent implements OnInit {
         map(loaded_cycles => loaded && loaded_cycles)
       ))
     );
-    this.cycles$ = this.schoolCyclesEntityService.entities$.pipe(tap(cycles => {
-      this.cycles = cycles;
-      this.cycle = cycles.find(cycle => cycle.isCurrentDefault === true);
-    }));
-    this.isTeacher$ = this.store.select(isTeacher);
-    this.user$ = this.store.select(selectUser)
-      .pipe(
-        tap(user => { this.user = user; this.userId = user.id }),
-        mergeMap(user => this.accountsEntityService.getByKey(user.id)),
-      );
     this.cycleForm = this.fb.group({
-      cycleId: new FormControl(this.route.snapshot.queryParams.cycle)
+      cycle: new FormControl()
     });
-    this.scoresEntityService.setFilter({ cycle: this.route.snapshot.queryParams.cycle, userId: this.userId });
+    this.cycles$ = this.schoolCyclesEntityService.entities$;
+    this.schoolCyclesEntityService.setFilter({ isCurrentDefault: true });
+
+    this.cycle$ = this.schoolCyclesEntityService.filteredEntities$.pipe(
+      map(cycles => {
+        this.cycle = cycles[0];
+        this.cycleForm.patchValue({ cycle: cycles[0].id });
+        return cycles[0];
+      }));
+    this.isTeacher$ = this.store.select(isTeacher);
+
+
+
     this.cycleForm.valueChanges
       .subscribe((changes) => {
         Object.keys(changes).forEach((key) => changes[key] == null && delete changes[key]);
-        this.scoresEntityService.setFilter({ id: this.userId + changes.cycleId });
+        this.scoresEntityService.setFilter({ id: this.userId + changes.cycle });
       });
-    this.selectedScore$ = this.scoresEntityService.filteredEntities$;
+
+    this.selectedScore$ = this.scoresEntityService.filteredEntities$.pipe(
+      map(scores => {
+        const score = scores[0];
+        const scores_ph = score.scores.map(scoreCourse => {
+          return {
+            ...scoreCourse,
+            unit1: scoreCourse.unit1 ? (scoreCourse.unit1 === 'Acreditado' ? 'A' : scoreCourse.unit1) : '-',
+            unit2: scoreCourse.unit2 ? (scoreCourse.unit2 === 'Acreditado' ? 'A' : scoreCourse.unit2) : '-',
+            unit3: scoreCourse.unit3 ? (scoreCourse.unit3 === 'Acreditado' ? 'A' : scoreCourse.unit3) : '-',
+            prom_materia: scoreCourse.prom_materia ? (scoreCourse.prom_materia.toLocaleString() === 'Acreditado' ? 'A' : scoreCourse.prom_materia) : '-'
+          } as ScoreListItem
+        })
+        return { ...score, scores: scores_ph } as Score;
+      })
+    );
     //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
     this.timeOpenScores = true;
     //this.initForm();
     //this.selectScore(this.route.snapshot.queryParams.cycle)
   }
   get cycleId() {
-    return this.cycleForm.get('cycleId').value;
+    return this.cycleForm.get('cycle').value;
   }
 
   /*   initForm() {

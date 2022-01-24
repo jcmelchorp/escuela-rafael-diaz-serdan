@@ -11,7 +11,7 @@
     <mat-card-header mat-title-group>
       <div class="float-end">
         <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start end">
-          <div class="badge bg-success"> {{ user.role}} </div>
+          <div class="badge bg-success"> {{user.role}} </div>
           <div class="badge bg-danger" *ngIf="user.isAdmin">Administrador</div>
         </div>
       </div>
@@ -68,7 +68,7 @@
       </div>
       <div fxLayout="row">
         <div class="col-4">F. de nacimiento:&nbsp;</div>
-        <div class="col-6">{{dayOfBirth|date:'fullDate'}}</div>
+        <div class="col-6">{{user.dob}}</div>
       </div>
     </mat-card-content>
     <mat-card-actions align="end">

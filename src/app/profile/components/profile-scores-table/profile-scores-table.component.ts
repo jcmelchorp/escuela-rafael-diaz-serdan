@@ -61,10 +61,10 @@ export class ProfileScoresTableComponent implements OnInit, OnChanges {
       sum4 = + score.prom_materia + sum4;
       count++;
     });
-    const avg1 = (Math.trunc(10 * (sum1 / count)) / 10).toString();
-    const avg2 = (Math.trunc(10 * (sum2 / count)) / 10).toString();
-    const avg3 = (Math.trunc(10 * (sum3 / count)) / 10).toString();
-    const avg4 = (Math.trunc(10 * (sum4 / count)) / 10).toString();
+    const avg1 = (Math.trunc(10 * (sum1 / count)) / 10);
+    const avg2 = (Math.trunc(10 * (sum2 / count)) / 10);
+    const avg3 = (Math.trunc(10 * (sum3 / count)) / 10);
+    const avg4 = (Math.trunc(10 * (sum4 / count)) / 10);
     return [avg1, avg2, avg3, avg4]
   }
 

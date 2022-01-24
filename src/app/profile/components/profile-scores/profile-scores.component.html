@@ -1,8 +1,11 @@
 <button class="float-start" appMaterialElevation mat-icon-button [routerLink]="['..']">
   <mat-icon>arrow_back_ios</mat-icon>
 </button>
+
 <div *ngIf="timeOpenScores;else comeBack">
-  <div *ngIf="!(isTeacher$|async)&&(cycles$|async)&&(user$|async) as user;else onlyStudents" [@fadeIn]="'fadeIn'">
+
+  <div *ngIf="!(isTeacher$|async)&&(cycle$|async)&& (loaded$|async)&&(user$|async) as user ;else onlyStudents"
+    [@fadeIn]="'fadeIn'">
     <!--  <div>{{|json}}</div> -->
     <div class="card bg-transparent">
       <h2 class="card-header" fxLayout="row wrap" fxLayoutAlign="space-between start">
@@ -14,8 +17,8 @@
           <form [formGroup]="cycleForm">
             <mat-form-field fxFlex="0 1 calc(50% -10px)" appearance="outline">
               <mat-label>Ciclo escolar</mat-label>
-              <mat-select formControlName="cycleId" placeholder="Ciclo escolar">
-                <mat-option *ngFor="let cycle of cycles" [value]="cycle.id">
+              <mat-select formControlName="cycle" placeholder="Ciclo escolar">
+                <mat-option *ngFor="let cycle of (cycles$|async)" [value]="cycle.id">
                   {{cycle.label}}
                 </mat-option>
               </mat-select>
@@ -34,14 +37,14 @@
           </div>
         </div>
       </div>
-      <div *ngIf="(loaded$|async) && (selectedScore$|async) as score;else spinner">
-        <app-profile-scores-table *ngIf="user.level!='Preescolar'" [data]="score[0]"></app-profile-scores-table>
-        <app-profile-scores-list *ngIf="user.level=='Preescolar'" [data]="score[0]"></app-profile-scores-list>
-        <div *ngIf="user.level!='Preescolar'" class="card-footer ">
+      <div *ngIf="(selectedScore$|async) as score;else spinner">
+        <app-profile-scores-table *ngIf="(user$|async).level!='Preescolar'" [data]="score"></app-profile-scores-table>
+        <app-profile-scores-list *ngIf="(user$|async).level=='Preescolar'" [data]="score"></app-profile-scores-list>
+        <div *ngIf="(user$|async).level!='Preescolar'" class="card-footer ">
           <h3 class="text-center">Recomendaciones</h3>
-          <app-profile-scores-recomendation [data]="score[0].notes"></app-profile-scores-recomendation>
+          <app-profile-scores-recomendation [data]="score.notes"></app-profile-scores-recomendation>
           <h3 class="text-center d-print-none">Estadísticas</h3>
-          <app-profile-scores-bar-chart class="d-print-none" [data]="score[0].scores">
+          <app-profile-scores-bar-chart class="d-print-none" [data]="score.scores">
           </app-profile-scores-bar-chart>
         </div>
       </div>
@@ -49,20 +52,10 @@
 
 
   </div>
-  <ng-template #spinner>
-    <app-spinner [spinnerText]="'Buscando ...'"></app-spinner>
-  </ng-template>
+
 </div>
-<ng-template #onlyStudents>
-  <mat-card fxFLex>
-    <mat-card-header>
-      <mat-card-title>
-        <div class="color-rds">Las calificaciones son de acceso excusivo para los alumnos.</div>
-      </mat-card-title>
-      <mat-card-subtitle>Si eres alumno, contacta a la dirección escolar para informar de este error.
-      </mat-card-subtitle>
-    </mat-card-header>
-  </mat-card>
+<ng-template #spinner>
+  <app-spinner [spinnerText]="'Buscando ...'"></app-spinner>
 </ng-template>
 <ng-template #comeBack>
   <mat-card>
@@ -74,6 +67,17 @@
         </p>
         <mat-card-subtitle>{{today|date:'long'}}</mat-card-subtitle>
       </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</ng-template>
+<ng-template #onlyStudents>
+  <mat-card fxFLex>
+    <mat-card-header>
+      <mat-card-title>
+        <div class="color-rds">Las calificaciones son de acceso excusivo para los alumnos.</div>
+      </mat-card-title>
+      <mat-card-subtitle>Si eres alumno, contacta a la dirección escolar para informar de este error.
+      </mat-card-subtitle>
     </mat-card-header>
   </mat-card>
 </ng-template>

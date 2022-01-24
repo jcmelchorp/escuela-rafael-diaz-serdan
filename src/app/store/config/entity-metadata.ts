@@ -127,7 +127,7 @@ export const entityMetadata: EntityMetadataMap = {
     filterFn: (entities: Score[], { id, cycle, userId }: Partial<Score>) =>
       entities
         .filter((e) => (id ? e.id.includes(id) : true))
-        .filter((e) => (cycle ? e.cycle.includes(cycle) : true))
+        .filter((e) => (cycle ? e.cycle === cycle : true))
         .filter((e) => (userId ? e.userId === userId : true)),
     selectId: (score: Score) => score.id,
     entityDispatcherOptions: {
