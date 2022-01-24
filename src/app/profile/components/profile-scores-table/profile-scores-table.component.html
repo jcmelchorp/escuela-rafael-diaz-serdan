@@ -12,7 +12,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="unit1">
       <mat-header-cell *matHeaderCellDef>U1</mat-header-cell>
-      <mat-cell class="text-{{element.unit1<6?'danger':'dark'}}" *matCellDef="let element">
+      <mat-cell [ngClass]="{'text-danger': element.unt1<6}" *matCellDef="let element">
         <span matBadge="{{(element.notes1)?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
           [matBadgeHidden]="hidden" matBadgeColor="warn">{{element.unit1==0?'-':element.unit1}}</span>
       </mat-cell>
@@ -23,7 +23,7 @@
 
     <ng-container matColumnDef="unit2">
       <mat-header-cell *matHeaderCellDef>U2</mat-header-cell>
-      <mat-cell class="text-{{element.unit2<6?'danger':'dark'}}" *matCellDef="let element">
+      <mat-cell [ngClass]="{'text-danger': element.unt2<6}" *matCellDef="let element">
         <span matBadge="{{(element.notes2)?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
           [matBadgeHidden]="hidden" matBadgeColor="warn"> {{element.unit2==0?'-':element.unit2}}</span>
       </mat-cell>
@@ -32,7 +32,7 @@
 
     <ng-container matColumnDef="unit3">
       <mat-header-cell *matHeaderCellDef>U3</mat-header-cell>
-      <mat-cell class="text-{{element.unit3<6?'danger':'dark'}}" *matCellDef="let element">
+      <mat-cell [ngClass]="{'text-danger': element.unt3<6}" *matCellDef="let element">
         <span matBadge="{{(element.notes3)?'1':''}}" matBadgePosition="after" matBadgeOverlap="false"
           [matBadgeHidden]="hidden" matBadgeColor="warn">{{element.unit3==0?'-':element.unit3}}</span>
       </mat-cell>
@@ -41,7 +41,7 @@
 
     <ng-container matColumnDef="prom_materia">
       <mat-header-cell *matHeaderCellDef>Final</mat-header-cell>
-      <mat-cell class="text-{{element.prom_materia<6?'danger':'dark'}}" *matCellDef="let element">
+      <mat-cell [ngClass]="{'text-danger': element.prom_materia<6}" *matCellDef="let element">
         {{element.isCourseClosed?element.prom_materia:'-'}}</mat-cell>
       <mat-footer-cell *matFooterCellDef> {{getAverage()[3]==0?'-':getAverage()[3]|number}}</mat-footer-cell>
     </ng-container>
