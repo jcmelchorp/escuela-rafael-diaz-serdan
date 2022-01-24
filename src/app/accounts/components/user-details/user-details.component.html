@@ -211,7 +211,7 @@
                       <input matInput placeholder="Ciudad" formControlName="city">
                     </mat-form-field>
                   </div>
-                  <div formArrayName="phones">
+                  <!--  <div formArrayName="phones">
                     <div *ngFor="let phone of phones.controls; let i=index">
                       <div [formGroupName]="i" fxLayout="row wrap" fxLayoutGap="5px"
                         fxLayoutAlign="space-around center">
@@ -235,7 +235,7 @@
                     <p>
                       <button mat-icon-button type="button" (click)="addPhone()">Añadir teléfono</button>
                     </p>
-                  </div>
+                  </div> -->
                   <div class="text-center">
                     <button class="btn btn-info-outline" mat-button type="submit" [disabled]="!parent.dirty">
                       <mat-icon class="{{parent.dirty?'text-success':'text-muted'}}">save</mat-icon>Guardar
