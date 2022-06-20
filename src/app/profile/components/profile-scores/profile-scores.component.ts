@@ -95,7 +95,7 @@ export class ProfileScoresComponent implements OnInit {
         mergeMap(user => this.accountsEntityService.entities$.pipe(map(accounts => {
           return accounts.find(account => account.id === user.id);
         }))),
-        //tap(user => console.log(user))
+        tap(user => this.user=user)
       );
     this.loading$ = this.scoresEntityService.loading$;
     this.loading_cycles$ = this.schoolCyclesEntityService.loading$;
@@ -107,7 +107,7 @@ export class ProfileScoresComponent implements OnInit {
     this.cycleForm = this.fb.group({
       cycle: new FormControl()
     });
-    this.cycles$ = this.schoolCyclesEntityService.entities$;
+    this.cycles$ = this.schoolCyclesEntityService.entities$.pipe(map(cycles => this.cycles=cycles));
     this.schoolCyclesEntityService.setFilter({ isCurrentDefault: true });
 
     this.cycle$ = this.schoolCyclesEntityService.filteredEntities$.pipe(
@@ -139,7 +139,8 @@ export class ProfileScoresComponent implements OnInit {
           } as ScoreListItem
         })
         return { ...score, scores: scores_ph } as Score;
-      })
+      }),
+      tap(score => {this.score=score})
     );
     //this.timeOpenScores = (this.today.getDate() > new Date('30/nov/2021').getDate()) ? true : false;
     this.timeOpenScores = true;
@@ -180,14 +181,16 @@ export class ProfileScoresComponent implements OnInit {
     this.subService.unsubscribeComponent$;
   }
   async generatePDF(action) {
-    this.selectedScore.pipe(tap(score => this.score = score));
-    this.user$.pipe(tap(user => this.user = user));
+    // const score=await this.selectedScore.pipe(tap(score => this.score = score)).toPromise();
+    // const user =await this.user$.pipe(tap(user => this.user = user)).toPromise();
     //pdfFonts.pdfMake.vfs['FredokaOne.ttf'] = fr.fredokaOne;
     //console.log(pdfFonts)
 
     //pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-    console.log(pdfMake)
+    /* console.log(this.cycles)
+    console.log(this.score) */
+
     const buildTableBody = (data: any[], columns: string[]) => {
       var body = [];
       //body.push(columns);
@@ -287,7 +290,7 @@ export class ProfileScoresComponent implements OnInit {
             ],
             [
               {
-                text: `Ciclo escolar: ${this.cycles[this.score.cycle]}`,
+                text: `Ciclo escolar: ${this.cycles.find(c => c.id === this.score.cycle).label}`,
                 alignment: 'right',
                 fontSize: 11,
               },
