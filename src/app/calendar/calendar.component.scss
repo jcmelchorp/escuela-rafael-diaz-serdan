@@ -1,0 +1,221 @@
+.mat-card {
+  padding: 0;
+  margin: 0;
+}
+.main,
+.main * {
+  display: flex;
+  justify-content: center;
+}
+section {
+  flex-direction: column;
+  align-self: center;
+}
+.calendar {
+  gap: 1rem;
+}
+.calendar,
+.month {
+  flex-wrap: wrap;
+}
+.day {
+  width: 1.7em;
+  height: 1.7em;
+  align-items: center;
+  justify-content: center;
+}
+.actualizacion {
+  background: #d7a4a3;
+}
+.OfWeek {
+  background: #dfc9a4;
+  color: #fff;
+}
+.month {
+  width: calc(2em * 7);
+  padding: 1em;
+  cursor: pointer;
+}
+.vacaciones {
+  background: #5b1e34;
+  color: white;
+}
+.fundacion {
+  background: #5b1e34;
+  color: white;
+  border-radius: 50%;
+}
+.padres {
+  background-color: #4f7469;
+  color: white;
+}
+.receso {
+  background: #235c4f;
+  color: white !important;
+}
+.consejo {
+  border-radius: 50%;
+  background: #b34b56;
+  color: white;
+}
+.inici {
+  background-image: url("https://www.gob.mx/cms/uploads/image/file/498702/inicio.svg");
+  color: white;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+}
+.ins_start {
+  background-image: url("https://www.gob.mx/cms/uploads/image/file/498702/inicio.svg");
+  filter: invert(95%) sepia(62%) saturate(2447%) hue-rotate(333deg)
+    brightness(107%) contrast(94%);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+  color: #fff;
+}
+.abandono-inf {
+  border-bottom-color: #4f7469;
+  border-bottom-style: solid;
+  border-bottom-width: 0.1em;
+}
+.abandono-sup {
+  border-top-color: #4f7469;
+  border-top-style: solid;
+  border-top-width: 0.1em;
+}
+.abandono-der {
+  border-right-color: #4f7469;
+  border-right-style: solid;
+  border-right-width: 0.1em;
+}
+.abandono-izq {
+  border-left-color: #4f7469;
+  border-left-style: solid;
+  border-left-width: 0.1em;
+}
+.recuperacion-sup {
+  border-top-color: #d7a4a3;
+  border-top-style: dashed;
+  border-top-width: 0.1em;
+}
+.recuperacion-der {
+  border-right-color: #d7a4a3;
+  border-right-style: dashed;
+  border-right-width: 0.1em;
+}
+.recuperacion-inf {
+  border-bottom-color: #d7a4a3;
+  border-bottom-style: dashed;
+  border-bottom-width: 0.1em;
+}
+.recuperacion-izq {
+  border-left-color: #d7a4a3;
+  border-left-style: dashed;
+  border-left-width: 0.1em;
+}
+.suspension {
+  background: #706f6f;
+  color: white;
+  border-radius: 50%;
+}
+.preinscripcion-sup {
+  background: white;
+  border-top-color: #9d2443;
+  border-top-style: solid;
+  border-top-width: 0.1em;
+}
+.preinscripcion-izq {
+  background: white;
+  border-left-color: #9d2443;
+  border-left-style: solid;
+  border-left-width: 0.1em;
+}
+.preinscripcion-inf {
+  background: white;
+  border-bottom-color: #9d2443;
+  border-bottom-style: solid;
+  border-bottom-width: 0.1em;
+}
+.preinscripcion-der {
+  background: white;
+  border-right-color: #9d2443;
+  border-right-style: solid;
+  border-right-width: 0.1em;
+}
+.administrativa {
+  background: #dfc9a4;
+  color: white;
+}
+.imgBW {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+.nomenclatura {
+  margin-bottom: 10px;
+  padding: 0.5em;
+}
+.indicador {
+  width: 1.7em;
+  height: 1.7em;
+  display: inline-block;
+  margin-right: 1em;
+}
+.fin {
+  background-image: url("https://www.gob.mx/cms/uploads/image/file/498701/fin.svg");
+  color: white;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+}
+.boletas-inf {
+  border-bottom-color: black;
+  border-bottom-style: dashed;
+  border-bottom-width: 0.1em;
+}
+.boletas-sup {
+  border-top-color: black;
+  border-top-style: dashed;
+  border-top-width: 0.1em;
+}
+.boletas-der {
+  border-right-color: black;
+  border-right-style: dashed;
+  border-right-width: 0.1em;
+}
+.boletas-izq {
+  border-left-color: black;
+  border-left-style: dashed;
+  border-left-width: 0.1em;
+}
+h4 {
+  justify-content: center;
+  flex: 1 0 100%;
+}
+h4 {
+  font-size: 1em;
+  text-transform: uppercase;
+  background: #0060a0;
+  color: #fff;
+  padding-top: 0;
+  border-radius: 5px;
+}
+.titulo_blanco {
+  color: white;
+  font-size: 2.2em;
+}
+h1 {
+  justify-content: center;
+  align-self: stretch;
+}
+.texto-leyenda {
+  color: rgb(172, 172, 172);
+  font-size: 0.5em;
+  font-weight: normal;
+}
+.dorado-t {
+  color: #d4c19c;
+}
+.strong {
+  font-weight: bold !important;
+}

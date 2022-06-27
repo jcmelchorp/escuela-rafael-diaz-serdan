@@ -35,9 +35,16 @@ export class DashboardComponent {
     this.cards = [
       {
         title: 'Alumnos',
-        description: 'Accede a toda tu información como alumno.',
+        description: 'Información como alumno.',
         route: 'p',
         imgUrl: 'assets/images/assignment-grades2.png',
+        access: this.isOnline$,
+      },
+      {
+        title: 'Calendario',
+        description: 'Ciclo escolar 2022-2023',
+        route: 'c',
+        imgUrl: 'assets/images/school-calendar.png',
         access: this.isOnline$,
       },
       {

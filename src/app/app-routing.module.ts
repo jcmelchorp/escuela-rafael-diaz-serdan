@@ -41,6 +41,7 @@ const routes: Routes = [
           m => m.ProfileModule),
         canActivate: [AuthGuard],
       },
+      { path: 'c', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule) },
       {
         path: 'g',
         loadChildren: () => import('@rds-classroom/classroom.module').then(
