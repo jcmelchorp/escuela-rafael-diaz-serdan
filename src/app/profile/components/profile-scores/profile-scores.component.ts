@@ -12,7 +12,7 @@ import { map, tap, mergeMap, switchMap } from 'rxjs/operators';
 import { Score } from '@rds-profile/models/score.model';
 import { fadeInAnimation } from '@rds-shared/animations/fade-in.animation';
 import { Cycle, SchoolCycle } from '@rds-school/models/school-course.model';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ScoresEntityService } from '@rds-store/scores/scores-entity.service';
 import { CourseLevel } from '@rds-auth/models/user.enum';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
@@ -65,7 +65,7 @@ export class ProfileScoresComponent implements OnInit {
   level: CourseLevel;
   cycle: SchoolCycle;
   cycles: SchoolCycle[];
-  cycleForm: FormGroup;
+  cycleForm: UntypedFormGroup;
   selectedScore: BehaviorSubject<Score> = new BehaviorSubject(null);
   selectedScore$: Observable<Score>;
   userId: string;
@@ -79,7 +79,7 @@ export class ProfileScoresComponent implements OnInit {
     private scoresEntityService: ScoresEntityService,
     private accountsEntityService: AccountsEntityService,
     private schoolCyclesEntityService: SchoolCyclesEntityService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private subService: SubscriptionService,
@@ -105,7 +105,7 @@ export class ProfileScoresComponent implements OnInit {
       ))
     );
     this.cycleForm = this.fb.group({
-      cycle: new FormControl()
+      cycle: new UntypedFormControl()
     });
     this.cycles$ = this.schoolCyclesEntityService.entities$.pipe(map(cycles => this.cycles=cycles));
     this.schoolCyclesEntityService.setFilter({ isCurrentDefault: true });

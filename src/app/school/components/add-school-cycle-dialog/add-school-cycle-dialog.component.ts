@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -8,27 +8,27 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./add-school-cycle-dialog.component.scss']
 })
 export class AddSchoolCycleDialogComponent implements OnInit {
-  formData: FormGroup;
+  formData: UntypedFormGroup;
 
   constructor(
     private dialogRef: MatDialogRef<AddSchoolCycleDialogComponent>,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.formData = this.fb.group({
-      begin: new FormControl('', Validators.required),
-      end: new FormControl('', Validators.required),
-      isCurrentDefault: new FormControl(false, Validators.required),
+      begin: new UntypedFormControl('', Validators.required),
+      end: new UntypedFormControl('', Validators.required),
+      isCurrentDefault: new UntypedFormControl(false, Validators.required),
     });
     if (!this.data.isNew) {
       const splitArr = this.data.cycle.label.split('-');
       const begin = splitArr[0];
       const end = splitArr[1];
       this.formData.patchValue({
-        begin: new FormControl(begin, Validators.required),
-        end: new FormControl(end, Validators.required),
-        isCurrentDefault: new FormControl(this.data.cycle.isCurrentDefault, Validators.required),
+        begin: new UntypedFormControl(begin, Validators.required),
+        end: new UntypedFormControl(end, Validators.required),
+        isCurrentDefault: new UntypedFormControl(this.data.cycle.isCurrentDefault, Validators.required),
       });
     }
 

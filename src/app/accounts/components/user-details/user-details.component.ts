@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import {
   faTrashAlt,
   faPlus,
@@ -31,8 +31,8 @@ export class UserDetailsComponent implements OnInit {
   phoneEnum = PhoneType;
   statesNames: string[];
   municipiosNames!: string[] | undefined;
-  userForm!: FormGroup;
-  parentForm!: FormGroup;
+  userForm!: UntypedFormGroup;
+  parentForm!: UntypedFormGroup;
   showParentForm = false;
   raisedElev: number = 12;
   faTrashAlt = faTrashAlt;
@@ -42,7 +42,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private accountsEntityService: AccountsEntityService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.statesNames = Object.keys(states);
     this.phoneKeys = Object.keys(this.phoneEnum).filter(Number);
@@ -77,10 +77,10 @@ export class UserDetailsComponent implements OnInit {
   }
   fillStudentForm(user?: Partial<User>) {
     this.userForm = this.fb.group({
-      curp: new FormControl(user?.curp),
-      niev: new FormControl(user?.niev),
-      dob: new FormControl(moment(user?.dob, "DD/MM/YYYY")),
-      gender: new FormControl(user?.gender),
+      curp: new UntypedFormControl(user?.curp),
+      niev: new UntypedFormControl(user?.niev),
+      dob: new UntypedFormControl(moment(user?.dob, "DD/MM/YYYY")),
+      gender: new UntypedFormControl(user?.gender),
       parents: this.fb.array(
         user?.parents
           ? user?.parents.map((parent) => this.setParent(parent))
@@ -91,10 +91,10 @@ export class UserDetailsComponent implements OnInit {
   fillUserForm(user?: Partial<User>) {
 
     this.userForm = this.fb.group({
-      curp: new FormControl(user?.curp),
-      rfc: new FormControl(user?.rfc),
-      dob: new FormControl(moment(user?.dob, "DD/MM/YYYY")),
-      gender: new FormControl(user?.gender),
+      curp: new UntypedFormControl(user?.curp),
+      rfc: new UntypedFormControl(user?.rfc),
+      dob: new UntypedFormControl(moment(user?.dob, "DD/MM/YYYY")),
+      gender: new UntypedFormControl(user?.gender),
     });
   }
 
@@ -122,10 +122,10 @@ export class UserDetailsComponent implements OnInit {
     );
   }
 
-  get parents(): FormArray {
-    return this.userForm.get('parents') as FormArray;
+  get parents(): UntypedFormArray {
+    return this.userForm.get('parents') as UntypedFormArray;
   }
-  newParent(): FormGroup {
+  newParent(): UntypedFormGroup {
     return this.fb.group({
       userId: '',
       givenName: '',
@@ -144,7 +144,7 @@ export class UserDetailsComponent implements OnInit {
       state: '',
     });
   }
-  setParent(parent: any): FormGroup {
+  setParent(parent: any): UntypedFormGroup {
     return this.fb.group({
       userId: '',
       givenName: [parent.givenName],
@@ -169,10 +169,10 @@ export class UserDetailsComponent implements OnInit {
   removeParent(j: number) {
     this.parents.removeAt(j);
   }
-  get phones(): FormArray {
-    return this.parents.get('phones') as FormArray;
+  get phones(): UntypedFormArray {
+    return this.parents.get('phones') as UntypedFormArray;
   }
-  newPhone(): FormGroup {
+  newPhone(): UntypedFormGroup {
     return this.fb.group({
       value: '',
       type: '',

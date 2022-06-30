@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -24,8 +24,8 @@ import { UserInsert, AccountDomain } from '../../models/account-domain.model';
   styleUrls: ['./new-account.component.scss'],
 })
 export class NewAccountComponent implements OnInit {
-  firstFormGroup!: FormGroup;
-  secondFormGroup!: FormGroup;
+  firstFormGroup!: UntypedFormGroup;
+  secondFormGroup!: UntypedFormGroup;
   faTimes = faTimes;
   hide: boolean = true;
   googleError: any;
@@ -43,7 +43,7 @@ export class NewAccountComponent implements OnInit {
     private dialogRef: MatDialogRef<NewAccountComponent>,
     private accountsDomainEntityService: AccountsDomainEntityService,
     private accountsEntityService: AccountsEntityService,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.clevelKeys = Object.keys(this.clevels).filter(Number);
@@ -52,38 +52,38 @@ export class NewAccountComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      givenName: new FormControl('', [Validators.required]),
-      familyName: new FormControl('', [Validators.required]),
-      primaryEmail: new FormControl('', [
+      givenName: new UntypedFormControl('', [Validators.required]),
+      familyName: new UntypedFormControl('', [Validators.required]),
+      primaryEmail: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[^ @]*@[^ @]*'),
         emailDomainValidator,
       ]),
       //primaryEmail: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      password: new UntypedFormControl('', [Validators.required]),
     });
     this.secondFormGroup = this._formBuilder.group({
-      id: new FormControl('', [Validators.required]),
-      givenName: new FormControl('', [Validators.required]),
-      familyName: new FormControl('', [Validators.required]),
-      primaryEmail: new FormControl('', [
+      id: new UntypedFormControl('', [Validators.required]),
+      givenName: new UntypedFormControl('', [Validators.required]),
+      familyName: new UntypedFormControl('', [Validators.required]),
+      primaryEmail: new UntypedFormControl('', [
         Validators.required,
         Validators.email,
       ]),
-      password: new FormControl('', [Validators.required]),
-      gender: new FormControl(''),
-      dob: new FormControl(''),
-      role: new FormControl('', Validators.required),
-      grade: new FormControl(''),
-      level: new FormControl(''),
-      isInGoogle: new FormControl(false),
-      isHuman: new FormControl(false),
-      isAdmin: new FormControl(false),
-      isTeacher: new FormControl(false),
-      suspended: new FormControl(false),
-      curp: new FormControl(''),
-      niev: new FormControl(''),
-      rfc: new FormControl(''),
+      password: new UntypedFormControl('', [Validators.required]),
+      gender: new UntypedFormControl(''),
+      dob: new UntypedFormControl(''),
+      role: new UntypedFormControl('', Validators.required),
+      grade: new UntypedFormControl(''),
+      level: new UntypedFormControl(''),
+      isInGoogle: new UntypedFormControl(false),
+      isHuman: new UntypedFormControl(false),
+      isAdmin: new UntypedFormControl(false),
+      isTeacher: new UntypedFormControl(false),
+      suspended: new UntypedFormControl(false),
+      curp: new UntypedFormControl(''),
+      niev: new UntypedFormControl(''),
+      rfc: new UntypedFormControl(''),
     });
   }
   close() {
@@ -223,7 +223,7 @@ export class NewAccountComponent implements OnInit {
     return firebaseUser;
   }
 }
-function emailDomainValidator(control: FormControl) {
+function emailDomainValidator(control: UntypedFormControl) {
   1;
   let email = control.value;
   2;

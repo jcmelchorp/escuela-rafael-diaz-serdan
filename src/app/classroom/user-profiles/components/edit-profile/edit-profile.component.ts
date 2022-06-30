@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy,
   OnDestroy,
 } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, UntypedFormBuilder } from '@angular/forms';
 
 import { select, Store } from '@ngrx/store';
 
@@ -33,16 +33,16 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   user$: Observable<User>;
   userSub: Subscription;
   @Output() profileUpdate = new EventEmitter<User>();
-  updateProfileForm: FormGroup;
-  fullName: FormControl;
-  photoUrl: FormControl;
+  updateProfileForm: UntypedFormGroup;
+  fullName: UntypedFormControl;
+  photoUrl: UntypedFormControl;
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>) {
+  constructor(private fb: UntypedFormBuilder, private store: Store<AppState>) {
     this.user$ = this.store.pipe(select(selectUser));
     this.userSub = this.user$.subscribe((user) => (this.user = user));
     this.updateProfileForm = this.fb.group({
-      fullName: new FormControl(this.user.name),
-      photoUrl: new FormControl(this.user.photoUrl),
+      fullName: new UntypedFormControl(this.user.name),
+      photoUrl: new UntypedFormControl(this.user.photoUrl),
     });
   }
 

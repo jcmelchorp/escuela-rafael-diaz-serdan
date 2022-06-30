@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectionStrategy } 
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators, UntypedFormBuilder } from '@angular/forms';
 
 import { faEdit, faUserGraduate, faUserTie, faExclamation, faCheck, faArchive, faScrewdriver, faTimes, faUserPlus, faBan, faPlus, faBullhorn } from '@fortawesome/free-solid-svg-icons';
 
@@ -54,9 +54,9 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   faPlus = faPlus;
   faBullhorn = faBullhorn;
   searching: boolean = false;
-  searchForm: FormGroup;
-  name: FormControl;
-  creationTime: FormControl;
+  searchForm: UntypedFormGroup;
+  name: UntypedFormControl;
+  creationTime: UntypedFormControl;
   public creationTimeFilter = '';
   public courseNameFilter = '';
   public courseStateFilter = [''];
@@ -66,7 +66,7 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private courseEntityService: CourseEntityService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.keys = Object.keys(this.states).filter(Number);
     this.courseTotal$ = this.courseEntityService.count$
@@ -87,8 +87,8 @@ export class CoursesListComponent implements OnInit, AfterViewInit {
   }
   searchFormInit(): void {
     this.searchForm = this.fb.group({
-      name: new FormControl('', Validators.pattern('^[a-zA-Z ]+$')),
-      creationTime: new FormControl(''),
+      name: new UntypedFormControl('', Validators.pattern('^[a-zA-Z ]+$')),
+      creationTime: new UntypedFormControl(''),
       //selectedStates: new FormControl()
     });
   }

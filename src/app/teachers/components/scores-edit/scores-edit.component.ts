@@ -1,6 +1,6 @@
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { UntypedFormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
   faChevronLeft,
@@ -39,14 +39,14 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   publishing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loaded$: Observable<boolean>;
   loading$: Observable<boolean>;
-  currentGrades!: FormGroup;
+  currentGrades!: UntypedFormGroup;
   constructor(
     private route: ActivatedRoute,
     private scoresService: ScoresService,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
 
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private subscriptionService: SubscriptionService
   ) {
     this.loaded$ = this.schoolCoursesEntityService.loaded$;
@@ -86,7 +86,7 @@ export class ScoresEditComponent implements OnInit, OnDestroy {
   )
   }
 
-  async setScore(student: any): Promise<FormGroup> {
+  async setScore(student: any): Promise<UntypedFormGroup> {
     const currentGrades = await this.scoresService.getById(student.id + this.course.cycle).toPromise()
     return this.formBuilder.group({
       studentId: [student.id, [Validators.required]],

@@ -9,7 +9,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
@@ -47,7 +47,7 @@ export class UsersListComponent implements OnInit, OnDestroy, AfterViewInit {
   gradeKeys: string[];
   grades = SchoolLevel;
   selection = new SelectionModel<User>(true, []);
-  filterValues: FormGroup;
+  filterValues: UntypedFormGroup;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   columnsToDisplay = [
     {
@@ -81,15 +81,15 @@ export class UsersListComponent implements OnInit, OnDestroy, AfterViewInit {
     private accountsEntityService: AccountsEntityService,
     private store: Store<AppState>,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.gradeKeys = Object.keys(this.grades).filter(Number);
     this.roleKeys = Object.keys(this.roles).filter(Number);
     this.filterValues = this.fb.group({
-      grade: new FormControl(''),
-      role: new FormControl(''),
-      name: new FormControl(''),
-      suspended: new FormControl(''),
+      grade: new UntypedFormControl(''),
+      role: new UntypedFormControl(''),
+      name: new UntypedFormControl(''),
+      suspended: new UntypedFormControl(''),
     });
     this.loaded$ = this.accountsEntityService.loaded$;
   }

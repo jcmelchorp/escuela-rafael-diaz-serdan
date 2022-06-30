@@ -9,7 +9,7 @@ import { ConfirmDialogComponent } from '@rds-shared/components';
 import { MatDialog } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AddStudentsCoursesComponent } from '../add-students-courses/add-students-courses.component';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { TableGroup } from '@rds-school/models/table-group.model';
 import { SchoolCoursesEntityService } from '@rds-store/school/school-courses/school-courses-entity.service';
 import { SchoolTeachersEntityService } from '@rds-store/school/school-teachers/school-teacher-entity.service';
@@ -41,7 +41,7 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   cycles = Cycle;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
-  filterValues: FormGroup;
+  filterValues: UntypedFormGroup;
   courses$: Observable<SchoolCourse[]>;
   teachers$: Observable<User[]>;
   filteredCourses$: Observable<SchoolCourse[]>;
@@ -59,7 +59,7 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private dialog: MatDialog
   ) {
@@ -91,8 +91,8 @@ export class SchoolCoursesTableComponent implements OnInit/* , AfterViewInit  */
     ];
     this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
-      grade: new FormControl(),
-      name: new FormControl(),
+      grade: new UntypedFormControl(),
+      name: new UntypedFormControl(),
     });
     this.filterValues.valueChanges.subscribe((changes) => {
       Object.keys(changes).forEach(

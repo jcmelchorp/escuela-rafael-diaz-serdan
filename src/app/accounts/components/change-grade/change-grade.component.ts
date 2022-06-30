@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { CourseLevel, SchoolLevel } from '@rds-auth/models/user.enum';
 export class ChangeGradeComponent implements OnInit {
   faTimes = faTimes;
   faUserPlus = faUserPlus;
-  saveForm!: FormGroup;
+  saveForm!: UntypedFormGroup;
 
   clevelKeys: string[];
   clevels: any = CourseLevel;
@@ -20,7 +20,7 @@ export class ChangeGradeComponent implements OnInit {
   slevels: any = SchoolLevel;
   constructor(
     private dialogRef: MatDialogRef<ChangeGradeComponent>,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.clevelKeys = Object.keys(this.clevels).filter(Number);
@@ -31,9 +31,9 @@ export class ChangeGradeComponent implements OnInit {
   ngOnInit(): void { }
   initForm() {
     this.saveForm = this.fb.group({
-      grade: new FormControl(this.data.grade),
-      level: new FormControl(this.data.level),
-      isInGoogle: new FormControl(this.data.isInGoogle),
+      grade: new UntypedFormControl(this.data.grade),
+      level: new UntypedFormControl(this.data.level),
+      isInGoogle: new UntypedFormControl(this.data.isInGoogle),
     });
   }
 

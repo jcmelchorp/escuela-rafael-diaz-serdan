@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild, ChangeDetectionStrategy } from '@a
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { GroupsService } from '@rds-admin/services/groups.service';
 import { Group } from '@rds-accounts/models/account-domain.model';
@@ -26,7 +26,7 @@ export class GroupTableComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<Group>;
   dataSource!: MatTableDataSource<Group>;
-  searchForm!: FormGroup;
+  searchForm!: UntypedFormGroup;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'directMembersCount', 'email'];
   constructor(private groupsService: GroupsService) { }

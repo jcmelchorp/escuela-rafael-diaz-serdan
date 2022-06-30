@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { SubscriptionService } from '@rds-shared/services';
@@ -17,7 +17,7 @@ export class NotesEditComponent implements OnInit {
     private route: ActivatedRoute,
     //private teachersCourses: TeachersCoursesService,
     //private roomService: RoomService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private subscriptionService: SubscriptionService
   ) {
     this.courseId = this.route.snapshot.params.courseId;

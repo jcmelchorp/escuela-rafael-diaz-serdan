@@ -1,8 +1,8 @@
 import { AccountDomain } from './../../models/account-domain.model';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -23,7 +23,7 @@ export class UserEditDialogComponent {
   faTimes = faTimes;
   faUserPlus = faUserPlus;
   hide: boolean = true;
-  saveForm!: FormGroup;
+  saveForm!: UntypedFormGroup;
   roles = UserRole;
   rolekeys: string[];
   newUser!: Observable<AccountDomain>;
@@ -33,7 +33,7 @@ export class UserEditDialogComponent {
   slevels: any = SchoolLevel;
   constructor(
     private dialogRef: MatDialogRef<UserEditDialogComponent>,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.rolekeys = Object.keys(UserRole);
@@ -44,26 +44,26 @@ export class UserEditDialogComponent {
 
   initForm() {
     this.saveForm = this.fb.group({
-      givenName: new FormControl(this.data.user.name.givenName, [
+      givenName: new UntypedFormControl(this.data.user.name.givenName, [
         Validators.required,
       ]),
-      familyName: new FormControl(this.data.user.name.familyName, [
+      familyName: new UntypedFormControl(this.data.user.name.familyName, [
         Validators.required,
       ]),
-      primaryEmail: new FormControl(this.data.user.primaryEmail, [
+      primaryEmail: new UntypedFormControl(this.data.user.primaryEmail, [
         Validators.required,
         Validators.email,
       ]),
-      password: new FormControl(this.data.user.password),
+      password: new UntypedFormControl(this.data.user.password),
       /*  dob: new FormControl(new Date(this.data.user.dob)), */
-      role: new FormControl(this.data.user.role),
-      grade: new FormControl(this.data.user.grade),
-      level: new FormControl(this.data.user.level),
-      isInGoogle: new FormControl(this.data.isInGoogle),
-      isHuman: new FormControl(this.data.user.isHuman),
-      isAdmin: new FormControl(this.data.user.isAdmin),
-      isTeacher: new FormControl(this.data.user.isTeacher),
-      suspended: new FormControl(this.data.user.suspended),
+      role: new UntypedFormControl(this.data.user.role),
+      grade: new UntypedFormControl(this.data.user.grade),
+      level: new UntypedFormControl(this.data.user.level),
+      isInGoogle: new UntypedFormControl(this.data.isInGoogle),
+      isHuman: new UntypedFormControl(this.data.user.isHuman),
+      isAdmin: new UntypedFormControl(this.data.user.isAdmin),
+      isTeacher: new UntypedFormControl(this.data.user.isTeacher),
+      suspended: new UntypedFormControl(this.data.user.suspended),
       /*  curp: new FormControl(this.data.user.curp),
        niev: new FormControl({ value: this.data.user.niev, disabled: this.data.user.isAdmin }),
        rfc: new FormControl(this.data.user.rfc), */

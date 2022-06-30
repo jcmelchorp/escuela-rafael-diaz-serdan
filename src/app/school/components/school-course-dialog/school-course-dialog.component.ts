@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faTimes, faBook } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@rds-auth/models/user.model';
@@ -20,7 +20,7 @@ export class SchoolCourseDialogComponent {
   faTimes = faTimes;
   faBook = faBook;
 
-  formData: FormGroup;
+  formData: UntypedFormGroup;
   keys;
   types = CourseType;
   slevelKeys;
@@ -30,7 +30,7 @@ export class SchoolCourseDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<SchoolCourseDialogComponent>,
     private accountsEntityService: AccountsEntityService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.keys = Object.keys(this.types);
@@ -39,13 +39,13 @@ export class SchoolCourseDialogComponent {
     this.accountsEntityService.setFilter({ role: 'Profesores', suspended: false });
     this.teachers$ = this.accountsEntityService.filteredEntities$;
     this.formData = this.fb.group({
-      name: new FormControl(this.data.course.name, Validators.required),
-      grade: new FormControl(this.data.course.grade),
-      courseType: new FormControl(this.data.course.courseType),
-      cycle: new FormControl(this.data.course.cycle),
-      description: new FormControl(this.data.course.description),
-      teacherEmail: new FormControl(this.data.course.teacherEmail),
-      priority: new FormControl(this.data.course.priority),
+      name: new UntypedFormControl(this.data.course.name, Validators.required),
+      grade: new UntypedFormControl(this.data.course.grade),
+      courseType: new UntypedFormControl(this.data.course.courseType),
+      cycle: new UntypedFormControl(this.data.course.cycle),
+      description: new UntypedFormControl(this.data.course.description),
+      teacherEmail: new UntypedFormControl(this.data.course.teacherEmail),
+      priority: new UntypedFormControl(this.data.course.priority),
     });
 
   }
