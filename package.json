@@ -50,7 +50,7 @@
     "firebase": "^9.4.0",
     "moment": "^2.29.1",
     "ng2-charts": "^3.0.5",
-    "ngx-bootstrap": "^7.1.2",
+    "ngx-bootstrap": "^8.0.0",
     "ngx-spinner": "13.0.0",
     "ngx-toastr": "14.2.1",
     "pdfmake": "^0.2.4",
