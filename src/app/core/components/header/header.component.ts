@@ -12,6 +12,7 @@ import { LoginDialogComponent } from '@rds-auth/components';
 import { User } from '@rds-auth/models/user.model';
 import { signOut } from '@rds-auth/state/auth.actions';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { AdminApiService } from '@rds-admin/services';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -39,7 +40,9 @@ export class HeaderComponent {
   constructor(
     private layoutService: LayoutService,
     private dialog: MatDialog,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private adminApiService: AdminApiService,
+
   ) { }
 
   toggleSidenavLeft($event: any) {
