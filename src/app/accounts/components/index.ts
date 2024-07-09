@@ -8,9 +8,13 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { SaveUserErrorComponent } from './save-user-error/save-user-error.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { MigrationProgressComponent } from './migration-progress/migration-progress.component';
+import { UserEditPasswordComponent } from './user-edit-password/user-edit-password.component';
+import { UserEditNameComponent } from './user-edit-name/user-edit-name.component';
 
 export const accountsComponents: any[] = [
   UserEditDialogComponent,
+  UserEditPasswordComponent,
+  UserEditNameComponent,
   SaveUserErrorComponent,
   UsersListComponent,
   UserDetailsComponent,
@@ -22,6 +26,8 @@ export const accountsComponents: any[] = [
   NewAccountConfirmComponent
 ]
 export * from './user-edit-dialog/user-edit-dialog.component';
+export * from './user-edit-password/user-edit-password.component';
+export * from './user-edit-name/user-edit-name.component';
 export * from './new-account-confirm/new-account-confirm.component';
 export * from './save-user-error/save-user-error.component';
 export * from './change-grade/change-grade.component';

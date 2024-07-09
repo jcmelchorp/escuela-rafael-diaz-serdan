@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogComponent } from '@rds-shared/components';
-import { ChangeGradeComponent, MigrationProgressComponent, UserEditDialogComponent } from '..';
+import { ChangeGradeComponent, MigrationProgressComponent, UserEditDialogComponent, UserEditNameComponent, UserEditPasswordComponent } from '..';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
@@ -188,6 +188,51 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
       minWidth: '500px',
       height: 'fit-content',
       minHeight: '400px',
+      data: user
+        ? { user: user, isNew: false, action: 'actualiza', isInGoogle: true }
+        : { user: {}, isNew: true, action: 'crea', isInGoogle: false },
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        if (data.isNew == false) {
+          this.accountsEntityService.update(data.user);
+        } else if (data.isNew == true) {
+          this.accountsEntityService.add(data.user);
+        }
+      } else {
+        console.log('Modal closed by the user');
+      }
+    });
+  }
+
+
+  onEditPassword(user?: User) {
+    const dialogRef = this.dialog.open(UserEditPasswordComponent, {
+      width: '60%',
+      minWidth: '500px',
+      height: 'fit-content',
+      data: user
+        ? { user: user, isNew: false, action: 'actualiza', isInGoogle: true }
+        : { user: {}, isNew: true, action: 'crea', isInGoogle: false },
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        if (data.isNew == false) {
+          this.accountsEntityService.update(data.user);
+        } else if (data.isNew == true) {
+          this.accountsEntityService.add(data.user);
+        }
+      } else {
+        console.log('Modal closed by the user');
+      }
+    });
+  }
+
+  onEditUsername(user?: User) {
+    const dialogRef = this.dialog.open(UserEditNameComponent, {
+      width: '60%',
+      minWidth: '500px',
+      height: 'fit-content',
       data: user
         ? { user: user, isNew: false, action: 'actualiza', isInGoogle: true }
         : { user: {}, isNew: true, action: 'crea', isInGoogle: false },
