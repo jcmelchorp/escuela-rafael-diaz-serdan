@@ -20,7 +20,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="5px">
       <!-- <span>{{myDate|date:'full':'es-MX'}}</span> -->
-      <button *ngIf="isOnline && isAdmin" (click)="this.adminApiService.handleAdminLoad()"><mat-icon mat-icon-button>admin</mat-icon></button>
+      <!--       <button *ngIf="isOnline && isAdmin" mat-icon-button><mat-icon mat-icon-button>key_vertical</mat-icon></button> -->
       <button *ngIf="isOnline" mat-icon-button [matMenuTriggerFor]="userMenu">
         <img class="img-fluid rounded-circle" src="{{user.photoUrl?user.photoUrl:user.authPhotoUrl}}" />
       </button>

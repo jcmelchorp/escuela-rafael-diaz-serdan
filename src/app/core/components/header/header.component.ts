@@ -41,7 +41,7 @@ export class HeaderComponent {
     private layoutService: LayoutService,
     private dialog: MatDialog,
     private store: Store<AppState>,
-    private adminApiService: AdminApiService,
+    // private adminApiService: AdminApiService,
 
   ) { }
 
