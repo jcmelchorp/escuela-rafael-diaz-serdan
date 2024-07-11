@@ -16,8 +16,9 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
 
 
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, concat, merge, Observable, pipe, Subscription } from 'rxjs';
 import { UserInsert, AccountDomain } from '../../models/account-domain.model';
+import { concatMap, map, mapTo, mergeAll, mergeMap, mergeMapTo, switchMap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './new-account.component.html',
@@ -27,7 +28,7 @@ export class NewAccountComponent implements OnInit {
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   faTimes = faTimes;
-  hide: boolean = true;
+  hide: boolean = false;
   googleError: any;
   firebaseError: any;
   googleError$!: Observable<any>;
@@ -39,6 +40,9 @@ export class NewAccountComponent implements OnInit {
   clevels: any = CourseLevel;
   slevelKeys: string[];
   slevels: any = SchoolLevel;
+  subscription: Subscription;
+  nombre: string;
+  apellido: string;
   constructor(
     private dialogRef: MatDialogRef<NewAccountComponent>,
     private accountsDomainEntityService: AccountsDomainEntityService,
@@ -54,9 +58,9 @@ export class NewAccountComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       givenName: new FormControl('', [Validators.required]),
       familyName: new FormControl('', [Validators.required]),
-      primaryEmail: new FormControl('', [
+      primaryEmail: new FormControl('@rafaeldiazserdan.net', [
         Validators.required,
-        Validators.pattern('[^ @]*@[^ @]*'),
+        Validators.pattern('[^ @]*.[^ @]*@[^ @]*'),
         emailDomainValidator,
       ]),
       //primaryEmail: new FormControl('', [Validators.required, Validators.email]),
@@ -85,9 +89,25 @@ export class NewAccountComponent implements OnInit {
       niev: new FormControl(''),
       rfc: new FormControl(''),
     });
+
+
+    merge(
+      this.firstFormGroup.get('givenName').valueChanges,
+      this.firstFormGroup.get('familyName').valueChanges,
+      // this.firstFormGroup.get('primaryEmail').valueChanges
+    ).subscribe(value => {
+      this.nombre = this.firstFormGroup.get('givenName').value;
+      this.apellido = this.firstFormGroup.get('familyName').value;
+      // console.log(this.nombre + '.' + this.apellido + '@rafaeldiazserdan.net')
+      this.firstFormGroup.controls['primaryEmail'].patchValue(this.nombre + '.' + this.apellido + '@rafaeldiazserdan.net');
+      this.firstFormGroup.controls['password'].patchValue(this.nombre);
+
+    });
+
   }
   close() {
     this.dialogRef.close();
+    this.subscription.unsubscribe();
   }
   onGoogleCreate() {
     this.creating.next(true);
