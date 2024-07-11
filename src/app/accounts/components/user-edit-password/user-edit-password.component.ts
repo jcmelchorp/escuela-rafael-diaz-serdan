@@ -16,7 +16,7 @@ import { User } from '@rds-auth/models/user.model';
 export class UserEditPasswordComponent {
   faTimes = faTimes;
   faUserPlus = faUserPlus;
-  hide: boolean = true;
+  hide: boolean = false;
   saveForm!: FormGroup;
   roles = UserRole;
   rolekeys: string[];
@@ -26,29 +26,17 @@ export class UserEditPasswordComponent {
   slevelKeys: string[];
   slevels: any = SchoolLevel;
   constructor(
-    private dialogRef: MatDialogRef<UserEditDialogComponent>,
+    private dialogRef: MatDialogRef<UserEditPasswordComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.rolekeys = Object.keys(UserRole);
-    this.clevelKeys = Object.keys(CourseLevel);
-    this.slevelKeys = Object.keys(SchoolLevel);
     this.initForm();
   }
 
   initForm() {
     this.saveForm = this.fb.group({
-      givenName: new FormControl(this.data.user.name.givenName, [
-        Validators.required,
-      ]),
-      familyName: new FormControl(this.data.user.name.familyName, [
-        Validators.required,
-      ]),
-      primaryEmail: new FormControl(this.data.user.primaryEmail, [
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl(this.data.user.password),
+      password: new FormControl(this.data.user.password!),
+      changePasswordAtNextLogin: new FormControl(this.data.user.changePasswordAtNextLogin!),
     });
   }
   onSubmit() {
@@ -56,30 +44,10 @@ export class UserEditPasswordComponent {
       if (!this.saveForm.get('isInGoogle')?.value) {
         let googleUser: Partial<AccountDomain> = {
           password: this.saveForm.get('password')?.value,
-          primaryEmail: this.saveForm.get('primaryEmail')?.value,
-          name: {
-            givenName: this.saveForm.get('givenName')?.value,
-            familyName: this.saveForm.get('familyName')?.value,
-            fullName: [
-              this.saveForm.get('givenName')?.value,
-              this.saveForm.get('familyName')?.value,
-            ].join(' '),
-          },
           changePasswordAtNextLogin: false,
-          orgUnitPath: ['/Dirección', this.saveForm.get('role')?.value].join('/'),
         };
-        if (
-          this.saveForm.get('role')?.value == 'Alumnos' &&
-          this.saveForm.get('level')?.value != null &&
-          this.saveForm.get('grade')?.value != null
-        ) {
-          googleUser.orgUnitPath = [
-            ...googleUser.orgUnitPath,
-            this.saveForm.get('level')?.value,
-            this.saveForm.get('grade')?.value,
-          ].join('/');
-        }
-        const firebaseUser: Partial<User> = this.firebaseUser(googleUser);
+        // const firebaseUser: Partial<User> = this.firebaseUser(googleUser);
+        // this.data.user = firebaseUser;
         this.data.user = firebaseUser;
         this.dialogRef.close(this.data);
       }
@@ -87,37 +55,9 @@ export class UserEditPasswordComponent {
       if (this.saveForm.get('isInGoogle')?.value) {
         var firebaseUser: any = { id: this.data.user.id };
         Object.keys(this.saveForm.controls).forEach((name: string) => {
-          if (this.saveForm.controls[name].dirty) {
-            if (name != 'familyName' && name != 'givenName') {
-              firebaseUser[name] = this.saveForm.controls[name].value;
-            } else {
-              if (name == 'familyName')
-                firebaseUser.name
-                  ? (firebaseUser.name[name] =
-                    this.saveForm.controls[name].value.toUpperCase())
-                  : (firebaseUser.name = {});
-              if (name == 'givenName')
-                firebaseUser.name
-                  ? ([name] = this.saveForm.controls[name].value.toUpperCase())
-                  : (firebaseUser.name = {});
-            }
-
-            if (name == 'role')
-              firebaseUser[name] =
-                this.saveForm.controls[name].value;
-          }
+          firebaseUser[name] =
+            this.saveForm.controls[name].value;
         });
-        if (
-          this.saveForm.get('role')?.value == 'Alumnos' &&
-          this.saveForm.get('level')?.value != null &&
-          this.saveForm.get('grade')?.value != null
-        ) {
-          firebaseUser.orgUnitPath = [
-            firebaseUser.orgUnitPath,
-            this.saveForm.get('level')?.value,
-            this.saveForm.get('grade')?.value,
-          ].join('/');
-        }
         this.data.user = firebaseUser;
         this.dialogRef.close(this.data);
       } else if (!this.saveForm.get('isInGoogle')?.value) {
@@ -142,11 +82,7 @@ export class UserEditPasswordComponent {
       //gender: this.saveForm.get('gender')?.value,
       name: {
         givenName: googleUser.name?.givenName,
-        familyName: googleUser.name?.familyName,
-        fullName: [
-          this.saveForm.get('givenName')?.value,
-          this.saveForm.get('familyName')?.value,
-        ].join(' '),
+        familyName: googleUser.name?.familyName
       },
       customerId: googleUser.customerId!,
       suspended: this.saveForm.get('suspended')?.value,

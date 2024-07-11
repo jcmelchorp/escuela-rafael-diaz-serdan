@@ -22,7 +22,7 @@ import { UserRole } from '../../../auth/models/user.enum';
 export class UserEditDialogComponent {
   faTimes = faTimes;
   faUserPlus = faUserPlus;
-  hide: boolean = true;
+  hide: boolean = false;
   saveForm!: FormGroup;
   roles = UserRole;
   rolekeys: string[];
@@ -40,6 +40,11 @@ export class UserEditDialogComponent {
     this.clevelKeys = Object.keys(CourseLevel);
     this.slevelKeys = Object.keys(SchoolLevel);
     this.initForm();
+    this.saveForm.get('givenName').disable();
+    this.saveForm.get('familyName').disable();
+    this.saveForm.get('primaryEmail').disable();
+    this.saveForm.get('password').disable();
+
   }
 
   initForm() {
