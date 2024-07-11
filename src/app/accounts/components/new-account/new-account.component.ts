@@ -96,8 +96,8 @@ export class NewAccountComponent implements OnInit {
       this.firstFormGroup.get('familyName').valueChanges,
       // this.firstFormGroup.get('primaryEmail').valueChanges
     ).subscribe(value => {
-      this.nombre = this.firstFormGroup.get('givenName').value;
-      this.apellido = this.firstFormGroup.get('familyName').value;
+      this.nombre = this.firstFormGroup.get('givenName').value.split(' ')[0];
+      this.apellido = this.firstFormGroup.get('familyName').value.split(' ')[0];
       // console.log(this.nombre + '.' + this.apellido + '@rafaeldiazserdan.net')
       this.firstFormGroup.controls['primaryEmail'].patchValue(this.nombre + '.' + this.apellido + '@rafaeldiazserdan.net');
       this.firstFormGroup.controls['password'].patchValue(this.nombre);

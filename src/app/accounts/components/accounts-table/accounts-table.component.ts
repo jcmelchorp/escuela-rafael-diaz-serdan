@@ -212,8 +212,8 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   onEditPassword(user?: User) {
     this.adminApiService.handleAdminLoad();
     const dialogRef = this.dialog.open(UserEditPasswordComponent, {
-      width: '60%',
-      minWidth: '500px',
+      width: 'fit-content',
+      minWidth: '300px',
       height: 'fit-content',
       data: user
         ? { user: user, isNew: false, action: 'actualiza', isInGoogle: true }

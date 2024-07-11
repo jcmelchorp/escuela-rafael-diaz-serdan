@@ -1,4 +1,4 @@
-import { AccountDomain } from './../../models/account-domain.model';
+import { AccountDomain, UserInsert } from './../../models/account-domain.model';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -8,12 +8,13 @@ import { faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import states from './states.json';
 import { CourseLevel, SchoolLevel } from '@rds-auth/models/user.enum';
 import { User } from '@rds-auth/models/user.model';
 import { UserRole } from '../../../auth/models/user.enum';
+import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts-domain-entity.service';
 
 @Component({
   templateUrl: './user-edit-dialog.component.html',
@@ -31,7 +32,15 @@ export class UserEditDialogComponent {
   clevels: any = CourseLevel;
   slevelKeys: string[];
   slevels: any = SchoolLevel;
+  googleError: any;
+  firebaseError: any;
+  googleError$!: Observable<any>;
+  creating: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  created: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  creating$: Observable<boolean> = this.creating.asObservable();
+  created$: Observable<boolean> = this.created.asObservable();
   constructor(
+    private accountsDomainEntityService: AccountsDomainEntityService,
     private dialogRef: MatDialogRef<UserEditDialogComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -40,11 +49,6 @@ export class UserEditDialogComponent {
     this.clevelKeys = Object.keys(CourseLevel);
     this.slevelKeys = Object.keys(SchoolLevel);
     this.initForm();
-    this.saveForm.get('givenName').disable();
-    this.saveForm.get('familyName').disable();
-    this.saveForm.get('primaryEmail').disable();
-    this.saveForm.get('password').disable();
-
   }
 
   initForm() {
@@ -69,6 +73,7 @@ export class UserEditDialogComponent {
       isAdmin: new FormControl(this.data.user.isAdmin),
       isTeacher: new FormControl(this.data.user.isTeacher),
       suspended: new FormControl(this.data.user.suspended),
+      changePasswordAtNextLogin: new FormControl(this.data.user.changePasswordAtNextLogin!),
       /*  curp: new FormControl(this.data.user.curp),
        niev: new FormControl({ value: this.data.user.niev, disabled: this.data.user.isAdmin }),
        rfc: new FormControl(this.data.user.rfc), */
@@ -111,47 +116,58 @@ export class UserEditDialogComponent {
         var firebaseUser: any = { id: this.data.user.id };
         Object.keys(this.saveForm.controls).forEach((name: string) => {
           if (this.saveForm.controls[name].dirty) {
-            if (name != 'familyName' && name != 'givenName') {
+            if (name != 'familyName' || 'givenName' || 'primaryEmail' || 'givenName') {
               firebaseUser[name] = this.saveForm.controls[name].value;
-            } else {
-              if (name == 'familyName')
-                firebaseUser.name
-                  ? (firebaseUser.name[name] =
-                    this.saveForm.controls[name].value.toUpperCase())
-                  : (firebaseUser.name = {});
-              if (name == 'givenName')
-                firebaseUser.name
-                  ? ([name] = this.saveForm.controls[name].value.toUpperCase())
-                  : (firebaseUser.name = {});
             }
-
-            if (name == 'role')
-              firebaseUser[name] =
-                this.saveForm.controls[name].value;
           }
         });
-        if (
-          this.saveForm.get('role')?.value == 'Alumnos' &&
-          this.saveForm.get('level')?.value != null &&
-          this.saveForm.get('grade')?.value != null
-        ) {
-          firebaseUser.orgUnitPath = [
-            firebaseUser.orgUnitPath,
-            this.saveForm.get('level')?.value,
-            this.saveForm.get('grade')?.value,
-          ].join('/');
+
+
+
+        if (this.saveForm.get('givenName').dirty || this.saveForm.get('familyName').dirty || this.saveForm.get('primaryEmail').dirty || this.saveForm.get('password').dirty) {
+          const tryUser: UserInsert = {
+            id: this.data.user.id,
+            name: {
+              givenName: this.saveForm.get('givenName')?.value,
+              familyName: this.saveForm.get('familyName')?.value,
+            },
+            primaryEmail: this.saveForm.get('primaryEmail')?.value,
+            password: this.saveForm.get('password')?.value,
+          };
+          this.accountsDomainEntityService.update({ ...tryUser, userKey: this.data.user.id } as AccountDomain).subscribe(
+            (user) => {
+              this.creating.next(false);
+              this.created.next(true);
+              // const firebaseUser: Partial<User> = this.firebaseUser(googleUser);
+              // this.data.user = firebaseUser;
+              // console.log(`The Domain User is ${JSON.stringify(user)}`);
+              // const firebaseUser: Partial<User> = this.firebaseUser(user);
+              this.data.user = { ...firebaseUser, ...tryUser };
+              console.log(this.data.user)
+              this.dialogRef.close(this.data);
+            },
+            (err) => {
+              this.creating.next(false);
+              this.created.next(false);
+              console.log(err.error.result.error);
+              this.googleError = err.error.result.error;
+            }
+          );
+        } else {
+          this.data.user = firebaseUser;
+          console.log(this.data.user)
+          this.dialogRef.close(this.data);
         }
-        this.data.user = firebaseUser;
-        this.dialogRef.close(this.data);
-      } else if (!this.saveForm.get('isInGoogle')?.value) {
-        alert('Esta opcion no esta lista aún');
       }
+    } else if (!this.saveForm.get('isInGoogle')?.value) {
+      alert('Esta opcion no esta lista aún');
     }
   }
 
+
   firebaseUser(googleUser: AccountDomain) {
     const firebaseUser: User = {
-      id: googleUser.id ? googleUser.id : ' ',
+      id: googleUser.id ? googleUser.id : '',
       primaryEmail: googleUser.primaryEmail,
       isAdmin: this.saveForm.get('isAdmin')?.value,
       isTeacher: this.saveForm.get('role')?.value == 'Profesores',

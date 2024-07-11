@@ -321,6 +321,7 @@ export interface AccountDomain {
   /** Output only. Photo Url of the user (Read-only) */
   thumbnailPhotoUrl?: string;
   /** A list of the user's websites. The maximum allowed data size is 2Kb. */
+  userKey?: string;
   websites?: [
     {
       /** The custom type. Only used if the type is custom. */
@@ -408,6 +409,7 @@ export interface GroupResponse {
   nextPageToken: string;
 }
 export interface UserInsert {
+  id?: string;
   name: {
     familyName: string;
     givenName: string;
