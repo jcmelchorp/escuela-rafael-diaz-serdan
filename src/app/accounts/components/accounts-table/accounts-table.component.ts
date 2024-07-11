@@ -21,6 +21,7 @@ import exportFromJSON from 'export-from-json';
 import * as XLSX from 'xlsx';
 import { ExportService } from '@rds-shared/services/export.service';
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
+import { AdminApiService } from '@rds-admin/services';
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 @Component({
@@ -70,6 +71,7 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   ];
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   constructor(
+    private adminApiService: AdminApiService,
     private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog,
     private exportService: ExportService,
@@ -183,6 +185,7 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   }
 
   onEditUser(user?: User) {
+    this.adminApiService.handleAdminLoad();
     const dialogRef = this.dialog.open(UserEditDialogComponent, {
       width: '60%',
       minWidth: '500px',
@@ -207,6 +210,7 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
 
 
   onEditPassword(user?: User) {
+    this.adminApiService.handleAdminLoad();
     const dialogRef = this.dialog.open(UserEditPasswordComponent, {
       width: '60%',
       minWidth: '500px',
@@ -228,27 +232,6 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onEditUsername(user?: User) {
-    const dialogRef = this.dialog.open(UserEditNameComponent, {
-      width: '60%',
-      minWidth: '500px',
-      height: 'fit-content',
-      data: user
-        ? { user: user, isNew: false, action: 'actualiza', isInGoogle: true }
-        : { user: {}, isNew: true, action: 'crea', isInGoogle: false },
-    });
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data) {
-        if (data.isNew == false) {
-          this.accountsEntityService.update(data.user);
-        } else if (data.isNew == true) {
-          this.accountsEntityService.add(data.user);
-        }
-      } else {
-        console.log('Modal closed by the user');
-      }
-    });
-  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
