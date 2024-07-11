@@ -2,11 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { AccountDomain } from '@rds-accounts/models/account-domain.model';
+import { AccountDomain, UserInsert } from '@rds-accounts/models/account-domain.model';
 import { UserRole, CourseLevel, SchoolLevel } from '@rds-auth/models/user.enum';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserEditDialogComponent } from '../user-edit-dialog/user-edit-dialog.component';
 import { User } from '@rds-auth/models/user.model';
+import { AccountsDomainEntityService } from '@rds-store/accounts-domain/accounts-domain-entity.service';
+import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 
 @Component({
   selector: 'app-user-edit-password',
@@ -25,7 +27,16 @@ export class UserEditPasswordComponent {
   clevels: any = CourseLevel;
   slevelKeys: string[];
   slevels: any = SchoolLevel;
+  googleError: any;
+  firebaseError: any;
+  googleError$!: Observable<any>;
+  creating: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  created: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  creating$: Observable<boolean> = this.creating.asObservable();
+  created$: Observable<boolean> = this.created.asObservable();
   constructor(
+    private accountsEntityService: AccountsEntityService,
+    private accountsDomainEntityService: AccountsDomainEntityService,
     private dialogRef: MatDialogRef<UserEditPasswordComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -42,26 +53,36 @@ export class UserEditPasswordComponent {
   onSubmit() {
     if (this.data.isNew == true) {
       if (!this.saveForm.get('isInGoogle')?.value) {
-        let googleUser: Partial<AccountDomain> = {
+        this.creating.next(true);
+        this.created.next(false);
+        //this.adminService.handleAdminLoad()
+        const tryUser: UserInsert = {
+          name: {
+            givenName: this.saveForm.get('givenName')?.value,
+            familyName: this.saveForm.get('familyName')?.value,
+          },
+          primaryEmail: this.saveForm.get('primaryEmail')?.value,
           password: this.saveForm.get('password')?.value,
-          changePasswordAtNextLogin: false,
         };
-        // const firebaseUser: Partial<User> = this.firebaseUser(googleUser);
-        // this.data.user = firebaseUser;
-        this.data.user = firebaseUser;
+
+        this.accountsDomainEntityService.update(tryUser as AccountDomain).subscribe(
+          (user) => {
+            this.creating.next(false);
+            this.created.next(true);
+            // const firebaseUser: Partial<User> = this.firebaseUser(googleUser);
+            // this.data.user = firebaseUser;
+            console.log(`The Domain User is ${JSON.stringify(user)}`);
+            const firebaseUser: Partial<User> = this.firebaseUser(user);
+            this.data.user = firebaseUser;
+          },
+          (err) => {
+            this.creating.next(false);
+            this.created.next(false);
+            console.log(err.error.result.error);
+            this.googleError = err.error.result.error;
+          }
+        );
         this.dialogRef.close(this.data);
-      }
-    } else if (this.data.isNew == false) {
-      if (this.saveForm.get('isInGoogle')?.value) {
-        var firebaseUser: any = { id: this.data.user.id };
-        Object.keys(this.saveForm.controls).forEach((name: string) => {
-          firebaseUser[name] =
-            this.saveForm.controls[name].value;
-        });
-        this.data.user = firebaseUser;
-        this.dialogRef.close(this.data);
-      } else if (!this.saveForm.get('isInGoogle')?.value) {
-        alert('Esta opcion no esta lista aún');
       }
     }
   }
@@ -119,31 +140,7 @@ export class UserEditPasswordComponent {
   close() {
     this.dialogRef.close();
   }
-  roleChange() {
-    if (this.data.role != 'Alumnos') {
-      this.data.grade = '';
-      this.data.level = '';
-    } else {
-      this.data.parents = [
-        {
-          name: {
-            fullName: '',
-            givenName: '',
-            familyName: '',
-          },
-          city: '',
-          curp: '',
-          email: '',
-          gender: '',
-        },
-      ];
-    }
-    this.data.modified = true;
-  }
-  dobChange() {
-    this.data.dob = this.data.dob.toLocaleDateString();
-    this.data.modified = true;
-  }
+
   wasModify() {
     this.data.modified = true;
   }
