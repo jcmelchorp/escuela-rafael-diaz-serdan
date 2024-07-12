@@ -66,11 +66,11 @@ export class UserEditPasswordComponent {
       //this.adminService.handleAdminLoad()
       const tryUser: UserInsert = {
         id: this.data.user.id,
-        name: {
-          givenName: this.saveForm.get('givenName')?.value,
-          familyName: this.saveForm.get('familyName')?.value,
-        },
-        primaryEmail: this.saveForm.get('primaryEmail')?.value,
+        // name: {
+        //   givenName: this.saveForm.get('givenName')?.value,
+        //   familyName: this.saveForm.get('familyName')?.value,
+        // },
+        // primaryEmail: this.saveForm.get('primaryEmail')?.value,
         password: this.saveForm.get('password')?.value,
       };
 

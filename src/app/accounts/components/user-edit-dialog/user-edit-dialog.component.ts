@@ -114,26 +114,26 @@ export class UserEditDialogComponent {
     } else if (this.data.isNew == false) {
       if (this.saveForm.get('isInGoogle')?.value) {
         var firebaseUser: any = { id: this.data.user.id };
+        var tryUser: any = { id: this.data.user.id };
         Object.keys(this.saveForm.controls).forEach((name: string) => {
           if (this.saveForm.controls[name].dirty) {
-            if (name != 'familyName' || 'givenName' || 'primaryEmail' || 'givenName') {
+            if (name != 'familyName' || 'givenName') {
               firebaseUser[name] = this.saveForm.controls[name].value;
+            } else if (name == 'familyName' || 'givenName') {
+              tryUser = {
+                id: this.data.user.id,
+                name: {
+                  givenName: this.saveForm.get('givenName')?.value,
+                  familyName: this.saveForm.get('familyName')?.value,
+                },
+              }
+            } else if (name == 'primaryEmail') {
+              tryUser[name] = this.saveForm.controls[name].value;
             }
           }
         });
 
-
-
-        if (this.saveForm.get('givenName').dirty || this.saveForm.get('familyName').dirty || this.saveForm.get('primaryEmail').dirty || this.saveForm.get('password').dirty) {
-          const tryUser: UserInsert = {
-            id: this.data.user.id,
-            name: {
-              givenName: this.saveForm.get('givenName')?.value,
-              familyName: this.saveForm.get('familyName')?.value,
-            },
-            primaryEmail: this.saveForm.get('primaryEmail')?.value,
-            password: this.saveForm.get('password')?.value,
-          };
+        if (this.saveForm.get('givenName').dirty || this.saveForm.get('familyName').dirty || this.saveForm.get('primaryEmail').dirty) {
           this.accountsDomainEntityService.update({ ...tryUser, userKey: this.data.user.id } as AccountDomain).subscribe(
             (user) => {
               this.creating.next(false);
@@ -173,7 +173,7 @@ export class UserEditDialogComponent {
       isTeacher: this.saveForm.get('role')?.value == 'Profesores',
       isHuman: this.saveForm.get('isHuman')?.value,
       orgUnitPath: googleUser.orgUnitPath!,
-      password: this.saveForm.get('password')?.value,
+      // password: this.saveForm.get('password')?.value,
       role: this.saveForm.get('role')?.value,
       level: this.saveForm.get('level')?.value,
       grade: this.saveForm.get('grade')?.value,

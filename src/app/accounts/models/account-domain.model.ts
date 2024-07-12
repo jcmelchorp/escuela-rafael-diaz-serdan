@@ -410,10 +410,10 @@ export interface GroupResponse {
 }
 export interface UserInsert {
   id?: string;
-  name: {
-    familyName: string;
-    givenName: string;
+  name?: {
+    familyName?: string;
+    givenName?: string;
   };
-  password: string;
+  password?: string;
   primaryEmail?: string;
 }
