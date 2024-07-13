@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ export class StudentsCoursesComponent {
   @Input() dataArray: SchoolCourse[];
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
-  filterValues: UntypedFormGroup;
+  filterValues: FormGroup;
   schoolCourses$: Observable<SchoolCourse[]>;
   filteredEntities$: Observable<SchoolCourse[]>;
   resCount$: Observable<number>;

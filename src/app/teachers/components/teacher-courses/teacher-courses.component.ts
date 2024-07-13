@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectUser } from '@rds-auth/state/auth.selectors';
 import { User } from '@rds-auth/models/user.model';
@@ -24,11 +24,11 @@ export class TeacherCoursesComponent implements OnInit {
   isAdmin$!: Observable<boolean>;
   currentTeacher!: User;
   teachers$: Observable<User[]>;
-  searchForm!: UntypedFormGroup;
+  searchForm!: FormGroup;
   teacherSubscription: Subscription;
   loading_courses$: Observable<boolean>;
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private store: Store<AppState>,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private schoolTeachersEntityService: SchoolTeachersEntityService
@@ -109,8 +109,8 @@ export class TeacherCoursesComponent implements OnInit {
 
   initSearchForm() {
     this.searchForm = this.fb.group({
-      searchString: new UntypedFormControl(''),
-      teacherEmail: new UntypedFormControl('', Validators.required),
+      searchString: new FormControl(''),
+      teacherEmail: new FormControl('', Validators.required),
     });
   }
   ngOnDestroy(): void {

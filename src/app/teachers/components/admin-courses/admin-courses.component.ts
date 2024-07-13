@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 
@@ -35,7 +35,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   userId!: string;
   slevelKeys;
   slevels = SchoolLevel;
-  searchForm!: UntypedFormGroup;
+  searchForm!: FormGroup;
   formSubscription!: Subscription;
   periods$: Observable<string[]>;
   selectedCicle = '20202021';
@@ -43,7 +43,7 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
     private teachersCoursesService: SchoolTeachersService,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private store: Store<AppState>
   ) {
     this.slevelKeys = Object.keys(this.slevels).filter((x) => x.length > 5);
@@ -75,9 +75,9 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   }
   initSearchForm() {
     this.searchForm = this.fb.group({
-      grade: new UntypedFormControl(),
-      tacherId: new UntypedFormControl(),
-      cycle: new UntypedFormControl(),
+      grade: new FormControl(),
+      tacherId: new FormControl(),
+      cycle: new FormControl(),
     });
     this.searchForm.patchValue({
       grade: '',

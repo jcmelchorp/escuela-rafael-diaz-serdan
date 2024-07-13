@@ -11,7 +11,7 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { SchoolLevel, UserRole } from '@rds-auth/models/user.enum';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@rds-store/app.state';
 import { selectAccounts } from '@rds-accounts/state/accounts.selectors';
@@ -38,8 +38,8 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
   roles = UserRole;
   gradeKeys: string[];
   grades = SchoolLevel;
-  filterValues: UntypedFormGroup;
-  fastRole: UntypedFormControl = new UntypedFormControl();
+  filterValues: FormGroup;
+  fastRole: FormControl = new FormControl();
   filteredEntities$: Observable<User[]>;
   selection = new SelectionModel<User>(true, []);
   subscription: Subscription;
@@ -76,7 +76,7 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private exportService: ExportService,
     private store: Store<AppState>,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
   ) { }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -89,10 +89,10 @@ export class AccountsTableComponent implements OnInit, AfterViewInit {
     this.gradeKeys = Object.keys(SchoolLevel);
     this.roleKeys = Object.keys(UserRole);
     this.filterValues = this.fb.group({
-      grade: new UntypedFormControl(),
-      role: new UntypedFormControl(),
-      name: new UntypedFormControl(),
-      suspended: new UntypedFormControl(),
+      grade: new FormControl(),
+      role: new FormControl(),
+      name: new FormControl(),
+      suspended: new FormControl(),
     });
 
     this.filteredEntities$ = this.accountsEntityService.filteredEntities$

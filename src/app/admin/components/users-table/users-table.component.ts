@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -36,7 +36,7 @@ export class UsersTableComponent implements AfterViewInit, OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [/* 'id',  */'photo', 'name', 'primaryEmail', 'org', 'acciones'];
   expandedElement: any;
-  public searchForm!: UntypedFormGroup;
+  public searchForm!: FormGroup;
   public creationTimeSearch = '';
   public courseName = '';
   select: any;
@@ -68,9 +68,9 @@ export class UsersTableComponent implements AfterViewInit, OnInit {
   }
 
   searchFormInit() {
-    this.searchForm = new UntypedFormGroup({
-      courseName: new UntypedFormControl('', Validators.pattern('^[a-zA-Z ]+$')),
-      creationTimeSearch: new UntypedFormControl(''),
+    this.searchForm = new FormGroup({
+      courseName: new FormControl('', Validators.pattern('^[a-zA-Z ]+$')),
+      creationTimeSearch: new FormControl(''),
     });
   }
 

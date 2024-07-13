@@ -1,7 +1,7 @@
 import { map, tap } from 'rxjs/operators';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -23,14 +23,14 @@ export class AddStudentsCoursesComponent implements OnInit {
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  findCtrl = new UntypedFormControl();
+  findCtrl = new FormControl();
   filteredStudents: Observable<User[]>;
-  filterValues: UntypedFormGroup;
+  filterValues: FormGroup;
   filteredEntities$: Observable<User[]>;
   studentsStr: string[] = [];
   students: User[] = [];
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private accountsEntityService: AccountsEntityService,
     private dialogRef: MatDialogRef<AddStudentsCoursesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -38,7 +38,7 @@ export class AddStudentsCoursesComponent implements OnInit {
     this.loaded$ = this.accountsEntityService.loaded$;
     this.loading$ = this.accountsEntityService.loading$;
     this.filterValues = this.fb.group({
-      fullName: new UntypedFormControl(),
+      fullName: new FormControl(),
     });
     this.filterValues.valueChanges.subscribe((changes) => {
       Object.keys(changes).forEach(

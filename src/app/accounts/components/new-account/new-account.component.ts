@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +26,7 @@ import { concatMap, map, mapTo, mergeAll, mergeMap, mergeMapTo, switchMap } from
 })
 export class NewAccountComponent implements OnInit {
   firstFormGroup!: FormGroup;
-  secondFormGroup!: UntypedFormGroup;
+  secondFormGroup!: FormGroup;
   faTimes = faTimes;
   hide: boolean = false;
   googleError: any;

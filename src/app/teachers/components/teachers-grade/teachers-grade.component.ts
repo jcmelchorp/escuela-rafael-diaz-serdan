@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  UntypedFormArray,
-  UntypedFormBuilder,
-  UntypedFormGroup,
+  FormArray,
+  FormBuilder,
+  FormGroup,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -32,16 +32,16 @@ export class TeachersGradeComponent implements OnInit {
   faChevronLeft = faChevronLeft;
   loading$!: Observable<boolean>;
   loaded$!: Observable<boolean>;
-  formGrades!: UntypedFormGroup;
+  formGrades!: FormGroup;
   studentsSubscription!: Subscription;
   dataSource = new BehaviorSubject<AbstractControl[]>([]);
   displayColumns = ['studentName', 'unit1', 'unit2', 'unit3', 'action'];
-  currentGrades!: UntypedFormGroup;
+  currentGrades!: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private schoolCoursesEntityService: SchoolCoursesEntityService,
     private accountsEntityService: AccountsEntityService,
-    private fb: UntypedFormBuilder
+    private fb: FormBuilder
   ) {
     this.courseId = this.route.snapshot.params.courseId;
     /* this.formGrades = this.fb.group({
@@ -74,7 +74,7 @@ export class TeachersGradeComponent implements OnInit {
     ) */
   )
   }
-  setScore(student: any): UntypedFormGroup {
+  setScore(student: any): FormGroup {
     return this.fb.group({
       studentId: [student.id],
       studentName: [student.name.fullName],
@@ -137,8 +137,8 @@ export class TeachersGradeComponent implements OnInit {
     });
   }
 
-  get scores(): UntypedFormArray {
-    return this.formGrades.get('scores') as UntypedFormArray;
+  get scores(): FormArray {
+    return this.formGrades.get('scores') as FormArray;
   }
 
   finalGrades(arrayItem: any) {

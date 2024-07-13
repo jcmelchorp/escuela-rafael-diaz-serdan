@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SchoolLevel } from '@rds-auth/models/user.enum';
 import { Cycle, SchoolClassroom } from '../../models/school-course.model';
@@ -13,10 +13,10 @@ export class SchoolClassroomDialogComponent implements OnInit {
   slevels = SchoolLevel;
   cycleKeys;
   cycles = Cycle;
-  formData: UntypedFormGroup;
+  formData: FormGroup;
   constructor(
     private dialogRef: MatDialogRef<SchoolClassroomDialogComponent>,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -24,8 +24,8 @@ export class SchoolClassroomDialogComponent implements OnInit {
     this.cycleKeys = Object.keys(this.cycles);
     this.slevelKeys = Object.keys(this.slevels);
     this.formData = this.fb.group({
-      grade: new UntypedFormControl(this.data.classroom.grade, Validators.required),
-      cycle: new UntypedFormControl(this.data.classroom.cycle, Validators.required),
+      grade: new FormControl(this.data.classroom.grade, Validators.required),
+      cycle: new FormControl(this.data.classroom.cycle, Validators.required),
     });
     //console.log(this.data)
   }

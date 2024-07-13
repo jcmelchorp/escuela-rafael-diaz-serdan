@@ -10,7 +10,7 @@ import { AddStudentsCoursesComponent } from '../add-students-courses/add-student
 import { User } from '@rds-auth/models/user.model';
 import { SchoolStudentsEntityService } from '@rds-store/school/school-students/school-students-entity.service';
 import { map } from 'rxjs/operators';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TableGroup } from '@rds-school/models/table-group.model';
 import { Cycle } from '@rds-school/models/school-course.model';
 @Component({
@@ -37,7 +37,7 @@ export class SchoolStudentsTableComponent implements OnInit/* , AfterViewInit, O
   cycles = Cycle;
   students$: Observable<User[]>;
   filteredStudents$: Observable<User[]>;
-  filterValues: UntypedFormGroup;
+  filterValues: FormGroup;
   gradeKeys;
   grades = SchoolLevel;
   students: any[];
@@ -50,7 +50,7 @@ export class SchoolStudentsTableComponent implements OnInit/* , AfterViewInit, O
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private schoolStudentsEntityService: SchoolStudentsEntityService,
     private dialog: MatDialog
   ) {
@@ -76,8 +76,8 @@ export class SchoolStudentsTableComponent implements OnInit/* , AfterViewInit, O
     ];
     this.gradeKeys = Object.keys(this.grades);
     this.filterValues = this.fb.group({
-      grade: new UntypedFormControl(),
-      name: new UntypedFormControl(),
+      grade: new FormControl(),
+      name: new FormControl(),
     });
     this.filterValues.valueChanges.subscribe((changes) => {
       Object.keys(changes).forEach(

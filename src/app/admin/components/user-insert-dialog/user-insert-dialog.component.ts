@@ -1,6 +1,6 @@
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -17,13 +17,13 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs';
 })
 export class UserInsertDialogComponent implements OnInit {
   faTimes = faTimes;
-  saveForm!: UntypedFormGroup;
+  saveForm!: FormGroup;
   hide: boolean = true;
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(
     private dialogRef: MatDialogRef<UserInsertDialogComponent>,
     private accountsDomainEntityService: AccountsDomainEntityService,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.initForm();
@@ -31,10 +31,10 @@ export class UserInsertDialogComponent implements OnInit {
   }
   initForm() {
     this.saveForm = this.fb.group({
-      givenName: new UntypedFormControl('', [Validators.required]),
-      familyName: new UntypedFormControl('', [Validators.required]),
-      primaryEmail: new UntypedFormControl('', [Validators.required, Validators.email]),
-      password: new UntypedFormControl('', [Validators.required]),
+      givenName: new FormControl('', [Validators.required]),
+      familyName: new FormControl('', [Validators.required]),
+      primaryEmail: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 

@@ -2,7 +2,7 @@ import { AccountDomain, UserInsert } from './../../models/account-domain.model';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import { faTimes, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -42,7 +42,7 @@ export class UserEditDialogComponent {
   constructor(
     private accountsDomainEntityService: AccountsDomainEntityService,
     private dialogRef: MatDialogRef<UserEditDialogComponent>,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.rolekeys = Object.keys(UserRole);
@@ -53,17 +53,17 @@ export class UserEditDialogComponent {
 
   initForm() {
     this.saveForm = this.fb.group({
-      givenName: new UntypedFormControl(this.data.user.name.givenName, [
+      givenName: new FormControl(this.data.user.name.givenName, [
         Validators.required,
       ]),
-      familyName: new UntypedFormControl(this.data.user.name.familyName, [
+      familyName: new FormControl(this.data.user.name.familyName, [
         Validators.required,
       ]),
-      primaryEmail: new UntypedFormControl(this.data.user.primaryEmail, [
+      primaryEmail: new FormControl(this.data.user.primaryEmail, [
         Validators.required,
         Validators.email,
       ]),
-      password: new UntypedFormControl(this.data.user.password),
+      password: new FormControl(this.data.user.password),
       /*  dob: new FormControl(new Date(this.data.user.dob)), */
       role: new FormControl(this.data.user.role),
       grade: new FormControl(this.data.user.grade),

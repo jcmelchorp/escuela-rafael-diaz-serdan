@@ -8,9 +8,9 @@ import {
   Input,
 } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -32,7 +32,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class UserDetailsComponent implements OnInit {
   @Output() updatedUser = new EventEmitter<any>();
-  userDetailsForm!: UntypedFormGroup;
+  userDetailsForm!: FormGroup;
   @Input()
   user!: AuthUser;
   raisedElev: number = 10;
@@ -75,21 +75,21 @@ export class UserDetailsComponent implements OnInit {
   phoneKeys: any;
   phones!: PhoneType;
   userSub!: Subscription;
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: FormBuilder) {
     this.initForm(this.user);
   }
   ngOnInit(): void { }
   initForm(defaultUser?: AuthUser) {
     this.userDetailsForm = this.fb.group({
-      dayOfBirth: new UntypedFormControl(''),
-      addressLine: new UntypedFormControl(''),
-      postalCode: new UntypedFormControl(''),
-      photoUrl: new UntypedFormControl(''),
-      city: new UntypedFormControl(''),
-      state: new UntypedFormControl(''),
-      country: new UntypedFormControl(''),
-      phoneHome: new UntypedFormControl(''),
-      mobilePhone: new UntypedFormControl(''),
+      dayOfBirth: new FormControl(''),
+      addressLine: new FormControl(''),
+      postalCode: new FormControl(''),
+      photoUrl: new FormControl(''),
+      city: new FormControl(''),
+      state: new FormControl(''),
+      country: new FormControl(''),
+      phoneHome: new FormControl(''),
+      mobilePhone: new FormControl(''),
     });
   }
   onSubmit() {

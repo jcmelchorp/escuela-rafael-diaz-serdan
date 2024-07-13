@@ -17,7 +17,7 @@ import { SaveUserErrorComponent, UserEditDialogComponent } from '..';
 import { User } from '@rds-auth/models/user.model';
 import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.service';
 import { Observable, Subscription } from 'rxjs';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@rds-store/app.state';
 import { selectAccounts } from '@rds-accounts/state/accounts.selectors';
@@ -39,7 +39,7 @@ export class AccountsListComponent implements OnInit {
   roles = UserRole;
   gradeKeys: string[];
   grades = SchoolLevel;
-  filterValues: UntypedFormGroup;
+  filterValues: FormGroup;
   filteredEntities$: Observable<User[]>;
 
   subscription: Subscription;
@@ -55,7 +55,7 @@ export class AccountsListComponent implements OnInit {
     private accountsEntityService: AccountsEntityService,
     private dialog: MatDialog,
     private store: Store<AppState>,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private toastr: ToastrService
   ) { }
 
@@ -64,10 +64,10 @@ export class AccountsListComponent implements OnInit {
     this.gradeKeys = Object.keys(this.grades);
     this.roleKeys = Object.keys(this.roles);
     this.filterValues = this.fb.group({
-      grade: new UntypedFormControl(),
-      role: new UntypedFormControl(),
-      name: new UntypedFormControl(),
-      suspended: new UntypedFormControl(),
+      grade: new FormControl(),
+      role: new FormControl(),
+      name: new FormControl(),
+      suspended: new FormControl(),
     });
     this.subscription = this.filterValues.valueChanges.subscribe((changes) => {
       Object.keys(changes).forEach(
