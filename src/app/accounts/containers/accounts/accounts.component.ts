@@ -3,15 +3,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewAccountConfirmComponent } from './../../components/new-account-confirm/new-account-confirm.component';
 import { NewAccountComponent } from './../../components/new-account/new-account.component';
 import { User } from '@rds-auth/models/user.model';
+import { AdminApiService } from '@rds-admin/services';
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss'],
 })
 export class AccountsComponent implements OnInit {
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private adminApiService: AdminApiService,
+
+  ) {
+  }
   ngOnInit(): void { }
   onCreateUser() {
+    this.adminApiService.handleAdminLoad();
     let firebaseUser: User;
     const dialogRef = this.dialog.open(NewAccountComponent, {
       width: '600px',

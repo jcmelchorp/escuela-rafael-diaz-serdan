@@ -1,10 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -16,18 +11,19 @@ import { AccountsEntityService } from '@rds-store/accounts/accounts-entity.servi
 
 
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, concat, merge, Observable, pipe, Subscription } from 'rxjs';
 import { UserInsert, AccountDomain } from '../../models/account-domain.model';
+import { concatMap, map, mapTo, mergeAll, mergeMap, mergeMapTo, switchMap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.scss'],
 })
 export class NewAccountComponent implements OnInit {
-  firstFormGroup!: UntypedFormGroup;
+  firstFormGroup!: FormGroup;
   secondFormGroup!: UntypedFormGroup;
   faTimes = faTimes;
-  hide: boolean = true;
+  hide: boolean = false;
   googleError: any;
   firebaseError: any;
   googleError$!: Observable<any>;
@@ -39,11 +35,14 @@ export class NewAccountComponent implements OnInit {
   clevels: any = CourseLevel;
   slevelKeys: string[];
   slevels: any = SchoolLevel;
+  subscription: Subscription;
+  nombre: string;
+  apellido: string;
   constructor(
     private dialogRef: MatDialogRef<NewAccountComponent>,
     private accountsDomainEntityService: AccountsDomainEntityService,
     private accountsEntityService: AccountsEntityService,
-    private _formBuilder: UntypedFormBuilder,
+    private _formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.clevelKeys = Object.keys(this.clevels).filter(Number);
@@ -52,42 +51,58 @@ export class NewAccountComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      givenName: new UntypedFormControl('', [Validators.required]),
-      familyName: new UntypedFormControl('', [Validators.required]),
-      primaryEmail: new UntypedFormControl('', [
+      givenName: new FormControl('', [Validators.required]),
+      familyName: new FormControl('', [Validators.required]),
+      primaryEmail: new FormControl('@rafaeldiazserdan.net', [
         Validators.required,
-        Validators.pattern('[^ @]*@[^ @]*'),
+        Validators.pattern('[^ @]*.[^ @]*@[^ @]*'),
         emailDomainValidator,
       ]),
       //primaryEmail: new FormControl('', [Validators.required, Validators.email]),
-      password: new UntypedFormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     });
     this.secondFormGroup = this._formBuilder.group({
-      id: new UntypedFormControl('', [Validators.required]),
-      givenName: new UntypedFormControl('', [Validators.required]),
-      familyName: new UntypedFormControl('', [Validators.required]),
-      primaryEmail: new UntypedFormControl('', [
+      id: new FormControl('', [Validators.required]),
+      givenName: new FormControl('', [Validators.required]),
+      familyName: new FormControl('', [Validators.required]),
+      primaryEmail: new FormControl('', [
         Validators.required,
         Validators.email,
       ]),
-      password: new UntypedFormControl('', [Validators.required]),
-      gender: new UntypedFormControl(''),
-      dob: new UntypedFormControl(''),
-      role: new UntypedFormControl('', Validators.required),
-      grade: new UntypedFormControl(''),
-      level: new UntypedFormControl(''),
-      isInGoogle: new UntypedFormControl(false),
-      isHuman: new UntypedFormControl(false),
-      isAdmin: new UntypedFormControl(false),
-      isTeacher: new UntypedFormControl(false),
-      suspended: new UntypedFormControl(false),
-      curp: new UntypedFormControl(''),
-      niev: new UntypedFormControl(''),
-      rfc: new UntypedFormControl(''),
+      password: new FormControl('', [Validators.required]),
+      gender: new FormControl(''),
+      dob: new FormControl(''),
+      role: new FormControl('', Validators.required),
+      grade: new FormControl(''),
+      level: new FormControl(''),
+      isInGoogle: new FormControl(false),
+      isHuman: new FormControl(false),
+      isAdmin: new FormControl(false),
+      isTeacher: new FormControl(false),
+      suspended: new FormControl(false),
+      curp: new FormControl(''),
+      niev: new FormControl(''),
+      rfc: new FormControl(''),
     });
+
+
+    merge(
+      this.firstFormGroup.get('givenName').valueChanges,
+      this.firstFormGroup.get('familyName').valueChanges,
+      // this.firstFormGroup.get('primaryEmail').valueChanges
+    ).subscribe(value => {
+      this.nombre = this.firstFormGroup.get('givenName').value.split(' ')[0];
+      this.apellido = this.firstFormGroup.get('familyName').value.split(' ')[0];
+      // console.log(this.nombre + '.' + this.apellido + '@rafaeldiazserdan.net')
+      this.firstFormGroup.controls['primaryEmail'].patchValue(this.nombre + '.' + this.apellido + '@rafaeldiazserdan.net');
+      this.firstFormGroup.controls['password'].patchValue(this.nombre);
+
+    });
+
   }
   close() {
     this.dialogRef.close();
+    this.subscription.unsubscribe();
   }
   onGoogleCreate() {
     this.creating.next(true);
@@ -223,7 +238,7 @@ export class NewAccountComponent implements OnInit {
     return firebaseUser;
   }
 }
-function emailDomainValidator(control: UntypedFormControl) {
+function emailDomainValidator(control: FormControl) {
   1;
   let email = control.value;
   2;

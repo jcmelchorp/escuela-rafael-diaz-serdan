@@ -16,6 +16,7 @@ import { accountsComponents } from './components';
 import { AccountsService } from './services/accounts.service';
 import { AccountsDomainService } from './services/accounts-domain.service';
 import { MigrationProgressComponent } from './components/migration-progress/migration-progress.component';
+import { ADMIN_SERVICES } from '@rds-admin/services';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { MigrationProgressComponent } from './components/migration-progress/migr
     EffectsModule.forFeature([AccountsEffects]),
   ],
   providers: [
+    ...ADMIN_SERVICES,
     AccountsService,
     AccountsDataService,
     AccountsEntityService,
